@@ -2,10 +2,10 @@
     .logoPrint {
         width: 130px;
         height: 110px;
-        margin: 0.75px;
-        padding: 0.75px;
+        margin: 0.7px;
+        padding: 0.5px;
         border-radius: 0;
-        border: 0.8px solid var(--background-color);
+        border: 0.7px solid var(--background-color);
     }
 </style>
 <div ng-repeat="sInvoice in invList">
@@ -50,125 +50,125 @@
 
         <div class="row full">
             <!-- <div class="row"> -->
-            <fieldset class="black">
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3"><p class="black font-12">Date</p></div>
-                        <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm a" }}</p></div>
-                        <div class="col-3"><p class="black font-12">التاريخ</p></div>
-                    </fieldset>
-                </div>
+            <!-- <fieldset class="black"> -->
+            <div class="center full col-6">
+                <fieldset>
+                    <div class="col-3"><p class="black font-12">Date</p></div>
+                    <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm a" }}</p></div>
+                    <div class="col-3"><p class="black font-12">التاريخ</p></div>
+                </fieldset>
+            </div>
 
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3">
-                            <p class="black font-12">Invoice No.</p>
-                        </div>
-                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.code}}</p></div>
-                        <div class="col-3">
-                            <p class="black font-12">رقم الفاتورة</p>
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
+            <div class="center full col-6">
+                <fieldset>
+                    <div class="col-3">
+                        <p class="black font-12">Invoice No.</p>
+                    </div>
+                    <div class="col-6"><p class="font-12 userPrint">{{sInvoice.code}}</p></div>
+                    <div class="col-3">
+                        <p class="black font-12">رقم الفاتورة</p>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- </fieldset> -->
             <!-- </div> -->
 
             <!-- <div class="row" ng-hide="##query.type## == 5"> -->
-            <fieldset class="black" ng-hide="##query.type## == 5">
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3"><p class="black font-12">Pay Method</p></div>
-                        <div class="col-6"><p class="black font-12">{{sInvoice.paymentType.name##session.lang##}}</p></div>
-                        <div class="col-3"><p class="black font-12">طريقة الدفع</p></div>
-                    </fieldset>
-                </div>
+            <!-- <fieldset class="black" ng-hide="##query.type## == 5"> -->
+            <div class="center full col-6" ng-hide="##query.type## == 5">
+                <fieldset>
+                    <div class="col-3"><p class="black font-12">Pay Method</p></div>
+                    <div class="col-6"><p class="black font-12">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+                    <div class="col-3"><p class="black font-12">طريقة الدفع</p></div>
+                </fieldset>
+            </div>
 
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3">
-                            <!-- <p class="black font-12">Transaction Type / Sales Invoice :</p> -->
-                            <p class="black font-12">Sales Invoice</p>
-                        </div>
-                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.paymentType.name##session.lang##}}</p></div>
-                        <div class="col-3">
-                            <p class="black font-12">فاتورة مبيعات</p>
-                            <!-- <p class="black font-12">: نوع المعاملة / فاتورة مبيعات</p> -->
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
+            <div class="center full col-6" ng-hide="##query.type## == 5">
+                <fieldset>
+                    <div class="col-3">
+                        <!-- <p class="black font-12">Transaction Type / Sales Invoice :</p> -->
+                        <p class="black font-12">Sales Invoice</p>
+                    </div>
+                    <div class="col-6"><p class="font-12 userPrint">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+                    <div class="col-3">
+                        <p class="black font-12">فاتورة مبيعات</p>
+                        <!-- <p class="black font-12">: نوع المعاملة / فاتورة مبيعات</p> -->
+                    </div>
+                </fieldset>
+            </div>
+            <!-- </fieldset> -->
             <!-- </div> -->
 
             <!-- <div class="row" ng-show="item.salesType.code == 'customer'"> -->
-            <fieldset class="black" ng-show="item.salesType.code == 'customer'">
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3">
-                            <p class="black font-12">Customer</p>
-                        </div>
-                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
-                        <div class="col-3">
-                            <p class="black font-12">العميل</p>
-                        </div>
-                    </fieldset>
-                </div>
+            <!-- <fieldset class="black" > -->
+            <div class="center full col-6" ng-show="item.salesType.code == 'customer'">
+                <fieldset>
+                    <div class="col-3">
+                        <p class="black font-12">Customer</p>
+                    </div>
+                    <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
+                    <div class="col-3">
+                        <p class="black font-12">العميل</p>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3"><p class="black font-12">Mobile :</p></div>
-                        <div class="col-6"><p class="black font-12">{{sInvoice.customer.mobile }}</p></div>
-                        <div class="col-3"><p class="black font-12">: الجوال</p></div>
-                    </fieldset>
-                </div>
-            </fieldset>
+            <div class="center full col-6" ng-show="item.salesType.code == 'customer'">
+                <fieldset>
+                    <div class="col-3"><p class="black font-12">Mobile :</p></div>
+                    <div class="col-6"><p class="black font-12">{{sInvoice.customer.mobile }}</p></div>
+                    <div class="col-3"><p class="black font-12">: الجوال</p></div>
+                </fieldset>
+            </div>
+            <!-- </fieldset> -->
             <!-- </div> -->
 
             <!-- <div class="row" ng-show="item.salesType.code == 'company'"> -->
-            <fieldset class="black" ng-show="item.salesType.code == 'company'">
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3">
-                            <p class="black font-12">Company</p>
-                        </div>
-                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.company.name##session.lang##}}</p></div>
-                        <div class="col-3">
-                            <p class="black font-12">الشركة</p>
-                        </div>
-                    </fieldset>
-                </div>
+            <!-- <fieldset class="black" ng-show="item.salesType.code == 'company'"> -->
+            <div class="center full col-6" ng-show="item.salesType.code == 'company'">
+                <fieldset>
+                    <div class="col-3">
+                        <p class="black font-12">Company</p>
+                    </div>
+                    <div class="col-6"><p class="font-12 userPrint">{{sInvoice.company.name##session.lang##}}</p></div>
+                    <div class="col-3">
+                        <p class="black font-12">الشركة</p>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3"><p class="black font-12">Mobile :</p></div>
-                        <div class="col-6"><p class="black font-12">{{sInvoice.company.mobile }}</p></div>
-                        <div class="col-3"><p class="black font-12">: الجوال</p></div>
-                    </fieldset>
-                </div>
-            </fieldset>
+            <div class="center full col-6" ng-show="item.salesType.code == 'company'">
+                <fieldset>
+                    <div class="col-3"><p class="black font-12">Mobile :</p></div>
+                    <div class="col-6"><p class="black font-12">{{sInvoice.company.mobile }}</p></div>
+                    <div class="col-3"><p class="black font-12">: الجوال</p></div>
+                </fieldset>
+            </div>
+            <!-- </fieldset> -->
             <!-- </div> -->
 
             <!-- <div class="row" ng-show="item.salesType.code == 'patient'"> -->
-            <fieldset class="black" ng-show="item.salesType.code == 'patient'">
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3">
-                            <p class="black font-12">Patient</p>
-                        </div>
-                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}}</p></div>
-                        <div class="col-3">
-                            <p class="black font-12">المريض</p>
-                        </div>
-                    </fieldset>
-                </div>
+            <!-- <fieldset class="black" ng-show="item.salesType.code == 'patient'"> -->
+            <div class="center full col-6" ng-show="item.salesType.code == 'patient'">
+                <fieldset>
+                    <div class="col-3">
+                        <p class="black font-12">Patient</p>
+                    </div>
+                    <div class="col-6"><p class="font-12 userPrint">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}}</p></div>
+                    <div class="col-3">
+                        <p class="black font-12">المريض</p>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3"><p class="black font-12">Patient Mobile</p></div>
-                        <div class="col-6"><p class="black font-12">{{sInvoice.doctorDeskTop.patient.mobile }}</p></div>
-                        <div class="col-3"><p class="black font-12">جوال المريض</p></div>
-                    </fieldset>
-                </div>
-            </fieldset>
+            <div class="center full col-6" ng-show="item.salesType.code == 'patient'">
+                <fieldset>
+                    <div class="col-3"><p class="black font-12">Patient Mobile</p></div>
+                    <div class="col-6"><p class="black font-12">{{sInvoice.doctorDeskTop.patient.mobile }}</p></div>
+                    <div class="col-3"><p class="black font-12">جوال المريض</p></div>
+                </fieldset>
+            </div>
+            <!-- </fieldset> -->
             <!-- </div> -->
 
             <!-- <div class="row" ng-show="item.salesType.code == 'customer' || item.salesType.code == 'company'"> -->
@@ -576,102 +576,102 @@
             </table>
         </div> -->
 
-        <div class="row full">
-            <div class="footer center">
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Total Items Dis</p></div>
+        <div class="footer">
+            <div class="row full">
+                <fieldset>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Total Items Dis</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>إجمالي خصم الأصناف</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">إجمالي خصم الأصناف</p></div>
+                    </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Total Items Dis</p></div>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Total Items Dis</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>إجمالي خصم الأصناف</p></div>
-                    </fieldset>
-                </div>
-
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>VAT</p></div>
+                        <div class="col-3"><p class="font-12">إجمالي خصم الأصناف</p></div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="row full">
+                <fieldset>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">VAT</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>ضريبة القيمة المضافة</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">ضريبة القيمة المضافة</p></div>
+                    </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Total Before Tax</p></div>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Total Before Tax</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>الإجمالي قبل الضريبة</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">الإجمالي قبل الضريبة</p></div>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Total After Tax</p></div>
+            <div class="row full">
+                <fieldset>
+                    <div class="center col-6">
+                        <div class="col-3" class="font-12"><p>Total After Tax</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>الإجمالي بعد الضريبة</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">الإجمالي بعد الضريبة</p></div>
+                    </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Cash Discount</p></div>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Cash Discount</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>الخصم النقدي</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">الخصم النقدي</p></div>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Cash TAX</p></div>
+            <div class="row full">
+                <fieldset>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Cash TAX</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalTaxes | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>الضريبة النقدي</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">الضريبة النقدي</p></div>
+                    </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Paid</p></div>
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Paid</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>المدفوع</p></div>
-                    </fieldset>
-                </div>
+                        <div class="col-3"><p class="font-12">المدفوع</p></div>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="col-6">
-                    <fieldset>
-                        <div class="col-3"><p>Total</p></div>
+            <div class="row full">
+                <fieldset>
+                    <div class="center col-6">
+                        <div class="qrcode-a4"></div>
+                    </div>
+
+                    <div class="center col-6">
+                        <div class="col-3"><p class="font-12">Total</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
-                        <div class="col-3"><p>المجموع</p></div>
-                    </fieldset>
-                </div>
-
-                <div class="col-6">
-                    <span class="qrcode-a4"></span>
-                </div>
-
+                        <div class="col-3"><p class="font-12">المجموع</p></div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="row full">
                 <div class="row" ng-show="setting.printerProgram.printWrittenAmount">
                     <div class="col-1"></div>
                     <div class="col-11">
@@ -785,22 +785,19 @@
             </div> -->
 
             <div class="row full">
-                <div class="center col-6">
-                    <fieldset>
-                        <div class="col-3"><p class="font-12 black center">المستلم / Receiver</p></div>
-                        <div class="col-6"><p class="black">الإسم / Name</p></div>
-                        <div class="col-3"><p class="black">التوقيع / Signature</p></div>
-                    </fieldset>
+                <!-- <fieldset> -->
+                <div class="col-6">
+                    <p class="font-12 black">Receiver / المستلم</p>
+                    <p class="black">Name / الإسم</p>
+                    <p class="black">Signature / التوقيع</p>
                 </div>
 
-                <div class="center col-6">
-                    <fieldset>
-                        <p class="font-12 black center">المندوب / Sales Man</p>
-
-                        <div class="col-6"><p class="black">الإسم / Name</p></div>
-                        <div class="col-3"><p class="black">التوقيع / Signature</p></div>
-                    </fieldset>
+                <div class="col-6">
+                    <p class="font-12 black">Sales Man / المندوب</p>
+                    <p class="black">Name / الإسم</p>
+                    <p class="black">Signature / التوقيع</p>
                 </div>
+                <!-- </fieldset> -->
 
                 <!-- <div class="col-4 bold">
                     <p class="font-12 black center">المستلم / Receiver</p>

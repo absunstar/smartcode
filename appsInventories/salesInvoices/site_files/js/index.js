@@ -1360,6 +1360,10 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         );
     };
 
+    if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+        $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+    }
+
     $scope.getAll();
     $scope.getSalesTypes();
     $scope.getPaymentTypes();
