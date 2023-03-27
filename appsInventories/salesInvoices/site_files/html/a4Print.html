@@ -1,354 +1,828 @@
 <style>
-  .logoPrint {
-    width: 130px;
-    height: 110px;
-    margin: 1px;
-    padding: 1px;
-    border-radius: 0;
-    border: 1px solid var(--background-color);
-  }
+    .logoPrint {
+        width: 130px;
+        height: 110px;
+        margin: 0.75px;
+        padding: 0.75px;
+        border-radius: 0;
+        border: 0.8px solid var(--background-color);
+    }
 </style>
 <div ng-repeat="sInvoice in invList">
-  <div class="border page-a4">
-    <div class="row">
-      <div class="col-5 center">
-        <br />
+    <div class="border page-a4">
         <div class="row">
-          <h2 class="center bold">##session.company.nameAr##</h2>
-        </div>
-        <div class="row">
-          <h3 class="center bold">##session.branch.nameAr##</h3>
-        </div>
-        <div class="row center" ng-repeat="i in settings.printerProgram.invoiceHeader">
-          <p class="font-12 bold black center">{{i.name}}</p>
-        </div>
-      </div>
+            <div class="col-5 center">
+                <div class="row">
+                    <h4 class="center bold">##session.company.nameEn##</h4>
+                </div>
+                <div class="row">
+                    <h5 class="center bold">##session.branch.nameEn##</h5>
+                </div>
+                <div class="row center" ng-repeat="i in settings.printerProgram.invoiceHeader2">
+                    <p class="font-12 bold black center">{{i.name}}</p>
+                </div>
+            </div>
 
-      <div class="col-2 center">
-        <br />
-        <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
-      </div>
+            <div class="col-2 center">
+                <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
+            </div>
 
-      <div class="col-5 center">
-        <br />
-        <div class="row">
-          <h2 class="center bold">##session.company.nameEn##</h2>
+            <div class="col-5 center">
+                <div class="row">
+                    <h4 class="center bold">##session.company.nameAr##</h4>
+                </div>
+                <div class="row">
+                    <h5 class="center bold">##session.branch.nameAr##</h5>
+                </div>
+                <div class="row center" ng-repeat="i in settings.printerProgram.invoiceHeader">
+                    <p class="font-12 bold black center">{{i.name}}</p>
+                </div>
+            </div>
+
+            <div class="row center" ng-show="##session.company.taxNumber##">
+                <p class="center black bold font-12">Tax No. : ##session.company.taxNumber## / الرقم الضريبي</p>
+                <p class="center black bold txt18">Tax Invoice / فاتورة ضريبية</p>
+                <p ng-show="sInvoice.returned" class="center black bold txt18">Return NOTICE ( {{item.invoiceCode}} ) / إشعار مرتجع</p>
+            </div>
         </div>
-        <div class="row">
-          <h3 class="center bold">##session.branch.nameEn##</h3>
+        <pr />
+        <hr />
+
+        <div class="row full">
+            <!-- <div class="row"> -->
+            <fieldset class="black">
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3"><p class="black font-12">Date</p></div>
+                        <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm a" }}</p></div>
+                        <div class="col-3"><p class="black font-12">التاريخ</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3">
+                            <p class="black font-12">Invoice No.</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.code}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">رقم الفاتورة</p>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <!-- </div> -->
+
+            <!-- <div class="row" ng-hide="##query.type## == 5"> -->
+            <fieldset class="black" ng-hide="##query.type## == 5">
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3"><p class="black font-12">Pay Method</p></div>
+                        <div class="col-6"><p class="black font-12">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+                        <div class="col-3"><p class="black font-12">طريقة الدفع</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3">
+                            <!-- <p class="black font-12">Transaction Type / Sales Invoice :</p> -->
+                            <p class="black font-12">Sales Invoice</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">فاتورة مبيعات</p>
+                            <!-- <p class="black font-12">: نوع المعاملة / فاتورة مبيعات</p> -->
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <!-- </div> -->
+
+            <!-- <div class="row" ng-show="item.salesType.code == 'customer'"> -->
+            <fieldset class="black" ng-show="item.salesType.code == 'customer'">
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3">
+                            <p class="black font-12">Customer</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">العميل</p>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3"><p class="black font-12">Mobile :</p></div>
+                        <div class="col-6"><p class="black font-12">{{sInvoice.customer.mobile }}</p></div>
+                        <div class="col-3"><p class="black font-12">: الجوال</p></div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <!-- </div> -->
+
+            <!-- <div class="row" ng-show="item.salesType.code == 'company'"> -->
+            <fieldset class="black" ng-show="item.salesType.code == 'company'">
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3">
+                            <p class="black font-12">Company</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.company.name##session.lang##}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">الشركة</p>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3"><p class="black font-12">Mobile :</p></div>
+                        <div class="col-6"><p class="black font-12">{{sInvoice.company.mobile }}</p></div>
+                        <div class="col-3"><p class="black font-12">: الجوال</p></div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <!-- </div> -->
+
+            <!-- <div class="row" ng-show="item.salesType.code == 'patient'"> -->
+            <fieldset class="black" ng-show="item.salesType.code == 'patient'">
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3">
+                            <p class="black font-12">Patient</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">المريض</p>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3"><p class="black font-12">Patient Mobile</p></div>
+                        <div class="col-6"><p class="black font-12">{{sInvoice.doctorDeskTop.patient.mobile }}</p></div>
+                        <div class="col-3"><p class="black font-12">جوال المريض</p></div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <!-- </div> -->
+
+            <!-- <div class="row" ng-show="item.salesType.code == 'customer' || item.salesType.code == 'company'"> -->
+            <fieldset class="black" ng-show="item.salesType.code == 'customer' || item.salesType.code == 'company'">
+                <div class="col-3">
+                    <p class="black font-12">VAT Registration Number</p>
+                </div>
+                <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.taxIdentificationNumber}}</p></div>
+                <div class="col-3">
+                    <p class="black font-12">رقم تسجيل ضريبة القيمة المضافة</p>
+                </div>
+            </fieldset>
+            <!-- <fieldset class="black" ng-show="item.salesType.code == 'customer'">
+                    <fieldset>
+                        <div class="col-3">
+                            <p class="black font-12">Customer VAT Registration Number :</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.taxIdentificationNumber}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">رقم تسجيل ضريبة القيمة المضافة للعميل :</p>
+                        </div>
+                    </fieldset>
+                    <fieldset class="black" ng-show="item.salesType.code == 'company'">
+                        <div class="col-3">
+                            <p class="black font-12">Company VAT Registration Number :</p>
+                        </div>
+                        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.taxIdentificationNumber}}</p></div>
+                        <div class="col-3">
+                            <p class="black font-12">رقم تسجيل ضريبة القيمة المضافة للشركة :</p>
+                        </div>
+                    </fieldset>
+                </fieldset> -->
+            <!-- </div> -->
+
+            <!-- <div class="row"> -->
+            <fieldset class="black">
+                <div class="col-3">
+                    <p class="black font-12">Notes :</p>
+                </div>
+                <div class="col-6"><p class="font-12 userPrint">{{sInvoice.notes}}</p></div>
+                <div class="col-3">
+                    <p class="black font-12">: ملاحظات</p>
+                </div>
+            </fieldset>
         </div>
-        <div class="row center" ng-repeat="i in settings.printerProgram.invoiceHeader2">
-          <p class="font-12 bold black center">{{i.name}}</p>
+        <!-- </div> -->
+        <!-- <div class="table-responsive">
+              <table class="table hover bold">
+                  <tr>
+                      <td class="center">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Date :</p>
+                              </div>
+                              <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm" }}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">: التاريخ</p>
+                              </div>
+                          </div>
+                           <p></p>
+                          <p class="black font-12"> Date : / </p>
+                          <p class="center font-12"></p> 
+                      </td>
+
+                      <td class="center">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Invoice No. :</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.code}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">: رقم الفاتورة</p>
+                              </div>
+                          </div>
+                      </td>
+
+                      <div class="row">
+                          <div class="col-4">Invoice No. :</div>
+                          <div class="col-4"><p class="font-12 userPrint">{{sInvoice.code}}</p></div>
+                          <div class="col-4">رقم الفاتورة :</div>
+                      </div>
+                      <p class="black font-12">/</p>
+                      <p class="font-12 userPrint">{{sInvoice.code}}</p>
+                  </tr>
+
+                  <tr ng-hide="##query.type## == 5">
+                      <td class="center font-12 bold">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Pay Method. :</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">: طريقة الدفع</p>
+                              </div>
+                          </div>
+                      </td>
+                      <td class="title font-12 bold">
+                          <p class="black">طريقة الدفع / Pay Method :</p>
+                          <p class="center">{{sInvoice.paymentType.name##session.lang##}}</p>
+                      </td>
+
+                      <td class="center font-12 bold">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Transaction Type / Sales Invoice</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">نوع المعاملة / فاتورة مبيعات</p>
+                              </div>
+                          </div>
+                      </td>
+
+                      <td class="center">
+                          <p class="black font-12">نوع المعاملة / Transaction type :</p>
+                          <p class="center font-12 bold">فاتورة مبيعات - Sales nvoice</p>
+                      </td>
+                  </tr>
+
+                  <tr ng-show="item.salesType.code == 'customer'">
+                      <td class="center font-12 bold">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Customer :</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">العميل :</p>
+                              </div>
+                          </div>
+                      </td>
+
+                      <td class="title font-12">
+                          <p class="black">العميل / Customer :</p>
+                          <p class="center">{{sInvoice.customer.name##session.lang##}}</p>
+                      </td>
+
+                      <td class="center font-12 bold">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Customer Mobile :</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.mobile}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">جوال العميل :</p>
+                              </div>
+                          </div>
+                      </td>
+
+                      <td class="center font-12">
+                          <p class="black">جوال العميل / Customer Mobile:</p>
+                          <p class="center">{{sInvoice.customer.mobile}}</p>
+                      </td>
+                  </tr>
+
+                  <tr ng-show="item.salesType.code == 'company'">
+                      <td class="center font-12 bold">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Company :</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">الشركة :</p>
+                              </div>
+                          </div>
+                      </td>
+
+                      <td class="title font-12">
+                          <p class="black">الشركة / Company :</p>
+                          <p class="center">{{sInvoice.customer.name##session.lang##}}</p>
+                      </td>
+                      <td class="center font-12 bold">
+                          <div class="row">
+                              <div class="col-3">
+                                  <p class="black font-12">Company Mobile :</p>
+                              </div>
+                              <div class="col-6"><p class="font-12 userPrint">{{sInvoice.company.mobile}}</p></div>
+                              <div class="col-3">
+                                  <p class="black font-12">جوال الشركة :</p>
+                              </div>
+                          </div>
+                      </td>
+
+                      <td class="center font-12">
+                          <p class="black">جوال الشركة / Company Mobile:</p>
+                          <p class="center">{{sInvoice.customer.mobile}}</p>
+                      </td>
+                  </tr>
+
+                  <tr ng-show="item.salesType.code == 'patient'">
+                      <td class="title font-12">
+                          <p class="black">المريض / Patient :</p>
+                          <p class="center">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}}</p>
+                      </td>
+                      <td class="center font-12">
+                          <p class="black">جوال المريض / Patient Mobile:</p>
+                          <p class="center">{{sInvoice.doctorDeskTop.patient.mobile}}</p>
+                      </td>
+                  </tr>
+
+                  <tr ng-show="item.salesType.code == 'customer' || item.salesType.code == 'company'">
+                      <td class="title font-12" colspan="2">
+                          <p class="black">
+                              <span ng-show="item.salesType.code == 'customer'">رقم تسجيل ضريبة القيمة المضافة للعميل / Customer VAT Registration Number : </span>
+                              <span ng-show="item.salesType.code == 'company'">رقم تسجيل ضريبة القيمة المضافة للشركة / Company VAT Registration Number : </span>
+                              {{sInvoice.customer.taxIdentificationNumber}}
+                          </p>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td class="title font-12" colspan="2">
+                          <p class="black">ملاحظات / Notes : {{sInvoice.notes}}</p>
+                      </td>
+                  </tr>
+              </table>
+          </div> -->
+
+        <pr />
+        <div class="row full">
+            <table class="table center bold hover details">
+                <tr>
+                    <th class="width-15-mm font-10">
+                        <p>مسلسل</p>
+                        <p>Serial</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>رقم الصنف</p>
+                        <p>Item No.</p>
+                    </th>
+
+                    <th class="width-60-mm font-10">
+                        <p>إسم الصنف</p>
+                        <p>Item Name</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>خصم 1 / DIS 1</p>
+                        <p>Total DIS 1</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>DIS 2 ##word.%##</p>
+                        <p>Total DIS 2 ##word.$##</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>الكمية</p>
+                        <p>Qty.</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>سعر الوحدة</p>
+                        <p>Unit Price</p>
+                    </th>
+
+                    <th class="width-15-mm font-10" ng-show="settings.storesSetting.vat > 0">
+                        <p>VAT PER.</p>
+                        <p>VAT</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>الإجمالي</p>
+                        <p>Total Net</p>
+                    </th>
+                </tr>
+
+                <tr ng-repeat="itm in sInvoice.itemsList">
+                    <td class="center width-15-mm font-12">{{itm.$index}}</td>
+                    <td class="center width-15-mm font-12">{{itm.barcode}}</td>
+
+                    <td class="center width-60-mm">
+                        <p class="font-12">{{itm.nameAr}} ( {{itm.unit.nameAr}} )</p>
+                        <p class="font-12">{{itm.nameEn}} ( {{itm.unit.nameEn}} )</p>
+                        <p ng-repeat="b in itm.batchesList" ng-show="b.count > 0">
+                            <span class="" ng-show="b.productionDate"> {{b.productionDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
+                            <span class="" ng-show="b.expiryDate"> {{b.expiryDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
+                            <span class="" ng-show="b.code && !itm.workByQrCode"> {{b.code}} ({{b.count}}##word.+##) </span>
+                            <span class="" ng-show="itm.workByQrCode"> {{b.gtin}} ({{b.count}}##word.+##) </span>
+                        </p>
+                    </td>
+
+                    <td class="center width-15-mm font-12">
+                        <p>{{itm.extraDiscount}} <span class="currency">##word.%##</span></p>
+                        <p>{{itm.totalExtraDiscount}} <span class="currency">##word.$##</span></p>
+                    </td>
+
+                    <td class="center width-15-mm font-12">
+                        <p>
+                            {{itm.discount}}
+                            <span ng-show="itm.discountType =='value'" class="currency"> ##word.$##</span>
+                            <span ng-show="itm.discountType =='percent'" class="currency"> ##word.%##</span>
+                        </p>
+                        <p>{{itm.totalDiscount}} <span class="currency">##word.$##</span></p>
+                    </td>
+
+                    <td class="center width-15-mm font-12">{{itm.count}}</td>
+
+                    <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
+
+                    <td class="center width-15-mm font-12" ng-show="settings.storesSetting.vat > 0">
+                        <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
+                        <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                    </td>
+                    <td class="center width-15-mm font-12">
+                        <p>{{itm.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                        <p>{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
+                    </td>
+                </tr>
+            </table>
         </div>
-      </div>
+
+        <!-- <div class="row">
+            <table class="table center bold hover details">
+                <tr>
+                    <th class="width-15-mm font-10">
+                        <p>مسلسل</p>
+                        <p>Serial</p>
+                    </th>
+                    <th class="width-15-mm font-10">
+                        <p>رقم الصنف</p>
+                        <p>Item No.</p>
+                    </th>
+                    <th class="width-60-mm font-10">
+                        <p>إسم الصنف</p>
+                        <p>Item Name</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>خصم 1 / DISC 1</p>
+                        <p>Total DISC 1</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>DISC 2 ##word.%##</p>
+                        <p>Total DISC 2 ##word.$##</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>الكمية</p>
+                        <p>Qty.</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>سعر الوحدة</p>
+                        <p>Unit Price</p>
+                    </th>
+
+                    <th class="width-15-mm font-10" ng-show="settings.storesSetting.vat > 0">
+                        <p>VAT PER.</p>
+                        <p>VAT</p>
+                    </th>
+
+                    <th class="width-15-mm font-10">
+                        <p>الإجمالي / Total</p>
+                        <p>Total After VAT</p>
+                    </th>
+                </tr>
+
+                <tr ng-repeat="itm in sInvoice.itemsList">
+                    <td class="center width-15-mm font-12">{{itm.$index}}</td>
+                    <td class="center width-15-mm font-12">{{itm.barcode}}</td>
+
+                    <td class="center width-60-mm">
+                        <p class="font-12">{{itm.nameAr}} ( {{itm.unit.nameAr}} )</p>
+                        <p class="font-12">{{itm.nameEn}} ( {{itm.unit.nameEn}} )</p>
+                        <p ng-repeat="b in itm.batchesList" ng-show="b.count > 0">
+                            <span class="" ng-show="b.productionDate"> {{b.productionDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
+                            <span class="" ng-show="b.expiryDate"> {{b.expiryDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
+                            <span class="" ng-show="b.code && !itm.workByQrCode"> {{b.code}} ({{b.count}}##word.+##) </span>
+                            <span class="" ng-show="itm.workByQrCode"> {{b.gtin}} ({{b.count}}##word.+##) </span>
+                        </p>
+                    </td>
+
+                    <td class="center width-15-mm font-12">
+                        <p>{{itm.extraDiscount}} <span class="currency">##word.%##</span></p>
+                        <p>{{itm.totalExtraDiscount}} <span class="currency">##word.$##</span></p>
+                    </td>
+
+                    <td class="center width-15-mm font-12">
+                        <p>
+                            {{itm.discount}}
+                            <span ng-show="itm.discountType =='value'" class="currency"> ##word.$##</span>
+                            <span ng-show="itm.discountType =='percent'" class="currency"> ##word.%##</span>
+                        </p>
+                        <p>{{itm.totalDiscount}} <span class="currency">##word.$##</span></p>
+                    </td>
+
+                    <td class="center width-15-mm font-12">{{itm.count}}</td>
+
+                    <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
+
+                    <td class="center width-15-mm font-12" ng-show="settings.storesSetting.vat > 0">
+                        <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
+                        <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                    </td>
+                    <td class="center width-15-mm font-12">
+                        <p>{{itm.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                        <p>{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
+                    </td>
+                </tr>
+            </table>
+        </div> -->
+
+        <div class="row full">
+            <div class="footer center">
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Total Items Dis</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>إجمالي خصم الأصناف</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Total Items Dis</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>إجمالي خصم الأصناف</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>VAT</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>ضريبة القيمة المضافة</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Total Before Tax</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>الإجمالي قبل الضريبة</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Total After Tax</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>الإجمالي بعد الضريبة</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Cash Discount</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>الخصم النقدي</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Cash TAX</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalTaxes | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>الضريبة النقدي</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Paid</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>المدفوع</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <fieldset>
+                        <div class="col-3"><p>Total</p></div>
+                        <div class="col-6">
+                            <p class="bold black">{{sInvoice.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="col-3"><p>المجموع</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="col-6">
+                    <span class="qrcode-a4"></span>
+                </div>
+
+                <div class="row" ng-show="settings.printerProgram.printWrittenAmount">
+                    <div class="col-1"></div>
+                    <div class="col-11">
+                        <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
+                        <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+
+            <!-- <div class="row padding" ng-show="($index+1) == invList.length">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">المجموع / Total</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">إجمالي خصم الأصناف/ Total Items Disc</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">الإجمالي قبل الضريبة / Total Before Tax</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">ضريبة القيمة المضافة / VAT {{settings.storesSetting.vat | xmoney2}} <span class="currency">##word.$##</span>%</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">الإجمالي بعد الضريبة / Total After Tax</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">الخصم النقدي / Discount Cash</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="settings.storesSetting.taxesAppearingInInvoices">
+                        <div class="col-8">
+                            <p class="txt18 bold black">الضريبة النقدي / TAX Cash</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalTaxes | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="txt18 bold black">المدفوع / Cash</p>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <p class="txt18 center bold black">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 center">
+                    <div class="qrcode-a4 center"></div>
+                </div>
+
+                <div class="row" ng-show="settings.printerProgram.printWrittenAmount">
+                    <div class="col-1"></div>
+                    <div class="col-11">
+                        <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
+                        <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
+                    </div>
+                    <hr />
+                </div>
+            </div> -->
+
+            <div class="row full">
+                <div class="center col-6">
+                    <fieldset>
+                        <div class="col-3"><p class="font-12 black center">المستلم / Receiver</p></div>
+                        <div class="col-6"><p class="black">الإسم / Name</p></div>
+                        <div class="col-3"><p class="black">التوقيع / Signature</p></div>
+                    </fieldset>
+                </div>
+
+                <div class="center col-6">
+                    <fieldset>
+                        <p class="font-12 black center">المندوب / Sales Man</p>
+
+                        <div class="col-6"><p class="black">الإسم / Name</p></div>
+                        <div class="col-3"><p class="black">التوقيع / Signature</p></div>
+                    </fieldset>
+                </div>
+
+                <!-- <div class="col-4 bold">
+                    <p class="font-12 black center">المستلم / Receiver</p>
+                    <p class="black">الإسم / Name :</p>
+                    <p class="black">التوقيع / Signature</p>
+                </div> -->
+
+                <!-- <div class="col-2"></div> -->
+
+                <!-- <div class="col-4 bold">
+                    <p class="font-12 black center">المندوب / Sales man</p>
+                    <p class="black">الإسم / Name :</p>
+                    <p class="black">التوقيع / Signature :</p>
+                </div> -->
+            </div>
+            <hr />
+
+            <div class="row padding" ng-repeat="i in settings.printerProgram.invoiceFooter">
+                <p class="font-12 bold black center">{{i.name}}</p>
+            </div>
+
+            <p class="font-12 center bold black">Page {{$index + 1}} / {{invList.length}}</p>
+        </div>
     </div>
-
-    <div class="row center" ng-show="##session.company.taxNumber##">
-      <p class="center black bold font-12">الرقم الضريبي / Tax No. : ##session.company.taxNumber##</p>
-      <p class="center black bold txt18">فاتورة ضريبية / Tax Invoice</p>
-      <p ng-show="sInvoice.returned" class="center black bold txt18">إشعار مرتجع / Return NOTICE ( {{item.invoiceCode}} )</p>
-    </div>
-    <br />
-    <hr />
-
-    <div class="row">
-      <div class="table-responsive">
-        <table class="table hover bold">
-          <tr>
-            <td>
-              <b class="black font-12"> التاريخ / Date :</b>
-              <b class="center font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm" }} </b>
-            </td>
-
-            <td class="center">
-              <b class="black font-12">رقم الفاتورة / Invoice No. :</b>
-              <b class="font-12 userPrint">{{sInvoice.code}}</b>
-            </td>
-          </tr>
-
-          <tr ng-hide="##query.type## == 5">
-            <td class="title font-12 bold">
-              <b class="black">طريقة الدفع / Pay Method :</b>
-              <b class="center">{{sInvoice.paymentType.name##session.lang##}} </b>
-            </td>
-
-            <td class="center">
-              <b class="black font-12"> نوع المعاملة / Transaction type :</b>
-              <b class="center font-12 bold"> فاتورة مبيعات - Sales nvoice </b>
-            </td>
-          </tr>
-
-          <tr ng-show="item.salesType.code == 'customer'">
-            <td class="title font-12">
-              <b class="black"> العميل / Customer :</b>
-              <b class="center">{{sInvoice.customer.name##session.lang##}} </b>
-            </td>
-            <td class="center font-12">
-              <b class="black"> جوال العميل / Customer Mobile:</b>
-              <b class="center">{{sInvoice.customer.mobile}} </b>
-            </td>
-          </tr>
-
-          <tr ng-show="item.salesType.code == 'company'">
-            <td class="title font-12">
-              <b class="black"> الشركة / Company :</b>
-              <b class="center">{{sInvoice.customer.name##session.lang##}} </b>
-            </td>
-            <td class="center font-12">
-              <b class="black"> جوال الشركة / Company Mobile:</b>
-              <b class="center">{{sInvoice.customer.mobile}} </b>
-            </td>
-          </tr>
-
-          <tr ng-show="item.salesType.code == 'patient'">
-            <td class="title font-12">
-              <b class="black"> المريض / Patient :</b>
-              <b class="center">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}} </b>
-            </td>
-            <td class="center font-12">
-              <b class="black"> جوال المريض / Patient Mobile:</b>
-              <b class="center">{{sInvoice.doctorDeskTop.patient.mobile}} </b>
-            </td>
-          </tr>
-
-          <tr ng-show="item.salesType.code == 'customer' || item.salesType.code == 'company'">
-            <td class="title font-12" colspan="2">
-              <p class="black">
-                <span ng-show="item.salesType.code == 'customer'">رقم تسجيل ضريبة القيمة المضافة للعميل / Customer VAT Registration Number : </span>
-                <span ng-show="item.salesType.code == 'company'">رقم تسجيل ضريبة القيمة المضافة للشركة / Company VAT Registration Number : </span>
-                {{sInvoice.customer.taxIdentificationNumber}}
-              </p>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="title font-12" colspan="2">
-              <b class="black"> ملاحظات / Notes : {{sInvoice.notes}} </b>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <br />
-
-    <div class="row">
-      <table class="table center bold hover details">
-        <tr>
-          <th class="width-15-mm font-10">
-            <p>مسلسل</p>
-            <p>Serial</p>
-          </th>
-          <th class="width-15-mm font-10">
-            <p>رقم الصنف</p>
-            <p>Item No.</p>
-          </th>
-          <th class="width-60-mm font-10">
-            <p>إسم الصنف</p>
-            <p>Item Name</p>
-          </th>
-
-          <th class="width-15-mm font-10">
-            <p>خصم 1 / DISC 1</p>
-            <p>Total DISC 1</p>
-          </th>
-
-          <th class="width-15-mm font-10">
-            <p>DISC 2 ##word.%##</p>
-            <p>Total DISC 2 ##word.$##</p>
-          </th>
-
-          <th class="width-15-mm font-10">
-            <p>الكمية</p>
-            <p>Qty.</p>
-          </th>
-
-          <th class="width-15-mm font-10">
-            <p>سعر الوحدة</p>
-            <p>Unit Price</p>
-          </th>
-
-          <th class="width-15-mm font-10" ng-show="settings.storesSetting.vat > 0">
-            <p>VAT PER.</p>
-            <p>VAT</p>
-          </th>
-
-          <th class="width-15-mm font-10">
-            <p>الإجمالي / Total</p>
-            <p>Total After VAT</p>
-          </th>
-        </tr>
-
-        <tr ng-repeat="itm in sInvoice.itemsList">
-          <td class="center width-15-mm font-12">{{itm.$index}}</td>
-          <td class="center width-15-mm font-12">{{itm.barcode}}</td>
-
-          <td class="center width-60-mm">
-            <p class="font-12">{{itm.nameAr}} ( {{itm.unit.nameAr}} )</p>
-            <p class="font-12">{{itm.nameEn}} ( {{itm.unit.nameEn}} )</p>
-            <p ng-repeat="b in itm.batchesList" ng-show="b.count > 0">
-              <span class="" ng-show="b.productionDate"> {{b.productionDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
-              <span class="" ng-show="b.expiryDate"> {{b.expiryDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
-              <span class="" ng-show="b.code && !itm.workByQrCode"> {{b.code}} ({{b.count}}##word.+##) </span>
-              <span class="" ng-show="itm.workByQrCode"> {{b.gtin}} ({{b.count}}##word.+##) </span>
-            </p>
-          </td>
-
-          <td class="center width-15-mm font-12">
-            <p>{{itm.extraDiscount}} <span class="currency">##word.%##</span></p>
-            <p>{{itm.totalExtraDiscount}} <span class="currency">##word.$##</span></p>
-          </td>
-
-          <td class="center width-15-mm font-12">
-            <p>
-              {{itm.discount}}
-              <span ng-show="itm.discountType =='value'" class="currency"> ##word.$##</span>
-              <span ng-show="itm.discountType =='percent'" class="currency"> ##word.%##</span>
-            </p>
-            <p>{{itm.totalDiscount}} <span class="currency">##word.$##</span></p>
-          </td>
-
-          <td class="center width-15-mm font-12">{{itm.count}}</td>
-
-          <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
-
-          <td class="center width-15-mm font-12" ng-show="settings.storesSetting.vat > 0">
-            <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
-            <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
-          </td>
-          <td class="center width-15-mm font-12">
-            <p>{{itm.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
-            <p>{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="footer">
-      <div class="row padding" ng-show="($index+1) == invList.length">
-        <div class="col-8">
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">المجموع / Total</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">إجمالي خصم الأصناف/ Total Items Disc</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">الإجمالي قبل الضريبة / Total Before Tax</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">ضريبة القيمة المضافة / VAT {{settings.storesSetting.vat | xmoney2}} <span class="currency">##word.$##</span>%</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">الإجمالي بعد الضريبة / Total After Tax</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">الخصم النقدي / Discount Cash</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-
-          <div class="row" ng-show="settings.storesSetting.taxesAppearingInInvoices">
-            <div class="col-8">
-              <p class="txt18 bold black">الضريبة النقدي / TAX Cash</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalTaxes | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-8">
-              <p class="txt18 bold black">المدفوع / Cash</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-              <p class="txt18 center bold black">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
-              <hr />
-            </div>
-          </div>
-        </div>
-        <div class="col-4 center">
-          <div class="qrcode-a4 center"></div>
-        </div>
-
-        <div class="row" ng-show="settings.printerProgram.printWrittenAmount">
-          <div class="col-1"></div>
-          <div class="col-11">
-            <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
-            <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-1"></div>
-        <div class="col-4 bold">
-          <p class="font-12 black center">المستلم / Receiver</p>
-          <p class="black">الإسم / Name :</p>
-          <p class="black">التوقيع / Signature :</p>
-        </div>
-
-        <div class="col-2"></div>
-
-        <div class="col-4 bold">
-          <p class="font-12 black center">المندوب / Sales man</p>
-          <p class="black">الإسم / Name :</p>
-          <p class="black">التوقيع / Signature :</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="row padding" ng-repeat="i in settings.printerProgram.invoiceFooter">
-        <p class="font-12 bold black center">{{i.name}}</p>
-      </div>
-
-      <p class="font-12 center bold black">Page {{$index + 1}} / {{invList.length}}</p>
-    </div>
-  </div>
 </div>

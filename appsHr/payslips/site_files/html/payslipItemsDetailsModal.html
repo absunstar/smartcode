@@ -6,7 +6,7 @@
         </div>
 
         <div class="modal-body">
-            <fieldset>
+            <fieldset ng-hide="payslipItem.code == 'delayRequests' ||payslipItem.code == 'workErrands' || payslipItem.code == 'vacationsRequests'">
                 <legend>{{payslipItem.nameEn}} - {{payslipItem.nameAr}}</legend>
 
                 <div class="table-responsive" ng-show="payslipItem.code =='employeesBonuses'">
@@ -269,7 +269,7 @@
                     </table>
                 </div>
 
-                <div class="table-responsive" ng-show="payslipItem.code == 'delayRequests'">
+                <!-- <div class="table-responsive" ng-show="payslipItem.code == 'delayRequests'">
                     <table class="table hover bold">
                         <tr>
                             <th>##word.s##</th>
@@ -301,9 +301,9 @@
                             <td class="center"><span class="text-danger"> {{itm.value}} </span> <span class="currency">##word.$##</span></td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
 
-                <div class="table-responsive" ng-show="payslipItem.code == 'workErrands'">
+                <!-- <div class="table-responsive" ng-show="payslipItem.code == 'workErrands'">
                     <table class="table hover bold">
                         <tr>
                             <th>##word.s##</th>
@@ -320,9 +320,9 @@
                             <td class="center">{{itm.allwedTime}} <span>##word.Minute/s##</span></td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
 
-                <div class="table-responsive" ng-show="payslipItem.code == 'vacationsRequests'">
+                <!-- <div class="table-responsive" ng-show="payslipItem.code == 'vacationsRequests'">
                     <table class="table hover bold">
                         <tr>
                             <th>##word.s##</th>
@@ -341,7 +341,7 @@
                             <td class="center">{{itm.approvedDays}} <span>##word.Day/s##</span></td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
 
                 <div class="table-responsive" ng-show="payslipItem.code == 'employeesAdvances'">
                     <table class="table hover bold">
