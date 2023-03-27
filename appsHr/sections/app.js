@@ -1,7 +1,7 @@
 module.exports = function init(site) {
     let app = {
         name: 'sections',
-        allowMemory: true,
+        allowMemory: false,
         memoryList: [],
         allowCache: false,
         cacheList: [],
@@ -274,14 +274,12 @@ module.exports = function init(site) {
                 }
 
                 if (app.allowMemory) {
-                 
                     if (!search) {
                         search = 'id';
                     }
                     let list = app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
-             
 
                     res.json({
                         done: true,

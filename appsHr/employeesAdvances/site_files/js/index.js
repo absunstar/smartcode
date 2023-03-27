@@ -42,8 +42,8 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
             $scope.error = v.messages[0].ar;
             return;
         }
-        $scope.item.approvedAmount = response.data.doc.amount || _item.amount;
-        $scope.item.approvedNumberOfMonths = response.data.doc.numberOfMonths || _item.numberOfMonths;
+        $scope.item.approvedAmount =  $scope.item.amount || _item.amount;
+        $scope.item.approvedNumberOfMonths =  $scope.item.numberOfMonths || _item.numberOfMonths;
         if (!$scope.item.employee || !$scope.item.employee.id) {
             $scope.error = '##word.Please Select Employee##';
             return;

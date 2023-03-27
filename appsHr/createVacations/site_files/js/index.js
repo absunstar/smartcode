@@ -360,6 +360,7 @@ app.controller('createVacations', function ($scope, $http, $timeout) {
         }).then(
             function (response) {
                 $scope.busy = false;
+        
                 if (response.data.done && response.data.list.length > 0) {
                     $scope.employeesList = response.data.list;
                 }

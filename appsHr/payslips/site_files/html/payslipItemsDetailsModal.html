@@ -353,7 +353,7 @@
                         <tr ng-repeat="itm in payslipItem.list">
                             <td class="center blue">{{$index+1}}</td>
                             <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
-                            <td class="center">{{itm.amount | number:'0.3'}} <span class="currency">##word.$##</span></td>
+                            <td class="center"><span class="text-success">{{itm.amount | number:'0.3'}}</span> <span class="currency">##word.$##</span></td>
                         </tr>
                     </table>
                 </div>

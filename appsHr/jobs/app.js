@@ -1,7 +1,7 @@
 module.exports = function init(site) {
     let app = {
         name: 'jobs',
-        allowMemory: true,
+        allowMemory: false,
         memoryList: [],
         allowCache: false,
         cacheList: [],
@@ -251,7 +251,7 @@ module.exports = function init(site) {
                 let where = req.body.where || {};
                 let search = req.body.search || '';
                 let limit = req.body.limit || 10;
-                let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, active: 1 };
+                let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, department: 1, section: 1 };
 
                 if (app.allowMemory) {
                     if (!search) {
@@ -260,7 +260,7 @@ module.exports = function init(site) {
                     let list = app.memoryList
                         .filter(
                             (g) =>
-                                // (!where['department'] || g.department.id == where['department'].id) &&
+                                // (!where['section'] || g.section.id == where['section'].id) &&
                                 g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search)
                         )
                         .slice(0, limit);

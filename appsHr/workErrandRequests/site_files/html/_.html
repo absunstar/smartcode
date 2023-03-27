@@ -25,7 +25,6 @@
                     <th>##word.Employee##</th>
                     <th>##word.Request Date##</th>
                     <th>##word.Errand Date##</th>
-                    <th>##word.Action Date##</th>
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
@@ -43,15 +42,13 @@
                     </td>
 
                     <td class="center">
-                        <p ng-show="item.requestStatus == 'accepted'">{{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}}</p>
-                        <p ng-show="item.requestStatus == 'rejected'">{{item.rejectDate | date:'dd/MM/yyyy'}} - {{item.rejectDate | date:'hh:mm:ss a'}}</p>
-                        <p ng-show="item.requestStatus == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
-                    </td>
-
-                    <td class="center">
                         <span class="blue" ng-show="item.requestStatus == 'new' || item.requestStatus =='canceled'">{{item.requestStatus|uppercase}}</span>
                         <span class="text-success" ng-show="item.requestStatus == 'accepted'">##word.Accepted##</span>
                         <span class="text-danger" ng-show="item.requestStatus == 'rejected'">##word.Refused##</span>
+                        <p ng-show="item.requestStatus == 'accepted'">{{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'rejected'">{{item.rejectDate | date:'dd/MM/yyyy'}} - {{item.rejectDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
+
                     </td>
 
                     <td class="center not-print">

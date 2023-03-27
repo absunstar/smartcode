@@ -590,6 +590,10 @@ module.exports = function init(site) {
                     date: new Date(),
                 };
 
+                if (!_data.email) {
+                    const splitName = _data.fullNameEn.split(' ');
+                    _data.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
+                }
                 _data.roles = [
                     {
                         moduleName: 'public',
@@ -598,7 +602,7 @@ module.exports = function init(site) {
                         Ar: 'صلاحيات الموظف',
                     },
                 ];
-                _data.type = site.usersTypesList[4];
+                _data.type = site.usersTypesList[3];
 
                 if (_data.mobileList.length > 0) {
                     _data.mobile = _data.mobileList[0].mobile;

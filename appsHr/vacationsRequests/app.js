@@ -281,8 +281,9 @@ module.exports = function init(site) {
 
                 if (_data && _data.approvedVacationType && _data.approvedVacationType.id) {
                     // const employeeApp = site.getApp('employees');
-                    const employeeApp = site.getApp('users_info');
-                    employeeApp.$collection.find({ where: { id: _data.employee.id, 'type.id': 4 } }, (err, doc) => {
+                    // const employeeApp = site.getApp('users_info');
+                    const employeeApp = site.connectCollection('users_info');
+                    employeeApp.find({ where: { id: _data.employee.id, 'type.id': 4 } }, (err, doc) => {
                         if (doc) {
                             if (_data.approvedVacationType.id === 1) {
                                 doc.annualVacation += _data.approvedDays;
@@ -298,7 +299,7 @@ module.exports = function init(site) {
                             return;
                         }
 
-                        employeeApp.$collection.update(doc);
+                        employeeApp.update(doc);
                     });
                 }
 
@@ -341,8 +342,9 @@ module.exports = function init(site) {
                     if (exisitIndex == -1 || (exisitIndex !== -1 && docs[exisitIndex].id == _data.id)) {
                         if (_data && _data.approvedVacationType && _data.approvedVacationType.id) {
                             // const employeeApp = site.getApp('employees');
-                            const employeeApp = site.getApp('users_info');
-                            employeeApp.$collection.find({ where: { id: _data.employee.id, 'type.id': 4 } }, (err, doc) => {
+                            // const employeeApp = site.getApp('users_info');
+                            const employeeApp = site.connectCollection('users_info');
+                            employeeApp.find({ where: { id: _data.employee.id, 'type.id': 4 } }, (err, doc) => {
                                 if (doc) {
                                     if (_data.approvedVacationType.id === 1) {
                                         doc.annualVacation -= _data.approvedDays;
@@ -358,7 +360,7 @@ module.exports = function init(site) {
                                     return;
                                 }
 
-                                employeeApp.$collection.update(doc);
+                                employeeApp.update(doc);
                             });
                         }
                         app.update(_data, (err, result) => {

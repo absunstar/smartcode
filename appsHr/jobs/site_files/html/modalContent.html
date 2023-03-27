@@ -67,10 +67,10 @@
                                 <tr ng-repeat="mission in item.tasksList">
                                     <td class="center">{{$index + 1}}</td>
                                     <td class="center">
-                                        <p >{{mission.name}}</p>
+                                        <p>{{mission.name}}</p>
                                     </td>
                                     <td class="center">
-                                        <p >{{mission.notes}}</p>
+                                        <p>{{mission.notes}}</p>
                                     </td>
                                     <td class="center">
                                         <div class="row">
@@ -92,9 +92,9 @@
                             <legend>##word.Tools##</legend>
                             <div class="row">
                                 <i-list class="col4" ng-model="selectedTool.tool" label="##word.Tool##" display="name##session.lang##" items="jobsToolsList" ng-search="item.$jobsTool"></i-list>
-                                <i-checkbox class="col2" ng-model="selectedTool.companyMustProvide" label="##word.Company Must Provide##"></i-checkbox>
+                                <i-checkbox class="col3" ng-model="selectedTool.companyMustProvide" label="##word.Company Must Provide##"></i-checkbox>
                                 <i-control class="col4" type="text" ng-model="selectedTool.notes" label="##word.Notes##"></i-control>
-                                <div class="col2">
+                                <div class="col1">
                                     <br />
                                     <i-button type="push" ng-click="addTool(selectedTool)"></i-button>
                                 </div>
@@ -111,7 +111,7 @@
                                 <tr ng-repeat="tol in item.toolsList">
                                     <td class="center">{{$index + 1}}</td>
                                     <td class="center">
-                                        <p >{{tol.tool.name##session.lang##}}</p>
+                                        <p>{{tol.tool.name##session.lang##}}</p>
                                     </td>
 
                                     <td class="center">
@@ -119,7 +119,7 @@
                                         <span class="text-danger" ng-show="!tol.companyMustProvide">##word.No##</span>
                                     </td>
                                     <td class="center">
-                                        <p >{{tol.notes}}</p>
+                                        <p>{{tol.notes}}</p>
                                     </td>
                                     <td class="center">
                                         <div class="row">
@@ -160,13 +160,13 @@
                                 <tr ng-repeat="gift in item.skillsList">
                                     <td class="center">{{$index + 1}}</td>
                                     <td class="center">
-                                        <p >{{gift.name}}</p>
+                                        <p>{{gift.name}}</p>
                                     </td>
                                     <td class="center">
-                                        <p >{{gift.experienceYears}}</p>
+                                        <p>{{gift.experienceYears}}</p>
                                     </td>
                                     <td class="center">
-                                        <p >{{gift.notes}}</p>
+                                        <p>{{gift.notes}}</p>
                                     </td>
                                     <td class="center">
                                         <div class="row">

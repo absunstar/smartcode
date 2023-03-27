@@ -191,9 +191,10 @@ module.exports = function init(site) {
         _data.addUserInfo = req.getUserFinger();
         _data.type = site.usersTypesList[7];
 
-        if (!_data.email) {
-          _data.email = _data.nameEn + Math.floor(Math.random() * 1000 + 1).toString();
-        }
+          if (!_data.email) {
+              const splitName = _data.nameEn.split(' ');
+              _data.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
+          }
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;

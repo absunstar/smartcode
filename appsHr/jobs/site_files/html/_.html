@@ -17,6 +17,8 @@
                 <tr>
                     <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
+                    <th>##word.Department##</th>
+                    <th>##word.Section##</th>
                     <th>##word.Name##</th>
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
@@ -26,6 +28,8 @@
                         <i-image view class="logo center" ng-model="item.image"></i-image>
                     </td>
                     <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.department.name##session.lang##}}</td>
+                    <td class="center">{{item.section.name##session.lang##}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
                     <td class="center">
                         <span class="text-success" ng-show="item.active">##word.Active##</span>
