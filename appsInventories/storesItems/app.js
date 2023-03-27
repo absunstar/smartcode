@@ -793,14 +793,17 @@ module.exports = function init(site) {
       } else if (doc) {
         let unitIndex = doc.unitsList.findIndex((unt) => unt.unit.id === where.unitId);
         if (unitIndex != -1) {
+          console.log("gggggggggggggggg");
           let storeIndex = doc.unitsList[unitIndex].storesList.findIndex((st) => st.store.id === where.storeId);
           if (storeIndex != -1) {
+          console.log('xxxxxxxxxxxxxxxxxxxx');
             doc.unitsList[unitIndex].storesList[storeIndex].batchesList = doc.unitsList[unitIndex].storesList[storeIndex].batchesList || [];
-
-            let batchIndex = doc.unitsList[unitIndex].storesList[storeIndex].batchesList.findIndex((b) => b.code === where.code || b.sn === where.code);
+            console.log(doc.unitsList[unitIndex].storesList[storeIndex].batchesList);
+            let batchIndex = doc.unitsList[unitIndex].storesList[storeIndex].batchesList.findIndex((b) => b.code == where.code || b.sn == where.code);
             if (batchIndex != -1) {
               doc.unitsList[unitIndex].storesList[storeIndex].batchesList[batchIndex];
               let batch = { ...doc.unitsList[unitIndex].storesList[storeIndex].batchesList[batchIndex] };
+              console.log(batch);
               if (batch.count > 0) {
                 batch.currentCount = batch.count;
                 batch.count = 1;

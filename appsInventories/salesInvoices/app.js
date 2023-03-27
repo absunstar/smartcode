@@ -187,10 +187,12 @@ module.exports = function init(site) {
                   return b.count > b.currentCount;
                 });
 
-                if (_item.$batchCount != _item.count || batchCountErr) {
-                  let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                  errBatchList.push(itemName);
-                }
+
+                // if (_item.$batchCount != _item.count || batchCountErr) {
+
+                //   let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                //   errBatchList.push(itemName);
+                // }
               } else {
                 let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
                 errBatchList.push(itemName);
