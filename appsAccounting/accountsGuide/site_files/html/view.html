@@ -1,0 +1,117 @@
+<div ng-hide="busy" class="row">
+  <fieldset>
+    <legend>##word.AccountsGuide Informations##</legend>
+    <div class="row">
+      <div class="col9">
+        <div class="row">
+          <div class="row">
+            <table id="guideAccountsInformation" class="table hover bold">
+              <tr>
+                <td class="title">##word.Code##</td>
+                <td class="center blue">{{accountingAccountsGuideView.code}}</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Name Aranic##</td>
+                <td class="center">{{accountingAccountsGuideView.nameAr}}</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Name English##</td>
+                <td class="center">{{accountingAccountsGuideView.nameEn}}</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Type##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.type=='primary'">##word.Primary##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.type=='detailed'">##word.Detailed##</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Account Side##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.side=='debtor'">##word.Debtor##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.side=='creditor'">##word.Creditor##</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Report Type##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.reportType=='budget'">##word.Budget##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.reportType=='incomeList'">##word.Income List##</td>
+              </tr>
+
+              <tr ng-show="settings.accountsSetting.linkGlWithIncomeStatementAndBudget == true">
+                <td class="title">##word.Category##</td>
+                <td class="center">{{accountingAccountsGuideView.category.name##session.lang##}}</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Type Of Cost Center##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.costCenterType=='mandatory'">##word.Mandatory##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.costCenterType=='choice'">##word.Choice##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.costCenterType=='without'">##word.Without##</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Cash Flow##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.cashFlow=='mandatory'">##word.Mandatory##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.cashFlow=='choice'">##word.Choice##</td>
+                <td class="center" ng-show="accountingAccountsGuideView.cashFlow=='without'">##word.Without##</td>
+              </tr>
+
+              <tr>
+                <td class="title">##word.Status##</td>
+                <td class="center green" ng-show="accountingAccountsGuideView.status=='active'">##word.Active##</td>
+                <td class="center red" ng-show="accountingAccountsGuideView.status=='inactive'">##word.Inactive##</td>
+              </tr>
+            </table>
+          </div>
+
+          <br />
+          <br />
+
+       
+        </div>
+      </div>
+
+      <div class="col3">
+        <i-image class="img128 center" view ng-model="accountingAccountsGuideView.image"></i-image>
+      </div>
+      <i-button type="print " onclick="site.print('#accountsGuideDetailsModal #accountsGuideInformation')"></i-button>
+    </div>
+
+    <div class="row" ng-show="accountingAccountsGuideView.costCentersList.length > 0">
+      <fieldset>
+        <legend>##word.Cost Centers##</legend>
+
+        <table class="table loaded center hover bold">
+          <tr>
+            <th>##word.Code##</th>
+            <th>##word.Name##</th>
+            <th>##word.Rate## ##word.%##</th>
+          </tr>
+          <tr ng-repeat="cost in accountingAccountsGuideView.costCentersList">
+            <td>{{cost.code}}</td>
+            <td>{{cost.name##session.lang##}}</td>
+            <td class="blue">{{cost.rate}} ##word.%##</td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+    <div class="row" ng-show="accountingAccountsGuideView.generalLedgerList.length > 0">
+      <fieldset>
+        <legend>##word.General Ledger##</legend>
+
+        <table class="table loaded center hover bold">
+          <tr>
+            <th>##word.Code##</th>
+            <th>##word.Name##</th>
+          </tr>
+          <tr ng-repeat="gl in accountingAccountsGuideView.generalLedgerList">
+            <td>{{gl.code}}</td>
+            <td>{{gl.name##session.lang##}}</td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+  </fieldset>
+</div>

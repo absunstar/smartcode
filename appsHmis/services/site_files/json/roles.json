@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "servicesAdmin",
+    "En": "Services Admin",
+    "Ar": "إدارة الخدمات",
+    "permissions": ["servicesManage"]
+}]

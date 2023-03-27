@@ -1,0 +1,515 @@
+<div class="form" id="services">
+  <fieldset>
+    <div class="col9">
+      <div class="row">
+        <i-control ng-hide="disabledCode" class="col6" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+      </div>
+      <div class="row">
+        <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+        <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+      </div>
+    </div>
+    <div class="col3">
+      <i-image class="img128" ng-model="item.image"></i-image>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="tabs">
+      <div class="tabs-header full">
+        <a class="tab-link" onclick="site.showTabContent(event, '#general')">
+          <span> ##word.General##</span>
+        </a>
+
+        <a class="tab-link" onclick="site.showTabContent(event, '#serviceGroup')">
+          <span> ##word.Services Groups##</span>
+        </a>
+
+        <a class="tab-link" onclick="site.showTabContent(event, '#serviceCategory')">
+          <span> ##word.Services Categories##</span>
+        </a>
+
+        <a class="tab-link" onclick="site.showTabContent(event, '#service')">
+          <span> ##word.Services##</span>
+        </a>
+
+        <a class="tab-link" onclick="site.showTabContent(event, '#package')">
+          <span>##word.Package##</span>
+        </a>
+      </div>
+
+      <div class="tabs-content">
+        <div id="general" class="tab-content">
+          <div class="row padding">
+            <div class="row">
+              <i-control type="number" class="col4" ng-model="item.freeRevistPeriod" label="##word.Free Revist Period##"></i-control>
+              <i-control type="number" class="col4" ng-model="item.freeRevistCount" label="##word.Free Revist Count##"></i-control>
+              <i-control type="number" class="col4" ng-model="item.nonDiscountForm" label="##word.Non-Discount Form##"></i-control>
+            </div>
+
+            <div class="row">
+              <i-list items="accountsGuideList" class="col4" ng-search="item.$postingAccount" display="name##session.lang##" ng-model="item.postingAccount" label="##word.Posting Account##"></i-list>
+              <i-control type="number" class="col4" ng-model="item.vatNum" label="##word.VAT Number##"></i-control>
+              <i-control type="text" class="col4" ng-model="item.crn" label="##word.CRN##"></i-control>
+            </div>
+
+            <div class="row">
+              <i-list
+                class="col4"
+                label="##word.Country##"
+                ng-change="getGovesList(item.country)"
+                ng-model="item.country"
+                display="name##session.lang##"
+                items="countriesList"
+                ng-search="item.$Country"
+              ></i-list>
+              <i-list
+                help-id=""
+                class="col4"
+                label="##word.Governorate##"
+                ng-change="getCitiesList(item.gov)"
+                ng-model="item.gov"
+                display="name##session.lang##"
+                items="govesList"
+                ng-search="item.$gov"
+              ></i-list>
+            </div>
+
+            <div class="row">
+              <i-list class="col4" label="##word.City##" ng-model="item.city" ng-change="getAreasList(item.city)" items="citiesList" display="name##session.lang##" ng-search="item.$city_search">
+              </i-list>
+              <i-list class="col4" label="##word.Area##" ng-model="item.area" items="areasList" display="name##session.lang##" ng-search="item.$area_search"> </i-list>
+            </div>
+
+            <div class="row">
+              <i-control type="text" class="col6" ng-model="item.address" label="##word.Address English##"></i-control>
+              <i-control type="text" class="col6" ng-model="item.addressAr" label="##word.Address Arabic##"></i-control>
+            </div>
+          </div>
+        </div>
+
+        <div id="serviceGroup" class="tab-content">
+          <div class="row">
+            <i-list
+              help-id=""
+              label="##word.Service Group##"
+              class="col7"
+              ng-model="item.$serviceGroup"
+              display="name##session.lang##"
+              items="servicesGroupsList"
+              ng-search="item.$servicesGroup"
+            ></i-list>
+            <div class="col5">
+              <br />
+              <i-button type="add" label="##word.Add Service Group##" ng-click="addServicesGroups(item)"></i-button>
+            </div>
+          </div>
+          <div class="row">
+            <table class="table hover center bold">
+              <tr>
+                <th>##word.Code##</th>
+                <th>##word.Name##</th>
+                <th>##word.Cash Out## %</th>
+                <th>##word.Credit Out## %</th>
+                <th>##word.Cash In## %</th>
+                <th>##word.Credit In## %</th>
+                <th class="not-print">##word.Actions##</th>
+              </tr>
+              <tr ng-repeat="g in item.servicesGroupsList">
+                <td class="center blue">
+                  <p class="center">( {{g.code}} )</p>
+                  <i-checkbox label="##word.Coverage##" ng-model="g.coverage"></i-checkbox>
+                  <i-checkbox ng-show="g.coverage" label="##word.NeedApproval##" ng-model="g.needApproval"></i-checkbox>
+                </td>
+                <td>
+                  <p class="center word-line">{{g.name##session.lang##}}</p>
+                </td>
+
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="g.cashOut"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="g.creditOut"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="g.cashIn"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="g.creditIn"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+
+                <td class="center not-print">
+                  <i-checkbox label="##word.ApplyDiscOut##" ng-model="g.applyDiscOut"></i-checkbox>
+                  <i-checkbox label="##word.ApplyDiscIn##" ng-model="g.applyDiscIn"></i-checkbox>
+                  <i-button type="delete default" ng-click="item.servicesGroupsList.splice($index,1)"> </i-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div id="serviceCategory" class="tab-content">
+          <div class="row">
+            <i-list
+              label="##word.Service Category##"
+              class="col7"
+              ng-model="item.$serviceCategory"
+              display="name##session.lang##"
+              items="servicesCategoriesList"
+              ng-search="item.$servicesCategory"
+            ></i-list>
+            <div class="col5">
+              <br />
+              <i-button type="add" label="##word.Add Service Category##" ng-click="addServicesCategories(item)"></i-button>
+            </div>
+          </div>
+          <div class="row">
+            <table class="table hover center bold">
+              <tr>
+                <th>##word.Code##</th>
+                <th>##word.Name##</th>
+                <th>##word.Cash Out## %</th>
+                <th>##word.Credit Out## %</th>
+                <th>##word.Cash In## %</th>
+                <th>##word.Credit In## %</th>
+                <th class="not-print">##word.Actions##</th>
+              </tr>
+
+              <tr ng-repeat="c in item.servicesCategoriesList">
+                <td class="center blue">
+                  <p class="center">( {{c.code}} )</p>
+                  <i-checkbox label="##word.Coverage##" ng-model="c.coverage"></i-checkbox>
+                  <i-checkbox ng-show="c.coverage" label="##word.NeedApproval##" ng-model="c.needApproval"></i-checkbox>
+                </td>
+                <td>
+                  <p class="center word-line">{{c.name##session.lang##}}</p>
+                </td>
+
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="c.cashOut"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="c.creditOut"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="c.cashIn"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col10" type="number" ng-model="c.creditIn"></i-control>
+                    <p class="col2 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center not-print word-line">
+                  <i-checkbox label="##word.ApplyDiscOut##" ng-model="c.applyDiscOut"></i-checkbox>
+                  <i-checkbox label="##word.ApplyDiscIn##" ng-model="c.applyDiscIn"></i-checkbox>
+                  <i-button type="delete default" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div id="service" class="tab-content">
+          <div class="row">
+            <i-list help-id="" label="##word.Service##" class="col7" ng-model="item.$service" display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
+            <div class="col5">
+              <br />
+              <i-button type="add" label="##word.Add Service##" ng-click="addServices(item)"></i-button>
+            </div>
+          </div>
+          <div class="row">
+            <table class="table hover center bold">
+              <tr>
+                <th>
+                  <p>##word.Code##</p>
+                  <p>##word.Co code##</p>
+                </th>
+                <th>
+                  <p>##word.Name##</p>
+                  <p>##word.Co Name##</p>
+                </th>
+                <th>
+                  <p>##word.Cash## ##word.In##</p>
+                  <p>##word.Credit## ##word.In##</p>
+                </th>
+                <th>
+                  <p>##word.CashIn## ##word.$##</p>
+                  <p>##word.Disc## ##word.%##</p>
+                </th>
+                <th>
+                  <p>##word.CreditIn## ##word.$##</p>
+                  <p>##word.Disc## ##word.%##</p>
+                </th>
+                <th>
+                  <p>##word.Cash## ##word.In##</p>
+                  <p>##word.Credit## ##word.Out##</p>
+                </th>
+
+                <th>
+                  <p>##word.CashOut## ##word.$##</p>
+                  <p>##word.Disc## ##word.%##</p>
+                </th>
+                <th>
+                  <p>##word.CreditOut## ##word.$##</p>
+                  <p>##word.Disc## ##word.%##</p>
+                </th>
+                <th>##word.Package Price##</th>
+                <th class="not-print">##word.Actions##</th>
+              </tr>
+              <tr ng-repeat="s in item.servicesList">
+                <td class="center">
+                  <p class="blue text-center">( {{s.code}} )</p>
+                  <i-control type="text" ng-model="s.coCode"></i-control>
+                </td>
+                <td>
+                  <p class="text-center">{{s.name##session.lang##}}</p>
+                  <i-control type="text" ng-model="s.coName"></i-control>
+                </td>
+
+                <td class="center">
+                  <p class="">{{s.cashPriceIn}} <span class="currency">##word.$##</span></p>
+                  
+                  <p class="">{{s.creditPriceIn}} <span class="currency">##word.$##</span></p>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.cashIn"></i-control>
+                    <span class="currency col4">##word.$##</span>
+                  </div>
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.cashInDesc"></i-control>
+                    <span class="currency col4">##word.%##</span>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.creditIn"></i-control>
+                    <span class="currency col4">##word.$##</span>
+                  </div>
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.creditInDesc"></i-control>
+                    <span class="currency col4">##word.%##</span>
+                  </div>
+                </td>
+                <td class="center">
+                  <p class="">{{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
+                  
+                  <p class="">{{s.creditPriceOut}} <span class="currency">##word.$##</span></p>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.cashOut"></i-control>
+                    <span class="currency col4">##word.$##</span>
+                  </div>
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.cashOutDesc"></i-control>
+                    <span class="currency col4">##word.%##</span>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.creditOut"></i-control>
+                    <span class="currency col4">##word.$##</span>
+                  </div>
+                  <div class="row">
+                    <i-control class="col8" type="number" ng-model="s.creditOutDesc"></i-control>
+                    <span class="currency col4">##word.%##</span>
+                  </div>
+                </td>
+                <td class="center"><i-control type="number" ng-model="s.packagePrice"></i-control></td>
+                <td class="center not-print">
+                  <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
+                  <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>
+                  <i-button type="delete default" ng-click="item.servicesList.splice($index,1)"> </i-button>
+                </td>
+              </tr>
+            </table>
+           <!--  <div class="row table-cart bold" ng-repeat="s in item.servicesList">
+              <div class="row">
+                <div class="col10">
+                  <div class="row margin padding font-20">
+                    <span class="col2 darkGray">##word.Code## : </span> <span class="col3 center">( {{s.code}} )</span> <span class="col2 darkGray">##word.Name## : </span>
+                    <span class="col5"> {{s.name##session.lang##}} </span>
+                  </div>
+                  <div class="row font-20">
+                    <span class="col2">##word.Company Code## : </span> <i-control type="text" class="col3" ng-model="s.coCode"></i-control>
+                    <span class="col2">##word.Company Name## : </span>
+                    <i-control class="col5" type="text" ng-model="s.coName"></i-control>
+                  </div>
+                </div>
+                <div class="col2">
+                  <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
+                  <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>
+                  <i-button type="delete default" ng-click="item.servicesList.splice($index,1)"> </i-button>
+                </div>
+              </div>
+
+              <div class="row">
+                <p class="col2 font-20">##word.Cash In## : {{s.cashPriceIn}} <span class="currency">##word.$##</span></p>
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Cash In## :</p>
+                    <i-control class="col5" type="number" ng-model="s.cashIn"></i-control>
+                    <span class="col2 currency">##word.$##</span>
+                  </div>
+                </div>
+
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Disc In## :</p>
+                    <i-control class="col5" type="number" ng-model="s.cashInDisc"></i-control>
+                    <span class="col2 currency">##word.%##</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <p class="col2 font-20">##word.Credit In## : {{s.creditPriceIn}} <span class="currency">##word.$##</span></p>
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Cash In## :</p>
+                    <i-control class="col5" type="number" ng-model="s.creditIn"></i-control>
+                    <span class="col2 currency">##word.$##</span>
+                  </div>
+                </div>
+
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Disc In## :</p>
+                    <i-control class="col5" type="number" ng-model="s.creditInDisc"></i-control>
+                    <span class="col2 currency">##word.%##</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <p class="col2 font-20">##word.Cash Out## : {{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Cash Out## :</p>
+                    <i-control class="col5" type="number" ng-model="s.cashOut"></i-control>
+                    <span class="col2 currency">##word.$##</span>
+                  </div>
+                </div>
+
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Disc Out## :</p>
+                    <i-control class="col5" type="number" ng-model="s.cashOutDisc"></i-control>
+                    <span class="col2 currency">##word.%##</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <p class="col2 font-20">##word.Credit Out## : {{s.creditPriceOut}} <span class="currency">##word.$##</span></p>
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Cash Out## :</p>
+                    <i-control class="col5" type="number" ng-model="s.creditOut"></i-control>
+                    <span class="col2 currency">##word.$##</span>
+                  </div>
+                </div>
+
+                <div class="col5">
+                  <div class="row">
+                    <p class="col5 font-20">##word.Company Disc Out## :</p>
+                    <i-control class="col5" type="number" ng-model="s.creditOutDisc"></i-control>
+                    <span class="col2 currency">##word.%##</span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div id="package" class="tab-content">
+          <div class="row padding">
+            <div class="row">
+              <i-list
+                help-id=""
+                label="##word.Service Group##"
+                class="col7"
+                ng-model="item.$packageServiceGroup"
+                display="name##session.lang##"
+                items="servicesGroupsList"
+                ng-search="item.$servicesGroup"
+              ></i-list>
+              <div class="col5">
+                <br />
+                <i-button type="add" label="##word.Add Service Group##" ng-click="addPackageServicesGroups(item)"></i-button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th class="w150">##word.Discount## %</th>
+                    <th class="not-print">##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="s in item.packageServicesGroupsList">
+                    <td class="center blue">{{s.code}}</td>
+                    <td class="center">{{s.name##session.lang##}}</td>
+                    <td class="center"><i-control type="number" ng-model="s.discount"></i-control></td>
+                    <td class="center not-print">
+                      <i-button type="delete default" ng-click="item.packageServicesGroupsList.splice($index,1)"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.addUserInfo##</th>
+      <th>##word.editUserInfo##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

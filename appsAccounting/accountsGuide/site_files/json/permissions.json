@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuidePrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "accountsGuide" , "name":"accountsGuideUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

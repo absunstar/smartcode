@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="row padding">
+    <fieldset>
+      <div class="col10">
+        <div class="row">
+          <div class="row">
+            <i-list
+              v="r"
+              class="col9"
+              label="##word.Main Insurance Company##"
+              ng-model="item.mainInsuranceCompany"
+              display="name##session.lang##"
+              items="mainInsuranceCompaniesList"
+              ng-search="item.$mainInsuranceCompanies"
+            ></i-list>
+            <i-checkbox class="col3" ng-model="item.active" label="##word.Active##"></i-checkbox>
+          </div>
+          <i-list
+            v="r"
+            class="col9"
+            label="##word.Insurance Company##"
+            ng-model="item.insuranceCompany"
+            display="name##session.lang##"
+            items="insuranceCompaniesList"
+            ng-search="item.$insuranceCompany"
+          ></i-list>
+        </div>
+
+        <div class="row">
+          <i-control type="number" class="col4" label="##word.Free Revisit Count##" ng-model="item.freeRevisitCount"> </i-control>
+          <i-control type="number" class="col4" label="##word.Free Revisit Days##" ng-model="item.freeRevisitDays"> </i-control>
+          <i-control class="col4" label="##word.Policy Number##" ng-model="item.policyNumber"> </i-control>
+        </div>
+
+        <div class="row">
+          <i-date class="col6" v="r" ng-model="item.startDate" label="##word.Start Date##"> </i-date>
+          <i-date class="col6" v="r" ng-model="item.endDate" label="##word.End Date##"> </i-date>
+        </div>
+      </div>
+      <div class="col2">
+        <i-control ng-hide="disabledCode" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-image class="img128 center" ng-model="item.image"></i-image>
+      </div>
+    </fieldset>
+  </div>
+  <div class="row">
+    <fieldset>
+      <div class="row">
+        <i-list label="##word.Insurance Class##" class="col6" ng-model="item.$insuranceClass" display="name##session.lang##" items="insuranceClassesList" ng-search="item.$insuranceClasses"></i-list>
+        <div class="col2">
+          <br />
+          <i-button type="add" ng-click="addInsuranceClass()"></i-button>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="table hover bold">
+          <tr>
+            <th>##word.Code##</th>
+            <th>##word.Class Name##</th>
+            <th>##word.Service Deduct##</th>
+            <th>##word.Consultation Deduct##</th>
+            <th>##word.Free Revisit Amount##</th>
+            <th>##word.Max Deduct Amount##</th>
+            <th>##word.Max Service Amount##</th>
+            <th>##word.Max Cons Amount##</th>
+          </tr>
+          <tr ng-repeat="c in item.insuranceClassesList">
+            <td class="center blue">{{c.code}}</td>
+            <td class="center">{{c.name##session.lang##}}</td>
+            <td class="center">
+              <br>
+              <i-control type="number" ng-model="c.serviceDeduct"> </i-control>
+              <div class="row">
+                <i-radio class="col6" group="{{$index}}serviceType" label="##word.Percent##" ng-value="percent" ng-model="c.serviceType"> </i-radio>
+                <i-radio class="col6" group="{{$index}}serviceType" label="##word.Value##" ng-value="value" ng-model="c.serviceType"> </i-radio>
+              </div>
+            </td>
+            <td class="center">
+              <br>
+              <i-control type="number" ng-model="c.consultationDeduct"> </i-control>
+              <div class="row">
+                <i-radio class="col6" group="{{$index}}cons" label="##word.Percent##" ng-value="percent" ng-model="c.consultationType"> </i-radio>
+                <i-radio class="col6" group="{{$index}}cons" label="##word.Value##" ng-value="value" ng-model="c.consultationType"> </i-radio>
+              </div>
+            </td>
+            <td class="center"><i-control type="number" ng-model="c.freeRevisitAmount"> </i-control></td>
+            <td class="center"><i-control type="number" ng-model="c.maxDeductAmount"> </i-control></td>
+            <td class="center"><i-control type="number" ng-model="c.maxServiceAmount"> </i-control></td>
+            <td class="center"><i-control type="number" ng-model="c.maxConsAmount"> </i-control></td>
+          </tr>
+        </table>
+      </div>
+
+     
+    </fieldset>
+  </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.addUserInfo##</th>
+      <th>##word.editUserInfo##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

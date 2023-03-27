@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="En" data-ng-app="myApp">
+    <head x-import="head.html"> </head>
+
+    <body class="##session.lang##">
+        <div x-import="site-top/index.html"></div>
+        <div x-import="site-bottom/index.html"></div>
+
+        <div id="main-layout" class="container" ng-controller="numbering">
+            <div x-import="numbering/yearMonth.html"></div>
+            <div class="row">
+            
+                <div x-import="numbering/content.html"></div>
+                <br />
+                <br />
+
+                <i-button type="save" label="##word.Save##" ng-click="saveNumbering()"></i-button>
+            </div>
+
+            <div id="alert" class="modal alert small">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="blue center">##word.Settings Saved##</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div x-import="scripts.html"></div>
+        <script x-import="numbering/index.js"></script>
+    </body>
+</html>

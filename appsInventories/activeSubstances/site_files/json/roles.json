@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "inventory",
+    "name": "activeSubstancesAdmin",
+    "En": "Active Substances Admin",
+    "Ar": "إدارة المواد الفعالة",
+    "permissions": ["activeSubstancesManage"]
+  }
+]

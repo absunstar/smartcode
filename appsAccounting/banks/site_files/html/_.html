@@ -1,0 +1,51 @@
+<div ng-controller="banks" class="loaded">
+    <div class="row" x-permissions="banksUi || banksManage">
+        <div x-import="banks/modal.html"></div>
+        <div x-import="banks/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="banksAdd || banksManage" label="##word.New##" ng-click="showAdd()"></i-button>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="banksSearch || banksManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th class="w150">##word.Logo##</th>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Swift Code##</th>
+                    <th>##word.Hotline##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td>
+                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                    </td>
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.name##session.lang##}}</td>
+                    <td class="center">{{item.swiftCode}}</td>
+                    <td class="center">{{item.hotline}}</td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.active">##word.Active##</span>
+                        <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="banksUpdate || banksManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" x-permissions="banksDelete || banksManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <i-button x-permissions="banksPrint || banksManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="banksExport || banksManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+    </div>
+</div>

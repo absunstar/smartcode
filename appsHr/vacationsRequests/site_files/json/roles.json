@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "vacationsRequestsAdmin",
+        "En": "Vacations Requests Admin",
+        "Ar": "إدارة طلبات الأجازات",
+        "permissions": ["vacationsRequestsManage"]
+    }
+]

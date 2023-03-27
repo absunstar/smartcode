@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "hr",
+    "name": "overtimeRequestsAdmin",
+    "En": "Overtime Requests Admin",
+    "Ar": "إدارة مكأفات الوقت الإضافي",
+    "permissions": ["overtimeRequestsManage"]
+  }
+]

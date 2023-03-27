@@ -1,0 +1,14 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "doctorsAdmin",
+    "En": "Doctors Admin",
+    "Ar": "إدارة الأطباء",
+    "permissions": ["doctorsManage"]
+},
+{
+  "moduleName": "hmis",
+  "name": "doctorPermissions",
+  "En": "Doctor Permissions",
+  "Ar": "صلاحيات الطبيب",
+  "permissions": ["doctorDeskTopManage"]
+}]

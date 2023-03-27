@@ -1,0 +1,62 @@
+<div id="findPurchaseOrdersModal" class="modal full">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Select Purchase Order / Invoice## <i class="fa fa-search"></i></p>
+        </div>
+
+        <div class="modal-body">
+            <form class="form">
+                <div class="row padding">
+                    <div class="row">
+                        <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="search.code"> </i-control>
+                        <i-date class="col2" label="##word.Date##" ng-model="search.date"> </i-date>
+
+                        <i-list class="col2" ng-model="search.store" label="##word.Store##" items="storesList" display="name##session.lang##"></i-list>
+                        <i-list class="col2" ng-model="search.paymentType" label="##word.Payment Type##" items="paymentTypesList" display="name##session.lang##"></i-list>
+                        <i-list class="col2" ng-model="search.vendor" label="##word.Vendor##" items="vendorsList" display="name##session.lang##"></i-list>
+                        <div class="col2">
+                            <br />
+                            <i-button type="search" label="##word.Search##" ng-click="getPurchaseOrders(search)"> </i-button>
+                        </div>
+                    </div>
+                </div>
+                <p class="center error">{{searchError}}</p>
+                <fieldset>
+                    <legend>##word.Purchase Orders / Invoices##</legend>
+                    <div class="table-responsive">
+                        <table class="table hover bold">
+                            <tr>
+                                <th>##word.S##</th>
+                                <th>##word.Code##</th>
+                                <th>##word.Vendor##</th>
+                                <th>##word.Date##</th>
+                                <th>##word.Store##</th>
+                                <th>##word.Payment Type##</th>
+                                <th class="not-print">##word.Actions##</th>
+                            </tr>
+                            <tr ng-repeat="bill in returnPurchaseOrdersList">
+                                <td class="center">{{$index+1}}</td>
+                                <td class="center">{{bill.code}}</td>
+                                <td class="center">{{bill.vendor.name##session.lang##}}</td>
+                                <td class="center">{{bill.date|date:'dd/MM/yyyy'}} - {{bill.date|date:'hh:mm:ss a'}}</td>
+                                <td class="center">{{bill.store.name##session.lang##}}</td>
+                                <td class="center">{{bill.paymentType.name##session.lang##}}</td>
+
+                                <td class="center">
+                                    <i-button type="add" label="##word.Select Invoice##" ng-click="addToItemsList(bill)"> </i-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <p class="error">{{error}}</p>
+
+        <div class="modal-footer center">
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal('#findPurchaseOrdersModal')"> </i-button>
+        </div>
+    </div>
+</div>

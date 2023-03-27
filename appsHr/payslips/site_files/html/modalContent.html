@@ -1,0 +1,194 @@
+<div class="row">
+    <fieldset>
+        <legend>##word.Basic Informations##</legend>
+        <div class="row">
+            <i-control class="col2" ng-hide="disabledCode" label="##word.Code##" ng-model="item.code"> </i-control>
+            <i-date class="col3" v="r" ng-model="item.fromDate" label="##word.From Date##" ng-disabled="item.approved"></i-date>
+            <i-date class="col3" v="r" ng-model="item.toDate" label="##word.To Date##" ng-disabled="item.approved"></i-date>
+
+            <i-list
+                class="col4"
+                label="##word.Employee##"
+                ng-disabled="item.approved"
+                ng-model="item.employee"
+                ng-search="item.$employee"
+                display="fullName##session.lang##"
+                items="employeesList"
+            ></i-list>
+            <div class="col2">
+                <br />
+                <i-button type="search" ng-show="!item.approved" label="##word.Search##" ng-click="calculatePaySlip(item)"></i-button>
+            </div>
+        </div>
+
+        <p class="error">{{getDataError}}</p>
+    </fieldset>
+
+    <fieldset ng-show="item.paySlip">
+        <legend>##word.Details##</legend>
+        <div class="row">
+            <i-button type="list" label="##word.Delay Requests##" ng-show="item.paySlip.delayRequests" ng-click="viewPayslipItemDetails(item.paySlip.delayRequests)"></i-button>
+            <i-button type="list" label="##word.Work Errands##" ng-show="item.paySlip.workErrands" ng-click="viewPayslipItemDetails(item.paySlip.workErrands)"></i-button>
+            <i-button type="list" label="##word.Vacations Requests##" ng-show="item.paySlip.vacationsRequests" ng-click="viewPayslipItemDetails(item.paySlip.vacationsRequests)"></i-button>
+        </div>
+    </fieldset>
+
+    <fieldset ng-show="item.paySlip">
+        <legend>##word.Allowances Items##</legend>
+
+        <div class="table-responsive">
+            <table class="table hover bold">
+                <tr>
+                    <th>##word.s##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Value##</th>
+                    <th>##word.Name Arabic##</th>
+                    <th>##word.Actions##</th>
+                </tr>
+                <tr class="center">
+                    <td class="center blue">1</td>
+                    <td class="center">##word.Basic Salary##</td>
+
+                    <td class="center">
+                        <span class="text-success">{{item.paySlip.salaryData.basicSalary}}</span>
+                        <span>##word.$##</span>
+                    </td>
+                    <td class="center">##word.الراتب الأساسي##</td>
+                    <td class="center">
+                        <i-button type="list" label="##word.Details##" ng-click="viewPayslipItemDetails(item.paySlip.salaryData)"></i-button>
+                    </td>
+                </tr>
+                <tr ng-repeat="itm in item.paySlip.allowancesList">
+                    <td class="center blue">{{$index+2}}</td>
+                    <td class="center">{{itm.nameEn}}</td>
+                    <td class="center">
+                        <span ng-show="itm.type">
+                            (
+                            <span class="red" ng-show="itm.type =='value' "> ##word.Value## </span>
+                            <span class="red" ng-show="itm.type =='percent' "> ##word.%## </span> )
+                        </span>
+                        <span class="text-success"> {{itm.value}} </span>
+                        <span class="currency">##word.$##</span>
+                    </td>
+                    <td class="center">{{itm.nameAr}}</td>
+
+                    <td class="center">
+                        <i-button type="list" label="##word.Details##" ng-click="viewPayslipItemDetails(itm)"></i-button>
+                    </td>
+                </tr>
+                <tr ng-show="item.paySlip.totalAllowance">
+                    <th colspan="2" class="center">##word.Total Allowance##</th>
+                    <td colspan="2" class="center"><span class="text-success bold"> {{item.paySlip.totalAllowance}} </span><span class="currency">##word.$##</span></td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+
+    <fieldset ng-show="item.paySlip">
+        <legend>##word.Deductions Items##</legend>
+
+        <div class="table-responsive">
+            <table class="table hover bold">
+                <tr>
+                    <th>##word.s##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Day/Minute/Count##</th>
+                    <th>##word.Value##</th>
+                    <th>##word.Name Arabic##</th>
+                    <th>##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="itm in item.paySlip.deductionsList">
+                    <td class="center blue">{{$index+1}}</td>
+                    <td class="center">
+                        <p>{{itm.nameEn}}</p>
+                    </td>
+                    <td class="center">
+                        <p ng-show="itm.count == '-'">
+                            <span ng-show="itm.type == 'percent'"> ##word.%## </span>
+                            <span ng-show="itm.type == 'value'" class="currency"> ##word.$## </span>
+                        </p>
+                        <p ng-show="itm.count != '-' && itm.count != '#'">{{itm.count}}</p>
+                        <p ng-show="itm.count == '#' ">-</p>
+                    </td>
+                    <td class="center">
+                        <p class="text-danger">{{itm.value}} <span class="currency">##word.$##</span></p>
+                    </td>
+                    <td class="center">{{itm.nameAr}}</td>
+
+                    <td class="center">
+                        <i-button type="list" label="##word.Details##" ng-show="itm.list" ng-click="viewPayslipItemDetails(itm)"></i-button>
+                        <i-button type="list" label="##word.Details##" ng-show="!itm.list" ng-click="viewPayslipItemDetails(itm)"></i-button>
+                    </td>
+                </tr>
+
+                <tr ng-show="item.paySlip.totalDeductions">
+                    <th colspan="2" class="center">##word.Total Deductions##</th>
+                    <td colspan="2" class="center">
+                        <span class="text-danger bold"> {{item.paySlip.totalDeductions}} </span>
+                        <span class="currency">##word.$##</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+
+    <fieldset ng-show="item.paySlip">
+        <legend>##word.Total##</legend>
+        <div class="row">
+            <div class="col2">
+                <div class="row">
+                    <label>##word.Total Allowance##</label>
+                    <p class="text-success bold">{{item.paySlip.totalAllowance}} <span class="currency">##word.$##</span></p>
+                </div>
+            </div>
+            <div class="col1">
+                <div class="row">
+                    <label></label>
+                    <h3 class="bold">-</h3>
+                </div>
+            </div>
+            <div class="col2">
+                <div class="row">
+                    <label>##word.Total Deductions##</label>
+                    <p class="text-danger bold">{{item.paySlip.totalDeductions}} <span class="currency">##word.$##</span></p>
+                </div>
+            </div>
+            <div class="col1">
+                <div class="row">
+                    <label></label>
+                    <h3 class="bold">=</h3>
+                </div>
+            </div>
+            <div class="col2">
+                <div class="row">
+                    <label>##word.Net Salary##</label>
+                    <p class="text-success bold">{{item.paySlip.totalAllowance - item.paySlip.totalDeductions|number:'0.3'}} <span class="currency">##word.$##</span></p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

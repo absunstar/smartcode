@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "hr",
+    "name": "salaryDeductionsNamesAdmin",
+    "En": "Salary Deductions Names Admin",
+    "Ar": "إدارة إستقطاعات المرتب",
+    "permissions": ["salaryDeductionsNamesManage"]
+  }
+]

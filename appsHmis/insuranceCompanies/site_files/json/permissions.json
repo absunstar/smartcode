@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceCompanies" , "name":"insuranceCompaniesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

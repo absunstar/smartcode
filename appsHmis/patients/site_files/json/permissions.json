@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "patients" , "name":"patientsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

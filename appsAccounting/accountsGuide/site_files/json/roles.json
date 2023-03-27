@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "accounting" ,
+    "name": "accountsGuideAdmin",
+    "En": "Accounts Guide Admin",
+    "Ar": "إدارة دليل الحسابات",
+    "permissions": ["accountsGuideManage"]
+}]

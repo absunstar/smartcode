@@ -1,0 +1,244 @@
+<div class="row">
+  <div class="row padding">
+    <div class="col9">
+      <fieldset>
+        <legend>##word.Patient##</legend>
+        <div class="row" ng-show="item.patient.id">
+          <div class="cart">
+            <div class="col3">
+              <br />
+              <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
+            </div>
+            <div class="row">
+              <div class="col9">
+                <p class="bold">
+                  <span class="darkGray">##word.Full Name## : </span> {{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> )
+                  <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+                </p>
+              </div>
+              <div class="col3">
+                <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.patient.mobile}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col4">
+                <p class="bold">
+                  <span class="darkGray"> ##word.Nationality## : </span> {{item.patient.nationality.name##session.lang##}}
+                  <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" />
+                </p>
+              </div>
+              <div class="col2">
+                <p class="bold"><span class="darkGray">##word.Age## : </span> {{item.patient.age}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray">الإسم بالكامل : </span> {{item.patient.fullNameAr}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col7">
+                <p class="bold">
+                  <span class="darkGray">##word.Mother Name## : </span> {{item.patient.motherNameEn}}
+                  <span class="blue" ng-show="item.patient.newBorn">(##word.New Born##)</span>
+                </p>
+              </div>
+              <div class="col5">
+                <p class="bold text-right"><span class="darkGray"> إسم الأم : </span> {{item.patient.motherNameAr}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Marital Status## : </span> {{item.patient.maritalStatus.name##session.lang##}}</p>
+              </div>
+
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray"> ##word.Gender## : </span> {{item.patient.gender.name##session.lang##}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col8">
+                <p class="bold">
+                  <span class="darkGray">##word.Insurance Company##: </span> {{item.mainInsuranceCompany.name##session.lang##}} ( <span class="blue">{{item.mainInsuranceCompany.code}}</span> )
+                </p>
+              </div>
+              <div class="col4">
+                <p class="bold text-right">
+                  <span class="darkGray">##word.Patient Type##: </span> {{item.patient.patientType.name##session.lang##}} ( <span class="blue">{{item.patient.patientType.code}}</span> )
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Insurance Class## : </span> {{item.patient.insuranceClass.name##session.lang##}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray"> ##word.Expiry Date## : </span> {{item.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>##word.Doctor##</legend>
+        <div class="row" ng-show="item.doctor.id">
+          <div class="cart">
+            <div class="row">
+              <div class="col7">
+                <p class="bold">
+                  <span class="darkGray">##word.Name English## : </span> {{item.doctor.nameEn}} ( <span class="blue">{{item.doctor.code}}</span> )
+                  <img class="img-logo" ng-src="{{item.doctor.image.url}}" alt="" />
+                </p>
+              </div>
+              <div class="col5">
+                <p class="bold text-right"><span class="darkGray">الإسم بالعربي : </span> {{item.doctor.nameAr}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Home Tel## : </span> {{item.doctor.homeTel}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.doctor.mobile}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Doctor Type## : </span> {{item.doctor.doctorType.name##session.lang##}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray"> ##word.Hospital Responsibility## : </span> {{item.doctor.hospitalResponsibility.name##session.lang##}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Specialty## : </span> {{item.doctor.specialty.name##session.lang##}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right">
+                  <span class="darkGray"> ##word.Nationality## : </span> {{item.doctor.nationality.name##session.lang##}}
+                  <img class="img-logo" ng-src="{{item.doctor.nationality.image.url}}" alt="" />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>##word.Service##</legend>
+        <table class="table bold center hover">
+          <tr>
+            <th>##word.Name##</th>
+            <td class="center" colspan="5">
+              <p class="height-5">{{item.service.name##session.lang##}}</p>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+
+      <fieldset ng-show="item.recipientPerson.id">
+        <legend>##word.Delivery Detailes##</legend>
+
+        <h3 class="bold"> ##word.Recipient person## : <span class="blue">{{item.recipientPerson.name##session.lang##}}</span> </h3>
+        <table class="table bold center hover" ng-show="item.recipientPerson.id == 2">
+          <tr>
+            <th>##word.Recipient Name##</th>
+            <td class="center" colspan="5">
+              <p class="height-5">{{item.recipientName}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th>##word.Recipient Mobile##</th>
+            <td class="center" colspan="5">
+              <p class="height-5">{{item.recipientMobile}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th>##word.Recipient Id##</th>
+            <td class="center" colspan="5">
+              <p class="height-5">{{item.recipientId}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th>##word.Recipient-patient relationship##</th>
+            <td class="center" colspan="5">
+              <p class="height-5">{{item.recipientRelation}}</p>
+            </td>
+          </tr>
+      
+        </table>
+
+      </fieldset>
+    </div>
+    <div class="col3">
+      <fieldset class="">
+        <div class="row margin">
+          <p class="bold center">##word.Detection number## : <span class="blue">( {{item.code}} )</span></p>
+        </div>
+        <div class="row padding margin">
+          <p class="darkGray bold center">
+            <i class="fas fa-hourglass-start"></i> <span ng-show="item.$hours" class="blue"> H {{item.$hours}} </span> <span ng-show="item.$hours && item.$minutes">:</span>
+            <span ng-show="item.$minutes" class="blue">{{item.$minutes}} MIN </span> <i class="fas fa-male" ng-show="item.patient.gender.id == 'm'"></i>
+            <i class="fas fa-female" ng-show="item.patient.gender.id == 'f'"></i>
+          </p>
+          <p class="bold brown center"><i class="fas fa-clock darkGray"></i> {{item.date | date:"dd / MM / yyyy"}} - <span class="green">{{item.date | date:"hh:mm"}}</span></p>
+          <p class="bold center">##word.Status## : <span class="blue">( {{item.status.name##session.lang##}} )</span></p>
+        </div>
+
+        <div class="row center">
+          <a title="##word.Vitals Notes##" class="btn btn-primary btn-lg margin-button" ng-click="showVitalsNotes(item)"><i class="fas fa-file-medical-alt"></i></a>
+          <br />
+          <a title="##word.Doctor recommendations##" class="btn btn-success btn-lg" ng-click="showRecommendations(item)"><i class="fas fa-vial"></i></a>
+        </div>
+
+        <fieldset>
+          <legend>##word.Change Status##</legend>
+
+          <div class="row center">
+            <a class="btn btn-secondary btn-lg margin-button" x-permissions="laboratoryDeskTopChangeStatus || laboratoryDeskTopManage" ng-click="updateStatus(item,1)"
+              >##word.Pending## <i class="fas fa-pen"></i
+            ></a>
+            <a class="btn btn-secondary btn-lg margin-button" x-permissions="laboratoryDeskTopChangeStatus || laboratoryDeskTopManage" ng-click="updateStatus(item,2)"
+              >##word.Entrance laboratory## <i class="fas fa-pen"></i
+            ></a>
+            <a class="btn btn-secondary btn-lg margin-button" x-permissions="laboratoryDeskTopChangeStatus || laboratoryDeskTopManage" ng-click="updateStatus(item,3)"
+              >##word.Complete analysis## <i class="fas fa-pen"></i
+            ></a>
+            <a class="btn btn-secondary btn-lg margin-button" x-permissions="laboratoryDeskTopChangeStatus || laboratoryDeskTopManage" ng-click="updateStatus(item,4)"
+              >##word.Put results## <i class="fas fa-pen"></i
+            ></a>
+            <a class="btn btn-secondary btn-lg margin-button" x-permissions="laboratoryDeskTopChangeStatus || laboratoryDeskTopManage" ng-click="updateStatus(item,5)"
+              >##word.Was delivered## <i class="fas fa-pen"></i
+            ></a>
+            <a class="btn btn-secondary btn-lg margin-button" x-permissions="laboratoryDeskTopChangeStatus || laboratoryDeskTopManage" ng-click="updateStatus(item,6)"
+              >##word.Cancel detection## <i class="fas fa-pen"></i
+            ></a>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.addUserInfo##</th>
+      <th>##word.editUserInfo##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

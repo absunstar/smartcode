@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistorySearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "patientHistory" , "name":"patientHistoryUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

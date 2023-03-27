@@ -1,0 +1,196 @@
+<style>
+    .logoPrint {
+        width: 130px;
+        height: 110px;
+        margin: 0.75px;
+        padding: 0.75px;
+        border-radius: 0;
+        border: 0.8px solid var(--background-color);
+    }
+</style>
+<div class="border page-a4">
+    <div class="row">
+        <div class="col-5 center">
+            <div class="row">
+                <h4 class="center bold">##session.company.nameEn##</h4>
+            </div>
+            <div class="row">
+                <h5 class="center bold">##session.branch.nameEn##</h5>
+            </div>
+        </div>
+
+        <div class="col-2 center">
+            <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
+        </div>
+
+        <div class="col-5 center">
+            <div class="row">
+                <h4 class="center bold">##session.company.nameAr##</h4>
+            </div>
+            <div class="row">
+                <h5 class="center bold">##session.branch.nameAr##</h5>
+            </div>
+        </div>
+    </div>
+    <fieldset>
+        <div class="row">
+            <div class="center col-3">
+                <span class="bold blue">##word.Pay Slip For Month##</span>
+            </div>
+
+            <div class="center col-6">
+                <span class="bold blue">{{item.fromDate |date :'MM'}} / {{item.fromDate |date :'yyyy'}}</span>
+            </div>
+            <div class="center col-3">
+                <span class="bold blue">إشعار صرف عن شهر</span>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend class="black">##word.Allowances## - الإستحقاقات</legend>
+        <fieldset>
+            <div class="row">
+                <div class="center col-3">
+                    <span class="bold">##word.Employee Name##</span>
+                </div>
+
+                <div class="center col-6">
+                    <span class="bold">{{item.employee.fullNameEn}} - {{item.employee.fullNameAr}}</span>
+                </div>
+                <div class="center col-3">
+                    <span class="bold">إسم الموظف</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="row">
+                <div class="center col-3">
+                    <span class="bold">##word.Department##</span>
+                </div>
+
+                <div class="center col-6">
+                    <span> {{item.employee.department.nameEn}} - {{item.employee.department.nameAr}}</span>
+                </div>
+                <div class="center col-3">
+                    <span class="bold">الإدارة</span>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <div class="center col-3">
+                    <span class="bold">##word.Section##</span>
+                </div>
+
+                <div class="center col-6">
+                    <span>{{item.employee.section.nameEn}} - {{item.employee.section.nameAr}}</span>
+                </div>
+                <div class="center col-3">
+                    <span class="bold">##word.القسم##</span>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <div class="center col-3">
+                    <span class="bold">##word.Basic Salary##</span>
+                </div>
+                <div class="center col-6">
+                    <span class="text-success bold">{{item.paySlip.originalSalary}} <span class="currency">##word.$##</span></span>
+                </div>
+                <div class="center col-3">
+                    <span class="bold">الراتب الأساسي</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset ng-repeat="allow in item.paySlip.allowancesList">
+            <div class="row">
+                <div class="center col-4">
+                    <span class="bold">{{allow.nameEn}}</span>
+                </div>
+                <div class="center col-4">
+                    <span class="text-success bold">{{allow.value}} <span class="currency">##word.$##</span></span>
+                </div>
+                <div class="center col-4">
+                    <span class="bold">{{allow.nameAr}}</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="row">
+                <div class="center col-3">
+                    <span class="bold blue">##word.Gross Salary##</span>
+                </div>
+                <div class="center col-6">
+                    <span class="text-success bold">{{item.paySlip.totalAllowance}} <span class="currency">##word.$##</span></span>
+                </div>
+                <div class="center col-3">
+                    <span class="bold blue">إجمالي المستحق</span>
+                </div>
+            </div>
+        </fieldset>
+    </fieldset>
+
+    <fieldset>
+        <legend class="black">##word.Deductions## - الإستقطاعات</legend>
+        <div class="row">
+            <fieldset ng-repeat="allow in item.paySlip.deductionsList">
+                <div class="center col-4">
+                    <span class="bold">{{allow.nameEn}}</span>
+                </div>
+                <div class="center col-4">
+                    <span class="text-danger bold">{{allow.value}} <span class="currency">##word.$##</span></span>
+                </div>
+                <div class="center col-4">
+                    <span class="bold">{{allow.nameAr}}</span>
+                </div>
+            </fieldset>
+        </div>
+        <fieldset>
+            <div class="row">
+                <div class="center col-3">
+                    <span class="bold blue">##word.Total Deduction##</span>
+                </div>
+                <div class="center col-6">
+                    <span class="text-danger bold">{{item.paySlip.totalDeductions}} <span class="currency">##word.$##</span></span>
+                </div>
+                <div class="center col-3">
+                    <span class="bold blue">إجمالي الإستقطاعات</span>
+                </div>
+            </div>
+        </fieldset>
+    </fieldset>
+    <fieldset>
+        <div class="row">
+            <div class="center col-4">
+                <p class="bold blue">##word.Net Amount Due##</p>
+            </div>
+            <div class="center col-5">
+                <p>
+                    <span>{{item.paySlip.totalAllowance}}</span>
+                    -
+                    <span class="text-danger">{{item.paySlip.totalDeductions}}</span>
+                    =
+                    <span class="text-success"> {{(item.paySlip.totalAllowance - item.paySlip.totalDeductions).toFixed(3) }}</span>
+                    <span class="currency">##word.$##</span>
+                </p>
+            </div>
+            <div class="center col-3">
+                <p class="bold blue">صافي المستحق</p>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row">
+        <div class="center col-3">
+            <p class="bold blue">##word.SIGNATURE##</p>
+        </div>
+        <div class="center col-6"></div>
+        <div class="center col-3">
+            <p class="bold blue">التوقيع بالإستلام</p>
+        </div>
+    </div>
+</div>

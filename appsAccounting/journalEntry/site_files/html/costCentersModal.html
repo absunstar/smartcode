@@ -1,0 +1,43 @@
+<div id="costCentersModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">##word.Cost Centers Modal## <i class="fa fa-file"></i></p>
+    </div>
+
+    <div class="modal-body">
+      <form class="form">
+        <fieldset>
+        <p class="center font-25 bold">{{account.name##session.lang##}}</p>
+          <div class="row">
+            <table class="table loaded center bold hover details">
+              <tr>
+                <th>##word.Code##</th>
+                <th >##word.Cost Center Name##</th>
+                <th>##word.Rate## ##word.%##</th>
+              </tr>
+
+              <tr ng-repeat="c in account.costCentersList">
+                <td class="center">
+                  <p>{{c.code}}</p>
+                </td>
+                <td class="center">
+                  <p>{{c.name##session.lang##}}</p>
+                </td>
+                <td class="center">
+                  <i-control type="number" ng-model="c.rate"></i-control>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <p class="error">{{error}}</p>
+
+    <div class="modal-footer center">
+      <i-button type="save" label="##word.Save##" onclick="site.hideModal( '#costCentersModal')"></i-button>
+    </div>
+  </div>
+</div>

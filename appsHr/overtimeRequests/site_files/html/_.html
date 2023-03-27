@@ -1,0 +1,72 @@
+<div ng-controller="overtimeRequests" class="loaded">
+    <div class="row" x-permissions="overtimeRequestsUi || overtimeRequestsManage">
+        <div x-import="overtimeRequests/modal.html"></div>
+        <div x-import="overtimeRequests/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="overtimeRequestsAdd || overtimeRequestsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="overtimeRequestsSearch || overtimeRequestsManage" label="##word.New##" ng-click="searchAll(search={requestStatus:'new'})"></i-button>
+            <i-button type="search" x-permissions="overtimeRequestsSearch || overtimeRequestsManage" label="##word.Accepted##" ng-click="searchAll(search={requestStatus:'accepted'})"></i-button>
+            <i-button type="search" x-permissions="overtimeRequestsSearch || overtimeRequestsManage" label="##word.Rejected##" ng-click="searchAll(search={requestStatus:'rejected'})"></i-button>
+            <i-button type="search" x-permissions="overtimeRequestsSearch || overtimeRequestsManage" label="##word.Canceled##" ng-click="searchAll(search={requestStatus:'canceled'})"></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="overtimeRequestsSearch || overtimeRequestsManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="overtime-requests">
+                <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Date##</th>
+                    <th>##word.Employee##</th>
+                    <th>##word.Value##</th>
+                    <th>##word.Action Date##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center brown">{{item.date | date:"dd / MM / yyyy"}}</td>
+                    <td class="center">{{item.employee.fullName##session.lang##}}</td>
+                    <td class="center">{{item.hours}} - <span>##word.Hours##</span> : {{item.minutes}}<span> - ##word.Minutes##</span></td>
+
+                    <td class="center">
+                        <p ng-show="item.requestStatus == 'accepted'">{{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'rejected'">{{item.rejectDate | date:'dd/MM/yyyy'}} - {{item.rejectDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
+                    </td>
+
+                    <td class="center">
+                        <span class="blue" ng-show="item.requestStatus == 'new' || item.requestStatus =='canceled'">{{item.requestStatus|uppercase}}</span>
+                        <span class="text-success" ng-show="item.requestStatus == 'accepted'">##word.Accepted##</span>
+                        <span class="text-danger" ng-show="item.requestStatus == 'rejected'">##word.Refused##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button
+                            type="cancel"
+                            ng-if="item.approved && item.requestStatus == 'accepted'"
+                            x-permissions="overtimeRequestsCancel || overtimeRequestsManage"
+                            label="##word.Cancel##"
+                            ng-click="cancel(item)"
+                        ></i-button>
+
+                        <i-button type="edit" ng-if="!item.approved" x-permissions="overtimeRequestsUpdate || overtimeRequestsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" ng-if="!item.approved" x-permissions="overtimeRequestsDelete || overtimeRequestsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="overtimeRequestsPrint || overtimeRequestsManage" type="print" label="##word.Print##" onclick="site.print('#overtime-requests')"></i-button>
+        <i-button x-permissions="overtimeRequestsExport || overtimeRequestsManage" type="export" label="##word.Export to excel##" onclick="site.export('#overtime-requests')"> </i-button>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div id="viewManageUserModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close"> &times; </span>
+      <h2>
+        <i class="fa fa-file"> ##word.edit## </i>
+      </h2>
+    </div>
+
+    <div class="modal-body">
+      <div class="row center">
+        <i-image ng-show="viewText === 'logo'" ng-model="manageUser.image"> </i-image>
+
+        <i-control ng-show="viewText === 'nameAr'" label="##word.name Arabic##" ng-model="manageUser.nameAr"> </i-control>
+
+        <i-control ng-show="viewText === 'nameAr'" label="##word.Name English##" ng-model="manageUser.nameEn"> </i-control>
+
+        <i-date ng-show="viewText === 'birthDate'" ng-model="manageUser.dateOfBirth" label="##word.Birth Date##"> </i-date>
+
+        <i-list ng-show="viewText === 'gender'" ng-search="manageUser.$genderSearch" label="##word.Gender##" ng-model="manageUser.gender" items="gendersList" display="name##session.lang##"> </i-list>
+
+        <i-control ng-show="viewText === 'email'" label="##word.New Email##" ng-model="manageUser.newEmail"> </i-control>
+
+        <i-control v="r" ng-show="viewText === 'password'" type="password" label="##word.currentPassword##" ng-model="manageUser.currentPassword"> </i-control>
+      </div>
+
+      <div class="row">
+        <div class="row">
+          <i-control class="col8" type="tel" ng-show="viewText === 'mobile'" label="##word.Mobile##" ng-model="manageUser.mobile"> </i-control>
+        </div>
+
+        <fieldset ng-show="viewText === 'mobile'">
+          <legend>##word.Other Mobile Numbers##</legend>
+
+          <div class="row" >
+            <i-control class="col8" type="tel" label="##word.Mobile##" ng-model="manageUser.$mobile"> </i-control>
+            <div class="col4">
+              <br />
+              <i-button type="push"  ng-click="addMobileList()"></i-button>
+            </div>
+          </div>
+
+          <div class="row" ng-show="manageUser.mobileList.length > 0">
+            <table x-permissions="login" class="table bold hover loaded">
+              <tr>
+                <th>##word.Mobile##</th>
+                <th class="not-print">##word.actions##</th>
+              </tr>
+              <tr ng-repeat="c in manageUser.mobileList">
+                <td class="center title">
+                  {{c}}
+                  <i class="fa-solid fa-mobile-screen-button"></i>
+                </td>
+
+                <td class="center not-print">
+                  <i-button type="delete" label="##word.Delete Mobile Number##" ng-click="manageUser.mobileList.length ===1 ||manageUser.mobileList.splice($index,1)"> </i-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row center" ng-show="viewText === 'password'">
+        <i-control v="r" class="col6" type="password" label="##word.newPassword##" ng-model="manageUser.newPassword"> </i-control>
+        <i-control v="r" class="col6" type="password" label="##word.Return Password##" ng-model="manageUser.rePassword"> </i-control>
+      </div>
+    </div>
+
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+      <i-button type="save" ng-show="viewText === 'password'" label="##word.save##" ng-click="editPersonalInfoUser('password')"></i-button>
+      <i-button type="save" ng-show="viewText === 'logo'" label="##word.save##" ng-click="editPersonalInfoUser('logo')"></i-button>
+      <i-button type="save" ng-show="viewText === 'name'" label="##word.save##" ng-click="editPersonalInfoUser('name')"></i-button>
+      <i-button type="save" ng-show="viewText === 'birthDate'" label="##word.save##" ng-click="editPersonalInfoUser('birthDate')"></i-button>
+      <i-button type="save" ng-show="viewText === 'gender'" label="##word.save##" ng-click="editPersonalInfoUser('gender')"></i-button>
+      <i-button type="save" ng-show="viewText === 'email'" label="##word.save##" ng-click="editPersonalInfoUser('email')"></i-button>
+      <i-button type="save" ng-show="viewText === 'mobile'" label="##word.save##" ng-click="editPersonalInfoUser('mobile')"></i-button>
+      <i-button type="close" label="##word.close##" onclick="site.hideModal( '#viewManageUserModal')"> </i-button>
+    </div>
+  </div>
+</div>

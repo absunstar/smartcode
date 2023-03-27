@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hr" , "screenName" : "attendanceLeaving" , "name":"attendanceLeavingUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

@@ -1,0 +1,46 @@
+<div ng-controller="currencies" class="loaded">
+    <div class="row" x-permissions="currenciesUi || currenciesManage">
+        <div x-import="currencies/modal.html"></div>
+        <div x-import="currencies/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="currenciesAdd || currenciesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="currenciesSearch || currenciesManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th class="w150">##word.Logo##</th>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td>
+                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                    </td>
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.name##session.lang##}}</td>
+                    <td class="center">
+                        <span ng-show="item.active" class="text-success"> ##word.Active##</span>
+                        <span ng-show="!item.active" class="text-danger">##word.Not Active##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="currenciesUpdate || currenciesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" x-permissions="currenciesDelete || currenciesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="currenciesPrint || currenciesManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="currenciesExport || currenciesManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+    </div>
+</div>

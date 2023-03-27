@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "convertUnitsAdmin",
+        "En": "Convert Units Admin",
+        "Ar": "إدارة تحويل الوحدات",
+        "permissions": ["convertUnitsManage"]
+    }
+]

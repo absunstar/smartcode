@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "delayRequestsAdmin",
+        "En": "Delay Requests Admin",
+        "Ar": "إدارة أذونات التأخير",
+        "permissions": ["delayRequestsManage"]
+    }
+]

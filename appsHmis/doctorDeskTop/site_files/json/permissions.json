@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopChangeStatus" , "En":"Change Status" , "Ar":"تفيير الحالة"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "doctorDeskTop" , "name":"doctorDeskTopUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

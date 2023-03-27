@@ -1,0 +1,14 @@
+[
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "storesOpeningBalancesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "approveStoresOpeningBalancesItem", "En": "Approve Item", "Ar": "إعتماد رصيد إفتتاحي لصنف" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "unapproveStoresOpeningBalancesItem", "En": "Unapprove Item", "Ar": "إلغاء إعتماد رصيد إفتتاحي لصنف" },
+    { "moduleName": "inventory", "screenName": "storesOpeningBalances", "name": "approveStoresOpeningBalances", "En": "Approve Order", "Ar": "إعتماد الأرصدة الإفتتاحية للأصناف" }
+]

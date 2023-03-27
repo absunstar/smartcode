@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "doctorAppointments" , "name":"doctorAppointmentsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

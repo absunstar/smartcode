@@ -1,0 +1,115 @@
+<div id="vitalsNotesModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">
+        ##word.Vitals Notes##
+        <i class="fa fa-pencil"></i>
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <div class="row" ng-show="item.patient.id">
+        <div class="col3" >
+          <br />
+          <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
+        </div>
+        <div class="cart">
+          <div class="row">
+            <div class="col9">
+              <p class="bold">
+                <span class="darkGray">##word.Full Name## : </span> {{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> )
+                <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+              </p>
+            </div>
+            <div class="col3">
+              <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.patient.mobile}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col4">
+              <p class="bold">
+                <span class="darkGray"> ##word.Nationality## : </span> {{item.patient.nationality.name##session.lang##}}
+                <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" />
+              </p>
+            </div>
+            <div class="col2">
+              <p class="bold"><span class="darkGray">##word.Age## : </span> {{item.patient.age}}</p>
+            </div>
+            <div class="col6">
+              <p class="bold text-right"><span class="darkGray">الإسم بالكامل : </span> {{item.patient.fullNameAr}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col7">
+              <p class="bold">
+                <span class="darkGray">##word.Mother Name## : </span> {{item.patient.motherNameEn}}
+                <span class="blue" ng-show="item.patient.newBorn">(##word.New Born##)</span>
+              </p>
+            </div>
+            <div class="col5">
+              <p class="bold text-right"><span class="darkGray"> إسم الأم : </span> {{item.patient.motherNameAr}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col6">
+              <p class="bold"><span class="darkGray"> ##word.Marital Status## : </span> {{item.patient.maritalStatus.name##session.lang##}}</p>
+            </div>
+
+            <div class="col6">
+              <p class="bold text-right"><span class="darkGray"> ##word.Gender## : </span> {{item.patient.gender.name##session.lang##}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col8">
+              <p class="bold">
+                <span class="darkGray">##word.Insurance Company##: </span> {{item.mainInsuranceCompany.name##session.lang##}} ( <span class="blue">{{item.mainInsuranceCompany.code}}</span> )
+              </p>
+            </div>
+            <div class="col4">
+              <p class="bold text-right">
+                <span class="darkGray">##word.Patient Type##: </span> {{item.patient.patientType.name##session.lang##}} ( <span class="blue">{{item.patient.patientType.code}}</span> )
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col6">
+              <p class="bold"><span class="darkGray"> ##word.Insurance Class## : </span> {{item.patient.insuranceClass.name##session.lang##}}</p>
+            </div>
+            <div class="col6">
+              <p class="bold text-right"><span class="darkGray"> ##word.Expiry Date## : </span> {{item.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <i-control type="text" label="##word.Height## / CM" ng-model="item.Height"></i-control>
+        <i-control type="text" label="##word.Weight## / KG" ng-model="item.weight"></i-control>
+        <i-control type="text" label="##word.Temperature##" ng-model="item.temperature"></i-control>
+        <i-control type="text" label="##word.Pulse##" ng-model="item.pulse"></i-control>
+        <i-control type="text" label="##word.Blood Pressure High##" ng-model="item.bloodPressureHigh"></i-control>
+        <i-control type="text" label="##word.Blood Pressure Low##" ng-model="item.bloodPressureLow"></i-control>
+        <i-control type="text" label="##word.Respiratory Rate##" ng-model="item.respiratoryRate"></i-control>
+        <i-control type="text" label="##word.Oxygen Saturation##" ng-model="item.oxygenSaturation"></i-control>
+        <i-control type="text" label="##word.BMI##" ng-model="item.bmi"></i-control>
+        <i-control type="text" label="##word.FBS##" ng-model="item.fbs"></i-control>
+        <i-control type="text" label="##word.Rbs##" ng-model="item.rbs"></i-control>
+        <i-textarea label="##word.notes##" ng-model="item.notesAfter"></i-textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+      <i-button type="edit" label="##word.Save##" x-permissions="radiologyDeskTopUpdate || radiologyDeskTopManage" ng-click="update(item,'#vitalsNotesModal')"></i-button>
+      <i-button
+        type="save"
+        label="##word.Save## ##word.And## ##word.Entrance to the doctor##"
+        x-permissions="radiologyDeskTopUpdate || radiologyDeskTopManage"
+        ng-click="update(item,'#vitalsNotesModal',2)"
+      ></i-button>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#vitalsNotesModal')"></i-button>
+    </div>
+  </div>
+</div>

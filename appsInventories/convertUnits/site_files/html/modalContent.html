@@ -1,0 +1,179 @@
+<div class="row">
+    <div class="row padding">
+        <fieldset>
+            <legend>##word.Basic Information##</legend>
+            <div class="row">
+                <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
+                <i-date ng-model="item.date" class="col3" label="##word.Date##"></i-date>
+                <i-list v="r" class="col4" ng-disabled="item.itemsList.length > 0" display="name##session.lang##" ng-model="item.store" items="storesList" label="##word.Store##"></i-list>
+                <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+            </div>
+        </fieldset>
+        <fieldset ng-show="item.store.id">
+            <legend>##word.Items Information##</legend>
+            <div class="row" ng-if="mode =='add'">
+                <div class="row">
+                    <i-list
+                        class="col3"
+                        ng-model="orderItem.item"
+                        ng-change="orderItem.item? getItemUnits(orderItem.item):''"
+                        items="itemsList"
+                        display="name##session.lang##"
+                        label="##word.Item##"
+                        ng-get="getStoresItems($search)"
+                    ></i-list>
+                    <i-list
+                        class="col2"
+                        ng-change="calculateConversionUnits('from')"
+                        ng-model="orderItem.unit"
+                        items="unitsList"
+                        display="name##session.lang##"
+                        label="##word.Unit##"
+                        ng-search="orderItem.$unit"
+                    ></i-list>
+                    <i-list
+                        class="col2"
+                        ng-change="calculateConversionUnits('to')"
+                        ng-model="orderItem.toUnit"
+                        items="unitsList"
+                        display="name##session.lang##"
+                        label="##word.To Unit##"
+                        ng-search="orderItem.$toUnit"
+                    ></i-list>
+                    <div class="col5">
+                        <i-control
+                            class="col4 padding"
+                            ng-show="orderItem.toUnit.id && orderItem.unit.id"
+                            ng-change="calculateConversionUnits('from')"
+                            min="0"
+                            type="number"
+                            ng-model="orderItem.count"
+                            label="##word.Count From##"
+                        ></i-control>
+                        <i-control
+                            class="col4 padding"
+                            ng-show="orderItem.toUnit.id && orderItem.unit.id"
+                            ng-change="calculateConversionUnits('to')"
+                            min="0"
+                            type="number"
+                            ng-model="orderItem.toCount"
+                            label="##word.Count To##"
+                        ></i-control>
+                        <div class="col3">
+                            <br />
+                            <i-button type="push"  ng-show="orderItem.unit.id && orderItem.toUnit.id" ng-click="addToItemsList(orderItem)"> </i-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col6" ng-show="orderItem.item && orderItem.item.id">
+                    <fieldset>
+                        <legend>##word.From##</legend>
+                        <div class="row">
+                            <i-control class="col4" type="number" disabled ng-model="orderItem.unit.conversion" label="##word.Conversion##"></i-control>
+                            <i-control class="col4" type="number" disabled ng-model="orderItem.unit.currentCount" label="##word.Current Count##"></i-control>
+                            <i-control class="col4" type="number" disabled ng-model="orderItem.unit.newCount" label="##word.New Count##"></i-control>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col6" ng-show="orderItem.item && orderItem.item.id">
+                    <fieldset>
+                        <legend>##word.To##</legend>
+                        <div class="row">
+                            <i-control class="col4" type="number" disabled ng-model="orderItem.toUnit.conversion" label="##word.Conversion##"></i-control>
+
+                            <i-control class="col4" type="number" disabled ng-model="orderItem.toUnit.currentCount" label="##word.Current Count##"></i-control>
+                            <i-control class="col4" type="number" disabled ng-model="orderItem.toUnit.newCount" label="##word.New Count##"></i-control>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <p class="error">{{itemsError}}</p>
+            <div class="table-responsive">
+                <table class="table hover bold">
+                    <tr>
+                        <th>##word.S##</th>
+                        <th>##word.Item##</th>
+                        <th>##word.From Unit##</th>
+                        <th>##word.From Count##</th>
+                        <th>##word.To Unit##</th>
+                        <th>##word.To Count##</th>
+                        <th>##word.Approved##</th>
+                        <th class="not-print">##word.Actions##</th>
+                    </tr>
+                    <tr ng-repeat="elem in item.itemsList">
+                        <td class="center">{{$index+1}}</td>
+                        <td class="center">
+                            <p>{{elem.name##session.lang##}}</p>
+                        </td>
+                        <td class="center">
+                            <p class="text-danger">{{elem.unit.name##session.lang##}}</p>
+                        </td>
+
+                        <td class="center">
+                            <p class="text-danger">{{elem.count}}</p>
+                        </td>
+                        <td class="center">
+                            <p class="text-success">{{elem.toUnit.name##session.lang##}}</p>
+                        </td>
+
+                        <td class="center">
+                            <p class="text-success">{{elem.toCount}}</p>
+                        </td>
+
+                        <td class="center">
+                            <p class="text-success" ng-if="elem.approved">##word.Yes##</p>
+                            <p class="text-danger" ng-if="!elem.approved">##word.No##</p>
+                        </td>
+                        <td class="center">
+                            <i-button type="edit" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode" label="##word.From Batch##" ng-click="showBatchModal(elem)"> </i-button>
+                            <i-button type="edit" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode" label="##word.To Batch##" ng-click="showToBatchModal(elem)"> </i-button>
+
+                            <i-button
+                                type="approve"
+                                ng-if="!elem.approved &&!item.approved && mode == 'edit'"
+                                x-permissions="approveConvertUnitsItem || convertUnitsManage"
+                                label="##word.Approve##"
+                                ng-click="approveItem(elem)"
+                            >
+                            </i-button>
+                            <i-button
+                                type="unapprove"
+                                ng-if="elem.approved &&!item.approved  && mode =='edit'"
+                                x-permissions="unapproveConvertUnitsItem || convertUnitsManage"
+                                label="##word.Unapprove##"
+                                ng-click="unapproveItem(elem)"
+                            >
+                            </i-button>
+                            <i-button type="delete" ng-show="!item.approved && item.sourceType.id !== 1" ng-click="item.itemsList.splice($index,1)"> </i-button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

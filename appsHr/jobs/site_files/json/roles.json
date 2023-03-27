@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "hr",
+    "name": "jobsAdmin",
+    "En": "Jobs Admin",
+    "Ar": "إدارة الوظائف",
+    "permissions": ["jobsManage"]
+  }
+]

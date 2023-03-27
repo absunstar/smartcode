@@ -1,0 +1,212 @@
+<div class="row">
+    <div class="row padding">
+        <div class="col9">
+            <div class="row">
+                <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
+                <i-date class="col6" label="##word.Date##" ng-model="item.date"> </i-date>
+                <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+            </div>
+        </div>
+        <div class="col3 center">
+            <i-image class="img128 center" ng-model="item.image"></i-image>
+        </div>
+        <div class="row">
+            <i-checkbox ng-model="item.fromJobsApplicants" ng-change="getJobsApplicants(item);" class="col3" label="##word.From Jobs Applicants##"></i-checkbox>
+            <i-list
+                ng-show="item.fromJobsApplicants"
+                class="col6"
+                v="r"
+                ng-change="setContractDataFromJobApplicant(item.jobApplicant)"
+                label="##word.Jobs Applicants##"
+                ng-model="item.jobApplicant"
+                display="name##session.lang##"
+                display2="date"
+                items="jobsApplicantsList"
+                ng-search="item.$genders"
+            ></i-list>
+        </div>
+        <div class="row">
+            <i-control type="text" v="r" ng-model="item.fullNameEn" label="##word.Full Name##"></i-control>
+            <i-control type="text" v="r" ng-model="item.fullNameAr" label="##word.Full Name Arabic##"></i-control>
+        </div>
+    </div>
+    <p class="error">{{error}}</p>
+    <fieldset>
+        <div class="tabs">
+            <div class="tabs-header full">
+                <a class="tab-link" onclick="site.showTabContent(event, '#personalData')">
+                    <span> ##word.Personal Informations##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#workInformations')">
+                    <span> ##word.Work Informations##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#vacationsAndInsuranceInformations')">
+                    <span> ##word.Vacations And Insurance Informations##</span>
+                </a>
+            </div>
+
+            <div class="tabs-content">
+                <div id="personalData" class="tab-content">
+                    <fieldset>
+                        <legend>##word.Personal Informations##</legend>
+                        <div class="row">
+                            <i-list
+                                class="col4"
+                                label="##word.Nationality##"
+                                ng-model="item.nationality"
+                                ng-change="setDefaultVacations(item.nationality);setDefaultInsurance(item.nationality)"
+                                items="nationalitiesList"
+                                display="name##session.lang##"
+                                ng-search="item.$nationality"
+                            >
+                            </i-list>
+                            <i-list class="col4" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##" items="gendersList" ng-search="item.$genders"></i-list>
+                            <i-list
+                                class="col4"
+                                v="r"
+                                label="##word.Marital Status##"
+                                ng-model="item.maritalStatus"
+                                display="name##session.lang##"
+                                items="maritalStatusList"
+                                ng-search="item.$maritalStatus"
+                            ></i-list>
+                            <i-control class="col6" label="##word.Email##" ng-model="item.email"> </i-control>
+                            <i-date class="col6" label="##word.Date Of Birth ##" ng-model="item.dateOfBirth"> </i-date>
+
+                            <fieldset>
+                                <legend>##word.Personal Verification##</legend>
+                                <fieldset>
+                                    <div class="col4">
+                                        <br />
+                                        <i-radio class="col6" label="##word.ID##" ng-value="id" ng-model="item.idType"> </i-radio>
+                                        <i-radio class="col6" label="##word.Passport /Iqama##" ng-value="iqama" ng-model="item.idType"> </i-radio>
+                                    </div>
+                                    <i-control class="col8" v="r ll10 ml10" label="##word.ID /Iqama Number##" ng-model="item.idNumber"> </i-control>
+                                </fieldset>
+                                <div class="row">
+                                    <i-date class="col6" label="##word.Issue Date##" ng-model="item.idIssueDate"> </i-date>
+                                    <i-control class="col6" label="##word.Issue Place##" ng-model="item.idIssuePlace"> </i-control>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="workInformations" class="tab-content">
+                    <fieldset>
+                        <legend>##word.Work Informations##</legend>
+                        <div class="row">
+                            <i-list
+                                v="r"
+                                class="col4"
+                                label="##word.Department##"
+                                ng-model="item.department"
+                                ng-change="getSections(item.department)"
+                                display="name##session.lang##"
+                                items="departmentsList"
+                                ng-search="item.$department"
+                            ></i-list>
+                            <i-list
+                                v="r"
+                                class="col4"
+                                label="##word.Section##"
+                                ng-change="getJobs(item.section)"
+                                ng-model="item.section"
+                                display="name##session.lang##"
+                                items="sectionsList"
+                                ng-search="item.$section"
+                            ></i-list>
+
+                            <i-list v="r" class="col4" label="##word.Job##" ng-model="item.job" display="name##session.lang##" items="jobsList" ng-search="item.$job"></i-list>
+                            <i-date class="col6" label="##word.Contract Work Start Date ##" ng-model="item.contractWorkStartDate"> </i-date>
+                            <i-date class="col6" label="##word.Contract Work End Date ##" ng-model="item.contractWorkEndDate"> </i-date>
+
+                            <i-date class="col6" label="##word.Work Start Date ##" ng-model="item.workStartDate"> </i-date>
+                            <i-date class="col6" label="##word.Work End Date ##" ng-model="item.workEndDate"> </i-date>
+                            <fieldset>
+                                <legend>##word.Salary Informations##</legend>
+                                <div class="row">
+                                    <div class="col4">
+                                        <div class="col10">
+                                            <i-control type="number" v="r" label="##word.Basic Salary##" ng-change="calculateWorkCost(item)" ng-model="item.basicSalary"></i-control>
+                                        </div>
+                                        <div class="col2 padding">
+                                            <br />
+                                            <span class="currency">##word.$##</span>
+                                        </div>
+                                    </div>
+                                    <i-control type="number" v="r" class="col4" ng-change="calculateWorkCost(item)" label="##word.Work Days##" ng-model="item.workDays"> </i-control>
+                                    <i-control type="number" v="r" class="col4" ng-change="calculateWorkCost(item)" label="##word.Work Hours##" ng-model="item.workHours"> </i-control>
+
+                                    <div class="col4">
+                                        <div class="col10">
+                                            <i-control v="r" type="number" label="##word.Day Salary##" ng-model="item.daySalary"></i-control>
+                                        </div>
+                                        <div class="col2 padding">
+                                            <br />
+                                            <span class="currency">##word.$##</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col4">
+                                        <div class="col10">
+                                            <i-control v="r" type="number" label="##word.Hour Salary##" ng-model="item.hourSalary"></i-control>
+                                        </div>
+                                        <div class="col2 padding">
+                                            <br />
+                                            <span class="currency">##word.$##</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+                <div id="vacationsAndInsuranceInformations" class="tab-content">
+                    <fieldset>
+                        <legend>##word.Vacations Balance##</legend>
+                        <div class="row">
+                            <i-control type="number" class="col3" label="##word.Annual##" ng-model="item.annualVacation"> </i-control>
+                            <i-control type="number" class="col3" label="##word.Regular##" ng-model="item.regularVacation"> </i-control>
+                            <i-control type="number" class="col3" label="##word.Casual##" ng-model="item.casualVacation"> </i-control>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>##word.Social Insurance##</legend>
+                        <div class="row">
+                            <i-control type="number" class="col4" label="##word.Total Subscriptions %##" ng-model="item.totalSubscriptions"> </i-control>
+
+                            <i-control type="number" class="col4" label="##word.Employee Percentage %##" ng-model="item.employeePercentage"> </i-control>
+
+                            <i-control type="number" class="col4" label="##word.Company Percentage %##" ng-model="item.companyPercentage"> </i-control>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

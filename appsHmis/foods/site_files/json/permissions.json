@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "foods" , "name":"foodsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

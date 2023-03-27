@@ -1,0 +1,38 @@
+<div class="row">
+    <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
+    <i-date v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
+
+    <i-control class="col6" label="##word.Title##" ng-model="item.nameEn"> </i-control>
+    <i-control class="col6" label="##word.Title Arabic##" ng-model="item.nameAr"> </i-control>
+
+    <i-list v="r" class="col6" label="##word.Requested By##" ng-model="item.requestedBy" items="employeesList" ng-search="item.$requestedBy" display="fullName##session.lang##"> </i-list>
+    <i-list v="r" class="col6" label="##word.Employee##" ng-model="item.employee" items="employeesList" ng-search="item.$employee" display="fullName##session.lang##"> </i-list>
+
+    <i-control class="col4" v="r" ng-model="item.hours" label="##word.Hours##" type="number"></i-control>
+    <i-control class="col4" v="r" ng-model="item.minutes" label="##word.Minutes##" type="number"></i-control>
+
+    <i-textarea label="##word.Description##" rows="4" ng-model="item.description"> </i-textarea>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

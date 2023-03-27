@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hr" ,
+    "name": "jobsToolsAdmin",
+    "En": "Jobs Tools Admin",
+    "Ar": "إدارة أدوات الوظائف",
+    "permissions": ["jobsToolsManage"]
+}]

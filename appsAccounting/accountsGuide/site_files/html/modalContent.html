@@ -1,0 +1,189 @@
+<div class="row">
+  <div class="row padding">
+    <div class="col9">
+      <div class="row">
+        <div class="row">
+          <i-control ng-hide="disabledCode" class="col6" label="##word.Code##" ng-model="item.code"> </i-control>
+          <i-control ng-show="disabledCode" type="number" class="col6" label="##word.Length Level##" ng-model="item.lengthLevel"></i-control>
+        </div>
+
+        <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+        <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+      </div>
+      <div class="row">
+        <fieldset>
+          <legend>##word.Type##</legend>
+
+          <i-radio class="col3" ng-value="primary" label="##word.Primary##" ng-model="item.type"> </i-radio>
+
+          <i-radio class="col3" ng-value="detailed" label="##word.Detailed##" ng-model="item.type"> </i-radio>
+        </fieldset>
+      </div>
+      <br />
+      <div class="row">
+        <fieldset>
+          <legend>##word.Status##</legend>
+          <i-radio class="col3" ng-value="active" label="##word.Active##" ng-model="item.status"> </i-radio>
+
+          <i-radio class="col3" ng-value="inactive" label="##word.Inactive##" ng-model="item.status"> </i-radio>
+        </fieldset>
+      </div>
+      <div class="row">
+        <fieldset>
+          <legend>##word.Account Side##</legend>
+
+          <i-radio class="col3" ng-value="debtor" label="##word.Debtor##" ng-model="item.side"> </i-radio>
+
+          <i-radio class="col3" ng-value="creditor" label="##word.Creditor##" ng-model="item.side"> </i-radio>
+        </fieldset>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <fieldset>
+          <legend>##word.Report Type##</legend>
+          <i-radio class="col3" ng-value="budget" ng-change="getCategoryList()" label="##word.Budget##" ng-model="item.reportType"> </i-radio>
+
+          <i-radio class="col3" ng-value="incomeList" ng-change="getCategoryList()" label="##word.IncomeList##" ng-model="item.reportType"> </i-radio>
+          <i-list
+            ng-show="settings.accountsSetting.linkGlWithIncomeStatementAndBudget == true"
+            class="col4"
+            display="name##session.lang##"
+            ng-search="item.$category"
+            items="categoryList"
+            label="##word.Category##"
+            ng-model="item.category"
+          ></i-list>
+        </fieldset>
+      </div>
+
+      <br />
+      <div class="row">
+        <fieldset>
+          <legend>##word.Cash Flow##</legend>
+
+          <i-radio class="col3" ng-value="mandatory" label="##word.Mandatory##" ng-model="item.cashFlow"> </i-radio>
+
+          <i-radio class="col3" ng-value="choice" label="##word.Choice##" ng-model="item.cashFlow"> </i-radio>
+
+          <i-radio class="col3" ng-value="without" label="##word.Without##" ng-model="item.cashFlow"> </i-radio>
+        </fieldset>
+      </div>
+
+      <br />
+      <div class="row">
+        <fieldset>
+          <legend>##word.Type Of Cost Center##</legend>
+
+          <i-radio class="col3" ng-value="mandatory" label="##word.Mandatory##" ng-model="item.costCenterType"></i-radio>
+
+          <i-radio class="col3" ng-value="choice" label="##word.Choice##" ng-model="item.costCenterType"></i-radio>
+
+          <i-radio class="col3" ng-value="without" label="##word.Without##" ng-model="item.costCenterType"></i-radio>
+        </fieldset>
+      </div>
+
+      <br />
+
+      <div ng-hide="item.costCenterType=='without'" class="row">
+        <fieldset>
+          <div class="row">
+            <i-list items="costCentersList" class="col4" label="##word.Cost Center##" ng-search="item.$costCenter" display="name##session.lang##" ng-model="item.$costCenter"> </i-list>
+            <div class="col2">
+              <br />
+              <i-button type="add" label="##word.Add##" ng-click="addCostCenters()"></i-button>
+            </div>
+          </div>
+          <div class="row" ng-show="item.costCentersList.length > 0">
+            <table class="table loaded center bold" id="t1">
+              <tr>
+                <th>##word.Code##</th>
+                <th>##word.Name##</th>
+                <th>##word.Rate## ##word.%##</th>
+                <th>##word.Actions##</th>
+              </tr>
+
+              <tr ng-repeat="cost in item.costCentersList">
+                <td>
+                  <p class="center">{{cost.code}}</p>
+                </td>
+                <td>
+                  <p class="center">{{cost.name##session.lang##}}</p>
+                </td>
+                <td>
+                  <div class="row">
+                    <i-control class="col9" ng-model="cost.rate" type="number"></i-control>
+                    <p class="col3 currency">##word.%##</p>
+                  </div>
+                </td>
+                <td class="center">
+                  <i-button type="delete" ng-click="item.costCentersList.splice($index,1)"> </i-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+
+      <fieldset ng-show="item.type== 'detailed'">
+        <div class="row">
+          <i-list items="generalLedgerList" class="col4" label="##word.General Ledger##" ng-search="item.$generalLedger" display="name##session.lang##" ng-model="item.$generalLedger"> </i-list>
+          <div class="col2">
+            <br />
+            <i-button type="add" label="##word.Add##" ng-click="addGeneralLedger()"></i-button>
+          </div>
+        </div>
+        <div class="row" ng-show="item.generalLedgerList.length > 0">
+          <table class="table loaded center bold" id="t1">
+            <tr>
+              <th>##word.Code##</th>
+              <th>##word.Name##</th>
+              <th>##word.Actions##</th>
+            </tr>
+
+            <tr ng-repeat="gL in item.generalLedgerList">
+              <td>
+                <p class="center">{{gL.code}}</p>
+              </td>
+              <td>
+                <p class="center">{{gL.name##session.lang##}}</p>
+              </td>
+
+              <td class="center">
+                <i-button type="delete" ng-click="item.generalLedgerList.splice($index,1)"> </i-button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col3">
+      <i-image class="img128 center" ng-model="item.image"></i-image>
+    </div>
+  </div>
+  <div class="row padding"></div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.addUserInfo##</th>
+      <th>##word.editUserInfo##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

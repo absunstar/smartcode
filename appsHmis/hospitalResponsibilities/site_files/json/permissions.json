@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "hospitalResponsibilities" , "name":"hospitalResponsibilitiesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

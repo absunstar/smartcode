@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" x-permissions="login" data-ng-app="myApp">
+  <head x-import="head.html"> </head>
+
+  <body class="##session.lang## loaded" ng-controller="manageUser">
+    <div x-import="site-top/index.html"></div>
+    <div x-import="site-bottom/index.html"></div>
+    <div x-import="manageUser/viewModal.html"></div>
+
+    <div class="form" id="manageUser">
+      <div class="all-section tabs user-tabs">
+        <div class="tabs-header full">
+          <a class="tab-link inline-block" onclick="site.showTabContent(event, '#personalInfo')"> ##word.Personal Info## </a>
+          <a class="tab-link inline-block" ng-click="showTab($event,'#myAddresses')"> ##word.My Addresses## </a>
+        </div>
+        <div class="tabs-content">
+          <div id="personalInfo" class="tab-content">
+            <div class="row">
+              <table class="table loaded hover center bold">
+                <tr>
+                  <td class="blue">
+                    ##word.Profile Photo##
+                  </td>
+
+                  <td>
+                    <i-image view class="logo center" ng-model="manageUser.image"></i-image>
+                  </td>
+
+                  <td>
+                    <i-button type="update" label="##word.update##" ng-click="view('logo')"> </i-button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="blue">
+                    ##word.Email##
+                  </td>
+
+                  <td class="userPrint">
+                    {{manageUser.email}}
+                  </td>
+
+                  <td>
+                    <i-button type="update" label="##word.update##" ng-click="view('email')"> </i-button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="blue">
+                    ##word.Password##
+                  </td>
+
+                  <td>
+                    <div class="row">
+                      <div class="col4"></div>
+                      <div class="col4">
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                        <i class="col1 fa fa-circle font-8"></i>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <i-button type="update" label="##word.update##" ng-click="view('password')"> </i-button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="blue">
+                    ##word.Name##
+                  </td>
+
+                  <td class="userPrint">
+                    {{manageUser.nameAr}} - {{manageUser.nameEn}}
+                  </td>
+
+                  <td>
+                    <i-button type="update" label="##word.update##" ng-click="view('nameAr')"> </i-button>
+                  </td>
+                </tr>
+
+                <tr ng-hide="manageUser.isCompany">
+                  <td class="blue">
+                    ##word.Gender##
+                  </td>
+
+                  <td>
+                    {{manageUser.gender.name##session.lang##}}
+                  </td>
+
+                  <td>
+                    <i-button type="update" label="##word.update##" ng-click="view('gender')"> </i-button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="blue">
+                    ##word.Mobile##
+                  </td>
+
+                  <td class="userPrint">
+                    <a href="tel:{{manageUser.mobile}}">
+                      {{manageUser.mobile}}
+                      <i class="fa-solid fa-mobile-screen-button"></i>
+                    </a>
+                  </td>
+
+                  <td>
+                    <i-button type="update" label="##word.update##" ng-click="view('mobile')"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div id="myAddresses" class="tab-content">
+            <div>
+              <div class="row">
+                <fieldset>
+                  <legend>##word.Addresses##</legend>
+                  <div class="row">
+                    <i-list
+                      help-id=""
+                      class="col6"
+                      label="##word.Country##"
+                      ng-change="getGovesList(manageUser.country)"
+                      ng-model="manageUser.country"
+                      display="name##session.lang##"
+                      items="countriesList"
+                      ng-search="manageUser.$Country"
+                    ></i-list>
+                    <i-list
+                      help-id=""
+                      class="col6"
+                      label="##word.Governorate##"
+                      ng-change="getCitiesList(manageUser.gov)"
+                      ng-model="manageUser.gov"
+                      display="name##session.lang##"
+                      items="govesList"
+                      ng-search="manageUser.$gov"
+                    ></i-list>
+                  </div>
+
+                  <div class="row">
+                    <i-list
+                      class="col6"
+                      label="##word.City##"
+                      ng-model="manageUser.city"
+                      ng-change="getAreasList(manageUser.city)"
+                      items="citiesList"
+                      display="name##session.lang##"
+                      ng-search="manageUser.$area.$cityitem"
+                    >
+                    </i-list>
+                    <i-list class="col6" label="##word.Area##" ng-model="manageUser.area" items="areasList" display="name##session.lang##" ng-search="manageUser.$area.$areaitem"> </i-list>
+                  </div>
+
+                  <div class="row">
+                    <i-control class="col6" label="##word.Street##" ng-model="manageUser.street"> </i-control>
+                    <i-control class="col6" label="##word.P.O.Box##" ng-model="manageUser.poBox"> </i-control>
+                  </div>
+
+                  <div class="row">
+                    <i-control class="col6" label="##word.Zip##" ng-model="manageUser.zip"> </i-control>
+                    <i-control class="col6" label="##word.E-mail##" ng-model="manageUser.patientEmail"> </i-control>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <i-button type="save" label="##word.save##" ng-click="saveUserChanges(manageUser)"> </i-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <script src="../js/script.js"></script> -->
+
+    <div x-import="scripts.html"></div>
+
+    <script x-import="manageUser/index.js"></script>
+  </body>
+</html>

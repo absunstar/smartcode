@@ -1,0 +1,38 @@
+<div ng-controller="medicineRoutes" class="loaded">
+    <div class="row" x-permissions="medicineRoutesUi || medicineRoutesManage">
+        <div x-import="medicineRoutes/modal.html"></div>
+        <div x-import="medicineRoutes/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="medicineRoutesAdd || medicineRoutesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/medicineRoutes/import" label="Import"></i-upload>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="medicineRoutesSearch || medicineRoutesManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.name##session.lang##}}</td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="medicineRoutesUpdate || medicineRoutesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" x-permissions="medicineRoutesDelete || medicineRoutesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="medicineRoutesPrint || medicineRoutesManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="medicineRoutesExport || medicineRoutesManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+    </div>
+</div>

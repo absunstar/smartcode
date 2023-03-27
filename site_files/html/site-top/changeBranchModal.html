@@ -1,0 +1,43 @@
+<style>
+
+</style>
+<div id="changeBranchModal" class="modal small">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2 class="text-center"><i class="fa fa-sign-in"></i> ##word.Change Branch##</h2>
+    </div>
+
+    <div class="modal-body">
+      <h1 ng-show="busy"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span></h1>
+
+      <form ng-hide="busy">
+        <div class="row">
+          <div class="col1"></div>
+          <div class="col10">
+            <table class="table branch loaded hover center bold">
+              <tr ng-repeat="b in branchList">
+                <td class="blue">
+                  {{b.company.name##session.lang##}}
+                </td>
+                <td class="green">
+                  {{b.branch.name##session.lang##}}
+                </td>
+                <td>
+                  <a ng-click="login(b)" class="login-btn"> ##word.Branch Login## <i class="fas fa-sign-in-alt"></i> </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="col1"></div>
+        </div>
+      </form>
+
+      <p class="red text-center bold">{{error}}</p>
+    </div>
+    <div class="modal-footer center">
+      <i-button onclick="site.hideModal('#changeBranchModal')" type="close" label="##word.Close##"></i-button>
+    </div>
+  </div>
+</div>

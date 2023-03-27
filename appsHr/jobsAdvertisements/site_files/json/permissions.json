@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "jobsAdvertisementsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "approveJobsAdvertisement", "En": "Approve", "Ar": "الموافقة علي إعلان وظيفة" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "cancelJobsAdvertisement", "En": "Cancel", "Ar": "إلغاء إعلان وظيفة" },
+    { "moduleName": "hr", "screenName": "jobsAdvertisements", "name": "unapproveJobsAdvertisement", "En": "Unapprove", "Ar": "رفض إعلان وظيفة" }
+]

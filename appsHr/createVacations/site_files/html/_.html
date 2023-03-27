@@ -1,0 +1,71 @@
+<div ng-controller="createVacations" class="loaded">
+    <div class="row" x-permissions="createVacationsUi || createVacationsManage">
+        <div x-import="createVacations/modal.html"></div>
+        <div x-import="createVacations/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="createVacationsAdd || createVacationsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="createVacationsSearch || createVacationsManage" label="##word.Not Approved##" ng-click="searchAll(search={approved:false})"></i-button>
+            <i-button type="search" x-permissions="createVacationsSearch || createVacationsManage" label="##word.Approved##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="createVacationsSearch || createVacationsManage" label="##word.All Emloyees##" ng-click="searchAll(search={vacationFor:'all'})"></i-button>
+            <i-button type="search" x-permissions="createVacationsSearch || createVacationsManage" label="##word.Some Emloyees##" ng-click="searchAll(search={vacationFor:'some'})"></i-button>
+            <i-button type="search" x-permissions="createVacationsSearch || createVacationsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="createVacationsSearch || createVacationsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="createVacationsSearch || createVacationsManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="global-vacations">
+                <tr>
+                    <th class="w150">##word.Logo##</th>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Vacation For##</th>
+                    <th>##word.From Date##</th>
+                    <th>##word.To Date##</th>
+                    <th>##word.Approved##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td>
+                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                    </td>
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.vacationName.name##session.lang##}}</td>
+                    <td>
+                        <p class="text-success" ng-if="item.vacationFor =='all' ">##word.All Employees##</p>
+                        <p class="text-danger" ng-if="item.vacationFor =='some' ">##word.Some Employees##</p>
+                    </td>
+                    <td class="center blue">{{item.fromDate|date:'dd/MM/yyyy'}}</td>
+                    <td class="center blue">{{item.toDate|date:'dd/MM/yyyy'}}</td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.approved">( ##word.Yes## ) - <span> {{item.approveDate|date:'dd/MM/yyyy'}} - {{item.approveDate|date:'hh:mm:ss a'}} </span> </span>
+                        <span class="text-danger" ng-show="!item.approved">##word.No##</span>
+                    </td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.active">##word.Active##</span>
+                        <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="createVacationsUpdate || createVacationsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" ng-if="!item.approved" x-permissions="createVacationsDelete || createVacationsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="createVacationsPrint || createVacationsManage" type="print" label="##word.Print##" onclick="site.print('#global-vacations')"></i-button>
+        <i-button x-permissions="createVacationsExport || createVacationsManage" type="export" label="##word.Export to excel##" onclick="site.export('#global-vacations')"> </i-button>
+    </div>
+</div>

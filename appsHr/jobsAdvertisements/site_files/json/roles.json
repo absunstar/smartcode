@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "jobsAdvertisementsAdmin",
+        "En": "Jobs Advertisements Admin",
+        "Ar": "إدارة إعلانات الوظائف",
+        "permissions": ["jobsAdvertisementsManage"]
+    }
+]

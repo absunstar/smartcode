@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "acceptworkErrandRequest", "En": "Accept Work Errand Request", "Ar": "قبول إذن مأمورية" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "rejectworkErrandRequest", "En": "Reject Work Errand Request", "Ar": "رفض إذن مأمورية" },
+    { "moduleName": "hr", "screenName": "workErrandRequests", "name": "workErrandRequestCancel", "En": "Cancel Work Errand Request", "Ar": "إلغاء إذن مأمورية" }
+]

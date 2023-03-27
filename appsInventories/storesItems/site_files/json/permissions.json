@@ -1,0 +1,11 @@
+[
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

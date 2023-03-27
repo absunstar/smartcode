@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "accounting",
+    "name": "taxesTypesAdmin",
+    "En": "Taxes Types Admin",
+    "Ar": "إدارة أنواع الضرائب",
+    "permissions": ["taxesTypesManage"]
+  }
+]

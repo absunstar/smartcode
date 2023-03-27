@@ -1,0 +1,20 @@
+[
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "jobsShiftsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "changeDelayTime", "En": "Change Delay Time", "Ar": "تعديل مدة التأخير المسوح بها في الورديات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "addShiftWorktimes", "En": "Add Shift Worktimes", "Ar": "إضافة مواعيد عمل الودريات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "editShiftWorktimes", "En": "Edit Shift Worktimes", "Ar": "تعديل مواعيد عمل الودريات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "removeShiftWorktimes", "En": "Remove Shift Worktimes", "Ar": "حذف مواعيد عمل الودريات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "addDelayPenalty", "En": "Add Delay Penalty", "Ar": "إضافة عقوبة تأخير عن مواعيد الودريات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "editDelayPenalty", "En": "Edit Delay Penalty", "Ar": "تعديل عقوبة تأخير عن مواعيد الودريات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "removeDelayPenalty", "En": "Remove Delay Penalty", "Ar": "حذف عقوبة تأخير عن مواعيد الودريات" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "approveShiftData", "En": "Approve Shift Data", "Ar": "إعتماد بيانات الوردية" },
+    { "moduleName": "hr", "screenName": "jobsShifts", "name": "unapproveShiftData", "En": "Unapprove Shift Data", "Ar": "إلفاء إعتماد بيانات الوردية" }
+]

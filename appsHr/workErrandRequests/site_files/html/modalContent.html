@@ -1,0 +1,52 @@
+<div class="row">
+    <fieldset>
+        <legend>##word.Request Informations##</legend>
+        <div class="row">
+            <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+            <i-date class="col4" label="##word.Date##" ng-model="item.date"> </i-date>
+            <i-list v="r" ng-model="item.employee" class="col4" items="employeesList" display="fullName##session.lang##" ng-gsearchet="item.$employee" label="##word.Employee##"></i-list>
+            <i-date class="col6" label="##word.Errand Date##" ng-model="item.delayDate"> </i-date>
+            <i-control type="time" class="col3" label="##word.From Time##" ng-model="item.$fromTime"> </i-control>
+            <i-control type="time" class="col3" label="##word.To Time##" ng-model="item.$toTime"> </i-control>
+        </div>
+
+        <fieldset>
+            <legend>##word.Files##</legend>
+            <div class="row">
+                <i-file ng-model="item.file"></i-file>
+            </div>
+        </fieldset>
+
+        <i-textarea ng-model="item.reason" rows="4" label="##word.Reason##"></i-textarea>
+    </fieldset>
+
+    <fieldset ng-show="mode !='add'">
+        <legend>##word.Approve Informations##</legend>
+        <div class="row">
+            <i-textarea ng-model="item.comment" rows="4" label="##word.Comment##"></i-textarea>
+        </div>
+    </fieldset>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

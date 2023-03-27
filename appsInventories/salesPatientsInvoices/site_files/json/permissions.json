@@ -1,0 +1,11 @@
+[
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "salesPatientsInvoices", "name": "salesPatientsInvoicesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

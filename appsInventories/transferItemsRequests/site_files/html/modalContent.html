@@ -1,0 +1,144 @@
+<div class="row">
+    <fieldset>
+        <legend>##word.Basic Informations##</legend>
+        <div class="row padding">
+            <div class="row">
+                <div class="row">
+                    <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+                    <i-control class="col4" v="r" label="##word.Title##" ng-model="item.title"> </i-control>
+                    <i-date class="col4" v="r" label="##word.Request Date##" ng-model="item.requestDate"> </i-date>
+                    <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+                </div>
+                <fieldset>
+                    <legend>
+                        <i-button type="add default" ng-click="addFiles()"></i-button>
+                        ##word.Files##
+                    </legend>
+                    <div class="row" ng-repeat="doc in item.filesList">
+                        <div class="col10">
+                            <i-file ng-model="doc.file"></i-file>
+                        </div>
+                        <div class="col2">
+                            <br />
+                            <i-button type="delete" label="##word.Delete##" ng-click="item.filesList.splice($index,1)"> </i-button>
+                        </div>
+                    </div>
+                </fieldset>
+                <i-list
+                    v="r"
+                    class="col6"
+                    ng-model="item.store"
+                    ng-change="validateStores()"
+                    ng-disabled="item.itemsList.length > 0"
+                    label="##word.From Store##"
+                    display="name##session.lang##"
+                    items="storesList"
+                ></i-list>
+                <i-list v="r" class="col6" ng-model="item.toStore" ng-change="validateStores()" label="##word.To Store##" display="name##session.lang##" items="storesList"></i-list>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="item.store.id">
+        <legend>##word.Items Informations##</legend>
+
+        <div class="row" ng-show="!item.approved && !canApprove">
+            <i-list
+                class="col2"
+                label="##word.Item##"
+                ng-model="orderItem.item"
+                ng-change="getItemUnits(orderItem.item)"
+                items="storesItemsList"
+                display="name##session.lang##"
+                ng-get="getStoresItems($search)"
+            >
+            </i-list>
+
+            <i-list
+                class="col2"
+                label="##word.Unit##"
+                ng-model="orderItem.unit"
+                items="unitsList"
+                ng-change="setOrderItemData(orderItem.unit)"
+                display="name##session.lang##"
+                ng-search="item.$elemItem"
+            >
+            </i-list>
+            <i-control class="col2" disabled type="number" label="##word.Current Count##" ng-model="orderItem.currentCount"> </i-control>
+            <i-control class="col2" type="number" min="1" label="##word.Transfer Count##" ng-model="orderItem.count"> </i-control>
+            <div class="col2">
+                <br />
+                <div class="row">
+                    <i-button type="push"  ng-click="addToItemsList(orderItem)"> </i-button>
+                </div>
+            </div>
+        </div>
+        <p class="error">{{itemsError}}</p>
+        <div class="table-responsive">
+            <table class="table hover bold">
+                <tr>
+                    <th>##word.S##</th>
+                    <th>##word.Store Item##</th>
+                    <th>##word.Item Unit##</th>
+                    <th>##word.Transfer Count##</th>
+                    <th>##word.Approved##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="elem in item.itemsList">
+                    <td class="center">{{$index+1}}</td>
+                    <td class="center">{{elem.name##session.lang##}}</td>
+                    <td class="center">{{elem.unit.name##session.lang##}}</td>
+
+                    <td class="center">
+                        <i-control type="number" min="1" ng-show="!elem.approved" ng-model="elem.count"> </i-control>
+                        <span  ng-show="elem.approved">{{elem.count}}</span>
+                    </td>
+                    <td class="center">
+                        <span class="text-success" ng-show="elem.approved">##word.Yes##</span>
+                        <span class="text-danger" ng-show="!elem.approved">##word.No##</span>
+                    </td>
+                    <td class="center">
+                        <i-button
+                            type="unapprove"
+                            ng-show="elem.approved &&   mode == 'edit'"
+                            ng-click="unapproveItem(elem,$index)"
+                            x-permissions="unapproveTransferItem||transferItemsRequestsManage"
+                            label="##word.Unapprove##"
+                        ></i-button>
+                        <i-button
+                            type="approve"
+                            ng-show="!elem.approved &&  mode == 'edit'"
+                            ng-click="approveItem(elem,$index)"
+                            x-permissions="approveTransferItem||transferItemsRequestsManage"
+                            label="##word.Approve##"
+                        ></i-button>
+                        <i-button type="delete" ng-show="!elem.approved" ng-click="item.itemsList.splice($index,1)"> </i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

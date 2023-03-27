@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "chiefComplaints" , "name":"chiefComplaintsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

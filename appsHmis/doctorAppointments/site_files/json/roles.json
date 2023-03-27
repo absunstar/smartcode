@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "doctorAppointmentsAdmin",
+    "En": "Doctor Appointments Admin",
+    "Ar": "إدارة مواعيد الطبيب",
+    "permissions": ["doctorAppointmentsManage"]
+}]

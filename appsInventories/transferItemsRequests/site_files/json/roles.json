@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "transferItemsRequestsAdmin",
+        "En": "Transfer Items Requests Admin",
+        "Ar": "إدارة طلبات تحويل الأصناف",
+        "permissions": ["transferItemsRequestsManage"]
+    }
+]

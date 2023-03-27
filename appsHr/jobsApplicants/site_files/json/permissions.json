@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "jobsApplicantsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "approvejobsApplicants", "En": "Approve", "Ar": "الموافقة علي طلب تقدم لوظيفة" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "canceljobsApplicants", "En": "Cancel", "Ar": "إلغاء طلبةتقدم  لوظيفة" },
+    { "moduleName": "hr", "screenName": "jobsApplicants", "name": "unapprovejobsApplicants", "En": "Unapprove", "Ar": "رفض طلب تقدم لوظيفة" }
+]

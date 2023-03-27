@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "patientRecommendations" , "name":"patientRecommendationsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

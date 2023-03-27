@@ -1,0 +1,25 @@
+<script src="/x-js/sa.js?v=##site.options.version##"></script>
+<script>
+  site.features = '##req.features##';
+  site.feature = (f) => site.features.indexOf(f) !== -1;
+</script>
+
+<script x-import="sitebar.js"></script>
+<script x-import="sitebottom.js"></script>
+<script x-import="ui-print/index.js"></script>
+
+<div x-permission="!login" x-import="security/loginModal.html"></div>
+
+<script>
+  function toggleShow(selector) {
+    document.querySelectorAll(`.menu-bottom:not(${selector})`).forEach((m) => {
+      m.classList.remove('x-show');
+      m.classList.add('x-hide');
+    });
+
+    if ((dom = document.querySelector(selector))) {
+      dom.classList.toggle('x-show');
+      dom.classList.toggle('x-hide');
+    }
+  }
+</script>

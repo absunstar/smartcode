@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "significantSignsAdmin",
+    "En": "Significant Signs Admin",
+    "Ar": "إدارة العلامات المهمة",
+    "permissions": ["significantSignsManage"]
+}]

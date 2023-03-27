@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "insuranceClassesAdmin",
+    "En": "Insurance Classes Admin",
+    "Ar": "إدارة الفئات",
+    "permissions": ["insuranceClassesManage"]
+}]

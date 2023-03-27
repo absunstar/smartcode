@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "name": "Financial year"
+    },
+    {
+        "id": 2,
+        "name": "Accounting period"
+    },
+    {
+        "id": 3,
+        "name": "Connected"
+    },
+    {
+        "id": 4,
+        "name": "Manual"
+    }
+
+]

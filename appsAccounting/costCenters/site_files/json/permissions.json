@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "costCenters" , "name":"costCentersUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

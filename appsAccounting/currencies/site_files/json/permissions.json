@@ -1,0 +1,65 @@
+[
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesManage",
+    "En": "Manage",
+    "Ar": "إدارة"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesAdd",
+    "En": "Add",
+    "Ar": "إضافة"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesUpdate",
+    "En": "Edit",
+    "Ar": "تعديل"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesDelete",
+    "En": "Delete",
+    "Ar": "حذف"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesView",
+    "En": "View",
+    "Ar": "عرض"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesSearch",
+    "En": "Search",
+    "Ar": "بحث"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesExport",
+    "En": "Export",
+    "Ar": "تصدير"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesPrint",
+    "En": "Print",
+    "Ar": "طباعة"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "currencies",
+    "name": "currenciesUi",
+    "En": "UI",
+    "Ar": "الواجهة الرسومية"
+  }
+]

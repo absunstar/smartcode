@@ -1,0 +1,78 @@
+<div ng-controller="delayRequests" class="loaded">
+    <div class="row" x-permissions="delayRequestsUi || delayRequestsManage">
+        <div x-import="delayRequests/modal.html"></div>
+        <div x-import="delayRequests/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="delayRequestsAdd || delayRequestsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="delayRequestsSearch || delayRequestsManage" label="##word.New##" ng-click="searchAll(search={requestStatus:'new'})"></i-button>
+            <i-button type="search" x-permissions="delayRequestsSearch || delayRequestsManage" label="##word.Accepted##" ng-click="searchAll(search={requestStatus:'accepted'})"></i-button>
+            <i-button type="search" x-permissions="delayRequestsSearch || delayRequestsManage" label="##word.Rejected##" ng-click="searchAll(search={requestStatus:'rejected'})"></i-button>
+            <i-button type="search" x-permissions="delayRequestsSearch || delayRequestsManage" label="##word.Canceled##" ng-click="searchAll(search={requestStatus:'canceled'})"></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="delayRequestsSearch || delayRequestsManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="delay-requests">
+                <tr>
+                    <th>##word.S##</th>
+                    <th>##word.Employee##</th>
+                    <th>##word.Request Date##</th>
+                    <th>##word.Delay Date##</th>
+                    <th>##word.Action Date##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{$index+1}}</td>
+                    <td class="center">{{item.employee.fullName##session.lang##}}</td>
+                    <td>
+                        <p class="text-center">{{item.date | date:'dd/MM/yyyy'}}</p>
+                    </td>
+                    
+                    <td class="blue">
+                        <p class="text-center">{{item.delayDate | date:'dd/MM/yyyy'}}</p>
+                        <p class="text-center text-success">{{item.fromTime | date:'hh:mm a'}} - {{item.toTime | date:'hh:mm a'}}</p>
+                    </td>
+
+                    <td class="center">
+                        <p ng-show="item.requestStatus == 'accepted'">{{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'rejected'">{{item.rejectDate | date:'dd/MM/yyyy'}} - {{item.rejectDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
+                    </td>
+
+                    <td class="center">
+                        <span class="blue" ng-show="item.requestStatus == 'new' || item.requestStatus =='canceled'">{{item.requestStatus|uppercase}} </span>
+                        <span class="text-success" ng-show="item.requestStatus == 'accepted'">##word.Accepted##</span>
+                        <span class="text-danger" ng-show="item.requestStatus == 'rejected'">##word.Refused##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button
+                            type="cancel"
+                            ng-if="item.approved && item.requestStatus == 'accepted'"
+                            x-permissions="cancelDelayRequest || delayRequestsManage"
+                            label="##word.Cancel##"
+                            ng-click="cancel(item)"
+                        ></i-button>
+
+                        <i-button type="edit" ng-if="!item.approved" x-permissions="delayRequestsUpdate || delayRequestsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" ng-if="!item.approved" x-permissions="delayRequestsDelete || delayRequestsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="delayRequestsPrint || delayRequestsManage" type="print" label="##word.Print##" onclick="site.print('#delay-requests')"></i-button>
+        <i-button x-permissions="delayRequestsExport || delayRequestsManage" type="export" label="##word.Export to excel##" onclick="site.xport('#delay-requests')"> </i-button>
+    </div>
+</div>

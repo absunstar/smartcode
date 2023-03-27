@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "hmis",
+    "name": "laboratoryDeskTopAdmin",
+    "En": "Laboratory DeskTop Admin",
+    "Ar": "إدارة معمل التحاليل",
+    "permissions": ["laboratoryDeskTopManage"]
+  }
+]

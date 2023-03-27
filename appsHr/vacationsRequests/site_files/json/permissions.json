@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "acceptVacationRequest", "En": "Accept Vacation Request", "Ar": "قبول طلب أجازة" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "rejectVacationRequest", "En": "Reject Vacation Request", "Ar": "رفض طلب أجازة" },
+    { "moduleName": "hr", "screenName": "vacationsRequests", "name": "vacationsRequestsCancel", "En": "Cancel Vacation Request", "Ar": "ألغاء طلب أجازة" }
+]

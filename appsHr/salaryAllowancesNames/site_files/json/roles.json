@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "hr",
+    "name": "salaryAllowancesNamesAdmin",
+    "En": "Salary Allowances Names Admin",
+    "Ar": "إدارة بدلات المرتب",
+    "permissions": ["salaryAllowancesNamesManage"]
+  }
+]

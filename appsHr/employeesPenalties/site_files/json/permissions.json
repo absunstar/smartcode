@@ -1,0 +1,13 @@
+[
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "approveEmployeePenalty", "En": "Approve Employee Penalty", "Ar": "إعتماد جزاء لموظف" },
+    { "moduleName": "hr", "screenName": "employeesPenalties", "name": "employeesPenaltiesCancel", "En": "Cancel Employee Penalty", "Ar": "إلغاء جزاء لموظف" }
+]

@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "medicalOffersAdmin",
+    "En": "Medical Offers Admin",
+    "Ar": "إدارة العروض الطبية",
+    "permissions": ["medicalOffersManage"]
+}]

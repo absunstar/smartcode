@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "damageItemsAdmin",
+        "En": "Damage Items Admin",
+        "Ar": "إدارة إتلاف الأصناف",
+        "permissions": ["damageItemsManage"]
+    }
+]

@@ -1,0 +1,12 @@
+[
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "approveReturnPurchaseOrder", "En": "Approve Return Purchase Order", "Ar": "إعتماد مرتجع فاتورة شراء" }
+]

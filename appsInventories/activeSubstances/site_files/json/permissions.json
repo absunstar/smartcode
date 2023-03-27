@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "inventory" , "screenName" : "activeSubstances" , "name":"activeSubstancesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

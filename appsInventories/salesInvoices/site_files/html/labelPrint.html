@@ -1,0 +1,33 @@
+<style>
+  .logoPrint {
+    width: 130px;
+    height: 110px;
+    margin: 1px;
+    padding: 1px;
+    border-radius: 0;
+    border: 1px solid var(--background-color);
+  }
+</style>
+<div ng-repeat="sInvoice in labelList">
+  <div class="border page-a4">
+    <p class="center font-25 bold">##session.company.nameAr## - ##session.company.nameEn##  &nbsp; ##word.Tel## : ##session.company.mobile##</p>
+    <p><span class="bold font-25">##word.Patient## : </span> <span class="font-20">{{sInvoice.patient.code}}- {{sInvoice.patient.name##session.lang##}}</span></p>
+    <p><span class="bold font-25">##word.Medicine## : </span> <span class="font-20">{{sInvoice.barcode}}- {{sInvoice.name##session.lang##}}</span></p>
+    <p>
+      <span class="bold font-25">Dosage : </span>
+      <span class="font-20">{{sInvoice.medicineDuration.nameEn}} &nbsp; {{sInvoice.medicineFrequency.nameEn}} &nbsp; {{sInvoice.medicineRoute.nameEn}}</span>
+    </p>
+    <p>
+      <span class="bold font-25">الجرعة : </span>
+      <span class="font-20">{{sInvoice.medicineDuration.nameAr}} &nbsp; {{sInvoice.medicineFrequency.nameAr}} &nbsp; {{sInvoice.medicineRoute.nameAr}}</span>
+    </p>
+    <p ng-show="sInvoice.workByBatch"><span class="bold font-25">##word.EXP Date## : </span> <span class="font-20">{{sInvoice.expiryDate| date : 'dd-MM-yyyy'}} </span></p>
+    <p ng-show="sInvoice.workByQrCode"><span class="bold font-25">##word.EXP Date## : </span> <span class="font-20">{{sInvoice.expiryDate}} </span></p>
+    <p ng-show="sInvoice.workBySerial"><span class="bold font-25">##word.Production Date## : </span> <span class="font-20">{{sInvoice.productionDate| date : 'dd-MM-yyyy'}} </span></p>
+    <p>
+      <span class="bold font-25">##word.Date## : </span> <span class="font-20">{{sInvoice.date| date : 'dd-MM-yyyy'}} &nbsp; &nbsp;</span> <span class="bold font-25">##word.QTY## :</span>
+      <span class="font-20">{{sInvoice.count}}</span>
+    </p>
+    <p ng-show="item.salesType.code == 'patient'"><span class="bold font-25">##word.Doctor Name## : </span> <span class="font-20">{{sInvoice.doctor.name##session.lang##}}</span></p>
+  </div>
+</div>

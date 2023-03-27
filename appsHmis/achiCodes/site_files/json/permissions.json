@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "achiCodes" , "name":"achiCodesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

@@ -1,0 +1,33 @@
+<div ng-controller="patientsApproval" class="loaded">
+    <div class="row" x-permissions="patientsApprovalUi || patientsApprovalManage">
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th>##word.Date##</th>
+                    <th>##word.Patient##</th>
+                    <th>##word.Doctor##</th>
+                    <th>##word.Service##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{item.date |date:"dd - MM - yyyy"}}</td>
+                    <td class="center">
+                        {{item.patient.fullName##session.lang##}}
+                        <p class="center">( {{item.mainInsuranceCompany.name##session.lang##}} )</p>
+                        <p class="center">##word.Sub InSurance Com## : ( {{item.patient.insuranceCompany.name##session.lang##}} )</p>
+                        <p class="center">##word.Insurance Class## : ( {{item.patient.insuranceClass.name##session.lang##}} )</p>
+                    </td>
+                    <td class="center">{{item.doctor.name##session.lang##}}</td>
+                    <td class="center">({{item.service.code}}) {{item.service.name##session.lang##}}</td>
+
+                    <td class="center not-print">
+                        <i-button type="approve" label="##word.Approve##" ng-click="approve(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="patientsApprovalPrint || patientsApprovalManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="patientsApprovalExport || patientsApprovalManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
+        </i-button>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "discountTypes" , "name":"discountTypesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

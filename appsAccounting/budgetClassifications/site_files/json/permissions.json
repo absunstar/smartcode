@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "budgetClassifications" , "name":"budgetClassificationsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

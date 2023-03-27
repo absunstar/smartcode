@@ -1,0 +1,12 @@
+[
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "payslipsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "payslips", "name": "approvePayslip", "En": "Approve Payslip", "Ar": "إعتماد الراتب" }
+]

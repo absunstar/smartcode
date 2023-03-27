@@ -1,0 +1,44 @@
+<div id="pricesModal" class="modal">
+  <div class="col2"></div>
+  <div class="modal-content col8">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">
+        <span ng-if="unitsPrice.$showPrice == 'purchase'">##word.Purchase Prices List## </span> 
+        <span ng-if="unitsPrice.$showPrice == 'sales'">##word.Sales Prices List## </span> 
+        <i class="fa fa-file"></i></p>
+    </div>
+
+    <div class="modal-body">
+      <form class="form">
+        <fieldset>
+          <div class="row">
+            <table class="table center hover bold">
+              <tr>
+                <th>##word.S##</th>
+                <th>##word.Price##</th>
+                <th>##word.Date##</th>
+              </tr>
+              <tr ng-if="unitsPrice.$showPrice == 'purchase'" ng-repeat="str in unitsPrice.purchasePriceList">
+                <td>{{$index+1}}</td>
+                <td class="green">{{str.price}}</td>
+                <td class="brown">{{str.date | date:"dd / MM / yyyy" }}</td>
+              </tr>
+              <tr ng-if="unitsPrice.$showPrice == 'sales'" ng-repeat="str in unitsPrice.salesPriceList">
+                <td>{{$index+1}}</td>
+                <td class="green">{{str.price}}</td>
+                <td class="brown">{{str.date | date:"dd / MM / yyyy" }}</td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <p class="error">{{error}}</p>
+
+    <div class="modal-footer center">
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#pricesModal')"> </i-button>
+    </div>
+  </div>
+</div>

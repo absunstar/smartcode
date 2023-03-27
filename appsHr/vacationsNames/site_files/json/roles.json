@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "vacationsNamesAdmin",
+        "En": "Vacations Names Admin",
+        "Ar": "إدارة أسماء الاجازات",
+        "permissions": ["vacationsNamesManage"]
+    }
+]

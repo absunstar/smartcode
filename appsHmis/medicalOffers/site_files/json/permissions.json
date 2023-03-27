@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "medicalOffers" , "name":"medicalOffersUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

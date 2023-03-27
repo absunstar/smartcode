@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "patientEducationsAdmin",
+    "En": "Patient Educations Admin",
+    "Ar": "إدارة تثقيفات المريض",
+    "permissions": ["patientEducationsManage"]
+}]

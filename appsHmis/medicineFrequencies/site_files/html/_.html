@@ -1,0 +1,41 @@
+<div ng-controller="medicineFrequencies" class="loaded">
+    <div class="row" x-permissions="medicineFrequenciesUi || medicineFrequenciesManage">
+        <div x-import="medicineFrequencies/modal.html"></div>
+        <div x-import="medicineFrequencies/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="medicineFrequenciesAdd || medicineFrequenciesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/medicineFrequencies/import" label="Import"></i-upload>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="medicineFrequenciesSearch || medicineFrequenciesManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Times##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.nameEn}} / {{item.nameAr}}</td>
+                    <td class="center">{{item.perCount}} Times Every {{item.perHour}} Hours</td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="medicineFrequenciesUpdate || medicineFrequenciesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" x-permissions="medicineFrequenciesDelete || medicineFrequenciesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="medicineFrequenciesPrint || medicineFrequenciesManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="medicineFrequenciesExport || medicineFrequenciesManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
+        </i-button>
+    </div>
+</div>

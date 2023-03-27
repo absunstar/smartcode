@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "servicesCategories" , "name":"servicesCategoriesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

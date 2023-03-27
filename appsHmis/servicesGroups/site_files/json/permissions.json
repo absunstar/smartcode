@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "servicesGroups" , "name":"servicesGroupsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

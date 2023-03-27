@@ -1,0 +1,182 @@
+<div id="printPayslipModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Payslip Item Details## <i class="fa fa-details"></i></p>
+        </div>
+
+        <div class="modal-body">
+            <fieldset>
+                <div class="row">
+                    <div class="center col2">
+                        <p class="bold blue">##word.Pay Slip For Month##</p>
+                    </div>
+
+                    <div class="center col8">
+                        <p class="bold blue">{{item.fromDate |date :'MM'}} / {{item.fromDate |date :'yyyy'}}</p>
+                    </div>
+                    <div class="center col2">
+                        <p class="bold blue">إشعار صرف عن شهر</p>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>##word.Allowances## - الإستحقاقات</legend>
+                <fieldset>
+                    <div class="row">
+                        <div class="center col2">
+                            <p class="bold">##word.Employee Name##</p>
+                        </div>
+
+                        <div class="center col8">
+                            <p class="bold">{{item.employee.fullNameEn}} - {{item.employee.fullNameAr}}</p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold">إسم الموظف</p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="row">
+                        <div class="center col2">
+                            <p class="bold">##word.Department##</p>
+                        </div>
+
+                        <div class="center col8">
+                            <p>{{item.employee.department.nameEn}} - {{item.employee.department.nameAr}}</p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold">الإدارة</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="center col2">
+                            <p class="bold">##word.Section##</p>
+                        </div>
+
+                        <div class="center col8">
+                            <p>{{item.employee.section.nameEn}} - {{item.employee.section.nameAr}}</p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold">##word.القسم##</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="center col2">
+                            <p class="bold">##word.Basic Salary##</p>
+                        </div>
+                        <div class="center col8">
+                            <p class="text-success bold">{{item.paySlip.originalSalary}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold">الراتب الأساسي</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row" ng-repeat="allow in item.paySlip.allowancesList">
+                    <fieldset>
+                        <div class="center col2">
+                            <p class="bold">{{allow.nameEn}}</p>
+                        </div>
+                        <div class="center col8">
+                            <p class="text-success bold">{{allow.value}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold">{{allow.nameAr}}</p>
+                        </div>
+                    </fieldset>
+                </div>
+                <fieldset>
+                    <div class="row">
+                        <div class="center col2">
+                            <p class="bold blue">##word.Gross Salary##</p>
+                        </div>
+                        <div class="center col8">
+                            <p class="text-success bold">{{item.paySlip.totalAllowance}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold blue">إجمالي المستحق</p>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+
+            <fieldset>
+                <legend>##word.Deductions## - الإستقطاعات</legend>
+                <div class="row" ng-repeat="allow in item.paySlip.deductionsList">
+                    <fieldset>
+                        <div class="center col2">
+                            <p class="bold">{{allow.nameEn}}</p>
+                        </div>
+                        <div class="center col8">
+                            <p class="text-danger bold">{{allow.value}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold">{{allow.nameAr}}</p>
+                        </div>
+                    </fieldset>
+                </div>
+                <fieldset>
+                    <div class="row">
+                        <div class="center col2">
+                            <p class="bold blue">##word.Total Deduction##</p>
+                        </div>
+                        <div class="center col8">
+                            <p class="text-danger bold">{{item.paySlip.totalDeductions}} <span class="currency">##word.$##</span></p>
+                        </div>
+                        <div class="center col2">
+                            <p class="bold blue">إجمالي الإستقطاعات</p>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <fieldset>
+                <div class="row">
+                    <div class="center col3">
+                        <h3 class="bold blue">##word.Net Amount Due##</h3>
+                    </div>
+                    <div class="center col6">
+                        <h4>
+                            <span>{{item.paySlip.totalAllowance}}</span>
+                            -
+                            <span class="text-danger">{{item.paySlip.totalDeductions}}</span>
+                            =
+                            <span class="text-success"> {{(item.paySlip.totalAllowance - item.paySlip.totalDeductions).toFixed(3) }}</span>
+                            <span class="currency">##word.$##</span>
+                        </h4>
+                    </div>
+                    <div class="center col3">
+                        <h3 class="bold blue">صافي المستحق</h3>
+                    </div>
+                </div>
+            </fieldset>
+            <br />
+
+            <fieldset>
+                <br />
+                <div class="row">
+                    <div class="center col3">
+                        <h5 class="bold blue">##word.SIGNATURE##</h5>
+                    </div>
+                    <div class="center col6"></div>
+                    <div class="center col3">
+                        <h5 class="bold blue">التوقيع بالإستلام</h5>
+                    </div>
+                </div>
+                <br />
+            </fieldset>
+            <br />
+        </div>
+
+        <div class="modal-footer center">
+            <i-button type="print" label="##word.Print##" ng-click="paySlipPrint(item)"> </i-button>
+            <!-- <i-button type="print" label="##word.Print##" onclick="site.print('#printPayslipModal')"> </i-button> -->
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal('#printPayslipModal')"> </i-button>
+        </div>
+    </div>
+</div>

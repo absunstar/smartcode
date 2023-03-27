@@ -1,0 +1,130 @@
+<div id="yearMonthModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2 ng-show="currentScreen.typeNumbering.id == 1">##word.Financial Year## <i class="fa fa-file"></i></h2>
+      <h2 ng-show="currentScreen.typeNumbering.id == 2">##word.Accounting Period## <i class="fa fa-file"></i></h2>
+    </div>
+
+    <div class="modal-body">
+      <form class="form">
+        <div class="row" ng-show="currentScreen.typeNumbering.id == 1">
+          <div class="row">
+            <i-button type="add" label="##word.Add##" ng-click="addYearMonth(currentScreen)"></i-button>
+          </div>
+          <div class="row">
+            <table x-permissions="login" class="table hover bold">
+              <tr>
+                <th>##word.Year Name##</th>
+                <th>##word.Start Numbering##</th>
+                <th>##word.Last Transaction Number##</th>
+                <th>##word.Length Level##</th>
+                <th>##word.Separator Symbol##</th>
+                <th>##word.Actions##</th>
+              </tr>
+
+              <tr ng-repeat="c in currentScreen.yearsList">
+
+                <td>
+                  <p class="text-center blue">
+                    <br />
+                    {{c.year}}
+                  </p>
+                </td>
+
+                <td>
+                  <i-control ng-model="c.firstValue" type="number"> </i-control>
+                </td>
+
+                <td>
+                  <p class="text-center red">
+                    <br />
+                    {{c.lastValue}}
+                  </p>
+                </td>
+
+                <td>
+                  <i-control ng-model="c.lengthLevel" type="number"> </i-control>
+                </td>
+
+                <td>
+                  <i-control ng-model="c.separatorSymbol"> </i-control>
+                </td>
+
+                <td class="center">
+                  <i-button type="reset" ng-click="c.lastValue = 0"></i-button>
+                </td>
+
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row" ng-show="currentScreen.typeNumbering.id == 2">
+          <div class="row">
+            <i-button type="add" label="##word.Add##" ng-click="addYearMonth(currentScreen)"></i-button>
+          </div>
+          <div class="row">
+            <table x-permissions="login" class="table hover bold">
+              <tr>
+                <th>##word.Year Name##</th>
+                <th>##word.The Month##</th>
+                <th>##word.Start Numbering##</th>
+                <th>##word.Last Transaction Number##</th>
+                <th>##word.Length Level##</th>
+                <th>##word.Separator Symbol##</th>
+                <th>##word.Actions##</th>
+              </tr>
+
+              <tr ng-repeat="c in currentScreen.monthsList">
+
+                <td>
+                  <p class="text-center blue">
+                    <br />
+                    {{c.year}}
+                  </p>
+                </td>
+
+                <td>
+                  <p class="text-center blue">
+                    <br />
+                    {{c.month}}
+                  </p>
+                </td>
+
+                <td>
+                  <i-control ng-model="c.firstValue" type="number"> </i-control>
+                </td>
+
+                <td>
+                  <p class="text-center red">
+                    <br />
+                    {{c.lastValue}}
+                  </p>
+                </td>
+
+                <td>
+                  <i-control ng-model="c.lengthVevel" type="number"> </i-control>
+                </td>
+
+                <td>
+                  <i-control ng-model="c.separatorSymbol"> </i-control>
+                </td>
+
+                <td class="center">
+                  <i-button type="reset" ng-click="c.lastValue = 0"></i-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="error">{{error}}</h2>
+
+    <div class="modal-footer center">
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#yearMonthModal')"> </i-button>
+    </div>
+  </div>
+</div>

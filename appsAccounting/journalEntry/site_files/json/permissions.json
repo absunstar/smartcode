@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntrySearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "journalEntry" , "name":"journalEntryUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

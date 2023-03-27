@@ -1,0 +1,503 @@
+[
+    {
+        "name": "Print",
+        "En": "Print",
+        "Ar": "طباعة"
+    },
+    {
+        "name": "Export to excel",
+        "En": "Export to excel",
+        "Ar": "تصدير إلى إكسل"
+    },
+    {
+        "name": "New",
+        "En": "New",
+        "Ar": "جديد"
+    },
+    { "name": "Accounting", "En": "Accounting", "Ar": "الحسابات" },
+    {
+        "name": "Must Enter Code",
+        "En": "Must Enter Code",
+        "Ar": "يجب إدخال الكود"
+    },
+    {
+        "name": "Inventory",
+        "En": "Inventory",
+        "Ar": "المخازن"
+    },
+    {
+        "name": "Actions",
+        "En": "Actions",
+        "Ar": "الإجراءات"
+    },
+    {
+        "name": "Close",
+        "En": "Close",
+        "Ar": "إغلاق"
+    },
+    {
+        "name": "Name",
+        "En": "Name",
+        "Ar": "الإسم"
+    },
+    {
+        "name": "Add",
+        "En": "Add",
+        "Ar": "إضافة"
+    },
+    {
+        "name": "Edit",
+        "En": "Edit",
+        "Ar": "تعديل"
+    },
+    {
+        "name": "Delete",
+        "En": "Delete",
+        "Ar": "حذف"
+    },
+    {
+        "name": "Details",
+        "En": "Details",
+        "Ar": "تفاصيل"
+    },
+    {
+        "name": "Search All",
+        "En": "Search All",
+        "Ar": "البحث الشامل"
+    },
+    {
+        "name": "Active",
+        "En": "Active",
+        "Ar": "نشط"
+    },
+    {
+        "name": "Not Active",
+        "En": "Not Active",
+        "Ar": "غير نشط"
+    },
+    {
+        "name": "Must Enter One Item At Least",
+        "En": "Must Enter One Item At Least",
+        "Ar": "يجب إدخال صنف واحد علي الأقل"
+    },
+    {
+        "name": "Please Enter Item",
+        "En": "Please Enter Item",
+        "Ar": "رجاء إختيار الصنف"
+    },
+    {
+        "name": "Item Exisit",
+        "En": "Item Exisit",
+        "Ar": "الصنف موجود"
+    },
+    {
+        "name": "Please Enter Count",
+        "En": "Please Enter Count",
+        "Ar": "يرجي إدخال الكمية"
+    },
+    {
+        "name": "Active Substance Exisit",
+        "En": "Active Substance Exisit",
+        "Ar": "المادة الفعالة موجودة"
+    },
+    {
+        "name": "Concentration Required",
+        "En": "Concentration Required",
+        "Ar": "نسبة التركيز مطلوبة"
+    },
+    {
+        "name": "Unit Exisit",
+        "En": "Unit Exisit",
+        "Ar": "الوحدة مسجلة"
+    },
+    {
+        "name": "Please Enter Item Unit",
+        "En": "Must Enter Item Unit",
+        "Ar": "يجب ادخال وحدة الصنف"
+    },
+    {
+        "name": "Please Enter Item To Unit",
+        "En": "Must Enter Item To Unit",
+        "Ar": "يجب إدخال إلي وحدة صنف"
+    },
+    {
+        "name": "Conversion Required",
+        "En": "Conversion Must Be Greater Than Zero",
+        "Ar": "نسبة التحويل يجب ان تكون أكبر من صفر"
+    },
+    {
+        "name": "Unit Information Required",
+        "En": "Must Enter Item Units",
+        "Ar": "يجب إدخال وحدات الصنف"
+    },
+    {
+        "name": "Collected Items Must Be Greater Than Two Items",
+        "En": "Collected Items Must Be Greater Than Two Items",
+        "Ar": "يجب ان يحتوي الصنف المجمع علي صنفين علي الأقل"
+    },
+    {
+        "name": "Must Enter Activesubstance",
+        "En": "Must Enter Activesubstance",
+        "Ar": "يجب إدخال المواد الفعالة"
+    },
+    {
+        "name": "Please Enter Price",
+        "En": "Please Enter Price",
+        "Ar": "يجب إدخال سعر الشراء"
+    },
+    {
+        "name": "Please Enter Validity Days",
+        "En": "Please Enter Validity Days",
+        "Ar": "يجب إدخال فترة الصلاحية"
+    },
+    {
+        "name": "Must Enter Items Data",
+        "En": "Must Enter Items Data",
+        "Ar": "يجب إدخال بيانات الأصناف"
+    },
+    {
+        "name": "Same Store",
+        "En": "Canot Transfer To Same Store",
+        "Ar": "لايمكن التحويل لنفس المخزن"
+    },
+    {
+        "name": "Please Select Calculate Purchase Cost Type",
+        "En": "Please Select Calculate Purchase Cost Type",
+        "Ar": "يرجي إختيار نوع حساب تكلفة الشراء"
+    },
+    {
+        "name": "Please Enter Calculate Purchase Cost",
+        "En": "Please Enter Calculate Purchase Cost",
+        "Ar": "يرجي إدخال قيمة تكلفة الشراء"
+    },
+    {
+        "name": "Transfer Count Bigger Than Current Balance",
+        "En": "Transfer Count Bigger Than Current Balance",
+        "Ar": "لايمكن تحويل قيمة اكبر من رصيد الصنف"
+    },
+    {
+        "name": "Item balance Is Zero",
+        "En": "Item balance Is Zero",
+        "Ar": "لايوجد رصيد للصنف في المخزن"
+    },
+    {
+        "name": "Please Enter Valid Numbers",
+        "En": "Please Enter Valid Numbers",
+        "Ar": "رجاء إدخال قيم صحيحة"
+    },
+    {
+        "name": "Conversion Value Must Be Integer",
+        "En": "Conversion Value Must Be Integer",
+        "Ar": "يجب ان تكون قيم التحويل صحيحة"
+    },
+    {
+        "name": "Please Select File Type",
+        "En": "Please Select File Type",
+        "Ar": "يجب إختيار نوع الملف"
+    },
+    {
+        "name": "Please Enter Renewal Date",
+        "En": "Please Enter Renewal Date",
+        "Ar": "يجب إدخال تاريخ التجديد"
+    },
+    {
+        "name": "File Type Already Exisit",
+        "En": "File Type Already Exisit",
+        "Ar": "نوع الملف موجود بالفعل"
+    },
+    {
+        "name": "Please Upload File",
+        "En": "Please Upload File",
+        "Ar": "يرجي تحميل الملف"
+    },
+    {
+        "name": "Invalid Value",
+        "En": "Invalid Value",
+        "Ar": "قيمة غير صحيحة"
+    },
+    {
+        "name": "Please Enter Skill Name",
+        "En": "Please Enter Skill Name",
+        "Ar": "يرجي إدخال المهارة "
+    },
+    {
+        "name": "Please Enter Skill Description",
+        "En": "Please Enter Skill Description",
+        "Ar": "يرجي إدخال وصف المهارة "
+    },
+    {
+        "name": "Please Enter Bank Name",
+        "En": "Please Enter Bank Name",
+        "Ar": "يرجي إدخال إسم البنك  "
+    },
+    {
+        "name": "Please Enter Account Number",
+        "En": "Please Enter Account Number",
+        "Ar": "يرجي إدخال رقم الحساب  "
+    },
+    {
+        "name": "Please Enter Account Name",
+        "En": "Please Enter Account Name",
+        "Ar": "يرجي إدخال إسم صاحب الحساب  "
+    },
+    {
+        "name": "Default Salary Bank Exisit",
+        "En": "Default Salary Bank Exisit",
+        "Ar": "يوجد بنك إفتراضي للمرتب  "
+    },
+    {
+        "name": "Please Enter Experience Company",
+        "En": "Please Enter Experience Company",
+        "Ar": "يرجي إدخال اسم الشركة  "
+    },
+    {
+        "name": "Please Enter Job Title",
+        "En": "Please Enter Job Title",
+        "Ar": "يرجي إدخال المسمي الوظيفي  "
+    },
+    {
+        "name": "Please Select Allowance",
+        "En": "Please Select Allowance",
+        "Ar": "يرجي إختيار البند   "
+    },
+    {
+        "name": "Allowance Exisit",
+        "En": "Allowance Exisit",
+        "Ar": "البند مسجل"
+    },
+    {
+        "name": "Please Select Deduction",
+        "En": "Please Select Deduction",
+        "Ar": "يرجي إختيار بند الخصم   "
+    },
+    {
+        "name": "Deduction Exisit",
+        "En": "Deduction Exisit",
+        "Ar": "بند الخصم مسجل"
+    },
+    {
+        "name": "Are You Sure To Approve Employee Bounus",
+        "En": "Are You Sure To Approve Employee Bounus",
+        "Ar": "هل أنت متأكد من الموافقة على مكافأة الموظف"
+    },
+    {
+        "name": "Are You Sure To Approve Employee Penalty",
+        "En": "Are You Sure To Approve Employee Penalty",
+        "Ar": "هل أنت متأكد من الموافقة على عقوبة الموظف"
+    },
+    {
+        "name": "Please Select Day",
+        "En": "Please Select Day",
+        "Ar": "يرجي إختيار اليوم"
+    },
+    {
+        "name": "Please Select Start Time",
+        "En": "Please Select Start Time",
+        "Ar": "يرجي تحديد بداية الوقت"
+    },
+    {
+        "name": "Please Select End Time",
+        "En": "Please Select End Time",
+        "Ar": "يرجي تحديد نهاية الوقت"
+    },
+    {
+        "name": "Delay From Minute Penalty",
+        "En": "Delay From Minute Penalty",
+        "Ar": " يرجي تحديد بداية مدة التأخير"
+    },
+    {
+        "name": "Delay To Minute Penalty",
+        "En": "Delay To Minute Penalty",
+        "Ar": " يرجي تحديد نهاية مدة التأخير"
+    },
+    {
+        "name": "Please Select Penalty Value",
+        "En": "Please Select Penalty Value",
+        "Ar": " يرجي تحديد قيمة العقوبة"
+    },
+    {
+        "name": "Please Select Delay Discount Type",
+        "En": "Please Select Delay Discount Type",
+        "Ar": "يرجي تحديد نوع خصم عقوبة التأخير"
+    },
+    {
+        "name": "Must Enter At least One Work Time",
+        "En": "Must Enter At least One Work Time",
+        "Ar": "يجب إدخال وقت عمل واحد علي الأقل"
+    },
+    {
+        "name": "Please Enter Task Name",
+        "En": "Please Enter Task Name",
+        "Ar": "يرجي إدخال إسم المهمة"
+    },
+    {
+        "name": "Please Select Tool Name",
+        "En": "Please Select Tool Name",
+        "Ar": "يرجي إختيار الاداة"
+    },
+    {
+        "name": "Are You Sure To Aapprove Group Vacation",
+        "En": "Are You Sure To Aapprove Group Vacation",
+        "Ar": "هل تريد إعتماد الأجازة المجمعة"
+    },
+    {
+        "name": "Are You Sure To Unapprove Group Vacation",
+        "En": "Are You Sure To Unapprove Group Vacation",
+        "Ar": "هل تريد إلغاء إعتماد الأجازة المجمعة"
+    },
+    {
+        "name": "Allowed Employees For  Vacation",
+        "En": "Allowed Employees For  Vacation",
+        "Ar": "الموظفين المسموح لهم بالأجازة"
+    },
+    {
+        "name": "Please Select Employee",
+        "En": "Please Select Employee",
+        "Ar": "يرجي إختيار موظف"
+    },
+    {
+        "name": "Can't Select Employee If Vacation For All Employees",
+        "En": "Can't Select Employee If Vacation For All Employees",
+        "Ar": "لايمكن تحديد موظف أثناء تحديد الأجازة لجميع الموظفين"
+    },
+    {
+        "name": "Employee Exisit",
+        "En": "Employee Exisit",
+        "Ar": "الموظف موجود"
+    },
+    {
+        "name": "Please Check Date",
+        "En": "Please Check Date",
+        "Ar": "يرجي التأكد من التاريخ"
+    },
+    {
+        "name": "Must Select One Employee Al Least",
+        "En": "Must Select One Employee Al Least",
+        "Ar": "يجب إختيار موظف واحد علي الأقل"
+    },
+    {
+        "name": "All Employees",
+        "En": "All Employees",
+        "Ar": "جميع الموظفين"
+    },
+    {
+        "name": "Some Employees",
+        "En": "Some Employees",
+        "Ar": "بعض الموظفين"
+    },
+    {
+        "name": "Please Select Approved Vacation Type",
+        "En": "Please Select Approved Vacation Type",
+        "Ar": "يرجي تحديد نوع الأجازة في الموافقة"
+    },
+    {
+        "name": "Please Set Approved Days",
+        "En": "Please Set Approved Days",
+        "Ar": "يرجي تحديد عدد الأيام الموافق عليها"
+    },
+    {
+        "name": "Please Set Vacation For Value",
+        "En": "Please Set Vacation For Value",
+        "Ar": "يرجي تحديد نوع الأجازة بالنسبة للموظفين"
+    },
+    {
+        "name": "Please Contact System Administrator to Set System Setting",
+        "En": "Please Contact System Administrator to Set System Setting",
+        "Ar": "يرجي التواصل مع مدير النظام لعمل إعدادات النظام"
+    },
+    {
+        "name": "Please select Position",
+        "En": "Please select Position",
+        "Ar": "يرجي إختيار المنصب"
+    },
+    {
+        "name": "Position Exisit",
+        "En": "Position Exisit",
+        "Ar": "المنصب موجود في قائمة الإعتماد"
+    },
+    {
+        "name": "Please Enter Amount",
+        "En": "Please Enter Amount",
+        "Ar": "يرجي إدخال المبلغ"
+    },
+    {
+        "name": "Please Enter Number Of Payment Months",
+        "En": "Please Enter Number Of Payment Months",
+        "Ar": "يرجي إدخال عدد شهور السداد"
+    },
+    {
+        "name": "Please Enter Approved Amount",
+        "En": "Please Enter Approved Amount",
+        "Ar": "يرجي إدخال المبلغ الموافق عليه"
+    },
+    {
+        "name": "Please Enter Approved Number Of Payment Months",
+        "En": "Please Enter Approved Number Of Payment Months",
+        "Ar": "يرجي إدخال عدد الشهور الموافق عليها"
+    },
+    {
+        "name": "Installment Amounts Not Equal Approved Amount",
+        "En": "Installment Amounts Not Equal Approved Amount",
+        "Ar": "قيمة الأقساط لاتساوي مبلغ السلفة"
+    },
+    {
+        "name": "Please Enter Installment Date",
+        "En": "Please Enter Installment Date",
+        "Ar": "يجب إدخال تاريخ سداد السلفة"
+    },
+    {
+        "name": "Installment",
+        "En": "Installment ",
+        "Ar": "القسط "
+    },
+    {
+        "name": "Please Check Installments Data",
+        "En": "Please Check Installments Data ",
+        "Ar": "يرجي التأكد من بيانات الأقساط "
+    },
+    {
+        "name": "No Installment Available For This Employee",
+        "En": "No Installment Available For This Employee ",
+        "Ar": "لاتوجد اقساط متاحه لهذا الموظف "
+    },
+    {
+        "name": "Please Select Date",
+        "En": "Please Select Date",
+        "Ar": "يرجي إختيار التاريخ"
+    },
+    {
+        "name": "Please Enter Certificate Name",
+        "En": "Please Enter Certificate Name",
+        "Ar": "يرجي إدخال إسم الشهادة"
+    },
+    {
+        "name": "Please Enter Certificate Source",
+        "En": "Please Enter Certificate Source",
+        "Ar": "يرجي إدخال مصدر الشهادة"
+    },
+    {
+        "name": "Please Enter Delay Date",
+        "En": "Please Enter Delay Date",
+        "Ar": "يرجي إدخال تاريخ التأخير"
+    },
+    {
+        "name": "Please Set Applicant Status",
+        "En": "Please Set Applicant Status",
+        "Ar": "يرجي نحديد حالة مقدم الطلب"
+    },
+    {
+        "name": "Please Set Interview Status",
+        "En": "Please Set Interview Status",
+        "Ar": "يرجي نحديد حالة المقابلة"
+    },
+    {
+        "name": "Please Select Applicant Status After Contract",
+        "En": "Please Select Applicant Status After Contract",
+        "Ar": "يرجي نحديد حالة الموظف بعد التعاقد"
+    },
+    {
+        "name": "Please Set Receive Work Date",
+        "En": "Please Set Receive Work Date",
+        "Ar": "يرجي نحديد تاريخ إستلام العمل"
+    }
+]

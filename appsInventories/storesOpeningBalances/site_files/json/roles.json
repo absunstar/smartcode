@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "approveStoresOpeningBalancesAdmin",
+        "En": "Approve Purchase Order Admin",
+        "Ar": "إدارة الأرصدة الإفتتاحية للأصناف",
+        "permissions": ["storesOpeningBalancesManage"]
+    }
+]

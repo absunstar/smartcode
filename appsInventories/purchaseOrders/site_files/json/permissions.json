@@ -1,0 +1,14 @@
+[
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersItem", "En": "Approve Item", "Ar": "إعتماد أصناف فاتورة مشتريات" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "unapprovePurchaseOrdersItem", "En": "Unapprove Item", "Ar": "إلغاء إعتماد أصناف فاتورة شراء" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "approvePurchaseOrders", "En": "Approve Order", "Ar": "إعتماد فاتورة مشتريات" }
+]

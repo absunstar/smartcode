@@ -1,0 +1,14 @@
+[
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "convertUnitsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "approveConvertUnitsItem", "En": "Approve Item", "Ar": "إعتماد تحويل صنف" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "unapproveConvertUnitsItem", "En": "Unapprove Item", "Ar": "إلغاء إعتماد تحويل صنف" },
+    { "moduleName": "inventory", "screenName": "convertUnits", "name": "approveConvertUnits", "En": "Approve Order", "Ar": "إعتماد أمر تحويل وحدات" }
+]

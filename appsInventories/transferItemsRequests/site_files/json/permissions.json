@@ -1,0 +1,15 @@
+[
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "transferItemsRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "approveTransferItem", "En": "Approve Item", "Ar": "إعتماد صنف في طلب تحويل الأصناف" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "unapproveTransferItem", "En": "Unapprove Item", "Ar": "إلغاء إعتماد صنف في طلب تحويل الأصناف" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "approveTransferItemsRequest", "En": "Approve Transfer Items Request", "Ar": "إعتماد طلب تحويل أصناف" },
+    { "moduleName": "inventory", "screenName": "transferItemsRequests", "name": "ubapproveTransferItemsRequest", "En": "Unapprove Transfer Items Request", "Ar": "إلغاء إعتماد طلب تحويل أصناف" }
+]

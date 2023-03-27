@@ -1,0 +1,68 @@
+<div id="unitConversionModal" class="modal full">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Unit Conversion##</p>
+        </div>
+
+        <div class="modal-body">
+            <fieldset>
+                <div class="row">
+                    <i-control class="col3" ng-model="unitConversion.code" label="##word.Code##"> </i-control>
+                    <i-list class="col3" ng-model="unitConversion.store"  items="storesList" display="name##session.lang##" label="##word.Store##"> </i-list>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>##word.From Data##</legend>
+
+                <div class="row text-center">
+                    <i-list
+                        class="col3"
+                        ng-change="validateUnitConversionData(unitConversion)"
+                        ng-model="unitConversion.unit"
+                        items="unitConversionList"
+                        display="name##session.lang##"
+                        label="##word.From Unit##"
+                    >
+                    </i-list>
+
+                    <i-control class="col3" disabled ng-model="unitConversion.unit.currentCount" type="number" label="##word.Current Count##"> </i-control>
+
+                    <i-control
+                        class="col3"
+                        ng-change="validateUnitConversionData(unitConversion)"
+                        ng-model="unitConversion.count"
+                        type="number"
+                        label="##word.Conversion Count##"
+                        step="unitConversion.toUnit.conversion"
+                    >
+                    </i-control>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>##word.To Data##</legend>
+                <div class="row">
+                    <i-list
+                        class="col3"
+                        ng-change="validateUnitConversionData(unitConversion)"
+                        ng-model="unitConversion.toUnit"
+                        items="unitConversionList"
+                        display="name##session.lang##"
+                        label="##word.To Unit##"
+                    >
+                    </i-list>
+                    <i-control class="col3" disabled ng-model="unitConversion.toUnit.conversion" type="number" label="##word.Conversion##"> </i-control>
+
+                    <i-control class="col3" disabled ng-model="unitConversion.newCount" type="number" label="##word.New Count##"> </i-control>
+                </div>
+            </fieldset>
+        </div>
+        <p class="error">{{error}}</p>
+        <div class="modal-footer center">
+            <i-button type="add" label="##word.Confirm##" ng-click="addConvertUnits(unitConversion)"> </i-button>
+
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal('#unitConversionModal')"> </i-button>
+        </div>
+    </div>
+</div>

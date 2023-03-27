@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "public" , "screenName" : "namesConversions" , "name":"namesConversionsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

@@ -1,0 +1,91 @@
+<div ng-controller="jobsApplicants" class="loaded">
+    <div class="row" x-permissions="jobsApplicantsUi || jobsApplicantsManage">
+        <div x-import="jobsApplicants/modal.html"></div>
+        <div x-import="jobsApplicants/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="jobsApplicantsAdd || jobsApplicantsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="jobsApplicantsSearch || jobsApplicantsManage" label="##word.New##" ng-click="searchAll(search={status:'new'})"></i-button>
+            <i-button type="search" x-permissions="jobsApplicantsSearch || jobsApplicantsManage" label="##word.Accepted##" ng-click="searchAll(search={status:'accepted'})"></i-button>
+            <i-button type="search" x-permissions="jobsApplicantsSearch || jobsApplicantsManage" label="##word.Rejected##" ng-click="searchAll(search={status:'rejected'})"></i-button>
+            <i-button type="search" x-permissions="jobsApplicantsSearch || jobsApplicantsManage" label="##word.Canceled##" ng-click="searchAll(search={'interviewStatus.id':1})"></i-button>
+            <i-button type="search" x-permissions="jobsApplicantsSearch || jobsApplicantsManage" label="##word.Waiting##" ng-click="searchAll(search={'interviewStatus.id':3})"></i-button>
+            <i-button
+                type="search"
+                x-permissions="jobsApplicantsSearch || jobsApplicantsManage"
+                label="##word.Received Work##"
+                ng-click="searchAll(search={'applicantStatusAfterContract.id':1})"
+            ></i-button>
+            <i-button
+                type="search"
+                x-permissions="jobsApplicantsSearch || jobsApplicantsManage"
+                label="##word.Accepted And Complete Papers##"
+                ng-click="searchAll(search={'interviewStatus.id':4})"
+            ></i-button>
+            <i-button
+                type="search"
+                x-permissions="jobsApplicantsSearch || jobsApplicantsManage"
+                label="##word.Accepted And Signed Contract##"
+                ng-click="searchAll(search={status:'canceled'})"
+            ></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="jobsApplicantsSearch || jobsApplicantsManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="jobs-applicants">
+                <tr>
+                    <th class="w150">##word.Logo##</th>
+                    <th>##word.Code##</th>
+                    <th>##word.Job##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Date##</th>
+                    <th>##word.Mobile##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td>
+                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                    </td>
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.jobName##session.lang##}}</td>
+                    <td class="center">{{item.name##session.lang##}}</td>
+                    <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+                    <td class="center">{{item.mobile}}</td>
+
+                    <td class="center">
+                        <span class="blue" ng-show="item.status == 'new' || item.status =='canceled'">{{item.status|uppercase}}</span>
+                        <span class="text-success" ng-show="item.status == 'accepted'">##word.Accepted##</span>
+                        <span class="text-danger" ng-show="item.status == 'rejected'">##word.Refused##</span>
+                        <p ng-show="item.status == 'accepted'">{{item.acceptDate | date:'dd/MM/yyyy'}} - {{item.acceptDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.status == 'rejected'">{{item.rejectDate | date:'dd/MM/yyyy'}} - {{item.rejectDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.status == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
+                    </td>
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="jobsApplicantsUpdate || jobsApplicantsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button
+                            type="cancel"
+                            ng-if="item.approved && item.status == 'accepted'"
+                            x-permissions="cancelJobsAdvertisement || jobsApplicantsManage"
+                            label="##word.Cancel##"
+                            ng-click="cancel(item)"
+                        ></i-button>
+
+                        <i-button type="delete" ng-show="!item.approved" x-permissions="jobsApplicantsDelete || jobsApplicantsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="jobsApplicantsPrint || jobsApplicantsManage" type="print" label="##word.Print##" onclick="site.print('#jobs-applicants')"></i-button>
+        <i-button x-permissions="jobsApplicantsExport || jobsApplicantsManage" type="export" label="##word.Export to excel##" onclick="site.export('#jobs-applicants')"> </i-button>
+    </div>
+</div>

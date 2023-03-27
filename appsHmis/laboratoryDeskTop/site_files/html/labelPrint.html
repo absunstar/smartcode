@@ -1,0 +1,26 @@
+<style>
+  .logoPrint {
+    width: 130px;
+    height: 110px;
+    margin: 1px;
+    padding: 1px;
+    border-radius: 0;
+    border: 1px solid var(--background-color);
+  }
+</style>
+<div>
+  <div class="border page-a4">
+    <p><span class="font-25 bold"> {{item.service.name##session.lang##}}</span></p>
+    <p><span class="font-25 bold"> {{item.date| date : 'dd/MM/yyyy'}}</span></p>
+    <p><span class="font-25 bold"> {{item.code}}</span></p>
+    <p>
+      <span class="font-25 bold"> ##word.DOB## : </span> 
+      <span class="font-22 bold"> {{item.patient.dateOfBirth| date : 'dd/MM/yyyy'}} &nbsp; &nbsp;</span>
+      <span class="font-25 bold"> ##word.Gender## : </span> 
+      <span class="font-22 bold"> {{item.patient.gender.name##session.lang##}}</span>
+    </p>
+    <div class="invoice-barcode center">
+      <svg style="max-height: 25mm" class="barcode" jsbarcode-format="auto" jsbarcode-value="{{item.code}}" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>
+    </div>
+  </div>
+</div>

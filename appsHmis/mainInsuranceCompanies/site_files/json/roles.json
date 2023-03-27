@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "mainInsuranceCompaniesAdmin",
+    "En": "Main Insurance Companies Admin",
+    "Ar": "إدارة شركات التأمين",
+    "permissions": ["mainInsuranceCompaniesManage"]
+}]

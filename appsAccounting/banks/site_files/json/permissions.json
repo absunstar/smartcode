@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "banks" , "name":"banksUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

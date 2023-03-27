@@ -1,0 +1,27 @@
+<div ng-controller="costCenters" class="loaded">
+  <div class="row" x-permissions="costCentersUi || costCentersManage">
+    <div x-import="costCenters/modal.html"></div>
+    <div x-import="costCenters/modalSearch.html"></div>
+
+    <p class="error">{{error}}</p>
+    <div x-permissions="login" class="row">
+      <i-treeview
+        display="name##session.lang##"
+        class="col5"
+        label="##word.Cost Centers##"
+        ng-model="parentCostCenter"
+        ng-click="accountingCostCentersView = parentCostCenter"
+        ng-node="showAdd(null)"
+        ng-add="showAdd(parentCostCenter)"
+        ng-edit="showUpdate(parentCostCenter)"
+        ng-delete="showDelete(parentCostCenter)"
+        nodes="list"
+      >
+      </i-treeview>
+      <div class="col1"></div>
+      <div ng-show="parentCostCenter" class="col6" x-import="costCenters/view.html"></div>
+    </div>
+    <i-button x-permissions="costCentersPrint || costCentersManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="costCentersExport || costCentersManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+  </div>
+</div>

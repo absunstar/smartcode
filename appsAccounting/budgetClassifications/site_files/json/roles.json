@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "accounting" ,
+    "name": "budgetClassificationsAdmin",
+    "En": "Budget Classifications Admin",
+    "Ar": "إدارة تصنيفات الميزانية",
+    "permissions": ["budgetClassificationsManage"]
+}]

@@ -1,0 +1,363 @@
+<div class="row">
+    <div class="row padding">
+        <div class="col9">
+            <div class="row">
+                <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+                <i-date class="col6" label="##word.Date##" ng-model="item.date"></i-date>
+                <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+                <i-checkbox
+                    ng-model="item.selectFromAdvertisement"
+                    class="col3"
+                    ng-change="getJobsAdvertisements(item.selectFromAdvertisement);"
+                    label="##word.Select From Advertisements##"
+                ></i-checkbox>
+                <i-list
+                    class="col4"
+                    label="##word.Jobs Advertisements##"
+                    ng-show="item.selectFromAdvertisement"
+                    ng-change="setJobName(item.advertisement)"
+                    ng-model="item.advertisement"
+                    display="title"
+                    display2="date"
+                    items="getJobsAdvertisementsList"
+                    ng-search="item.$department"
+                ></i-list>
+            </div>
+        </div>
+        <div class="col3 center">
+            <i-image class="img128 center" ng-model="item.image"></i-image>
+        </div>
+        <div class="row">
+            <i-control class="col6" type="text" v="r" ng-model="item.jobNameEn" label="##word.Job Name##"></i-control>
+            <i-control class="col6" type="text" v="r" ng-model="item.jobNameAr" label="##word.Job Name Arabic##"></i-control>
+        </div>
+        <div class="row">
+            <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+            <i-control class="col6" type="text" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+        </div>
+    </div>
+    <p class="error">{{error}}</p>
+    <fieldset>
+        <div class="tabs">
+            <div class="tabs-header full">
+                <a class="tab-link" onclick="site.showTabContent(event, '#personalData')">
+                    <span> ##word.Personal Data##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#qualificationData')">
+                    <span> ##word.Qualifications##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#skillsData')">
+                    <span> ##word.Skills##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#certificatesData')">
+                    <span> ##word.Certificates##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#experiencesData')">
+                    <span> ##word.Experiences##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#applicantData')">
+                    <span> ##word.Applicant Data##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#interviewData')" ng-show="item.applicantStatus == 'acceptable'">
+                    <span> ##word.Interview Data##</span>
+                </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#applicantStatusData')" ng-show="item.applicantStatus == 'acceptable'">
+                    <span> ##word.Applicant Status##</span>
+                </a>
+            </div>
+            <div class="tabs-content">
+                <div id="personalData" class="tab-content">
+                    <fieldset>
+                        <legend class="black">##word.Personal Informations##</legend>
+
+                        <div class="row">
+                            <!-- <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+                            <i-control class="col6" type="text" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control> -->
+                            <i-control class="col4" type="text" ng-model="item.phone" label="##word.Phone##"></i-control>
+                            <i-control class="col4" type="text" v="r" ng-model="item.mobile" label="##word.Mobile##"></i-control>
+                            <i-control class="col4" type="text" ng-model="item.otherMobile" label="##word.Other Mobile##"></i-control>
+                            <i-control class="col4" type="age" ng-model="item.age" label="##word.Age##"></i-control>
+                            <i-control class="col8" type="text" ng-model="item.email" label="##word.Email##"></i-control>
+                            <i-control type="text" ng-model="item.address" label="##word.Address##"></i-control>
+                            <i-date class="col6" ng-model="item.dateOfBirth" label="##word.Date Of Birth##"></i-date>
+                            <i-list class="col3" ng-model="item.gender" v="r" label="##word.Gender##" items="gendersList" display="name##session.lang##"></i-list>
+                            <i-list class="col3" ng-model="item.nationality" v="r" label="##word.Nationality##" items="nationalitiesList" display="name##session.lang##"></i-list>
+                            <fieldset>
+                                <legend>##word.Personal Verification##</legend>
+                                <div class="row">
+                                    <div class="col4">
+                                        <br />
+                                        <i-radio class="col6" label="##word.ID##" v="r" ng-value="id" ng-model="item.idType"> </i-radio>
+                                        <i-radio class="col6" label="##word.Passport /Iqama##" v="r" ng-value="iqama" ng-model="item.idType"> </i-radio>
+                                    </div>
+                                    <i-control class="col8" v="r ll10 ml10" label="##word.ID /Iqama Number##" ng-model="item.idNumber"> </i-control>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="qualificationData" class="tab-content">
+                    <fieldset>
+                        <legend>##word.Qualifications##</legend>
+                        <div class="row">
+                            <i-list
+                                class="col4"
+                                label="##word.Degree##"
+                                ng-model="item.qualificationDegree"
+                                items="qualificationsDegreesList"
+                                display="name##session.lang##"
+                                ng-search="item.$qualificationDegree"
+                            >
+                            </i-list>
+                            <i-control class="col4" label="##word.Major##" ng-model="item.educationalMajor"> </i-control>
+                            <i-control class="col4" label="##word.Educational Qualification##" ng-model="item.educationalQualification"> </i-control>
+
+                            <i-list
+                                class="col4"
+                                label="##word.Country Of Qualification##"
+                                ng-model="item.countryOfQualification"
+                                items="nationalitiesList"
+                                display="name##session.lang##"
+                                ng-search="item.$countryOfQualification"
+                            >
+                            </i-list>
+                            <i-date ng-model="item.graduationDate" class="col4" label="##word.Graduation Date##"></i-date>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="skillsData" class="tab-content">
+                    <fieldset>
+                        <legend class="black">##word.Skills##</legend>
+                        <p class="error">{{skillError}}</p>
+
+                        <div class="row" ng-show="mode == 'add' ||  mode == 'edit'  && !item.approved">
+                            <i-control class="col6" type="text" ng-model="skill.name" label="##word.Skill Name##"></i-control>
+                            <i-control class="col3" type="number" ng-model="skill.experienceYears" label="##word.Experience Years##"></i-control>
+
+                            <div class="col2">
+                                <br />
+                                <i-button type="push" ng-click="addSkill(skill)"></i-button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table center hover bold">
+                                <tr>
+                                    <th>##word.S##</th>
+                                    <th>##word.Skill##</th>
+                                    <th>##word.Experience Years##</th>
+
+                                    <th>##word.Status##</th>
+                                    <th class="not-print" ng-show="!item.approved">##word.Actions##</th>
+                                </tr>
+                                <tr ng-repeat="gift in item.skillsList">
+                                    <td class="center">{{$index + 1}}</td>
+                                    <td class="center">
+                                        <p>{{gift.name}}</p>
+                                    </td>
+                                    <td class="center">
+                                        <p><span class="text-success"> {{gift.experienceYears}}</span> <span>##word.Year/s##</span></p>
+                                    </td>
+
+                                    <td class="center">
+                                        <div class="row">
+                                            <i-checkbox class="col6" ng-model="gift.active" ng-show="!item.approved"></i-checkbox>
+                                            <span class="col6 text-success" ng-show="gift.active">##word.Active##</span>
+                                            <span class="col6 text-danger" ng-show="!gift.active">##word.Not Active##</span>
+                                        </div>
+                                    </td>
+                                    <td ng-show="!item.approved">
+                                        <i-button type="delete" ng-click="item.skillsList.splice($index,1)"> </i-button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="certificatesData" class="tab-content">
+                    <fieldset>
+                        <legend class="black">##word.Certificates##</legend>
+                        <p class="error">{{certificateerror}}</p>
+                        <div class="row">
+                            <i-control class="col4" ng-model="certificates.name" label="##word.Name##"></i-control>
+                            <i-control class="col4" ng-model="certificates.source" label="##word.Source##"></i-control>
+                            <i-control class="col4" ng-model="certificates.link" label="##word.Link##"></i-control>
+                            <i-date class="col4" ng-model="certificates.date" label="##word.Date##"></i-date>
+
+                            <div class="col4">
+                                <br />
+                                <i-button type="push" ng-click="addCertificate(certificates)"></i-button>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <div class="table-responsive">
+                                <table class="table hover bold">
+                                    <tr>
+                                        <th>##word.S##</th>
+                                        <th>##word.Name##</th>
+                                        <th>##word.Source##</th>
+                                        <th>##word.Link##</th>
+                                        <th>##word.Date##</th>
+                                        <th class="not-print">##word.Actions##</th>
+                                    </tr>
+                                    <tr ng-repeat="cer in item.certificatesList">
+                                        <td class="center">{{$index+1}}</td>
+                                        <td class="center">{{cer.name}}</td>
+                                        <td class="center">{{cer.source}}</td>
+                                        <td class="center"><a target="_blank" href="{{cer.link}}">Certificate URL</a></td>
+                                        <td class="center">{{cer.date| date:'dd/MM/yyyy'}}</td>
+                                        <td class="center not-print">
+                                            <i-button type="delete" ng-click="item.certificatesList.splice($index,1)"> </i-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                </div>
+
+                <div id="experiencesData" class="tab-content">
+                    <fieldset>
+                        <legend class="black">##word.Experiences##</legend>
+                        <p class="error">{{experiencesrror}}</p>
+                        <div class="row">
+                            <i-control class="col4" ng-model="experience.company" label="##word.Company##"></i-control>
+                            <i-control class="col4" ng-model="experience.department" label="##word.Department##"></i-control>
+                            <i-control class="col4" ng-model="experience.jobTitle" label="##word.Job Title##"></i-control>
+                            <i-date class="col4" ng-model="experience.from" label="##word.From##"></i-date>
+                            <i-date class="col4" ng-model="experience.to" label="##word.To##"></i-date>
+
+                            <div class="col4">
+                                <br />
+                                <i-button type="push" ng-click="addExperience(experience)"></i-button>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="table-responsive">
+                                <table class="table hover bold">
+                                    <tr>
+                                        <th>##word.S##</th>
+                                        <th>##word.Company##</th>
+                                        <th>##word.Department##</th>
+                                        <th>##word.Job Title##</th>
+                                        <th>##word.From##</th>
+                                        <th>##word.To##</th>
+                                        <th class="not-print">##word.Actions##</th>
+                                    </tr>
+                                    <tr ng-repeat="knowlage in item.experiencesList">
+                                        <td class="center"><p>{{$index+1}}</p></td>
+                                        <td class="center"><p>{{knowlage.company}}</p></td>
+                                        <td class="center"><p>{{knowlage.department}}</p></td>
+                                        <td class="center"><p>{{knowlage.jobTitle}}</p></td>
+                                        <td class="center">
+                                            <p ng-if="knowlage.from">{{knowlage.from |date:'dd/MM/yyyy'}}</p>
+                                            <p ng-if="!knowlage.from">-</p>
+                                        </td>
+                                        <td class="center">
+                                            <p ng-if="knowlage.to">{{knowlage.to |date:'dd/MM/yyyy'}}</p>
+                                            <p ng-if="!knowlage.to">-</p>
+                                        </td>
+
+                                        <td class="center not-print">
+                                            <i-button type="delete" ng-click="item.experiencesList.splice($index,1)"> </i-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                </div>
+
+                <div id="applicantData" class="tab-content">
+                    <fieldset>
+                        <legend class="black">##word.Applicant Data##</legend>
+                        <div class="row">
+                            <fieldset>
+                                <legend>##word.Phone Call Result##</legend>
+                                <div class="row">
+                                    <i-radio class="col6" label="##word.Acceptable##" ng-value="acceptable" ng-model="item.applicantStatus"> </i-radio>
+                                    <i-radio class="col6" label="##word.Unacceptable##" ng-value="unacceptable" ng-model="item.applicantStatus"> </i-radio>
+                                </div>
+                                <i-textarea rows="3" label="##word.Comment##" ng-model="item.comment"> </i-textarea>
+                            </fieldset>
+                            <i-date class="col6" ng-model="item.interViewDate" label="##word.Interview Date##"></i-date>
+                            <i-control class="col4" type="time" ng-model="item.interViewTime" label="##word.Interview Time##"></i-control>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="interviewData" class="tab-content" ng-show="item.applicantStatus == 'acceptable'">
+                    <fieldset>
+                        <legend class="black">##word.Interview Data##</legend>
+                        <div class="row">
+                            <div class="row">
+                                <i-checkbox ng-change="setAttendInterviewDefaultData(item)" ng-model="item.attended" class="col2" label="##word.Attended##"></i-checkbox>
+                                <i-date ng-show="item.attended" class="col6" ng-model="item.attendDate" label="##word.Attend Date##"></i-date>
+                                <i-control ng-show="item.attended" class="col4" type="time" ng-model="item.attendTime" label="##word.Attend Time##"></i-control>
+                                <i-list
+                                    ng-show="item.attended"
+                                    class="col4"
+                                    label="##word.Interview Status##"
+                                    ng-model="item.interviewStatus"
+                                    display="name##session.lang##"
+                                    items="interviewStatusList"
+                                    ng-search="item.$result"
+                                ></i-list>
+                            </div>
+
+                            <i-textarea rows="3" ng-show="item.attended" label="##word.Notes##" ng-model="item.interViewNotes"> </i-textarea>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="applicantStatusData" class="tab-content" ng-show="item.applicantStatus == 'acceptable'">
+                    <fieldset>
+                        <legend class="black">##word.Applicant Status After Contract Data##</legend>
+                        <div class="row">
+                            <div class="row">
+                                <i-date class="col6" ng-model="item.receiveWorkDate" label="##word.Receive Work Date##"></i-date>
+                                <i-list
+                                    class="col4"
+                                    label="##word.Applicant Status After Contract##"
+                                    ng-model="item.applicantStatusAfterContract"
+                                    display="name##session.lang##"
+                                    items="applicantStatusAfterContractingList"
+                                    ng-search="item.$status"
+                                ></i-list>
+                            </div>
+
+                            <i-textarea rows="3" label="##word.Notes##" ng-model="item.applicantStatusAfterContractNotes"> </i-textarea>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row padding"></div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

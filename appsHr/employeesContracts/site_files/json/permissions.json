@@ -1,0 +1,13 @@
+[
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "employeesContractsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "acceptEmployeeContract", "En": "Accept", "Ar": "قبول عقد موطف" },
+    { "moduleName": "hr", "screenName": "employeesContracts", "name": "cancelEmployeeContract", "En": "Cancel", "Ar": "إلغاء عقد موطف" }
+]

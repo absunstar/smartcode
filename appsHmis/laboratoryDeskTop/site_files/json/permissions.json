@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopChangeStatus" , "En":"Change Status" , "Ar":"تغيير الحالة"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "laboratoryDeskTop" , "name":"laboratoryDeskTopUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

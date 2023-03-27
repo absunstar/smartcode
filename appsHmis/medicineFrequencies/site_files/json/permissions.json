@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineFrequencies" , "name":"medicineFrequenciesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

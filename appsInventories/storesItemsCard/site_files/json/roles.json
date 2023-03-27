@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "storesItemsCardAdmin",
+        "En": "Stores Items Card Admin",
+        "Ar": "إدارة الجنسيات",
+        "permissions": ["storesItemsCardManage"]
+    }
+]

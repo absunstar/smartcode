@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineDurations" , "name":"medicineDurationsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

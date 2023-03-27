@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "purchaseRequestsAdmin",
+        "En": "Purchase Requests Admin",
+        "Ar": "إدارة طلبات الشراء",
+        "permissions": ["purchaseRequestsManage"]
+    }
+]

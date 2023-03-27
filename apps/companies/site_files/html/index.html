@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="En" data-ng-app="myApp">
+    <head x-import="head.html"> </head>
+
+    <body class="##session.lang## loaded">
+        <div x-import="site-top/index.html"></div>
+        <div x-import="site-bottom/index.html"></div>
+        <div id="main-layout" class="container" x-permissions="developer">
+            <div class="row">
+                <div class="row" ng-controller="companies">
+                    <div x-import="companies/add_modal.html"></div>
+                    <div x-import="companies/update_modal.html"></div>
+                    <div x-import="companies/delete_modal.html"></div>
+                    <div x-import="companies/view_modal.html"></div>
+                    <div x-import="companies/search_all_modal.html"></div>
+
+                    <div class="row">
+                        <h1 class="bold text-center">##word.companies##</h1>
+                    </div>
+
+                    <div class="top-actions">
+                        <i-button type="add" label="##word.Company New##" ng-click="displayAddCompany()"></i-button>
+
+                        <i-button type="search" label="##word.Search All##" onclick="site.showModal('#companieSearchModal')"></i-button>
+
+                        <span ng-show="busy">
+                            <span class="sr-only">Loading...</span>
+                        </span>
+                        <h3 class="bold text-center">##word.count## : {{count}}</h3>
+                        <br />
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table hover bold loaded center" id="t1">
+                            <tr>
+                                <th class="not-print">##word.Logo##</th>
+                                <th>##word.Code##</th>
+                                <th>##word.Companies Name##</th>
+                                <th>##word.Status##</th>
+                                <th class="not-print">##word.Actions##</th>
+                            </tr>
+                            <tr ng-repeat="c in list | orderBy:'-id'">
+                                <td class="not-print">
+                                    <i-image view class="logo" ng-model="c.image"></i-image>
+                                </td>
+                                <td class="blue">{{c.code}}</td>
+
+                                <td>{{c.name##session.lang##}}</td>
+
+                                <td>
+                                    <p class="green" ng-show="c.active ==true">##word.Active##</p>
+                                    <p class="green" ng-show="c.active ==false">##word.Not Active##</p>
+                                </td>
+
+                                <td class="center not-print">
+                                    <i-button type="details" label="##word.Details##" ng-click="displayDetailsCompany(c)"></i-button>
+
+                                    <i-button type="update" label="##word.Update##" ng-click="displayUpdateCompany(c)"></i-button>
+
+                                    <i-button type="delete" label="##word.Delete##" ng-click="displayDeleteCompany(c)"></i-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <i-button type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div x-import="scripts.html"></div>
+        <script x-permissions="developer" x-import="companies/index.js"></script>
+    </body>
+</html>

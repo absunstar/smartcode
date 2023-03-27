@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "inventory",
+    "name": "storesUnitsAdmin",
+    "En": "Stores Units Admin",
+    "Ar": "إدارة الوحدات المخزنية",
+    "permissions": ["storesUnitsManage"]
+  }
+]

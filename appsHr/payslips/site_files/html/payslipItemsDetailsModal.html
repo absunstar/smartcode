@@ -1,0 +1,544 @@
+<div id="payslipItemsDetailsModal" class="modal full">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Payslip Item Details## <i class="fa fa-details"></i></p>
+        </div>
+
+        <div class="modal-body">
+            <fieldset>
+                <legend>{{payslipItem.nameEn}} - {{payslipItem.nameAr}}</legend>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='employeesBonuses'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Category##</th>
+                            <th>##word.Bonus Name##</th>
+                            <th>##word.Type##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.category.nameEn}} - {{itm.category.nameAr}}</td>
+                            <td class="center">{{itm.employeesBonusName.nameEn}} - {{itm.employeesBonusName.nameAr}}</td>
+                            <td class="center"><p>{{itm.type.nameEn}} - {{itm.type.nameAr}}</p></td>
+                            <td class="center">
+                                <span class="blue"> {{itm.count}} </span>
+                                <span ng-show="itm.type.id == 1"> - ##word.Hour/s##</span>
+                                <span ng-show="itm.type.id == 2"> - ##word.Day/s##</span>
+                                <span ng-show="itm.type.id == 3"> - ##word.%##</span>
+                                <span ng-show="itm.type.id == 4"> - ##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.amount}} </span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                            <td class="center"><span class="text-success"> {{itm.value}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='overtimeRequests'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount##</th>
+                            <th>##word.Overtime Percent##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+
+                            <td class="center">{{itm.count}} ##word.Minute/s##</td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.amount}}</span>
+                                <span class="currency">##word.$##</span> - <span>##word.Per Minute##</span>
+                            </td>
+                            <td class="center"><span class="blue"> {{itm.overtime}} </span> ##word.%##</td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.value}}</span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='autoOverTime'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount##</th>
+                            <th>##word.Overtime Percent##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+
+                            <td class="center">{{itm.count}} ##word.Minute/s##</td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.amount}}</span>
+                                <span class="currency">##word.$##</span> - <span>##word.Per Minute##</span>
+                            </td>
+                            <td class="center"><span class="blue"> {{itm.overtime}} </span> ##word.%##</td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.value}}</span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='employeesPenalties'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Category##</th>
+                            <th>##word.Penality Name##</th>
+                            <th>##word.Type##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.category.nameEn}} - {{itm.category.nameAr}}</td>
+                            <td class="center">{{itm.employeesPenalityName.nameEn}} - {{itm.employeesPenalityName.nameAr}}</td>
+                            <td class="center">{{itm.type.nameEn}} - {{itm.type.nameAr}}</td>
+                            <td class="center">
+                                <span class="blue"> {{itm.count}} </span>
+                                <span ng-show="itm.type.id == 1" class="currency">##word.Hour/s##</span>
+                                <span ng-show="itm.type.id == 2" class="currency">##word.Day/s##</span>
+                                <span ng-show="itm.type.id == 3" class="currency">##word.%##</span>
+                                <span ng-show="itm.type.id == 4" class="currency">##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.amount}} </span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                            <td class="center"><span class="text-danger"> {{itm.value}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='unpaidVacations'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount Per Day##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.count}}</td>
+                            <td class="center">
+                                <span class="text-success">{{itm.amount}}</span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+
+                            <td class="center">
+                                <span class="text-danger"> {{itm.value}} </span> -
+                                <span class="currency">##word.$##</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='absentDays'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Source##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount Per Day##</th>
+                            <th>##word.Penality##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">
+                                <span ng-show="itm.source.code ==1">
+                                    <p class="text-danger">{{itm.source.nameEn}}</p>
+                                    <p class="text-danger">{{itm.source.nameAr}}</p>
+                                </span>
+                                <span ng-show="itm.source.code == 2">
+                                    <p class="blue">{{itm.source.nameEn}}</p>
+                                    <p class="blue">{{itm.source.nameAr}}</p>
+                                </span>
+                                <span ng-show="itm.source.code == 3">
+                                    <p class="text-warning">{{itm.source.nameEn}}</p>
+                                    <p class="text-warning">{{itm.source.nameAr}}</p>
+                                </span>
+                            </td>
+                            <td class="center">
+                                <span class="blue"> {{itm.count}} </span> -
+                                <span> ##word.Day##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-danger" ng-show="itm.amount>0">{{itm.amount}}</span>
+                                <span class="text-success" ng-show="!itm.amount">{{itm.amount}}</span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="blue"> {{itm.penality}} </span> -
+                                <span> ##word.Day/s##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-danger" ng-show="itm.value>0">{{itm.value}}</span>
+                                <span class="text-success" ng-show="!itm.value">{{itm.value}}</span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code == 'absentHours'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Source##</th>
+                            <th>##word.Reqruired##</th>
+                            <th>##word.Action##</th>
+                            <th>##word.Delay Minute/s##</th>
+                            <th>##word.Available Delay Minute/s##</th>
+                            <th>##word.Calculated Minute##</th>
+                            <th>##word.Amount Per Day##</th>
+                            <th>##word.Penality##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">
+                                <span ng-show="itm.source.code ==1">
+                                    <p class="blue">{{itm.source.nameEn}}</p>
+                                    <p class="blue">{{itm.source.nameAr}}</p>
+                                </span>
+                                <span ng-show="itm.source.code == 2">
+                                    <p class="text-danger">{{itm.source.nameEn}}</p>
+                                    <p class="text-danger">{{itm.source.nameAr}}</p>
+                                </span>
+                                <span ng-show="itm.source.code == 3">
+                                    <p class="text-warning">{{itm.source.nameEn}}</p>
+                                    <p class="text-warning">{{itm.source.nameAr}}</p>
+                                </span>
+                            </td>
+                            <td class="center">{{itm.from |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.to |date:'hh:mm a'}}</td>
+                            <td class="center">
+                                <span class="text-danger"> {{itm.count}} </span> -
+                                <span>##word.Minute/s##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.availableDelayTime}} </span> -
+                                <span>##word.Minute/s##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-danger"> {{itm.calcualtedCount}} </span> -
+                                <span>##word.Minute/s##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-danger" ng-show="itm.amount>0">{{itm.amount}}</span>
+                                <span class="text-success" ng-show="!itm.amount">{{itm.amount}}</span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="blue"> {{itm.penality}} </span> -
+                                <span> ##word.Day/s##</span>
+                            </td>
+                            <td class="center"><span class="text-danger"> {{itm.value}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code == 'delayRequests'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.From##</th>
+                            <th>##word.To##</th>
+                            <th>##word.Minute##</th>
+                            <th>##word.Count##</th>
+                            <th>##word.Amount##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.fromTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.toTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.allwedTime}} <span>##word.Minute/s##</span></td>
+                            <td class="center">
+                                <span class="blue"> {{itm.count}} </span>
+                                <span ng-show="itm.type.id == 1" class="currency">##word.Hour/s##</span>
+                                <span ng-show="itm.type.id == 2" class="currency">##word.Day/s##</span>
+                                <span ng-show="itm.type.id == 3" class="currency">##word.%##</span>
+                                <span ng-show="itm.type.id == 4" class="currency">##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{itm.amount}} </span>
+                                <span class="currency">##word.$##</span>
+                            </td>
+                            <td class="center"><span class="text-danger"> {{itm.value}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code == 'workErrands'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.From##</th>
+                            <th>##word.To##</th>
+                            <th>##word.Minute##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.fromTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.toTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.allwedTime}} <span>##word.Minute/s##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code == 'vacationsRequests'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Request Vacation Type##</th>
+                            <th>##word.Request Days##</th>
+                            <th>##word.Approved Vacation Type##</th>
+                            <th>##word.Approved Days##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.vacationType.nameEn}} - {{itm.vacationType.nameAr}}</td>
+                            <td class="center">{{itm.days}}</td>
+                            <td class="center">{{itm.approvedVacationType.nameEn}} - {{itm.approvedVacationType.nameAr}}</td>
+                            <td class="center">{{itm.approvedDays}} <span>##word.Day/s##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code == 'employeesAdvances'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Due Date##</th>
+                            <th>##word.Amount##</th>
+                        </tr>
+                        <tr ng-repeat="itm in payslipItem.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.amount | number:'0.3'}} <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.addToBasicSalary && !payslipItem.workHours">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.Basic Salary##</th>
+                            <th>##word.Type##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr>
+                            <td class="center"><span class="text-success"> {{payslipItem.basicSalary | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                            <td class="center">
+                                <span class="text-success"> {{payslipItem.originalValue}} </span>
+                                <span ng-show="payslipItem.type == 'percent'">##word.%##</span>
+                                <span ng-show="payslipItem.type == 'value' ">##word.$##</span>
+                            </td>
+
+                            <td class="center"><span class="text-success"> {{payslipItem.value | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code == 'salaryData'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.Basic Salary##</th>
+                            <th>##word.Work Days##</th>
+                            <th>##word.Work Hours##</th>
+                            <th>##word.Hour Value##</th>
+                            <th>##word.Minute Value##</th>
+                        </tr>
+                        <tr>
+                            <td class="center"><span class="text-success"> {{payslipItem.basicSalary | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                            <td class="center"><span class="blue"> {{payslipItem.workDays }} </span> <span>##word.Days/s##</span></td>
+                            <td class="center"><span class="blue"> {{payslipItem.workHours }} </span> <span>##word.Hour/s##</span></td>
+                            <td class="center"><span class="blue"> {{payslipItem.hourValue }} </span> <span class="currency">##word.$##</span></td>
+                            <td class="center"><span class="blue"> {{payslipItem.minuteValue }} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code !=='socialInsurance' && payslipItem.count == '-'">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.Basic Salary##</th>
+                            <th>##word.Type##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr>
+                            <td class="center"><span class="text-success"> {{payslipItem.basicSalary | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                            <td class="center">
+                                <span class="text-success"> {{payslipItem.value}} </span>
+                                <span ng-show="payslipItem.type == 'percent'">##word.%##</span>
+                                <span ng-show="payslipItem.type == 'value' ">##word.$##</span>
+                            </td>
+
+                            <td class="center"><span class="text-success"> {{payslipItem.value | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive" ng-show="payslipItem.code =='socialInsurance' ">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.Basic Salary##</th>
+                            <th>##word.Item##</th>
+                            <th>##word.Total Subscriptions##</th>
+                            <th>##word.Employee Subscriptions##</th>
+                            <th>##word.Company Subscriptions##</th>
+                            <th>##word.Value##</th>
+                        </tr>
+                        <tr>
+                            <td class="center"><span class="text-success"> {{payslipItem.basicSalary | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                            <td class="center">
+                                <p>{{payslipItem.item.nameEn}} - {{payslipItem.item.nameAr}}</p>
+                                <p>
+                                    <span class="text-success"> {{payslipItem.item.value}} </span>
+                                    <span ng-show="payslipItem.item.type == 'percent'">##word.%##</span>
+                                    <span ng-show="payslipItem.item.type == 'value' ">##word.$##</span>
+                                    <span ng-show="payslipItem.item.type == 'percent'">
+                                        - <span class="text-success"> {{payslipItem.basicSalary * payslipItem.item.value /100}} </span>
+                                        <span class="currency">##word.$##</span>
+                                    </span>
+                                </p>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{payslipItem.totalSubscriptions}} </span>
+                                <span>##word.%##</span> -
+                                <span class="text-danger"> ({{payslipItem.basicSalary * payslipItem.totalSubscriptions/100}}) </span>
+                                <span>##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{payslipItem.employeePercentage}} </span> <span>##word.%##</span> -
+                                <span class="text-danger"> ({{payslipItem.basicSalary * payslipItem.employeePercentage/100}}) </span>
+                                <span>##word.$##</span>
+                            </td>
+                            <td class="center">
+                                <span class="text-success"> {{payslipItem.companyPercentage}} </span> <span>##word.%##</span> -
+                                <span class="text-danger"> ({{payslipItem.basicSalary * payslipItem.companyPercentage/100}}) </span>
+                                <span>##word.$##</span>
+                            </td>
+
+                            <td class="center"><span class="text-success"> {{payslipItem.value | number:'0.3'}} </span> <span class="currency">##word.$##</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="payslipItem.code == 'delayRequests' && item.delayRequests && item.delayRequests.list && item.delayRequests.list.length">
+                <legend>{{item.delayRequests.nameEn}} - {{item.delayRequests.nameAr}}</legend>
+
+                <div class="table-responsive">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.From##</th>
+                            <th>##word.To##</th>
+                            <th>##word.Minute##</th>
+                        </tr>
+                        <tr ng-repeat="itm in item.delayRequests.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.fromTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.toTime | date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.allwedTime}} <span>##word.Minute/s##</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="payslipItem.code == 'workErrands' && item.workErrands && item.workErrands.list && item.workErrands.list.length">
+                <legend>{{item.workErrands.nameEn}} - {{item.workErrands.nameAr}}</legend>
+
+                <div class="table-responsive">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.From##</th>
+                            <th>##word.To##</th>
+                            <th>##word.Minute##</th>
+                        </tr>
+                        <tr ng-repeat="itm in item.workErrands.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.fromTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.toTime |date:'hh:mm a'}}</td>
+                            <td class="center">{{itm.allwedTime}} <span>##word.Minute/s##</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="payslipItem.code == 'vacationsRequests'  && item.vacationsRequests && item.vacationsRequests.list && item.vacationsRequests.list.length">
+                <legend>{{item.vacationsRequests.nameEn}} - {{item.vacationsRequests.nameAr}}</legend>
+                <div class="table-responsive">
+                    <table class="table hover bold">
+                        <tr>
+                            <th>##word.s##</th>
+                            <th>##word.Date##</th>
+                            <th>##word.Request Vacation Type##</th>
+                            <th>##word.Request Days##</th>
+                            <th>##word.Approved Vacation Type##</th>
+                            <th>##word.Approved Days##</th>
+                        </tr>
+                        <tr ng-repeat="itm in item.vacationsRequests.list">
+                            <td class="center blue">{{$index+1}}</td>
+                            <td class="center">{{itm.date |date:'dd/MM/yyyy'}}</td>
+                            <td class="center">{{itm.vacationType.nameEn}} - {{itm.vacationType.nameAr}}</td>
+                            <td class="center">{{itm.days}}</td>
+                            <td class="center">{{itm.approvedVacationType.nameEn}} - {{itm.approvedVacationType.nameAr}}</td>
+                            <td class="center">{{itm.approvedDays}} <span>##word.Day/s##</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+        <p class="error">{{error}}</p>
+
+        <div class="modal-footer center">
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal('#payslipItemsDetailsModal')"> </i-button>
+        </div>
+    </div>
+</div>

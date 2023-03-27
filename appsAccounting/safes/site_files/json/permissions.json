@@ -1,0 +1,65 @@
+[
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesManage",
+    "En": "Manage",
+    "Ar": "إدارة"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesAdd",
+    "En": "Add",
+    "Ar": "إضافة"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesUpdate",
+    "En": "Edit",
+    "Ar": "تعديل"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesDelete",
+    "En": "Delete",
+    "Ar": "حذف"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesView",
+    "En": "View",
+    "Ar": "عرض"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesSearch",
+    "En": "Search",
+    "Ar": "بحث"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesExport",
+    "En": "Export",
+    "Ar": "تصدير"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesPrint",
+    "En": "Print",
+    "Ar": "طباعة"
+  },
+  {
+    "moduleName": "accounting",
+    "screenName": "safes",
+    "name": "safesUi",
+    "En": "UI",
+    "Ar": "الواجهة الرسومية"
+  }
+]

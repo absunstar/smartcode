@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "jobsApplicantsAdmin",
+        "En": "Jobs Applicants Admin",
+        "Ar": "إدارة طلبات المتقدمين الوظائف",
+        "permissions": ["jobsApplicantsManage"]
+    }
+]

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "salesPatientsInvoicesAdmin",
+        "En": "Sales Invoices For Patients Admin",
+        "Ar": "إدارة فواتير مبيعات للمرضى",
+        "permissions": ["salesPatientsInvoicesManage"]
+    }
+]

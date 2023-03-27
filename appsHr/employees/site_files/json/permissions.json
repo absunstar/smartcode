@@ -1,0 +1,17 @@
+[
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employees", "name": "employeesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employees", "name": "addEmployeeAllowance", "En": "Add Employee Allowance", "Ar": "إضافة بدل لراتب موظف" },
+    { "moduleName": "hr", "screenName": "employees", "name": "changeEmployeeAllowance", "En": "Change Employee Allowance", "Ar": "تعديل بدل لراتب موظف" },
+    { "moduleName": "hr", "screenName": "employees", "name": "removeEmployeeAllowance", "En": "Remove Employee Allowance", "Ar": "حذف بدل لراتب موظف" },
+    { "moduleName": "hr", "screenName": "employees", "name": "addEmployeeDeduction", "En": "Add Employee Deduction", "Ar": "إضافة خصم لراتب موظف" },
+    { "moduleName": "hr", "screenName": "employees", "name": "changeEmployeeDeduction", "En": "Change Employee Deduction", "Ar": "تعديل خصم لراتب موظف" },
+    { "moduleName": "hr", "screenName": "employees", "name": "removeEmployeeDeduction", "En": "Remove Employee Deduction", "Ar": "حذف خصم لراتب موظف" }
+]

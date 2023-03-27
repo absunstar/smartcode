@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "acceptOvertimeRequest", "En": "Accept Overtime Request", "Ar": "الموافقة علي مكافأة وقت إضافي" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "rejectOvertimeRequest", "En": "Reject Overtime Request", "Ar": "رفض  مكافأة وقت إضافي" },
+    { "moduleName": "hr", "screenName": "overtimeRequests", "name": "overtimeRequestsCancel", "En": "Cance Overtime Request", "Ar": "إلغاء  مكافأة وقت إضافي" }
+]

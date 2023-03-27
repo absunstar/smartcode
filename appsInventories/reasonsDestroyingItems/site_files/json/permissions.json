@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "inventory" , "screenName" : "reasonsDestroyingItems" , "name":"reasonsDestroyingItemsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

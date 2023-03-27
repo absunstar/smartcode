@@ -1,0 +1,88 @@
+<div id="toBatchModal" class="modal" fixed>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.To Batch Modal## <i class="fa fa-file"></i></p>
+        </div>
+
+        <div class="modal-body">
+            <form class="form">
+                <fieldset>
+                    <legend>
+                        <i-button type="add default" ng-click="addNewBatch(batch)"></i-button>
+                    </legend>
+                    <div class="row">
+                        <div class="col3">
+                            <br />
+                            <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
+                        </div>
+                        <div class="col4">
+                            <table class="table loaded center bold hover details">
+                                <tr>
+                                    <th>##word.Required Count##</th>
+                                    <th>##word.Current Count##</th>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <p class="green">{{batch.toCount}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="blue">{{batch.$toBatchCount}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table loaded center bold hover details">
+                            <tr>
+                                <th>##word.Batch Code##</th>
+                                <th>##word.Production Date##</th>
+                                <th ng-hide="batch.workBySerial">##word.Expiry Date##</th>
+                                <th ng-hide="batch.workBySerial">##word.validit Days##</th>
+                              <th>##word.Quantity##</th>
+                               <th>##word.Actions##</th>
+                            </tr>
+
+                            <tr ng-repeat="c in batch.toBatchesList">
+                                <td>
+                                    <i-control v="r" ng-model="c.code"></i-control>
+                                </td>
+
+                                <td>
+                                    <i-date ng-click="changeDate(c,'pro')" ng-model="c.productionDate"></i-date>
+                                </td>
+
+                                <td ng-hide="batch.workBySerial">
+                                    <i-date ng-click="changeDate(c,'exp')" ng-model="c.expiryDate"></i-date>
+                                </td>
+
+                                <td ng-hide="batch.workBySerial">
+                                    <i-control ng-change="changeDate(c,'pro')" type="number" ng-model="c.validityDays"></i-control>
+                                </td>
+
+                                <td>
+                                    <i-control type="number" v="r" ng-change="calcToBatch(batch)" ng-disabled="batch.workBySerial" ng-model="c.count"> </i-control>
+                                </td>
+                                <td>
+                                    <p>
+                                        <i-button type="delete" ng-click="batch.toBatchesList.splice($index,1);calcToBatch(batch)"> </i-button>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <p class="error">{{errorBatch}}</p>
+
+        <div class="modal-footer center">
+            <i-button type="save" label="##word.Save##" ng-click="toSaveBatch(batch)"> </i-button>
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#toBatchModal')"></i-button>
+        </div>
+    </div>
+    <div class="col2"></div>
+</div>

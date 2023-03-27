@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "employeesAdvancesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "approveEmployeeAdvance", "En": "Accept Employee Advance ", "Ar": "الموافقة علي  سداد سلفة موظف" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "acceptEmployeeAdvance", "En": "Accept Employee Advance", "Ar": "قبول سلفة موظف" },
+    { "moduleName": "hr", "screenName": "employeesAdvances", "name": "rejectEmployeeAdvance", "En": "Reject Employee Advance", "Ar": "رفض سلفة موظف" }
+]

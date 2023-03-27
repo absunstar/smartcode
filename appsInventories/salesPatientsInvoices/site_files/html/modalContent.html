@@ -1,0 +1,335 @@
+<div class="row">
+    <fieldset>
+        <legend>##word.Basic Informations##</legend>
+        <div class="row padding">
+            <div class="col9">
+                <div class="row">
+                    <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
+                    <i-date class="col5" label="##word.Date##" ng-model="item.date"> </i-date>
+                    <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+                </div>
+                <div class="row">
+                    <i-list
+                        v="r"
+                        class="col4"
+                        ng-disabled="item.itemsList.length"
+                        ng-model="item.store"
+                        label="##word.Store##"
+                        ng-search="item.$store"
+                        items="storesList"
+                        display="name##session.lang##"
+                    ></i-list>
+                    <i-list v="r" class="col4" ng-model="item.paymentType" label="##word.Payment Type##" items="paymentTypesList" display="name##session.lang##"></i-list>
+                </div>
+                <div class="row">
+                    <i-list
+                        ng-show="item.store.id"
+                        v="r"
+                        ng-change="selectDoctorDeskTop()"
+                        class="col6"
+                        ng-model="item.doctorDeskTop"
+                        label="##word.Doctor DeskTop##"
+                        items="doctorDeskTopList"
+                        display="patient.fullName##session.lang##"
+                    ></i-list>
+                </div>
+                <fieldset ng-show="item.doctorDeskTop.patient.id">
+                    <legend>##word.Patient##</legend>
+                    <div class="row">
+                        <div class="col3">
+                            <br />
+                            <a target="_blank" class="a-btn" href="/patientHistory/{{item.doctorDeskTop.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
+                        </div>
+                        <div class="cart">
+                            <div class="row">
+                                <div class="col9">
+                                    <p class="bold">
+                                        <span class="darkGray">##word.Full Name## : </span> {{item.doctorDeskTop.patient.fullNameEn}} ( <span class="blue">{{item.doctorDeskTop.patient.code}}</span> )
+                                        <img class="img-logo" ng-src="{{item.doctorDeskTop.patient.image.url}}" alt="" />
+                                    </p>
+                                </div>
+                                <div class="col3">
+                                    <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.doctorDeskTop.patient.mobile}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col4">
+                                    <p class="bold">
+                                        <span class="darkGray"> ##word.Nationality## : </span> {{item.doctorDeskTop.patient.nationality.name##session.lang##}}
+                                        <img class="img-logo" ng-src="{{item.doctorDeskTop.patient.nationality.image.url}}" alt="" />
+                                    </p>
+                                </div>
+                                <div class="col2">
+                                    <p class="bold"><span class="darkGray">##word.Age## : </span> {{item.doctorDeskTop.patient.age}}</p>
+                                </div>
+                                <div class="col6">
+                                    <p class="bold text-right"><span class="darkGray">الإسم بالكامل : </span> {{item.doctorDeskTop.patient.fullNameAr}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col7">
+                                    <p class="bold">
+                                        <span class="darkGray">##word.Mother Name## : </span> {{item.doctorDeskTop.patient.motherNameEn}}
+                                        <span class="blue" ng-show="item.doctorDeskTop.patient.newBorn">(##word.New Born##)</span>
+                                    </p>
+                                </div>
+                                <div class="col5">
+                                    <p class="bold text-right"><span class="darkGray"> إسم الأم : </span> {{item.doctorDeskTop.patient.motherNameAr}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col6">
+                                    <p class="bold"><span class="darkGray"> ##word.Marital Status## : </span> {{item.doctorDeskTop.patient.maritalStatus.name##session.lang##}}</p>
+                                </div>
+
+                                <div class="col6">
+                                    <p class="bold text-right"><span class="darkGray"> ##word.Gender## : </span> {{item.doctorDeskTop.patient.gender.name##session.lang##}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col8">
+                                    <p class="bold">
+                                        <span class="darkGray">##word.Insurance Company##: </span> {{item.doctorDeskTop.mainInsuranceCompany.name##session.lang##}} (
+                                        <span class="blue">{{item.doctorDeskTop.mainInsuranceCompany.code}}</span> )
+                                    </p>
+                                </div>
+                                <div class="col4">
+                                    <p class="bold text-right">
+                                        <span class="darkGray">##word.Patient Type##: </span> {{item.doctorDeskTop.patient.patientType.name##session.lang##}} (
+                                        <span class="blue">{{item.doctorDeskTop.patient.patientType.code}}</span> )
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col6">
+                                    <p class="bold"><span class="darkGray"> ##word.Insurance Class## : </span> {{item.doctorDeskTop.patient.insuranceClass.name##session.lang##}}</p>
+                                </div>
+                                <div class="col6">
+                                    <p class="bold text-right"><span class="darkGray"> ##word.Expiry Date## : </span> {{item.doctorDeskTop.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col3 center">
+                <i-image class="img128 center" ng-model="item.image"></i-image>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset ng-show="item.store && item.store.id">
+        <legend>##word.Items Information##</legend>
+        <p class="error">{{itemsError}}</p>
+        <table class="table hover center bold">
+            <tr>
+                <th>##word.S##</th>
+                <th>##word.Item##</th>
+                <th>##word.Unit##</th>
+                <th>##word.Count##</th>
+                <th>##word.Total Price##</th>
+                <th>##word.Extra Disc## ##word.%##</th>
+                <th>##word.Total Discount##</th>
+                <th>##word.Total VAT##</th>
+                <th>##word.Total##</th>
+                <th class="not-print">##word.Actions##</th>
+            </tr>
+            <tr ng-repeat="elem in item.itemsList">
+                <td class="center">{{$index+1}}</td>
+                <td class="center">{{elem.name##session.lang##}}</td>
+                <td class="center">{{elem.unit.name##session.lang##}}</td>
+                <td class="center">
+                    <i-control ng-if="mode == 'add'" min="0" type="number" ng-change="calculate(item)" ng-model="elem.count"></i-control>
+                    <p ng-if="mode != 'add'">{{elem.count}}</p>
+                </td>
+                <td class="center">
+                    <p class="text-center">{{elem.totalPrice}} <span class="currency">##word.$##</span></p>
+                    <p class="text-center blue" ng-if="elem.count > 1">( {{elem.price}} <span class="currency">##word.$##</span> )</p>
+                </td>
+                <td class="center">
+                    <i-control min="0" type="number" ng-change="calculate(item)" ng-model="elem.extraDiscount"></i-control>
+                </td>
+                <td class="center">
+                    <p>{{elem.totalDiscount}} ##word.$##</p>
+
+                    <p class="text-center green">
+                        ( {{elem.discount}}
+                        <span ng-if="elem.discountType === 'percent'"> ##word.%## </span>
+                        <span ng-if="elem.discountType === 'value'"> ##word.$## </span>
+                        )
+                    </p>
+                </td>
+                <td class="center">
+                    <p>{{elem.totalVat}} ##word.$##</p>
+                </td>
+                <td class="center">
+                    <p class="text-center">{{elem.total}} <span class="currency">##word.$##</span></p>
+                </td>
+
+                <td class="center">
+                    <i-button type="edit" label="##word.Batch##" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode || elem.hasMedicalData" ng-click="showBatchModal(elem)"> </i-button>
+                    <i-button type="delete" ng-show="!item.approved" ng-click="item.itemsList.splice($index,1)"> </i-button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <div class="row">
+        <div class="col6">
+            <fieldset>
+                <legend>##word.Discounts Information##</legend>
+                <div class="row">
+                    <i-list class="col6" ng-model="discount" display="name##session.lang##" items="discountTypesList" label="##word.Discount##" ng-search="$discount"></i-list>
+                    <i-control label="##word.Value##" type="number" class="col3" ng-model="discount.discountValue"></i-control>
+                    <div class="col3">
+                        <br />
+                        <i-button type="add" label="##word.Add##" ng-click="addToList(discount,'discount')"> </i-button>
+                    </div>
+                </div>
+                <div class="row" ng-show="discount.id">
+                    <div class="col6"></div>
+                    <div class="col4">
+                        <fieldset>
+                            <i-radio class="col6" label="##word.Value##" ng-value="value" ng-model="discount.discountType"> </i-radio>
+
+                            <i-radio class="col6" label="##word.Pecent##" ng-value="percent" ng-model="discount.discountType"> </i-radio>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table hover bold">
+                            <tr>
+                                <th>##word.Name##</th>
+                                <th>##word.Value##</th>
+                                <th class="not-print">##word.Actions##</th>
+                            </tr>
+                            <tr ng-repeat="discount in item.discountsList">
+                                <td class="center"><p>{{discount.name##session.lang##}}</p></td>
+                                <td class="center">
+                                    <p>
+                                        {{discount.value}}
+                                        <span ng-if="discount.type == 'value'" class="currency">##word.$##</span>
+                                        <span ng-if="discount.type == 'percent'" class="currency">##word.%##</span>
+                                    </p>
+                                </td>
+                                <td class="center">
+                                    <i-button type="delete" label="##word.Delete##" ng-click="spliceFromList(discount,'discount');"> </i-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col6" ng-show="settings.storesSetting.taxesAppearingInInvoices">
+            <fieldset>
+                <legend>##word.Taxes Information##</legend>
+
+                <div class="row">
+                    <i-list class="col6" ng-model="tax" display="name##session.lang##" items="taxTypesList" label="##word.Tax##" ng-search="$tax"></i-list>
+                    <i-control label="##word.Value##" type="number" class="col3" ng-model="tax.value"></i-control>
+
+                    <div class="col3">
+                        <br />
+                        <i-button type="add" label="##word.Add##" ng-click="addToList(tax,'tax')"> </i-button>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="settings.storesSetting.taxesAppearingInInvoices">
+                    <div class="table-responsive">
+                        <table class="table hover bold">
+                            <tr>
+                                <th>##word.Name##</th>
+                                <th>##word.Value##</th>
+                                <th class="not-print">##word.Actions##</th>
+                            </tr>
+                            <tr ng-repeat="tax in item.taxesList">
+                                <td><p class="text-center">{{tax.name##session.lang##}}</p></td>
+                                <td>
+                                    <p class="text-center">{{tax.value}} <span class="green">##word.%##</span></p>
+                                </td>
+
+                                <td class="center">
+                                    <i-button type="delete" label="##word.Delete##" ng-click="spliceFromList(tax,'tax');"> </i-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <fieldset>
+            <legend>##word.Totals##</legend>
+            <div class="row">
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-20 blue">##word.Total## : {{item.totalPrice}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-20 text-warning">##word.Total Items Disc## : {{item.totalItemsDiscounts}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-20 text-warning">##word.Total Before VAT## : {{item.totalBeforeVat}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-20 text-danger">##word.Total Vat## : {{item.totalVat}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-20 text-success">##word.Total After VAT## : {{item.totalAfterVat}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-20 text-warning">##word.Total Cash Discounts## : {{item.totalDiscounts}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4" ng-show="settings.storesSetting.taxesAppearingInInvoices">
+                    <fieldset>
+                        <p class="bold font-20 text-warning">##word.Total Taxes## : {{item.totalTaxes}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+                <div class="col4">
+                    <fieldset>
+                        <p class="bold font-24 text-success">##word.Total Net## : {{item.totalNet}} <span class="currency">##word.$##</span></p>
+                    </fieldset>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

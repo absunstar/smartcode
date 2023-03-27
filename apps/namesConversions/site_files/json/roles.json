@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "public" ,
+    "name": "namesConversionsAdmin",
+    "En": "Names Conversions Admin",
+    "Ar": "إدارة تحويلات الأسماء",
+    "permissions": ["namesConversionsManage"]
+}]

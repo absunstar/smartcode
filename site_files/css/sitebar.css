@@ -1,0 +1,186 @@
+.site-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  background: var(--theme-color);
+  border-bottom: 5px solid #ffeb3b;
+  z-index: 999999;
+}
+.site-top .user-area {
+  margin: 2px 30px;
+  padding: 3px 10px;
+  display: inline-block;
+  background: var(--theme-color);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.site-top .user-area span {
+  vertical-align: text-bottom;
+  color: #fff;
+}
+.site-top .user-area i {
+  font-size: 20px;
+  border-radius: 3px;
+  padding: 5px;
+  color: #fff;
+  background: var(--theme-color);
+}
+
+.site-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: #607d8b;
+  z-index: 999999;
+}
+
+.site-bottom .icons {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.site-bottom .icons button {
+  position: relative;
+  margin-right: 20px;
+  top: -35px;
+  font-size: 20px;
+  padding: 5px 20px;
+  background: var(--theme-color);
+  color: #ffffff;
+  box-shadow: 1px 1px 8px #000000;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  min-width: 200px;
+}
+.site-bottom .icons button:hover {
+  transform: scale(1.1);
+}
+.site-bottom .icons button i {
+  font-size: 32px;
+}
+.site-bottom .icons button span {
+  display: block;
+  text-align: center;
+}
+.menu-bottom {
+  display: grid;
+  gap: 0px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  background: var(--theme-color);
+  margin: 0 auto;
+  position: fixed;
+  bottom: 90px;
+  left: 10px;
+  right: 10px;
+  border-radius: 10px;
+  border: var(--border);
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 75vh;
+  justify-items: center;
+  z-index: 999999;
+  transition: all 0s;
+}
+.menu-bottom.x-show {
+  animation: showMenu 1s;
+}
+.menu-bottom.x-hide {
+  animation: hideMenu 0s;
+  visibility: hidden;
+}
+@keyframes showMenu {
+  from {
+    right: -100vw;
+  }
+  to {
+    right: 0px;
+  }
+}
+@keyframes hideMenu {
+  from {
+    bottom: 0px;
+  }
+  to {
+    bottom: -100vh;
+  }
+}
+
+.menu-bottom .menu-item {
+  text-align: center;
+  margin: 5px;
+  min-width: 140px;
+  max-width: 80% !important;
+  min-height: 140px;
+  background: #ffffff;
+  color: #272727;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 5px;
+}
+.menu-bottom .menu-item:hover {
+  background: #ff5722;
+  filter: drop-shadow(2px 4px 6px black);
+}
+.menu-bottom .menu-item i {
+  font-size: 50px;
+  display: block;
+  text-align: center;
+  position: sticky;
+  top: 15px;
+}
+
+.menu-bottom .menu-item span {
+  text-align: center;
+  display: block;
+  padding: 5px;
+  font-size: 16px;
+  margin: 5px;
+  font-weight: bold;
+  color: #000000;
+}
+.menu-bottom .menu-item:hover span {
+  color: #ffffff;
+}
+.menu-bottom .menu-item img {
+  width: 80px;
+  height: 64px;
+  filter: none;
+}
+.menu-bottom .menu-item:hover img {
+  filter: none;
+}
+.branch-bar {
+  display: inline-block;
+  position: relative;
+  margin: 10px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0px 20px 4px;
+  color: #ffffff;
+  background: #ff9800;
+  border-radius: 7px;
+  font-weight: 800;
+  font-size: 19px;
+  cursor: pointer;
+  float: right;
+}
+
+.app-name {
+  padding: 0px 20px 4px;
+  color: white;
+  font-size: 19px;
+  font-weight: 800;
+  background: #00bcd4;
+  border-radius: 30px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}

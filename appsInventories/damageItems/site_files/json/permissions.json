@@ -1,0 +1,14 @@
+[
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "damageItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "approveDamageItem", "En": "Approve Damage Item", "Ar": "إعتماد صنف للإتلاف" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "unapproveDamageItem", "En": "Unapprove Damage Item", "Ar": "إلغاء إعتماد صنف للإتلاف" },
+    { "moduleName": "inventory", "screenName": "damageItems", "name": "approveDamageItems", "En": "Approve Damage Items", "Ar": "إعتماد إتلاف اصناف" }
+]

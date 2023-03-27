@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "public" ,
+    "name": "numberingAdmin",
+    "En": "Numbering Admin",
+    "Ar": "إدارة الترقيم",
+    "permissions": ["numberingManage"]
+}]

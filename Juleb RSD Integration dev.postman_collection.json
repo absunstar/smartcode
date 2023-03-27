@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "39e742d3-4740-4d87-8455-d328e089420b",
+		"name": "Juleb RSD Integration dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15803865"
+	},
+	"item": [
+		{
+			"name": "Inventory Accept",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"branch_user\": \"68230431000010000\",\n    \"branch_pass\": \"ef671ff957f38f311584464f110faa47\",\n    \"product_list\": [{\n        \"gti_number\": \"06285128007849\",\n        \"serial_number\": \"KAEC24A5VEYG9N\",\n\t\t\"batch_number\": \"WL0074\",\n\t\t\"expiry_date\": \"2021-12-10\"\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.juleb-dev.com/rasd/inventory_accept",
+				"description": "GTIN: String of medication GTIN number, no longer than 14 digits\nserial number: String of medication serial number\nBatch number: String of batch number\nExpiry date: String of medication expiry date in the format yyyy-mm-dd"
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory Return",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"branch_user\": \"68230431000010000\",\n    \"branch_pass\": \"ef671ff957f38f311584464f110faa47\",\n    \"gln\": \"6823043100002\",\n    \"product_list\": [{\n        \"gti_number\": \"06285128002448\",\n\t    \"serial_number\": \"2033634053171\",\n\t\t\"batch_number\": \"XG0224\",\n\t\t\"expiry_date\": \"2022-07-23\"\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.juleb-dev.com/rasd/inventory_return",
+				"description": "GLN: String of the GLN of the receiving side.\nGTIN: String of medication GTIN number, no longer than 14 digits\nserial number: String of medication serial number\nBatch number: String of batch number\nExpiry date: String of medication expiry date in the format yyyy-mm-dd"
+			},
+			"response": []
+		},
+		{
+			"name": "POS Sale",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"branch_user\": \"68230431000010000\",\n    \"branch_pass\": \"ef671ff957f38f311584464f110faa47\",\n    \"product_list\": [{\n        \"gti_number\": \"06285096000842\",\n\t    \"serial_number\": \"5C4YDPMWG1\",\n\t\t\"batch_number\": \"246M\",\n\t\t\"expiry_date\": \"2025-07-31\"\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.juleb-dev.com/rasd/pos_sale",
+				"description": "GTIN: String of medication GTIN number, no longer than 14 digits\nserial number: String of medication serial number\nBatch number: String of batch number\nExpiry date: String of medication expiry date in the format yyyy-mm-dd"
+			},
+			"response": []
+		},
+		{
+			"name": "POS Sale Cancel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"branch_user\": \"68230431000010000\",\n    \"branch_pass\": \"ef671ff957f38f311584464f110faa47\",\n    \"product_list\": [{\n        \"gti_number\": \"06285128002448\",\n\t    \"serial_number\": \"2033634053171\",\n\t\t\"batch_number\": \"XG0224\",\n\t\t\"expiry_date\": \"2022-07-23\"\n    }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.juleb-dev.com/rasd/pos_sale_cancel",
+				"description": "GTIN: String of medication GTIN number, no longer than 14 digits\nserial number: String of medication serial number\nBatch number: String of batch number\nExpiry date: String of medication expiry date in the format yyyy-mm-dd"
+			},
+			"response": []
+		}
+	]
+}

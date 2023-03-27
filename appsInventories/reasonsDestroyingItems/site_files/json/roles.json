@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "inventory" ,
+    "name": "reasonsDestroyingItemsAdmin",
+    "En": "Reasons Destroying Items Admin",
+    "Ar": "إدارة أسباب إتلاف الأصناف",
+    "permissions": ["reasonsDestroyingItemsManage"]
+}]

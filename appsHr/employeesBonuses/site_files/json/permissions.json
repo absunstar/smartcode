@@ -1,0 +1,14 @@
+[
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "employeesBonusesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "acceptEmployeeBonus", "En": "Accept Employee Bonus", "Ar": "الموافقة علي مكافأة لموظف" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "rejectEmployeeBonus", "En": "Reject Employee Bonus", "Ar": "رفض  مكافأة لموظف" },
+    { "moduleName": "hr", "screenName": "employeesBonuses", "name": "camcelEmployeeBonus", "En": "Cancel Employee Bonus", "Ar": "إلغاء  مكافأة لموظف" }
+]

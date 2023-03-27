@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "approvepurchaseOrdersAdmin",
+        "En": "Approve Purchase Order Admin",
+        "Ar": "إدارة فواتير الشراء",
+        "permissions": ["purchaseOrdersManage"]
+    }
+]

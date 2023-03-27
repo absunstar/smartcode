@@ -1,0 +1,28 @@
+<div class="site-top" ng-controller="sitetop">
+  <div x-import="site-top/changeBranchModal.html"></div>
+  <div x-permission="login" class="user-area" ng-click="logout()">
+    <span> Logout </span>
+    <i class="fas fa-sign-out-alt"></i>
+  </div>
+
+  <div x-permission="login" class="user-area">
+    <a href="/manageUser">
+
+      <img class="logoProfile" src="##user.image.url##" onerror="this.src='/images/user.png'" alt="" />
+      <span> ##user.email##</span>
+    </a>
+  </div>
+ 
+  <div class="branch-bar" x-features="login">
+    <a id="btn_change_branch" onclick="site.showModal('#changeBranchModal');">
+      <i x-lang="Ar"> ##session.branch.nameAr## @ ##session.company.nameAr## </i>
+      <i x-lang="En"> ##session.branch.nameEn## @ ##session.company.nameEn## </i>
+    </a>
+  </div>
+  <span class="app-name"> ##word.Screen## : ##data.appName##</span>
+  <div x-permission="!login" class="user-area" ng-click="showLogin()">
+    <span> Login </span>
+    <i class="fas fa-sign-in-alt"></i>
+  </div>
+ 
+</div>

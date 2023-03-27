@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "medicines" , "name":"medicinesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

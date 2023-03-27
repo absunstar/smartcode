@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "assistantGeneralLedger" , "name":"assistantGeneralLedgerUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

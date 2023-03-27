@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "otherConditions" , "name":"otherConditionsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

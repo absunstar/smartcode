@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "accounting" ,
+    "name": "assistantGeneralLedgerAdmin",
+    "En": "Assistant General Ledger Admin",
+    "Ar": "إدارة دفتر الأستاذ العام المساعد",
+    "permissions": ["assistantGeneralLedgerManage"]
+}]

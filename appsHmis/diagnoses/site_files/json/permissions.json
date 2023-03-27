@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "diagnoses" , "name":"diagnosesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

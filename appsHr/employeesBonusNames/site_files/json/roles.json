@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hr" ,
+    "name": "employeesBonusNamesAdmin",
+    "En": "Employees Bonus Names Admin",
+    "Ar": "إدارة أسماء مكافئات الموظفين",
+    "permissions": ["employeesBonusNamesManage"]
+}]

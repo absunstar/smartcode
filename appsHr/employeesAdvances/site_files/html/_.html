@@ -1,0 +1,75 @@
+<div ng-controller="employeesAdvances" class="loaded">
+    <div class="row" x-permissions="employeesAdvancesUi || employeesAdvancesManage">
+        <div x-import="employeesAdvances/modal.html"></div>
+        <div x-import="employeesAdvances/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="employeesAdvancesAdd || employeesAdvancesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="employeesAdvancesSearch || employeesAdvancesManage" label="##word.New##" ng-click="searchAll(search={requestStatus:'new'})"></i-button>
+            <i-button type="search" x-permissions="employeesAdvancesSearch || employeesAdvancesManage" label="##word.Accepted##" ng-click="searchAll(search={requestStatus:'accepted'})"></i-button>
+            <i-button type="search" x-permissions="employeesAdvancesSearch || employeesAdvancesManage" label="##word.Rejected##" ng-click="searchAll(search={requestStatus:'rejected'})"></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="employeesAdvancesSearch || employeesAdvancesManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="employees-advances">
+                <tr>
+                    <th>##word.S##</th>
+                    <th>##word.Date##</th>
+                    <th>##word.Employee##</th>
+                    <th>##word.Request Status##</th>
+                    <th>##word.Approved##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{$index+1}}</td>
+                    <td class="center blue">{{item.date | date:'dd/MM/yyyy'}}</td>
+                    <td class="center">{{item.employee.fullName##session.lang##}}</td>
+                    <td class="center">
+                        <span class="blue" ng-show="item.requestStatus == 'new'">##word.New##</span>
+                        <span class="text-success" ng-show="item.requestStatus == 'accepted'">##word.Accepted##</span>
+                        <span class="text-danger" ng-show="item.requestStatus == 'rejected'">##word.Refused##</span>
+                    </td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.approved">( ##word.Yes## ) <span> {{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}} </span> </span>
+                        <span class="text-danger" ng-show="!item.approved">##word.No##</span>
+                    </td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.active">##word.Active##</span>
+                        <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button
+                            type="edit"
+                            ng-if="!item.hasPaidtransaction  && item.requestStatus != 'rejected'"
+                            x-permissions="employeesAdvancesUpdate || employeesAdvancesManage"
+                            label="##word.Edit##"
+                            ng-click="showUpdate(item)"
+                        ></i-button>
+
+                        <i-button
+                            type="delete"
+                            ng-if="!item.approved"
+                            x-permissions="employeesAdvancesDelete || employeesAdvancesManage"
+                            label="##word.Delete##"
+                            ng-click="showDelete(item)"
+                        ></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="employeesAdvancesPrint || employeesAdvancesManage" type="print" label="##word.Print##" onclick="site.print('#employees-advances')"></i-button>
+        <i-button x-permissions="employeesAdvancesExport || employeesAdvancesManage" type="export" label="##word.Export to excel##" onclick="site.export('#employees-advances' )"> </i-button>
+    </div>
+</div>

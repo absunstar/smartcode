@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "generalLedger" , "name":"generalLedgerUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

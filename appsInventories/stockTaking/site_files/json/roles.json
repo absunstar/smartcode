@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "stockTakingAdmin",
+        "En": "StockTaking Admin",
+        "Ar": "إدارة الجرد المخزني",
+        "permissions": ["stockTakingManage"]
+    }
+]

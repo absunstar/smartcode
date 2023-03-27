@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "patientsApprovalAdmin",
+    "En": "Patients Approval Admin",
+    "Ar": "إدارة موافقات المرضى",
+    "permissions": ["patientsApprovalManage"]
+}]

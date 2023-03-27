@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "inventory" , "screenName" : "storesItemsCard" , "name":"storesItemsCardUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

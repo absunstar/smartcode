@@ -1,0 +1,62 @@
+<div class="row">
+    <fieldset>
+        <legend>##word.Request Informations##</legend>
+        <div class="row">
+            <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+            <i-list v="r" ng-model="item.employee" class="col4" items="employeesList" display="fullName##session.lang##" ng-search="item.$employee" label="##word.Employee##"></i-list>
+            <i-date class="col4" label="##word.Request Date##" ng-model="item.date"> </i-date>
+
+            <i-date class="col6" label="##word.From Date##" ng-model="item.fromDate"> </i-date>
+            <i-list v="r" ng-model="item.vacationType" class="col3" items="vacationsTypesList" display="name##session.lang##" label="##word.Type##"></i-list>
+            <i-control type="number" class="col3" label="##word.Days##" ng-model="item.days"> </i-control>
+        </div>
+        <fieldset>
+            <legend>##word.Files##</legend>
+            <div class="row">
+                <i-file ng-model="item.file"></i-file>
+            </div>
+        </fieldset>
+
+        <i-content ng-model="item.reason" rows="4" label="##word.Reason##"></i-content>
+    </fieldset>
+
+    <fieldset ng-show="mode !='add'">
+        <legend>##word.Approve Informations##</legend>
+        <div class="row">
+            <i-list ng-model="item.approvedVacationType" class="col3" ng-disabled="item.approved" items="vacationsTypesList" display="name##session.lang##" label="##word.Approved Type##"></i-list>
+            <i-control type="number" class="col3" ng-disabled="item.approved" label="##word.Approved Days##" ng-model="item.approvedDays"> </i-control>
+        </div>
+        <fieldset>
+            <legend>##word.Vacations Balance##</legend>
+            <div class="row">
+                <i-control type="number" disabled class="col2" label="##word.Annual Vacation##" ng-model="item.annualVacation"> </i-control>
+                <i-control type="number" disabled class="col2" label="##word.Regular Balance##" ng-model="item.regularVacation"> </i-control>
+                <i-control type="number" disabled class="col2" label="##word.Casual Balance##" ng-model="item.casualVacation"> </i-control>
+            </div>
+        </fieldset>
+        <i-content ng-model="item.comment" rows="4" label="##word.Comment##"></i-content>
+    </fieldset>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

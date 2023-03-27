@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "medicineRoutesAdmin",
+    "En": "Medicine Routes Admin",
+    "Ar": "إدارة طرق الدواء",
+    "permissions": ["medicineRoutesManage"]
+}]

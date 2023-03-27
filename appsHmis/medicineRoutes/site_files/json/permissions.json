@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "medicineRoutes" , "name":"medicineRoutesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

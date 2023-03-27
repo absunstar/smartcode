@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="row padding">
+        <div class="col9">
+            <div class="row">
+                <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+                <i-date class="col6" label="##word.Date##" ng-model="item.date"></i-date>
+                <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+                <i-control class="col5" v="r" label="##word.Title##" ng-model="item.title"> </i-control>
+                <i-checkbox ng-model="item.selectFromJobs" class="col3" ng-change="getJobs(item.selectFromJobs);" label="##word.Select From Jobs##"></i-checkbox>
+                <i-list
+                    class="col4"
+                    label="##word.Jobs##"
+                    ng-change="setJobName(item.job)"
+                    ng-show="item.selectFromJobs"
+                    ng-model="item.job"
+                    display="name##session.lang##"
+                    items="jobsList"
+                    ng-search="item.$department"
+                ></i-list>
+            </div>
+            <div class="row">
+                <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+                <i-control class="col6" type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+            </div>
+        </div>
+        <div class="col3 center">
+            <i-image class="img128 center" ng-model="item.image"></i-image>
+        </div>
+    </div>
+    <div class="row padding">
+        <fieldset>
+            <legend class="black">##word.Skills##</legend>
+            <p class="error">{{skillError}}</p>
+            <div class="row" ng-show="mode == 'add' ||  mode == 'edit'  && !item.approved">
+                <i-control class="col6" type="text" ng-model="skill.name" label="##word.Skill Name##"></i-control>
+                <i-control class="col3" type="number" ng-model="skill.experienceYears" label="##word.Experience Years##"></i-control>
+
+                <div class="col2">
+                    <br />
+                    <i-button type="push" ng-click="addSkill(skill)"></i-button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table center hover bold">
+                    <tr>
+                        <th>##word.S##</th>
+                        <th>##word.Skill##</th>
+                        <th>##word.Experience Years##</th>
+
+                        <th>##word.Status##</th>
+                        <th class="not-print" ng-show="!item.approved">##word.Actions##</th>
+                    </tr>
+                    <tr ng-repeat="gift in item.skillsList">
+                        <td class="center">{{$index + 1}}</td>
+                        <td class="center">
+                            <p>{{gift.name}}</p>
+                        </td>
+                        <td class="center">
+                            <p><span class="text-success"> {{gift.experienceYears}}</span> <span>##word.Year/s##</span></p>
+                        </td>
+
+                        <td class="center">
+                            <div class="row">
+                                <i-checkbox class="col6" ng-model="gift.active" ng-show="!item.approved"></i-checkbox>
+                                <span class="col6 text-success" ng-show="gift.active">##word.Active##</span>
+                                <span class="col6 text-danger" ng-show="!gift.active">##word.Not Active##</span>
+                            </div>
+                        </td>
+                        <td ng-show="!item.approved">
+                            <i-button type="delete" ng-click="item.skillsList.splice($index,1)"> </i-button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

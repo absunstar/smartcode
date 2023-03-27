@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+
+<head x-import="head.html">
+    <style>
+
+     
+        i-image.photo img{
+            min-width: 240px;
+        }
+        .user {
+            padding: 10px;
+            background: var(--theme-color);
+            margin: 5px;
+            border-radius: 10px;
+            }
+
+        .title {
+                font-weight: bold;
+                color: #000 !important;
+            }
+
+    </style>
+</head>
+
+<body class="##session.lang## loaded">
+
+    <div x-import="site-top/index.html"></div>
+    <div x-import="site-bottom/index.html"></div>
+
+    <div id="main-layout" class="container " data-ng-controller="security">
+        <div class="row ">
+
+         
+            <i-button label="##word.Security Users##" ng-click="gotoUsers()"></i-button>
+            <i-button label="##word.Security Roles##" ng-click="gotoRoles()"></i-button>
+
+        </div>
+
+    </div>
+
+
+    <div x-import="scripts.html"></div>
+    <script x-import="security/index.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "insuranceContracts" , "name":"insuranceContractsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

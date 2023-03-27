@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "employeesContractsAdmin",
+        "En": "Employees Contracts Admin",
+        "Ar": "إدارة عقود الموظفين",
+        "permissions": ["employeesContractsManage"]
+    }
+]

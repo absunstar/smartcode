@@ -1,0 +1,202 @@
+<div class="row">
+    <div class="row padding">
+      <fieldset>
+        <legend>##word.Basic Information##</legend>
+        <div class="row">
+          <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
+          <i-date v="r" class="col3" label="##word.Order Date##" ng-model="item.date"> </i-date>
+          <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+        </div>
+        <div class="row">
+          <fieldset>
+            <div class="row">
+              <i-list
+                v="r"
+                class="col4"
+                ng-change="setFromAndToStoreValue(item.sourceType);item.sourceType.id === 1?getTransferItemsRequests():item.itemsList=[]"
+                ng-model="item.sourceType"
+                display="name##session.lang##"
+                items="transferItemsOrdersSourcesList"
+                label="##word.Source Type##"
+                ng-search="item.$source"
+              ></i-list>
+              <i-list
+                v="r"
+                ng-if="item.sourceType.id === 1"
+                class="col4"
+                ng-model="item.transferItemsRequest"
+                ng-change="setFromAndToStoreValue(item.transferItemsRequest);item.itemsList=[]"
+                display="code"
+                display2="title"
+                items="transferItemsRequestsList"
+                label="##word.Transfer Requests##"
+                ng-search="item.$purchaseRequests"
+              ></i-list>
+  
+              <div class="col2">
+                <br />
+                <i-button
+                  ng-show="!item.approved && item.sourceType.id === 1 && item.transferItemsRequest.id"
+                  type="get"
+                  label="##word.Load Items##"
+                  ng-click="getRequestItems(item.transferItemsRequest)"
+                >
+                </i-button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+  
+        <div class="row">
+          <div class="row" ng-if="item.sourceType.id ===1 && item.transferItemsRequest.id">
+            <div class="col3">
+              <p class="text-center">##word.From Store##</p>
+              <p class="text-center blue">{{item.transferItemsRequest.store.name##session.lang##}}</p>
+            </div>
+            <div class="col3">
+              <p class="text-center">##word.To Store##</p>
+              <p class="text-center blue">{{item.transferItemsRequest.toStore.name##session.lang##}}</p>
+            </div>
+          </div>
+          <div class="row" ng-if="item.sourceType.id !==1">
+            <i-list
+              v="r"
+              class="col4"
+              ng-change="validateStores()"
+              ng-model="item.store"
+              ng-disabled="item.itemsList.length > 0"
+              display="name##session.lang##"
+              items="storesList"
+              label="##word.From Store##"
+            ></i-list>
+            <i-list v="r" class="col4" ng-change="validateStores()" ng-model="item.toStore" display="name##session.lang##" items="storesList" label="##word.To Store##"></i-list>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset ng-show="item.store.id">
+        <legend>##word.Items Information##</legend>
+        <div class="row" ng-if="!item.approved &&  item.sourceType.id !== 1">
+          <div class="row">
+            <i-control class="col4" ng-model="orderItem.barcode" ng-keydown="getBarcode($event)" label="##word.Barcode## / ##word.Qr Code##"></i-control>
+            <i-list
+              class="col3"
+              label="##word.Item##"
+              ng-model="orderItem.item"
+              ng-change="getItemUnits(orderItem.item)"
+              items="storesItemsList"
+              display="name##session.lang##"
+              ng-get="getStoresItems($search)"
+            >
+            </i-list>
+  
+            <i-list
+              class="col3"
+              label="##word.Unit##"
+              ng-change="calculateItemBalance(orderItem.unit)"
+              ng-model="orderItem.unit"
+              items="unitsList"
+              display="name##session.lang##"
+              ng-search="item.$elemItem"
+            >
+            </i-list>
+  
+            <div class="col2">
+              <br />
+              <div class="row">
+                <i-button type="push" label="##word.Add##" ng-click="addToItemsList(orderItem)"> </i-button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <i-control class="col2" disabled type="number" label="##word.Current Balance##" ng-model="orderItem.currentBalance"> </i-control>
+            <i-control class="col2" type="number" min="1" label="##word.Transfer Count##" ng-model="orderItem.count"> </i-control>
+          </div>
+        </div>
+  
+        <p class="error">{{itemsError}}</p>
+        <table class="table hover center bold">
+          <tr>
+            <th>##word.S##</th>
+            <th>##word.Item##</th>
+            <th>##word.Unit##</th>
+            <th>##word.Transfer Count##</th>
+            <th>##word.Purchase Cost##</th>
+            <th>##word.Approved##</th>
+            <th class="not-print" ng-show="item.sourceType.id !== 1">##word.Actions##</th>
+          </tr>
+          <tr ng-repeat="elem in item.itemsList">
+            <td class="center">{{$index+1}}</td>
+            <td class="center">{{elem.name##session.lang##}}</td>
+            <td class="center">
+              {{elem.unit.name##session.lang##}}
+              <p class="green center" ng-show="elem.storeBalance > 0">( + {{elem.storeBalance}} )</p>
+              <p class="red center" ng-show="elem.storeBalance <= 0">( + {{elem.storeBalance}} )</p>
+            </td>
+            <td class="center">
+              <p ng-if="item.sourceType.id === 1 || elem.approved">{{elem.count}}</p>
+              <i-control
+                ng-if="item.sourceType.id !== 1 && !elem.approved"
+                ng-change="calculateTotalInItemsList(elem)"
+                ng-keyup="calculateTotalInItemsList(elem)"
+                ng-click="calculateTotalInItemsList(elem)"
+                min="0"
+                type="number"
+                ng-model="elem.count"
+              ></i-control>
+            </td>
+            <td class="center">
+              <p>{{elem.price}}</p>
+            </td>
+            <td class="center">
+              <p class="text-center text-success" ng-if="elem.approved">##word.Yes##</p>
+              <p class="text-center text-danger" ng-if="!elem.approved">##word.No##</p>
+              <i-button type="edit" ng-if="(elem.workByBatch || elem.workBySerial || elem.workByQrCode) && item.sourceType.id === 1" label="##word.Batch##" ng-click="showBatchModal(elem)"> </i-button>
+            </td>
+            <td class="center" ng-show="item.sourceType.id !== 1">
+              <i-button type="edit" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode" label="##word.Batch##" ng-click="showBatchModal(elem)"> </i-button>
+              <i-button
+                type="approve"
+                ng-if="!elem.approved &&!item.approved && mode == 'edit'"
+                x-permissions="approveTransferItemsOrdersItem || transferItemsOrdersManage"
+                label="##word.Approve##"
+                ng-click="approveItem(elem)"
+              >
+              </i-button>
+              <i-button
+                type="unapprove"
+                ng-if="elem.approved &&!item.approved  && mode =='edit'"
+                x-permissions="unapproveTransferItemsOrdersItem || transferItemsOrdersManage"
+                label="##word.Unapprove##"
+                ng-click="unapproveItem(elem)"
+              >
+              </i-button>
+              <i-button type="delete" ng-if="item.sourceType.id !== 1 && !elem.approved" ng-click="item.itemsList.splice($index,1)"> </i-button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+    <div ng-show="mode !== 'add' " class="row">
+      <table class="table hover border">
+        <tr>
+          <th>##word.Add Info##</th>
+          <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+          <td class="center">
+            <p class="blue">{{item.addUserInfo.name}}</p>
+            <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+            <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+            <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+          </td>
+  
+          <td class="center">
+            <p class="blue">{{item.editUserInfo.name}}</p>
+            <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+            <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+            <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>

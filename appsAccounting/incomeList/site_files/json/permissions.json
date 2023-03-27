@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "incomeList" , "name":"incomeListUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

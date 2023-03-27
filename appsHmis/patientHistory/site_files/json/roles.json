@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "patientHistoryAdmin",
+    "En": "Patient History Admin",
+    "Ar": "إدارة سجل المريض",
+    "permissions": ["patientHistoryManage"]
+}]

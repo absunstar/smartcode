@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "accounting",
+        "name": "banksAdmin",
+        "En": "Banks Admin",
+        "Ar": "إدارة البنوك",
+        "permissions": ["banksManage"]
+    }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "hmis",
+    "name": "doctorDeskTopAdmin",
+    "En": "Doctor Desk Top Admin",
+    "Ar": "إدارة مكتب الطبيب",
+    "permissions": ["doctorDeskTopManage"]
+  }
+]

@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopChangeStatus" , "En":"Change Status" , "Ar":"تغيير الحالة"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "radiologyDeskTop" , "name":"radiologyDeskTopUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

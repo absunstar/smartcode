@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hmis" , "screenName" : "patientsApproval" , "name":"patientsApprovalUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

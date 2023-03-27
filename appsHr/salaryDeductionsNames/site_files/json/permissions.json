@@ -1,0 +1,11 @@
+[
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesManage", "En": "Manage", "Ar": "إدارة" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesAdd", "En": "Add", "Ar": "إضافة" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesUpdate", "En": "Edit", "Ar": "تعديل" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesDelete", "En": "Delete", "Ar": "حذف" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesView", "En": "View", "Ar": "عرض" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesSearch", "En": "Search", "Ar": "بحث" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesExport", "En": "Export", "Ar": "تصدير" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesPrint", "En": "Print", "Ar": "طباعة" },
+  { "moduleName": "hr", "screenName": "salaryDeductionsNames", "name": "salaryDeductionsNamesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

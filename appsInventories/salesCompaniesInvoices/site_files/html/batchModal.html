@@ -1,0 +1,88 @@
+<div id="batchModalModal" class="modal" fixed>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Batch Modal## <i class="fa fa-file"></i></p>
+        </div>
+
+        <div class="modal-body">
+            <form class="form">
+                <fieldset>
+                    <div class="row">
+                        <div class="col3">
+                            <br />
+                            <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
+                        </div>
+                        <div class="col4">
+                            <table class="table loaded center bold hover details">
+                                <tr>
+                                    <th>##word.Required Count##</th>
+                                    <th>##word.Current Count##</th>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <p class="green">{{batch.count}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="blue">{{batch.$batchCount}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table loaded center bold hover details">
+                            <tr>
+                                <th>##word.Batch Code##</th>
+                                <th>##word.Production Date##</th>
+                                <th ng-hide="batch.workBySerial">##word.Expiry Date##</th>
+                                <th ng-hide="batch.workBySerial">##word.validit Days##</th>
+                                <th>##word.Current QTY.##</th>
+                                <th>##word.Quantity##</th>
+                                <th ng-show="batch.workBySerial">##word.Select##</th>
+                            </tr>
+
+                            <tr ng-repeat="c in batch.batchesList">
+                                <td>
+                                    <p>{{c.code}}</p>
+                                </td>
+
+                                <td>
+                                    <p class="green">{{c.productionDate | date: "dd / MM / yyyy"}}</p>
+                                </td>
+
+                                <td ng-hide="batch.workBySerial">
+                                    <p class="red">{{c.expiryDate | date: "dd / MM / yyyy"}}</p>
+                                </td>
+
+                                <td ng-hide="batch.workBySerial">
+                                    <p class="green">{{c.validityDays}}</p>
+                                </td>
+                                <td>
+                                    <p>{{c.currentCount}}</p>
+                                </td>
+
+                                <td>
+                                    <i-control type="number" ng-change="calcBatch(batch)" ng-disabled="batch.workBySerial" ng-model="c.count"> </i-control>
+                                </td>
+
+                                <td ng-show="batch.workBySerial">
+                                    <i-checkbox ng-model="c.$select" label="##word.Select##" ng-change="c.count = c.$select? 1 : 0 ; calcBatch(batch)"></i-checkbox>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <p class="error">{{errorBatch}}</p>
+
+        <div class="modal-footer center">
+            <i-button type="save" label="##word.Save##" ng-click="saveBatch(batch)"> </i-button>
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#batchModalModal')"></i-button>
+        </div>
+    </div>
+    <div class="col2"></div>
+</div>

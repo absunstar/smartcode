@@ -1,0 +1,27 @@
+<div ng-controller="accountsGuide" class="loaded">
+  <div class="row" x-permissions="accountsGuideUi || accountsGuideManage">
+    <div x-import="accountsGuide/modal.html"></div>
+    <div x-import="accountsGuide/modalSearch.html"></div>
+
+    <p class="error">{{error}}</p>
+    <div x-permissions="login" class="row">
+      <i-treeview
+        display="name##session.lang##"
+        class="col5"
+        label="##word.Accounts Guides##"
+        ng-model="parentAccountsGuide"
+        ng-click="accountingAccountsGuideView = parentAccountsGuide"
+        ng-node="showAdd(null)"
+        ng-add="showAdd(parentAccountsGuide)"
+        ng-edit="showUpdate(parentAccountsGuide)"
+        ng-delete="showDelete(parentAccountsGuide)"
+        nodes="list"
+      >
+      </i-treeview>
+      <div class="col1"></div>
+      <div ng-show="parentAccountsGuide" class="col6" x-import="accountsGuide/view.html"></div>
+    </div>
+    <i-button x-permissions="accountsGuidePrint || accountsGuideManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="accountsGuideExport || accountsGuideManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+  </div>
+</div>

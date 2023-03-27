@@ -1,0 +1,76 @@
+<div ng-controller="purchaseRequests" class="loaded">
+    <div class="row" x-permissions="purchaseRequestsUi || purchaseRequestsManage">
+        <div x-import="purchaseRequests/modal.html"></div>
+        <div x-import="purchaseRequests/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="purchaseRequestsAdd || purchaseRequestsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+
+            <i-button type="search" x-permissions="purchaseRequestsSearch || purchaseRequestsManage" label="##word.Approved##" ng-click="getApproved()"></i-button>
+
+            <i-button type="search" x-permissions="purchaseRequestsSearch || purchaseRequestsManage" label="##word.Unpproved##" ng-click="getUnapproved()"></i-button>
+
+            <div class="row">
+                <i-date class="col3" label="##word.From##" ng-model="date.from"> </i-date>
+
+                <i-date class="col3" label="##word.To##" ng-model="date.to"> </i-date>
+            </div>
+        </div>
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="purchaseRequestsSearch || purchaseRequestsManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Title##</th>
+                    <th>##word.Request Date##</th>
+                    <th>##word.Approved##</th>
+                    <th>##word.Status##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.title}}</td>
+                    <td class="center">{{item.requestDate |date:'dd/MM/yyyy' }} - {{item.requestDate |date:'hh:mm:ss a' }}</td>
+
+                    <td class="center">
+                        <span ng-show="item.approved">
+                            <span class="text-success ">( ##word.Yes## )</span> {{item.approvedDate |date:'dd/MM/yyyy' }} - {{item.approvedDate |date:'hh:mm:ss a' }}
+                        </span>
+
+                        <span class="text-danger" ng-show="!item.approved">##word.No##</span>
+                    </td>
+
+                    <td class="center">
+                        <span class="text-success" ng-show="item.active">##word.Active##</span>
+                        <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button
+                            type="edit"
+                            ng-show="!item.hasTransaction"
+                            x-permissions="purchaseRequestsUpdate || purchaseRequestsManage"
+                            label="##word.Edit##"
+                            ng-click="showUpdate(item)"
+                        ></i-button>
+
+                        <i-button
+                            type="delete"
+                            ng-show="!item.hasTransaction"
+                            x-permissions="purchaseRequestsDelete || purchaseRequestsManage"
+                            label="##word.Delete##"
+                            ng-click="showDelete(item)"
+                        ></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="purchaseRequestsPrint || purchaseRequestsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="purchaseRequestsExport || purchaseRequestsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
+        </i-button>
+    </div>
+</div>

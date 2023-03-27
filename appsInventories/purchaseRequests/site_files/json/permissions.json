@@ -1,0 +1,13 @@
+[
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "purchaseRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "approvePurchaseRequests", "En": "Approve", "Ar": "إعتماد طلب الشراء" },
+    { "moduleName": "inventory", "screenName": "purchaseRequests", "name": "unapprovePurchaseRequests", "En": "Unapprove", "Ar": "إلغاء إعتماد طلب الشراء" }
+]

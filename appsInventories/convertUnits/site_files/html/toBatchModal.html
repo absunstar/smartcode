@@ -1,0 +1,115 @@
+
+<div id="toBatchModal" class="modal" fixed>
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <p class="center">##word.To Batch Modal## <i class="fa fa-file"></i></p>
+      </div>
+  
+      <div class="modal-body">
+        <form class="form">
+          <fieldset>
+            <legend ng-show="!item.approved">
+              <i-button ng-hide="mode == 'view' " type="add default" label="##word.Add New Serial##" ng-click="addNewBatch(batch)"></i-button>
+            </legend>
+            <div class="row">
+              <div class="col3">
+                <br />
+                <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
+              </div>
+              <div class="col4">
+                <table class="table loaded center bold hover details">
+                  <tr>
+                    <th>##word.Required Count##</th>
+                    <th>##word.Current Count##</th>
+                  </tr>
+  
+                  <tr>
+                    <td>
+                      <p class="green">{{batch.toCount}}</p>
+                    </td>
+                    <td>
+                      <p class="blue">{{batch.$toBatchCount}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            
+            <p class="error">{{errorBatch}}</p>
+  
+            <div class="row">
+              <table class="table loaded center bold hover details">
+                <tr>
+                  <th>##word.S##</th>
+                  <th ng-hide="item.approved && batch.workByQrCode">##word.Code##</th>
+                  <th ng-hide="batch.workByQrCode">##word.Production Date##</th>
+                  <th ng-show="batch.workByQrCode">##word.GTIN##</th>
+                  <th ng-show="batch.workByQrCode">##word.BATCH##</th>
+                  <th ng-show="batch.workByQrCode">##word.SERIAL NO.##</th>
+                  <th ng-show="batch.workByBatch || batch.workByQrCode">##word.Expiry Date##</th>
+                  <th ng-show="batch.workByBatch">##word.validit Days##</th>
+                  <th ng-show="batch.workByBatch">##word.Quantity##</th>
+                  <th ng-show="!item.approved">##word.Actions##</th>
+                </tr>
+  
+                <tr ng-repeat="c in batch.toBatchesList">
+                  <td class="center">{{$index + 1}}</td>
+                  <td class="center" ng-hide="item.approved && batch.workByQrCode">
+                    <i-control ng-model="c.code" ng-hide="item.approved" ng-change="batch.workByQrCode?readQR(c) :''"></i-control>
+                    <p ng-show="item.approved">{{c.code}}</p>
+                  </td>
+  
+                  <td class="center" ng-show="batch.workByQrCode">
+                    <i-control ng-model="c.gtin" ng-show="!item.approved"></i-control>
+                    <p ng-show="item.approved">{{c.gtin}}</p>
+                  </td>
+  
+                  <td class="center" ng-show="batch.workByQrCode">
+                    <i-control ng-model="c.batch" ng-show="!item.approved"></i-control>
+                    <p ng-show="item.approved">{{c.batch}}</p>
+                  </td>
+  
+                  <td class="center" ng-show="batch.workByQrCode">
+                    <i-control ng-model="c.sn" ng-show="!item.approved"></i-control>
+                    <p ng-show="item.approved">{{c.sn}}</p>
+                  </td>
+  
+                  <td class="center" ng-hide="batch.workByQrCode">
+                    <i-date ng-click="changeDate(c,'pro')" ng-show="!item.approved" ng-model="c.productionDate"></i-date>
+                    <p ng-show="item.approved">{{c.productionDate|date:'dd/MM/yyyy'}}</p>
+                  </td>
+  
+                  <td class="center" ng-show="batch.workByBatch || batch.workByQrCode">
+                    <i-date ng-click="changeDate(c,'exp')" ng-model="c.expiryDate" ng-show="!item.approved"></i-date>
+                    <p ng-show="item.approved">{{c.expiryDate|date:'dd/MM/yyyy'}}</p>
+                  </td>
+  
+                  <td class="center" ng-show="batch.workByBatch">
+                    <i-control ng-change="changeDate(c,'pro')" type="number" ng-show="!item.approved" ng-model="c.validityDays"></i-control>
+                    <p ng-show="item.approved">{{c.validityDays}}</p>
+                  </td>
+  
+                  <td class="center" ng-show="batch.workByBatch">
+                    <i-control type="number" v="r" ng-change="calcBatch(batch)" ng-show="!item.approved" ng-disabled="batch.workBySerial || batch.workByQrCode" ng-model="c.count"> </i-control>
+                    <p ng-show="item.approved">{{c.count}}</p>
+                  </td>
+  
+                  <td ng-show="!item.approved">
+                    <i-button type="delete" ng-click="batch.toBatchesList.splice($index,1);calcBatch(batch)"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+  
+      <div class="modal-footer center">
+        <i-button type="save" label="##word.Save##" ng-show="!item.approved" ng-click="toSaveBatch(batch)"> </i-button>
+        <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#toBatchModal')"></i-button>
+      </div>
+    </div>
+    <div class="col2"></div>
+  </div>
+  

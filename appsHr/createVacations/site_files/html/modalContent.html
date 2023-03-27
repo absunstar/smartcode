@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col9">
+        <div class="row">
+            <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
+            <i-list
+                v="r"
+                ng-model="item.vacationName"
+                class="col4"
+                items="vacationsNamesList"
+                display="name##session.lang##"
+                ng-get="getVacationsNames($search)"
+                label="##word.Vacation Name##"
+            ></i-list>
+            <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+
+            <i-date v="r" ng-model="item.fromDate" class="col6" label="##word.From Date##"></i-date>
+            <i-date v="r" ng-model="item.toDate" class="col6" label="##word.To Date##"></i-date>
+
+            <i-textarea ng-model="item.notes" rows="4" label="##word.Notes##"></i-textarea>
+            <fieldset>
+                <legend>##word.Vacation For##</legend>
+                <div class="row">
+                    <i-radio class="col3" v="r" label="##word.All Employees##" ng-value="all" ng-model="item.vacationFor"> </i-radio>
+
+                    <i-radio class="col3" v="r" label="##word.Some Employees##" ng-value="some" ng-model="item.vacationFor"> </i-radio>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="item.vacationFor ==='some'">
+                <legend>##word.Allowed Employees For Vacation##</legend>
+                <div class="row" ng-show="!item.approved ">
+                    <i-list class="col8" ng-model="selectedemployee" display="fullName##session.lang##" items="employeesList" label="##word.Employee##"></i-list>
+
+                    <div class="col4">
+                        <br />
+                        <i-button type="push" ng-click="addEmployeeToVacationEmployeesList(selectedemployee)"> </i-button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table hover bold">
+                            <tr>
+                                <th>##word.S##</th>
+                                <th>##word.Employee##</th>
+
+                                <th class="not-print" ng-show="!item.approved ">##word.Actions##</th>
+                            </tr>
+                            <tr ng-repeat="emp in item.employeesList">
+                                <td><p class="text-center">{{$index +1}}</p></td>
+                                <td><p class="text-center">{{emp.fullName##session.lang##}}</p></td>
+
+                                <td class="center" ng-show="!item.approved ">
+                                    <i-button type="delete" ng-click="item.employeesList.splice($index,1);"> </i-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="col3 center">
+        <i-image class="img128 center" ng-model="item.image"></i-image>
+    </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

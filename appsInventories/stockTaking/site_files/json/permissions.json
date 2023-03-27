@@ -1,0 +1,14 @@
+[
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "stockTakingUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "approveStockTakingItem", "En": "Approve Stocktaking Item", "Ar": "إعتماد صنف في جرد الأصناف" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "unapproveStockTakingItem", "En": "Unapprove Stocktaking Item", "Ar": "إلغاء إعتماد صنف في جرد الأصناف" },
+    { "moduleName": "inventory", "screenName": "stockTaking", "name": "approveStockTaking", "En": "Approve Stocktaking", "Ar": "إعتماد جرد الأصناف" }
+]

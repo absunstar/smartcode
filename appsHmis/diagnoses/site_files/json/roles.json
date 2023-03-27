@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "diagnosesAdmin",
+    "En": "Diagnoses Admin",
+    "Ar": "إدارة التشخيصات",
+    "permissions": ["diagnosesManage"]
+}]

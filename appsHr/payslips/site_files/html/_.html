@@ -1,0 +1,68 @@
+<div ng-controller="payslips" class="loaded">
+    <div class="row" x-permissions="payslipsUi || payslipsManage">
+        <div x-import="payslips/modal.html"></div>
+        <div x-import="payslips/modalSearch.html"></div>
+        <div x-import="payslips/payslipItemsDetailsModal.html"></div>
+        <div x-import="payslips/printPayslipModal.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="payslipsAdd || payslipsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="payslipsSearch || payslipsManage" label="##word.Approved##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="payslipsSearch || payslipsManage" label="##word.Not Approved##" ng-click="searchAll(search={approved:false})"></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="payslipsSearch || payslipsManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="t1">
+                <tr>
+                    <th class="w150">##word.Logo##</th>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Period##</th>
+                    <th>##word.Total##</th>
+                    <th>##word.Approved##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td>
+                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                    </td>
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.employee.fullName##session.lang##}}</td>
+                    <td class="center">{{item.fromDate|date:'dd/MM/yyyy'}} - {{item.toDate|date:'dd/MM/yyyy'}}</td>
+                    <td class="center">
+                        <span class="blue">{{item.paySlip.totalAllowance }} </span>- <span class="text-danger">{{item.paySlip.totalDeductions }} </span> = (<span class="text-success bold">
+                            {{(item.paySlip.totalAllowance - item.paySlip.totalDeductions).toFixed(3) }} </span
+                        >)
+                    </td>
+                    <td class="center">
+                        <p ng-show="item.approved">
+                            <span class="text-success"> (##word.Yes##) </span>
+                            - {{item.approveDate|date:'dd/MM/yyyy'}} - {{item.approveDate|date:'dd/MM/yyyy'}}
+                        </p>
+                        <p class="text-danger" ng-show="!item.approved">##word.No##</p>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" x-permissions="payslipsManage" label="##word.View Payslip##" ng-click="showPrintPayslipModal(item)"></i-button>
+
+                        <i-button type="edit" ng-show="!item.approved" x-permissions="payslipsUpdate || payslipsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="print" x-permissions="payslipsManage" label="##word.Print##" ng-click="paySlipPrint(item)"></i-button>
+
+                        <i-button type="delete" ng-show="!item.approved" x-permissions="payslipsDelete || payslipsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="payslipsPrint || payslipsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="payslipsExport || payslipsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'employees_payslip.xlsx')"> </i-button>
+        <div id="paySlipDetails" x-import="payslips/printPayslipPrint.html"></div>
+    </div>
+</div>

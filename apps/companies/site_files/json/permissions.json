@@ -1,0 +1,66 @@
+[
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesManage",
+    "En": "Manage",
+    "Ar": "إدارة"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesAdd",
+    "En": "Add",
+    "Ar": "إضافة"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesEdit",
+    "En": "Edit",
+    "Ar": "تعديل"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesDelete",
+    "En": "Delete",
+    "Ar": "حذف"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesView",
+    "En": "View",
+    "Ar": "عرض"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesSearch",
+    "En": "Search",
+    "Ar": "بحث"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesExport",
+    "En": "Export",
+    "Ar": "تصدير"
+  },
+
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesPrint",
+    "En": "Print",
+    "Ar": "طباعة"
+  },
+  {
+    "moduleName": "public",
+    "screenName": "companies",
+    "name": "companiesUi",
+    "En": "UI",
+    "Ar": "الواجهة الرسومية"
+  }
+]
