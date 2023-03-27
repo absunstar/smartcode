@@ -1,4 +1,5 @@
 app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
+    $scope.setting = site.showObject(`##data.#setting##`);
   $scope.baseURL = '';
   $scope.appName = 'salesInvoices';
   $scope.modalID = '#salesPatientsInvoicesManageModal';
@@ -37,7 +38,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.mainError = '';
 
-    if (!$scope.settings || !$scope.settings.id) {
+    if (!$scope.setting || !$scope.setting.id) {
       $scope.mainError = '##word.Please Contact System Administrator to Set System Setting##';
       return;
     }
@@ -45,15 +46,15 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.mode = 'add';
     $scope.resetOrderItem();
     $scope.item = { ...$scope.structure, salesType: $scope.salesTypesList[2], date: new Date(), itemsList: [], discountsList: [], taxesList: [] };
-    if ($scope.settings.storesSetting.paymentType && $scope.settings.storesSetting.paymentType.id) {
+    if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
-        return _t.id == $scope.settings.storesSetting.paymentType.id;
+        return _t.id == $scope.setting.storesSetting.paymentType.id;
       });
     }
 
-    if ($scope.settings.storesSetting.subStore && $scope.settings.storesSetting.subStore.id) {
+    if ($scope.setting.storesSetting.subStore && $scope.setting.storesSetting.subStore.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
-        return _t.id == $scope.settings.storesSetting.subStore.id;
+        return _t.id == $scope.setting.storesSetting.subStore.id;
       });
     }
 
@@ -164,14 +165,14 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
-          if ($scope.settings.accountsSetting.currency) {
+          if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
-              ar: ' ' + $scope.settings.accountsSetting.currency.nameAr + ' ',
-              en: ' ' + $scope.settings.accountsSetting.currency.nameEn + ' ',
+              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
             };
             site.strings['from100'] = {
-              ar: ' ' + $scope.settings.accountsSetting.currency.smallCurrencyAr + ' ',
-              en: ' ' + $scope.settings.accountsSetting.currency.smallCurrencyEn + ' ',
+              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
           $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
@@ -834,29 +835,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSetting = function () {
-    $scope.busy = true;
-    $scope.settings = {};
-    $http({
-      method: 'POST',
-      url: '/api/systemSetting/get',
-      data: {},
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done) {
-          $scope.settings = response.data.doc;
-          if ($scope.settings.printerProgram.invoiceLogo) {
-            $scope.invoiceLogo = document.location.origin + $scope.settings.printerProgram.invoiceLogo.url;
-          }
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
 
   $scope.calculate = function (obj) {
     $timeout(() => {
@@ -882,7 +860,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         item.totalPrice = item.price * item.count;
         obj.totalPrice += item.totalPrice;
         if (!item.noVat) {
-          item.vat = $scope.settings.storesSetting.vat;
+          item.vat = $scope.setting.storesSetting.vat;
           item.totalVat = (((item.price - discountValue) * item.vat) / 100) * item.count;
           item.totalVat = site.toNumber(item.totalVat);
         } else {
@@ -977,29 +955,29 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
-    if ($scope.settings.printerProgram.thermalPrinter) {
+    if ($scope.setting.printerProgram.thermalPrinter) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
       $scope.localPrint = function () {
-        if ($scope.settings.printerProgram.placeQr) {
-          if ($scope.settings.printerProgram.placeQr.id == 1) {
+        if ($scope.setting.printerProgram.placeQr) {
+          if ($scope.setting.printerProgram.placeQr.id == 1) {
             site.qrcode({
               width: 140,
               height: 140,
               selector: document.querySelector('.qrcode'),
               text: document.location.protocol + '//' + document.location.hostname + `/qr_storeout?id=${$scope.thermal.id}`,
             });
-          } else if ($scope.settings.printerProgram.placeQr.id == 2) {
-            if ($scope.settings.printerProgram.countryQr && $scope.settings.printerProgram.countryQr.id == 1) {
+          } else if ($scope.setting.printerProgram.placeQr.id == 2) {
+            if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
               let qrString = {
                 vatNumber: '##session.company.taxNumber##',
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat,
               };
-              if ($scope.settings.printerProgram.thermalLang.id == 1 || ($scope.settings.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
+              if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
                 qrString.name = '##session.company.nameAr##';
-              } else if ($scope.settings.printerProgram.thermalLang.id == 2 || ($scope.settings.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
+              } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
                 qrString.name = '##session.company.nameEn##';
               }
               qrString.name = '##session.company.nameEn##';
@@ -1019,14 +997,14 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
               let datetime = new Date($scope.thermal.date);
               let formattedDate =
                 datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate() + ' ' + datetime.getHours() + ':' + datetime.getMinutes() + ':' + datetime.getSeconds();
-              let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.settings.printerProgram.taxNumber}]\nرقم الفاتورة :[${
+              let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
                 $scope.thermal.code
               }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${$scope.thermal.totalVat}]\nالصافي : [${$scope.thermal.totalNet}]`;
               site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: qrString });
             }
           }
         }
-        let printer = $scope.settings.printerProgram.thermalPrinter;
+        let printer = $scope.setting.printerProgram.thermalPrinter;
         if ('##user.printerPath##' && '##.printerPath.id##' > 0) {
           printer = JSON.parse('##user.printerPath##');
         }
@@ -1057,11 +1035,11 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#salesInvoicesDetails').removeClass('hidden');
 
-    if ($scope.item.itemsList.length > $scope.settings.printerProgram.itemsCountA4) {
+    if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
       $scope.invList = [];
-      let invLength = $scope.item.itemsList.length / $scope.settings.printerProgram.itemsCountA4;
+      let invLength = $scope.item.itemsList.length / $scope.setting.printerProgram.itemsCountA4;
       invLength = parseInt(invLength);
-      let ramainItems = $scope.item.itemsList.length - invLength * $scope.settings.printerProgram.itemsCountA4;
+      let ramainItems = $scope.item.itemsList.length - invLength * $scope.setting.printerProgram.itemsCountA4;
 
       if (ramainItems) {
         invLength += 1;
@@ -1074,7 +1052,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         $scope.item.itemsList.forEach((itm, i) => {
           let item = { ...itm };
           item.$index = i + 1;
-          if (i < (iInv + 1) * $scope.settings.printerProgram.itemsCountA4 && !item.$doneInv) {
+          if (i < (iInv + 1) * $scope.setting.printerProgram.itemsCountA4 && !item.$doneInv) {
             item.$doneInv = true;
             so.itemsList.push(item);
           }
@@ -1097,25 +1075,25 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         return;
       }
 
-      if ($scope.settings.printerProgram.placeQr) {
-        if ($scope.settings.printerProgram.placeQr.id == 1) {
+      if ($scope.setting.printerProgram.placeQr) {
+        if ($scope.setting.printerProgram.placeQr.id == 1) {
           site.qrcode({
             width: 140,
             height: 140,
             selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1],
             text: document.location.protocol + '//' + document.location.hostname + `/qr_storeout?id=${$scope.item.id}`,
           });
-        } else if ($scope.settings.printerProgram.placeQr.id == 2) {
-          if ($scope.settings.printerProgram.countryQr && $scope.settings.printerProgram.countryQr.id == 1) {
+        } else if ($scope.setting.printerProgram.placeQr.id == 2) {
+          if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
             let qrString = {
               vatNumber: '##session.company.taxNumber##',
               time: new Date($scope.item.date).toISOString(),
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,
             };
-            if ($scope.settings.printerProgram.thermalLang.id == 1 || ($scope.settings.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
+            if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
               qrString.name = '##session.company.nameAr##';
-            } else if ($scope.settings.printerProgram.thermalLang.id == 2 || ($scope.settings.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
+            } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
               qrString.name = '##session.company.nameEn##';
             }
             qrString.name = '##session.company.nameEn##';
@@ -1135,7 +1113,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
             let datetime = new Date($scope.item.date);
             let formattedDate =
               datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate() + ' ' + datetime.getHours() + ':' + datetime.getMinutes() + ':' + datetime.getSeconds();
-            let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.settings.printerProgram.taxNumber}]\nرقم الفاتورة :[${
+            let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
               $scope.item.code
             }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${$scope.item.totalVat}]\nالصافي : [${$scope.item.totalNet}]`;
 
@@ -1145,8 +1123,8 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       }
       let printer = {};
       if (type == 'a4') {
-        if ($scope.settings.printerProgram.a4Printer) {
-          printer = $scope.settings.printerProgram.a4Printer;
+        if ($scope.setting.printerProgram.a4Printer) {
+          printer = $scope.setting.printerProgram.a4Printer;
         } else {
           $scope.error = '##word.A4 printer must select##';
           return;
@@ -1155,8 +1133,8 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
           printer = JSON.parse('##user.printerPath##');
         }
       } else if (type === 'pdf') {
-        if ($scope.settings.printerProgram.pdfPrinter) {
-          printer = $scope.settings.printerProgram.pdfPrinter;
+        if ($scope.setting.printerProgram.pdfPrinter) {
+          printer = $scope.setting.printerProgram.pdfPrinter;
         } else {
           $scope.error = '##word.PDF printer must select##';
           return;
@@ -1211,8 +1189,8 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     });
     $scope.localPrint = function () {
       let printer = {};
-      if ($scope.settings.printerProgram.labelPrinter) {
-        printer = $scope.settings.printerProgram.labelPrinter;
+      if ($scope.setting.printerProgram.labelPrinter) {
+        printer = $scope.setting.printerProgram.labelPrinter;
       } else {
         $scope.error = '##word.Label printer must select##';
         return;
@@ -1461,7 +1439,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
   $scope.getCustomers();
   $scope.getStoresItems();
   $scope.getNumberingAuto();
-  $scope.getSetting();
   $scope.getDoctorDeskTopList();
   $scope.getMedicineDurationsList();
   $scope.getMedicineFrequenciesList();

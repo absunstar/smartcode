@@ -214,7 +214,7 @@ app.controller('printersPaths', function ($scope, $http, $timeout) {
   $scope.getPrintersNamesList = function () {
     $scope.error = '';
     let printersList = site.printerList;
-    console.log(site.printerList);
+
     $scope.printersNamesList = [];
     printersList.forEach((_p, i) => {
       $scope.printersNamesList.push({ id: i + 1, name: _p.name });

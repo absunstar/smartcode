@@ -5,7 +5,6 @@ module.exports = function init(site) {
         allowRouteGet: true,
     };
 
-
     if (app.allowRoute) {
         if (app.allowRouteGet) {
             site.get(
@@ -13,12 +12,11 @@ module.exports = function init(site) {
                     name: app.name,
                 },
                 (req, res) => {
-                    res.render(app.name + '/index.html', { title: app.name, appName: 'Sales Invoices For Companies' }, { parser: 'html', compres: true });
+                    res.render(app.name + '/index.html', { title: app.name, appName: 'Sales Invoices For Companies', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
                 }
             );
         }
     }
 
-
-  site.addApp(app);
+    site.addApp(app);
 };

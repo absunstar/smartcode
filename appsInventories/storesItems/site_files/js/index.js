@@ -1,4 +1,5 @@
 app.controller('storesItems', function ($scope, $http, $timeout) {
+    $scope.setting = site.showObject(`##data.#setting##`);
     $scope.baseURL = '';
     $scope.appName = 'storesItems';
     $scope.modalID = '#storesItemsManageModal';
@@ -53,7 +54,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mainError = '';
-        if (!$scope.settings || !$scope.settings.id) {
+        if (!$scope.setting || !$scope.setting.id) {
             $scope.mainError = '##word.Please Contact System Administrator to Set System Setting##';
             return;
         }
@@ -72,21 +73,21 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             validityDays: 0,
             reorderLimit: 0,
         };
-        if ($scope.settings.storesSetting.itemType && $scope.settings.storesSetting.itemType.id) {
+        if ($scope.setting.storesSetting.itemType && $scope.setting.storesSetting.itemType.id) {
             $scope.item.itemType = $scope.itemsTypesList.find((_t) => {
-                return _t.id == $scope.settings.storesSetting.itemType.id;
+                return _t.id == $scope.setting.storesSetting.itemType.id;
             });
         }
 
-        /*  if ($scope.settings.storesSetting.itemGroup && $scope.settings.storesSetting.itemGroup.id) {
+        /*  if ($scope.setting.storesSetting.itemGroup && $scope.setting.storesSetting.itemGroup.id) {
       $scope.item.itemGroup = $scope.itemsgroupsList.find((_g) => {
-        return _g.id == $scope.settings.storesSetting.itemGroup.id;
+        return _g.id == $scope.setting.storesSetting.itemGroup.id;
       });
     } */
 
-        if ($scope.settings.storesSetting.itemUnit && $scope.settings.storesSetting.itemUnit.id) {
+        if ($scope.setting.storesSetting.itemUnit && $scope.setting.storesSetting.itemUnit.id) {
             $scope.item.mainUnit = $scope.storesUnitsList.find((_g) => {
-                return _g.id == $scope.settings.storesSetting.itemUnit.id;
+                return _g.id == $scope.setting.storesSetting.itemUnit.id;
             });
             if ($scope.item.mainUnit) {
                 $scope.addMainItemUnit($scope.item.mainUnit);
@@ -534,27 +535,6 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getSetting = function () {
-        $scope.busy = true;
-        $scope.settings = {};
-        $http({
-            method: 'POST',
-            url: '/api/systemSetting/get',
-            data: {},
-        }).then(
-            function (response) {
-                $scope.busy = false;
-                if (response.data.done) {
-                    $scope.settings = response.data.doc;
-                }
-            },
-            function (err) {
-                $scope.busy = false;
-                $scope.error = err;
-            }
-        );
-    };
-
     $scope.showSearch = function () {
         $scope.error = '';
         site.showModal($scope.modalSearchID);
@@ -962,73 +942,72 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
 
     $scope.readQR = function (obj) {
         $timeout(() => {
-          if (obj.$code) {
-            $scope.qr = site.getQRcode(obj.$code);
-            obj.gtin = $scope.qr.gtin;
-           /*  obj.batch = $scope.qr.batch;
+            if (obj.$code) {
+                $scope.qr = site.getQRcode(obj.$code);
+                obj.gtin = $scope.qr.gtin;
+                /*  obj.batch = $scope.qr.batch;
             obj.mfgDate = $scope.qr.mfgDate;
             obj.expiryDate = $scope.qr.expiryDate;
             obj.sn = $scope.qr.sn; */
-            
-          }
+            }
         }, 300);
-      };
-    
-      site.getQRcode = function (code) {
+    };
+
+    site.getQRcode = function (code) {
         let qr = {
-          code: code,
+            code: code,
         };
         if (code.indexOf('') !== -1) {
-          code = code.split('');
+            code = code.split('');
         } else if (code.indexOf('^') !== -1) {
-          code = code.split('^');
+            code = code.split('^');
         }
-    
+
         if (code[0].length === 24 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '10') {
-          qr.gtin = code[0].slice(2, 16);
-          qr.batch = code[0].slice(18);
+            qr.gtin = code[0].slice(2, 16);
+            qr.batch = code[0].slice(18);
         } else if (code[0].length === 24 && code[0].slice(0, 2) === '01') {
-          qr.gtin = code[0].slice(2, 15);
-          qr.mfgDate = code[0].slice(16, 23);
+            qr.gtin = code[0].slice(2, 15);
+            qr.mfgDate = code[0].slice(16, 23);
         } else if (code[0].length === 32 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '17') {
-          qr.gtin = code[0].slice(2, 15);
-          qr.expiryDate = code[0].slice(18, 24);
-          qr.batch = code[0].slice(25);
+            qr.gtin = code[0].slice(2, 15);
+            qr.expiryDate = code[0].slice(18, 24);
+            qr.batch = code[0].slice(25);
         } else if (code[0].length === 32 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '21') {
-          qr.gtin = code[0].slice(2, 15);
-          qr.sn = code[0].slice(18);
+            qr.gtin = code[0].slice(2, 15);
+            qr.sn = code[0].slice(18);
         } else if (code[0].length === 25 && code[0].slice(0, 2) === '01') {
-          qr.gtin = code[0].slice(1, 12);
-          qr.mfgDate = code[0].slice(12, 18);
-          qr.batch = code[0].slice(18);
+            qr.gtin = code[0].slice(1, 12);
+            qr.mfgDate = code[0].slice(12, 18);
+            qr.batch = code[0].slice(18);
         } else if (code[0].length === 33 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '17' && code[0].slice(24, 26) === '10') {
-          qr.gtin = code[0].slice(2, 16);
-          qr.expiryDate = code[0].slice(18, 24);
-          qr.batch = code[0].slice(26);
+            qr.gtin = code[0].slice(2, 16);
+            qr.expiryDate = code[0].slice(18, 24);
+            qr.batch = code[0].slice(26);
         }
-    
+
         if (code[1].length === 22 && code[1].slice(0, 2) === '17' && code[1].slice(8, 10) === '21') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.sn = code[1].slice(10);
+            qr.expiryDate = code[1].slice(2, 8);
+            qr.sn = code[1].slice(10);
         } else if (code[1].length === 22 && code[1].slice(0, 2) === '21') {
-          qr.sn = code[1].slice(2);
+            qr.sn = code[1].slice(2);
         } else if (code[1].length === 24 && code[1].slice(0, 2) === '17' && code[1].slice(8, 10) === '21') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.sn = code[1].slice(10);
+            qr.expiryDate = code[1].slice(2, 8);
+            qr.sn = code[1].slice(10);
         } else if (code[1].length === 11 && code[1].slice(0, 2) === '21') {
-          qr.sn = code[1].slice(2, 8);
+            qr.sn = code[1].slice(2, 8);
         } else if (code[1].length === 17 && code[1].slice(0, 2) === '21') {
-          qr.sn = code[1].slice(2);
+            qr.sn = code[1].slice(2);
         } else if (code[1].length === 17 && code[1].slice(0, 2) === '17' && code[1].slice(8, 10) === '10') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.batch = code[1].slice(10);
+            qr.expiryDate = code[1].slice(2, 8);
+            qr.batch = code[1].slice(10);
         } else if (code[1].length === 20 && code[1].slice(0, 2) === '17' && code[1].slice(8, 10) === '21') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.sn = code[1].slice(10);
+            qr.expiryDate = code[1].slice(2, 8);
+            qr.sn = code[1].slice(10);
         }
-    
+
         return qr;
-      };
+    };
 
     $scope.getAll();
     $scope.getStoresUnits();
@@ -1036,5 +1015,4 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     $scope.getItemsTypes();
     $scope.getNumberingAuto();
     $scope.getItemsGroups();
-    $scope.getSetting();
 });
