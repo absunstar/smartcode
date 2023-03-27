@@ -414,14 +414,14 @@
     {
         "category": "hr",
         "feature": "public",
-        "id": "jobsAdministrations",
-        "name": "Jobs Administrations"
+        "id": "departments",
+        "name": "Departments"
     },
     {
         "category": "hr",
         "feature": "public",
-        "id": "jobsDepartments",
-        "name": "Jobs Sections"
+        "id": "sections",
+        "name": "Sections"
     },
     {
         "category": "hr",

@@ -252,6 +252,7 @@ module.exports = function init(site) {
                 let search = req.body.search || '';
                 let limit = req.body.limit || 10;
                 let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, manager: 1, deputy: 1, department: 1 };
+
                 if (search) {
                     where.$or = [];
 
@@ -273,12 +274,14 @@ module.exports = function init(site) {
                 }
 
                 if (app.allowMemory) {
+                 
                     if (!search) {
                         search = 'id';
                     }
                     let list = app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
+             
 
                     res.json({
                         done: true,

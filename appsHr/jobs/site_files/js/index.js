@@ -44,10 +44,7 @@ app.controller('jobs', function ($scope, $http, $timeout) {
                     site.resetValidated($scope.modalID);
                     $scope.list.push(response.data.doc);
                 } else {
-                    $scope.error = response.data.error;
-                    if (response.data.error && response.data.error.like('*Must Enter Code*')) {
-                        $scope.error = '##word.Must Enter Code##';
-                    }
+                    $scope.error = response.data.error || 'Please Login First';
                 }
             },
             function (err) {
@@ -88,7 +85,7 @@ app.controller('jobs', function ($scope, $http, $timeout) {
                         $scope.list[index] = response.data.result.doc;
                     }
                 } else {
-                    $scope.error = 'Please Login First';
+                    $scope.error = response.data.error || 'Please Login First';
                 }
             },
             function (err) {
@@ -260,7 +257,7 @@ app.controller('jobs', function ($scope, $http, $timeout) {
             method: 'POST',
             url: '/api/sections/all',
             data: {
-                where: { active: true, department },
+                where: { active: true, 'department.id': department.id },
                 select: {
                     id: 1,
                     code: 1,
