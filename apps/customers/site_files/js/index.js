@@ -425,7 +425,7 @@ app.controller('customers', function ($scope, $http, $timeout) {
             url = '/api/accountsGuide/all';
             where = {
                 status: 'active',
-                type: 'primary',
+                type: 'detailed',
             };
         } else {
             url = '/api/assistantGeneralLedger/all';
