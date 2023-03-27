@@ -443,7 +443,6 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         where['hasReturnTransaction'] = { $ne: true };
         $scope.busy = true;
         $scope.returnSalesInvoicesList = [];
-        console.log(where);
         $http({
             method: 'POST',
             url: '/api/salesInvoices/all',

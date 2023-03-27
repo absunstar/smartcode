@@ -687,7 +687,6 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
     } else {
       $scope.orderItem.currentBalance = unit.storesList[storeIndex].currentCount;
     }
-    console.log($scope.orderItem.currentBalance);
   };
 
   $scope.addToItemsList = function (elem) {

@@ -44,7 +44,6 @@ app.controller('vendors', function ($scope, $http, $timeout) {
             data: $scope.item,
         }).then(
             function (response) {
-                console.log('response', response);
 
                 $scope.busy = false;
                 if (response.data.done) {

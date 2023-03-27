@@ -32,7 +32,6 @@ site.get(
     name: '/',
   },
   (req, res) => {
-    console.log(req.word);
     res.render('index.html', { title: req.word('Site Title')}, { parser: 'html css js', compres: true });
   }
 );

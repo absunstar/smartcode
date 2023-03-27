@@ -21,7 +21,7 @@ module.exports = function init(site) {
       if (!err && docs) {
         let itemsDocs = [];
         for (let i = 0; i < obj.items.length; i++) {
-          let item = obj.items[i];
+          let item = {...obj.items[i]};
           let batchCount = { ...item }.count;
           item.batchesList = [];
           let indexDoc = docs.findIndex((itm) => itm.id === item.id);
@@ -798,7 +798,6 @@ module.exports = function init(site) {
           if (storeIndex != -1) {
     
             doc.unitsList[unitIndex].storesList[storeIndex].batchesList = doc.unitsList[unitIndex].storesList[storeIndex].batchesList || [];
-            console.log(doc.unitsList[unitIndex].storesList[storeIndex].batchesList);
             let batchIndex = doc.unitsList[unitIndex].storesList[storeIndex].batchesList.findIndex((b) => b.code == where.code || b.sn == where.code);
             if (batchIndex != -1) {
               doc.unitsList[unitIndex].storesList[storeIndex].batchesList[batchIndex];
