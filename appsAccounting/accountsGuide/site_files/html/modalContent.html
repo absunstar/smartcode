@@ -47,7 +47,7 @@
 
           <i-radio class="col3" ng-value="incomeList" ng-change="getCategoryList()" label="##word.IncomeList##" ng-model="item.reportType"> </i-radio>
           <i-list
-            ng-show="settings.accountsSetting.linkGlWithIncomeStatementAndBudget == true"
+            ng-show="setting.accountsSetting.linkGlWithIncomeStatementAndBudget == true"
             class="col4"
             display="name##session.lang##"
             ng-search="item.$category"

@@ -18,7 +18,7 @@
                 <div class="row">
                     <h5 class="center bold">##session.branch.nameEn##</h5>
                 </div>
-                <div class="row center" ng-repeat="i in settings.printerProgram.invoiceHeader2">
+                <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
                     <p class="font-12 bold black center">{{i.name}}</p>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="row">
                     <h5 class="center bold">##session.branch.nameAr##</h5>
                 </div>
-                <div class="row center" ng-repeat="i in settings.printerProgram.invoiceHeader">
+                <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
                     <p class="font-12 bold black center">{{i.name}}</p>
                 </div>
             </div>
@@ -428,7 +428,7 @@
                         <p>Unit Price</p>
                     </th>
 
-                    <th class="width-15-mm font-10" ng-show="settings.storesSetting.vat > 0">
+                    <th class="width-15-mm font-10" ng-show="setting.storesSetting.vat > 0">
                         <p>VAT PER.</p>
                         <p>VAT</p>
                     </th>
@@ -472,7 +472,7 @@
 
                     <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
 
-                    <td class="center width-15-mm font-12" ng-show="settings.storesSetting.vat > 0">
+                    <td class="center width-15-mm font-12" ng-show="setting.storesSetting.vat > 0">
                         <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
                         <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                     </td>
@@ -520,7 +520,7 @@
                         <p>Unit Price</p>
                     </th>
 
-                    <th class="width-15-mm font-10" ng-show="settings.storesSetting.vat > 0">
+                    <th class="width-15-mm font-10" ng-show="setting.storesSetting.vat > 0">
                         <p>VAT PER.</p>
                         <p>VAT</p>
                     </th>
@@ -564,7 +564,7 @@
 
                     <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
 
-                    <td class="center width-15-mm font-12" ng-show="settings.storesSetting.vat > 0">
+                    <td class="center width-15-mm font-12" ng-show="setting.storesSetting.vat > 0">
                         <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
                         <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                     </td>
@@ -672,11 +672,11 @@
                     <span class="qrcode-a4"></span>
                 </div>
 
-                <div class="row" ng-show="settings.printerProgram.printWrittenAmount">
+                <div class="row" ng-show="setting.printerProgram.printWrittenAmount">
                     <div class="col-1"></div>
                     <div class="col-11">
-                        <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
-                        <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
+                        <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}</p>
+                        <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}</p>
                     </div>
                     <hr />
                 </div>
@@ -717,7 +717,7 @@
 
                     <div class="row">
                         <div class="col-8">
-                            <p class="txt18 bold black">ضريبة القيمة المضافة / VAT {{settings.storesSetting.vat | xmoney2}} <span class="currency">##word.$##</span>%</p>
+                            <p class="txt18 bold black">ضريبة القيمة المضافة / VAT {{setting.storesSetting.vat | xmoney2}} <span class="currency">##word.$##</span>%</p>
                         </div>
                         <div class="col-1"></div>
                         <div class="col-3">
@@ -748,7 +748,7 @@
                         </div>
                     </div>
 
-                    <div class="row" ng-show="settings.storesSetting.taxesAppearingInInvoices">
+                    <div class="row" ng-show="setting.storesSetting.taxesAppearingInInvoices">
                         <div class="col-8">
                             <p class="txt18 bold black">الضريبة النقدي / TAX Cash</p>
                         </div>
@@ -774,11 +774,11 @@
                     <div class="qrcode-a4 center"></div>
                 </div>
 
-                <div class="row" ng-show="settings.printerProgram.printWrittenAmount">
+                <div class="row" ng-show="setting.printerProgram.printWrittenAmount">
                     <div class="col-1"></div>
                     <div class="col-11">
-                        <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
-                        <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{settings.accountsSetting.endNumStrAr || ''}}</p>
+                        <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}</p>
+                        <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}</p>
                     </div>
                     <hr />
                 </div>
@@ -818,7 +818,7 @@
             </div>
             <hr />
 
-            <div class="row padding" ng-repeat="i in settings.printerProgram.invoiceFooter">
+            <div class="row padding" ng-repeat="i in setting.printerProgram.invoiceFooter">
                 <p class="font-12 bold black center">{{i.name}}</p>
             </div>
 
