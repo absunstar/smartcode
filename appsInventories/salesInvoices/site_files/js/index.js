@@ -89,7 +89,10 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
                 if (response.data.done) {
                     site.hideModal($scope.modalID);
                     site.resetValidated($scope.modalID);
-                    $scope.list.push(response.data.doc);
+                    $scope.list.unshift(response.data.doc);
+                    if($scope.setting.printerProgram.autoThermalPrintSalesInvo) {
+                        $scope.thermalPrint(response.data.doc);
+                    }
                 } else {
                     $scope.error = response.data.error;
                     if (response.data.error && response.data.error.like('*Must Enter Code*')) {

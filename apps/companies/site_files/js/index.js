@@ -43,7 +43,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
         if (response.data.done) {
 
           site.hideModal('#companyAddModal');
-          $scope.list.push(response.data.doc);
+          $scope.list.unshift(response.data.doc);
           $scope.count += 1;
           $scope.busy = true;
         } else {

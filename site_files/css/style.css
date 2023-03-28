@@ -5,8 +5,8 @@
   --body-background: #ffffff;
   --bs-body-bg: #ffffff;
   --modal-animation-duration: 0.1s;
-  --tabs-background-color :  #00bcd4;
-  --tabs-background-color2 :  #00bcd4;
+  --tabs-background-color: #00bcd4;
+  --tabs-background-color2: #00bcd4;
   --tabs-header-link-color: #0000005e;
   --tabs-header-link-font-weight: bold;
   --modal-header-background-color: var(--theme-color);
@@ -21,6 +21,11 @@
 .borderBlack {
   border-style: solid;
   border-color: black;
+}
+.border-1 {
+  border: 2px var(--theme-color) solid;
+  margin: 2px !important;
+  border-radius: 5px;
 }
 .space {
   word-spacing: 7px;
@@ -121,14 +126,13 @@
   background: #00b086e0;
 }
 .error {
-  font-size : 22px !important;
+  font-size: 22px !important;
 }
 i-image img {
   min-height: 45px !important;
 }
 i-image[view] img {
   border-radius: 3px !important;
-
 }
 .logoProfile {
   width: 64px;
@@ -183,9 +187,9 @@ body {
 .tabs .tabs-header .tab-link.active {
 }
 
-.tabs .full .tab-link {
+/* .tabs .full .tab-link {
   margin: auto;
-}
+} */
 .no-line {
   text-decoration-line: unset;
 }
@@ -219,7 +223,7 @@ body {
 }
 
 .cart-number {
-  color: #009688;
+  color: var(--theme-color);
   font-size: 20px;
   display: inherit;
 }
@@ -249,8 +253,19 @@ body {
   text-align: left;
 }
 
+.tabs .full .tab-link {
+  margin: auto;
+  display: inline-table;
+  white-space: break-spaces;
+  margin-top: 0px;
+}
+
+.tabs .tabs-header .tab-link {
+  padding: 2px 9px;
+}
+
 p {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.1rem !important;
 }
 .word-line {
   word-break: keep-all;

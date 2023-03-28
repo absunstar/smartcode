@@ -56,7 +56,7 @@ app.controller('createVacations', function ($scope, $http, $timeout) {
                 if (response.data.done) {
                     site.hideModal($scope.modalID);
                     site.resetValidated($scope.modalID);
-                    $scope.list.push(response.data.doc);
+                    $scope.list.unshift(response.data.doc);
                 } else {
                     $scope.error = response.data.error || 'Please Login First';
                 }
