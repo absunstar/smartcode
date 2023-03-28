@@ -238,10 +238,106 @@
                     <p class="black center font-10 bold">{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
             </div>
-            <hr />
+            <!-- <hr /> -->
         </div>
         <hr />
         <div class="row">
+            <div class="center col-12 border-1">
+                <div class="col-4"><p class="font-12">Discount 1</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalLegalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">خصم 1</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="center col-12 border-1">
+                <div class="col-4"><p class="font-12">Discount 2</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalVendorDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">خصم 2</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="center col-12 border-1">
+                <div class="col-4"><p class="font-12">Cash Discount</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">الخصم النقدي</p></div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="setting.storesSetting.vat">
+            <div class="center col-6 border-1">
+                <div class="col-4"><p class="font-12">VAT</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">ضريبة القيمة المضافة</p></div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="setting.storesSetting.vat">
+            <div class="center col-6 border-1">
+                <div class="col-4"><p class="font-12">Total Before Tax</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">الإجمالي قبل الضريبة</p></div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="setting.storesSetting.vat">
+            <div class="center col-6 border-1">
+                <div class="col-4" class="font-12"><p>Total After Tax</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">الإجمالي بعد الضريبة</p></div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="setting.storesSetting.taxesAppearingInInvoices">
+            <div class="center col-12 border-1">
+                <div class="col-4"><p class="font-12">Cash TAX</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalTaxes | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">الضريبة النقدي</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="center col-12 border-1">
+                <div class="col-4"><p class="font-12">Paid</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">المدفوع</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="center col-12 border-1">
+                <div class="col-4"><p class="font-12">Total</p></div>
+                <div class="col-4">
+                    <p class="bold black">{{sInvoice.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12">المجموع</p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="center col-12 border-1">
+                <span class="qrcode"></span>
+            </div>
+        </div>
+
+        <!-- <div class="row">
             <div class="col-8 center">
                 <p class="black bold font-12">المجموع / Total</p>
             </div>
@@ -250,9 +346,9 @@
                 <p class="black bold center font-12">{{thermal.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-8 center">
                 <p class="black bold font-10">إجمالي خصم 1 / Total Discounts 1</p>
             </div>
@@ -271,7 +367,7 @@
                     <hr />
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!--   <div class="row">
       <div class="col-8 center">
@@ -284,7 +380,7 @@
       </div>
     </div> -->
 
-        <div class="row" ng-show="setting.storesSetting.vat">
+        <!-- <div class="row" ng-show="setting.storesSetting.vat">
             <div class="col-8 center">
                 <p class="black bold font-10">إجمالي بعد الخصم و قبل الضريبة / Gross Amount</p>
             </div>
@@ -293,9 +389,9 @@
                 <p class="black center bold font-11">{{thermal.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
-        <div class="row" ng-show="setting.storesSetting.vat">
+        <!-- <div class="row" ng-show="setting.storesSetting.vat">
             <div class="col-8 center">
                 <p class="black bold font-11">ضريبة القيمة المضافة / Value VAT : {{setting.storesSetting.vat}} <span class="currency">##word.%##</span></p>
             </div>
@@ -304,9 +400,9 @@
                 <p class="black center bold font-11">{{thermal.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
-        <div class="row" ng-show="setting.storesSetting.vat">
+        <!-- <div class="row" ng-show="setting.storesSetting.vat">
             <div class="col-8 center">
                 <p class="black center bold font-10">الإجمالي شامل الضريبة / Total After VAT</p>
             </div>
@@ -315,9 +411,9 @@
                 <p class="black center bold font-11">{{thermal.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-8 center">
                 <p class="black bold font-12">الخصم النقدي / Discount cash</p>
             </div>
@@ -326,9 +422,9 @@
                 <p class="black center bold font-12">{{thermal.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
-        <div class="row" ng-show="setting.storesSetting.taxesAppearingInInvoices">
+        <!-- <div class="row" ng-show="setting.storesSetting.taxesAppearingInInvoices">
             <div class="col-8 center">
                 <p class="black bold font-12">الضريبة النقدي / TAX cash</p>
             </div>
@@ -337,9 +433,9 @@
                 <p class="black center bold font-12">{{thermal.totalTaxes | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-8 center">
                 <p class="black bold font-11">المدفوع / Cash</p>
             </div>
@@ -348,7 +444,7 @@
                 <p class="black center bold font-11">{{thermal.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
                 <hr />
             </div>
-        </div>
+        </div> -->
 
         <div class="row" ng-show="setting.printerProgram.printWrittenAmount">
             <div class="col-1"></div>
@@ -364,7 +460,7 @@
 
         <pr />
 
-        <div class="qrcode center"></div>
+        <!-- <div class="qrcode center"></div> -->
         <div class="row" ng-repeat="i in setting.printerProgram.thermalFooter">
             <p class="black bold font-15 center">{{i.name}}</p>
         </div>
