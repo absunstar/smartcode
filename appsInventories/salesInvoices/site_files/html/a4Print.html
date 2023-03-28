@@ -45,13 +45,13 @@
                 <p ng-show="sInvoice.returned" class="center black bold txt18">Return NOTICE ( {{item.invoiceCode}} ) / إشعار مرتجع</p>
             </div>
         </div>
-        <pr />
+        <!-- <pr /> -->
         <hr />
 
         <div class="row full">
             <!-- <div class="row"> -->
             <!-- <fieldset class="black"> -->
-            <div class="center full col-6">
+            <div class="center col-6">
                 <fieldset>
                     <div class="col-3"><p class="black font-12">Date</p></div>
                     <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm a" }}</p></div>
@@ -59,7 +59,7 @@
                 </fieldset>
             </div>
 
-            <div class="center full col-6">
+            <div class="center col-6">
                 <fieldset>
                     <div class="col-3">
                         <p class="black font-12">Invoice No.</p>
@@ -75,7 +75,7 @@
 
             <!-- <div class="row" ng-hide="##query.type## == 5"> -->
             <!-- <fieldset class="black" ng-hide="##query.type## == 5"> -->
-            <div class="center full col-6" ng-hide="##query.type## == 5">
+            <div class="center col-6" ng-hide="##query.type## == 5">
                 <fieldset>
                     <div class="col-3"><p class="black font-12">Pay Method</p></div>
                     <div class="col-6"><p class="black font-12">{{sInvoice.paymentType.name##session.lang##}}</p></div>
@@ -83,7 +83,7 @@
                 </fieldset>
             </div>
 
-            <div class="center full col-6" ng-hide="##query.type## == 5">
+            <div class="center col-6" ng-hide="##query.type## == 5">
                 <fieldset>
                     <div class="col-3">
                         <!-- <p class="black font-12">Transaction Type / Sales Invoice :</p> -->
@@ -101,7 +101,7 @@
 
             <!-- <div class="row" ng-show="item.salesType.code == 'customer'"> -->
             <!-- <fieldset class="black" > -->
-            <div class="center full col-6" ng-show="item.salesType.code == 'customer'">
+            <div class="center col-6" ng-show="item.salesType.code == 'customer'">
                 <fieldset>
                     <div class="col-3">
                         <p class="black font-12">Customer</p>
@@ -113,7 +113,7 @@
                 </fieldset>
             </div>
 
-            <div class="center full col-6" ng-show="item.salesType.code == 'customer'">
+            <div class="center col-6" ng-show="item.salesType.code == 'customer'">
                 <fieldset>
                     <div class="col-3"><p class="black font-12">Mobile :</p></div>
                     <div class="col-6"><p class="black font-12">{{sInvoice.customer.mobile }}</p></div>
@@ -125,7 +125,7 @@
 
             <!-- <div class="row" ng-show="item.salesType.code == 'company'"> -->
             <!-- <fieldset class="black" ng-show="item.salesType.code == 'company'"> -->
-            <div class="center full col-6" ng-show="item.salesType.code == 'company'">
+            <div class="center col-6" ng-show="item.salesType.code == 'company'">
                 <fieldset>
                     <div class="col-3">
                         <p class="black font-12">Company</p>
@@ -137,7 +137,7 @@
                 </fieldset>
             </div>
 
-            <div class="center full col-6" ng-show="item.salesType.code == 'company'">
+            <div class="center col-6" ng-show="item.salesType.code == 'company'">
                 <fieldset>
                     <div class="col-3"><p class="black font-12">Mobile :</p></div>
                     <div class="col-6"><p class="black font-12">{{sInvoice.company.mobile }}</p></div>
@@ -149,7 +149,7 @@
 
             <!-- <div class="row" ng-show="item.salesType.code == 'patient'"> -->
             <!-- <fieldset class="black" ng-show="item.salesType.code == 'patient'"> -->
-            <div class="center full col-6" ng-show="item.salesType.code == 'patient'">
+            <div class="center col-6" ng-show="item.salesType.code == 'patient'">
                 <fieldset>
                     <div class="col-3">
                         <p class="black font-12">Patient</p>
@@ -161,7 +161,7 @@
                 </fieldset>
             </div>
 
-            <div class="center full col-6" ng-show="item.salesType.code == 'patient'">
+            <div class="center col-6" ng-show="item.salesType.code == 'patient'">
                 <fieldset>
                     <div class="col-3"><p class="black font-12">Patient Mobile</p></div>
                     <div class="col-6"><p class="black font-12">{{sInvoice.doctorDeskTop.patient.mobile }}</p></div>
@@ -389,7 +389,7 @@
               </table>
           </div> -->
 
-        <pr />
+        <!-- <pr /> -->
         <div class="row full">
             <table class="table center bold hover details">
                 <tr>
@@ -409,13 +409,13 @@
                     </th>
 
                     <th class="width-15-mm font-10">
-                        <p>خصم 1 / DIS 1</p>
-                        <p>Total DIS 1</p>
+                        <p>DISC 1</p>
+                        <p>T. DISC 1</p>
                     </th>
 
                     <th class="width-15-mm font-10">
-                        <p>DIS 2 ##word.%##</p>
-                        <p>Total DIS 2 ##word.$##</p>
+                        <p>DISC 2</p>
+                        <p>T. DISC 2</p>
                     </th>
 
                     <th class="width-15-mm font-10">
@@ -580,7 +580,7 @@
             <div class="row full">
                 <fieldset>
                     <div class="center col-6">
-                        <div class="col-3"><p class="font-12">Total Items Dis</p></div>
+                        <div class="col-3"><p class="font-12">Total Items DISC</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
@@ -588,7 +588,7 @@
                     </div>
 
                     <div class="center col-6">
-                        <div class="col-3"><p class="font-12">Total Items Dis</p></div>
+                        <div class="col-3"><p class="font-12">Total Items DISC</p></div>
                         <div class="col-6">
                             <p class="bold black">{{sInvoice.totalItemsDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                         </div>
