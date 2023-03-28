@@ -1147,7 +1147,6 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         }, 250);
     };
 
-
     $scope.thermalPrint = function (obj) {
         $scope.error = '';
         if ($scope.busy) return;
@@ -1432,6 +1431,9 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         }
         return qr;
     };
+    if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+        $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+    }
 
     $scope.getAll();
     $scope.getPaymentTypes();

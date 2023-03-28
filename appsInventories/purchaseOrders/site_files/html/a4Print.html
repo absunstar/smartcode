@@ -1,48 +1,35 @@
-<style>
-    .logoPrint {
-        width: 130px;
-        height: 110px;
-        margin: 1px;
-        padding: 1px;
-        border-radius: 0;
-        border: 1px solid var(--background-color);
-    }
-</style>
 <div ng-repeat="sInvoice in invList">
     <div class="border page-a4">
         <div class="row">
             <div class="col-5 center">
-                <br />
                 <div class="row">
-                    <h2 class="center bold">##session.company.nameAr##</h2>
+                    <h4 class="center bold">##session.company.nameEn##</h4>
                 </div>
                 <div class="row">
-                    <h3 class="center bold">##session.branch.nameAr##</h3>
-                </div>
-                <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
-                    <p class="font-12 bold black center">{{i.name}}</p>
-                </div>
-            </div>
-
-            <div class="col-2 center">
-                <br />
-                <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
-            </div>
-
-            <div class="col-5 center">
-                <br />
-                <div class="row">
-                    <h2 class="center bold">##session.company.nameEn##</h2>
-                </div>
-                <div class="row">
-                    <h3 class="center bold">##session.branch.nameEn##</h3>
+                    <h5 class="center bold">##session.branch.nameEn##</h5>
                 </div>
                 <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
                     <p class="font-12 bold black center">{{i.name}}</p>
                 </div>
             </div>
-        </div>
 
+            <div class="col-2 center">
+                <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
+            </div>
+
+            <div class="col-5 center">
+                <div class="row">
+                    <h4 class="center bold">##session.company.nameAr##</h4>
+                </div>
+                <div class="row">
+                    <h5 class="center bold">##session.branch.nameAr##</h5>
+                </div>
+                <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
+                    <p class="font-12 bold black center">{{i.name}}</p>
+                </div>
+            </div>
+        </div>
+   
         <div class="row center" ng-show="##session.company.taxNumber##">
             <p class="center black bold font-12">الرقم الضريبي / Tax No. : ##session.company.taxNumber##</p>
             <p class="center black bold txt18">فاتورة ضريبية / Tax Invoice</p>
