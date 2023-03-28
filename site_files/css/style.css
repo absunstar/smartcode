@@ -184,8 +184,8 @@ body {
   border-radius: 0px 0px 15px 15px;
   min-height: 45px;
 }
-.tabs .tabs-header .tab-link.active {
-}
+/* .tabs .tabs-header .tab-link.active {
+} */
 
 /* .tabs .full .tab-link {
   margin: auto;
