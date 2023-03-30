@@ -704,6 +704,27 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.reset = function (_item) {
+        $scope.busy = true;
+        $scope.error = '';
+
+        $http({
+            method: 'POST',
+            url: `${$scope.baseURL}/api/${$scope.appName}/delete`,
+            data: {
+                id: _item.id,
+            },
+        }).then(
+            function (response) {
+                $scope.busy = false;
+               
+            },
+            function (err) {
+                console.log(err);
+            }
+        );
+    };
+
     $scope.getNationalitiesList();
     $scope.getAccountsGuideList();
     $scope.getPrintersPaths();
