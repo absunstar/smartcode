@@ -7,6 +7,7 @@ module.exports = function init(site) {
     cacheList: [],
     allowRoute: true,
     allowRouteGet: true,
+    allowRouteDelete: true,
     allowRouteSave: true,
     allowRouteGetSetting: true,
   };
@@ -21,57 +22,98 @@ module.exports = function init(site) {
   let establishingAccountsList = [
     {
       screen: { nameAr: 'فواتير الشراء', nameEn: 'Purchase Invoices', name: 'purchaseOrders', active: true },
-      list: [{ nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true }],
+      list: [
+        { nameAr: 'إجمالي الأسعار', nameEn: 'Total Net', name: 'totalPrice', active: true },
+        { nameAr: 'إجمالي الخصم', nameEn: 'Total Discount', name: 'totalDiscounts', active: true },
+        { nameAr: 'إجمالي قبل الضريبة', nameEn: 'Total Before VAT', name: 'totalBeforeVat', active: true },
+        { nameAr: 'إجمالي الضريبة', nameEn: 'Total VAT', name: 'totalVat', active: true },
+        { nameAr: 'إجمالي بعد الضريبة', nameEn: 'Total After VAT', name: 'totalAfterVat', active: true },
+        { nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true },
+      ],
     },
     {
       screen: { nameAr: 'فواتير مبيعات العملاء', nameEn: 'Sales Customers Invoices', name: 'salesInvoices', active: true },
-      list: [{ nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true }],
+      list: [
+        { nameAr: 'إجمالي الأسعار', nameEn: 'Total Net', name: 'totalPrice', active: true },
+        { nameAr: 'إجمالي الخصم', nameEn: 'Total Discount', name: 'totalDiscounts', active: true },
+        { nameAr: 'إجمالي قبل الضريبة', nameEn: 'Total Before VAT', name: 'totalBeforeVat', active: true },
+        { nameAr: 'إجمالي الضريبة', nameEn: 'Total VAT', name: 'totalVat', active: true },
+        { nameAr: 'إجمالي بعد الضريبة', nameEn: 'Total After VAT', name: 'totalAfterVat', active: true },
+        { nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true },
+      ],
     },
     {
       screen: { nameAr: 'فواتير مبيعات الشركات', nameEn: 'Sales Companies Invoices', name: 'salesCompaniesInvoices', active: true },
-      list: [{ nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true }],
+      list: [
+        { nameAr: 'إجمالي الأسعار', nameEn: 'Total Net', name: 'totalPrice', active: true },
+        { nameAr: 'إجمالي الخصم', nameEn: 'Total Discount', name: 'totalDiscounts', active: true },
+        { nameAr: 'إجمالي قبل الضريبة', nameEn: 'Total Before VAT', name: 'totalBeforeVat', active: true },
+        { nameAr: 'إجمالي الضريبة', nameEn: 'Total VAT', name: 'totalVat', active: true },
+        { nameAr: 'إجمالي بعد الضريبة', nameEn: 'Total After VAT', name: 'totalAfterVat', active: true },
+        { nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true },
+      ],
     },
     {
       screen: { nameAr: 'فواتير مبيعات المرضى', nameEn: 'Sales Patients Invoices', name: 'salesPatientsInvoices', active: true },
-      list: [{ nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true }],
+      list: [
+        { nameAr: 'إجمالي الأسعار', nameEn: 'Total Net', name: 'totalPrice', active: true },
+        { nameAr: 'إجمالي الخصم', nameEn: 'Total Discount', name: 'totalDiscounts', active: true },
+        { nameAr: 'إجمالي قبل الضريبة', nameEn: 'Total Before VAT', name: 'totalBeforeVat', active: true },
+        { nameAr: 'إجمالي الضريبة', nameEn: 'Total VAT', name: 'totalVat', active: true },
+        { nameAr: 'إجمالي بعد الضريبة', nameEn: 'Total After VAT', name: 'totalAfterVat', active: true },
+        { nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true },
+      ],
     },
     {
       screen: { nameAr: 'مرتجعات فواتير المشتريات', nameEn: 'Return Purchases Invoices', name: 'returnPurchaseOrders', active: true },
-      list: [{ nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true }],
+      list: [
+        { nameAr: 'إجمالي الأسعار', nameEn: 'Total Net', name: 'totalPrice', active: true },
+        { nameAr: 'إجمالي الخصم', nameEn: 'Total Discount', name: 'totalDiscounts', active: true },
+        { nameAr: 'إجمالي قبل الضريبة', nameEn: 'Total Before VAT', name: 'totalBeforeVat', active: true },
+        { nameAr: 'إجمالي الضريبة', nameEn: 'Total VAT', name: 'totalVat', active: true },
+        { nameAr: 'إجمالي بعد الضريبة', nameEn: 'Total After VAT', name: 'totalAfterVat', active: true },
+        { nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true },
+      ],
     },
     {
       screen: { nameAr: 'مرتجعات فواتير مبيعات', nameEn: 'Return Sales Invoices', name: 'returnSalesInvoices', active: true },
-      list: [{ nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true }],
+      list: [
+        { nameAr: 'إجمالي الأسعار', nameEn: 'Total Net', name: 'totalPrice', active: true },
+        { nameAr: 'إجمالي الخصم', nameEn: 'Total Discount', name: 'totalDiscounts', active: true },
+        { nameAr: 'إجمالي قبل الضريبة', nameEn: 'Total Before VAT', name: 'totalBeforeVat', active: true },
+        { nameAr: 'إجمالي الضريبة', nameEn: 'Total VAT', name: 'totalVat', active: true },
+        { nameAr: 'إجمالي بعد الضريبة', nameEn: 'Total After VAT', name: 'totalAfterVat', active: true },
+        { nameAr: 'إجمالي الصافي', nameEn: 'Total Net', name: 'totalNet', active: true },
+      ],
     },
   ];
 
   site.setting = {
-      printerProgram: printerProgram,
-      storesSetting: {
-          hasDefaultVendor: false,
-          cannotExceedMaximumDiscount: false,
-          allowOverdraft: false,
-          defaultStore: {},
-          idefaultItemType: {},
-          idefaultItemGroup: {},
-          defaultItemUnit: {},
-          defaultVendor: {},
-      },
-      accountsSetting: {
-          paymentType: {},
-          currencySymbol: 'SR',
-      },
-      generalSystemSetting: {},
-      hrSettings: {
-          absenceDays: 1,
-          forgetFingerprint: 0.5,
-          nathionalitiesVacationsList: [],
-          publicVacations: { annualVacation: 0, casualVacation: 0, regularVacation: 0 },
-          nathionalitiesInsuranceList: [],
-          publicInsurance: { totalSubscriptions: 21.5, employeePercentage: 9.75, companyPercentage: 11.75 },
-
-      },
-      establishingAccountsList,
+    printerProgram: printerProgram,
+    storesSetting: {
+      hasDefaultVendor: false,
+      cannotExceedMaximumDiscount: false,
+      allowOverdraft: false,
+      defaultStore: {},
+      idefaultItemType: {},
+      idefaultItemGroup: {},
+      defaultItemUnit: {},
+      defaultVendor: {},
+    },
+    accountsSetting: {
+      paymentType: {},
+      currencySymbol: 'SR',
+    },
+    generalSystemSetting: {},
+    hrSettings: {
+      absenceDays: 1,
+      forgetFingerprint: 0.5,
+      nathionalitiesVacationsList: [],
+      publicVacations: { annualVacation: 0, casualVacation: 0, regularVacation: 0 },
+      nathionalitiesInsuranceList: [],
+      publicInsurance: { totalSubscriptions: 21.5, employeePercentage: 9.75, companyPercentage: 11.75 },
+    },
+    establishingAccountsList,
   };
 
   app.$collection = site.connectCollection(app.name);
@@ -106,6 +148,30 @@ module.exports = function init(site) {
 
     return site.setting;
   };
+
+  app.delete = function (_item, callback) {
+    app.$collection.delete(
+        {
+            id: _item.id,
+        },
+        (err, result) => {
+            if (callback) {
+                callback(err, result);
+            }
+            if (app.allowMemory && !err && result.count === 1) {
+                let index = app.memoryList.findIndex((a) => a.id === _item.id);
+                if (index !== -1) {
+                    app.memoryList.splice(index, 1);
+                }
+            } else if (app.allowCache && !err && result.count === 1) {
+                let index = app.cacheList.findIndex((a) => a.id === _item.id);
+                if (index !== -1) {
+                    app.cacheList.splice(index, 1);
+                }
+            }
+        }
+    );
+};
 
   app.save = function (_item, callback) {
     app.$collection.find({ where: { 'company.id': _item.company.id } }, (err, doc) => {
@@ -182,6 +248,25 @@ module.exports = function init(site) {
             site.word({ name: '$', Ar: result.doc.accountsSetting.currencySymbol, En: result.doc.accountsSetting.currencySymbol });
           } else {
             response.error = err.message;
+          }
+          res.json(response);
+        });
+      });
+    }
+
+    if (app.allowRouteDelete) {
+      site.post({ name: `/api/${app.name}/delete`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+        let _data = req.data;
+
+        app.delete(_data, (err, result) => {
+          if (!err && result.count === 1) {
+            response.done = true;
+            response.result = result;
+          } else {
+            response.error = err?.message || 'Deleted Not Exists';
           }
           res.json(response);
         });

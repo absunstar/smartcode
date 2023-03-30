@@ -366,9 +366,9 @@ module.exports = function init(site) {
         }
 
         establish.list.forEach((_l) => {
-          if (_l.active && obj[_l.name] > 0) {
-            if (_l.debtorAccountGuide && _l.debtorAccountGuide.id) {
-              journalEntry.accountsList.push({
+          if (_l.active && obj[_l.name] > 0 && _l.debtorAccountGuide && _l.debtorAccountGuide.id && _l.creditorAccountGuide && _l.creditorAccountGuide.id) {
+            journalEntry.accountsList.push(
+              {
                 id: _l.debtorAccountGuide.id,
                 code: _l.debtorAccountGuide.code,
                 nameAr: _l.debtorAccountGuide.nameAr,
@@ -376,12 +376,8 @@ module.exports = function init(site) {
                 side: 'debtor',
                 debtor: obj[_l.name],
                 creditor: 0,
-              });
-              journalEntry.totalDebtor += obj[_l.name];
-            }
-
-            if (_l.creditorAccountGuide && _l.creditorAccountGuide.id) {
-              journalEntry.accountsList.push({
+              },
+              {
                 id: _l.creditorAccountGuide.id,
                 code: _l.creditorAccountGuide.code,
                 nameAr: _l.creditorAccountGuide.nameAr,
@@ -389,9 +385,11 @@ module.exports = function init(site) {
                 side: 'creditor',
                 creditor: obj[_l.name],
                 debtor: 0,
-              });
-              journalEntry.totalCreditor += obj[_l.name];
-            }
+              }
+            );
+
+            journalEntry.totalCreditor += obj[_l.name];
+            journalEntry.totalDebtor += obj[_l.name];
           }
         });
         app.add(journalEntry, (err, doc) => {});
