@@ -159,7 +159,6 @@ module.exports = function init(site) {
         _data['approved'] = true;
         _data.company = site.getCompany(req);
         const storesSetting = site.getSystemSetting(req).storesSetting;
-
         let errBatchList = [];
         let medicationDosesList = [];
         site.getBatchesToSalesAuto({ store: _data.store, items: _data.itemsList }, (callbackItems) => {

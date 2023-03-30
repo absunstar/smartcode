@@ -46,7 +46,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $scope.itemsError = '';
     $scope.mode = 'add';
     $scope.resetOrderItem();
-    $scope.item = { ...$scope.structure, salesType: $scope.salesTypesList[1], date: new Date(), itemsList: [], discountsList: [], taxesList: [] };
+    $scope.item = { ...$scope.structure, salesType: { id: 2, nameAr: 'مبيعات للشركات', nameEn: 'Sales For Companies', code: 'company' }, date: new Date(), itemsList: [], discountsList: [], taxesList: [] };
     if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.paymentType.id;
@@ -58,7 +58,6 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
         return _t.id == $scope.setting.storesSetting.store.id;
       });
     }
-
     site.showModal($scope.modalID);
   };
 
@@ -74,6 +73,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
       return;
     }
     $scope.busy = true;
+    console.log($scope.item.salesType);
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/add`,
