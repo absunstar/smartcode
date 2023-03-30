@@ -333,66 +333,68 @@ module.exports = function init(site) {
 
   site.autoJournalEntry = function (session, obj) {
     let setting = site.getSystemSetting({ session });
-    let index = setting.establishingAccountsList.findIndex((itm) => itm.screen.name === obj.appName);
-    if (index !== -1) {
-      let establish = setting.establishingAccountsList[index];
+    if (setting.establishingAccountsList) {
+      let index = setting.establishingAccountsList.findIndex((itm) => itm.screen.name === obj.appName);
+      if (index !== -1) {
+        let establish = setting.establishingAccountsList[index];
 
-      if (establish.screen.active) {
-        let numObj = {
-          company: site.getCompany({ session }),
-          screen: app.name,
-          date: new Date(),
-        };
-        let journalEntry = {
-          date: new Date(),
-          image: obj.image,
-          active: true,
-          totalDebtor: 0,
-          totalCreditor: 0,
-          accountsList: [],
-          company: site.getCompany({ session }),
-          branch: site.getBranch({ session }),
-          addUserInfo: obj.userInfo,
-          nameAr: setting.establishingAccountsList[index].screen.nameAr + ' ' + obj.code,
-          nameEn: setting.establishingAccountsList[index].screen.nameEn + ' ' + obj.code,
-        };
+        if (establish.screen.active) {
+          let numObj = {
+            company: site.getCompany({ session }),
+            screen: app.name,
+            date: new Date(),
+          };
+          let journalEntry = {
+            date: new Date(),
+            image: obj.image,
+            active: true,
+            totalDebtor: 0,
+            totalCreditor: 0,
+            accountsList: [],
+            company: site.getCompany({ session }),
+            branch: site.getBranch({ session }),
+            addUserInfo: obj.userInfo,
+            nameAr: setting.establishingAccountsList[index].screen.nameAr + ' ' + obj.code,
+            nameEn: setting.establishingAccountsList[index].screen.nameEn + ' ' + obj.code,
+          };
 
-        let cb = site.getNumbering(numObj);
-        if (!journalEntry.code && !cb.auto) {
-          response.error = 'Must Enter Code';
-          return;
-        } else if (cb.auto) {
-          journalEntry.code = cb.code;
-        }
-
-        establish.list.forEach((_l) => {
-          if (_l.active && obj[_l.name] > 0 && _l.debtorAccountGuide && _l.debtorAccountGuide.id && _l.creditorAccountGuide && _l.creditorAccountGuide.id) {
-            journalEntry.accountsList.push(
-              {
-                id: _l.debtorAccountGuide.id,
-                code: _l.debtorAccountGuide.code,
-                nameAr: _l.debtorAccountGuide.nameAr,
-                nameEn: _l.debtorAccountGuide.nameEn,
-                side: 'debtor',
-                debtor: obj[_l.name],
-                creditor: 0,
-              },
-              {
-                id: _l.creditorAccountGuide.id,
-                code: _l.creditorAccountGuide.code,
-                nameAr: _l.creditorAccountGuide.nameAr,
-                nameEn: _l.creditorAccountGuide.nameEn,
-                side: 'creditor',
-                creditor: obj[_l.name],
-                debtor: 0,
-              }
-            );
-
-            journalEntry.totalCreditor += obj[_l.name];
-            journalEntry.totalDebtor += obj[_l.name];
+          let cb = site.getNumbering(numObj);
+          if (!journalEntry.code && !cb.auto) {
+            response.error = 'Must Enter Code';
+            return;
+          } else if (cb.auto) {
+            journalEntry.code = cb.code;
           }
-        });
-        app.add(journalEntry, (err, doc) => {});
+
+          establish.list.forEach((_l) => {
+            if (_l.active && obj[_l.name] > 0 && _l.debtorAccountGuide && _l.debtorAccountGuide.id && _l.creditorAccountGuide && _l.creditorAccountGuide.id) {
+              journalEntry.accountsList.push(
+                {
+                  id: _l.debtorAccountGuide.id,
+                  code: _l.debtorAccountGuide.code,
+                  nameAr: _l.debtorAccountGuide.nameAr,
+                  nameEn: _l.debtorAccountGuide.nameEn,
+                  side: 'debtor',
+                  debtor: obj[_l.name],
+                  creditor: 0,
+                },
+                {
+                  id: _l.creditorAccountGuide.id,
+                  code: _l.creditorAccountGuide.code,
+                  nameAr: _l.creditorAccountGuide.nameAr,
+                  nameEn: _l.creditorAccountGuide.nameEn,
+                  side: 'creditor',
+                  creditor: obj[_l.name],
+                  debtor: 0,
+                }
+              );
+
+              journalEntry.totalCreditor += obj[_l.name];
+              journalEntry.totalDebtor += obj[_l.name];
+            }
+          });
+          app.add(journalEntry, (err, doc) => {});
+        }
       }
     }
   };
