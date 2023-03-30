@@ -321,6 +321,10 @@ i-checkbox label {
     width: 140px !important;
     border-radius: 0px !important;
 }
+.m-top-50 {
+
+    margin-top: 50px !important;
+}
 .logoThermalPrint {
     width: 125px !important;
     height: 105px !important;

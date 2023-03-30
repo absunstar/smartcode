@@ -26,11 +26,11 @@
 
         <fieldset ng-show="batch.workByBatch || batch.workBySerial || batch.workByQrCode">
           <div class="row">
-            <div class="col3">
+            <div class="col6">
               <br />
               <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
             </div>
-            <div class="col4">
+            <div class="col4" ng-hide="mode == 'view' || batch.$view">
               <table class="table loaded center bold hover details">
                 <tr>
                   <th>##word.Required Count##</th>
@@ -48,7 +48,7 @@
               </table>
             </div>
           </div>
-          <fieldset ng-hide="mode == 'view' ">
+          <fieldset ng-hide="mode == 'view' || batch.$view">
             <legend>##word.Search##</legend>
             <i-control type="text" class="col6" label="##word.BATCH## / ##word.SERIAL## / ##word.QR CODE##" ng-keydown="getBatch($event,batch)" ng-model="batch.$search"> </i-control>
             <p class="error">{{errorBatch}}</p>
@@ -65,7 +65,7 @@
                 <th ng-show="batch.workByBatch">##word.validit Days##</th>
                 <th ng-show="batch.workByBatch">##word.Current QTY.##</th>
                 <th ng-show="batch.workByBatch">##word.Quantity##</th>
-                <th>##word.Actions##</th>
+                <th  ng-hide="mode == 'view' || batch.$view">##word.Actions##</th>
                 <!-- <th ng-hide="batch.workByBatch">##word.Select##</th> -->
               </tr>
 
@@ -98,10 +98,10 @@
                 </td>
 
                 <td class="center" ng-show="batch.workByBatch">
-                  <i-control type="number" ng-change="calcBatch(batch)" ng-show="!item.approved" ng-disabled="batch.workBySerial" ng-model="c.count"> </i-control>
-                  <p ng-show="item.approved">{{c.count}}</p>
+                  <i-control type="number" ng-change="calcBatch(batch)" ng-hide="mode == 'view' || batch.$view" ng-disabled="batch.workBySerial" ng-model="c.count"> </i-control>
+                  <p ng-show="mode == 'view' || batch.$view">{{c.count}}</p>
                 </td>
-                <td>
+                <td ng-hide="mode == 'view' || batch.$view">
                   <i-button type="delete default" ng-click="batch.$batchCount = batch.$batchCount - c.count ;batch.batchesList.splice($index,1)"> </i-button>
                 </td>
                 <!-- <td ng-hide="batch.workByBatch">
@@ -115,7 +115,7 @@
     </div>
 
     <div class="modal-footer center">
-      <i-button type="save" label="##word.Save##" ng-show="!item.approved" ng-click="saveBatch(batch)"> </i-button>
+      <i-button type="save" label="##word.Save##" ng-hide="mode == 'view' || batch.$view" ng-click="saveBatch(batch)"> </i-button>
       <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#batchModalModal')"></i-button>
     </div>
   </div>

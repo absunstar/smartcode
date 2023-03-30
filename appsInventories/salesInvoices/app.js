@@ -173,14 +173,14 @@ module.exports = function init(site) {
             if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
               if (_item.batchesList) {
                 if (storesSetting.workFifo) {
+                  _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
+
                   if (_item.$batchCount != _item.count) {
                     let itemIndex = callbackItems.findIndex((itm) => itm.id === _item.id);
                     if (itemIndex !== -1) {
                       _item.batchesList = callbackItems[itemIndex].batchesList;
                     }
                   }
-                  _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-                } else {
                   _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
                 }
                 let batchCountErr = _item.batchesList.find((b) => {

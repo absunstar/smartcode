@@ -1,5 +1,6 @@
 <div ng-controller="returnPurchaseOrders" class="loaded">
     <div class="row" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage">
+        <div x-import="purchaseOrders/batchModal.html"></div>
         <div x-import="returnPurchaseOrders/modal.html"></div>
         <div x-import="returnPurchaseOrders/modalSearch.html"></div>
         <div x-import="returnPurchaseOrders/getPurchaseOrdersModal.html"></div>

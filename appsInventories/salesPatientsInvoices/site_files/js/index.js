@@ -1,5 +1,5 @@
 app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
-    $scope.setting = site.showObject(`##data.#setting##`);
+  $scope.setting = site.showObject(`##data.#setting##`);
   $scope.baseURL = '';
   $scope.appName = 'salesInvoices';
   $scope.modalID = '#salesPatientsInvoicesManageModal';
@@ -84,9 +84,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
           $scope.list.unshift(response.data.doc);
-          if($scope.setting.printerProgram.autoThermalPrintSalesInvo) {
+          if ($scope.setting.printerProgram.autoThermalPrintSalesInvo) {
             $scope.thermalPrint(response.data.doc);
-        }
+          }
         } else {
           $scope.error = response.data.error;
           if (response.data.error && response.data.error.like('*Must Enter Code*')) {
@@ -838,67 +838,73 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     );
   };
 
-
   $scope.calculate = function (obj) {
     $timeout(() => {
+      $scope.itemsError = '';
+      obj.totalDiscounts = 0;
+      obj.totalCashDiscounts = 0;
+      obj.totalCashTaxes = 0;
+      obj.totalNet = 0;
       obj.totalPrice = 0;
       obj.totalVat = 0;
       obj.totalAfterVat = 0;
       obj.totalBeforeVat = 0;
-      obj.totalDiscounts = 0;
+      obj.totalMainDiscounts = 0;
+      obj.totalExtraDiscounts = 0;
       obj.totalItemsDiscounts = 0;
-      obj.totalTaxes = 0;
-      obj.totalNet = 0;
+      obj.itemsList.forEach((_item) => {
+        let mainDiscountValue = 0;
 
-      obj.itemsList.forEach((item) => {
-        let discountValue = 0;
-        item.totalVat = 0;
-        item.newPrice = 0;
-        discountValue = item.discountType === 'value' ? item.discount : (item.price * item.discount) / 100;
-        item.totalDiscount = discountValue * item.count;
-        item.totalDiscount = site.toNumber(item.totalDiscount);
-        item.totalExtraDiscount = (item.totalPrice * item.extraDiscount) / 100;
-        item.totalExtraDiscount = site.toNumber(item.totalExtraDiscount);
-        obj.totalItemsDiscounts += item.totalDiscount + item.totalExtraDiscount;
-        item.totalPrice = item.price * item.count;
-        obj.totalPrice += item.totalPrice;
-        if (!item.noVat) {
-          item.vat = $scope.setting.storesSetting.vat;
-          item.totalVat = (((item.price - discountValue) * item.vat) / 100) * item.count;
-          item.totalVat = site.toNumber(item.totalVat);
+        _item.totalVat = 0;
+        _item.totalPrice = _item.price * _item.count;
+        mainDiscountValue = _item.discountType === 'value' ? _item.discount : (_item.price * _item.discount) / 100;
+        _item.totalMainDiscounts = mainDiscountValue * _item.count;
+        _item.totalExtraDiscounts = (_item.totalPrice * _item.extraDiscount) / 100;
+        _item.totalDiscounts = _item.totalMainDiscounts + _item.totalExtraDiscounts;
+        _item.totalMainDiscounts = site.toNumber(_item.totalMainDiscounts);
+        _item.totalExtraDiscounts = site.toNumber(_item.totalExtraDiscounts);
+        _item.totalDiscounts = site.toNumber(_item.totalDiscounts);
+        _item.totalAfterDiscounts = _item.totalPrice - _item.totalDiscounts;
+
+        obj.totalPrice += _item.totalPrice;
+        obj.totalMainDiscounts += _item.totalMainDiscounts;
+        obj.totalExtraDiscounts += _item.totalExtraDiscounts;
+        obj.totalItemsDiscounts += _item.totalDiscounts;
+
+        if (!_item.noVat) {
+          _item.vat = $scope.setting.storesSetting.vat;
+          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100) * _item.count;
+          _item.totalVat = site.toNumber(_item.totalVat);
         } else {
-          item.vat = 0;
+          _item.vat = 0;
         }
-        item.newPrice = item.price - discountValue + item.totalVat;
-        item.newPrice = site.toNumber(item.newPrice);
-        item.vat = site.toNumber(item.vat);
-        item.totalVat = site.toNumber(item.totalVat);
-        obj.totalVat += item.totalVat;
-        item.total = item.totalPrice + item.totalVat - (item.totalDiscount + item.totalExtraDiscount);
-        item.total = site.toNumber(item.total);
-        item.totalBeforeVat = item.totalPrice - (item.totalDiscount + item.totalExtraDiscount);
-        obj.totalBeforeVat += item.totalBeforeVat;
-        obj.totalAfterVat += item.total;
+
+        _item.vat = site.toNumber(_item.vat);
+        _item.totalVat = site.toNumber(_item.totalVat);
+        _item.total = _item.totalAfterDiscounts + _item.totalVat;
+        _item.total = site.toNumber(_item.total);
+        obj.totalBeforeVat += _item.totalAfterDiscounts;
+        obj.totalVat += _item.totalVat;
+        obj.totalAfterVat += _item.total;
       });
 
       obj.discountsList.forEach((d) => {
         if (d.type == 'value') {
-          obj.totalDiscounts += d.value;
+          obj.totalCashDiscounts += d.value;
         } else if (d.type == 'percent') {
-          obj.totalDiscounts += (obj.totalAfterVat * d.value) / 100;
+          obj.totalCashDiscounts += (obj.totalPrice * d.value) / 100;
         }
       });
 
       obj.taxesList.forEach((t) => {
-        obj.totalTaxes += (obj.totalAfterVat * t.value) / 100;
+        obj.totalCashTaxes += (obj.totalPrice * t.value) / 100;
       });
-
-      obj.totalItemsDiscounts = site.toNumber(obj.totalItemsDiscounts);
-      obj.totalTaxes = site.toNumber(obj.totalTaxes);
-      obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
-      obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
+      obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
+      obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
+      obj.totalVat = site.toNumber(obj.totalVat);
       obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
-      obj.totalNet = obj.totalAfterVat - obj.totalDiscounts + obj.totalTaxes;
+      obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
+      obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
       obj.totalNet = site.toNumber(obj.totalNet);
     }, 300);
 

@@ -294,6 +294,15 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.showBatchModal = function (item) {
+        $scope.error = '';
+        $scope.errorBatch = '';
+        item.batchesList = item.batchesList || [];
+        $scope.batch = item;
+        $scope.batch.$view = true;
+        site.showModal('#batchModalModal');
+      };
+
     $scope.addToItemsList = function (invoice) {
         $scope.item = {
             ...$scope.item,
@@ -309,6 +318,9 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
             totalDiscounts: invoice.totalDiscounts,
             totalTaxes: invoice.totalTaxes,
             totalAfterDiscounts: invoice.totalAfterDiscounts,
+            totalBeforeVat: invoice.totalBeforeVat,
+            totalAfterVat: invoice.totalAfterVat,
+            totalVat: invoice.totalVat,
             totalNet: invoice.totalNet,
             itemsList: invoice.itemsList,
         };

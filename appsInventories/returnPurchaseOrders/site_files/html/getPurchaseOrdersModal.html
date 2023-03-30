@@ -9,15 +9,15 @@
             <form class="form">
                 <div class="row padding">
                     <div class="row">
-                        <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="search.code"> </i-control>
-                        <i-date class="col2" label="##word.Date##" ng-model="search.date"> </i-date>
+                        <i-control class="col2" label="##word.Code##" ng-model="search.code"> </i-control>
+                        <i-date class="col3" label="##word.Date##" ng-model="search.date"> </i-date>
 
                         <i-list class="col2" ng-model="search.store" label="##word.Store##" items="storesList" display="name##session.lang##"></i-list>
                         <i-list class="col2" ng-model="search.paymentType" label="##word.Payment Type##" items="paymentTypesList" display="name##session.lang##"></i-list>
                         <i-list class="col2" ng-model="search.vendor" label="##word.Vendor##" items="vendorsList" display="name##session.lang##"></i-list>
-                        <div class="col2">
+                        <div class="col1">
                             <br />
-                            <i-button type="search" label="##word.Search##" ng-click="getPurchaseOrders(search)"> </i-button>
+                            <i-button type="search" ng-click="getPurchaseOrders(search)"> </i-button>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                                 <td class="center">{{bill.paymentType.name##session.lang##}}</td>
 
                                 <td class="center">
-                                    <i-button type="add" label="##word.Select Invoice##" ng-click="addToItemsList(bill)"> </i-button>
+                                    <i-button type="push" label="##word.Select Invoice##" ng-click="addToItemsList(bill)"> </i-button>
                                 </td>
                             </tr>
                         </table>

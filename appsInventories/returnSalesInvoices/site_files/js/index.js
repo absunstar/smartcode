@@ -364,6 +364,17 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.showBatchModal = function (item) {
+        $scope.error = '';
+        $scope.errorBatch = '';
+        if (item.workByBatch || item.workBySerial || item.workByQrCode) {
+          item.batchesList = item.batchesList || [];
+        }
+        $scope.batch = item;
+        $scope.batch.$view = true;
+        site.showModal('#batchModalModal');
+      };
+
     $scope.addToItemsList = function (invoice) {
         $scope.item = {
             ...$scope.item,
@@ -376,7 +387,9 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
             itemsList: invoice.itemsList,
             totalDiscounts: invoice.totalDiscounts,
             totalItemsDiscounts: invoice.totalItemsDiscounts,
+            totalExtraDiscounts: invoice.totalExtraDiscounts,
             totalTaxes: invoice.totalTaxes,
+            discountType: invoice.discountType,
             totalBeforeVat: invoice.totalBeforeVat,
             totalVat: invoice.totalVat,
             totalAfterVat: invoice.totalAfterVat,
