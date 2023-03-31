@@ -213,6 +213,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         if (response.data.done) {
           $scope.item = response.data.doc;
           if ($scope.setting.accountsSetting.currency) {
+            console.log($scope.setting.accountsSetting.currency);
             site.strings['currency'] = {
               ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
               en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
