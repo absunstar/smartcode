@@ -29,6 +29,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row center" ng-show="##session.company.taxNumber##">
             <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 1">الرقم الضريبي : ##session.company.taxNumber##</p>
             <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 2">Tax Number : ##session.company.taxNumber##</p>
@@ -98,7 +99,7 @@
         <div class="row">
             <div class="center col-12 border-1">
                 <span class="black col-3 font-12">Time :</span>
-                <span class="col-6 black font-11"> {{thermal.date |date:"mm : hh a" }} </span>
+                <span class="col-6 black font-11"> {{thermal.date |date:"hh : mm a" }} </span>
                 <span class="black col-3 font-12">: الوقت</span>
             </div>
         </div>
@@ -135,8 +136,8 @@
             </div>
         </div>
 
-        <div class="row border-1" ng-repeat="itm in thermal.itemsList">
-            <div class="row">
+        <div class="row" ng-repeat="itm in thermal.itemsList">
+            <div class="border-1">
                 <div class="col-6">
                     <p class="black center font-8">{{itm.nameAr}} - ({{itm.unit.nameAr}})</p>
                     <p class="black center font-8">{{itm.nameEn}} - ({{itm.unit.nameEn}})</p>
