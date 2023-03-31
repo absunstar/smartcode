@@ -21,7 +21,7 @@ module.exports = function init(site) {
       if (!err && docs) {
         let itemsDocs = [];
         for (let i = 0; i < obj.items.length; i++) {
-          let item = {...obj.items[i]};
+          let item = { ...obj.items[i] };
           let batchCount = { ...item }.count;
           item.batchesList = [];
           let indexDoc = docs.findIndex((itm) => itm.id === item.id);
@@ -35,11 +35,11 @@ module.exports = function init(site) {
                 if (item.workByBatch || item.workByQrCode) {
                   docs[indexDoc].unitsList[unitIndex].storesList[storeIndex].batchesList = docs[indexDoc].unitsList[unitIndex].storesList[storeIndex].batchesList
                     .sort((a, b) => new Date(b.expiryDate) - new Date(a.expiryDate))
-                    .reverse()
+                    .reverse();
                 } else if (item.workBySerial) {
                   docs[indexDoc].unitsList[unitIndex].storesList[storeIndex].batchesList = docs[indexDoc].unitsList[unitIndex].storesList[storeIndex].batchesList
                     .sort((a, b) => new Date(b.productionDate) - new Date(a.productionDate))
-                    .reverse()
+                    .reverse();
                 }
                 docs[indexDoc].unitsList[unitIndex].storesList[storeIndex].batchesList.forEach((_b) => {
                   _b.currentCount = _b.count;
@@ -76,16 +76,21 @@ module.exports = function init(site) {
 
           if (storeIndex == -1) {
             const newUitStore = site.setStoresItemsUnitStoreProperties();
-            newUitStore.store = _elm.store;
+            newUitStore.store = { id: _elm.store.id, nameAr: _elm.store.nameAr, nameEn: _elm.store.nameEn };
             doc.unitsList[index].storesList.push(newUitStore);
             storeIndex = doc.unitsList[index].storesList.length - 1;
           }
 
-          if (screenName === 'purchaseOrders') {
-            doc.unitsList[index].storesList[storeIndex].purchaseCount += _elm.count;
-            // doc.unitsList[index].storesList[storeIndex].purchasePrice += _elm.total;
-            doc.unitsList[index].storesList[storeIndex].bonusCount += _elm.bonusCount;
-            doc.unitsList[index].storesList[storeIndex].bonusPrice += _elm.bonusPrice;
+          if (screenName === 'purchaseOrders' || screenName === 'storesOpeningBalances') {
+            if (screenName === 'purchaseOrders') {
+              doc.unitsList[index].storesList[storeIndex].purchaseCount += _elm.count;
+              doc.unitsList[index].storesList[storeIndex].bonusCount += _elm.bonusCount;
+              doc.unitsList[index].storesList[storeIndex].bonusPrice += _elm.bonusPrice;
+            } else {
+              doc.unitsList[index].storesList[storeIndex].openingBalanceCount += _elm.count;
+              doc.unitsList[index].storesList[storeIndex].openingBalancePrice += _elm.total;
+            }
+
             if (_elm.price != doc.unitsList[index].purchasePrice) {
               doc.unitsList[index].purchasePriceList.push({ price: _elm.price, date: new Date() });
             }
@@ -166,12 +171,6 @@ module.exports = function init(site) {
             doc.unitsList[index].storesList[storeIndex].damagedPrice += _elm.total;
             if (_elm.workByBatch || _elm.workBySerial || _elm.workByQrCode) {
               doc.unitsList[index].storesList[storeIndex] = site.handelBalanceBatches(doc.unitsList[index].storesList[storeIndex], _elm.batchesList, '-');
-            }
-          } else if (screenName === 'storesOpeningBalances') {
-            doc.unitsList[index].storesList[storeIndex].openingBalanceCount += _elm.count;
-            doc.unitsList[index].storesList[storeIndex].openingBalancePrice += _elm.total;
-            if (_elm.workByBatch || _elm.workBySerial || _elm.workByQrCode) {
-              doc.unitsList[index].storesList[storeIndex] = site.handelAddBatches(doc.unitsList[index].storesList[storeIndex], _elm.batchesList);
             }
           } else if (screenName === 'stockTaking') {
             if (_elm.countType == 'in') {
@@ -771,7 +770,7 @@ module.exports = function init(site) {
             if (stockTakingItemsIdsCb.length > 0) {
               where['id'] = { $nin: stockTakingItemsIdsCb };
             }
-            app.all({ where, select, limit }, (err, docs) => {
+            app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
               res.json({
                 done: true,
                 list: docs,
@@ -793,16 +792,14 @@ module.exports = function init(site) {
       } else if (doc) {
         let unitIndex = doc.unitsList.findIndex((unt) => unt.unit.id === where.unitId);
         if (unitIndex != -1) {
-      
           let storeIndex = doc.unitsList[unitIndex].storesList.findIndex((st) => st.store.id === where.storeId);
           if (storeIndex != -1) {
-    
             doc.unitsList[unitIndex].storesList[storeIndex].batchesList = doc.unitsList[unitIndex].storesList[storeIndex].batchesList || [];
             let batchIndex = doc.unitsList[unitIndex].storesList[storeIndex].batchesList.findIndex((b) => b.code == where.code || b.sn == where.code);
             if (batchIndex != -1) {
               doc.unitsList[unitIndex].storesList[storeIndex].batchesList[batchIndex];
               let batch = { ...doc.unitsList[unitIndex].storesList[storeIndex].batchesList[batchIndex] };
-     
+
               if (batch.count > 0) {
                 batch.currentCount = batch.count;
                 batch.count = 1;

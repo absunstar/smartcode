@@ -58,13 +58,17 @@
             <i-control class="col1" type="number" min="1" ng-model="orderItem.count" label="##word.Count##"></i-control>
             <div class="col1">
                 <p class="text-center">##word.Price##</p>
-                <p class="text-center">{{orderItem.unit.price || 0}}</p>
-            </div>
-
-            <div class="col1">
+                <p class="text-center">{{orderItem.unit.price || 0}} <span class="currency">##word.$##</span></p>
+              </div>
+        
+              <div class="col1">
                 <p class="text-center">##word.Discount##</p>
-                <p class="text-center">{{orderItem.unit.discount || 0}}</p>
-            </div>
+                <p class="text-center">
+                  {{orderItem.unit.discount || 0}}
+                  <span ng-if="orderItem.unit.discountType === 'percent'"> <span class="currency">##word.%##</span> </span>
+                  <span ng-if="orderItem.unit.discountType === 'value'"><span class="currency">##word.$##</span> </span>
+                </p>
+              </div>
             <i-control class="col1" type="number" min="1" ng-model="orderItem.extraDiscount" label="##word.Extra Disc## ##word.%##"></i-control>
 
             <div class="col1">

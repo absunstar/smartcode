@@ -46,7 +46,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.itemsError = '';
     $scope.mode = 'add';
     $scope.resetOrderItem();
-    $scope.item = { ...$scope.structure, salesType: $scope.salesTypesList[0], date: new Date(), itemsList: [], discountsList: [], taxesList: [] };
+    $scope.item = { ...$scope.structure, salesType: { id: 1, nameAr: 'مبيعات للعملاء', nameEn: 'Sales For Customers', code: 'customer' }, date: new Date(), itemsList: [], discountsList: [], taxesList: [] };
     if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.paymentType.id;
@@ -1333,40 +1333,13 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     return qr;
   };
 
-  $scope.getSalesTypes = function () {
-    $scope.busy = true;
-    $scope.salesTypesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/salesTypesList',
-      data: {
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.salesTypesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
+ 
 
   if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
     $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
   }
 
   $scope.getAll();
-  $scope.getSalesTypes();
   $scope.getPaymentTypes();
   $scope.getDiscountTypes();
   $scope.getTaxTypes();

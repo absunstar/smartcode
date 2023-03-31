@@ -2,7 +2,7 @@
   <div class="row padding">
     <fieldset>
       <legend>##word.Basic Informations##</legend>
-      <div class="col8">
+      <div class="col9">
         <div class="row">
           <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
           <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
@@ -20,7 +20,7 @@
           <i-control class="col4" ng-if="item.hasMedicalData" v="r" type="text" ng-model="item.sfdaCode" label="##word.SFDA Code##"></i-control>
         </div>
       </div>
-      <div class="col4 center">
+      <div class="col3 center">
         <i-image class="img128 center" ng-model="item.image"></i-image>
       </div>
     </fieldset>
@@ -119,7 +119,7 @@
                 <th>##word.Barcode##</th>
                 <th>##word.Purchase Price##</th>
                 <th>##word.Sales Price##</th>
-                <th>##word.Average Cost##</th>
+                <th>##word.Purchase AV.Cost##</th>
                 <th>##word.Sales Discounts##</th>
                 <th class="not-print">##word.Actions##</th>
               </tr>

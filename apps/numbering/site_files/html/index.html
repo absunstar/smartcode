@@ -9,12 +9,13 @@
         <div id="main-layout" class="container" ng-controller="numbering">
             <div x-import="numbering/yearMonth.html"></div>
             <div class="row">
-            
+
                 <div x-import="numbering/content.html"></div>
                 <br />
                 <br />
 
                 <i-button type="save" label="##word.Save##" ng-click="saveNumbering()"></i-button>
+                <i-button type="reset" label="##word.Reset##" ng-click="reset()"></i-button>
             </div>
 
             <div id="alert" class="modal alert small">

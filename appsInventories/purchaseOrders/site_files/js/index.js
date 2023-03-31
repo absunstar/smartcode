@@ -16,6 +16,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     totalVendorDiscounts: 0,
     totalLegalDiscounts: 0,
     totalBeforeVat: 0,
+    totalAfterVat: 0,
     totalVat: 0,
     hasVendor: true,
     approved: false,

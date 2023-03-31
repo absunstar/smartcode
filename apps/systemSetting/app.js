@@ -242,10 +242,9 @@ module.exports = function init(site) {
         _data.editUserInfo = req.getUserFinger();
 
         app.save(_data, (err, result) => {
-          if (!err) {
+          if (!err && result.doc) {
             response.done = true;
             response.result = result;
-            console.log(result.doc);
             site.word({ name: '$', Ar: result.doc.accountsSetting.currencySymbol, En: result.doc.accountsSetting.currencySymbol });
           } else {
             response.error = err.message;

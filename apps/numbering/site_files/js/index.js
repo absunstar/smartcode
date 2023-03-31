@@ -68,6 +68,22 @@ app.controller('numbering', function ($scope, $http, $timeout) {
         });
     };
 
+    $scope.reset = function () {
+        $http({
+            method: 'POST',
+            url: '/api/numbering/get',
+            data: {reset : true},
+        }).then(function (response) {
+             if (response.data.done) {
+                 $scope.numbering = response.data.doc;
+             } else if (!response.data.done) {
+                 $scope.mainError = response.data.error;
+             } else {
+                 $scope.numbering = {};
+             }
+        });
+    };
+
     $scope.addYearMonth = function (c) {
         if (c.typeNumbering.id == 1) {
             c.yearsList.unshift({
