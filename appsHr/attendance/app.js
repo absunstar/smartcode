@@ -20,7 +20,6 @@ module.exports = function init(site) {
         const d2 = site.toDate(paySlip.toDate);
         app.$collection.findMany({ where: { 'employee.id': paySlip.employeeId, date: { $gte: d1, $lte: d2 } } }, (err, docs) => {
             paySlip.realWorkTimesList.forEach((workDay) => {
-                // console.log('shiftData', workDay.shiftData);
                 let shiftEnd;
                 const shiftStart = new Date(
                     new Date(workDay.date).getFullYear(),
@@ -47,7 +46,6 @@ module.exports = function init(site) {
                         new Date(workDay.shiftData.end).getMinutes()
                     );
                 }
-                // console.log('shiftEnd', workDay.shiftData.nightTime, shiftStart, shiftEnd);
 
                 let attencance = {
                     appName: '',
@@ -55,9 +53,8 @@ module.exports = function init(site) {
                     absent: false,
                     shiftStart: '',
                     shiftEnd: '',
+                    fingetPrintMissing: false,
                 };
-
-                // console.log('workDay.shiftData.fingerprintMethod', workDay.shiftData.fingerprintMethod);
 
                 let docIndex = docs.findIndex((_doc) => {
                     const getDayIndex = new Date(_doc.date).getDay();
@@ -75,14 +72,21 @@ module.exports = function init(site) {
                         absent: true,
                         shiftStart,
                         shiftEnd,
-                        attendanceDifference: -1,
-                        attendPeriod: -1,
-                        leaveDifference: -1,
-                        shiftTime: -1,
-                        absentPeriod: -1,
+                        // attendanceDifference: -1,
+                        // attendPeriod: -1,
+                        // leaveDifference: -1,
+                        // shiftTime: -1,
+                        // absentPeriod: -1,
+                        attendanceDifference: 'none',
+                        attendPeriod: 'none',
+                        leaveDifference: 'none',
+                        shiftTime: 'none',
+                        absentPeriod: 'none',
                         attendExisit: false,
+                        fingetPrintMissing: false,
                     };
                     paySlip.attendanceDataList.push(attencance);
+                    0;
                 } else {
                     attencance = { ...attencance };
                     // const attendTime = new Date(docs[docIndex].attendTime);
@@ -107,12 +111,12 @@ module.exports = function init(site) {
                     let attendValue;
                     let attendPeriod;
                     let absentPeriod;
+
                     // console.log('shiftEnd', docIndex, workDay.shiftData.dayIndex, workDay.shiftData.active, new Date(docs[docIndex].date).getDate(), shiftEnd);
                     if (workDay.shiftData.fingerprintMethod == 'fixed' && docIndex != -1 && !docs[docIndex].absent) {
                         const attendanceListLength = docs[docIndex]?.attendanceList.length;
                         attendTime = new Date(docs[docIndex]?.attendanceList[0].fingerprintTime);
                         leaveTime = new Date(docs[docIndex]?.attendanceList[attendanceListLength - 1].fingerprintTime);
-
                         attendDiff = ((shiftStart.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
                         attendanceDifference = Number(attendDiff);
                         leaveDiff = ((shiftEnd?.getTime() - leaveTime.getTime()) / 1000 / 60).toFixed();
@@ -122,15 +126,18 @@ module.exports = function init(site) {
                         attendValue = ((leaveTime.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
                         attendPeriod = Number(attendValue);
                         absentPeriod = Number(shiftTime - attendPeriod);
-                    }
-                    if (new Date(docs[docIndex].date).getDate() == 12) {
-                        console.log('attendanceList', new Date(docs[docIndex].date).getDate(), attendDiff);
 
-                        console.log('attendTime', attendTime);
+                        if (attendanceListLength == 1) {
+                            attencance.fingetPrintMissing = true;
+                            attendTime = shiftStart;
+                            leaveTime = shiftEnd;
+                        }
                     }
+
                     //  else if (workDay.shiftData.fingerprintMethod == 'variable') {
 
                     // }
+                    // console.log('attencance.fingetPrintMissing', attencance.fingetPrintMissing);
 
                     if (!docs[docIndex].absent) {
                         attencance = {
@@ -146,6 +153,7 @@ module.exports = function init(site) {
                             shiftTime,
                             absentPeriod,
                             attendExisit: true,
+                            fingetPrintMissing: attencance.fingetPrintMissing,
                         };
                     } else {
                         attencance = {
@@ -153,12 +161,13 @@ module.exports = function init(site) {
                             absent: true,
                             shiftStart,
                             shiftEnd,
-                            attendanceDifference: -1,
-                            attendPeriod: -1,
-                            leaveDifference: -1,
-                            shiftTime: -1,
-                            absentPeriod: -1,
+                            attendanceDifference: 'none',
+                            attendPeriod: 'none',
+                            leaveDifference: 'none',
+                            shiftTime: 'none',
+                            absentPeriod: 'none',
                             attendExisit: true,
+                            fingetPrintMissing: false,
                         };
                     }
 

@@ -27,10 +27,11 @@ app.controller('jobsShifts', function ($scope, $http, $timeout) {
             salaryAccountSettings: { overtime: 1 },
         };
         $scope.weekDaysList.forEach((day) => {
-            $scope.item.worktimesList.push({ day, start: '', end: '', active: true, nightShift: false });
+            $scope.item.worktimesList.push({ day, start: '', end: '', active: true, workHours: 0, nightShift: false });
         });
         site.showModal($scope.modalID);
     };
+
 
     $scope.add = function (_item) {
         $scope.error = '';
@@ -199,7 +200,7 @@ app.controller('jobsShifts', function ($scope, $http, $timeout) {
                 $scope.busy = false;
                 if (response.data.done) {
                     $scope.item = response.data.doc;
-                    // worktimesList;
+
                     $scope.item.worktimesList.forEach((time) => {
                         time.start = new Date(time.start);
                         time.end = new Date(time.end);

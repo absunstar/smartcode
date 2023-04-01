@@ -235,29 +235,38 @@ module.exports = function init(site) {
                 _data['approved'] = true;
                 _data['approveDate'] = new Date();
                 _data.approvedUserInfo = req.getUserFinger();
+                const checkShiftData = { id: _data.shift.id };
+                site.checkShiftApprove(checkShiftData, (result) => {
+                    if (result.done) {
+                        app.update(_data, (err, result) => {
+                            if (!err) {
+                                const advanceIndex = _data.paySlip.deductionsList.findIndex((advance) => advance.code == 'employeesAdvances');
 
-                app.update(_data, (err, result) => {
-                    if (!err) {
-                        const advanceIndex = _data.paySlip.deductionsList.findIndex((advance) => advance.code == 'employeesAdvances');
+                                if (advanceIndex != -1) {
+                                    const advancesList = _data.paySlip.deductionsList[advanceIndex].list;
 
-                        if (advanceIndex != -1) {
-                            const advancesList = _data.paySlip.deductionsList[advanceIndex].list;
-
-                            advancesList.forEach((_adv) => {
-                                const advanceData = {
-                                    employeeId: _data.employee.id,
-                                    date: _adv.date,
-                                    amount: _adv.amount,
-                                };
-                                site.payEmployeeAdvance(advanceData);
-                            });
-                        }
-                        response.done = true;
-                        response.result = result;
+                                    advancesList.forEach((_adv) => {
+                                        const advanceData = {
+                                            employeeId: _data.employee.id,
+                                            date: _adv.date,
+                                            amount: _adv.amount,
+                                        };
+                                        site.payEmployeeAdvance(advanceData);
+                                    });
+                                }
+                                response.done = true;
+                                response.result = result;
+                            } else {
+                                response.error = err.message;
+                            }
+                            res.json(response);
+                        });
                     } else {
-                        response.error = err.message;
+                        response.done = result.done;
+                        response.error = result.error;
+                        res.json(response);
+                        return;
                     }
-                    res.json(response);
                 });
             });
         }
@@ -305,19 +314,21 @@ module.exports = function init(site) {
                 let where = req.body.where || {};
                 let search = req.body.search || '';
                 let limit = req.body.limit || 10;
-                let select = req.body.select || {
-                    id: 1,
-                    code: 1,
-                    employee: 1,
-                    paySlip: 1,
-                    image: 1,
-                    approved: 1,
-                    approveDate: 1,
-                    fromDate: 1,
-                    toDate: 1,
-                    image: 1,
-                    active: 1,
-                };
+                let select =
+                    req.body.select ||
+                    {
+                        // id: 1,
+                        // code: 1,
+                        // employee: 1,
+                        // paySlip: 1,
+                        // image: 1,
+                        // approved: 1,
+                        // approveDate: 1,
+                        // fromDate: 1,
+                        // toDate: 1,
+                        // image: 1,
+                        // active: 1,
+                    };
 
                 if (search) {
                     where.$or = [];

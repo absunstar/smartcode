@@ -10,6 +10,7 @@
                 class="col3"
                 label="##word.Employee##"
                 ng-disabled="item.approved"
+                ng-change="setShiftData(item)"
                 ng-model="item.employee"
                 ng-search="item.$employee"
                 display="fullName##session.lang##"
@@ -17,7 +18,7 @@
             ></i-list>
             <div class="col1">
                 <br />
-                <i-button type="search" ng-show="!item.approved"  ng-click="calculatePaySlip(item)"></i-button>
+                <i-button type="search" ng-show="!item.approved" ng-click="calculatePaySlip(item)"></i-button>
             </div>
         </div>
 

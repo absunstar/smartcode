@@ -75,6 +75,21 @@ module.exports = function init(site) {
             callback(response);
         });
     };
+
+    site.checkShiftApprove = function (_data, callback) {
+        let response = { done: false };
+        app.$collection.find({ id: _data.id }, (err, doc) => {
+            if (doc && doc.approved) {
+                response.done = true;
+                // response.error = 'Shift Not Approved';
+            } else {
+                // response.done = false;
+                response.error = 'Shift Not Approved';
+            }
+            callback(response);
+        });
+        // checkShiftWorkDays;
+    };
     app.init = function () {
         if (app.allowMemory) {
             app.$collection.findMany({}, (err, docs) => {

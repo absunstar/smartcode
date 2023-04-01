@@ -25,13 +25,21 @@
     <fieldset>
         <legend class="black">##word.Worktimes##</legend>
         <div class="row" x-permissions="addShiftWorktimes || jobsShiftsManage">
+            <div class="row" ng-show="item.approved">
+                <div class="col2"><p class="bold center">##word.Day##</p></div>
+                <div class="col2"><p class="bold center">##word.Status##</p></div>
+                <div class="col2"><p class="bold center">##word.Type##</p></div>
+                <div class="col2"><p class="bold center">##word.Start##</p></div>
+                <div class="col2"><p class="bold center">##word.End##</p></div>
+                <div class="col2"><p class="bold center">##word.Work Hours##</p></div>
+            </div>
             <div class="row" ng-repeat="weekDay in item.worktimesList">
                 <div class="col2">
                     <br />
                     <p class="center bold" ng-model="weekDay.day">{{weekDay.day.name##session.lang##}}</p>
                 </div>
                 <div class="col2">
-                    <i-checkbox ng-model="weekDay.active" ng-show="!item.approved" label="##word.Active##"></i-checkbox>
+                    <i-checkbox ng-model="weekDay.active" group="item_{{$index}}" ng-show="!item.approved" label="##word.Active##"></i-checkbox>
                     <p class="center" ng-show="item.approved">
                         <br />
                         <span ng-show="weekDay.active" class="text-success">##word.Active##</span>
@@ -39,7 +47,7 @@
                     </p>
                 </div>
                 <div class="col2">
-                    <i-checkbox ng-model="weekDay.nightTime" ng-show="!item.approved && weekDay.active" label="##word.Night Time##"></i-checkbox>
+                    <i-checkbox ng-model="weekDay.nightTime" group="item_{{$index}}" ng-show="!item.approved && weekDay.active" label="##word.Night Time##"></i-checkbox>
                     <p class="center" ng-show="item.approved && weekDay.active">
                         <br />
                         <span ng-show="weekDay.nightTime" class="text-danger">##word.Night##</span>
@@ -47,23 +55,36 @@
                     </p>
                 </div>
                 <div class="col2">
-                    <i-control ng-show="weekDay.active && !item.approved" type="time" ng-show="!item.approved" ng-model="weekDay.start" label="##word.Start##"></i-control>
+                    <i-control ng-show="weekDay.active && !item.approved" type="time" group="item_{{$index}}" ng-show="!item.approved" ng-model="weekDay.start" label="##word.Start##"></i-control>
                     <p class="center" ng-show="item.approved && weekDay.active">
                         <br />
                         <span> {{weekDay.start |date :'hh:mm a'}}</span>
                     </p>
                 </div>
                 <div class="col2">
-                    <i-control ng-show="weekDay.active && !item.approved" type="time" ng-show="!item.approved" ng-model="weekDay.end" label="##word.End##"></i-control>
+                    <i-control ng-show="weekDay.active && !item.approved" type="time" group="item_{{$index}}" ng-show="!item.approved" ng-model="weekDay.end" label="##word.End##"></i-control>
                     <p class="center" ng-show="item.approved && weekDay.active">
                         <br />
                         <span> {{weekDay.end |date :'hh:mm a'}}</span>
                     </p>
                 </div>
+                <div class="col2">
+                    <i-control
+                        ng-show="weekDay.active && !item.approved"
+                        type="number"
+                        group="item_{{$index}}"
+                        ng-show="!item.approved"
+                        ng-model="weekDay.workHours"
+                        label="##word.Work Hours##"
+                    ></i-control>
+                    <p class="center" ng-show="item.approved && weekDay.active">
+                        <br />
+                        <span> {{weekDay.workHours }} ##word.Hour/s##</span>
+                    </p>
+                </div>
             </div>
         </div>
     </fieldset>
-
 
     <fieldset>
         <legend class="black">##word.Calculate Fingerprint Method##</legend>

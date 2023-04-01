@@ -25,7 +25,7 @@ app.controller('attendance', function ($scope, $http, $timeout) {
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
-        $scope.item = { ...$scope.structure, date: new Date(), attendanceList: [], absent: false, fingerprintTime: new Date(), shift: {} };
+        $scope.item = { ...$scope.structure, date: new Date(), attendanceList: [], absent: false, fingerprintTime: new Date(0, 0, 0, new Date().getHours(), new Date().getMinutes()), shift: {} };
         site.showModal($scope.modalID);
     };
 
@@ -41,7 +41,7 @@ app.controller('attendance', function ($scope, $http, $timeout) {
             return;
         }
         $scope.item.date = new Date(new Date(_item.date).getFullYear(), new Date(_item.date).getMonth(), new Date(_item.date).getDate());
-
+        delete $scope.item.fingerprintTime;
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -120,7 +120,7 @@ app.controller('attendance', function ($scope, $http, $timeout) {
             $scope.error = '##word.Must Set Attendance##';
             return;
         }
-
+        delete $scope.item.fingerprintTime;
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -171,7 +171,13 @@ app.controller('attendance', function ($scope, $http, $timeout) {
                     $scope.item.fingerprintTime = new Date();
                     if ($scope.item.attendanceList.length) {
                         $scope.item.attendanceList.forEach((elem) => {
-                            elem.fingerprintTime = new Date(elem.fingerprintTime);
+                            elem.fingerprintTime = new Date(
+                                new Date(elem.fingerprintTime).getFullYear(),
+                                new Date(elem.fingerprintTime).getMonth(),
+                                new Date(elem.fingerprintTime).getDate(),
+                                new Date(elem.fingerprintTime).getHours(),
+                                new Date(elem.fingerprintTime).getMinutes()
+                            );
                         });
                     }
                 } else {
@@ -347,9 +353,18 @@ app.controller('attendance', function ($scope, $http, $timeout) {
     };
 
     $scope.addToAattendanceList = function (item) {
+        console.log('fingerprintTime', item);
+
+        const fingerprintTime = new Date(
+            new Date(item.shift.start).getFullYear(),
+            new Date(item.shift.start).getMonth(),
+            new Date(item.shift.start).getDate(),
+            new Date(item.fingerprintTime).getHours(),
+            new Date(item.fingerprintTime).getMinutes()
+        );
         $scope.error = '';
         $scope.item.attendanceList.push({
-            fingerprintTime: item.fingerprintTime,
+            fingerprintTime,
         });
     };
 

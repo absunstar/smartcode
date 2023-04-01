@@ -228,6 +228,8 @@ app.controller('payslips', function ($scope, $http, $timeout) {
                     allowancesList: 1,
                     allowancesList: 1,
                     deductionsList: 1,
+                    shift: 1,
+                    image: 1,
                 },
             },
         }).then(
@@ -242,6 +244,12 @@ app.controller('payslips', function ($scope, $http, $timeout) {
                 $scope.error = err;
             }
         );
+    };
+
+    $scope.setShiftData = function (_data) {
+        $scope.error = '';
+        $scope.item.shift = _data.employee.shift;
+        $scope.item.image = _data.employee.image;
     };
 
     $scope.calculatePaySlip = function (item) {
@@ -268,6 +276,8 @@ app.controller('payslips', function ($scope, $http, $timeout) {
                 $scope.busy = false;
                 if (response.data.done && response.data.doc) {
                     $scope.item.paySlip = response.data.doc;
+                } else {
+                    $scope.error = response.data.error || 'Error Found In PaySlip';
                 }
                 // console.log('$scope.item.paySlip', $scope.item.paySlip);
             },
@@ -324,7 +334,7 @@ app.controller('payslips', function ($scope, $http, $timeout) {
                         $scope.list[index] = response.data.result.doc;
                     }
                 } else {
-                    $scope.error = 'Please Login First';
+                    $scope.error = response.data.error || 'Error While Approve Employee Pay Slip';
                 }
             },
             function (err) {
@@ -353,6 +363,7 @@ app.controller('payslips', function ($scope, $http, $timeout) {
         site.hideModal($scope.modalSearchID);
         $scope.search = {};
     };
+
     $scope.paySlipPrint = function (item) {
         $scope.error = '';
         if ($scope.busy) return;
