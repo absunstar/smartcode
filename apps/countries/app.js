@@ -305,11 +305,13 @@ module.exports = function init(site) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
                         docs.forEach((doc) => {
                             doc = { ...doc, code: code++ };
+                            let callingCode = String(doc.callingCode)[0];
+
                             let newDoc = {
                                 code: doc.code,
                                 nameAr: doc.nameAr,
                                 nameEn: doc.nameEn,
-                                callingCode: '+' + doc.callingCode,
+                                callingCode: callingCode == '+' ? doc.callingCode : '+' + doc.callingCode,
                                 image: { url: '/images/countries.png' },
                                 active: true,
                             };
