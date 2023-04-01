@@ -5,6 +5,8 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="jobsToolsAdd || jobsToolsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/jobsTools/import" label="Import" x-permissions="importJobsTools || jobsToolsManage"></i-upload>
+
             <i-button type="search" x-permissions="jobsToolsSearch || jobsToolsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
             <i-button type="search" x-permissions="jobsToolsSearch || jobsToolsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
         </div>

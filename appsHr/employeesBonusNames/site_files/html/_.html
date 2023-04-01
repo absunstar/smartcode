@@ -5,6 +5,8 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="employeesBonusNamesAdd || employeesBonusNamesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/employeesBonusNames/import" label="Import" x-permissions="importEmployeesBonusNames || employeesBonusNamesManage"></i-upload>
+
             <i-button type="search" x-permissions="employeesBonusNamesSearch || employeesBonusNamesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
             <i-button type="search" x-permissions="employeesBonusNamesSearch || employeesBonusNamesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
         </div>

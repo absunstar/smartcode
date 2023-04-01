@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hr" , "screenName" : "employeesBonusNames" , "name":"employeesBonusNamesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "employeesBonusNamesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employeesBonusNames", "name": "importEmployeesBonusNames", "En": "Import", "Ar": "إستيراد" }
 ]

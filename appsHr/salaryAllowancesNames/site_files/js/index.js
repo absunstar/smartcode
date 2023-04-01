@@ -15,7 +15,7 @@ app.controller('salaryAllowancesNames', function ($scope, $http, $timeout) {
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
-        $scope.item = { ...$scope.structure };
+        $scope.item = { ...$scope.structure, addToBasicSalary: false };
         site.showModal($scope.modalID);
     };
 

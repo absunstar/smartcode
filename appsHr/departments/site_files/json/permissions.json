@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hr" , "screenName" : "departments" , "name":"departmentsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "departments", "name": "departmentsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "departments", "name": "importDepartments", "En": "Import", "Ar": "إستيراد" }
 ]

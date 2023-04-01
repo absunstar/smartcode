@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hr" , "screenName" : "employeesPenaltiesNames" , "name":"employeesPenaltiesNamesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "employeesPenaltiesNamesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "employeesPenaltiesNames", "name": "importEmployeesPenaltiesNames", "En": "Import", "Ar": "إستيراد" }
 ]

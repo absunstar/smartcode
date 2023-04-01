@@ -69,5 +69,5 @@
         "En": "UI",
         "Ar": "الواجهة الرسومية"
     },
-    { "moduleName": "public", "screenName": "storesUnits", "name": "importStoresUnits", "En": "Import", "Ar": "إستيراد" }
+    { "moduleName": "inventory", "screenName": "storesUnits", "name": "importStoresUnits", "En": "Import", "Ar": "إستيراد" }
 ]

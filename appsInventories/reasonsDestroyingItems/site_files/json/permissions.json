@@ -8,5 +8,5 @@
     { "moduleName": "inventory", "screenName": "reasonsDestroyingItems", "name": "reasonsDestroyingItemsExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "reasonsDestroyingItems", "name": "reasonsDestroyingItemsPrint", "En": "Print", "Ar": "طباعة" },
     { "moduleName": "inventory", "screenName": "reasonsDestroyingItems", "name": "reasonsDestroyingItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
-    { "moduleName": "public", "screenName": "reasonsDestroyingItems", "name": "importReasonsDestroyingItems", "En": "Import", "Ar": "إستيراد" }
+    { "moduleName": "inventory", "screenName": "reasonsDestroyingItems", "name": "importReasonsDestroyingItems", "En": "Import", "Ar": "إستيراد" }
 ]

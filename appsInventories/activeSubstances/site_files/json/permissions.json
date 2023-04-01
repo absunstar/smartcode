@@ -8,5 +8,5 @@
     { "moduleName": "inventory", "screenName": "activeSubstances", "name": "activeSubstancesExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "activeSubstances", "name": "activeSubstancesPrint", "En": "Print", "Ar": "طباعة" },
     { "moduleName": "inventory", "screenName": "activeSubstances", "name": "activeSubstancesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
-    { "moduleName": "public", "screenName": "activeSubstances", "name": "importActiveSubstances", "En": "Import", "Ar": "إستيراد" }
+    { "moduleName": "inventory", "screenName": "activeSubstances", "name": "importActiveSubstances", "En": "Import", "Ar": "إستيراد" }
 ]

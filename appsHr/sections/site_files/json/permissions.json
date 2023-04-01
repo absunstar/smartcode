@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hr" , "screenName" : "sections" , "name":"sectionsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "sections", "name": "sectionsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "sections", "name": "importSections", "En": "Import", "Ar": "إستيراد" }
 ]

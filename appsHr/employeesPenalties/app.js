@@ -424,7 +424,6 @@ module.exports = function init(site) {
                     rejectDate: 1,
                     requestStatus: 1,
                 };
-                let list = [];
                 if (search) {
                     where.$or = [];
 

@@ -8,5 +8,5 @@
     { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsPrint", "En": "Print", "Ar": "طباعة" },
     { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
-    { "moduleName": "public", "screenName": "vendors", "name": "importVendors", "En": "Import", "Ar": "إستيراد" }
+    { "moduleName": "inventory", "screenName": "vendors", "name": "importVendors", "En": "Import", "Ar": "إستيراد" }
 ]

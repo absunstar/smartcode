@@ -1,11 +1,12 @@
 [
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesManage", "En": "Manage", "Ar": "إدارة" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesAdd", "En": "Add", "Ar": "إضافة" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesUpdate", "En": "Edit", "Ar": "تعديل" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesDelete", "En": "Delete", "Ar": "حذف" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesView", "En": "View", "Ar": "عرض" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesSearch", "En": "Search", "Ar": "بحث" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesExport", "En": "Export", "Ar": "تصدير" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesPrint", "En": "Print", "Ar": "طباعة" },
-  { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "salaryAllowancesNamesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "salaryAllowancesNames", "name": "importSalaryAllowancesNames", "En": "Import", "Ar": "إستيراد" }
 ]

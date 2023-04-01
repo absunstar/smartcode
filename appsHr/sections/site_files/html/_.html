@@ -5,6 +5,8 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="sectionsAdd || sectionsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/sections/import" label="Import" x-permissions="importSections || sectionsManage"></i-upload>
+
             <i-button type="search" x-permissions="sectionsSearch || sectionsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
             <i-button type="search" x-permissions="sectionsSearch || sectionsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
         </div>

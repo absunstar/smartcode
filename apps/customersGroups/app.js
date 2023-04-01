@@ -301,6 +301,7 @@ module.exports = function init(site) {
                     });
                 }
             });
+            
             site.post(`api/${app.name}/import`, (req, res) => {
                 let response = {
                     done: false,

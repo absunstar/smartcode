@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hr" , "screenName" : "jobsTools" , "name":"jobsToolsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "jobsToolsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "jobsTools", "name": "importJobsTools", "En": "Import", "Ar": "إستيراد" }
 ]

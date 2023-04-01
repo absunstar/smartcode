@@ -303,6 +303,80 @@ module.exports = function init(site) {
                     });
                 }
             });
+
+            site.post(`api/${app.name}/import`, (req, res) => {
+                let response = {
+                    done: false,
+                    file: req.form.files.fileToUpload,
+                };
+
+                if (site.isFileExistsSync(response.file.filepath)) {
+                    let docs = [];
+                    if (response.file.originalFilename.like('*.xls*')) {
+                        let workbook = site.XLSX.readFile(response.file.filepath);
+                        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                    } else {
+                        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+                    }
+
+                    if (Array.isArray(docs)) {
+                        let numObj = {
+                            company: site.getCompany(req),
+                            screen: app.name,
+                            date: new Date(),
+                        };
+                        let code = 0;
+                        let cb = site.getNumbering(numObj);
+                        if (!cb.auto) {
+                            response.error = 'Must Enter Code';
+                            res.json(response);
+                            return;
+                        } else if (cb.auto) {
+                            code = cb.code;
+                        }
+
+                        console.log(`Importing ${app.name} : ${docs.length}`);
+                        docs.forEach((doc) => {
+                            doc = { ...doc, code: code++ };
+                            let addToBasicSalary = false;
+                            if (doc.addToBasicSalary === 1) {
+                                addToBasicSalary = true;
+                            }
+
+                            let newDoc = {
+                                code: doc.code,
+                                nameAr: doc.nameAr,
+                                nameEn: doc.nameEn,
+                                addToBasicSalary,
+                                image: { url: '/images/salaryAllowancesNames.png' },
+                                active: true,
+                            };
+
+                            newDoc.company = site.getCompany(req);
+                            newDoc.branch = site.getBranch(req);
+                            newDoc.addUserInfo = req.getUserFinger();
+
+                            app.add(newDoc, (err, doc2) => {
+                                if (!err && doc2) {
+                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                    console.log(site.dbMessage);
+                                } else {
+                                    site.dbMessage = err.message;
+                                    console.log(site.dbMessage);
+                                }
+                            });
+                        });
+                    } else {
+                        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+                        console.log(site.dbMessage);
+                    }
+                } else {
+                    site.dbMessage = 'file not exists : ' + response.file.filepath;
+                    console.log(site.dbMessage);
+                }
+
+                res.json(response);
+            });
         }
     }
 

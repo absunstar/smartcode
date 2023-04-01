@@ -7,5 +7,6 @@
     { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsSearch", "En": "Search", "Ar": "بحث" },
     { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsPrint", "En": "Print", "Ar": "طباعة" },
-    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "storesItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "storesItems", "name": "importStoresItems", "En": "Import", "Ar": "إستيراد" }
 ]

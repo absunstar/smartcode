@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hr" , "screenName" : "vacationsNames" , "name":"vacationsNamesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "vacationsNamesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "vacationsNames", "name": "importVacationsNames", "En": "Import", "Ar": "إستيراد" }
 ]
