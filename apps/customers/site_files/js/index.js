@@ -458,7 +458,6 @@ app.controller('customers', function ($scope, $http, $timeout) {
     $scope.getBanks();
     $scope.getNationalities();
     $scope.getFilesTypes();
-    $scope.getFilesTypes();
     $scope.getNumberingAuto();
     $scope.getCustomersGroups();
     $scope.getAccountingLinkList();

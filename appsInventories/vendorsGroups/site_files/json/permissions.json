@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "inventory" , "screenName" : "vendorsGroups" , "name":"vendorsGroupsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "vendorsGroups", "name": "vendorsGroupsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "vendorsGroups", "name": "importVendorsGroups", "En": "Import", "Ar": "إستيراد" }
 ]

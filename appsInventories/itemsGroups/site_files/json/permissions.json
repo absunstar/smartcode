@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "inventory" , "screenName" : "itemsGroups" , "name":"itemsGroupsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "itemsGroups", "name": "itemsGroupsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "itemsGroups", "name": "importItemsGroups", "En": "Import", "Ar": "إستيراد" }
 ]

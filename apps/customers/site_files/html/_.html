@@ -5,6 +5,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="customersAdd || customersManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/customers/import" label="Import" x-permissions="importCustomers || customersManage"></i-upload>
         </div>
 
         <div class="row padding">

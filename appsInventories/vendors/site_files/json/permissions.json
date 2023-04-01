@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "inventory" , "screenName" : "vendors" , "name":"vendorsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "vendors", "name": "vendorsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "vendors", "name": "importVendors", "En": "Import", "Ar": "إستيراد" }
 ]

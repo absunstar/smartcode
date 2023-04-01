@@ -5,6 +5,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="activeSubstancesAdd || activeSubstancesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/activeSubstances/import" label="Import" x-permissions="importActiveSubstances || activeSubstancesManage"></i-upload>
         </div>
 
         <div class="row padding">

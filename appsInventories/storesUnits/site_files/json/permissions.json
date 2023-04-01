@@ -1,65 +1,73 @@
 [
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssManage",
-    "En": "Manage",
-    "Ar": "إدارة"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssAdd",
-    "En": "Add",
-    "Ar": "إضافة"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssUpdate",
-    "En": "Edit",
-    "Ar": "تعديل"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssDelete",
-    "En": "Delete",
-    "Ar": "حذف"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssView",
-    "En": "View",
-    "Ar": "عرض"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssSearch",
-    "En": "Search",
-    "Ar": "بحث"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssExport",
-    "En": "Export",
-    "Ar": "تصدير"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssPrint",
-    "En": "Print",
-    "Ar": "طباعة"
-  },
-  {
-    "moduleName": "inventory",
-    "screenName": "storesUnitss",
-    "name": "storesUnitssUi",
-    "En": "UI",
-    "Ar": "الواجهة الرسومية"
-  }
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsManage",
+        "En": "Manage",
+        "Ar": "إدارة"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsAdd",
+        "En": "Add",
+        "Ar": "إضافة"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsUpdate",
+        "En": "Edit",
+        "Ar": "تعديل"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsDelete",
+        "En": "Delete",
+        "Ar": "حذف"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsView",
+        "En": "View",
+        "Ar": "عرض"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsSearch",
+        "En": "Search",
+        "Ar": "بحث"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsExport",
+        "En": "Export",
+        "Ar": "تصدير"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsPrint",
+        "En": "Print",
+        "Ar": "طباعة"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "storesUnits",
+        "name": "storesUnitsUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    },
+    { "moduleName": "public", "screenName": "storesUnits", "name": "importStoresUnits", "En": "Import", "Ar": "إستيراد" }
 ]

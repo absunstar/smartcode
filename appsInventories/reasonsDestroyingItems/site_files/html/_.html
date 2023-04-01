@@ -5,6 +5,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="reasonsDestroyingItemsAdd || reasonsDestroyingItemsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/reasonsDestroyingItems/import" label="Import" x-permissions="importReasonsDestroyingItems || reasonsDestroyingItemsManage"></i-upload>
         </div>
 
         <div class="row padding">

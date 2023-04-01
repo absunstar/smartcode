@@ -5,6 +5,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="vendorsAdd || vendorsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/vendors/import" label="Import" x-permissions="importVendors || vendorsManage"></i-upload>
         </div>
 
         <div class="row padding">
@@ -27,8 +28,8 @@
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
                     <td class="center">
-                        <p  ng-if="item.group.id">{{item.group.name##session.lang##}}</p>
-                        <p  ng-if="!item.group.id">-</p>
+                        <p ng-if="item.group.id">{{item.group.name##session.lang##}}</p>
+                        <p ng-if="!item.group.id">-</p>
                     </td>
 
                     <td class="center">
