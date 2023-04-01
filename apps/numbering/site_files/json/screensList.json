@@ -21,12 +21,7 @@
         "id": "accountsGuide",
         "name": "Accounts Guide"
     },
-    {
-        "category": "accounting",
-        "feature": "public",
-        "id": "journalEntry",
-        "name": "Journal Entry"
-    },
+    { "category": "accounting", "feature": "public", "id": "journalEntry", "name": "Journal Entry" },
     {
         "category": "accounting",
         "feature": "public",
@@ -596,5 +591,11 @@
         "feature": "public",
         "id": "employeesContracts",
         "name": "Employees Contracts"
+    },
+    {
+        "category": "hr",
+        "feature": "public",
+        "id": "attendance",
+        "name": "Attendance"
     }
 ]

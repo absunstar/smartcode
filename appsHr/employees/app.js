@@ -164,7 +164,7 @@ module.exports = function init(site) {
                             site.getEmployeeDelayRequest(paySlip6, (paySlip7) => {
                                 site.getEmployeeWorkErrandRequests(paySlip7, (paySlip8) => {
                                     site.getEmployeeAttendance(paySlip8, (paySlip9) => {
-                                        site.getEmployeeAdvances(paySlip9, (paySlip10) => {
+                                        site.getAttendance(paySlip9, (paySlip10) => {
                                             // console.log('employeeAdvancesList', paySlip10.employeeAdvancesList.length);
                                             app.calculateEmployeePaySlipItems(paySlip10, (finalPaySlip) => {
                                                 callback(finalPaySlip);
@@ -772,6 +772,7 @@ module.exports = function init(site) {
                                 let shiftData = shiftDoc.worktimesList.find((w) => w.active && w.day && w.day.index == dayIndex);
 
                                 if (shiftData) {
+                                    shiftData = { fingerprintMethod: shiftDoc.fingerprintMethod, ...shiftData };
                                     shiftData.start = new Date(date.getFullYear(), date.getMonth(), date.getDate(), shiftData.start.getHours(), shiftData.start.getMinutes());
                                     shiftData.end = new Date(date.getFullYear(), date.getMonth(), date.getDate(), shiftData.end.getHours(), shiftData.end.getMinutes());
                                     realWorkTimesList.push({ date, day, dayIndex, shiftData });
@@ -789,6 +790,7 @@ module.exports = function init(site) {
                                 toDate: _data.toDate,
                                 realWorkTimesList,
                                 penaltiesList: shiftDoc.penaltiesList,
+                                fingerprintMethod: shiftDoc.fingerprintMethod,
                                 salaryAccountSettings: shiftDoc.salaryAccountSettings,
                                 shiftApproved: shiftDoc.approved,
                                 availableDelayTime: shiftDoc.availableDelayTime,

@@ -499,5 +499,10 @@
         "name": "Please Set Receive Work Date",
         "En": "Please Set Receive Work Date",
         "Ar": "يرجي نحديد تاريخ إستلام العمل"
+    },
+    {
+        "name": "Must Set Attendance",
+        "En": "Must Set Attendance",
+        "Ar": "يجب تسجيل الوقت"
     }
 ]

@@ -1,522 +1,526 @@
 <div class="site-bottom" x-permissions="login">
-  <div class="icons">
-    <button x-feature="m-accounting" onclick="toggleShow('#m-accounting')"><i class="fas fa-donate"></i> <span>Accounting</span></button>
-    <button x-feature="m-inventory" onclick="toggleShow('#m-inventroy')"><i class="fas fa-store"></i> <span>Inventroy</span></button>
-    <button x-feature="m-hr" onclick="toggleShow('#m-hr')"><i class="fas fa-users"></i> <span>HR</span></button>
-    <button x-feature="m-hmis" onclick="toggleShow('#m-hmis')"><i class="fas fa-hospital-user"></i> <span>Hospital</span></button>
-    <button onclick="toggleShow('#systemSetting')"><i class="fas fa-tools"></i> <span>Setting</span></button>
-  </div>
+    <div class="icons">
+        <button x-feature="m-accounting" onclick="toggleShow('#m-accounting')"><i class="fas fa-donate"></i> <span>Accounting</span></button>
+        <button x-feature="m-inventory" onclick="toggleShow('#m-inventroy')"><i class="fas fa-store"></i> <span>Inventroy</span></button>
+        <button x-feature="m-hr" onclick="toggleShow('#m-hr')"><i class="fas fa-users"></i> <span>HR</span></button>
+        <button x-feature="m-hmis" onclick="toggleShow('#m-hmis')"><i class="fas fa-hospital-user"></i> <span>Hospital</span></button>
+        <button onclick="toggleShow('#systemSetting')"><i class="fas fa-tools"></i> <span>Setting</span></button>
+    </div>
 </div>
 
 <div id="m-accounting" class="menu-bottom loaded x-hide">
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="safesUi || safesManage" href="/safes">
-    <img src="/images/safes.png" alt="" />
-    <span> ##word.Safes## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="safesUi || safesManage" href="/safes">
+        <img src="/images/safes.png" alt="" />
+        <span> ##word.Safes## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="banksManage" href="/banks">
-    <img src="/images/banks.png" alt="" />
-    <span> ##word.Banks## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="banksManage" href="/banks">
+        <img src="/images/banks.png" alt="" />
+        <span> ##word.Banks## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="currenciesUi || currenciesManage" href="/currencies">
-    <img src="/images/currencies.png" alt="" />
-    <span> ##word.Currencies## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="currenciesUi || currenciesManage" href="/currencies">
+        <img src="/images/currencies.png" alt="" />
+        <span> ##word.Currencies## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="accountsGuideUi || accountsGuideManage" href="/accountsGuide">
-    <img src="/images/accountsGuide.png" alt="" />
-    <span> ##word.Accounts Guide## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="accountsGuideUi || accountsGuideManage" href="/accountsGuide">
+        <img src="/images/accountsGuide.png" alt="" />
+        <span> ##word.Accounts Guide## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="costCentersUi || costCentersManage" href="/costCenters">
-    <img src="/images/costCenters.png" alt="" />
-    <span> ##word.Cost Centers## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="costCentersUi || costCentersManage" href="/costCenters">
+        <img src="/images/costCenters.png" alt="" />
+        <span> ##word.Cost Centers## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="generalLedgerUi || generalLedgerManage" href="/generalLedger">
-    <img src="/images/generalLedger.png" alt="" />
-    <span> ##word.General Ledger## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="generalLedgerUi || generalLedgerManage" href="/generalLedger">
+        <img src="/images/generalLedger.png" alt="" />
+        <span> ##word.General Ledger## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="assistantGeneralLedgerUi || assistantGeneralLedgerManage" href="/assistantGeneralLedger">
-    <img src="/images/assistantGeneralLedger.png" alt="" />
-    <span> ##word.Assistant General Ledger## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="assistantGeneralLedgerUi || assistantGeneralLedgerManage" href="/assistantGeneralLedger">
+        <img src="/images/assistantGeneralLedger.png" alt="" />
+        <span> ##word.Assistant General Ledger## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="journalEntryUi || journalEntryManage" href="/journalEntry">
-    <img src="/images/journalEntry.png" alt="" />
-    <span> ##word.Journal Entry## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="journalEntryUi || journalEntryManage" href="/journalEntry">
+        <img src="/images/journalEntry.png" alt="" />
+        <span> ##word.Journal Entry## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="budgetClassificationsUi || budgetClassificationsManage" href="/budgetClassifications">
-    <img src="/images/budgetClassifications.png" alt="" />
-    <span> ##word.Budget Classifications## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="budgetClassificationsUi || budgetClassificationsManage" href="/budgetClassifications">
+        <img src="/images/budgetClassifications.png" alt="" />
+        <span> ##word.Budget Classifications## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="incomeListUi || incomeListManage" href="/incomeList">
-    <img src="/images/incomeList.png" alt="" />
-    <span> ##word.Income Lists## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="incomeListUi || incomeListManage" href="/incomeList">
+        <img src="/images/incomeList.png" alt="" />
+        <span> ##word.Income Lists## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="discountTypesUi || discountTypesManage" href="/discountTypes">
-    <img src="/images/discountTypes.png" alt="" />
-    <span> ##word.Discount Types## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="discountTypesUi || discountTypesManage" href="/discountTypes">
+        <img src="/images/discountTypes.png" alt="" />
+        <span> ##word.Discount Types## </span>
+    </a>
 
-  <a x-feature="m-accounting" class="menu-item no-line" x-permissions="taxesTypesUi || taxesTypesManage" href="/taxesTypes">
-    <img src="/images/taxesTypes.png" alt="" />
-    <span> ##word.Taxes Types## </span>
-  </a>
+    <a x-feature="m-accounting" class="menu-item no-line" x-permissions="taxesTypesUi || taxesTypesManage" href="/taxesTypes">
+        <img src="/images/taxesTypes.png" alt="" />
+        <span> ##word.Taxes Types## </span>
+    </a>
 </div>
 
 <div id="m-inventroy" class="menu-bottom loaded x-hide">
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="salesInvoicesUi || salesInvoicesManage" href="/salesInvoices">
-    <img src="/images/salesInvoices.png" alt="" />
-    <span> ##word.Sales Invoicse For Customers ## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="salesInvoicesUi || salesInvoicesManage" href="/salesInvoices">
+        <img src="/images/salesInvoices.png" alt="" />
+        <span> ##word.Sales Invoicse For Customers ## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage" href="/salesCompaniesInvoices">
-    <img src="/images/salesCompaniesInvoices.png" alt="" />
-    <span> ##word.Sales Invoicse For Companies## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage" href="/salesCompaniesInvoices">
+        <img src="/images/salesCompaniesInvoices.png" alt="" />
+        <span> ##word.Sales Invoicse For Companies## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage" href="/salesPatientsInvoices">
-    <img src="/images/salesPatientsInvoices.png" alt="" />
-    <span> ##word.Sales Invoicse For Patients## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage" href="/salesPatientsInvoices">
+        <img src="/images/salesPatientsInvoices.png" alt="" />
+        <span> ##word.Sales Invoicse For Patients## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage" href="/returnSalesInvoices">
-    <img src="/images/returnSalesInvoices.png" alt="" />
-    <span> ##word.Return Sales Invoices## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage" href="/returnSalesInvoices">
+        <img src="/images/returnSalesInvoices.png" alt="" />
+        <span> ##word.Return Sales Invoices## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="purchaseRequestsUi || purchaseRequestsManage" href="/purchaseRequests">
-    <img src="/images/purchaseRequests.png" alt="" />
-    <span> ##word.Purchase Requests## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="purchaseRequestsUi || purchaseRequestsManage" href="/purchaseRequests">
+        <img src="/images/purchaseRequests.png" alt="" />
+        <span> ##word.Purchase Requests## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="purchaseOrdersUi || purchaseOrdersManage" href="/purchaseOrders">
-    <img src="/images/purchaseOrders.png" alt="" />
-    <span> ##word.Purchase Order## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="purchaseOrdersUi || purchaseOrdersManage" href="/purchaseOrders">
+        <img src="/images/purchaseOrders.png" alt="" />
+        <span> ##word.Purchase Order## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage" href="/returnPurchaseOrders">
-    <img src="/images/returnPurchaseOrders.png" alt="" />
-    <span> ##word.Return Purchase Orders## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage" href="/returnPurchaseOrders">
+        <img src="/images/returnPurchaseOrders.png" alt="" />
+        <span> ##word.Return Purchase Orders## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesItemsUi || storesItemsManage" href="/storesItems">
-    <img src="/images/storesItems.png" alt="" />
-    <span> ##word.Stores Items## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesItemsUi || storesItemsManage" href="/storesItems">
+        <img src="/images/storesItems.png" alt="" />
+        <span> ##word.Stores Items## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="vendorsUi || vendorsManage" href="/vendors">
-    <img src="/images/vendor.png" alt="" />
-    <span> ##word.Vendors## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="vendorsUi || vendorsManage" href="/vendors">
+        <img src="/images/vendor.png" alt="" />
+        <span> ##word.Vendors## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="transferItemsRequestsUi || transferItemsRequestsManage" href="/transferItemsRequests">
-    <img src="/images/transferItemsRequests.png" alt="" />
-    <span> ##word.Transfer Items Requests## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="transferItemsRequestsUi || transferItemsRequestsManage" href="/transferItemsRequests">
+        <img src="/images/transferItemsRequests.png" alt="" />
+        <span> ##word.Transfer Items Requests## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="transferItemsOrdersUi || transferItemsOrdersManage" href="/transferItemsOrders">
-    <img src="/images/transferItemsOrders.png" alt="" />
-    <span> ##word.Transfer Items Orders## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="transferItemsOrdersUi || transferItemsOrdersManage" href="/transferItemsOrders">
+        <img src="/images/transferItemsOrders.png" alt="" />
+        <span> ##word.Transfer Items Orders## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="convertUnitsUi || convertUnitsManage" href="/convertUnits">
-    <img src="/images/convertUnits.png" alt="" />
-    <span> ##word.Convert Units## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="convertUnitsUi || convertUnitsManage" href="/convertUnits">
+        <img src="/images/convertUnits.png" alt="" />
+        <span> ##word.Convert Units## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="damageItemsUi || damageItemsManage" href="/damageItems">
-    <img src="/images/damageItems.png" alt="" />
-    <span> ##word.Damage Items## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="damageItemsUi || damageItemsManage" href="/damageItems">
+        <img src="/images/damageItems.png" alt="" />
+        <span> ##word.Damage Items## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="stockTakingUi || stockTakingManage" href="/stockTaking">
-    <img src="/images/stockTaking.png" alt="" />
-    <span> ##word.Stocktaking## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="stockTakingUi || stockTakingManage" href="/stockTaking">
+        <img src="/images/stockTaking.png" alt="" />
+        <span> ##word.Stocktaking## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesItemsCardUi || storesItemsCardManage" href="/storesItemsCard">
-    <img src="/images/storesItemsCard.png" alt="" />
-    <span> ##word.Stores Items Card## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesItemsCardUi || storesItemsCardManage" href="/storesItemsCard">
+        <img src="/images/storesItemsCard.png" alt="" />
+        <span> ##word.Stores Items Card## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="activeSubstancesUi || activeSubstancesManage" href="/activeSubstances">
-    <img src="/images/activeSubstances.png" alt="" />
-    <span> ##word.Active Substances## </span>
-  </a>
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesOpeningBalancesUi || storesOpeningBalancesManage" href="/storesOpeningBalances">
-    <img src="/images/storesOpeningBalances.png" alt="" />
-    <span> ##word.Stores Opening Balances## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="activeSubstancesUi || activeSubstancesManage" href="/activeSubstances">
+        <img src="/images/activeSubstances.png" alt="" />
+        <span> ##word.Active Substances## </span>
+    </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesOpeningBalancesUi || storesOpeningBalancesManage" href="/storesOpeningBalances">
+        <img src="/images/storesOpeningBalances.png" alt="" />
+        <span> ##word.Stores Opening Balances## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesUnitsUi || storesUnitsManage" href="/storesUnits">
-    <img src="/images/storesUnits.png" alt="" />
-    <span> ##word.Stores Units## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesUnitsUi || storesUnitsManage" href="/storesUnits">
+        <img src="/images/storesUnits.png" alt="" />
+        <span> ##word.Stores Units## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="itemsGroupsUi || itemsGroupsManage" href="/itemsGroups">
-    <img src="/images/itemsGroups.png" alt="" />
-    <span> ##word.Items Groups## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="itemsGroupsUi || itemsGroupsManage" href="/itemsGroups">
+        <img src="/images/itemsGroups.png" alt="" />
+        <span> ##word.Items Groups## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesUi || storesManage" href="/stores">
-    <img src="/images/stores.png" alt="" />
-    <span> ##word.Stores## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="storesUi || storesManage" href="/stores">
+        <img src="/images/stores.png" alt="" />
+        <span> ##word.Stores## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="reasonsDestroyingItemsUi || reasonsDestroyingItemsManage" href="/reasonsDestroyingItems">
-    <img src="/images/reasonsDestroyingItems.png" alt="" />
-    <span> ##word.Reasons Destroying Items## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="reasonsDestroyingItemsUi || reasonsDestroyingItemsManage" href="/reasonsDestroyingItems">
+        <img src="/images/reasonsDestroyingItems.png" alt="" />
+        <span> ##word.Reasons Destroying Items## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="vendorsGroupsUi || vendorsGroupsManage" href="/vendorsGroups">
-    <img src="/images/vendorsGroups.png" alt="" />
-    <span> ##word.Vendors Groups## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="vendorsGroupsUi || vendorsGroupsManage" href="/vendorsGroups">
+        <img src="/images/vendorsGroups.png" alt="" />
+        <span> ##word.Vendors Groups## </span>
+    </a>
 </div>
 
 <div id="m-hmis" class="menu-bottom loaded x-hide">
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientsUi || patientsManage" href="/patients">
-    <img src="/images/patients.png" alt="" />
-    <span> ##word.Patients## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientsUi || patientsManage" href="/patients">
+        <img src="/images/patients.png" alt="" />
+        <span> ##word.Patients## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="doctorsUi || doctorsManage" href="/doctors">
-    <img src="/images/doctors.png" alt="" />
-    <span> ##word.Doctors## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="doctorsUi || doctorsManage" href="/doctors">
+        <img src="/images/doctors.png" alt="" />
+        <span> ##word.Doctors## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesOrdersUi || servicesOrdersManage" href="/servicesOrders">
-    <img src="/images/servicesOrders.png" alt="" />
-    <span> ##word.Services Orders## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesOrdersUi || servicesOrdersManage" href="/servicesOrders">
+        <img src="/images/servicesOrders.png" alt="" />
+        <span> ##word.Services Orders## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="doctorDeskTopUi || doctorDeskTopManage" href="/doctorDeskTop">
-    <img src="/images/doctorDeskTop.png" alt="" />
-    <span> ##word.Doctor DeskTop## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="doctorDeskTopUi || doctorDeskTopManage" href="/doctorDeskTop">
+        <img src="/images/doctorDeskTop.png" alt="" />
+        <span> ##word.Doctor DeskTop## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="doctorAppointmentsUi || doctorAppointmentsManage" href="/doctorAppointments">
-    <img src="/images/doctorAppointments.png" alt="" />
-    <span> ##word.Doctor Appointments## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="doctorAppointmentsUi || doctorAppointmentsManage" href="/doctorAppointments">
+        <img src="/images/doctorAppointments.png" alt="" />
+        <span> ##word.Doctor Appointments## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientHistoryUi || patientHistoryManage" href="/patientHistory">
-    <img src="/images/patientHistory.png" alt="" />
-    <span> ##word.Patient History## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientHistoryUi || patientHistoryManage" href="/patientHistory">
+        <img src="/images/patientHistory.png" alt="" />
+        <span> ##word.Patient History## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="laboratoryDeskTopUi || laboratoryDeskTopManage" href="/laboratoryDeskTop">
-    <img src="/images/laboratoryDeskTop.png" alt="" />
-    <span> ##word.Laboratory DeskTop## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="laboratoryDeskTopUi || laboratoryDeskTopManage" href="/laboratoryDeskTop">
+        <img src="/images/laboratoryDeskTop.png" alt="" />
+        <span> ##word.Laboratory DeskTop## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="radiologyDeskTopUi || radiologyDeskTopManage" href="/radiologyDeskTop">
-    <img src="/images/radiologyDeskTop.png" alt="" />
-    <span> ##word.Radiology DeskTop## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="radiologyDeskTopUi || radiologyDeskTopManage" href="/radiologyDeskTop">
+        <img src="/images/radiologyDeskTop.png" alt="" />
+        <span> ##word.Radiology DeskTop## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientsApprovalUi || patientsApprovalManage" href="/patientsApproval">
-    <img src="/images/patientsApproval.png" alt="" />
-    <span> ##word.Patients Approval## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientsApprovalUi || patientsApprovalManage" href="/patientsApproval">
+        <img src="/images/patientsApproval.png" alt="" />
+        <span> ##word.Patients Approval## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicalOffersUi || medicalOffersManage" href="/medicalOffers">
-    <img src="/images/medicalOffers.png" alt="" />
-    <span> ##word.Medical Offers## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicalOffersUi || medicalOffersManage" href="/medicalOffers">
+        <img src="/images/medicalOffers.png" alt="" />
+        <span> ##word.Medical Offers## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesUi || servicesManage" href="/services">
-    <img src="/images/services.png" alt="" />
-    <span> ##word.Services## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesUi || servicesManage" href="/services">
+        <img src="/images/services.png" alt="" />
+        <span> ##word.Services## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesCategoriesUi || servicesCategoriesManage" href="/servicesCategories">
-    <img src="/images/services.png" alt="" /><span> ##word.Services Categories## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesCategoriesUi || servicesCategoriesManage" href="/servicesCategories">
+        <img src="/images/services.png" alt="" /><span> ##word.Services Categories## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesGroupsUi || servicesGroupsManage" href="/servicesGroups">
-    <img src="/images/services.png" alt="" />
-    <span> ##word.Services Groups## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="servicesGroupsUi || servicesGroupsManage" href="/servicesGroups">
+        <img src="/images/services.png" alt="" />
+        <span> ##word.Services Groups## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="mainInsuranceCompaniesUi || mainInsuranceCompaniesManage" href="/mainInsuranceCompanies">
-    <img src="/images/company.png" alt="" />
-    <span> ##word.Main Insurance Companies## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="mainInsuranceCompaniesUi || mainInsuranceCompaniesManage" href="/mainInsuranceCompanies">
+        <img src="/images/company.png" alt="" />
+        <span> ##word.Main Insurance Companies## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="insuranceCompaniesUi || insuranceCompaniesManage" href="/insuranceCompanies">
-    <img src="/images/company.png" alt="" />
-    <span> ##word.Insurance Companies## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="insuranceCompaniesUi || insuranceCompaniesManage" href="/insuranceCompanies">
+        <img src="/images/company.png" alt="" />
+        <span> ##word.Insurance Companies## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="insuranceClassesUi || insuranceClassesManage" href="/insuranceClasses">
-    <img src="/images/company.png" alt="" />
-    <span> ##word.Insurance Classes## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="insuranceClassesUi || insuranceClassesManage" href="/insuranceClasses">
+        <img src="/images/company.png" alt="" />
+        <span> ##word.Insurance Classes## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="insuranceContractsUi || insuranceContractsManage" href="/insuranceContracts">
-    <img src="/images/insuranceContracts.png" alt="" />
-    <span> ##word.Insurance Contracts## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="insuranceContractsUi || insuranceContractsManage" href="/insuranceContracts">
+        <img src="/images/insuranceContracts.png" alt="" />
+        <span> ##word.Insurance Contracts## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="achiCodesUi || achiCodesManage" href="/achiCodes">
-    <img src="/images/achiCodes.png" alt="" />
-    <span> ##word.ACHI Codes## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="achiCodesUi || achiCodesManage" href="/achiCodes">
+        <img src="/images/achiCodes.png" alt="" />
+        <span> ##word.ACHI Codes## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicineDurationsUi || medicineDurationsManage" href="/medicineDurations">
-    <img src="/images/medicineDurations.png" alt="" />
-    <span> ##word.Medicine Durations## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicineDurationsUi || medicineDurationsManage" href="/medicineDurations">
+        <img src="/images/medicineDurations.png" alt="" />
+        <span> ##word.Medicine Durations## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicineRoutesUi || medicineRoutesManage" href="/medicineRoutes">
-    <img src="/images/medicineRoutes.png" alt="" />
-    <span> ##word.Medicine Routes## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicineRoutesUi || medicineRoutesManage" href="/medicineRoutes">
+        <img src="/images/medicineRoutes.png" alt="" />
+        <span> ##word.Medicine Routes## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicineFrequenciesUi || medicineFrequenciesManage" href="/medicineFrequencies">
-    <img src="/images/medicineFrequencies.png" alt="" />
-    <span> ##word.Medicine Frequencies## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="medicineFrequenciesUi || medicineFrequenciesManage" href="/medicineFrequencies">
+        <img src="/images/medicineFrequencies.png" alt="" />
+        <span> ##word.Medicine Frequencies## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="chiefComplaintsUi || chiefComplaintsManage" href="/chiefComplaints">
-    <img src="/images/chiefComplaints.png" alt="" />
-    <span> ##word.Chief Complaints## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="chiefComplaintsUi || chiefComplaintsManage" href="/chiefComplaints">
+        <img src="/images/chiefComplaints.png" alt="" />
+        <span> ##word.Chief Complaints## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="significantSignsUi || significantSignsManage" href="/significantSigns">
-    <img src="/images/significantSigns.png" alt="" />
-    <span> ##word.Significant Signs## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="significantSignsUi || significantSignsManage" href="/significantSigns">
+        <img src="/images/significantSigns.png" alt="" />
+        <span> ##word.Significant Signs## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="diagnosesUi || diagnosesManage" href="/diagnoses">
-    <img src="/images/diagnoses.png" alt="" />
-    <span> ##word.Diagnoses## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="diagnosesUi || diagnosesManage" href="/diagnoses">
+        <img src="/images/diagnoses.png" alt="" />
+        <span> ##word.Diagnoses## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientRecommendationsUi || patientRecommendationsManage" href="/patientRecommendations">
-    <img src="/images/patientRecommendations.png" alt="" />
-    <span> ##word.Patient Recommend## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientRecommendationsUi || patientRecommendationsManage" href="/patientRecommendations">
+        <img src="/images/patientRecommendations.png" alt="" />
+        <span> ##word.Patient Recommend## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientEducationsUi || patientEducationsManage" href="/patientEducations">
-    <img src="/images/patientEducations.png" alt="" />
-    <span> ##word.Patient Educations## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="patientEducationsUi || patientEducationsManage" href="/patientEducations">
+        <img src="/images/patientEducations.png" alt="" />
+        <span> ##word.Patient Educations## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="otherConditionsUi || otherConditionsManage" href="/otherConditions">
-    <img src="/images/otherConditions.png" alt="" />
-    <span> ##word.Other Conditions## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="otherConditionsUi || otherConditionsManage" href="/otherConditions">
+        <img src="/images/otherConditions.png" alt="" />
+        <span> ##word.Other Conditions## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="specialtiesUi || specialtiesManage" href="/specialties">
-    <img src="/images/specialties.png" alt="" />
-    <span> ##word.Specialties## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="specialtiesUi || specialtiesManage" href="/specialties">
+        <img src="/images/specialties.png" alt="" />
+        <span> ##word.Specialties## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="hospitalResponsibilitiesUi || hospitalResponsibilitiesManage" href="/hospitalResponsibilities">
-    <img src="/images/hospitalResponsibilities.png" alt="" />
-    <span> ##word.Hospital Responsibilities## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="hospitalResponsibilitiesUi || hospitalResponsibilitiesManage" href="/hospitalResponsibilities">
+        <img src="/images/hospitalResponsibilities.png" alt="" />
+        <span> ##word.Hospital Responsibilities## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="drinksUi || drinksManage" href="/drinks">
-    <img src="/images/drinks.png" alt="" />
-    <span> ##word.Drinks## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="drinksUi || drinksManage" href="/drinks">
+        <img src="/images/drinks.png" alt="" />
+        <span> ##word.Drinks## </span>
+    </a>
 
-  <a x-feature="m-hmis" class="menu-item no-line" x-permissions="foodsUi || foodsManage" href="/foods">
-    <img src="/images/foods.png" alt="" />
-    <span> ##word.Foods## </span>
-  </a>
+    <a x-feature="m-hmis" class="menu-item no-line" x-permissions="foodsUi || foodsManage" href="/foods">
+        <img src="/images/foods.png" alt="" />
+        <span> ##word.Foods## </span>
+    </a>
 </div>
 
 <div id="m-hr" class="menu-bottom loaded x-hide">
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="attendanceLeavingUi || attendanceLeavingManage" href="/attendanceLeaving">
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="attendanceUi || attendanceManage" href="/attendance">
+        <img src="/images/attendance.png" alt="" />
+        <span> ##word.Attendance## </span>
+    </a>
+    <!-- <a x-feature="m-hr" class="menu-item no-line" x-permissions="attendanceLeavingUi || attendanceLeavingManage" href="/attendanceLeaving">
     <img src="/images/attendanceLeaving.png" alt="" />
     <span> ##word.Attendance & Leaving## </span>
-  </a>
+  </a> -->
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="vacationsRequestsUi || vacationsRequestsManage" href="/vacationsRequests">
-    <img src="/images/vacationsRequests.png" alt="" />
-    <span> ##word.Vacations Requests## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="vacationsRequestsUi || vacationsRequestsManage" href="/vacationsRequests">
+        <img src="/images/vacationsRequests.png" alt="" />
+        <span> ##word.Vacations Requests## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="delayRequestsUi || delayRequestsManage" href="/delayRequests">
-    <img src="/images/delayRequests.png" alt="" />
-    <span> ##word.Delay Requests## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="delayRequestsUi || delayRequestsManage" href="/delayRequests">
+        <img src="/images/delayRequests.png" alt="" />
+        <span> ##word.Delay Requests## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="workErrandRequestsUi || workErrandRequestsManage" href="/workErrandRequests">
-    <img src="/images/workErrandRequests.png" alt="" />
-    <span> ##word.Work Errand Requests## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="workErrandRequestsUi || workErrandRequestsManage" href="/workErrandRequests">
+        <img src="/images/workErrandRequests.png" alt="" />
+        <span> ##word.Work Errand Requests## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="overtimeRequestsUi || overtimeRequestsManage" href="/overtimeRequests">
-    <img src="/images/overtimeRequests.png" alt="" />
-    <span> ##word.Overtime Requests## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="overtimeRequestsUi || overtimeRequestsManage" href="/overtimeRequests">
+        <img src="/images/overtimeRequests.png" alt="" />
+        <span> ##word.Overtime Requests## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesBonusesUi || employeesBonusesManage" href="/employeesBonuses">
-    <img src="/images/employeesBonuses.png" alt="" />
-    <span> ##word.Employees Bonuses## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesBonusesUi || employeesBonusesManage" href="/employeesBonuses">
+        <img src="/images/employeesBonuses.png" alt="" />
+        <span> ##word.Employees Bonuses## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesPenaltiesUi || employeesPenaltiesManage" href="/employeesPenalties">
-    <img src="/images/employeesPenalties.png" alt="" />
-    <span> ##word.Employees Penalties## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesPenaltiesUi || employeesPenaltiesManage" href="/employeesPenalties">
+        <img src="/images/employeesPenalties.png" alt="" />
+        <span> ##word.Employees Penalties## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesAdvancesUi || employeesAdvancesManage" href="/employeesAdvances">
-    <img src="/images/employeesAdvances.png" alt="" />
-    <span> ##word.Employees Advances## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesAdvancesUi || employeesAdvancesManage" href="/employeesAdvances">
+        <img src="/images/employeesAdvances.png" alt="" />
+        <span> ##word.Employees Advances## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="payslipsUi || payslipsManage" href="/payslips">
-    <img src="/images/payslips.png" alt="" />
-    <span> ##word.Payslips## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="payslipsUi || payslipsManage" href="/payslips">
+        <img src="/images/payslips.png" alt="" />
+        <span> ##word.Payslips## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesUi || employeesManage" href="/employees">
-    <img src="/images/employees.png" alt="" />
-    <span> ##word.Employees## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesUi || employeesManage" href="/employees">
+        <img src="/images/employees.png" alt="" />
+        <span> ##word.Employees## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="createVacationsUi || createVacationsManage" href="/createVacations">
-    <img src="/images/createVacations.png" alt="" />
-    <span> ##word.Create Vacations## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="createVacationsUi || createVacationsManage" href="/createVacations">
+        <img src="/images/createVacations.png" alt="" />
+        <span> ##word.Create Vacations## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="departmentsUi || departmentsManage" href="/departments">
-    <img src="/images/departments.png" alt="" />
-    <span> ##word.Departments## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="departmentsUi || departmentsManage" href="/departments">
+        <img src="/images/departments.png" alt="" />
+        <span> ##word.Departments## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="sectionsUi || sectionsManage" href="/sections">
-    <img src="/images/sections.png" alt="" />
-    <span> ##word.Sections## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="sectionsUi || sectionsManage" href="/sections">
+        <img src="/images/sections.png" alt="" />
+        <span> ##word.Sections## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsUi || jobsManage" href="/jobs">
-    <img src="/images/jobs.png" alt="" />
-    <span> ##word.Jobs## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsUi || jobsManage" href="/jobs">
+        <img src="/images/jobs.png" alt="" />
+        <span> ##word.Jobs## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsShiftsUi || jobsShiftsManage" href="/jobsShifts">
-    <img src="/images/jobsShifts.png" alt="" />
-    <span> ##word.Jobs Shifts## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsShiftsUi || jobsShiftsManage" href="/jobsShifts">
+        <img src="/images/jobsShifts.png" alt="" />
+        <span> ##word.Jobs Shifts## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="salaryDeductionsNamesUi || salaryDeductionsNamesManage" href="/salaryDeductionsNames">
-    <img src="/images/salaryDeductionsNames.png" alt="" />
-    <span> ##word.Salary Deductions Names## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="salaryDeductionsNamesUi || salaryDeductionsNamesManage" href="/salaryDeductionsNames">
+        <img src="/images/salaryDeductionsNames.png" alt="" />
+        <span> ##word.Salary Deductions Names## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage" href="/salaryAllowancesNames">
-    <img src="/images/salaryAllowancesNames.png" alt="" />
-    <span> ##word.Salary Allowances Names## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage" href="/salaryAllowancesNames">
+        <img src="/images/salaryAllowancesNames.png" alt="" />
+        <span> ##word.Salary Allowances Names## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesPenaltiesNamesUi || employeesPenaltiesNamesManage" href="/employeesPenaltiesNames">
-    <img src="/images/employeesPenaltiesNames.png" alt="" />
-    <span> ##word.Employees Penalties Names## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesPenaltiesNamesUi || employeesPenaltiesNamesManage" href="/employeesPenaltiesNames">
+        <img src="/images/employeesPenaltiesNames.png" alt="" />
+        <span> ##word.Employees Penalties Names## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesBonusNamesUi || employeesBonusNamesManage" href="/employeesBonusNames">
-    <img src="/images/employeesBonusNames.png" alt="" />
-    <span> ##word.Employees Bonus Names## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesBonusNamesUi || employeesBonusNamesManage" href="/employeesBonusNames">
+        <img src="/images/employeesBonusNames.png" alt="" />
+        <span> ##word.Employees Bonus Names## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsToolsUi || jobsToolsManage" href="/jobsTools">
-    <img src="/images/jobsTools.png" alt="" />
-    <span> ##word.Jobs Tools## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsToolsUi || jobsToolsManage" href="/jobsTools">
+        <img src="/images/jobsTools.png" alt="" />
+        <span> ##word.Jobs Tools## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="vacationsNamesUi || vacationsNamesManage" href="/vacationsNames">
-    <img src="/images/vacationsNames.png" alt="" />
-    <span> ##word.Vacations Names## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="vacationsNamesUi || vacationsNamesManage" href="/vacationsNames">
+        <img src="/images/vacationsNames.png" alt="" />
+        <span> ##word.Vacations Names## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsAdvertisementsUi || jobsAdvertisementsManage" href="/jobsAdvertisements">
-    <img src="/images/jobsAdvertisements.png" alt="" />
-    <span> ##word.Jobs Advertisements## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsAdvertisementsUi || jobsAdvertisementsManage" href="/jobsAdvertisements">
+        <img src="/images/jobsAdvertisements.png" alt="" />
+        <span> ##word.Jobs Advertisements## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsApplicantsUi || jobsApplicantsManage" href="/jobsApplicants">
-    <img src="/images/jobsApplicants.png" alt="" />
-    <span> ##word.Jobs Applicants## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="jobsApplicantsUi || jobsApplicantsManage" href="/jobsApplicants">
+        <img src="/images/jobsApplicants.png" alt="" />
+        <span> ##word.Jobs Applicants## </span>
+    </a>
 
-  <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesContractsUi || employeesContractsManage" href="/employeesContracts">
-    <img src="/images/employeesContracts.png" alt="" />
-    <span> ##word.Employees Contracts## </span>
-  </a>
+    <a x-feature="m-hr" class="menu-item no-line" x-permissions="employeesContractsUi || employeesContractsManage" href="/employeesContracts">
+        <img src="/images/employeesContracts.png" alt="" />
+        <span> ##word.Employees Contracts## </span>
+    </a>
 </div>
 
 <div id="systemSetting" class="menu-bottom loaded x-hide">
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="customersUi || customersManage" href="/customers">
-    <img src="/images/customer.png" alt="" />
-    <span> ##word.Customers## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="customersUi || customersManage" href="/customers">
+        <img src="/images/customer.png" alt="" />
+        <span> ##word.Customers## </span>
+    </a>
 
-  <a x-feature="m-inventory" class="menu-item no-line" x-permissions="customersGroupsUi || customersGroupsManage" href="/customersGroups">
-    <img src="/images/customersGroups.png" alt="" />
-    <span> ##word.Customers Groups## </span>
-  </a>
+    <a x-feature="m-inventory" class="menu-item no-line" x-permissions="customersGroupsUi || customersGroupsManage" href="/customersGroups">
+        <img src="/images/customersGroups.png" alt="" />
+        <span> ##word.Customers Groups## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="nationalitiesUi || nationalitiesManage" href="/nationalities">
-    <img src="/images/nationalities.png" alt="" />
-    <span> ##word.Nationalities## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="nationalitiesUi || nationalitiesManage" href="/nationalities">
+        <img src="/images/nationalities.png" alt="" />
+        <span> ##word.Nationalities## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="countriesUi || countriesManage" href="/countries">
-    <img src="/images/countries.png" alt="" />
-    <span> ##word.Countries## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="countriesUi || countriesManage" href="/countries">
+        <img src="/images/countries.png" alt="" />
+        <span> ##word.Countries## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="govesUi || govesManage" href="/goves">
-    <img src="/images/governorates.png" alt="" />
-    <span> ##word.Governorates## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="govesUi || govesManage" href="/goves">
+        <img src="/images/governorates.png" alt="" />
+        <span> ##word.Governorates## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="citiesUi || citiesManage" href="/cities">
-    <img src="/images/cities.png" alt="" />
-    <span> ##word.Cities## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="citiesUi || citiesManage" href="/cities">
+        <img src="/images/cities.png" alt="" />
+        <span> ##word.Cities## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="areasUi || areasManage" href="/areas">
-    <img src="/images/areas.png" alt="" />
-    <span> ##word.Areas## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="areasUi || areasManage" href="/areas">
+        <img src="/images/areas.png" alt="" />
+        <span> ##word.Areas## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="printersPathsUi || printersPathsManage" href="/printersPaths">
-    <img src="/images/printersPaths.png" alt="" />
-    <span> ##word.Printers Paths## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="printersPathsUi || printersPathsManage" href="/printersPaths">
+        <img src="/images/printersPaths.png" alt="" />
+        <span> ##word.Printers Paths## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="namesConversionsUi || namesConversionsManage" href="/namesConversions">
-    <img src="/images/namesConversions.png" alt="" />
-    <span> ##word.Names Conversions## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="namesConversionsUi || namesConversionsManage" href="/namesConversions">
+        <img src="/images/namesConversions.png" alt="" />
+        <span> ##word.Names Conversions## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="numberingUi || numberingManage" href="/numbering">
-    <img src="/images/numbering.png" alt="" />
-    <span> ##word.Numbering Setting## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="numberingUi || numberingManage" href="/numbering">
+        <img src="/images/numbering.png" alt="" />
+        <span> ##word.Numbering Setting## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="securityManage" href="/security">
-    <img src="/images/security.png" alt="" />
-    <span> ##word.Security## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="securityManage" href="/security">
+        <img src="/images/security.png" alt="" />
+        <span> ##word.Security## </span>
+    </a>
 
-  <a class="menu-item no-line" x-permissions="systemSettingManage" href="/systemSetting">
-    <img src="/images/systemSetting.png" alt="" />
-    <span> ##word.System Setting## </span>
-  </a>
+    <a class="menu-item no-line" x-permissions="systemSettingManage" href="/systemSetting">
+        <img src="/images/systemSetting.png" alt="" />
+        <span> ##word.System Setting## </span>
+    </a>
 </div>

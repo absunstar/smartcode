@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendancePrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "hr" , "screenName" : "attendance" , "name":"attendanceUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

@@ -18,6 +18,63 @@ module.exports = function init(site) {
 
     app.$collection = site.connectCollection(app.name);
 
+    site.checkShiftWorkDays = function (_data, callback) {
+        const day = new Date(_data.date).getDay();
+        let response = { done: false };
+        app.$collection.find({ id: _data.id }, (err, doc) => {
+            let dayIndex;
+
+            if (doc) {
+                if (!doc.approved) {
+                    response.done = false;
+                    response.error = 'Shift Not Approved';
+                } else {
+                    dayIndex = doc.worktimesList.findIndex((_d) => _d.day.index == day);
+
+                    if (doc.worktimesList[dayIndex].active && dayIndex !== -1) {
+                        const day = doc.worktimesList[dayIndex].day;
+                        const start = new Date(
+                            new Date(_data.date).getFullYear(),
+                            new Date(_data.date).getMonth(),
+                            new Date(_data.date).getDate(),
+                            new Date(doc.worktimesList[dayIndex].start).getHours(),
+                            new Date(doc.worktimesList[dayIndex].start).getMinutes()
+                        );
+
+                        const nightTime = doc.worktimesList[dayIndex].nightTime;
+                        let end;
+
+                        if (nightTime) {
+                            end = new Date(
+                                new Date(_data.date).getFullYear(),
+                                new Date(_data.date).getMonth(),
+                                new Date(new Date(_data.date).getDate() + 1),
+                                new Date(doc.worktimesList[dayIndex].end).getHours(),
+                                new Date(doc.worktimesList[dayIndex].end).getMinutes()
+                            );
+                        } else {
+                            end = new Date(
+                                new Date(_data.date).getFullYear(),
+                                new Date(_data.date).getMonth(),
+                                new Date(_data.date).getDate(),
+                                new Date(doc.worktimesList[dayIndex].end).getHours(),
+                                new Date(doc.worktimesList[dayIndex].end).getMinutes()
+                            );
+                        }
+                        response.done = true;
+                        response.doc = { id: doc.id, day, start, end, nightTime };
+                    }
+
+                    if (!doc.worktimesList[dayIndex].active || dayIndex == -1) {
+                        response.done = false;
+                        response.error = 'Selected Day Not Set As Work Day';
+                    }
+                }
+            }
+
+            callback(response);
+        });
+    };
     app.init = function () {
         if (app.allowMemory) {
             app.$collection.findMany({}, (err, docs) => {
@@ -299,10 +356,6 @@ module.exports = function init(site) {
 
         if (app.allowRouteGet) {
             site.post({ name: `/api/${app.name}/get`, require: { permissions: ['login'] } }, (req, res) => {
-                let response = {
-                    done: false,
-                };
-
                 let _data = req.data;
 
                 if (!_data.date) {
@@ -311,21 +364,27 @@ module.exports = function init(site) {
                 if (!_data.id) {
                     return;
                 }
-                const day = new Date(_data.date).getDay();
-                app.$collection.find({ id: _data.id }, (err, doc) => {
-                    if (doc) {
-                        const dayIndex = doc.worktimesList.findIndex((_d) => _d.day.index == day);
-                        if (dayIndex !== -1) {
-                            const day = doc.worktimesList[dayIndex].day;
-                            const start = doc.worktimesList[dayIndex].start;
-                            const end = doc.worktimesList[dayIndex].end;
 
-                            response.done = true;
-                            response.doc = { day, start, end };
-                            res.json(response);
-                        }
-                    }
+                site.checkShiftWorkDays(_data, (result) => {
+                    res.json(result);
                 });
+
+                // app.$collection.find({ id: _data.id }, (err, doc) => {
+                //     if (doc) {
+                //         const dayIndex = doc.worktimesList.findIndex((_d) => _d.active && _d.day.index == day);
+                //         if (dayIndex !== -1) {
+                //             const day = doc.worktimesList[dayIndex].day;
+                //             const start = doc.worktimesList[dayIndex].start;
+                //             const end = doc.worktimesList[dayIndex].end;
+                //             response.done = true;
+                //             response.doc = { day, start, end };
+                //         } else {
+                //             response.done = false;
+                //             response.error = 'Selected Day Not Set As Work Day';
+                //         }
+                //         res.json(response);
+                //     }
+                // });
             });
         }
 
@@ -340,6 +399,7 @@ module.exports = function init(site) {
                     nameEn: 1,
                     nameAr: 1,
                     approved: 1,
+                    fingerprintMethod: 1,
                     // availableDelayTime: 1,
                     // worktimesList: 1,
                     // penaltiesList: 1,

@@ -1,6 +1,6 @@
 module.exports = function init(site) {
     let app = {
-        name: 'attendanceLeaving',
+        name: 'attendance',
         allowMemory: false,
         memoryList: [],
         allowCache: false,
@@ -15,12 +15,13 @@ module.exports = function init(site) {
     };
 
     app.$collection = site.connectCollection(app.name);
-
-    site.getEmployeeAttendance = function (paySlip, callback) {
+    site.getAttendance = function (paySlip, callback) {
         const d1 = site.toDate(paySlip.fromDate);
         const d2 = site.toDate(paySlip.toDate);
         app.$collection.findMany({ where: { 'employee.id': paySlip.employeeId, date: { $gte: d1, $lte: d2 } } }, (err, docs) => {
             paySlip.realWorkTimesList.forEach((workDay) => {
+                console.log('shiftData', workDay.shiftData);
+                let shiftEnd;
                 const shiftStart = new Date(
                     new Date(workDay.date).getFullYear(),
                     new Date(workDay.date).getMonth(),
@@ -29,35 +30,50 @@ module.exports = function init(site) {
                     new Date(workDay.shiftData.start).getMinutes()
                 );
 
-                const shiftEnd = new Date(
-                    new Date(workDay.date).getFullYear(),
-                    new Date(workDay.date).getMonth(),
-                    new Date(workDay.date).getDate(),
-                    new Date(workDay.shiftData.end).getHours(),
-                    new Date(workDay.shiftData.end).getMinutes()
-                );
+                if (workDay.shiftData.nightTime) {
+                    shiftEnd = new Date(
+                        new Date(workDay.date).getFullYear(),
+                        new Date(workDay.date).getMonth(),
+                        new Date(workDay.date).getDate() + 1,
+                        new Date(workDay.shiftData.end).getHours(),
+                        new Date(workDay.shiftData.end).getMinutes()
+                    );
+                } else {
+                    shiftEnd = new Date(
+                        new Date(workDay.date).getFullYear(),
+                        new Date(workDay.date).getMonth(),
+                        new Date(workDay.date).getDate(),
+                        new Date(workDay.shiftData.end).getHours(),
+                        new Date(workDay.shiftData.end).getMinutes()
+                    );
+                }
+                // console.log('shiftEnd', workDay.shiftData.nightTime, shiftStart, shiftEnd);
 
                 let attencance = {
                     appName: '',
                     date: '',
-                    absence: false,
+                    absent: false,
                     shiftStart: '',
                     shiftEnd: '',
                 };
-                let docIndex = docs.findIndex((_doc) => {
-                    const getDayIndex = new Date(_doc.date).getDay();
-                    const docDay = new Date(_doc.date).getDate();
-                    if (workDay && workDay.shiftData.active && docDay === workDay.day && workDay.dayIndex == getDayIndex) {
-                        return _doc;
-                    }
-                });
+                let docIndex;
+                if (workDay.shiftData.fingerprintMethod == 'fixed') {
+                    docIndex = docs.findIndex((_doc) => {
+                        const getDayIndex = new Date(_doc.date).getDay();
+                        const docDay = new Date(_doc.date).getDate();
+                        if (workDay && workDay.shiftData.active && docDay === workDay.day && workDay.dayIndex == getDayIndex) {
+                            return _doc;
+                        }
+                    });
+                } else if (workDay.shiftData.fingerprintMethod == 'variable') {
+                }
 
                 attencance = { ...attencance };
                 if (docIndex == -1) {
                     attencance = {
                         appName: app.name,
                         date: workDay.date,
-                        absence: true,
+                        absent: true,
                         shiftStart,
                         shiftEnd,
                         attendanceDifference: -1,
@@ -82,10 +98,10 @@ module.exports = function init(site) {
                     const attendPeriod = Number(attendValue);
                     const absentPeriod = Number(shiftTime - attendPeriod);
 
-                    if (!docs[docIndex].absence) {
+                    if (!docs[docIndex].absent) {
                         attencance = {
                             date: docs[docIndex].date,
-                            absence: false,
+                            absent: false,
                             shiftStart,
                             shiftEnd,
                             attendTime,
@@ -100,7 +116,7 @@ module.exports = function init(site) {
                     } else {
                         attencance = {
                             date: docs[docIndex].date,
-                            absence: true,
+                            absent: true,
                             shiftStart,
                             shiftEnd,
                             attendanceDifference: -1,
@@ -119,7 +135,6 @@ module.exports = function init(site) {
             callback(paySlip);
         });
     };
-
     app.init = function () {
         if (app.allowMemory) {
             app.$collection.findMany({}, (err, docs) => {
@@ -248,7 +263,7 @@ module.exports = function init(site) {
                     name: app.name,
                 },
                 (req, res) => {
-                    res.render(app.name + '/index.html', { title: app.name, appName: 'Attendance & Leaving' }, { parser: 'html', compres: true });
+                    res.render(app.name + '/index.html', { title: app.name, appName: 'Attendance', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
                 }
             );
         }
@@ -279,14 +294,33 @@ module.exports = function init(site) {
 
                 _data.addUserInfo = req.getUserFinger();
 
-                app.add(_data, (err, doc) => {
-                    if (!err && doc) {
-                        response.done = true;
-                        response.doc = doc;
+                _data.date = site.toDate(_data.date);
+                app.$collection.find({ where: { 'employee.id': _data.employee.id, date: { $eq: _data.date } } }, (err, doc) => {
+                    if (doc) {
+                        res.done = false;
+                        response.error = 'Attendance Exisit For Employee In Same Date';
+                        res.json(response);
                     } else {
-                        response.error = err.mesage;
+                        const checkShiftData = { date: _data.date, id: _data.shift.id };
+                        site.checkShiftWorkDays(checkShiftData, (result) => {
+                            if (result.done) {
+                                app.add(_data, (err, doc) => {
+                                    if (!err && doc) {
+                                        response.done = true;
+                                        response.doc = doc;
+                                    } else {
+                                        response.error = err.mesage;
+                                    }
+                                    res.json(response);
+                                });
+                            } else {
+                                response.done = result.done;
+                                response.error = result.error;
+                                res.json(response);
+                                return;
+                            }
+                        });
                     }
-                    res.json(response);
                 });
             });
         }
@@ -300,14 +334,33 @@ module.exports = function init(site) {
                 let _data = req.data;
                 _data.editUserInfo = req.getUserFinger();
 
-                app.update(_data, (err, result) => {
-                    if (!err) {
-                        response.done = true;
-                        response.result = result;
+                _data.date = site.toDate(_data.date);
+                app.$collection.find({ where: { 'employee.id': _data.employee.id, date: { $eq: _data.date } } }, (err, doc) => {
+                    if (doc && doc.id != _data.id) {
+                        res.done = false;
+                        response.error = 'Attendance Exisit For Employee In Same Date';
+                        res.json(response);
                     } else {
-                        response.error = err.message;
+                        const checkShiftData = { date: _data.date, id: _data.shift.id };
+                        site.checkShiftWorkDays(checkShiftData, (result) => {
+                            if (result.done && doc.id == _data.id) {
+                                app.update(_data, (err, result) => {
+                                    if (!err) {
+                                        response.done = true;
+                                        response.result = result;
+                                    } else {
+                                        response.error = err.message;
+                                    }
+                                    res.json(response);
+                                });
+                            } else {
+                                response.done = result.done;
+                                response.error = result.error;
+                                res.json(response);
+                                return;
+                            }
+                        });
                     }
-                    res.json(response);
                 });
             });
         }
@@ -378,7 +431,6 @@ module.exports = function init(site) {
                 } else {
                     search = search;
                 }
-             
 
                 if (where && where.date) {
                     const d1 = site.toDate(where.date);
@@ -397,13 +449,6 @@ module.exports = function init(site) {
                     delete where.toDate;
                 }
 
-                if (where && where.attendanceTimeDifference) {
-                    where.attendanceTimeDifference = { $gt: 0 };
-                }
-                if (where && where.leavingTimeDifference) {
-                    where.leavingTimeDifference = { $gt: 0 };
-                }
-
                 if (app.allowMemory) {
                     if (!search) {
                         search = 'id';
@@ -418,7 +463,6 @@ module.exports = function init(site) {
                     });
                 } else {
                     where['company.id'] = site.getCompany(req).id;
-
                     app.all({ where, select, limit }, (err, docs) => {
                         res.json({
                             done: true,
@@ -428,74 +472,6 @@ module.exports = function init(site) {
                 }
             });
         }
-        site.post({ name: `/api/${app.name}/get`, require: { permissions: ['login'] } }, (req, res) => {
-            let response = {
-                done: false,
-            };
-
-            let _data = req.data;
-            let where = {};
-            let d1 = site.toDate(_data.date);
-            let d2 = site.toDate(_data.date);
-            d2.setDate(d2.getDate() + 1);
-            where.date = {
-                $gte: d1,
-                $lt: d2,
-            };
-            if (_data['employee']) {
-                where['employee.id'] = _data['employee'].id;
-            }
-
-            app.all(
-                {
-                    where,
-                    limit: 1,
-                    sort: {
-                        id: -1,
-                    },
-                },
-                (err, docs) => {
-                    if (!err) {
-                        if (docs && docs.length > 0) {
-                            response.done = true;
-                            response.result = docs[0];
-                            res.json(response);
-                        } else {
-                            _data.company = site.getCompany(req);
-                            _data.addUserInfo = req.getUserFinger();
-                            const shiftDate = new Date(_data.date).toISOString().slice(0, 10);
-                            const shiftStartHour = new Date(_data.shiftData.start).getHours();
-                            const shiftStartMiniute = new Date(_data.shiftData.start).getMinutes();
-                            const shiftEndHour = new Date(_data.shiftData.end).getHours();
-                            const shiftEndMiniute = new Date(_data.shiftData.end).getMinutes();
-
-                            _data.shiftData.start = new Date(shiftDate);
-                            _data.shiftData.start.setHours(shiftStartHour);
-                            _data.shiftData.start.setMinutes(shiftStartMiniute);
-                            _data.shiftData.end = new Date(shiftDate);
-                            _data.shiftData.end.setHours(shiftEndHour);
-                            _data.shiftData.end.setMinutes(shiftEndMiniute);
-                            _data.absence = false;
-                            _data.active = true;
-                            _data.attendanceTimeDifference = '';
-                            _data.leavingTimeDifference = '';
-                            app.add(_data, (err, doc) => {
-                                if (!err && doc) {
-                                    response.done = true;
-                                    response.result = doc;
-                                } else {
-                                    response.error = err.mesage;
-                                }
-                                res.json(response);
-                            });
-                        }
-                    } else {
-                        response.error = err.mesage;
-                        res.json(response);
-                    }
-                }
-            );
-        });
     }
 
     app.init();

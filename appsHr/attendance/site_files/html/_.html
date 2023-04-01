@@ -1,0 +1,53 @@
+<div ng-controller="attendance" class="loaded">
+    <div class="row" x-permissions="attendanceUi || attendanceManage">
+        <div x-import="attendance/modal.html"></div>
+        <div x-import="attendance/modalSearch.html"></div>
+
+        <div class="top-actions">
+            <i-button type="add" x-permissions="attendanceAdd || attendanceManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="attendanceSearch || attendanceManage" label="##word.Absent##" ng-click="searchAll(search={absent:true})"></i-button>
+        </div>
+        <div class="row">
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+        </div>
+        <div class="row padding">
+            <i-control ng-model="$search" x-permissions="attendanceSearch || attendanceManage"></i-control>
+        </div>
+        <div class="table-responsive">
+            <table class="table hover bold" id="attendance">
+                <tr>
+                    <th class="w150">##word.Logo##</th>
+                    <th>##word.Code##</th>
+                    <th>##word.Date##</th>
+                    <th>##word.Employee##</th>
+                    <th>##word.Absent##</th>
+                    <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="item in list | filter:$search">
+                    <td>
+                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                    </td>
+                    <td class="center blue">{{item.code}}</td>
+                    <td class="center blue">{{item.date|date:'dd/MM/yyyy'}}</td>
+                    <td class="center">{{item.employee.fullName##session.lang##}}</td>
+                    <td class="center">
+                        <span class="text-danger" ng-show="item.absent">##word.Yes##</span>
+                        <span class="text-success" ng-show="!item.absent">##word.No##</span>
+                    </td>
+
+                    <td class="center not-print">
+                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+                        <i-button type="edit" x-permissions="attendanceUpdate || attendanceManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+                        <i-button type="delete" x-permissions="attendanceDelete || attendanceManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <i-button x-permissions="attendancePrint || attendanceManage" type="print" label="##word.Print##" onclick="site.print('#attendance')"></i-button>
+        <i-button x-permissions="attendanceExport || attendanceManage" type="export" label="##word.Export to excel##" onclick="site.export('#attendance')"> </i-button>
+    </div>
+</div>

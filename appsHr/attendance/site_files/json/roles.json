@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "attendanceAdmin",
+        "En": "Attendance Admin",
+        "Ar": "إدارة الحضور والإنصراف",
+        "permissions": ["attendanceManage"]
+    }
+]

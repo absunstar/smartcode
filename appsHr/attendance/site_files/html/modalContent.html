@@ -1,0 +1,100 @@
+<div class="row padding">
+    <div class="col9">
+        <div class="row">
+            <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+
+            <i-date class="col6" label="##word.Date##" ng-model="item.date"></i-date>
+
+            <i-list
+                label="##word.Employee##"
+                class="col4"
+                v="r"
+                ng-model="item.employee"
+                ng-change="getShiftData(item)"
+                ng-search="item.$employee"
+                display="fullName##session.lang##"
+                items="employeesList"
+            ></i-list>
+        </div>
+
+        <div class="table-responsive" ng-show="item.shift.day">
+            <table class="table center hover bold">
+                <thead>
+                    <tr>
+                        <th>##word.Name##</th>
+                        <th>##word.Start##</th>
+                        <th>##word.End##</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="center">{{item.shift.day.name##session.lang##}}</td>
+                        <td class="center">
+                            <span ng-show="!item.shift.nightTime"> {{item.shift.start | date :'hh: mm a'}} </span>
+                            <span ng-show="item.shift.nightTime">{{item.shift.start | date :'dd/MM/yyyy'}} - {{item.shift.start | date :'hh: mm a'}} </span>
+                        </td>
+                        <td class="center">
+                            <span ng-show="!item.shift.nightTime"> {{item.shift.end | date :'hh: mm a'}} </span>
+                            <span ng-show="item.shift.nightTime">{{item.shift.end | date :'dd/MM/yyyy'}} - {{item.shift.end | date :'hh: mm a'}} </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col3 center">
+        <i-image class="img128 center" ng-model="item.image"></i-image>
+    </div>
+
+    <h3 class="center bold text-danger" ng-show="item.absent">##word.Absent##</h3>
+
+    <div class="row padding" ng-show="!item.absent && item.shift.day">
+        <fieldset>
+            <legend>##word.Fingerprints##</legend>
+            <div class="row">
+                <i-control type="time" class="col4" ng-model="item.fingerprintTime" ng-show="!item.absent"></i-control>
+                <i-button type="push" class="col2" ng-click="addToAattendanceList(item)"></i-button>
+                <i-button type="close" class="col2" ng-hide="item.attendanceList.length" label="##word.Absent##" ng-click="absent(item)"></i-button>
+            </div>
+            <div class="table-responsive">
+                <table class="table center hover bold">
+                    <tr>
+                        <th>##word.S##</th>
+                        <th>##word.Time##</th>
+                        <th>##word.Actions##</th>
+                    </tr>
+                    <tr ng-repeat="time in item.attendanceList">
+                        <td class="center blue">{{$index+1}}</td>
+                        <td class="center">{{time.fingerprintTime|date:"hh:mm a"}}</td>
+                        <td class="center">
+                            <i-button type="delete" ng-click="item.attendanceList.splice($index,1)"></i-button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
+
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

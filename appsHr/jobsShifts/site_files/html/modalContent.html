@@ -17,83 +17,68 @@
         </div>
     </div>
 
-    <!-- <div class="col4" x-permissions=" jobsShiftsManage" ng-if="!item.approved">
-        <i-checkbox ng-if="!item.approved" ng-model="item.useSystemSetting" label="##word.Use System Setting In Calculating Payslip##"></i-checkbox>
-    </div> -->
-
-    <!-- <div class="col4" ng-if="item.approved">
-        <div class="row">
-            <p class="text-center">##word.Use System Setting In Calculating Payslip##</p>
-            <p class="text-center">
-                <span class="bold text-success" ng-if="item.useSystemSetting">##word.Yes##</span>
-                <span class="bold text-danger" ng-if="!item.useSystemSetting">##word.No##</span>
-            </p>
-        </div>
-    </div> -->
     <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
     <div class="row">
         <i-control type="text" v="r" class="col6" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" class="col6" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
     </div>
     <fieldset>
-        <legend>##word.Worktimes##</legend>
+        <legend class="black">##word.Worktimes##</legend>
         <div class="row" x-permissions="addShiftWorktimes || jobsShiftsManage">
             <div class="row" ng-repeat="weekDay in item.worktimesList">
                 <div class="col2">
                     <br />
-                    <p class="center" ng-model="weekDay.day">{{weekDay.day.name##session.lang##}}</p>
+                    <p class="center bold" ng-model="weekDay.day">{{weekDay.day.name##session.lang##}}</p>
                 </div>
-                <i-checkbox ng-model="weekDay.active" class="col2" label="##word.Active##"></i-checkbox>
-                <i-control ng-show="weekDay.active" type="time" class="col3" ng-model="weekDay.start" label="##word.Start##"></i-control>
-                <i-control ng-show="weekDay.active" type="time" class="col3" ng-model="weekDay.end" label="##word.End##"></i-control>
-                <!-- <div class="col2">
-                    <br />
-                    <i-button type="delete" ng-if="!item.approved" x-permissions="removeShiftWorktimes || jobsShiftsManage" ng-click="item.worktimesList.splice($index,1)"></i-button>
-                </div> -->
-                <!-- <i-list label="##word.Day##" class="col3" ng-model="day.day" display="name##session.lang##" items="weekDaysList" ng-search="day.$day"></i-list> -->
-                <!-- <p class="center" class="col3" ng-model="weekDay.day">{{weekDay.name##session.lang##}}</p> -->
-                <!-- <div class="col2">
-                <br />
-                <i-button type="add" label="##word.Add##" ng-click="addWorktime(worktime)"></i-button>
-            </div> -->
+                <div class="col2">
+                    <i-checkbox ng-model="weekDay.active" ng-show="!item.approved" label="##word.Active##"></i-checkbox>
+                    <p class="center" ng-show="item.approved">
+                        <br />
+                        <span ng-show="weekDay.active" class="text-success">##word.Active##</span>
+                        <span ng-show="!weekDay.active" class="text-danger">##word.Not Active##</span>
+                    </p>
+                </div>
+                <div class="col2">
+                    <i-checkbox ng-model="weekDay.nightTime" ng-show="!item.approved && weekDay.active" label="##word.Night Time##"></i-checkbox>
+                    <p class="center" ng-show="item.approved && weekDay.active">
+                        <br />
+                        <span ng-show="weekDay.nightTime" class="text-danger">##word.Night##</span>
+                        <span ng-show="!weekDay.nightTime" class="text-success">##word.Morning##</span>
+                    </p>
+                </div>
+                <div class="col2">
+                    <i-control ng-show="weekDay.active && !item.approved" type="time" ng-show="!item.approved" ng-model="weekDay.start" label="##word.Start##"></i-control>
+                    <p class="center" ng-show="item.approved && weekDay.active">
+                        <br />
+                        <span> {{weekDay.start |date :'hh:mm a'}}</span>
+                    </p>
+                </div>
+                <div class="col2">
+                    <i-control ng-show="weekDay.active && !item.approved" type="time" ng-show="!item.approved" ng-model="weekDay.end" label="##word.End##"></i-control>
+                    <p class="center" ng-show="item.approved && weekDay.active">
+                        <br />
+                        <span> {{weekDay.end |date :'hh:mm a'}}</span>
+                    </p>
+                </div>
             </div>
         </div>
-        <!-- <div class="table-responsive">
-            <table class="table hover bold">
-                <tr>
-                    <th>##word.S##</th>
-                    <th>##word.Day##</th>
-                    <th>##word.Start##</th>
-                    <th>##word.End##</th>
-                    <th>##word.Status##</th>
-                    <th class="not-print">##word.Actions##</th>
-                </tr>
-                <tr ng-repeat="time in item.worktimesList">
-                    <td><p class="text-center">{{$index+1}}</p></td>
-                    <td><p class="text-center">{{time.day.name##session.lang##}}</p></td>
-                    <td><p class="text-center">{{time.start |date:'hh:mm:ss a'}}</p></td>
-                    <td><p class="text-center">{{time.end |date:'hh:mm:ss a'}}</p></td>
-                    <td class="center">
-                        <span class="text-success" ng-show="time.active">##word.Active##</span>
-                        <span class="text-danger" ng-show="!time.active">##word.Not Active##</span>
-                    </td>
-                    <td class="center">
-                        <i-button type="delete" ng-if="!item.approved" x-permissions="removeShiftWorktimes || jobsShiftsManage" ng-click="item.worktimesList.splice($index,1)"></i-button>
-                    </td>
-                </tr>
-            </table>
-        </div> -->
+    </fieldset>
+
+
+    <fieldset>
+        <legend class="black">##word.Calculate Fingerprint Method##</legend>
+        <div class="row">
+            <i-radio class="col2" label="##word.Fixed##" ng-disabled="item.approved" ng-value="fixed" ng-model="item.fingerprintMethod"> </i-radio>
+            <i-radio class="col2" label="##word.Variable##" ng-disabled="item.approved" ng-value="variable" ng-model="item.fingerprintMethod"> </i-radio>
+        </div>
     </fieldset>
 
     <fieldset>
-        <legend>##word.Bonuses And Discounts##</legend>
+        <legend class="black">##word.Bonuses And Discounts##</legend>
         <fieldset>
             <legend>##word.Bonuses##</legend>
             <div class="row">
                 <i-control class="col4" type="number" min="0" ng-disabled="item.approved" ng-model="item.salaryAccountSettings.overtime" label="##word.Overtime Value##"> </i-control>
-                <!-- <i-control class="col4" type="number" min="0" ng-disabled="item.approved" ng-model="item.salaryAccountSettings.penality" label="##word.Penality Value##"> </i-control> -->
-                <!-- <i-control class="col4" type="number" min="0" ng-disabled="item.approved" ng-model="item.salaryAccountSettings.absenceHours" label="##word.Absence hours Value##"> </i-control> -->
-                <!-- <i-control class="col4" type="number" min="0" ng-disabled="item.approved" ng-model="item.salaryAccountSettings.absenceDays" label="##word.Absence Days Value##"> </i-control> -->
             </div>
         </fieldset>
         <fieldset>
@@ -102,10 +87,9 @@
                 <i-control type="number" class="col2" ng-model="delayPenalty.fromMinute" label="##word.From Minute##"></i-control>
                 <i-control type="number" class="col2" ng-model="delayPenalty.toMinute" label="##word.To Minute##"></i-control>
                 <i-control type="number" class="col3" ng-model="delayPenalty.value" label="##word.Day##"></i-control>
-                <!-- <i-list label="##word.Type##" class="col3" ng-model="delayPenalty.type" display="name##session.lang##" items="delayDiscountsTypesList" ng-search="delayPenalty.$discountType"></i-list> -->
                 <div class="col2">
                     <br />
-                    <i-button type="push"  ng-click="addPenalty(delayPenalty)"></i-button>
+                    <i-button type="push" ng-click="addPenalty(delayPenalty)"></i-button>
                 </div>
             </div>
             <div class="table-responsive">
