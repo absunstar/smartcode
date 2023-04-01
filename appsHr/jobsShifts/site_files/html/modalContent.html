@@ -31,7 +31,7 @@
                 <div class="col2"><p class="bold center">##word.Type##</p></div>
                 <div class="col2"><p class="bold center">##word.Start##</p></div>
                 <div class="col2"><p class="bold center">##word.End##</p></div>
-                <div class="col2"><p class="bold center">##word.Work Hours##</p></div>
+                <!-- <div class="col2"><p class="bold center">##word.Work Hours##</p></div> -->
             </div>
             <div class="row" ng-repeat="weekDay in item.worktimesList">
                 <div class="col2">
@@ -68,7 +68,7 @@
                         <span> {{weekDay.end |date :'hh:mm a'}}</span>
                     </p>
                 </div>
-                <div class="col2">
+                <!-- <div class="col2">
                     <i-control
                         ng-show="weekDay.active && !item.approved"
                         type="number"
@@ -81,7 +81,7 @@
                         <br />
                         <span> {{weekDay.workHours }} ##word.Hour/s##</span>
                     </p>
-                </div>
+                </div> -->
             </div>
         </div>
     </fieldset>

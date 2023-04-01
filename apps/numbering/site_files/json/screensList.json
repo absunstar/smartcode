@@ -508,12 +508,7 @@
         "id": "jobsShifts",
         "name": "Jops Shifts"
     },
-    {
-        "category": "hr",
-        "feature": "public",
-        "id": "attendanceLeaving",
-        "name": "Attendance Leaving"
-    },
+
     {
         "category": "main",
         "feature": "public",
