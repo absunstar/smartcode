@@ -20,7 +20,7 @@ module.exports = function init(site) {
         const d2 = site.toDate(paySlip.toDate);
         app.$collection.findMany({ where: { 'employee.id': paySlip.employeeId, date: { $gte: d1, $lte: d2 } } }, (err, docs) => {
             paySlip.realWorkTimesList.forEach((workDay) => {
-                console.log('shiftData', workDay.shiftData);
+                // console.log('shiftData', workDay.shiftData);
                 let shiftEnd;
                 const shiftStart = new Date(
                     new Date(workDay.date).getFullYear(),
@@ -34,7 +34,7 @@ module.exports = function init(site) {
                     shiftEnd = new Date(
                         new Date(workDay.date).getFullYear(),
                         new Date(workDay.date).getMonth(),
-                        new Date(workDay.date).getDate() + 1,
+                        new Date(new Date(workDay.date).getDate() + 1),
                         new Date(workDay.shiftData.end).getHours(),
                         new Date(workDay.shiftData.end).getMinutes()
                     );
@@ -56,17 +56,16 @@ module.exports = function init(site) {
                     shiftStart: '',
                     shiftEnd: '',
                 };
-                let docIndex;
-                if (workDay.shiftData.fingerprintMethod == 'fixed') {
-                    docIndex = docs.findIndex((_doc) => {
-                        const getDayIndex = new Date(_doc.date).getDay();
-                        const docDay = new Date(_doc.date).getDate();
-                        if (workDay && workDay.shiftData.active && docDay === workDay.day && workDay.dayIndex == getDayIndex) {
-                            return _doc;
-                        }
-                    });
-                } else if (workDay.shiftData.fingerprintMethod == 'variable') {
-                }
+
+                // console.log('workDay.shiftData.fingerprintMethod', workDay.shiftData.fingerprintMethod);
+
+                let docIndex = docs.findIndex((_doc) => {
+                    const getDayIndex = new Date(_doc.date).getDay();
+                    const docDay = new Date(_doc.date).getDate();
+                    if (workDay && workDay.shiftData.active && docDay === workDay.day && workDay.dayIndex == getDayIndex) {
+                        return _doc;
+                    }
+                });
 
                 attencance = { ...attencance };
                 if (docIndex == -1) {
@@ -86,17 +85,52 @@ module.exports = function init(site) {
                     paySlip.attendanceDataList.push(attencance);
                 } else {
                     attencance = { ...attencance };
-                    const attendTime = new Date(docs[docIndex].attendTime);
-                    const leaveTime = new Date(docs[docIndex].leaveTime);
-                    const attendDiff = ((shiftStart.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
-                    const attendanceDifference = Number(attendDiff);
-                    const leaveDiff = ((shiftEnd.getTime() - leaveTime.getTime()) / 1000 / 60).toFixed();
-                    const leaveDifference = Number(leaveDiff);
-                    const shiftPeriod = ((shiftEnd.getTime() - shiftStart.getTime()) / 1000 / 60).toFixed();
-                    const shiftTime = Number(shiftPeriod);
-                    const attendValue = ((leaveTime.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
-                    const attendPeriod = Number(attendValue);
-                    const absentPeriod = Number(shiftTime - attendPeriod);
+                    // const attendTime = new Date(docs[docIndex].attendTime);
+                    // const leaveTime = new Date(docs[docIndex].leaveTime);
+                    // const attendDiff = ((shiftStart.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
+                    // const attendanceDifference = Number(attendDiff);
+                    // const leaveDiff = ((shiftEnd.getTime() - leaveTime.getTime()) / 1000 / 60).toFixed();
+                    // const leaveDifference = Number(leaveDiff);
+                    // const shiftPeriod = ((shiftEnd.getTime() - shiftStart.getTime()) / 1000 / 60).toFixed();
+                    // const shiftTime = Number(shiftPeriod);
+                    // const attendValue = ((leaveTime.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
+                    // const attendPeriod = Number(attendValue);
+                    // const absentPeriod = Number(shiftTime - attendPeriod);
+                    let attendTime;
+                    let leaveTime;
+                    let attendDiff;
+                    let attendanceDifference;
+                    let leaveDiff;
+                    let leaveDifference;
+                    let shiftPeriod;
+                    let shiftTime;
+                    let attendValue;
+                    let attendPeriod;
+                    let absentPeriod;
+                    // console.log('shiftEnd', docIndex, workDay.shiftData.dayIndex, workDay.shiftData.active, new Date(docs[docIndex].date).getDate(), shiftEnd);
+                    if (workDay.shiftData.fingerprintMethod == 'fixed' && docIndex != -1 && !docs[docIndex].absent) {
+                        const attendanceListLength = docs[docIndex]?.attendanceList.length;
+                        attendTime = new Date(docs[docIndex]?.attendanceList[0].fingerprintTime);
+                        leaveTime = new Date(docs[docIndex]?.attendanceList[attendanceListLength - 1].fingerprintTime);
+
+                        attendDiff = ((shiftStart.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
+                        attendanceDifference = Number(attendDiff);
+                        leaveDiff = ((shiftEnd?.getTime() - leaveTime.getTime()) / 1000 / 60).toFixed();
+                        leaveDifference = Number(leaveDiff);
+                        shiftPeriod = ((shiftEnd?.getTime() - shiftStart.getTime()) / 1000 / 60).toFixed();
+                        shiftTime = Number(shiftPeriod);
+                        attendValue = ((leaveTime.getTime() - attendTime.getTime()) / 1000 / 60).toFixed();
+                        attendPeriod = Number(attendValue);
+                        absentPeriod = Number(shiftTime - attendPeriod);
+                    }
+                    if (new Date(docs[docIndex].date).getDate() == 12) {
+                        console.log('attendanceList', new Date(docs[docIndex].date).getDate(), attendDiff);
+
+                        console.log('attendTime', attendTime);
+                    }
+                    //  else if (workDay.shiftData.fingerprintMethod == 'variable') {
+
+                    // }
 
                     if (!docs[docIndex].absent) {
                         attencance = {
