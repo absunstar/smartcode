@@ -5,6 +5,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="countriesAdd || countriesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/countries/import" label="Import"></i-upload>
         </div>
 
         <div class="row padding">
@@ -16,6 +17,7 @@
                     <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
+                    <th>##word.Calling Code##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
@@ -24,6 +26,7 @@
                     </td>
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
+                    <td class="center blue">{{item.callingCode}}</td>
 
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>

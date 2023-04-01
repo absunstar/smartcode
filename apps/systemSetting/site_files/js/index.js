@@ -153,11 +153,12 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
                         site.hideModal('#alert');
                     }, 1500);
                 } else {
-                    $scope.error = 'Please Login First';
+                    $scope.error = response.data.error || 'Please Login First';
                 }
             },
             function (err) {
-                console.log(err);
+                $scope.error = err.data.error;
+                console.log('err', err);
             }
         );
     };
@@ -717,7 +718,6 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         }).then(
             function (response) {
                 $scope.busy = false;
-               
             },
             function (err) {
                 console.log(err);

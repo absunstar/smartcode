@@ -6,10 +6,9 @@
         <div x-import="site-top/index.html"></div>
         <div x-import="site-bottom/index.html"></div>
 
-        <div id="main-layout" class="container" ng-controller="numbering">
+        <div id="main-layout" class="container" ng-controller="numbering" x-permissions="login">
             <div x-import="numbering/yearMonth.html"></div>
             <div class="row">
-
                 <div x-import="numbering/content.html"></div>
                 <br />
                 <br />

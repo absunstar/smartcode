@@ -53,34 +53,39 @@ app.controller('numbering', function ($scope, $http, $timeout) {
     };
 
     $scope.loadNumbering = function () {
+        $scope.mainError = '';
+        $scope.busy = true;
         $http({
             method: 'POST',
             url: '/api/numbering/get',
             data: {},
         }).then(function (response) {
-             if (response.data.done) {
-                 $scope.numbering = response.data.doc;
-             } else if (!response.data.done) {
-                 $scope.mainError = response.data.error;
-             } else {
-                 $scope.numbering = {};
-             }
+            if (response.data.done) {
+                $scope.numbering = response.data.doc;
+            } else if (!response.data.done) {
+                $scope.mainError = response.data.error;
+            } else {
+                $scope.numbering = {};
+            }
+            $scope.busy = false;
         });
     };
 
     $scope.reset = function () {
+        $scope.busy = true;
         $http({
             method: 'POST',
             url: '/api/numbering/get',
-            data: {reset : true},
+            data: { reset: true },
         }).then(function (response) {
-             if (response.data.done) {
-                 $scope.numbering = response.data.doc;
-             } else if (!response.data.done) {
-                 $scope.mainError = response.data.error;
-             } else {
-                 $scope.numbering = {};
-             }
+            if (response.data.done) {
+                $scope.numbering = response.data.doc;
+            } else if (!response.data.done) {
+                $scope.mainError = response.data.error;
+            } else {
+                $scope.numbering = {};
+            }
+            $scope.busy = false;
         });
     };
 
@@ -144,6 +149,7 @@ app.controller('numbering', function ($scope, $http, $timeout) {
 
     $scope.typeNumberingList = function () {
         $scope.error = '';
+        $scope.mainError = '';
         $scope.busy = true;
         $scope.typeNumberingList = [];
         $http({
