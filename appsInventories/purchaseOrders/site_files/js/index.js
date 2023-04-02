@@ -592,7 +592,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           workBySerial: 1,
           workByQrCode: 1,
           validityDays: 1,
-          gtin: 1,
+          gtinList: 1,
           itemGroup: 1,
           unitsList: 1,
         },
@@ -739,7 +739,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     } else if (orderItem.item.workBySerial) {
       item.workBySerial = true;
     } else if (orderItem.item.workByQrCode) {
-      item.gtin = orderItem.item.gtin;
+      item.gtinList = orderItem.item.gtinList;
       item.workByQrCode = true;
       item.batchesList =
         item.batchesList || $scope.qr
@@ -777,7 +777,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         $scope.item.itemsList[index].count += 1;
       }
     }
-
+    $scope.qr = {};
     $scope.calculateTotalInItemsList($scope.item);
     $scope.resetOrderItem();
     $scope.itemsError = '';
@@ -808,7 +808,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
               workBySerial: elem.workBySerial,
               workByQrCode: elem.workByQrCode,
               validityDays: elem.validityDays,
-              gtin: elem.gtin,
+              gtinList: elem.gtinList,
               storeBalance: elem.storeBalance,
               hasMedicalData: elem.hasMedicalData,
               salesPrice: elem.salesPrice,
@@ -847,7 +847,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     }
     if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
       $scope.qr = site.getQRcode($scope.orderItem.barcode);
-      where['gtin'] = $scope.qr.gtin;
+      where['gtinList.gtin'] = $scope.qr.gtin;
     } else {
       where['unitsList.barcode'] = $scope.orderItem.barcode;
     }
@@ -870,7 +870,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           workBySerial: 1,
           workByQrCode: 1,
           validityDays: 1,
-          gtin: 1,
+          gtinList: 1,
           unitsList: 1,
           itemGroup: 1,
         },
@@ -1085,7 +1085,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     } else if (item.workByQrCode) {
       obj = {
         count: 1,
-        gtin: item.gtin || 0,
+        gtinList: item.gtinList,
       };
     }
     item.batchesList.unshift(obj);
@@ -1113,9 +1113,22 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.errorBatch = '';
     item.batchesList = item.batchesList || [];
-    if (item.batchesList.length < 1) {
-      let obj = {};
+    if (item.batchesList.length > 0) {
+      if (item.workByQrCode || item.workBySerial) {
+        let remain = item.count - item.batchesList.length;
+        if (remain > 0) {
+          for (let i = 0; i < remain; i++) {
+            let obj = { count: 1 };
+            if (item.workBySerial) {
+              obj.productionDate = new Date();
+            }
+            item.batchesList.unshift(obj);
+          }
+        }
+      }
+    } else {
       if (item.workByBatch) {
+        let obj = {};
         obj = {
           productionDate: new Date(),
           expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
@@ -1123,6 +1136,14 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           count: item.count + item.bonusCount,
         };
         item.batchesList = [obj];
+      } else {
+        for (let i = 0; i < item.count; i++) {
+          let obj = { count: 1 };
+          if (item.workBySerial) {
+            obj.productionDate = new Date();
+          }
+          item.batchesList.unshift(obj);
+        }
       }
     }
     $scope.batch = item;
@@ -1155,7 +1176,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = '';
       $scope.error = '';
-      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => +a + +b.count, 0) : 0;
+      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a + b.count, 0) : 0;
     }, 250);
   };
 

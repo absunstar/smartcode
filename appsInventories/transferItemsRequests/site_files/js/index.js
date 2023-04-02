@@ -404,7 +404,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
                     workByBatch: 1,
                     workBySerial: 1,
                     validityDays: 1,
-                    gtin: 1,
+                    gtinList: 1,
                 },
                 search: $search,
             },

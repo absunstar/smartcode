@@ -350,7 +350,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code);
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code  || itm.sn == response.data.doc.sn);
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -415,7 +415,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
-          gtin: 1,
+          gtinList: 1,
           validityDays: 1,
           unitsList: 1,
           itemGroup: 1,
@@ -705,7 +705,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = '';
       $scope.error = '';
-      item.$batchCount = item.batchesList.reduce((a, b) => +a + +b.count, 0);
+      item.$batchCount = item.batchesList.reduce((a, b) => a  +b.count, 0);
     }, 250);
   };
 

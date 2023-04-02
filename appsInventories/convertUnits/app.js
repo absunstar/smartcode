@@ -235,7 +235,7 @@ module.exports = function init(site) {
         _data.itemsList.forEach((_item) => {
           if (_item.workByBatch || _item.workBySerial) {
             if (_item.batchesList && _item.batchesList.length > 0) {
-              _item.$batchCount = _item.batchesList.reduce((a, b) => +a + +b.count, 0);
+              _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
 
               let batchCountErr = _item.batchesList.find((b) => {
                 return b.count > b.currentCount;
@@ -251,7 +251,7 @@ module.exports = function init(site) {
             }
 
             if (_item.toBatchesList && _item.toBatchesList.length > 0) {
-              _item.$batchCount = _item.toBatchesList.reduce((a, b) => +a + +b.count, 0);
+              _item.$batchCount = _item.toBatchesList.reduce((a, b) => a  +b.count, 0);
               let notCode = _item.toBatchesList.some((_b) => !_b.code);
               if (_item.$batchCount != _item.toCount || notCode) {
                 let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;

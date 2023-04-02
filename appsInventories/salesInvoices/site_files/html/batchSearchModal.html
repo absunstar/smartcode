@@ -1,0 +1,93 @@
+<div id="batchSearchModal" class="modal" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">##word.Batches Search Modal## <i class="fa fa-file"></i></p>
+    </div>
+
+    <div class="modal-body">
+      <form class="form">
+        <fieldset>
+          <div class="row">
+            <div class="col3">
+              <br />
+              <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
+            </div>
+            <div class="col4">
+              <table class="table loaded center bold hover details">
+                <tr>
+                  <th>##word.Required Count##</th>
+                  <th>##word.Current Count##</th>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p class="green">{{batch.count}}</p>
+                  </td>
+                  <td>
+                    <p class="blue">{{batch.$batchCount}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <table class="table loaded center bold hover details">
+              <tr>
+                <th ng-show="!batch.workByQrCode">##word.Code##</th>
+                <th ng-show="batch.workByQrCode">##word.GTIN##</th>
+                <th ng-show="batch.workByQrCode">##word.BATCH##</th>
+                <th ng-show="batch.workByQrCode">##word.SERIAL NO.##</th>
+                <th ng-hide="batch.workByQrCode">##word.Production Date##</th>
+                <th ng-show="batch.workByBatch || batch.workByQrCode">##word.Expiry Date##</th>
+                <th ng-show="batch.workByBatch">##word.validit Days##</th>
+                <th ng-show="batch.workByBatch">##word.Current QTY.##</th>
+                <th ng-hide="mode == 'view' || batch.$view">##word.Select##</th>
+              </tr>
+
+              <tr ng-repeat="c in searchbBatchesList">
+                <td class="center" ng-show="!batch.workByQrCode">
+                  <p>{{c.code}}</p>
+                </td>
+                <td class="center" ng-show="batch.workByQrCode">
+                  <p>{{c.gtin}}</p>
+                </td>
+                <td class="center" ng-show="batch.workByQrCode">
+                  <p>{{c.batch}}</p>
+                </td>
+                <td class="center" ng-show="batch.workByQrCode">
+                  <p>{{c.sn}}</p>
+                </td>
+                <td class="center" ng-hide="batch.workByQrCode">
+                  <p class="green">{{c.productionDate | date: "dd / MM / yyyy"}}</p>
+                </td>
+
+                <td class="center" ng-show="batch.workByBatch || batch.workByQrCode">
+                  <p class="red">{{c.expiryDate | date: "dd / MM / yyyy"}}</p>
+                </td>
+
+                <td class="center" ng-show="batch.workByBatch">
+                  <p class="green">{{c.validityDays}}</p>
+                </td>
+                <td class="center" ng-show="batch.workByBatch">
+                  <p>{{c.count}}</p>
+                </td>
+
+                <td ng-hide="batch.workByBatch">
+                  <i-button type="push" ng-click="selectBatch(batch,c)"> </i-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <p class="error">{{errorBatch}}</p>
+
+    <div class="modal-footer center">
+      <i-button type="close" label="##word.Close##" ng-click="errorBatch = ''" onclick="site.hideModal( '#batchSearchModal')"></i-button>
+    </div>
+  </div>
+  <div class="col2"></div>
+</div>

@@ -188,7 +188,7 @@ module.exports = function init(site) {
             errAccountAllValuesList.push(itemName);
           }
           if (_ac.costCentersList && _ac.costCentersList.length > 0) {
-            if (_ac.costCentersList.reduce((a, b) => +a + +b.rate, 0) != 100) {
+            if (_ac.costCentersList.reduce((a, b) => a +b.rate, 0) != 100) {
               let itemName = req.session.lang == 'Ar' ? _ac.nameAr : _ac.nameEn;
               errCostCentersRateList.push(itemName);
             }

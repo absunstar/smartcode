@@ -627,7 +627,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
-          gtin: 1,
+          gtinList: 1,
           validityDays: 1,
           unitsList: 1,
           itemGroup: 1,
@@ -706,7 +706,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
-          gtin: 1,
+          gtinList: 1,
           validityDays: 1,
           unitsList: 1,
           itemGroup: 1,
@@ -874,7 +874,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = '';
       $scope.error = '';
-      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => +a + +b.count, 0) : 0;
+      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a  +b.count, 0) : 0;
     }, 250);
   };
 
@@ -1217,7 +1217,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code);
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code  || itm.sn == response.data.doc.sn);
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -1230,6 +1230,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
             }
           }
           item.$search = '';
+        } else if (response.data.done && response.data.docs){
+         $scope.searchbBatchesList = response.data.docs
+         site.showModal('#batchSearchModal');
         } else {
           $scope.errorBatch = response.data.error;
         }
@@ -1240,6 +1243,26 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       }
     );
   };
+
+  $scope.selectBatch = function (item,batch) {
+    $scope.errorBatch = '';
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code  || itm.sn == batch.sn);
+    if (index === -1) {
+      batch.currentCount = batch.count;
+      batch.count = 1;
+      item.batchesList.push(batch);
+      item.$batchCount += 1;
+    } else {
+      if (item.workByBatch) {
+        item.batchesList[index].count += 1;
+        item.$batchCount += 1;
+      } else {
+        $scope.errorBatch = 'Item Is Exist';
+      }
+    }
+    item.$search = '';
+  };
+  
   $scope.getMedicineRoutesList = function () {
     $scope.busy = true;
     $scope.medicineRoutesList = [];

@@ -17,7 +17,6 @@
         <div class="row">
           <i-checkbox ng-model="item.hasMedicalData" ng-change="setMedicalInformations(item)" class="col3" label="##word.Has Medical Data##"></i-checkbox>
           <i-control class="col5" ng-if="item.hasMedicalData" v="r" type="text" ng-model="item.scientificName" label="##word.Scientific Name##"></i-control>
-          <i-control class="col4" ng-if="item.hasMedicalData" v="r" type="text" ng-model="item.sfdaCode" label="##word.SFDA Code##"></i-control>
         </div>
       </div>
       <div class="col3 center">
@@ -40,6 +39,25 @@
       <div id="additionalInformations" class="tab-content">
         <fieldset>
           <legend>##word.Additional Informations##</legend>
+          <div class="row" ng-if="item.hasMedicalData">
+            <fieldset class="col8">
+              <legend><i-button type="add default" ng-click="item.sfdaCodeList.unshift({})"></i-button></legend>
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.SFDA Code##</th>
+                  <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="s in item.sfdaCodeList | filter:$search">
+                  <td class="center">
+                    <i-control type="text" ng-model="s.sfdaCode"></i-control>
+                  </td>
+                  <td class="center">
+                    <i-button type="delete" ng-click="item.sfdaCodeList.splice($index,1)"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </div>
           <div class="row">
             <i-list class="col4" v="r" label="##word.Item Type##" ng-model="item.itemType" items="itemsTypesList" display="name##session.lang##" ng-search="item.$itemType"> </i-list>
             <i-list class="col4" v="r" label="##word.Item Group##" ng-model="item.itemGroup" items="itemsgroupsList" display="name##session.lang##" ng-search="item.$group"> </i-list>
@@ -54,14 +72,33 @@
                   <i-checkbox ng-model="item.noVat" class="col2" label="##word.No VAT##"></i-checkbox>
                   <i-checkbox ng-model="item.showOnTouchScreen" class="col3" label="##word.Show On Touch Screen##"></i-checkbox>
                 </div>
-                <hr>
+                <hr />
                 <div class="row padding">
                   <i-checkbox ng-if="!item.workBySerial && !item.workByQrCode" ng-model="item.workByBatch" class="col2" label="##word.Work By Batch##"></i-checkbox>
                   <i-checkbox ng-if="!item.workByBatch && !item.workByQrCode" ng-model="item.workBySerial" class="col2" label="##word.Work By Serial##"></i-checkbox>
-                  <i-checkbox ng-if="!item.workByBatch && !item.workBySerial" ng-model="item.workByQrCode" class="col2" label="##word.Work By Qr Code##"></i-checkbox>
+                  <i-checkbox ng-if="!item.workByBatch && !item.workBySerial" ng-change="item.gtinList = [{}]" ng-model="item.workByQrCode" class="col2" label="##word.Work By Qr Code##"></i-checkbox>
                   <i-control class="col3" ng-if="item.workByBatch" min="1" type="number" ng-model="item.validityDays" label="##word.Validity Days##"></i-control>
-                  <i-control class="col6" ng-if="item.workByQrCode" ng-model="item.$code" label="##word.QrCode##" ng-change="readQR(item)"></i-control>
-                  <i-control class="col3" ng-if="item.workByQrCode" type="text" ng-model="item.gtin" label="##word.GTIN##"></i-control>
+                  <!--  <i-control class="col6" ng-if="item.workByQrCode" ng-model="item.$code" label="##word.QrCode##" ng-change="readQR(item)"></i-control>
+                  <i-control class="col3" ng-if="item.workByQrCode" type="text"  ng-model="item.gtin" label="##word.GTIN##"></i-control> -->
+                  <div class="col7" ng-if="item.workByQrCode">
+                    <fieldset>
+                      <legend><i-button type="add default" ng-click="item.gtinList.unshift({})"></i-button></legend>
+                      <table class="table hover bold">
+                        <tr>
+                          <th>##word.GTIN##</th>
+                          <th class="not-print">##word.Actions##</th>
+                        </tr>
+                        <tr ng-repeat="g in item.gtinList | filter:$search">
+                          <td class="center">
+                            <i-control type="text" ng-model="g.gtin"></i-control>
+                          </td>
+                          <td class="center">
+                            <i-button type="delete" ng-click="item.gtinList.splice($index,1)"> </i-button>
+                          </td>
+                        </tr>
+                      </table>
+                    </fieldset>
+                  </div>
                 </div>
               </fieldset>
             </div>
@@ -125,15 +162,15 @@
               </tr>
               <tr ng-repeat="elem in item.unitsList">
                 <td class="center">
-                  <span 
+                  <span
                     >{{elem.unit.name##session.lang##}}
-                    <p class=" blue" ng-if="!elem.currentCount">({{elem.currentCount}})</p>
-                    <p class=" text-success" ng-if="elem.currentCount>0">(##word.+##{{elem.currentCount}})</p>
-                    <p class=" text-danger" ng-if="elem.currentCount<0">(##word.-##{{elem.currentCount}})</p>
+                    <p class="blue" ng-if="!elem.currentCount">({{elem.currentCount}})</p>
+                    <p class="text-success" ng-if="elem.currentCount>0">(##word.+##{{elem.currentCount}})</p>
+                    <p class="text-danger" ng-if="elem.currentCount<0">(##word.-##{{elem.currentCount}})</p>
                   </span>
                 </td>
                 <td class="center">
-                  <p >{{elem.purchasePrice }}</p>
+                  <p>{{elem.purchasePrice }}</p>
                 </td>
                 <td class="center">
                   <i-control type="number" min="1" ng-model="elem.conversion"></i-control>
@@ -184,7 +221,7 @@
             <legend>##word.Active Substances##</legend>
             <div class="row">
               <i-list
-                class="col6"
+                class="col5"
                 label="##word.Active Substance##"
                 ng-model="substance.activeSubstance"
                 items="activeSubstancesList"
@@ -192,29 +229,31 @@
                 ng-get="getActiveSubstances($search)"
               >
               </i-list>
-              <i-control class="col4" type="number" step=".01" min="0.00001" ng-model="substance.concentration" label="##word.Concentration##"></i-control>
+              <i-control class="col2" type="number" step=".01" min="0.00001" ng-model="substance.concentration" label="##word.Concentration##"></i-control>
               <div class="col2">
                 <br />
-                <i-button type="push"  ng-click="addActiveSubstance(substance)"> </i-button>
+                <i-button type="push" ng-click="addActiveSubstance(substance)"> </i-button>
               </div>
             </div>
-            <div class="table-responsive">
-              <table class="table hover bold">
-                <tr>
-                  <th>##word.S##</th>
-                  <th>##word.Active Substance##</th>
-                  <th>##word.Concentration##</th>
-                  <th class="not-print">##word.Actions##</th>
-                </tr>
-                <tr ng-repeat="elem in item.medicalInformations.activeSubstancesList">
-                  <td class="center">{{$index+1}}</td>
-                  <td class="center">{{elem.activeSubstance.name##session.lang##}}</td>
-                  <td class="center">{{elem.concentration}}</td>
-                  <td class="center">
-                    <i-button type="delete" ng-click="item.medicalInformations.activeSubstancesList.splice($index,1)"> </i-button>
-                  </td>
-                </tr>
-              </table>
+            <div class="row">
+              <div class="table-responsive col10">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.S##</th>
+                    <th>##word.Active Substance##</th>
+                    <th>##word.Concentration##</th>
+                    <th class="not-print">##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="elem in item.medicalInformations.activeSubstancesList">
+                    <td class="center">{{$index+1}}</td>
+                    <td class="center">{{elem.activeSubstance.name##session.lang##}}</td>
+                    <td class="center">{{elem.concentration}}</td>
+                    <td class="center">
+                      <i-button type="delete" ng-click="item.medicalInformations.activeSubstancesList.splice($index,1)"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </fieldset>
           <i-textarea ng-model="item.medicalInformations.indications" rows="3" label="##word.Indications##"></i-textarea>
@@ -244,7 +283,7 @@
             <i-control class="col2" type="number" min="1" ng-model="collectedItem.quantity" label="##word.Quantity##"></i-control>
             <div class="col2">
               <br />
-              <i-button type="push"  ng-click="addToItemCollections(collectedItem)"> </i-button>
+              <i-button type="push" ng-click="addToItemCollections(collectedItem)"> </i-button>
             </div>
           </div>
           <div class="table-responsive">
