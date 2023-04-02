@@ -1,65 +1,66 @@
 [
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesManage",
-    "En": "Manage",
-    "Ar": "إدارة"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesAdd",
-    "En": "Add",
-    "Ar": "إضافة"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesUpdate",
-    "En": "Edit",
-    "Ar": "تعديل"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesDelete",
-    "En": "Delete",
-    "Ar": "حذف"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesView",
-    "En": "View",
-    "Ar": "عرض"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesSearch",
-    "En": "Search",
-    "Ar": "بحث"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesExport",
-    "En": "Export",
-    "Ar": "تصدير"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesPrint",
-    "En": "Print",
-    "Ar": "طباعة"
-  },
-  {
-    "moduleName": "accounting",
-    "screenName": "taxesTypes",
-    "name": "taxesTypesUi",
-    "En": "UI",
-    "Ar": "الواجهة الرسومية"
-  }
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesManage",
+        "En": "Manage",
+        "Ar": "إدارة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesAdd",
+        "En": "Add",
+        "Ar": "إضافة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesUpdate",
+        "En": "Edit",
+        "Ar": "تعديل"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesDelete",
+        "En": "Delete",
+        "Ar": "حذف"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesView",
+        "En": "View",
+        "Ar": "عرض"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesSearch",
+        "En": "Search",
+        "Ar": "بحث"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesExport",
+        "En": "Export",
+        "Ar": "تصدير"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesPrint",
+        "En": "Print",
+        "Ar": "طباعة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "taxesTypes",
+        "name": "taxesTypesUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    },
+    { "moduleName": "accounting", "screenName": "taxesTypes", "name": "importTaxesTypes", "En": "Import", "Ar": "إستيراد" }
 ]
