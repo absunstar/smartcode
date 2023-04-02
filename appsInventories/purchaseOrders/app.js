@@ -167,7 +167,7 @@ module.exports = function init(site) {
 
                 let errBatchList = [];
                 _data.itemsList.forEach((_item) => {
-                    if (_item.workByBatch || _item.workBySerial) {
+                    if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
                         if (_item.batchesList && _item.batchesList.length > 0) {
                             _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
                             let notCode = _item.batchesList.some((_b) => !_b.code);
@@ -231,7 +231,7 @@ module.exports = function init(site) {
                 let _data = req.data;
                 let errBatchList = [];
                 _data.itemsList.forEach((_item) => {
-                    if (_item.workByBatch || _item.workBySerial) {
+                    if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
                         if (_item.batchesList && _item.batchesList.length > 0) {
                             _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
                             let notCode = _item.batchesList.some((_b) => !_b.code);
@@ -279,7 +279,7 @@ module.exports = function init(site) {
                 let _data = req.data;
                 let errBatchList = [];
                 _data.itemsList.forEach((_item) => {
-                    if (_item.workByBatch || _item.workBySerial) {
+                    if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
                         if (_item.batchesList && _item.batchesList.length > 0) {
                             _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
                             let notCode = _item.batchesList.some((_b) => !_b.code);

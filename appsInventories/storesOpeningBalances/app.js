@@ -160,7 +160,7 @@ module.exports = function init(site) {
         let errBatchList = [];
 
         _data.itemsList.forEach((_item) => {
-          if (_item.workByBatch || _item.workBySerial) {
+          if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
             if (_item.batchesList && _item.batchesList.length > 0) {
               _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
               let notCode = _item.batchesList.some((_b) => !_b.code);
@@ -234,6 +234,31 @@ module.exports = function init(site) {
             res.json(response);
             return;
           }
+
+          let errBatchList = [];
+          _data.itemsList.forEach((_item) => {
+            if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
+              if (_item.batchesList && _item.batchesList.length > 0) {
+                _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
+                let notCode = _item.batchesList.some((_b) => !_b.code);
+                if (_item.$batchCount != _item.count || notCode) {
+                  let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                  errBatchList.push(itemName);
+                }
+              } else {
+                let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                errBatchList.push(itemName);
+              }
+            }
+          });
+  
+          if (errBatchList.length > 0) {
+            let error = errBatchList.map((m) => m).join('-');
+            response.error = `The Batches is not correct in ( ${error} )`;
+            res.json(response);
+            return;
+          }
+
           _data.editUserInfo = req.getUserFinger();
 
           app.update(_data, (err, result) => {
@@ -259,7 +284,7 @@ module.exports = function init(site) {
 
         let errBatchList = [];
         _data.itemsList.forEach((_item) => {
-          if (_item.workByBatch || _item.workBySerial) {
+          if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
             if (_item.batchesList && _item.batchesList.length > 0) {
               _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
               let notCode = _item.batchesList.some((_b) => !_b.code);
