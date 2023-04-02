@@ -52,7 +52,7 @@
 
         <fieldset ng-show="item.installmentsList && item.installmentsList.length">
             <legend>
-                <i-button type="add default" ng-show="!canReject && item.requestStatus != 'rejected'" ng-click="item.installmentsList.push({})"></i-button>
+                <i-button type="push" ng-show="!canReject && item.requestStatus != 'rejected'" ng-click="item.installmentsList.push({})"></i-button>
                 ##word.Payment Data##
             </legend>
             <div class="row" ng-repeat="c in item.installmentsList">

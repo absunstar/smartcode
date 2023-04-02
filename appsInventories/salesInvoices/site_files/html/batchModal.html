@@ -102,7 +102,7 @@
                   <p ng-show="mode == 'view' || batch.$view">{{c.count}}</p>
                 </td>
                 <td ng-hide="mode == 'view' || batch.$view">
-                  <i-button type="delete default" ng-click="batch.$batchCount = batch.$batchCount - c.count ;batch.batchesList.splice($index,1)"> </i-button>
+                  <i-button type="delete" ng-click="batch.$batchCount = batch.$batchCount - c.count ;batch.batchesList.splice($index,1)"> </i-button>
                 </td>
                 <!-- <td ng-hide="batch.workByBatch">
                   <i-checkbox ng-model="c.$select" label="##word.Select##" ng-change="c.count = c.$select? 1 : 0 ; calcBatch(batch)"></i-checkbox>

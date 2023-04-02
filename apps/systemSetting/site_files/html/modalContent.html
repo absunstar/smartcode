@@ -132,12 +132,12 @@
                                     <fieldset>
                                         <legend class="black">
                                             ##word.Invoice Header Right##
-                                            <i-button type="add default" ng-click="item.printerProgram.invoiceHeader.unshift({})"> </i-button>
+                                            <i-button type="push" ng-click="item.printerProgram.invoiceHeader.unshift({})"> </i-button>
                                         </legend>
 
                                         <div ng-repeat="h in item.printerProgram.invoiceHeader track by $index" class="row">
                                             <i-control class="col9" ng-model="h.name"></i-control>
-                                            <i-button class="col2" type="delete default" ng-click="item.printerProgram.invoiceHeader.length ==1 || item.printerProgram.invoiceHeader.splice($index,1)">
+                                            <i-button class="col2" type="delete" ng-click="item.printerProgram.invoiceHeader.length ==1 || item.printerProgram.invoiceHeader.splice($index,1)">
                                             </i-button>
                                         </div>
                                     </fieldset>
@@ -147,7 +147,7 @@
                                     <fieldset>
                                         <legend class="black">
                                             ##word.Invoice Header Left##
-                                            <i-button type="add default" ng-click="item.printerProgram.invoiceHeader2.unshift({})"> </i-button>
+                                            <i-button type="push" ng-click="item.printerProgram.invoiceHeader2.unshift({})"> </i-button>
                                         </legend>
 
                                         <div ng-repeat="f in item.printerProgram.invoiceHeader2 track by $index" class="row">
@@ -155,7 +155,7 @@
 
                                             <i-button
                                                 class="col2"
-                                                type="delete default"
+                                                type="delete"
                                                 ng-click="item.printerProgram.invoiceHeader2.length ==1 || item.printerProgram.invoiceHeader2.splice($index,1)"
                                             >
                                             </i-button>
@@ -170,13 +170,13 @@
                                     <fieldset>
                                         <legend class="black">
                                             ##word.Invoice Footer##
-                                            <i-button type="add default" ng-click="item.printerProgram.invoiceFooter.unshift({})"> </i-button>
+                                            <i-button type="push" ng-click="item.printerProgram.invoiceFooter.unshift({})"> </i-button>
                                         </legend>
 
                                         <div ng-repeat="f in item.printerProgram.invoiceFooter track by $index" class="row">
                                             <i-control class="col9" ng-model="f.name"></i-control>
 
-                                            <i-button class="col2" type="delete default" ng-click="item.printerProgram.invoiceFooter.length ==1 || item.printerProgram.invoiceFooter.splice($index,1)">
+                                            <i-button class="col2" type="delete" ng-click="item.printerProgram.invoiceFooter.length ==1 || item.printerProgram.invoiceFooter.splice($index,1)">
                                             </i-button>
                                         </div>
                                     </fieldset>
@@ -197,12 +197,12 @@
                                     <fieldset>
                                         <legend class="black">
                                             ##word.Invoice Header##
-                                            <i-button type="add default" ng-click="item.printerProgram.thermalHeader.unshift({})"> </i-button>
+                                            <i-button type="push" ng-click="item.printerProgram.thermalHeader.unshift({})"> </i-button>
                                         </legend>
 
                                         <div ng-repeat="h in item.printerProgram.thermalHeader track by $index" class="row">
                                             <i-control class="col9" ng-model="h.name"></i-control>
-                                            <i-button class="col2" type="delete default" ng-click="item.printerProgram.thermalHeader.length ==1 || item.printerProgram.thermalHeader.splice($index,1)">
+                                            <i-button class="col2" type="delete" ng-click="item.printerProgram.thermalHeader.length ==1 || item.printerProgram.thermalHeader.splice($index,1)">
                                             </i-button>
                                         </div>
                                     </fieldset>
@@ -212,13 +212,13 @@
                                     <fieldset>
                                         <legend class="black">
                                             ##word.Invoice Footer##
-                                            <i-button type="add default" ng-click="item.printerProgram.thermalFooter.unshift({})"> </i-button>
+                                            <i-button type="push" ng-click="item.printerProgram.thermalFooter.unshift({})"> </i-button>
                                         </legend>
 
                                         <div ng-repeat="f in item.printerProgram.thermalFooter track by $index" class="row">
                                             <i-control class="col9" ng-model="f.name"></i-control>
 
-                                            <i-button class="col2" type="delete default" ng-click="item.printerProgram.thermalFooter.length ==1 || item.printerProgram.thermalFooter.splice($index,1)">
+                                            <i-button class="col2" type="delete" ng-click="item.printerProgram.thermalFooter.length ==1 || item.printerProgram.thermalFooter.splice($index,1)">
                                             </i-button>
                                         </div>
                                     </fieldset>

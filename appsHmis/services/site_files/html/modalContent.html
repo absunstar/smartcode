@@ -73,7 +73,7 @@
 
                     <div class="row" ng-show="item.serviceGroup.type.id == 3">
                         <fieldset>
-                            <legend>##word.Laboratory Details## <i-button type="add default" ng-click="addNormalRange()"></i-button></legend>
+                            <legend>##word.Laboratory Details## <i-button type="push" ng-click="addNormalRange()"></i-button></legend>
                             <div class="table-responsive">
                                 <table class="table hover bold">
                                     <tr>
@@ -95,7 +95,7 @@
                                         <td class="center"><i-control v="r" ng-model="n.fromValue"></i-control></td>
                                         <td class="center"><i-control v="r" ng-model="n.toValue"></i-control></td>
                                         <td class="center not-print">
-                                            <i-button type="delete default" ng-click="item.normalRangeList.splice($index,1)"> </i-button>
+                                            <i-button type="delete" ng-click="item.normalRangeList.splice($index,1)"> </i-button>
                                         </td>
                                     </tr>
                                 </table>
@@ -134,7 +134,7 @@
                                         <td class="center">{{s.name##session.lang##}}</td>
 
                                         <td class="center not-print">
-                                            <i-button type="delete default" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
+                                            <i-button type="delete" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
                                         </td>
                                     </tr>
                                 </table>

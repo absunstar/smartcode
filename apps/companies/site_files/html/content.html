@@ -69,9 +69,9 @@
       <div id="companiesBranches" class="tab-content">
         <fieldset ng-repeat="branch in company.branchList">
           <legend>
-            <i-button type="add default" ng-click="company.branchList.push({charge: [{}]})"></i-button>
+            <i-button type="push" ng-click="company.branchList.push({charge: [{}]})"></i-button>
             ##word.Company Branch##
-            <i-button type="delete default" ng-click="company.branchList.length === 1 || company.branchList.splice($index,1)"> </i-button>
+            <i-button type="delete" ng-click="company.branchList.length === 1 || company.branchList.splice($index,1)"> </i-button>
           </legend>
 
           <fieldset>
@@ -104,10 +104,10 @@
 
           <!-- <fieldset ng-repeat="charge in branch.charge">
             <legend>
-              <i-button type="add default" ng-click="branch.charge.push({})"></i-button>
+              <i-button type="push" ng-click="branch.charge.push({})"></i-button>
               ##word.Contact Charge##
 
-              <i-button type="delete default" ng-click="branch.charge.length === 1 || branch.charge.splice($index,1)"></i-button>
+              <i-button type="delete" ng-click="branch.charge.length === 1 || branch.charge.splice($index,1)"></i-button>
             </legend>
 
             <div class="row">
@@ -133,9 +133,9 @@
       <!-- <div id="bankingAndAccounting" class="tab-content">
         <fieldset ng-repeat="bank in company.bankList">
           <legend>
-            <i-button type="add default" ng-click="company.bankList.push({})"></i-button>
+            <i-button type="push" ng-click="company.bankList.push({})"></i-button>
             ##word.Bank Information##
-            <i-button type="delete default" ng-click="company.bankList.length === 1 || company.bankList.splice($index,1)"></i-button>
+            <i-button type="delete" ng-click="company.bankList.length === 1 || company.bankList.splice($index,1)"></i-button>
           </legend>
           <div class="row">
             <i-list class="col4" label="##word.Bank Name##" ng-model="bank.bankName" items="bankList" display="name" ng-search="_search.$banNameSearch"> </i-list>

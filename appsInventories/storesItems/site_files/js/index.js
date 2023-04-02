@@ -572,7 +572,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             concentration: elem.concentration,
         });
         $scope.medicalInformationsError = '';
-        $scope.substance = {  };
+        $scope.substance = {};
     };
 
     $scope.addMainItemUnit = function (itemUnit) {
@@ -608,6 +608,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     };
 
     $scope.addItemUnitToItemUnitsList = function (itemUnit) {
+        $scope.error = '';
         if (!itemUnit.unit && !itemUnit.unit.id) {
             $scope.unitsInformationsError = '##word.Please Enter Item Unit##';
             return;
@@ -652,6 +653,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     };
 
     $scope.setItemCollectionInformations = function (elem) {
+        $scope.error = '';
         if (elem.collectionItem) {
             $scope.loadSubItem();
             $scope.item.collectedItemsList = [];
@@ -709,6 +711,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     };
 
     $scope.addToItemCollections = function (elem) {
+        $scope.error = '';
         for (const itm of $scope.item.collectedItemsList) {
             if (itm.item.id === elem.item.id) {
                 $scope.collectionItemsInformationsError = '##word.Item Exisit##';
@@ -780,6 +783,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             }
         );
     };
+    
     $scope.showBatches = function (_item) {
         $scope.batch = _item;
         site.showModal('#batchesModal');
@@ -807,7 +811,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             return success;
         }
 
-     /*    if (_item.workByQrCode && !_item.gtin) {
+        /*    if (_item.workByQrCode && !_item.gtin) {
             $scope.error = '##word.Please Enter GTIN Code##';
             return success;
         } */
@@ -846,7 +850,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
         $timeout(() => {
             $scope.errorBatch = '';
             $scope.error = '';
-            item.$batchCount = item.batchesList.reduce((a, b) => a  +b.count, 0);
+            item.$batchCount = item.batchesList.reduce((a, b) => a + b.count, 0);
         }, 250);
     };
 
@@ -937,13 +941,9 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             $scope.errorBatch = '';
             $scope.error = '';
 
-            item.$toBatchCount = item.toBatchesList.length > 0 ? item.toBatchesList.reduce((a, b) => a  +b.count, 0) : 0;
+            item.$toBatchCount = item.toBatchesList.length > 0 ? item.toBatchesList.reduce((a, b) => a + b.count, 0) : 0;
         }, 250);
     };
-
- 
-
- 
 
     $scope.getAll();
     $scope.getStoresUnits();

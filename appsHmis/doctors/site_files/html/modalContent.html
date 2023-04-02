@@ -110,14 +110,14 @@
         <div id="doctorSchedule" class="tab-content">
           <div class="row padding">
             <fieldset>
-              <legend><i-button type="add default" ng-click="item.doctorScheduleList.push({})"> </i-button></legend>
+              <legend><i-button type="push" ng-click="item.doctorScheduleList.push({})"> </i-button></legend>
               <div class="row" ng-repeat="s in item.doctorScheduleList">
                 <i-list label="##word.Day##" class="col3" ng-model="s.day" display="name##session.lang##" items="weekDaysList" ng-search="s.$day"></i-list>
                 <i-control type="time" class="col2" ng-model="s.start" label="##word.Start##"></i-control>
                 <i-control type="time" class="col2" ng-model="s.end" label="##word.End##"></i-control>
                 <div class="col2">
                   <br />
-                  <i-button type="delete default" ng-click="item.doctorScheduleList.splice($index,1)"> </i-button>
+                  <i-button type="delete" ng-click="item.doctorScheduleList.splice($index,1)"> </i-button>
                 </div>
               </div>
             </fieldset>

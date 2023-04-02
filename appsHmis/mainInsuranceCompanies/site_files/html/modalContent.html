@@ -154,7 +154,7 @@
                 <td class="center not-print">
                   <i-checkbox label="##word.ApplyDiscOut##" ng-model="g.applyDiscOut"></i-checkbox>
                   <i-checkbox label="##word.ApplyDiscIn##" ng-model="g.applyDiscIn"></i-checkbox>
-                  <i-button type="delete default" ng-click="item.servicesGroupsList.splice($index,1)"> </i-button>
+                  <i-button type="delete" ng-click="item.servicesGroupsList.splice($index,1)"> </i-button>
                 </td>
               </tr>
             </table>
@@ -225,7 +225,7 @@
                 <td class="center not-print word-line">
                   <i-checkbox label="##word.ApplyDiscOut##" ng-model="c.applyDiscOut"></i-checkbox>
                   <i-checkbox label="##word.ApplyDiscIn##" ng-model="c.applyDiscIn"></i-checkbox>
-                  <i-button type="delete default" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
+                  <i-button type="delete" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
                 </td>
               </tr>
             </table>
@@ -343,7 +343,7 @@
                 <td class="center not-print">
                   <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
                   <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>
-                  <i-button type="delete default" ng-click="item.servicesList.splice($index,1)"> </i-button>
+                  <i-button type="delete" ng-click="item.servicesList.splice($index,1)"> </i-button>
                 </td>
               </tr>
             </table>
@@ -363,7 +363,7 @@
                 <div class="col2">
                   <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
                   <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>
-                  <i-button type="delete default" ng-click="item.servicesList.splice($index,1)"> </i-button>
+                  <i-button type="delete" ng-click="item.servicesList.splice($index,1)"> </i-button>
                 </div>
               </div>
 
@@ -477,7 +477,7 @@
                     <td class="center">{{s.name##session.lang##}}</td>
                     <td class="center"><i-control type="number" ng-model="s.discount"></i-control></td>
                     <td class="center not-print">
-                      <i-button type="delete default" ng-click="item.packageServicesGroupsList.splice($index,1)"> </i-button>
+                      <i-button type="delete" ng-click="item.packageServicesGroupsList.splice($index,1)"> </i-button>
                     </td>
                   </tr>
                 </table>

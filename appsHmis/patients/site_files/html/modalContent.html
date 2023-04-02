@@ -107,7 +107,7 @@
                         <div class="row">
                             <fieldset class="col8">
                                 <legend>
-                                    <i-button type="add default" ng-click="item.mobileList.push({})"></i-button>
+                                    <i-button type="push" ng-click="item.mobileList.push({})"></i-button>
                                     ##word.Mobile##
                                 </legend>
                                 <div class="row" ng-repeat="m in item.mobileList">
@@ -115,7 +115,7 @@
                                         <i-control ng-model="m.mobile"> </i-control>
                                     </div>
                                     <div class="col3">
-                                        <i-button type="delete default" ng-click="item.mobileList.length === 1 || item.mobileList.splice($index,1)"> </i-button>
+                                        <i-button type="delete" ng-click="item.mobileList.length === 1 || item.mobileList.splice($index,1)"> </i-button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -262,7 +262,7 @@
                                         <td class="center">{{s.paid}}</td>
                                         <td class="center">{{s.balance}}</td>
                                         <td class="center not-print">
-                                            <i-button type="delete default" ng-click="item.offersList.splice($index,1)"> </i-button>
+                                            <i-button type="delete" ng-click="item.offersList.splice($index,1)"> </i-button>
                                         </td>
                                     </tr>
                                 </table>

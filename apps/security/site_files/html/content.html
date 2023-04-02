@@ -234,7 +234,7 @@
       <div id="securityAssginBranches" class="tab-content">
         <fieldset>
           <legend>
-            <i-button type="add default" ng-click="user.branchList.push({})"></i-button>
+            <i-button type="push" ng-click="user.branchList.push({})"></i-button>
             ##word.Bbranches##
           </legend>
           <div class="row" ng-repeat="info in user.branchList">
@@ -248,7 +248,7 @@
               items="info.company.branchList"
               ng-model="info.branch"
             ></i-list>
-            <i-button type="delete default" ng-click="user.branchList.length === 1 || user.branchList.splice($index,1)"></i-button>
+            <i-button type="delete" ng-click="user.branchList.length === 1 || user.branchList.splice($index,1)"></i-button>
           </div>
         </fieldset>
       </div>
