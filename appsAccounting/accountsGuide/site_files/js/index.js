@@ -18,7 +18,7 @@ app.controller('accountsGuide', function ($scope, $http, $timeout) {
         $scope.error = '';
         $scope.mode = 'add';
         if (!$scope.setting || !$scope.setting.id) {
-            $scope.error = '##word.Please Contact System Administrator to Set System Setting##';
+            $scope.error = '##word.Please Contact System Administrator to Set System Setting Or Reload Page##';
             return;
         }
 

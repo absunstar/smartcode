@@ -55,7 +55,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
         $scope.error = '';
         $scope.mainError = '';
         if (!$scope.setting || !$scope.setting.id) {
-            $scope.mainError = '##word.Please Contact System Administrator to Set System Setting##';
+            $scope.mainError = '##word.Please Contact System Administrator to Set System Setting Or Reload Page##';
             return;
         }
         $scope.mode = 'add';
@@ -563,7 +563,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
                 return;
             }
         }
-        if (!elem.concentration > 0) {
+        if (!(elem.concentration > 0)) {
             $scope.medicalInformationsError = '##word.Concentration Required##';
             return;
         }
@@ -722,7 +722,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             $scope.collectionItemsInformationsError = '##word.Item Missing##';
             return;
         }
-        if (!elem.quantity > 0) {
+        if (!(elem.quantity > 0)) {
             $scope.collectionItemsInformationsError = '##word.Please Enter Count ##';
             return;
         }
@@ -783,7 +783,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
             }
         );
     };
-    
+
     $scope.showBatches = function (_item) {
         $scope.batch = _item;
         site.showModal('#batchesModal');

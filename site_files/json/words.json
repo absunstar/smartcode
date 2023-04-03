@@ -401,9 +401,9 @@
         "Ar": "يرجي تحديد نوع الأجازة بالنسبة للموظفين"
     },
     {
-        "name": "Please Contact System Administrator to Set System Setting",
-        "En": "Please Contact System Administrator to Set System Setting",
-        "Ar": "يرجي التواصل مع مدير النظام لعمل إعدادات النظام"
+        "name": "Please Contact System Administrator to Set System Setting Or Reload Page",
+        "En": "Please Contact System Administrator to Set System Setting Or Reload Page",
+        "Ar": "يرجي التواصل مع مدير النظام لعمل إعدادات النظام أو قم بإعادة تحميل الصفحة"
     },
     {
         "name": "Please select Position",

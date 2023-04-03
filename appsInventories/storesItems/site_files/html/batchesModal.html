@@ -1,62 +1,61 @@
 <div id="batchesModal" class="modal">
-  <div class="col2"></div>
-  <div class="modal-content col8">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <p class="center">##word.Item Batches## <i class="fa fa-file"></i></p>
+    <div class="col2"></div>
+    <div class="modal-content col8">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Item Batches## <i class="fa fa-file"></i></p>
+        </div>
+
+        <div class="modal-body">
+            <form class="form">
+                <fieldset>
+                    <div class="row">
+                        <table class="table center hover bold">
+                            <tr>
+                                <th>##word.S##</th>
+                                <th>##word.code##</th>
+                                <th ng-show="item.workByQrCode">##word.GTIN##</th>
+                                <th ng-show="item.workByQrCode">##word.BATCH##</th>
+                                <th ng-show="item.workByQrCode">##word.MFG DATE##</th>
+                                <th ng-show="item.workByQrCode">##word.SERIAL NO.##</th>
+                                <th ng-hide="item.workByQrCode">##word.Production Date##</th>
+                                <th ng-if="item.workByBatch || item.workByQrCode">##word.Expiry Date##</th>
+                                <th ng-if="item.workByBatch">##word.Validity Days##</th>
+                                <th>##word.Count##</th>
+                            </tr>
+                            <tr ng-repeat="str in batch.batchesList">
+                                <td class="center">{{$index+1}}</td>
+                                <td class="center">
+                                    <p class="userPrint">{{str.code}}</p>
+                                </td>
+                                <td class="center" ng-show="item.workByQrCode">
+                                    <p>{{str.gtin}}</p>
+                                </td>
+                                <td class="center" ng-show="item.workByQrCode">
+                                    <p class="userPrint">{{str.batch}}</p>
+                                </td>
+                                <td class="center" ng-show="item.workByQrCode">
+                                    <p>{{str.mfgDate}}</p>
+                                </td>
+
+                                <td class="center" ng-show="item.workByQrCode">
+                                    <p class="userPrint">{{str.sn}}</p>
+                                </td>
+                                <td class="center green" ng-hide="item.workByQrCode">{{str.productionDate | date:"dd / MM / yyyy" }}</td>
+                                <td ng-if="item.workByBatch || item.workByQrCode" class="center red">{{str.expiryDate | date:"dd / MM / yyyy" }}</td>
+                                <td class="center" ng-if="item.workByBatch">{{str.validityDays}}</td>
+                                <td class="center">{{str.count}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <p class="error">{{error}}</p>
+
+        <div class="modal-footer center">
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal('#batchesModal')"> </i-button>
+        </div>
     </div>
-
-    <div class="modal-body">
-      <form class="form">
-        <fieldset>
-          <div class="row">
-            <table class="table center hover bold">
-              <tr>
-                <th>##word.S##</th>
-                <th>##word.code##</th>
-                <th ng-show="item.workByQrCode">##word.GTIN##</th>
-                <th ng-show="item.workByQrCode">##word.BATCH##</th>
-                <th ng-show="item.workByQrCode">##word.MFG DATE##</th>
-                <th ng-show="item.workByQrCode">##word.SERIAL NO.##</th>
-                <th ng-hide="item.workByQrCode">##word.Production Date##</th>
-                <th ng-if="item.workByBatch || item.workByQrCode">##word.Expiry Date##</th>
-                <th ng-if="item.workByBatch">##word.Validity Days##</th>
-                <th>##word.Count##</th>
-              </tr>
-              <tr ng-repeat="str in batch.batchesList">
-                <td>{{$index+1}}</td>
-                <td>
-                  <p class="userPrint">{{str.code}}</p>
-                </td>
-                <td class="center" ng-show="item.workByQrCode">
-                  <p>{{str.gtin}}</p>
-                </td>
-                <td class="center" ng-show="item.workByQrCode">
-                  <p class="userPrint">{{str.batch}}</p>
-                </td>
-                <td class="center" ng-show="item.workByQrCode">
-                  <p>{{str.mfgDate}}</p>
-                </td>
-             
-                <td class="center" ng-show="item.workByQrCode">
-                  <p class="userPrint">{{str.sn}}</p>
-
-                </td>
-                <td class="green" ng-hide="item.workByQrCode">{{str.productionDate | date:"dd / MM / yyyy" }}</td>
-                <td ng-if="item.workByBatch || item.workByQrCode" class="red">{{str.expiryDate | date:"dd / MM / yyyy" }}</td>
-                <td ng-if="item.workByBatch">{{str.validityDays}}</td>
-                <td>{{str.count}}</td>
-              </tr>
-            </table>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-
-    <p class="error">{{error}}</p>
-
-    <div class="modal-footer center">
-      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#batchesModal')"> </i-button>
-    </div>
-  </div>
 </div>
