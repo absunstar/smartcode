@@ -42,8 +42,8 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
             $scope.error = v.messages[0].ar;
             return;
         }
-        $scope.item.approvedAmount =  $scope.item.amount || _item.amount;
-        $scope.item.approvedNumberOfMonths =  $scope.item.numberOfMonths || _item.numberOfMonths;
+        $scope.item.approvedAmount = $scope.item.amount || _item.amount;
+        $scope.item.approvedNumberOfMonths = $scope.item.numberOfMonths || _item.numberOfMonths;
         if (!$scope.item.employee || !$scope.item.employee.id) {
             $scope.error = '##word.Please Select Employee##';
             return;
@@ -352,7 +352,7 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
-        $scope.search = { ...$scope.search, ...$scope._search };
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};

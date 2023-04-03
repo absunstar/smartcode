@@ -299,7 +299,7 @@ app.controller('createVacations', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
-        $scope.search = { ...$scope.search, ...$scope._search };
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};
@@ -360,7 +360,7 @@ app.controller('createVacations', function ($scope, $http, $timeout) {
         }).then(
             function (response) {
                 $scope.busy = false;
-        
+
                 if (response.data.done && response.data.list.length > 0) {
                     $scope.employeesList = response.data.list;
                 }

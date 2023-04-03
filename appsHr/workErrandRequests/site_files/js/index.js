@@ -346,7 +346,7 @@ app.controller('workErrandRequests', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
-        $scope.search = { ...$scope.search, ...$scope._search };
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};

@@ -734,8 +734,6 @@ app.controller('employees', function ($scope, $http, $timeout) {
     };
 
     $scope.getJobs = function (section) {
-  
-
         $scope.busy = true;
         $scope.jobsList = [];
         $http({
@@ -970,7 +968,7 @@ app.controller('employees', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
-        $scope.search = { ...$scope.search, ...$scope._search };
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};

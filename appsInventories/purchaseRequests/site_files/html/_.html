@@ -11,10 +11,10 @@
             <i-button type="search" x-permissions="purchaseRequestsSearch || purchaseRequestsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
             <i-button type="search" x-permissions="purchaseRequestsSearch || purchaseRequestsManage" label="##word.Has Transactions##" ng-click="searchAll(search={hasTransaction:true})"></i-button>
         </div>
-        <div class="row">
-            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+        <div class="row" x-permissions="purchaseRequestsSearch || purchaseRequestsManage">
+            <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
 
-            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+            <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
         </div>
         <div class="row padding">
             <i-control ng-model="$search" x-permissions="purchaseRequestsSearch || purchaseRequestsManage"></i-control>

@@ -319,24 +319,25 @@ module.exports = function init(site) {
                     }
 
                     if (Array.isArray(docs)) {
-                        let numObj = {
-                            company: site.getCompany(req),
-                            screen: app.name,
-                            date: new Date(),
-                        };
-                        let code = 0;
-                        let cb = site.getNumbering(numObj);
-                        if (!cb.auto) {
-                            response.error = 'Must Enter Code';
-                            res.json(response);
-                            return;
-                        } else if (cb.auto) {
-                            code = cb.code;
-                        }
-
                         console.log(`Importing ${app.name} : ${docs.length}`);
+                        let systemCode = 0;
                         docs.forEach((doc) => {
-                            doc = { ...doc, code: code++ };
+                            let numObj = {
+                                company: site.getCompany(req),
+                                screen: app.name,
+                                date: new Date(),
+                            };
+                            let cb = site.getNumbering(numObj);
+
+                            if (cb.auto) {
+                                systemCode = cb.code || ++systemCode;
+                            } else {
+                                systemCode++;
+                            }
+
+                            if (!doc.code) {
+                                doc.code = systemCode;
+                            }
 
                             let newDoc = {
                                 code: doc.code,

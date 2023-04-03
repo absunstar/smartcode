@@ -11,7 +11,7 @@
             <i-button type="search" x-permissions="storesOpeningBalancesSearch || storesOpeningBalancesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
             <i-button type="search" x-permissions="storesOpeningBalancesSearch || storesOpeningBalancesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
 
-            <div class="row">
+            <div class="row" x-permissions="storesOpeningBalancesSearch || storesOpeningBalancesManage">
                 <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
 
                 <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>

@@ -24,7 +24,7 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
         $scope._search.toDate = new Date(lastDay);
         return { firstDay, lastDay };
     };
-    
+
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
@@ -346,7 +346,7 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
-        $scope.search = { ...$scope.search, ...$scope._search };
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};
