@@ -13,69 +13,91 @@
         <i-control id2="qr1" class="row" ng-model="qr.code" label="Code" ng-disabled="true"></i-control>
         <i-control class="col6" ng-model="qr.gtin" label="GTIN"></i-control>
         <i-control class="col6" ng-model="qr.batch" label="BATCH"></i-control>
-        <i-control class="col6" ng-model="qr.mfgDate" label="MFG DATE"></i-control>
-        <i-control class="col6" ng-model="qr.expiryDate" label="EXPIRE DATE"></i-control>
+        <i-date class="col6" ng-model="qr.expiryDate" label="EXPIRE DATE"></i-date>
         <i-control class="col6" ng-model="qr.sn" label="SERIAL NUMBER"></i-control>
       </div>
     </div>
 
     <div x-import="scripts.html"></div>
     <script>
-      site.getQRcode = function (code) {
-        let qr = {
-          code: code,
-        };
-        if (code.indexOf('') !== -1) {
-          code = code.split('');
-        } else if (code.indexOf('^') !== -1) {
-          code = code.split('^');
+      site.getQRcode = function (qr) {
+        let reCheck = false;
+        if (typeof qr === 'string') {
+          reCheck = true;
+          qr = {
+            code: qr,
+            code2: qr,
+            gs_sperator: ['', '^'],
+            parameters: [
+              {
+                name: 'gtin',
+                start: '01',
+                length: 14,
+              },
+              {
+                name: 'expiryDate',
+                type: 'date',
+                start: '17',
+                length: 6,
+              },
+              {
+                name: 'batch',
+                start: '10',
+                length: 0,
+              },
+              {
+                name: 'sn',
+                start: '21',
+                length: 0,
+              },
+            ],
+          };
+          qr.gs_sperator.forEach((sp) => {
+            if (qr.code.indexOf(sp) !== -1) {
+              qr.code2 = qr.code2.replace(sp, '|');
+            }
+          });
         }
 
-        if (code[0].length === 24 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '10') {
-          qr.gtin = code[0].slice(2, 16);
-          qr.batch = code[0].slice(18);
-        } else if (code[0].length === 24 && code[0].slice(0, 2) === '01') {
-          qr.gtin = code[0].slice(2, 15);
-          qr.mfgDate = code[0].slice(16, 23);
-        } else if (code[0].length === 32 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '17') {
-          qr.gtin = code[0].slice(2, 15);
-          qr.expiryDate = code[0].slice(18, 24);
-          qr.batch = code[0].slice(25);
-        } else if (code[0].length === 32 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '21') {
-          qr.gtin = code[0].slice(2, 15);
-          qr.sn = code[0].slice(18);
-        } else if (code[0].length === 25 && code[0].slice(0, 2) === '01') {
-          qr.gtin = code[0].slice(1, 12);
-          qr.mfgDate = code[0].slice(12, 18);
-          qr.batch = code[0].slice(18);
-        } else if (code[0].length === 33 && code[0].slice(0, 2) === '01' && code[0].slice(16, 18) === '17' && code[0].slice(24, 26) === '10') {
-          qr.gtin = code[0].slice(2, 16);
-          qr.expiryDate = code[0].slice(18, 24);
-          qr.batch = code[0].slice(26);
+        qr.parameters.forEach((p) => {
+          if (!qr[p.name]) {
+            if (qr.code2.slice(0, 2) == p.start) {
+              if (p.length === 0) {
+                qr[p.name] = '';
+                qr.code2 = qr.code2.substring(2);
+                let stop = false;
+                for (let index = 0; index < qr.code2.length; index++) {
+                  let char = qr.code2[index];
+                  if (stop || char == '|') {
+                    stop = true;
+                  } else {
+                    qr[p.name] += char;
+                  }
+                }
+                qr.code2 = qr.code2.substring(qr[p.name].length);
+                if (stop) {
+                  qr.code2 = qr.code2.substring(1);
+                }
+              } else {
+                qr.code2 = qr.code2.substring(2);
+                qr[p.name] = qr.code2.slice(0, p.length);
+                qr.code2 = qr.code2.substring(p.length);
+              }
+            }
+          }
+        });
+
+        if (reCheck) {
+          return site.getQRcode(qr);
         }
 
-        if (code[1].length === 22 && code[1].slice(0, 2) === '17' && code[1].slice(8, 10) === '21') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.sn = code[1].slice(10);
-        } else if (code[1].length === 22 && code[1].slice(0, 2) === '21') {
-          qr.sn = code[1].slice(2);
-        } else if (code[1].length === 24 && code[1].slice(0, 2) === '17' && code[1].slice(8, 10) === '21') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.sn = code[1].slice(10);
-        } else if (code[1].length === 11 && code[1].slice(0, 2) === '21') {
-          qr.sn = code[1].slice(2, 8);
-        }else if (code[1].length === 17 && code[1].slice(0, 2) === '21') {
-          qr.sn = code[1].slice(2);
-        }else if (code[1].length === 17 && code[1].slice(0, 2) === '17'&& code[1].slice(8, 10) === '10') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.batch = code[1].slice(10);
-        }else if (code[1].length === 20 && code[1].slice(0, 2) === '17'&& code[1].slice(8, 10) === '21') {
-          qr.expiryDate = code[1].slice(2, 8);
-          qr.sn = code[1].slice(10);
+        if (qr['expiryDate']) {
+          let y = parseInt(qr['expiryDate'].slice(0, 2));
+          let m = parseInt(qr['expiryDate'].slice(2, 4)) - 1;
+          let d = parseInt(qr['expiryDate'].slice(4, 6));
+          qr['expiryDate'] = new Date(2000 + y, m , d);
         }
-
         console.log(qr);
-        console.log(code);
         return qr;
       };
 
