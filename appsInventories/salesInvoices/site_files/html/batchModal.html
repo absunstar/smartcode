@@ -51,7 +51,7 @@
           <fieldset ng-hide="mode == 'view' || batch.$view">
             <legend>##word.Search##</legend>
             <i-control type="text" class="col6" label="##word.BATCH## / ##word.SERIAL## / ##word.QR CODE##" ng-keydown="getBatch($event,batch)" ng-model="batch.$search"> </i-control>
-            <p class="error">{{errorBatch}}</p>
+            <p class="error row">{{errorBatch}}</p>
           </fieldset>
           <div class="row">
             <table class="table loaded center bold hover details">

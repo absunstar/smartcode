@@ -120,8 +120,8 @@
             <th>##word.Item##</th>
             <th>##word.Unit##</th>
             <th>##word.Transfer Count##</th>
-            <th>##word.Purchase Cost##</th>
-            <th>##word.Approved##</th>
+<!--             <th>##word.Purchase Cost##</th>
+ -->            <th>##word.Approved##</th>
             <th class="not-print" ng-show="item.sourceType.id !== 1">##word.Actions##</th>
           </tr>
           <tr ng-repeat="elem in item.itemsList">
@@ -144,9 +144,9 @@
                 ng-model="elem.count"
               ></i-control>
             </td>
-            <td class="center">
+          <!--   <td class="center">
               <p>{{elem.price}}</p>
-            </td>
+            </td> -->
             <td class="center">
               <p class="text-center text-success" ng-if="elem.approved">##word.Yes##</p>
               <p class="text-center text-danger" ng-if="!elem.approved">##word.No##</p>

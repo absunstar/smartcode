@@ -158,7 +158,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
                         $scope.list[index] = response.data.result.doc;
                     }
                 } else {
-                    $scope.error = 'Please Login First';
+                    $scope.error = response.data.error;
                 }
             },
             function (err) {

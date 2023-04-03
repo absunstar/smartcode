@@ -103,7 +103,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
             $scope.list[index] = response.data.result.doc;
           }
         } else {
-          $scope.error = 'Please Login First';
+          $scope.error = response.data.error;
         }
       },
       function (err) {
@@ -350,7 +350,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code  || itm.sn == response.data.doc.sn);
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || itm.sn == response.data.doc.sn);
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -363,6 +363,9 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
             }
           }
           item.$search = '';
+        } else if (response.data.done && response.data.docs) {
+          $scope.searchbBatchesList = response.data.docs;
+          site.showModal('#batchSearchModal');
         } else {
           $scope.errorBatch = response.data.error;
         }
@@ -376,22 +379,21 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
 
   $scope.getBarcode = function (ev) {
     $scope.error = '';
-    $scope.itemsError = '';
-
     let where = {
       active: true,
       allowSale: true,
     };
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.itemsError = '##word.Please Select Store';
+      $scope.error = '##word.Please Select Store';
       return;
     }
     if (ev && ev.which != 13) {
       return;
     }
+
     if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
       $scope.qr = site.getQRcode($scope.orderItem.barcode);
-      where['gtin'] = $scope.qr.gtin;
+      where['gtinList.gtin'] = $scope.qr.gtin;
       where.$and = [{ 'unitsList.storesList.batchesList.code': $scope.qr.code }, { 'unitsList.storesList.batchesList.count': { $gt: 0 } }];
     } else {
       where['unitsList.barcode'] = $scope.orderItem.barcode;
@@ -430,7 +432,6 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
             let _unit = $scope.itemsList[0].unitsList.find((_u) => {
               return _u.barcode == $scope.orderItem.barcode;
             });
-
             if (!_unit) {
               _unit = $scope.itemsList[0].unitsList[0];
             }
@@ -451,9 +452,8 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
               },
               count: 1,
             });
+            $scope.qr = {};
           }
-        } else {
-          $scope.itemsError = 'ItemNotFound';
         }
       },
       function (err) {
@@ -463,6 +463,30 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.selectBatch = function (item, batch) {
+    $scope.addBatch = '';
+    $scope.errorBatch = '';
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || itm.sn == batch.sn);
+    if (index === -1) {
+      batch.currentCount = batch.count;
+      batch.count = 1;
+      item.batchesList.unshift(batch);
+      item.$batchCount += 1;
+      $scope.addBatch = 'Added successfully';
+      $timeout(() => {
+        $scope.addBatch = '';
+      }, 1500);
+    } else {
+      if (item.workByBatch) {
+        item.batchesList[index].count += 1;
+        item.$batchCount += 1;
+      } else {
+        $scope.errorBatch = 'Item Is Exist';
+      }
+    }
+    item.$search = '';
+  };
+  
   $scope.getStores = function () {
     $scope.busy = true;
     $scope.storesList = [];
@@ -653,7 +677,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
             $scope.list[index] = response.data.result.doc;
           }
         } else {
-          $scope.error = 'Please Login First';
+          $scope.error = response.data.error;
         }
       },
       function (err) {
@@ -695,7 +719,9 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
   $scope.showBatchModal = function (item) {
     $scope.error = '';
     $scope.errorBatch = '';
-    item.batchesList = item.batchesList || [];
+    if (item.workByBatch || item.workBySerial || item.workByQrCode) {
+      item.batchesList = item.batchesList || [];
+    }
     $scope.batch = item;
     $scope.calcBatch($scope.batch);
     site.showModal('#batchModalModal');
@@ -705,7 +731,7 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = '';
       $scope.error = '';
-      item.$batchCount = item.batchesList.reduce((a, b) => a  +b.count, 0);
+      item.$batchCount = item.batchesList.reduce((a, b) => a + b.count, 0);
     }, 250);
   };
 

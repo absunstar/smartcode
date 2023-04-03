@@ -233,7 +233,7 @@ module.exports = function init(site) {
         let errBatchList = [];
         let errToBatchList = [];
         _data.itemsList.forEach((_item) => {
-          if (_item.workByBatch || _item.workBySerial) {
+          if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
             if (_item.batchesList && _item.batchesList.length > 0) {
               _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
 

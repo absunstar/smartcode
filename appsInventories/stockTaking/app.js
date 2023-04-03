@@ -221,26 +221,26 @@ module.exports = function init(site) {
 
                 let errBatchList = [];
                 _data.itemsList.forEach((_item) => {
-                    if (_item.workByBatch || _item.workBySerial) {
-                        if (_item.batchesList && _item.batchesList.length > 0) {
-                            _item.$batchCount = _item.batchesList.reduce((a, b) => a  +b.count, 0);
-                            let notCode = _item.batchesList.some((_b) => !_b.code);
-                            if (_item.$batchCount != _item.count || notCode) {
-                                let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                                errBatchList.push(itemName);
-                            }
-                        } else {
-                            let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                            errBatchList.push(itemName);
-                        }
+                  if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
+                    if (_item.batchesList && _item.batchesList.length > 0) {
+                      _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
+                      let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
+                      if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
+                        let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                        errBatchList.push(itemName);
+                      }
+                    } else {
+                      let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                      errBatchList.push(itemName);
                     }
+                  }
                 });
-                // if (errBatchList.length > 0) {
-                //     let error = errBatchList.map((m) => m).join('-');
-                //     response.error = `The Batches Count is not correct in ( ${error} )`;
-                //     res.json(response);
-                //     return;
-                // }
+                if (errBatchList.length > 0) {
+                  let error = errBatchList.map((m) => m).join('-');
+                  response.error = `The Batches Count is not correct in ( ${error} )`;
+                  res.json(response);
+                  return;
+                }
 
                 _data.approvedUserInfo = req.getUserFinger();
                 _data.approvedDate = new Date();

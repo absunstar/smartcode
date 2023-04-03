@@ -67,7 +67,7 @@
                     <td class="center">{{elem.total}}</td>
 
                     <td class="center">
-                        <i-list ng-model="elem.destroyingReason" ng-show="!item.approved" items="destroyingItemsReasonsList" display="name##session.lang##" ng-search="elem.$resone"></i-list>
+                        <i-list ng-model="elem.destroyingReason" v="r" ng-show="!item.approved" items="destroyingItemsReasonsList" display="name##session.lang##" ng-search="elem.$resone"></i-list>
                         <p ng-show="item.approved">{{elem.destroyingReason.name##session.lang##}}</p>
                     </td>
                     <td class="center">

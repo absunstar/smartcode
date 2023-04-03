@@ -84,9 +84,10 @@
     </div>
 
     <p class="error">{{errorBatch}}</p>
+    <p class="green font-20 bold center">{{addBatch}}</p>
 
     <div class="modal-footer center">
-      <i-button type="close" label="##word.Close##" ng-click="errorBatch = ''" onclick="site.hideModal( '#batchSearchModal')"></i-button>
+      <i-button type="close" label="##word.Close##" ng-click="errorBatch = '', addBatch = ''" onclick="site.hideModal( '#batchSearchModal')"></i-button>
     </div>
   </div>
   <div class="col2"></div>

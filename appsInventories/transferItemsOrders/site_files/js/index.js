@@ -123,7 +123,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
             $scope.list[index] = response.data.result.doc;
           }
         } else {
-          $scope.error = 'Please Login First';
+          $scope.error = response.data.error;
         }
       },
       function (err) {
@@ -391,7 +391,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code  || itm.sn == response.data.doc.sn);
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || itm.sn == response.data.doc.sn);
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -404,6 +404,9 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
             }
           }
           item.$search = '';
+        } else if (response.data.done && response.data.docs) {
+          $scope.searchbBatchesList = response.data.docs;
+          site.showModal('#batchSearchModal');
         } else {
           $scope.errorBatch = response.data.error;
         }
@@ -417,22 +420,21 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
 
   $scope.getBarcode = function (ev) {
     $scope.error = '';
-    $scope.itemsError = '';
-
     let where = {
       active: true,
       allowSale: true,
     };
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.itemsError = '##word.Please Select Store';
+      $scope.error = '##word.Please Select Store';
       return;
     }
     if (ev && ev.which != 13) {
       return;
     }
+
     if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
       $scope.qr = site.getQRcode($scope.orderItem.barcode);
-      where['gtin'] = $scope.qr.gtin;
+      where['gtinList.gtin'] = $scope.qr.gtin;
       where.$and = [{ 'unitsList.storesList.batchesList.code': $scope.qr.code }, { 'unitsList.storesList.batchesList.count': { $gt: 0 } }];
     } else {
       where['unitsList.barcode'] = $scope.orderItem.barcode;
@@ -471,21 +473,9 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
             let _unit = $scope.itemsList[0].unitsList.find((_u) => {
               return _u.barcode == $scope.orderItem.barcode;
             });
-
             if (!_unit) {
               _unit = $scope.itemsList[0].unitsList[0];
             }
-
-            $scope.calculateItemBalance(_unit);
-            let currentBalance = 0;
-            const storeIndex = _unit.storesList.findIndex((str) => str.store.id === $scope.item.store.id);
-            if (storeIndex === -1) {
-              currentBalance = 0;
-              return;
-            } else {
-              currentBalance = _unit.storesList[storeIndex].currentCount;
-            }
-
             $scope.addToItemsList({
               item: $scope.itemsList[0],
               unit: {
@@ -494,19 +484,17 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
                 code: _unit.unit.code,
                 nameEn: _unit.unit.nameEn,
                 nameAr: _unit.unit.nameAr,
+                price: _unit.salesPrice,
                 maxDiscount: _unit.maxDiscount,
                 discount: _unit.discount,
                 extraDiscount: _unit.extraDiscount,
                 discountType: _unit.discountType,
                 storesList: _unit.storesList,
               },
-              currentBalance,
-              price: _unit.purchasePrice,
               count: 1,
             });
+            $scope.qr = {};
           }
-        } else {
-          $scope.itemsError = 'ItemNotFound';
         }
       },
       function (err) {
@@ -707,7 +695,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
       return;
     }
 
-    if (!elem.currentBalance > 0) {
+    /*  if (!elem.currentBalance > 0) {
       $scope.itemsError = '##word.Item balance Is Zero##';
       return;
     }
@@ -715,7 +703,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
     if (elem.count > elem.currentBalance) {
       $scope.itemsError = '##word.Transfer Count Bigger Than Current Balance##';
       return;
-    }
+    } */
     let storeBalance = elem.unit.storesList.find((str) => {
       return str.store.id == $scope.item.store.id;
     });
@@ -762,6 +750,30 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
 
     $scope.resetOrderItem();
     $scope.itemsError = '';
+  };
+
+  $scope.selectBatch = function (item, batch) {
+    $scope.addBatch = '';
+    $scope.errorBatch = '';
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || itm.sn == batch.sn);
+    if (index === -1) {
+      batch.currentCount = batch.count;
+      batch.count = 1;
+      item.batchesList.unshift(batch);
+      item.$batchCount += 1;
+      $scope.addBatch = 'Added successfully';
+      $timeout(() => {
+        $scope.addBatch = '';
+      }, 1500);
+    } else {
+      if (item.workByBatch) {
+        item.batchesList[index].count += 1;
+        item.$batchCount += 1;
+      } else {
+        $scope.errorBatch = 'Item Is Exist';
+      }
+    }
+    item.$search = '';
   };
 
   $scope.approveItem = function (elem) {
@@ -819,7 +831,9 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
   $scope.showBatchModal = function (item) {
     $scope.error = '';
     $scope.errorBatch = '';
-    item.batchesList = item.batchesList || [];
+    if (item.workByBatch || item.workBySerial || item.workByQrCode) {
+      item.batchesList = item.batchesList || [];
+    }
     $scope.batch = item;
     $scope.calcBatch($scope.batch);
     site.showModal('#batchModalModal');
@@ -829,7 +843,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = '';
       $scope.error = '';
-      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a  +b.count, 0) : 0;
+      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a + b.count, 0) : 0;
     }, 250);
   };
 

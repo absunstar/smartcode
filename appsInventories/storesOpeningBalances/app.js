@@ -163,7 +163,7 @@ module.exports = function init(site) {
                     if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
                         if (_item.batchesList && _item.batchesList.length > 0) {
                             _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-                            let notCode = _item.batchesList.some((_b) => !_b.code);
+                            let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
                             if (_item.$batchCount != _item.count || notCode) {
                                 let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
                                 errBatchList.push(itemName);
@@ -240,7 +240,7 @@ module.exports = function init(site) {
                         if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
                             if (_item.batchesList && _item.batchesList.length > 0) {
                                 _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-                                let notCode = _item.batchesList.some((_b) => !_b.code);
+                                let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
                                 if (_item.$batchCount != _item.count || notCode) {
                                     let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
                                     errBatchList.push(itemName);
@@ -287,7 +287,7 @@ module.exports = function init(site) {
                     if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
                         if (_item.batchesList && _item.batchesList.length > 0) {
                             _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-                            let notCode = _item.batchesList.some((_b) => !_b.code);
+                            let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
                             if (_item.$batchCount != _item.count || notCode) {
                                 let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
                                 errBatchList.push(itemName);

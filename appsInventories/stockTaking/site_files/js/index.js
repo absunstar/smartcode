@@ -125,7 +125,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
                 $scope.list[index] = response.data.result.doc;
               }
             } else {
-              $scope.error = 'Please Login First';
+              $scope.error = response.data.error;
             }
           },
           function (err) {
@@ -168,7 +168,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
             $scope.list[index] = response.data.result.doc;
           }
         } else {
-          $scope.error = 'Please Login First';
+          $scope.error = response.data.error;
         }
       },
       function (err) {
@@ -577,23 +577,51 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
     };
 
     if (elem.item.workByBatch) {
-      elem.item.workByBatch = true;
-      elem.item.validityDays = elem.item.validityDays;
+      item.workByBatch = true;
+      item.validityDays = elem.item.validityDays;
     } else if (elem.item.workBySerial) {
-      elem.item.workBySerial = true;
+      item.workBySerial = true;
     } else if (elem.item.workByQrCode) {
-      elem.item.gtin = elem.item.gtin;
-      elem.item.workByQrCode = true;
-      elem.item.batchesList = [];
+      item.gtinList = elem.item.gtinList;
+      item.workByQrCode = true;
+      item.batchesList =
+        item.batchesList || $scope.qr
+          ? [
+              {
+                code: $scope.qr.code,
+                gtin: $scope.qr.gtin,
+                batch: $scope.qr.batch,
+                mfgDate: $scope.qr.mfgDate,
+                expiryDate: $scope.qr.expiryDate,
+                sn: $scope.qr.sn,
+                count: 1,
+              },
+            ]
+          : [];
     }
 
-    let index = $scope.item.itemsList.findIndex((_item) => _item.id === elem.item.id && _item.unit.id == elem.item.unit.id);
+    let index = $scope.item.itemsList.findIndex((_item) => _item.id === item.id && _item.unit.id == item.unit.id);
     if (index == -1) {
-      $scope.item.itemsList.unshift(obj);
+      $scope.item.itemsList.unshift(item);
     } else {
-      $scope.itemsError = 'Item Exist';
+      if (orderItem.item.workByQrCode) {
+        if (!$scope.item.itemsList[index].batchesList.some((b) => b.code == $scope.qr.code)) {
+          $scope.item.itemsList[index].batchesList.unshift({
+            code: $scope.qr.code,
+            gtin: $scope.qr.gtin,
+            batch: $scope.qr.batch,
+            mfgDate: $scope.qr.mfgDate,
+            expiryDate: $scope.qr.expiryDate,
+            sn: $scope.qr.sn,
+            count: 1,
+          });
+          $scope.item.itemsList[index].count += 1;
+        }
+      } else {
+        $scope.item.itemsList[index].count += 1;
+      }
     }
-
+    $scope.qr = {};
     $scope.resetOrderItem();
     $scope.itemsError = '';
   };
@@ -681,16 +709,37 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.errorBatch = '';
     item.batchesList = item.batchesList || [];
-    if (item.batchesList.length < 1) {
-      let obj = {};
+    if (item.batchesList.length > 0) {
+      if (item.workByQrCode || item.workBySerial) {
+        let remain = item.count - item.batchesList.length;
+        if (remain > 0) {
+          for (let i = 0; i < remain; i++) {
+            let obj = { count: 1 };
+            if (item.workBySerial) {
+              obj.productionDate = new Date();
+            }
+            item.batchesList.unshift(obj);
+          }
+        }
+      }
+    } else {
       if (item.workByBatch) {
+        let obj = {};
         obj = {
           productionDate: new Date(),
           expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
           validityDays: item.validityDays || 0,
-          count: item.count,
+          count: item.count + item.bonusCount,
         };
         item.batchesList = [obj];
+      } else {
+        for (let i = 0; i < item.count; i++) {
+          let obj = { count: 1 };
+          if (item.workBySerial) {
+            obj.productionDate = new Date();
+          }
+          item.batchesList.unshift(obj);
+        }
       }
     }
     $scope.batch = item;
@@ -729,91 +778,81 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
   $scope.getBarcode = function (ev) {
     $scope.error = '';
     let where = {
-      active: true,
-      allowSale: true,
+        active: true,
+        allowSale: true,
     };
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store';
-      return;
+        $scope.error = '##word.Please Select Store';
+        return;
     }
     if (ev && ev.which != 13) {
-      return;
+        return;
     }
     if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
-      $scope.qr = site.getQRcode($scope.orderItem.barcode);
-      where['gtin'] = $scope.qr.gtin;
+        $scope.qr = site.getQRcode($scope.orderItem.barcode);
+        where['gtinList.gtin'] = $scope.qr.gtin;
     } else {
-      where['unitsList.barcode'] = $scope.orderItem.barcode;
+        where['unitsList.barcode'] = $scope.orderItem.barcode;
     }
 
     $scope.busy = true;
     $scope.itemsList = [];
     $http({
-      method: 'POST',
-      url: '/api/storesItems/all',
-      data: {
-        storeId: $scope.item.store.id,
-        where: where,
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-          noVat: 1,
-          workByBatch: 1,
-          workBySerial: 1,
-          workByQrCode: 1,
-          validityDays: 1,
-          gtinList: 1,
-          unitsList: 1,
-          itemGroup: 1,
+        method: 'POST',
+        url: '/api/storesItems/all',
+        data: {
+            storeId: $scope.item.store.id,
+            where: where,
+            select: {
+                id: 1,
+                code: 1,
+                nameEn: 1,
+                nameAr: 1,
+                workByBatch: 1,
+                workBySerial: 1,
+                workByQrCode: 1,
+                validityDays: 1,
+                gtinList: 1,
+                unitsList: 1,
+                itemGroup: 1,
+            },
         },
-      },
     }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.itemsList = response.data.list;
-          if ($scope.itemsList && $scope.itemsList.length == 1) {
-            let _unit = $scope.itemsList[0].unitsList.find((_u) => {
-              return _u.barcode == $scope.orderItem.barcode;
-            });
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.itemsList = response.data.list;
+                if ($scope.itemsList && $scope.itemsList.length == 1) {
+                    let _unit = $scope.itemsList[0].unitsList.find((_u) => {
+                        return _u.barcode == $scope.orderItem.barcode;
+                    });
 
-            if (!_unit) {
-              _unit = $scope.itemsList[0].unitsList[0];
+                    if (!_unit) {
+                        _unit = $scope.itemsList[0].unitsList[0];
+                    }
+                    $scope.addToItemsList({
+                        item: $scope.itemsList[0],
+                        unit: {
+                            id: _unit.unit.id,
+                            barcode: _unit.barcode,
+                            code: _unit.unit.code,
+                            nameEn: _unit.unit.nameEn,
+                            nameAr: _unit.unit.nameAr,
+                            storesList: _unit.storesList,
+                        },
+                        price: _unit.purchasePrice,
+                        salesPrice: _unit.salesPrice,
+                        count: 1,
+                    });
+                }
             }
-            let storeIndex = _unit.storesList.findIndex((_s) => _s.store.id === $scope.item.store.id);
-            let count = 0;
-            if (storeIndex !== -1) {
-              count = _unit.storesList[storeIndex].currentCount;
-            }
-            $scope.addToItemsList({
-              item: $scope.itemsList[0],
-              unit: {
-                id: _unit.unit.id,
-                barcode: _unit.barcode,
-                code: _unit.unit.code,
-                nameEn: _unit.unit.nameEn,
-                nameAr: _unit.unit.nameAr,
-                storesList: _unit.storesList,
-              },
-              price: _unit.purchasePrice,
-              salesPrice: _unit.salesPrice,
-              bonusCount: 0,
-              bonusPrice: 0,
-              vendorDiscount: 0,
-              legalDiscount: 0,
-              count,
-            });
-          }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
         }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
     );
-  };
+};
 
   $scope.readQR = function (obj) {
     $timeout(() => {

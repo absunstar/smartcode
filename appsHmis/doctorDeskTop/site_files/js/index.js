@@ -91,7 +91,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
             $scope.list[index] = response.data.result.doc;
           }
         } else {
-          $scope.error = 'Please Login First';
+          $scope.error = response.data.error;
         }
       },
       function (err) {
@@ -123,7 +123,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
             }, 1500);
           }
         } else {
-          $scope.error = 'Please Login First';
+          $scope.error = response.data.error;
         }
       },
       function (err) {
