@@ -746,6 +746,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
     $scope.calcBatch($scope.batch);
     site.showModal('#batchModalModal');
   };
+  
 
   $scope.addDays = function (date, days) {
     let result = new Date(date);

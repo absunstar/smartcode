@@ -465,9 +465,58 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
       item.toBatchesList = [];
     }
 
-    $scope.item.itemsList.unshift(item);
+    if (orderItem.item.workByBatch) {
+      item.workByBatch = true;
+      item.validityDays = orderItem.item.validityDays;
+    } else if (orderItem.item.workBySerial) {
+      item.workBySerial = true;
+    } else if (orderItem.item.workByQrCode) {
+      item.gtinList = orderItem.item.gtinList;
+      item.workByQrCode = true;
+      item.batchesList = [];
+    }
+
+    let indx = $scope.item.itemsList.findIndex((_item) => _item.id === item.id && _item.unit.id == item.unit.id);
+
+    if (indx == -1) {
+      $scope.item.itemsList.unshift(item);
+      /*   if (item.workByQrCode && $scope.orderItem.barcode) {
+        $scope.item.itemsList[0].$search = $scope.orderItem.barcode;
+        $scope.getBatch({ which: 13 }, $scope.item.itemsList[0]);
+      } */
+    } else {
+      $scope.item.itemsList[indx].count += 1;
+      /*  if (item.workByQrCode && $scope.orderItem.barcode) {
+        $scope.item.itemsList[indx].$search = $scope.orderItem.barcode;
+        $scope.getBatch({ which: 13 }, $scope.item.itemsList[indx]);
+      } */
+    }
     $scope.orderItem = { ...$scope, orderItem };
     $scope.itemsError = '';
+  };
+
+  $scope.selectBatch = function (item, batch) {
+    $scope.addBatch = '';
+    $scope.errorBatch = '';
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || itm.sn == batch.sn);
+    if (index === -1) {
+      batch.currentCount = batch.count;
+      batch.count = 1;
+      item.batchesList.unshift(batch);
+      item.$batchCount += 1;
+      $scope.addBatch = 'Added successfully';
+      $timeout(() => {
+        $scope.addBatch = '';
+      }, 1500);
+    } else {
+      if (item.workByBatch) {
+        item.batchesList[index].count += 1;
+        item.$batchCount += 1;
+      } else {
+        $scope.errorBatch = 'Item Is Exist';
+      }
+    }
+    item.$search = '';
   };
 
   $scope.approveItem = function (_item) {
@@ -569,7 +618,9 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
   $scope.showBatchModal = function (item) {
     $scope.error = '';
     $scope.errorBatch = '';
-    item.batchesList = item.batchesList || [];
+    if (item.workByBatch || item.workBySerial || item.workByQrCode) {
+      item.batchesList = item.batchesList || [];
+    }
     $scope.batch = item;
     $scope.calcBatch($scope.batch);
     site.showModal('#batchModalModal');
@@ -579,7 +630,7 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = '';
       $scope.error = '';
-      item.$batchCount = item.batchesList.reduce((a, b) => a  +b.count, 0);
+      item.$batchCount = item.batchesList.reduce((a, b) => a + b.count, 0);
     }, 250);
   };
 
@@ -629,20 +680,41 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.errorBatch = '';
     item.toBatchesList = item.toBatchesList || [];
-    if (item.toBatchesList.length < 1) {
-      let obj = {};
+    if (item.toBatchesList.length > 0) {
+      if (item.workByQrCode || item.workBySerial) {
+        let remain = item.count - item.toBatchesList.length;
+        if (remain > 0) {
+          for (let i = 0; i < remain; i++) {
+            let obj = { count: 1 };
+            if (item.workBySerial) {
+              obj.productionDate = new Date();
+            }
+            item.toBatchesList.unshift(obj);
+          }
+        }
+      }
+    } else {
       if (item.workByBatch) {
+        let obj = {};
         obj = {
           productionDate: new Date(),
           expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
           validityDays: item.validityDays || 0,
-          count: item.toCount,
+          count: item.count + item.bonusCount,
         };
         item.toBatchesList = [obj];
+      } else {
+        for (let i = 0; i < item.count; i++) {
+          let obj = { count: 1 };
+          if (item.workBySerial) {
+            obj.productionDate = new Date();
+          }
+          item.toBatchesList.unshift(obj);
+        }
       }
     }
     $scope.batch = item;
-    $scope.calcToBatch($scope.batch);
+    $scope.calcBatch($scope.batch);
     site.showModal('#toBatchModal');
   };
 
@@ -695,6 +767,9 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
             }
           }
           item.$search = '';
+        } else if (response.data.done && response.data.docs) {
+          $scope.searchbBatchesList = response.data.docs;
+          site.showModal('#batchSearchModal');
         } else {
           $scope.errorBatch = response.data.error;
         }
@@ -711,7 +786,7 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
       $scope.errorBatch = '';
       $scope.error = '';
 
-      item.$toBatchCount = item.toBatchesList.length > 0 ? item.toBatchesList.reduce((a, b) => a  +b.count, 0) : 0;
+      item.$toBatchCount = item.toBatchesList.length > 0 ? item.toBatchesList.reduce((a, b) => a + b.count, 0) : 0;
     }, 250);
   };
 
