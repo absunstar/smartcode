@@ -321,6 +321,7 @@ module.exports = function init(site) {
                     });
                 }
             });
+
             site.post(`api/${app.name}/import`, (req, res) => {
                 let response = {
                     done: false,
@@ -338,47 +339,114 @@ module.exports = function init(site) {
 
                     if (Array.isArray(docs)) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
-                        let systemCode = 0;
-                        docs.forEach((doc) => {
-                            let numObj = {
-                                company: site.getCompany(req),
-                                screen: app.name,
-                                date: new Date(),
-                            };
-                            let cb = site.getNumbering(numObj);
 
-                            if (cb.auto) {
-                                systemCode = cb.code || ++systemCode;
-                            } else {
-                                systemCode++;
-                            }
-
-                            if (!doc.code) {
-                                doc.code = systemCode;
-                            }
-
-                            let newDoc = {
-                                code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
-                                image: { url: '/images/activeSubstances.png' },
-                                active: true,
-                            };
-
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
-
-                            app.add(newDoc, (err, doc2) => {
-                                if (!err && doc2) {
-                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                    console.log(site.dbMessage);
-                                } else {
-                                    site.dbMessage = err.message;
-                                    console.log(site.dbMessage);
+                        if (docs && docs.length && docs[1].Ingredient && !docs[1].nameEn) {
+                            const ingredientList = [];
+                            docs.forEach((doc) => {
+                                if (doc.Ingredient) {
+                                    const elementsList = doc.Ingredient.split(',');
+                  
+                                    elementsList.forEach((elem) => {
+                                        if (ingredientList.includes(elem.trim())) {
+                                        } else {
+                                            ingredientList.push(elem.trim());
+                                        }
+                                    });
                                 }
                             });
-                        });
+
+                            let systemCode = 0;
+                            ingredientList.forEach((elem) => {
+                                app.$collection.find({ where: { nameEn: elem } }, (err, exisitDoc) => {
+                                    if (!exisitDoc) {
+                                        let numObj = {
+                                            company: site.getCompany(req),
+                                            screen: app.name,
+                                            date: new Date(),
+                                        };
+                                        let cb = site.getNumbering(numObj);
+
+                                        if (cb.auto) {
+                                            systemCode = cb.code || ++systemCode;
+                                        } else {
+                                            systemCode++;
+                                        }
+                                        let item = { code: '' };
+                                        if (!item.code) {
+                                            item.code = systemCode;
+                                        }
+                                        item = {
+                                            code: item.code,
+                                            nameEn: elem,
+                                            nameAr: elem,
+                                        };
+
+                                        let newDoc = {
+                                            code: systemCode,
+                                            nameAr: item.nameEn,
+                                            nameEn: item.nameEn,
+                                            image: { url: '/images/activeSubstances.png' },
+                                            active: true,
+                                        };
+
+                                        newDoc.company = site.getCompany(req);
+                                        newDoc.branch = site.getBranch(req);
+                                        newDoc.addUserInfo = req.getUserFinger();
+
+                                        app.add(newDoc, (err, doc2) => {
+                                            if (!err && doc2) {
+                                                site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                                console.log(site.dbMessage);
+                                            } else {
+                                                site.dbMessage = err.message;
+                                                console.log(site.dbMessage);
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        } else if (!docs[1].Ingredient) {
+                            docs.forEach((doc) => {
+                                let numObj = {
+                                    company: site.getCompany(req),
+                                    screen: app.name,
+                                    date: new Date(),
+                                };
+                                let cb = site.getNumbering(numObj);
+
+                                if (cb.auto) {
+                                    systemCode = cb.code || ++systemCode;
+                                } else {
+                                    systemCode++;
+                                }
+
+                                if (!doc.code) {
+                                    doc.code = systemCode;
+                                }
+
+                                let newDoc = {
+                                    code: doc.code,
+                                    nameAr: doc.nameAr,
+                                    nameEn: doc.nameEn,
+                                    image: { url: '/images/activeSubstances.png' },
+                                    active: true,
+                                };
+
+                                newDoc.company = site.getCompany(req);
+                                newDoc.branch = site.getBranch(req);
+                                newDoc.addUserInfo = req.getUserFinger();
+
+                                app.add(newDoc, (err, doc2) => {
+                                    if (!err && doc2) {
+                                        site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                        console.log(site.dbMessage);
+                                    } else {
+                                        site.dbMessage = err.message;
+                                        console.log(site.dbMessage);
+                                    }
+                                });
+                            });
+                        }
                     } else {
                         site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
                         console.log(site.dbMessage);

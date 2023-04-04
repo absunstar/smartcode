@@ -14,6 +14,7 @@ module.exports = function init(site) {
         allowRouteAll: true,
         allowRouteActive: true,
         busyList: [],
+        importBusyList: [],
     };
 
     site.getBatchesToSalesAuto = function (obj, callback) {
@@ -77,7 +78,6 @@ module.exports = function init(site) {
         }
 
         app.busyList.push(_elm.id);
-
         app.view({ id: _elm.id }, (err, doc) => {
             if (doc) {
                 let index = doc.unitsList.findIndex((unt) => unt.unit.id == _elm.unit.id);
@@ -201,7 +201,10 @@ module.exports = function init(site) {
                 }
                 site.calculateStroeItemBalance(doc);
                 app.update(doc, () => {
-                    // app.busyList.splice(_elm.id );
+                    const itemIndex = app.busyList.findIndex(() => _elm.id);
+                    if (itemIndex != -1) {
+                        app.busyList.splice(itemIndex, 1);
+                    }
                 });
             }
         });
@@ -799,74 +802,115 @@ module.exports = function init(site) {
                 }
             });
 
-            // site.post(`api/${app.name}/import`, (req, res) => {
-            //     let response = {
-            //         done: false,
-            //         file: req.form.files.fileToUpload,
-            //     };
+            site.post(`api/${app.name}/importIdfList`, (req, res) => {
+                let response = {
+                    done: false,
+                    file: req.form.files.fileToUpload,
+                };
 
-            //     if (site.isFileExistsSync(response.file.filepath)) {
-            //         let docs = [];
-            //         if (response.file.originalFilename.like('*.xls*')) {
-            //             let workbook = site.XLSX.readFile(response.file.filepath);
-            //             docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-            //         } else {
-            //             docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
-            //         }
+                if (site.isFileExistsSync(response.file.filepath)) {
+                    let docs = [];
+                    if (response.file.originalFilename.like('*.xls*')) {
+                        let workbook = site.XLSX.readFile(response.file.filepath);
+                        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                    } else {
+                        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+                    }
 
-            //         if (Array.isArray(docs)) {
-            //             let numObj = {
-            //                 company: site.getCompany(req),
-            //                 screen: app.name,
-            //                 date: new Date(),
-            //             };
-            //             let code = 0;
-            //             let cb = site.getNumbering(numObj);
-            //             if (!cb.auto) {
-            //                 response.error = 'Must Enter Code';
-            //                 res.json(response);
-            //                 return;
-            //             } else if (cb.auto) {
-            //                 code = cb.code;
-            //             }
+                    if (Array.isArray(docs)) {
+                        console.log(`Importing ${app.name} : ${docs.length}`);
+                        let systemCode = 0;
+                        docs.forEach((doc) => {
+                            app.$collection.find({ where: { nameEn: doc.TradeName } }, (err, exisitDoc) => {
+                                if (exisitDoc) {
+                                    console.log('exisitDoc', exisitDoc.id);
+                                } else {
+                                    let numObj = {
+                                        company: site.getCompany(req),
+                                        screen: app.name,
+                                        date: new Date(),
+                                    };
+                                    let cb = site.getNumbering(numObj);
 
-            //             console.log(`Importing ${app.name} : ${docs.length}`);
-            //             docs.forEach((doc) => {
-            //                 doc = { ...doc, code: code++ };
+                                    if (cb.auto) {
+                                        systemCode = cb.code || ++systemCode;
+                                    } else {
+                                        systemCode++;
+                                    }
 
-            //                 let newDoc = {
-            //                     code: doc.code,
-            //                     nameAr: doc.nameAr,
-            //                     nameEn: doc.nameEn,
-            //                     image: { url: '/images/storesItems.png' },
-            //                     active: true,
-            //                 };
+                                    // if (typeof doc?.code == undefined) {
+                                    //     doc?.code = systemCode;
+                                    // }
+                                    // sfdaCodeList;
+                                    // gtinList
+                                    // doc = { ...doc, gtinList: [] };
+                                    let gtinList = [];
 
-            //                 newDoc.company = site.getCompany(req);
-            //                 newDoc.branch = site.getBranch(req);
-            //                 newDoc.addUserInfo = req.getUserFinger();
+                                    // console.log('doc.GTIN1', doc.GTIN1);
 
-            //                 app.add(newDoc, (err, doc2) => {
-            //                     if (!err && doc2) {
-            //                         site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-            //                         console.log(site.dbMessage);
-            //                     } else {
-            //                         site.dbMessage = err.message;
-            //                         console.log(site.dbMessage);
-            //                     }
-            //                 });
-            //             });
-            //         } else {
-            //             site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
-            //             console.log(site.dbMessage);
-            //         }
-            //     } else {
-            //         site.dbMessage = 'file not exists : ' + response.file.filepath;
-            //         console.log(site.dbMessage);
-            //     }
+                                    if (doc.GTIN1 && doc.GTIN1.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN1 });
+                                    } else if (doc.GTIN2 && doc.GTIN2.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN2 });
+                                    } else if (doc.GTIN3 && doc.GTIN3.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN3 });
+                                    } else if (doc.GTIN4 && doc.GTIN4.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN4 });
+                                    } else if (doc.GTIN5 && doc.GTIN5.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN5 });
+                                    } else if (doc.GTIN6 && doc.GTIN6.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN6 });
+                                    } else if (doc.GTIN7 && doc.GTIN7.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN7 });
+                                    } else if (doc.GTIN8 && doc.GTIN8.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN8 });
+                                    } else if (doc.GTIN9 && doc.GTIN9.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN9 });
+                                    } else if (doc.GTIN10 && doc.GTIN10.length > 7) {
+                                        gtinList.push({ gtin: doc.GTIN10 });
+                                    }
+                                    console.log('gtinList', gtinList.length);
 
-            //     res.json(response);
-            // });
+                                    let newDoc = {
+                                        // code: doc?.code,
+                                        nameAr: doc.TradeName,
+                                        nameEn: doc.TradeName,
+                                        scientificName: doc.ScientificName,
+                                        hasMedicalData: true,
+                                        itemType: site.itemsTypes.find((type) => type.id === 1),
+                                        sfdaCodeList: [{ sfdaCode: doc.RegisterNumber }],
+                                        gtinList: gtinList,
+                                        workByQrCode: true,
+                                        image: { url: '/images/storesItems.png' },
+                                        active: true,
+                                    };
+                                    newDoc.company = site.getCompany(req);
+                                    newDoc.branch = site.getBranch(req);
+                                    newDoc.addUserInfo = req.getUserFinger();
+
+                                    app.add(newDoc, (err, doc2) => {
+                                        if (!err && doc2) {
+                                            site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                            console.log(site.dbMessage);
+                                        } else {
+                                            site.dbMessage = err.message;
+                                            console.log(site.dbMessage);
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    } else {
+                        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+                        console.log(site.dbMessage);
+                    }
+                } else {
+                    site.dbMessage = 'file not exists : ' + response.file.filepath;
+                    console.log(site.dbMessage);
+                }
+
+                res.json(response);
+            });
         }
     }
     site.post({ name: `/api/${app.name}/getBatch`, require: { permissions: ['login'] } }, (req, res) => {
