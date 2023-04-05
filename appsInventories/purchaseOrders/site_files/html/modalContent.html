@@ -120,9 +120,9 @@
             <th>##word.Unit##</th>
             <th ng-if="item.sourceType.id === 1">##word.Requestd Count##</th>
             <th>##word.Count##</th>
+            <th>##word.Bonus Count##</th>
             <th>##word.Price##</th>
             <th>##word.Sales Price##</th>
-            <th>##word.Bonus Count##</th>
             <th>##word.Discount 1## ##word.%##</th>
             <th>##word.Discount 2## ##word.%##</th>
             <th>##word.Total VAT##</th>
@@ -148,6 +148,10 @@
               <i-control ng-change="calculateTotalInItemsList(item)" ng-if=" !elem.approved" min="0" type="number" ng-model="elem.count"></i-control>
             </td>
             <td class="center">
+              <p ng-if="elem.approved">{{elem.bonusCount}} <span>##word.+##</span></p>
+              <i-control type="number" ng-if="!elem.approved" ng-model="elem.bonusCount"></i-control>
+            </td>
+            <td class="center">
               <p ng-if=" elem.approved">{{elem.price}} <span class="currency">##word.$##</span></p>
               <i-control ng-change="calculateTotalInItemsList(item)" type="number" ng-if="!elem.approved" min="0" ng-model="elem.price"></i-control>
             </td>
@@ -155,10 +159,7 @@
               <p ng-if=" elem.approved">{{elem.salesPrice}} <span class="currency">##word.$##</span></p>
               <i-control type="number" ng-if="!elem.approved" min="0" ng-model="elem.salesPrice"></i-control>
             </td>
-            <td class="center">
-              <p ng-if="elem.approved">{{elem.bonusCount}} <span>##word.+##</span></p>
-              <i-control type="number" ng-if="!elem.approved" ng-model="elem.bonusCount"></i-control>
-            </td>
+         
             <td class="center">
               <p ng-if="elem.approved">{{elem.legalDiscount}} <span class="currency">##word.%##</span></p>
               <i-control type="number" ng-if="!elem.approved" ng-change="calculateTotalInItemsList(item)" ng-model="elem.legalDiscount"></i-control>
