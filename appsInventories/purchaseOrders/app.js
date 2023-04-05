@@ -155,7 +155,7 @@ module.exports = function init(site) {
                     let notGtin = false;
                     _item.batchesList.forEach((_b, i) => {
                         if (_item.workByQrCode) {
-                            if (!_item.gtinList.some((g) => g.gtin == _b.gtin)) {
+                            if (_item.gtinList && !_item.gtinList.some((g) => g.gtin == _b.gtin)) {
                                 notGtin = true;
                             }
                             let indx = _item.batchesList.findIndex((b) => b.sn == _b.sn);

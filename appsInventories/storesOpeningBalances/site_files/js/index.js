@@ -407,6 +407,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
                     workByQrCode: 1,
                     validityDays: 1,
                     itemGroup: 1,
+                    gtinList: 1,
                     unitsList: 1,
                 },
                 search: $search,
