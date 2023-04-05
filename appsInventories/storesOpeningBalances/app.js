@@ -174,41 +174,41 @@ module.exports = function init(site) {
                         res.json(response);
                         return;
                     }
-                });
 
-                _data.company = site.getCompany(req);
+                    _data.company = site.getCompany(req);
 
-                let numObj = {
-                    company: site.getCompany(req),
-                    screen: app.name,
-                    date: new Date(),
-                };
+                    let numObj = {
+                        company: site.getCompany(req),
+                        screen: app.name,
+                        date: new Date(),
+                    };
 
-                let cb = site.getNumbering(numObj);
-                if (!_data.code && !cb.auto) {
-                    response.error = 'Must Enter Code';
-                    res.json(response);
-                    return;
-                } else if (cb.auto) {
-                    _data.code = cb.code;
-                }
-
-                app.$collection.find({ code: _data.code }, (err, doc) => {
-                    if (doc) {
-                        response.done = false;
-                        response.error = 'There Is Order Exisit With Same Code';
-                        return res.json(response);
-                    }
-                    _data.addUserInfo = req.getUserFinger();
-
-                    app.add(_data, (err, doc) => {
-                        if (!err && doc) {
-                            response.done = true;
-                            response.doc = doc;
-                        } else {
-                            response.error = err.mesage;
-                        }
+                    let cb = site.getNumbering(numObj);
+                    if (!_data.code && !cb.auto) {
+                        response.error = 'Must Enter Code';
                         res.json(response);
+                        return;
+                    } else if (cb.auto) {
+                        _data.code = cb.code;
+                    }
+
+                    app.$collection.find({ code: _data.code }, (err, doc) => {
+                        if (doc) {
+                            response.done = false;
+                            response.error = 'There Is Order Exisit With Same Code';
+                            return res.json(response);
+                        }
+                        _data.addUserInfo = req.getUserFinger();
+
+                        app.add(_data, (err, doc) => {
+                            if (!err && doc) {
+                                response.done = true;
+                                response.doc = doc;
+                            } else {
+                                response.error = err.mesage;
+                            }
+                            res.json(response);
+                        });
                     });
                 });
             });
@@ -246,18 +246,18 @@ module.exports = function init(site) {
                             res.json(response);
                             return;
                         }
-                    });
 
-                    _data.editUserInfo = req.getUserFinger();
+                        _data.editUserInfo = req.getUserFinger();
 
-                    app.update(_data, (err, result) => {
-                        if (!err) {
-                            response.done = true;
-                            response.result = result;
-                        } else {
-                            response.error = err.message;
-                        }
-                        res.json(response);
+                        app.update(_data, (err, result) => {
+                            if (!err) {
+                                response.done = true;
+                                response.result = result;
+                            } else {
+                                response.error = err.message;
+                            }
+                            res.json(response);
+                        });
                     });
                 });
             });
@@ -288,31 +288,31 @@ module.exports = function init(site) {
                         res.json(response);
                         return;
                     }
-                });
 
-                _data.approveUserInfo = req.getUserFinger();
-                app.update(_data, (err, result) => {
-                    if (!err) {
-                        response.done = true;
-                        result.doc.itemsList.forEach((_item) => {
-                            let item = { ..._item };
-                            item.store = { ...result.doc.store };
-                            site.editItemsBalance(item, app.name);
-                            item.invoiceId = result.doc.id;
-                            item.company = result.doc.company;
-                            item.date = result.doc.date;
-                            item.vendor = result.doc.vendor;
-                            item.countType = 'in';
-                            item.orderCode = result.doc.code;
-                            site.setItemCard(item, app.name);
-                        });
+                    _data.approveUserInfo = req.getUserFinger();
+                    app.update(_data, (err, result) => {
+                        if (!err) {
+                            response.done = true;
+                            result.doc.itemsList.forEach((_item) => {
+                                let item = { ..._item };
+                                item.store = { ...result.doc.store };
+                                site.editItemsBalance(item, app.name);
+                                item.invoiceId = result.doc.id;
+                                item.company = result.doc.company;
+                                item.date = result.doc.date;
+                                item.vendor = result.doc.vendor;
+                                item.countType = 'in';
+                                item.orderCode = result.doc.code;
+                                site.setItemCard(item, app.name);
+                            });
 
-                        response.result = result;
-                    } else {
-                        response.error = err.message;
-                    }
+                            response.result = result;
+                        } else {
+                            response.error = err.message;
+                        }
 
-                    res.json(response);
+                        res.json(response);
+                    });
                 });
             });
         }
