@@ -139,6 +139,68 @@ module.exports = function init(site) {
     }
   };
 
+  site.checkBatchesError = function (itemsList, lang, callBack) {
+    let cb = {
+      errBatchList: [],
+      errBatchGtinList: [],
+      errBatchDuplicateList: [],
+    };
+
+    itemsList.forEach((_item) => {
+      if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
+        if (_item.batchesList && _item.batchesList.length > 0) {
+          _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
+          let notCode = false;
+          let duplicate = false;
+          let notGtin = false;
+          _item.batchesList.forEach((_b, i) => {
+            if (_item.workByQrCode) {
+              if (!_item.gtinList.some((g) => g.gtin == _b.gtin)) {
+                notGtin = true;
+              }
+              let indx = _item.batchesList.findIndex((b) => b.sn == _b.sn);
+              if (indx != i) {
+                duplicate = true;
+              }
+              if (!_b.sn || !_b.gtin || !_b.batch || !_b.expiryDate) {
+                notCode = true;
+              }
+            } else {
+              if (_item.batchesList.some((b) => b.code == _b.code)) {
+                duplicate = true;
+              }
+              if (_item.workByBatch) {
+                if (!_b.code || !_b.expiryDate || !_b.validityDays) {
+                  notCode = true;
+                }
+              } else if (_item.workBySerial) {
+                if (!_b.code || !_b.productionDate) {
+                  notCode = true;
+                }
+              }
+            }
+          });
+
+          if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
+            let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+            cb.errBatchList.push(itemName);
+          } else if (duplicate) {
+            let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+            cb.errBatchDuplicateList.push(itemName);
+          } else if (notGtin) {
+            let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+            cb.errBatchGtinList.push(itemName);
+          }
+        } else {
+          let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+          cb.errBatchList.push(itemName);
+        }
+      }
+    });
+
+    callBack(cb);
+  };
+
   if (app.allowRoute) {
     if (app.allowRouteGet) {
       site.get(
@@ -165,29 +227,25 @@ module.exports = function init(site) {
           date: new Date(),
         };
 
-        let errBatchList = [];
-        _data.itemsList.forEach((_item) => {
-          if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
-            if (_item.batchesList && _item.batchesList.length > 0) {
-              _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-              let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
-              if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
-                let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                errBatchList.push(itemName);
-              }
-            } else {
-              let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-              errBatchList.push(itemName);
-            }
+        site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
+          if (callbackErrorBatches.errBatchList.length > 0) {
+            let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
+            response.error = `The Batches is not correct in ( ${error} )`;
+            res.json(response);
+            return;
+          } else if (callbackErrorBatches.errBatchGtinList.length > 0) {
+            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join('-');
+            response.error = `Found GTIN Error Batches in ( ${error} )`;
+            res.json(response);
+            return;
+          } else if (callbackErrorBatches.errBatchDuplicateList.length > 0) {
+            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join('-');
+            response.error = `Found Duplication Batches in ( ${error} )`;
+            res.json(response);
+            return;
           }
         });
 
-        if (errBatchList.length > 0) {
-          let error = errBatchList.map((m) => m).join('-');
-          response.error = `The Batches is not correct in ( ${error} )`;
-          res.json(response);
-          return;
-        }
         let cb = site.getNumbering(numObj);
         if (!_data.code && !cb.auto) {
           response.error = 'Must Enter Code';
@@ -229,28 +287,26 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        let errBatchList = [];
-        _data.itemsList.forEach((_item) => {
-          if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
-            if (_item.batchesList && _item.batchesList.length > 0) {
-              _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-              let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
-              if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
-                let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                errBatchList.push(itemName);
-              }
-            } else {
-              let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-              errBatchList.push(itemName);
-            }
+
+        site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
+          if (callbackErrorBatches.errBatchList.length > 0) {
+            let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
+            response.error = `The Batches is not correct in ( ${error} )`;
+            res.json(response);
+            return;
+          } else if (callbackErrorBatches.errBatchGtinList.length > 0) {
+            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join('-');
+            response.error = `Found GTIN Error Batches in ( ${error} )`;
+            res.json(response);
+            return;
+          } else if (callbackErrorBatches.errBatchDuplicateList.length > 0) {
+            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join('-');
+            response.error = `Found Duplication Batches in ( ${error} )`;
+            res.json(response);
+            return;
           }
         });
-        if (errBatchList.length > 0) {
-          let error = errBatchList.map((m) => m).join('-');
-          response.error = `The Batches Count is not correct in ( ${error} )`;
-          res.json(response);
-          return;
-        }
+
         app.$collection.find({ code: _data.code, id: { $ne: _data.id } }, (err, doc) => {
           if (doc) {
             response.done = false;
@@ -277,28 +333,25 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
         let response = { done: false };
         let _data = req.data;
-        let errBatchList = [];
-        _data.itemsList.forEach((_item) => {
-          if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
-            if (_item.batchesList && _item.batchesList.length > 0) {
-              _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-              let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
-              if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
-                let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                errBatchList.push(itemName);
-              }
-            } else {
-              let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-              errBatchList.push(itemName);
-            }
+
+        site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
+          if (callbackErrorBatches.errBatchList.length > 0) {
+            let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
+            response.error = `The Batches is not correct in ( ${error} )`;
+            res.json(response);
+            return;
+          } else if (callbackErrorBatches.errBatchGtinList.length > 0) {
+            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join('-');
+            response.error = `Found GTIN Error Batches in ( ${error} )`;
+            res.json(response);
+            return;
+          } else if (callbackErrorBatches.errBatchDuplicateList.length > 0) {
+            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join('-');
+            response.error = `Found Duplication Batches in ( ${error} )`;
+            res.json(response);
+            return;
           }
         });
-        if (errBatchList.length > 0) {
-          let error = errBatchList.map((m) => m).join('-');
-          response.error = `The Batches Count is not correct in ( ${error} )`;
-          res.json(response);
-          return;
-        }
 
         _data.approveUserInfo = req.getUserFinger();
         app.update(_data, (err, result) => {
