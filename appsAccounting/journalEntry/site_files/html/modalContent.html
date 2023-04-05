@@ -1,16 +1,18 @@
 <div class="row">
-  <div class="row padding">
-    <i-control ng-hide="disabledCode" class="col5" label="##word.Code##" ng-model="item.code"> </i-control>
-    <i-date type="text" v="r" class="col5" ng-model="item.date" label="##word.Date##"></i-date>
-    <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
-  </div>
-  <div class="row padding">
+  <div class="row">
     <div class="col10">
       <div class="row">
-        <div class="row">
-          <i-control type="text" v="r" class="col6" ng-model="item.nameEn" label="##word.Name##"></i-control>
-          <i-control type="text" v="r" class="col6" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+        <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-date type="text" v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
+        <div class="col3">
+          <br />
+          <i-checkbox ng-model="item.active" class="row" label="##word.Active##"></i-checkbox>
+          <i-checkbox ng-model="item.openingBalance" class="row" label="##word.Opening Balance##"></i-checkbox>
         </div>
+      </div>
+      <div class="row">
+        <i-control type="text" v="r" class="col6" ng-model="item.nameEn" label="##word.Name##"></i-control>
+        <i-control type="text" v="r" class="col6" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
       </div>
     </div>
     <div class="col2">
@@ -18,17 +20,25 @@
     </div>
   </div>
   <br />
-  <br />
   <fieldset>
     <legend>##word.Accounts##</legend>
     <div class="row padding">
       <div class="row">
-        <i-list items="accountsGuideList" ng-change="item.$accountGuide.debtor = 0;item.$accountGuide.creditor = 0" class="col4" label="##word.Account Guide##" ng-search="item.$accountGuides" display="name##session.lang##" ng-model="item.$accountGuide"> </i-list>
-        <i-control type="number" class="col2" label="##word.Debtor##" ng-model="item.$accountGuide.debtor"></i-control>
-        <i-control type="number" class="col2" label="##word.Creditor##" ng-model="item.$accountGuide.creditor"></i-control>
+        <i-list
+          items="accountsGuideList"
+          ng-change="item.$accountGuide.debtor = 0;item.$accountGuide.creditor = 0"
+          class="col4"
+          label="##word.Account Guide##"
+          ng-search="item.$accountGuides"
+          display="name##session.lang##"
+          ng-model="item.$accountGuide"
+        >
+        </i-list>
+        <i-control type="number" class="col2" label="##word.Debtor##" ng-change="item.$accountGuide.creditor = 0" ng-model="item.$accountGuide.debtor"></i-control>
+        <i-control type="number" class="col2" label="##word.Creditor##" ng-change="item.$accountGuide.debtor = 0" ng-model="item.$accountGuide.creditor"></i-control>
         <div class="col2">
           <br />
-          <i-button type="push"  ng-click="addAccountGuide()"></i-button>
+          <i-button type="push" ng-click="addAccountGuide()"></i-button>
         </div>
       </div>
     </div>
@@ -44,16 +54,15 @@
         <tr ng-repeat="acc in item.accountsList">
           <td class="center blue">{{acc.code}}</td>
           <td class="center">{{acc.name##session.lang##}}</td>
-          <td class="center"><i-control type="number" ng-change="calc(item)" ng-model="acc.debtor"></i-control></td>
-          <td class="center"><i-control type="number" ng-change="calc(item)" ng-model="acc.creditor"></i-control></td>
+          <td class="center"><i-control type="number" ng-change="calc(item);acc.creditor = 0" ng-model="acc.debtor"></i-control></td>
+          <td class="center"><i-control type="number" ng-change="calc(item);acc.debtor = 0" ng-model="acc.creditor"></i-control></td>
           <td class="center not-print">
             <i-button type="list" label="##word.Cost Centers##" ng-click="showCostCenters(acc)"></i-button>
             <i-button type="list" label="##word.General Ledgers##" ng-click="showGeneralLedgers(acc)"></i-button>
-            <i-button type="delete" label="##word.Delete##" ng-click="item.accountsList.splice($index,1)"> </i-button>
+            <i-button type="delete" label="##word.Delete##" ng-click="item.accountsList.splice($index,1) ;calc(item)"> </i-button>
           </td>
         </tr>
       </table>
-
     </div>
   </fieldset>
   <br />

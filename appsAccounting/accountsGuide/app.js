@@ -166,13 +166,13 @@ module.exports = function init(site) {
                 _data.addUserInfo = req.getUserFinger();
                 const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
-                if (_data.costCenterType == 'mandatory') {
-                    if (!_data.costCentersList || _data.costCentersList.length < 1) {
-                        response.error = 'You Should Select Cost Center';
-                        res.json(response);
-                        return;
-                    }
-                }
+                // if (_data.costCenterType == 'mandatory') {
+                //     if (!_data.costCentersList || _data.costCentersList.length < 1) {
+                //         response.error = 'You Should Select Cost Center';
+                //         res.json(response);
+                //         return;
+                //     }
+                // }
 
                 if (accountsSetting.linkGlWithIncomeStatementAndBudget == true && _data.type == 'detailed') {
                     if (!_data.category) {
@@ -298,13 +298,13 @@ module.exports = function init(site) {
                 _data.editUserInfo = req.getUserFinger();
                 const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
-                if (_data.costCenterType == 'mandatory') {
-                    if (!_data.costCentersList || _data.costCentersList.length < 1) {
-                        response.error = 'You Should Select Cost Center';
-                        res.json(response);
-                        return;
-                    }
-                }
+                // if (_data.costCenterType == 'mandatory') {
+                //     if (!_data.costCentersList || _data.costCentersList.length < 1) {
+                //         response.error = 'You Should Select Cost Center';
+                //         res.json(response);
+                //         return;
+                //     }
+                // }
 
                 if (accountsSetting.linkGlWithIncomeStatementAndBudget == true && _data.type == 'detailed') {
                     if (!_data.category) {
@@ -396,7 +396,6 @@ module.exports = function init(site) {
                     side: 1,
                     reportType: 1,
                     cashFlow: 1,
-                    costCenterType: 1,
                     costCentersList: 1,
                     category: 1,
                     generalLedgerList: 1,

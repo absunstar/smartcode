@@ -60,33 +60,20 @@
 
       <br />
       <div class="row">
-        <fieldset>
+        <fieldset ng-show="item.reportType=='budget'">
           <legend>##word.Cash Flow##</legend>
 
-          <i-radio class="col3" ng-value="mandatory" label="##word.Mandatory##" ng-model="item.cashFlow"> </i-radio>
+          <i-radio class="col3" ng-value="operational" label="##word.Operational##" ng-model="item.cashFlow"> </i-radio>
 
-          <i-radio class="col3" ng-value="choice" label="##word.Choice##" ng-model="item.cashFlow"> </i-radio>
+          <i-radio class="col3" ng-value="investment" label="##word.Investment##" ng-model="item.cashFlow"> </i-radio>
 
-          <i-radio class="col3" ng-value="without" label="##word.Without##" ng-model="item.cashFlow"> </i-radio>
-        </fieldset>
-      </div>
-
-      <br />
-      <div class="row">
-        <fieldset>
-          <legend>##word.Type Of Cost Center##</legend>
-
-          <i-radio class="col3" ng-value="mandatory" label="##word.Mandatory##" ng-model="item.costCenterType"></i-radio>
-
-          <i-radio class="col3" ng-value="choice" label="##word.Choice##" ng-model="item.costCenterType"></i-radio>
-
-          <i-radio class="col3" ng-value="without" label="##word.Without##" ng-model="item.costCenterType"></i-radio>
+          <i-radio class="col3" ng-value="financing" label="##word.Financing##" ng-model="item.cashFlow"> </i-radio>
         </fieldset>
       </div>
 
       <br />
 
-      <div ng-hide="item.costCenterType=='without'" class="row">
+      <div ng-show="item.reportType=='incomeList'" class="row">
         <fieldset>
           <div class="row">
             <i-list items="costCentersList" class="col4" label="##word.Cost Center##" ng-search="item.$costCenter" display="name##session.lang##" ng-model="item.$costCenter"> </i-list>

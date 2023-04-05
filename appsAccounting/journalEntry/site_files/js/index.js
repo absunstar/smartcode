@@ -320,6 +320,7 @@ app.controller('journalEntry', function ($scope, $http, $timeout) {
       }
       $scope.item.$accountGuide = {};
     }
+    $scope.calc($scope.item);
   };
 
   $scope.calc = function (_item) {
