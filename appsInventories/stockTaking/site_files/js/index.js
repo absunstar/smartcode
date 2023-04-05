@@ -696,6 +696,11 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
       return;
     }
 
+    if( item.batchesList.some((_b) => (item.workByQrCode ? !_b.sn : !_b.code))){
+      $scope.errorBatch = 'The Batches Data is not correct';
+      return;
+    }
+
     // if (item.$batchCount === item.count) {
     site.hideModal('#batchModalModal');
     // }

@@ -668,6 +668,11 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
       return;
     }
 
+    if( item.toBatchesList.some((_b) => (item.workByQrCode ? !_b.sn : !_b.code))){
+      $scope.errorBatch = 'The Batches Data is not correct';
+      return;
+    }
+
     if (item.$toBatchCount === item.toCount) {
       site.hideModal('#toBatchModal');
     } else {
