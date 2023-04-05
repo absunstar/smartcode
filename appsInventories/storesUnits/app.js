@@ -285,7 +285,7 @@ module.exports = function init(site) {
                         search = 'id';
                     }
                     let list = app.memoryList
-                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (!where.active || g.active === where.active) && JSON.stringify(g).contains(search))
+                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
 
                     res.json({
@@ -320,7 +320,7 @@ module.exports = function init(site) {
                     if (Array.isArray(docs)) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
                         let systemCode = 0;
-                        if (docs && docs.length && docs[1].nameEn && !docs[1].StrengthUnit) {
+                        if (docs && docs.length && docs[1].nameEn && !docs[1]['PackageTypes']) {
                             docs.forEach((doc) => {
                                 let numObj = {
                                     company: site.getCompany(req),
@@ -361,12 +361,12 @@ module.exports = function init(site) {
                                     }
                                 });
                             });
-                        } else if (docs && docs.length && !docs[1].nameEn && docs[1].StrengthUnit) {
+                        } else if (docs && docs.length && !docs[1].nameEn && docs[1]['PackageTypes']) {
                             let unitsListList = [];
                             docs.forEach((doc) => {
-                                if (doc.StrengthUnit) {
-                                    if (!unitsListList.includes(doc.StrengthUnit.trim())) {
-                                        unitsListList.push(doc.StrengthUnit.trim());
+                                if (doc['PackageTypes']) {
+                                    if (!unitsListList.includes(doc['PackageTypes'].trim())) {
+                                        unitsListList.push(doc['PackageTypes'].trim());
                                     }
                                 }
                             });

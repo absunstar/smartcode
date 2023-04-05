@@ -82,9 +82,9 @@
                                     <p ng-show="batch.approved || batch.$view">{{c.productionDate|date:'dd/MM/yyyy'}}</p>
                                 </td>
 
-                                <td class="center" ng-show="batch.workByBatch || batch.workByQrCode">
+                                <td class="center " ng-show="batch.workByBatch || batch.workByQrCode">
                                     <i-date ng-click="changeDate(c,'exp')" ng-model="c.expiryDate" ng-hide="batch.approved || batch.$view"></i-date>
-                                    <p ng-show="batch.approved || batch.$view">{{c.expiryDate|date:'dd/MM/yyyy'}}</p>
+                                    <p class="text-danger" ng-show="batch.approved || batch.$view">{{c.expiryDate|date:'dd/MM/yyyy'}}</p>
                                 </td>
 
                                 <td class="center" ng-show="batch.workByBatch">

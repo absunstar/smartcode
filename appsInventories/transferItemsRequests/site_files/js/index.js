@@ -4,7 +4,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     $scope.modalID = '#transferItemsRequestsManageModal';
     $scope.modalSearchID = '#transferItemsRequestsSearchModal';
     $scope.mode = 'add';
-    $scope._search = {};
+    $scope._search = { fromDate: new Date(), toDate: new Date() };
     $scope.structure = {
         hasTransaction: false,
         approved: false,
@@ -13,6 +13,18 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     $scope.item = {};
     $scope.list = [];
     $scope.canApprove = false;
+
+    $scope.getCurrentMonthDate = function () {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        $scope._search.fromDate = new Date(firstDay);
+        $scope._search.toDate = new Date(lastDay);
+        return { firstDay, lastDay };
+    };
+
     $scope.resetOrderItem = function () {
         $scope.orderItem = {
             count: 1,
@@ -286,7 +298,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
             method: 'POST',
             url: `${$scope.baseURL}/api/${$scope.appName}/all`,
             data: {
-                where: where,
+                where: where || { approved: false },
             },
         }).then(
             function (response) {
@@ -334,6 +346,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};
@@ -546,6 +559,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
         });
     };
 
+    $scope.getCurrentMonthDate();
     $scope.getAll();
     $scope.getStores();
     $scope.getNumberingAuto();

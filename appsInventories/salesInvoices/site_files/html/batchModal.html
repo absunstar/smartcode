@@ -35,7 +35,8 @@
                     <div class="row">
                         <div class="col6">
                             <br />
-                            <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
+
+                            <h3 class="bold center"><span>{{batch.name##session.lang##}}</span> - (<span class="text-warning">{{batch.unit.name##session.lang##}}</span>)</h3>
                         </div>
                         <div class="col4" ng-hide="mode == 'view' || batch.$view">
                             <table class="table loaded center bold hover details">

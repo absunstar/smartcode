@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="vendorsAdd || vendorsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="vendorsSearch || vendorsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="vendorsSearch || vendorsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/vendors/import" label="Import" x-permissions="importVendors || vendorsManage"></i-upload>
         </div>
 

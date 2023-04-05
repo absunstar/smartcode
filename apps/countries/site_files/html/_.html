@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="countriesAdd || countriesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="countriesSearch || countriesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="countriesSearch || countriesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/countries/import" label="Import" x-permissions="importCountries || countriesManage"></i-upload>
         </div>
 
@@ -18,6 +21,7 @@
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
                     <th>##word.Calling Code##</th>
+                    <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
@@ -27,6 +31,10 @@
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
                     <td class="center blue">{{item.callingCode}}</td>
+                    <td class="center">
+                        <span ng-show="item.active" class="text-success">##word.Active##</span>
+                        <span ng-show="!item.active" class="text-danger">##word.Not Active##</span>
+                    </td>
 
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>

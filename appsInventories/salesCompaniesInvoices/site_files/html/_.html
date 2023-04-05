@@ -7,6 +7,12 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="salesCompaniesInvoicesAdd || salesCompaniesInvoicesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="salesCompaniesInvoicesSearch || salesCompaniesInvoicesManage" label="##word.Search##" ng-click="searchAll(search={approved:true})"></i-button>
+        </div>
+        <div class="row" x-permissions="salesCompaniesInvoicesSearch || salesCompaniesInvoicesManage">
+            <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
         </div>
 
         <div class="row padding">
@@ -17,6 +23,7 @@
             <table class="table hover bold" id="t1">
                 <tr>
                     <th>##word.Code##</th>
+                    <th>##word.Date##</th>
                     <th>##word.Name##</th>
                     <th>##word.Payment Type##</th>
                     <th>##word.Status##</th>
@@ -24,6 +31,7 @@
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
                     <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
                     <td class="center">{{item.customer.name##session.lang##}}</td>
                     <td class="center">{{item.paymentType.name##session.lang##}}</td>
                     <td class="center">

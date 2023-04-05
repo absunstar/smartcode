@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="activeSubstancesAdd || activeSubstancesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="activeSubstancesSearch || activeSubstancesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="activeSubstancesSearch || activeSubstancesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/activeSubstances/import" label="Import" x-permissions="importActiveSubstances || activeSubstancesManage"></i-upload>
         </div>
 

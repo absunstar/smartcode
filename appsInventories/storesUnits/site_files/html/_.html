@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="storesUnitsAdd || storesUnitsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="storesUnitsSearch || storesUnitsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="storesUnitsSearch || storesUnitsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/storesUnits/import" label="Import" x-permissions="importStoresUnits || storesUnitsManage"></i-upload>
         </div>
 

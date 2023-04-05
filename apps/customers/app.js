@@ -292,7 +292,7 @@ module.exports = function init(site) {
                         search = 'id';
                     }
                     let list = app.memoryList
-                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (!where.active || g.active === where.active) && JSON.stringify(g).contains(search))
+                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
                     res.json({
                         done: true,

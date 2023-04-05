@@ -7,7 +7,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     $scope.modalSearchID = '#returnSalesInvoicesSearchModal';
     $scope.getSalesInvoicesModalID = '#findSalesInvoicesModal';
     $scope.mode = 'add';
-    $scope.search = {};
+    $scope._search = { fromDate: new Date(), toDate: new Date() };
     $scope.structure = {
         approved: false,
         active: true,
@@ -15,6 +15,17 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     $scope.item = {};
     $scope.list = [];
 
+    $scope.getCurrentMonthDate = function () {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        $scope._search.fromDate = new Date(firstDay);
+        $scope._search.toDate = new Date(lastDay);
+        return { firstDay, lastDay };
+    };
+    
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.itemsError = '';
@@ -223,7 +234,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
             method: 'POST',
             url: `${$scope.baseURL}/api/${$scope.appName}/all`,
             data: {
-                where: where,
+                where: where || { approved: false },
             },
         }).then(
             function (response) {
@@ -271,6 +282,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     };
 
     $scope.searchAll = function () {
+        $scope.search = { ...$scope._search, ...$scope.search };
         $scope.getAll($scope.search);
         site.hideModal($scope.modalSearchID);
         $scope.search = {};
@@ -368,12 +380,12 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         $scope.error = '';
         $scope.errorBatch = '';
         if (item.workByBatch || item.workBySerial || item.workByQrCode) {
-          item.batchesList = item.batchesList || [];
+            item.batchesList = item.batchesList || [];
         }
         $scope.batch = item;
         $scope.batch.$view = true;
         site.showModal('#batchModalModal');
-      };
+    };
 
     $scope.addToItemsList = function (invoice) {
         $scope.item = {
@@ -819,6 +831,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         }, 8000);
     };
 
+    $scope.getCurrentMonthDate();
     $scope.getAll();
     $scope.getPaymentTypes();
     $scope.getSalesTypes();

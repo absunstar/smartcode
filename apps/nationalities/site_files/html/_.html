@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="nationalitiesAdd || nationalitiesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="nationalitiesSearch || nationalitiesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="nationalitiesSearch || nationalitiesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/nationalities/import" label="Import" x-permissions="importNationalities || nationalitiesManage"></i-upload>
         </div>
 

@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="itemsGroupsAdd || itemsGroupsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="itemsGroupsSearch || itemsGroupsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="itemsGroupsSearch || itemsGroupsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/itemsGroups/import" label="Import" x-permissions="importItemsGroups || itemsGroupsManage"></i-upload>
         </div>
 

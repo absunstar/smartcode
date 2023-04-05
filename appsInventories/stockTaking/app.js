@@ -221,25 +221,25 @@ module.exports = function init(site) {
 
                 let errBatchList = [];
                 _data.itemsList.forEach((_item) => {
-                  if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
-                    if (_item.batchesList && _item.batchesList.length > 0) {
-                      _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
-                      let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
-                      if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
-                        let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                        errBatchList.push(itemName);
-                      }
-                    } else {
-                      let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
-                      errBatchList.push(itemName);
+                    if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
+                        if (_item.batchesList && _item.batchesList.length > 0) {
+                            _item.$batchCount = _item.batchesList.reduce((a, b) => a + b.count, 0);
+                            let notCode = _item.batchesList.some((_b) => (_item.workByQrCode ? !_b.sn : !_b.code));
+                            if (_item.$batchCount != _item.count + _item.bonusCount || notCode) {
+                                let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                                errBatchList.push(itemName);
+                            }
+                        } else {
+                            let itemName = req.session.lang == 'Ar' ? _item.nameAr : _item.nameEn;
+                            errBatchList.push(itemName);
+                        }
                     }
-                  }
                 });
                 if (errBatchList.length > 0) {
-                  let error = errBatchList.map((m) => m).join('-');
-                  response.error = `The Batches Count is not correct in ( ${error} )`;
-                  res.json(response);
-                  return;
+                    let error = errBatchList.map((m) => m).join('-');
+                    response.error = `The Batches Count is not correct in ( ${error} )`;
+                    res.json(response);
+                    return;
                 }
 
                 _data.approvedUserInfo = req.getUserFinger();
@@ -335,6 +335,8 @@ module.exports = function init(site) {
         if (app.allowRouteAll) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || {};
+                let search = req.body.search || '';
+                let limit = req.body.limit || 10;
                 let select = req.body.select || {
                     id: 1,
                     code: 1,
@@ -348,48 +350,31 @@ module.exports = function init(site) {
                     approved: 1,
                 };
                 let list = [];
+                if (where && where.fromDate && where.toDate) {
+                    let d1 = site.toDate(where.fromDate);
+                    let d2 = site.toDate(where.toDate);
+                    d2.setDate(d2.getDate() + 1);
+                    where.date = {
+                        $gte: d1,
+                        $lt: d2,
+                    };
+                    delete where.fromDate;
+                    delete where.toDate;
+                }
                 if (app.allowMemory) {
-                    app.memoryList
-                        .filter((g) => g.company && g.company.id == site.getCompany(req).id)
-                        .forEach((doc) => {
-                            let obj = { ...doc };
+                    let list = app.memoryList.filter(
+                        (g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(where.search)
+                    );
 
-                            for (const p in obj) {
-                                if (!Object.hasOwnProperty.call(select, p)) {
-                                    delete obj[p];
-                                }
-                            }
-                            list.push(obj);
-                        });
                     res.json({
                         done: true,
-                        list: list,
+                        list: list.slice(-limit),
                     });
                 } else {
                     where['company.id'] = site.getCompany(req).id;
-                    if (where && where.dateTo) {
-                        let d1 = site.toDate(where.date);
-                        let d2 = site.toDate(where.dateTo);
-                        d2.setDate(d2.getDate() + 1);
-                        where.date = {
-                            $gte: d1,
-                            $lt: d2,
-                        };
-                        delete where.dateTo;
-                    } else if (where.date) {
-                        let d1 = site.toDate(where.date);
-                        let d2 = site.toDate(where.date);
-                        d2.setDate(d2.getDate() + 1);
-                        where.date = {
-                            $gte: d1,
-                            $lt: d2,
-                        };
-                    }
-                    app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
-                        res.json({
-                            done: true,
-                            list: docs,
-                        });
+
+                    app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+                        res.json({ done: true, list: docs });
                     });
                 }
             });

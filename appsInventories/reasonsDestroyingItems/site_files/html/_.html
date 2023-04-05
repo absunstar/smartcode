@@ -5,6 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="reasonsDestroyingItemsAdd || reasonsDestroyingItemsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="reasonsDestroyingItemsSearch || reasonsDestroyingItemsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+            <i-button type="search" x-permissions="reasonsDestroyingItemsSearch || reasonsDestroyingItemsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+
             <i-upload api="api/reasonsDestroyingItems/import" label="Import" x-permissions="importReasonsDestroyingItems || reasonsDestroyingItemsManage"></i-upload>
         </div>
 

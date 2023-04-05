@@ -274,6 +274,7 @@ module.exports = function init(site) {
                     image: 1,
                     active: 1,
                 };
+          
 
                 if (search) {
                     where.$or = [];
@@ -304,7 +305,7 @@ module.exports = function init(site) {
                         search = 'id';
                     }
                     let list = app.memoryList
-                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (!where.active || g.active === where.active) && JSON.stringify(g).contains(search))
+                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
                     res.json({
                         done: true,
@@ -391,15 +392,15 @@ module.exports = function init(site) {
                                         newDoc.branch = site.getBranch(req);
                                         newDoc.addUserInfo = req.getUserFinger();
 
-                                        // app.add(newDoc, (err, doc2) => {
-                                        //     if (!err && doc2) {
-                                        //         site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                        //         console.log(site.dbMessage);
-                                        //     } else {
-                                        //         site.dbMessage = err.message;
-                                        //         console.log(site.dbMessage);
-                                        //     }
-                                        // });
+                                        app.add(newDoc, (err, doc2) => {
+                                            if (!err && doc2) {
+                                                site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                                console.log(site.dbMessage);
+                                            } else {
+                                                site.dbMessage = err.message;
+                                                console.log(site.dbMessage);
+                                            }
+                                        });
                                     }
                                 });
                             });

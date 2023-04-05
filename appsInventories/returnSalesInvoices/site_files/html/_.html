@@ -7,6 +7,12 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="returnSalesInvoicesAdd || returnSalesInvoicesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="returnSalesInvoicesSearch || returnSalesInvoicesManage" label="##word.Search##" ng-click="searchAll(search={approved:true})"></i-button>
+        </div>
+        <div class="row" x-permissions="returnSalesInvoicesSearch || returnSalesInvoicesManage">
+            <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
         </div>
 
         <div class="row padding">
@@ -26,7 +32,7 @@
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.customer.name##session.lang##}}</td>
                     <td class="center">
-                        <p >{{item.date |date:'dd/MM/yyyy'}} - {{item.date |date:'hh:mm:ss a'}}</p>
+                        <p>{{item.date |date:'dd/MM/yyyy'}} - {{item.date |date:'hh:mm:ss a'}}</p>
                     </td>
                     <td class="center">
                         <span class="text-success" ng-show="item.approved">##word.Yes##</span>
