@@ -563,7 +563,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
                 return;
             }
         }
-        if (!(elem.concentration > 0)) {
+        if (!elem.concentration) {
             $scope.medicalInformationsError = '##word.Concentration Required##';
             return;
         }

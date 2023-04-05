@@ -9,8 +9,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="storesItemsAdd || storesItemsManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <!--  -->
+
             <i-upload api="api/storesItems/importIdfList" label="Import IDF List" x-permissions="importStoresItems || storesItemsManage"></i-upload>
+            <i-upload api="api/storesItems/importHumanDrugs" label="Import Human Drugs" x-permissions="importStoresItems || storesItemsManage"></i-upload>
 
             <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Collection Items##" ng-click="searchAll(search={collectionItem:true})"></i-button>
             <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Medical Items##" ng-click="searchAll(search={hasMedicalData:true})"></i-button>

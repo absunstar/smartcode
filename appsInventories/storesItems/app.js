@@ -14,7 +14,7 @@ module.exports = function init(site) {
         allowRouteAll: true,
         allowRouteActive: true,
         busyList: [],
-        importBusyList: [],
+        importHumanDrugsbusyList: [],
     };
 
     site.getBatchesToSalesAuto = function (obj, callback) {
@@ -381,6 +381,13 @@ module.exports = function init(site) {
         };
     };
 
+    app.validateExisitDrugInBusyList = function (doc) {
+        if (app.importHumanDrugsbusyList.includes(doc)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
     app.$collection = site.connectCollection(app.name);
 
     app.init = function () {
@@ -473,6 +480,7 @@ module.exports = function init(site) {
 
     app.view = function (_item, callback) {
         if (callback) {
+            let item;
             if (app.allowMemory) {
                 if ((item = app.memoryList.find((itm) => itm.id == _item.id))) {
                     callback(null, item);
@@ -746,8 +754,8 @@ module.exports = function init(site) {
         if (app.allowRouteAll) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || {};
-                let search = req.body.search || undefined;
-                let limit = req.body.limit || 10;
+                let search = req.body.search || '';
+                let limit = req.body.limit || 100;
                 let select = req.body.select || {
                     id: 1,
                     code: 1,
@@ -758,6 +766,7 @@ module.exports = function init(site) {
                     itemGroup: 1,
                     active: 1,
                 };
+
                 if (search) {
                     where.$or = [];
 
@@ -792,7 +801,8 @@ module.exports = function init(site) {
                         if (stockTakingItemsIdsCb.length > 0) {
                             where['id'] = { $nin: stockTakingItemsIdsCb };
                         }
-                        app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
+                        //  sort: { id: -1 }
+                        app.all({ where, select, limit }, (err, docs) => {
                             res.json({
                                 done: true,
                                 list: docs,
@@ -818,10 +828,10 @@ module.exports = function init(site) {
                     }
 
                     if (Array.isArray(docs)) {
-                        console.log(`Importing ${app.name} : ${docs.length}`);
+                        console.log(`Importing IDF List : ${docs.length}`);
                         let systemCode = 0;
                         docs.forEach((doc) => {
-                            app.$collection.find({ where: { nameEn: doc.TradeName } }, (err, exisitDoc) => {
+                            app.$collection.find({ where: { nameEn: String(doc['Trade Name']).trim() } }, (err, exisitDoc) => {
                                 if (exisitDoc) {
                                     console.log('exisitDoc', exisitDoc.id);
                                 } else {
@@ -838,49 +848,89 @@ module.exports = function init(site) {
                                         systemCode++;
                                     }
 
-                                    // if (typeof doc?.code == undefined) {
-                                    //     doc?.code = systemCode;
-                                    // }
-                                    // sfdaCodeList;
-                                    // gtinList
-                                    // doc = { ...doc, gtinList: [] };
                                     let gtinList = [];
 
-                                    // console.log('doc.GTIN1', doc.GTIN1);
-
-                                    if (doc.GTIN1 && doc.GTIN1.length > 7) {
+                                    if (doc.GTIN1 && String(doc.GTIN1).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN1 });
-                                    } else if (doc.GTIN2 && doc.GTIN2.length > 7) {
+                                    }
+                                    if (doc.GTIN2 && String(doc.GTIN2).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN2 });
-                                    } else if (doc.GTIN3 && doc.GTIN3.length > 7) {
+                                    }
+                                    if (doc.GTIN3 && String(doc.GTIN3).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN3 });
-                                    } else if (doc.GTIN4 && doc.GTIN4.length > 7) {
+                                    }
+                                    if (doc.GTIN4 && String(doc.GTIN4).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN4 });
-                                    } else if (doc.GTIN5 && doc.GTIN5.length > 7) {
+                                    }
+                                    if (doc.GTIN5 && String(doc.GTIN5).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN5 });
-                                    } else if (doc.GTIN6 && doc.GTIN6.length > 7) {
+                                    }
+                                    if (doc.GTIN6 && String(doc.GTIN6).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN6 });
-                                    } else if (doc.GTIN7 && doc.GTIN7.length > 7) {
+                                    }
+                                    if (doc.GTIN7 && String(doc.GTIN7).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN7 });
-                                    } else if (doc.GTIN8 && doc.GTIN8.length > 7) {
+                                    }
+                                    if (doc.GTIN8 && String(doc.GTIN8).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN8 });
-                                    } else if (doc.GTIN9 && doc.GTIN9.length > 7) {
+                                    }
+                                    if (doc.GTIN9 && String(doc.GTIN9).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN9 });
-                                    } else if (doc.GTIN10 && doc.GTIN10.length > 7) {
+                                    }
+                                    if (doc.GTIN10 && String(doc.GTIN10).length > 7) {
                                         gtinList.push({ gtin: doc.GTIN10 });
                                     }
-                                    console.log('gtinList', gtinList.length);
+
+                                    // let activeSubstancesList = [];
+
+                                    // if (doc['Scientific Name']) {
+                                    //     const elementsList = doc['Scientific Name'].split(',');
+                                    // const strengthList = doc['Strength'].split(',');
+                                    // elementsList.forEach((elem) => {
+                                    //     activeSubstancesList.push({
+                                    //         activeSubstance: {
+                                    //             nameAr: elem.trim(),
+                                    //             nameEn: elem.trim(),
+                                    //             image: { url: '/images/activeSubstances.png' },
+                                    //             active: true,
+                                    //         },
+                                    //     });
+
+                                    // if (!ingredientList.includes(elem.trim())) {
+                                    //     ingredientList.push(elem.trim());
+                                    // }
+                                    // });
+
+                                    // strengthList.forEach((elm) => {
+                                    //     activeSubstancesList.push({
+                                    //         concentration: elm,
+                                    //     });
+                                    // if (!ingredientList.includes(elm.trim())) {
+                                    //     ingredientList.push(elm.trim());
+                                    // }
+                                    // });
+
+                                    // activeSubstancesList.push({
+                                    //     activeSubstance:{
+                                    //         nameAr:
+                                    //     },
+                                    // });
+                                    // }
+                                    // console.log('activeSubstancesList', activeSubstancesList);
 
                                     let newDoc = {
-                                        // code: doc?.code,
-                                        nameAr: doc.TradeName,
-                                        nameEn: doc.TradeName,
-                                        scientificName: doc.ScientificName,
+                                        code: systemCode,
+                                        nameAr: String(doc['Trade Name']).trim(),
+                                        nameEn: String(doc['Trade Name']).trim(),
+                                        scientificName: String(doc['Scientific Name']).trim(),
                                         hasMedicalData: true,
                                         itemType: site.itemsTypes.find((type) => type.id === 1),
-                                        sfdaCodeList: [{ sfdaCode: doc.RegisterNumber }],
-                                        gtinList: gtinList,
+                                        sfdaCodeList: [{ sfdaCode: String(doc['Register Number']).trim() }],
+                                        gtinList,
+                                        medicalInformations: {},
                                         workByQrCode: true,
+                                        allowSale: true,
+                                        allowBuy: true,
                                         image: { url: '/images/storesItems.png' },
                                         active: true,
                                     };
@@ -897,6 +947,98 @@ module.exports = function init(site) {
                                             console.log(site.dbMessage);
                                         }
                                     });
+                                }
+                            });
+                        });
+                    } else {
+                        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+                        console.log(site.dbMessage);
+                    }
+                } else {
+                    site.dbMessage = 'file not exists : ' + response.file.filepath;
+                    console.log(site.dbMessage);
+                }
+
+                res.json(response);
+            });
+
+            site.post(`api/${app.name}/importHumanDrugs`, (req, res) => {
+                let response = {
+                    done: false,
+                    file: req.form.files.fileToUpload,
+                };
+
+                if (site.isFileExistsSync(response.file.filepath)) {
+                    let docs = [];
+                    if (response.file.originalFilename.like('*.xls*')) {
+                        let workbook = site.XLSX.readFile(response.file.filepath);
+                        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                    } else {
+                        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+                    }
+
+                    if (Array.isArray(docs)) {
+                        console.log(`Importing Human Drugs : ${docs.length}`);
+                        docs.forEach((doc) => {
+                            app.$collection.find({ where: { nameEn: String(doc['Trade Name']).trim() } }, (err, exisitDoc) => {
+                                if (exisitDoc) {
+                                    app.importHumanDrugsbusyList.push(exisitDoc.id);
+                                    const valid = app.validateExisitDrugInBusyList(exisitDoc.id);
+                                    if (valid) {
+                                        setTimeout(() => {
+                                            app.validateExisitDrugInBusyList(exisitDoc.id);
+                                        }, 200);
+                                        return;
+                                    }
+                                    const sfdaIndex = exisitDoc.sfdaCodeList.findIndex((sfda) => sfda.sfdaCode == String(doc['RegisterNumber']).trim());
+                                    console.log('app.importHumanDrugsbusyList.includes(exisitDoc.id)', app.importHumanDrugsbusyList.includes(exisitDoc.id));
+                                    // console.log('sfdaIndex', sfdaIndex);
+
+                                    if (sfdaIndex !== -1) {
+                                        const elementsList = String(doc['Scientific Name']).split(',');
+                                        const strengthList = doc['Strength'].split(',');
+                                        let activeSubstancesList = [];
+                                        console.log('strengthList', strengthList);
+
+                                        let activeSubstanceItem = {};
+                                        elementsList.forEach((elem, index) => {
+                                            activeSubstanceItem = {
+                                                activeSubstance: {
+                                                    nameAr: elem.trim(),
+                                                    nameEn: elem.trim(),
+                                                    image: { url: '/images/activeSubstances.png' },
+                                                    active: true,
+                                                },
+                                            };
+
+                                            console.log('strengthList.length', strengthList.length);
+
+                                            if (strengthList.length == 1) {
+                                                activeSubstanceItem.concentration = strengthList[0] + ' ' + String(doc['StrengthUnit']).trim();
+                                            } else if (strengthList.length > 1) {
+                                                // console.log('strengthList[0]', strengthList[index]);
+
+                                                let elm = strengthList.indexOf(strengthList, index);
+                                                // console.log('elm', strengthList.length, strengthList, elm);
+                                                // strengthList.forEach((elm) => {
+                                                activeSubstanceItem.concentration = (elm || strengthList[index]) + ' ' + String(doc['StrengthUnit']).trim();
+
+                                                elm == -1 ? (elm = doc['Strength']) : elm;
+                                                // });
+                                            }
+
+                                            activeSubstancesList.push(activeSubstanceItem);
+
+                                            exisitDoc.medicalInformations.activeSubstancesList = activeSubstancesList;
+                                        });
+
+                                        app.update(exisitDoc, () => {
+                                            const itemIndex = app.importHumanDrugsbusyList.findIndex(() => exisitDoc.id);
+                                            if (itemIndex != -1) {
+                                                app.importHumanDrugsbusyList.splice(itemIndex, 1);
+                                            }
+                                        });
+                                    }
                                 }
                             });
                         });

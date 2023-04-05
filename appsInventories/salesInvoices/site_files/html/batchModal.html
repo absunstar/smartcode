@@ -1,123 +1,130 @@
 <div id="batchModalModal" class="modal" fixed>
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <p class="center">##word.Edit Item Modal## <i class="fa fa-file"></i></p>
-    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="center">##word.Edit Item Modal## <i class="fa fa-file"></i></p>
+        </div>
 
-    <div class="modal-body">
-      <form class="form">
-        <fieldset ng-show="batch.hasMedicalData && item.salesType.code != 'company'">
-          <legend>##word.Medication doses##</legend>
-          <div class="row padding">
-            <i-list label="##word.Duration##" class="col4" ng-model="batch.medicineDuration" display="name##session.lang##" items="medicineDurationsList" ng-search="batch.$medicineDuration"></i-list>
-            <i-list
-              label="##word.Frequency##"
-              class="col4"
-              ng-model="batch.medicineFrequency"
-              display="name##session.lang##"
-              items="medicineFrequenciesList"
-              ng-search="batch.$medicineFrequency"
-            ></i-list>
+        <div class="modal-body">
+            <form class="form">
+                <fieldset ng-show="batch.hasMedicalData && item.salesType.code != 'company'">
+                    <legend>##word.Medication doses##</legend>
+                    <div class="row padding">
+                        <i-list
+                            label="##word.Duration##"
+                            class="col4"
+                            ng-model="batch.medicineDuration"
+                            display="name##session.lang##"
+                            items="medicineDurationsList"
+                            ng-search="batch.$medicineDuration"
+                        ></i-list>
+                        <i-list
+                            label="##word.Frequency##"
+                            class="col4"
+                            ng-model="batch.medicineFrequency"
+                            display="name##session.lang##"
+                            items="medicineFrequenciesList"
+                            ng-search="batch.$medicineFrequency"
+                        ></i-list>
 
-            <i-list label="##word.Route##" class="col4" ng-model="batch.medicineRoute" display="name##session.lang##" items="medicineRoutesList" ng-search="batch.$medicineRoute"></i-list>
-          </div>
-        </fieldset>
+                        <i-list label="##word.Route##" class="col4" ng-model="batch.medicineRoute" display="name##session.lang##" items="medicineRoutesList" ng-search="batch.$medicineRoute"></i-list>
+                    </div>
+                </fieldset>
 
-        <fieldset ng-show="batch.workByBatch || batch.workBySerial || batch.workByQrCode">
-          <div class="row">
-            <div class="col6">
-              <br />
-              <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
-            </div>
-            <div class="col4" ng-hide="mode == 'view' || batch.$view">
-              <table class="table loaded center bold hover details">
-                <tr>
-                  <th>##word.Required Count##</th>
-                  <th>##word.Current Count##</th>
-                </tr>
+                <fieldset ng-show="batch.workByBatch || batch.workBySerial || batch.workByQrCode">
+                    <div class="row">
+                        <div class="col6">
+                            <br />
+                            <h3 class="bold center">{{batch.name##session.lang##}} - ({{batch.unit.name##session.lang##}})</h3>
+                        </div>
+                        <div class="col4" ng-hide="mode == 'view' || batch.$view">
+                            <table class="table loaded center bold hover details">
+                                <tr>
+                                    <th>##word.Required Count##</th>
+                                    <th>##word.Current Count##</th>
+                                </tr>
 
-                <tr>
-                  <td>
-                    <p class="green">{{batch.count}}</p>
-                  </td>
-                  <td>
-                    <p class="blue">{{batch.$batchCount}}</p>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <fieldset ng-hide="mode == 'view' || batch.$view">
-            <legend>##word.Search##</legend>
-            <i-control type="text" class="col6" label="##word.BATCH## / ##word.SERIAL## / ##word.QR CODE##" ng-keydown="getBatch($event,batch)" ng-model="batch.$search"> </i-control>
-            <p class="error row">{{errorBatch}}</p>
-          </fieldset>
-          <div class="row">
-            <table class="table loaded center bold hover details">
-              <tr>
-                <th ng-show="!batch.workByQrCode">##word.Code##</th>
-                <th ng-show="batch.workByQrCode">##word.GTIN##</th>
-                <th ng-show="batch.workByQrCode">##word.BATCH##</th>
-                <th ng-show="batch.workByQrCode">##word.SERIAL NO.##</th>
-                <th ng-hide="batch.workByQrCode">##word.Production Date##</th>
-                <th ng-show="batch.workByBatch || batch.workByQrCode">##word.Expiry Date##</th>
-                <th ng-show="batch.workByBatch">##word.validit Days##</th>
-                <th ng-show="batch.workByBatch">##word.Current QTY.##</th>
-                <th ng-show="batch.workByBatch">##word.Quantity##</th>
-                <th  ng-hide="mode == 'view' || batch.$view">##word.Actions##</th>
-                <!-- <th ng-hide="batch.workByBatch">##word.Select##</th> -->
-              </tr>
+                                <tr>
+                                    <td>
+                                        <p class="green">{{batch.count}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="blue">{{batch.$batchCount}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <fieldset ng-hide="mode == 'view' || batch.approved || batch.$view">
+                        <legend>##word.Search##</legend>
+                        <i-control type="text" class="col6" label="##word.BATCH## / ##word.SERIAL## / ##word.QR CODE##" ng-keydown="getBatch($event,batch)" ng-model="batch.$search"> </i-control>
+                        <p class="error row">{{errorBatch}}</p>
+                    </fieldset>
+                    <div class="row">
+                        <table class="table loaded center bold hover details">
+                            <tr>
+                                <th ng-show="!batch.workByQrCode">##word.Code##</th>
+                                <th ng-show="batch.workByQrCode">##word.GTIN##</th>
+                                <th ng-show="batch.workByQrCode">##word.BATCH##</th>
+                                <th ng-show="batch.workByQrCode">##word.SERIAL NO.##</th>
+                                <th ng-hide="batch.workByQrCode">##word.Production Date##</th>
+                                <th ng-show="batch.workByBatch || batch.workByQrCode">##word.Expiry Date##</th>
+                                <th ng-show="batch.workByBatch">##word.validit Days##</th>
+                                <th ng-show="batch.workByBatch">##word.Current QTY.##</th>
+                                <th ng-show="batch.workByBatch">##word.Quantity##</th>
+                                <th ng-hide="mode == 'view' || batch.approved || batch.$view">##word.Actions##</th>
+                                <!-- <th ng-hide="batch.workByBatch">##word.Select##</th> -->
+                            </tr>
 
-              <tr ng-repeat="c in batch.batchesList">
-                <td class="center" ng-show="!batch.workByQrCode">
-                  <p>{{c.code}}</p>
-                </td>
-                <td class="center" ng-show="batch.workByQrCode">
-                  <p>{{c.gtin}}</p>
-                </td>
-                <td class="center" ng-show="batch.workByQrCode">
-                  <p>{{c.batch}}</p>
-                </td>
-                <td class="center" ng-show="batch.workByQrCode">
-                  <p>{{c.sn}}</p>
-                </td>
-                <td class="center" ng-hide="batch.workByQrCode">
-                  <p class="green">{{c.productionDate | date: "dd / MM / yyyy"}}</p>
-                </td>
+                            <tr ng-repeat="c in batch.batchesList">
+                                <td class="center" ng-show="!batch.workByQrCode">
+                                    <p>{{c.code}}</p>
+                                </td>
+                                <td class="center" ng-show="batch.workByQrCode">
+                                    <p>{{c.gtin}}</p>
+                                </td>
+                                <td class="center" ng-show="batch.workByQrCode">
+                                    <p>{{c.batch}}</p>
+                                </td>
+                                <td class="center" ng-show="batch.workByQrCode">
+                                    <p>{{c.sn}}</p>
+                                </td>
+                                <td class="center" ng-hide="batch.workByQrCode">
+                                    <p class="green">{{c.productionDate | date: "dd / MM / yyyy"}}</p>
+                                </td>
 
-                <td class="center" ng-show="batch.workByBatch || batch.workByQrCode">
-                  <p class="red">{{c.expiryDate | date: "dd / MM / yyyy"}}</p>
-                </td>
+                                <td class="center" ng-show="batch.workByBatch || batch.workByQrCode">
+                                    <p class="red">{{c.expiryDate | date: "dd / MM / yyyy"}}</p>
+                                </td>
 
-                <td class="center" ng-show="batch.workByBatch">
-                  <p class="green">{{c.validityDays}}</p>
-                </td>
-                <td class="center" ng-show="batch.workByBatch">
-                  <p>{{c.currentCount}}</p>
-                </td>
+                                <td class="center" ng-show="batch.workByBatch">
+                                    <p class="green">{{c.validityDays}}</p>
+                                </td>
+                                <td class="center" ng-show="batch.workByBatch">
+                                    <p>{{c.currentCount}}</p>
+                                </td>
 
-                <td class="center" ng-show="batch.workByBatch">
-                  <i-control type="number" ng-change="calcBatch(batch)" ng-hide="mode == 'view' || batch.$view" ng-disabled="batch.workBySerial" ng-model="c.count"> </i-control>
-                  <p ng-show="mode == 'view' || batch.$view">{{c.count}}</p>
-                </td>
-                <td ng-hide="mode == 'view' || batch.$view">
-                  <i-button type="delete" ng-click="batch.$batchCount = batch.$batchCount - c.count ;batch.batchesList.splice($index,1)"> </i-button>
-                </td>
-                <!-- <td ng-hide="batch.workByBatch">
+                                <td class="center" ng-show="batch.workByBatch">
+                                    <i-control type="number" ng-change="calcBatch(batch)" ng-hide="mode == 'view' || batch.$view" ng-disabled="batch.workBySerial" ng-model="c.count"> </i-control>
+                                    <p ng-show="mode == 'view' || batch.approved || batch.$view">{{c.count}}</p>
+                                </td>
+                                <td ng-hide="mode == 'view' || batch.approved|| batch.$view">
+                                    <i-button type="delete" ng-click="batch.$batchCount = batch.$batchCount - c.count ;batch.batchesList.splice($index,1)"> </i-button>
+                                </td>
+                                <!-- <td ng-hide="batch.workByBatch">
                   <i-checkbox ng-model="c.$select" label="##word.Select##" ng-change="c.count = c.$select? 1 : 0 ; calcBatch(batch)"></i-checkbox>
                 </td> -->
-              </tr>
-            </table>
-          </div>
-        </fieldset>
-      </form>
-    </div>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
 
-    <div class="modal-footer center">
-      <i-button type="save" label="##word.Save##" ng-hide="mode == 'view' || batch.$view" ng-click="saveBatch(batch)"> </i-button>
-      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#batchModalModal')"></i-button>
+        <div class="modal-footer center">
+            <i-button type="save" label="##word.Save##" ng-show="!batch.approved" ng-hide="mode == 'view' || batch.$view" ng-click="saveBatch(batch)"> </i-button>
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#batchModalModal')"></i-button>
+        </div>
     </div>
-  </div>
-  <div class="col2"></div>
+    <div class="col2"></div>
 </div>

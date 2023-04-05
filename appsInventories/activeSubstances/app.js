@@ -339,23 +339,21 @@ module.exports = function init(site) {
 
                     if (Array.isArray(docs)) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
-
+                        let systemCode = 0;
                         if (docs && docs.length && docs[1].Ingredient && !docs[1].nameEn) {
                             const ingredientList = [];
                             docs.forEach((doc) => {
                                 if (doc.Ingredient) {
                                     const elementsList = doc.Ingredient.split(',');
-                  
+
                                     elementsList.forEach((elem) => {
-                                        if (ingredientList.includes(elem.trim())) {
-                                        } else {
+                                        if (!ingredientList.includes(elem.trim())) {
                                             ingredientList.push(elem.trim());
                                         }
                                     });
                                 }
                             });
 
-                            let systemCode = 0;
                             ingredientList.forEach((elem) => {
                                 app.$collection.find({ where: { nameEn: elem } }, (err, exisitDoc) => {
                                     if (!exisitDoc) {
@@ -393,15 +391,15 @@ module.exports = function init(site) {
                                         newDoc.branch = site.getBranch(req);
                                         newDoc.addUserInfo = req.getUserFinger();
 
-                                        app.add(newDoc, (err, doc2) => {
-                                            if (!err && doc2) {
-                                                site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                                console.log(site.dbMessage);
-                                            } else {
-                                                site.dbMessage = err.message;
-                                                console.log(site.dbMessage);
-                                            }
-                                        });
+                                        // app.add(newDoc, (err, doc2) => {
+                                        //     if (!err && doc2) {
+                                        //         site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                        //         console.log(site.dbMessage);
+                                        //     } else {
+                                        //         site.dbMessage = err.message;
+                                        //         console.log(site.dbMessage);
+                                        //     }
+                                        // });
                                     }
                                 });
                             });
