@@ -362,7 +362,17 @@ module.exports = function init(site) {
                 let search = req.body.search || '';
                 let limit = req.body.limit || 10;
                 let list = [];
-
+                if (where && where.fromDate && where.toDate) {
+                    let d1 = site.toDate(where.fromDate);
+                    let d2 = site.toDate(where.toDate);
+                    d2.setDate(d2.getDate() + 1);
+                    where.date = {
+                        $gte: d1,
+                        $lte: d2,
+                    };
+                    delete where.fromDate;
+                    delete where.toDate;
+                }
                 if (app.allowMemory) {
                     app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id)
@@ -384,35 +394,6 @@ module.exports = function init(site) {
                     });
                 } else {
                     where['company.id'] = site.getCompany(req).id;
-
-                    if (where && where.dateTo) {
-                        let d1 = site.toDate(where.date);
-                        let d2 = site.toDate(where.dateTo);
-                        d2.setDate(d2.getDate() + 1);
-                        where.date = {
-                            $gte: d1,
-                            $lt: d2,
-                        };
-                        delete where.dateTo;
-                    } else if (where.date) {
-                        let d1 = site.toDate(where.date);
-                        let d2 = site.toDate(where.date);
-                        d2.setDate(d2.getDate() + 1);
-                        where.date = {
-                            $gte: d1,
-                            $lt: d2,
-                        };
-                    } else if (where && where.fromDate && where.toDate) {
-                        let d1 = site.toDate(where.fromDate);
-                        let d2 = site.toDate(where.toDate);
-                        d2.setDate(d2.getDate() + 1);
-                        where.date = {
-                            $gte: d1,
-                            $lt: d2,
-                        };
-                        delete where.fromDate;
-                        delete where.toDate;
-                    }
 
                     app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
                         res.json({

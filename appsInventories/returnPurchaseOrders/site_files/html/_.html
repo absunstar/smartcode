@@ -7,7 +7,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="returnPurchaseOrdersAdd || returnPurchaseOrdersManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-button type="search" x-permissions="returnPurchaseOrdersSearch || returnPurchaseOrdersManage" label="##word.Search##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="returnPurchaseOrdersSearch || returnPurchaseOrdersManage" label="##word.Search##" ng-click="searchAll(search={})"></i-button>
         </div>
         <div class="row" x-permissions="returnPurchaseOrdersSearch || returnPurchaseOrdersManage">
             <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
