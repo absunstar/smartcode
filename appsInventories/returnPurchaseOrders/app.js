@@ -323,11 +323,13 @@ module.exports = function init(site) {
                     d2.setDate(d2.getDate() + 1);
                     where.date = {
                         $gte: d1,
-                        $lt: d2,
+                        $lte: d2,
                     };
                     delete where.fromDate;
                     delete where.toDate;
                 }
+                console.log('where', where);
+
                 if (app.allowMemory) {
                     let list = app.memoryList.filter(
                         (g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(where.search)
