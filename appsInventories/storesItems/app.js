@@ -302,7 +302,7 @@ module.exports = function init(site) {
         let b = batchesList[i];
         if (b.count > 0) {
           if (obj.batchesList.length > 0) {
-            let batchIndex = obj.batchesList.findIndex((_b) => _b.code === b.code || _b.sn === b.sn);
+            let batchIndex = obj.batchesList.findIndex((_b) => (_b.sn ? _b.sn === b.sn : _b.code === b.code));
             if (batchIndex != -1) {
               obj.batchesList[batchIndex].count += b.count;
             } else {
@@ -323,7 +323,7 @@ module.exports = function init(site) {
       for (let i = 0; i < batchesList.length; i++) {
         let b = batchesList[i];
         obj.batchesList.forEach((_b) => {
-          if (_b.code === b.code || _b.sn === b.sn) {
+          if ((_b.sn && _b.sn === b.sn) || _b.code === b.code) {
             if (type == '+') {
               _b.count = _b.count + b.count;
             } else if (type == '-') {
