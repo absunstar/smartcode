@@ -47,10 +47,12 @@
                             </legend>
                             <table class="table hover bold">
                                 <tr>
+                                    <th>##word.S##</th>
                                     <th>##word.SFDA Code##</th>
                                     <th class="not-print">##word.Actions##</th>
                                 </tr>
                                 <tr ng-repeat="s in item.sfdaCodeList | filter:$search">
+                                    <td class="center">{{$index+1}}</td>
                                     <td class="center">
                                         <i-control type="text" ng-model="s.sfdaCode"></i-control>
                                     </td>
@@ -94,10 +96,12 @@
                                             <legend><i-button type="push" ng-click="item.gtinList.unshift({})"></i-button> ##word.GTIN List##</legend>
                                             <table class="table hover bold">
                                                 <tr>
+                                                    <th>##word.S##</th>
                                                     <th>##word.GTIN##</th>
                                                     <th class="not-print">##word.Actions##</th>
                                                 </tr>
                                                 <tr ng-repeat="g in item.gtinList | filter:$search">
+                                                    <td class="center">{{$index+1}}</td>
                                                     <td class="center">
                                                         <i-control type="text" ng-model="g.gtin"></i-control>
                                                     </td>
