@@ -6,9 +6,17 @@
           <i-control ng-hide="disabledCode" class="col6" label="##word.Code##" ng-model="item.code"> </i-control>
           <i-control ng-show="disabledCode" type="number" class="col6" label="##word.Length Level##" ng-model="item.lengthLevel"></i-control>
         </div>
-
         <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+
+        <i-list
+          class="col6"
+          display="name##session.lang##"
+          ng-search="item.$currency"
+          items="currenciesList"
+          label="##word.Currency##"
+          ng-model="item.currency"
+        ></i-list>
       </div>
       <div class="row">
         <fieldset>

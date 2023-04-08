@@ -1,0 +1,189 @@
+<div id="referenceOrdersModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">
+        ##word.Reference Orders##
+        <i class="fa fa-file"></i>
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <div class="row padding margin">
+        <fieldset class="col6 margin">
+          <div class="row ">
+            <i-checkbox class="col6" ng-model="item.$allDoctors" ng-change="getReferenceOrdersList()" label="##word.All Doctors##"></i-checkbox>
+            <i-checkbox class="col6" ng-model="item.$allPatients" ng-change="getReferenceOrdersList()" label="##word.All Patients##"></i-checkbox>
+          </div>
+        </fieldset>
+      </div>
+      <div class="tabs">
+        <div class="tabs-header full">
+          <a class="tab-link" onclick="site.showTabContent(event, '#medicine')">
+            <span> ##word.Medicine## </span>
+          </a>
+
+          <a class="tab-link" onclick="site.showTabContent(event, '#laboratory')">
+            <span> ##word.Laboratory## </span>
+          </a>
+
+          <a class="tab-link" onclick="site.showTabContent(event, '#radiology')">
+            <span> ##word.Radiology## </span>
+          </a>
+
+          <a class="tab-link" onclick="site.showTabContent(event, '#consultation')">
+            <span> ##word.Consultation## </span>
+          </a>
+        </div>
+        <div class="tabs-content">
+          <div id="medicine" class="tab-content">
+            <div class="row padding">
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.Name##</th>
+                  <th>##word.Price##</th>
+                  <th>##word.Disc##</th>
+                  <th>##word.Duration##</th>
+                  <th>##word.Frequency##</th>
+                  <th>##word.Route##</th>
+                  <th>##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="o in referenceOrders.medicineList">
+                  <td class="center">
+                    <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.price || 0}}
+                      <span class="currency">##word.$##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.discount || 0}}
+                      <span class="currency" ng-show="o.discountType == 'value'">##word.$##</span>
+                      <span class="currency" ng-show="o.discountType == 'percent'">##word.%##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <p class="center">{{o.medicineDuration.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">{{o.medicineFrequency.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">{{o.medicineRoute.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <i-button type="push" ng-click="selectReferenceOrders(o)"></i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="laboratory" class="tab-content">
+            <div class="row padding">
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.Name##</th>
+                  <th>##word.Price##</th>
+                  <th>##word.Disc##</th>
+                  <th>##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="o in referenceOrders.laboratoryList">
+                  <td class="center">
+                    <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.price || 0}}
+                      <span class="currency">##word.$##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.discount || 0}}
+                      <span class="currency">##%##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <i-button type="push" ng-click="selectReferenceOrders(o)"></i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="radiology" class="tab-content">
+            <div class="row padding">
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.Name##</th>
+                  <th>##word.Price##</th>
+                  <th>##word.Disc##</th>
+                  <th>##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="o in referenceOrders.radiologyList">
+                  <td class="center">
+                    <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.price || 0}}
+                      <span class="currency">##word.$##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.discount || 0}}
+                      <span class="currency">##%##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <i-button type="push" ng-click="selectReferenceOrders(o)"></i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="consultation" class="tab-content">
+            <div class="row padding">
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.Name##</th>
+                  <th>##word.Price##</th>
+                  <th>##word.Disc##</th>
+                  <th>##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="o in referenceOrders.consultationList">
+                  <td class="center">
+                    <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.price || 0}}
+                      <span class="currency">##word.$##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <p class="center">
+                      {{o.discount || 0}}
+                      <span class="currency">##%##</span>
+                    </p>
+                  </td>
+                  <td class="center">
+                    <i-button type="push" ng-click="selectReferenceOrders(o)"></i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer center">
+        <p class="center green bold font-20">{{addOrder}}</p>
+        <p class="error">{{errorOrder}}</p>
+        <i-button type="close" label="##word.Close##" ng-click="errorOrder = ''" onclick="site.hideModal( '#referenceOrdersModal')"></i-button>
+      </div>
+    </div>
+  </div>
+</div>

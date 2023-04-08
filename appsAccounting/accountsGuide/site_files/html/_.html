@@ -5,6 +5,8 @@
 
     <p class="error">{{error}}</p>
     <div x-permissions="login" class="row">
+      <i-upload api="api/accountsGuide/import" label="Import" x-permissions="importaccountsGuide || accountsGuideManage"></i-upload>
+
       <i-treeview
         display="name##session.lang##"
         class="col5"

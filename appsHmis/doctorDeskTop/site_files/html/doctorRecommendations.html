@@ -245,17 +245,24 @@
                 <div id="orders" class="tab-content">
                   <div class="row">
                     <i-list label="##word.Order##" class="col6" ng-model="item.$order" display="name##session.lang##" items="ordersList" ng-get="getOrdersList($search)"></i-list>
-                    <div class="col6">
+                    <div class="col4">
                       <br />
                       <div class="row">
-                        <i-button type="add" ng-click="addOrders(item)"></i-button>
+                        <i-button type="push" ng-click="addOrders(item)"></i-button>
                         <i title="##word.Consultation##" class="fas fa-user-md icon" id="CO" ng-click="item.$groupTypeId = 2 ; item.$orderType = 'CO' ;getOrdersList('')"></i>
                         <i title="##word.Laboratory##" class="fas fa-vial icon" id="LA" ng-click="item.$groupTypeId = 3 ;item.$orderType = 'LA' ;getOrdersList('')"></i>
                         <i title="##word.Radiology##" class="fas fa-x-ray icon" id="X-R" ng-click="item.$groupTypeId = 4 ;item.$orderType = 'X-R' ;getOrdersList('')"></i>
                         <i title="##word.Medicine##" class="fas fa-capsules icon" id="MD" ng-click="item.$orderType = 'MD' ;getOrdersList('')"></i>
                       </div>
                     </div>
+                    <div class="col2">
+                      <br />
+                      <i-button type="view" label="##word.Reference##" ng-click="showReferenceOrders()"> </i-button>
+                    </div>
                   </div>
+                  <p class="center green bold font-20">{{addOrder}}</p>
+                  <p class="error">{{errorOrder}}</p>
+
                   <div class="row list" ng-repeat="s in item.ordersList">
                     <div class="row">
                       <div class="col2">
@@ -277,19 +284,25 @@
                           <i-control type="number" ng-change="calc(s)" ng-show="s.type == 'MD'" class="col3" label="##word.QTY.##" ng-model="s.count"></i-control>
                           <div class="col3">
                             <p class="bold center">##word.Price##</p>
-                            <p class="bold center">{{s.price || 0}}</p>
+                            <p class="bold center">
+                              {{s.price || 0}}
+                              <span class="currency">##word.$##</span>
+                            </p>
                           </div>
                           <div class="col3">
                             <p class="bold center">##word.Disc##</p>
                             <p class="bold center">
                               {{s.discount || 0}}
-                              <span class="currency" ng-show="discountType == 'value'">##$##</span>
-                              <span class="currency" ng-show="discountType == 'percent'">##%##</span>
+                              <span class="currency" ng-show="s.discountType == 'value'">##word.$##</span>
+                              <span class="currency" ng-show="s.discountType == 'percent' || !s.discountType">##word.%##</span>
                             </p>
                           </div>
                           <div class="col3">
                             <p class="bold center">##word.Total##</p>
-                            <p class="bold center">{{s.total || 0}}</p>
+                            <p class="bold center">
+                              {{s.total || 0}}
+                              <span class="currency">##word.$##</span>
+                            </p>
                           </div>
                         </div>
                       </div>

@@ -577,7 +577,7 @@ module.exports = function init(site) {
             // service.patientCash = site.toNumber(service.total);
             servicesList.unshift(service);
           }
-
+          hmisSetting.vatList = hmisSetting.vatList || [];
           let vatIndex = hmisSetting.vatList.findIndex((itm) => itm.id === _data.nationalityId);
           servicesList[0].totalDisc = (servicesList[0].price * servicesList[0].discount) / 100;
           servicesList[0].totalAfterDisc = servicesList[0].price - servicesList[0].discount;

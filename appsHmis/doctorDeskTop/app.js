@@ -310,6 +310,51 @@ module.exports = function init(site) {
     }
   }
 
+  site.post({ name: `/api/${app.name}/ordersReference`, public: true }, (req, res) => {
+    let where = req.body.where || {};
+    let select = req.body.select || { id: 1, service: 1, ordersList: 1 };
+
+    where['company.id'] = site.getCompany(req).id;
+
+    // if (where['doctorId']) {
+    //   where['doctor.id'] = where['doctorId'];
+    //   delete where['doctorId'];
+    // }
+    // if (where['patientId']) {
+    //   where['patient.id'] = where['patientId'];
+    //   delete where['patientId'];
+    // }
+
+    app.all({ where, select, sort: { code: -1 }, limit: req.body.limit }, (err, docs) => {
+
+      let result = {
+        consultationList: [],
+        laboratoryList: [],
+        radiologyList: [],
+        medicineList: [],
+      };
+      if (!err && docs) {
+        docs.forEach((doc) => {
+          doc.ordersList.forEach((_order) => {
+            if (_order.type == 'CO' && !result.consultationList.some((s) => s.id == _order.id)) {
+              result.consultationList.push(_order);
+            } else  if (_order.type == 'LA' && !result.laboratoryList.some((s) => s.id == _order.id)) {
+              result.laboratoryList.push(_order);
+            }  else  if (_order.type == 'X-R' && !result.radiologyList.some((s) => s.id == _order.id)) {
+              result.radiologyList.push(_order);
+            }  else  if (_order.type == 'MD' && !result.medicineList.some((s) => s.id == _order.id)) {
+              result.medicineList.push(_order);
+            } 
+          });
+        });
+      }
+      res.json({
+        done: true,
+        doc: result,
+      });
+    });
+  });
+
   site.post({ name: `/api/selectDoctorDeskTop/serviceOrder`, require: { permissions: ['login'] } }, (req, res) => {
     let response = { done: false };
     let _data = req.body;
@@ -356,7 +401,7 @@ module.exports = function init(site) {
             payment: payment,
             hospitalResponsibility: _data.doctor.hospitalResponsibility,
             type: _data.type,
-            session: req.session
+            session: req.session,
           },
           (serviceCallback) => {
             callback.elig = nphisCallback.elig;

@@ -224,9 +224,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
       where['doctor.id'] == site.toNumber('##user.id##');
     }
 
-    if ($scope.today) {
+    /*   if ($scope.today) {
       where['date'] = new Date();
-    }
+    } */
 
     if (type == 'all') {
       delete where['status.id'];
@@ -672,6 +672,46 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.showReferenceOrders = function () {
+    $scope.error = '';
+    $scope.item.$allDoctors = false;
+    $scope.item.$allPatients = false;
+    $scope.getReferenceOrdersList();
+    site.showModal('#referenceOrdersModal');
+  };
+
+  $scope.getReferenceOrdersList = function () {
+    $scope.busy = true;
+    $scope.referenceOrders = {};
+    where = {};
+    if (!$scope.item.$allDoctors) {
+      where['doctor.id'] = $scope.item.doctor.id;
+    }
+    if (!$scope.item.$allPatients) {
+      where['patient.id'] = $scope.item.patient.id;
+    }
+    where['service.id'] = $scope.item.service.id;
+
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/ordersReference`,
+      data: {
+        where: where,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.referenceOrders = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.addDoctorReccomend = function (name, code) {
     $scope.error = '';
     $scope.item.doctorReccomendList = $scope.item.doctorReccomendList || [];
@@ -708,8 +748,43 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     }
   };
 
+  $scope.selectReferenceOrders = function (_item) {
+    $scope.error = '';
+    $scope.errorOrder = '';
+    let urlName = 'storesItems';
+    if (_item.type == 'MD') {
+      urlName = 'storesItems';
+    } else {
+      urlName = 'services';
+    }
+
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${urlName}/view`,
+      data: {
+        id: _item.id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.item.$order = { ...response.data.doc, $orderType: _item.type };
+          $scope.item.$orderType = _item.type;
+
+          $scope.addOrders($scope.item);
+        } else {
+          $scope.errorOrder = response.data.errorOrder;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
   $scope.addOrders = function (_item) {
     $scope.error = '';
+    $scope.errorOrder = '';
 
     if (_item.$order && _item.$order.id) {
       _item.ordersList = _item.ordersList || [];
@@ -723,6 +798,10 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           order.discountType = _item.$order.unitsList[0].discountType;
           _item.ordersList.unshift(order);
           $scope.calc(_item.ordersList[0]);
+          $scope.addOrder = 'addOrder added successfully';
+          $timeout(() => {
+            $scope.addOrder = '';
+          }, 1500);
         } else {
           let obj = {
             mainInsuranceCompany: _item.mainInsuranceCompany,
@@ -760,18 +839,26 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
                   discount: response.data.servicesList[0].discount,
                   total: response.data.servicesList[0].total,
                 });
+                $scope.addOrder = 'addOrder added successfully';
+                $timeout(() => {
+                  $scope.addOrder = '';
+                }, 1500);
               }
             },
             function (err) {
               $scope.busy = false;
-              $scope.error = err;
+              $scope.errorOrder = err;
             }
           );
         }
+      } else {
+        $scope.errorOrder = 'Service Is Exists';
+
+        return;
       }
       _item.$order = {};
     } else {
-      $scope.error = 'Must Select Service';
+      $scope.errorOrder = 'Must Select Service';
       return;
     }
   };
