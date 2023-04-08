@@ -7,7 +7,8 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="transferItemsOrdersAdd || transferItemsOrdersManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-button type="search" x-permissions="transferItemsOrdersSearch || transferItemsOrdersManage" label="##word.Search##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="transferItemsOrdersSearch || transferItemsOrdersManage" label="##word.Approved##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="transferItemsOrdersSearch || transferItemsOrdersManage" label="##word.Not Approved##" ng-click="searchAll(search={approved:false})"></i-button>
         </div>
         <div class="row" x-permissions="transferItemsOrdersSearch || transferItemsOrdersManage">
             <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>

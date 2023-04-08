@@ -328,7 +328,7 @@ module.exports = function init(site) {
                     delete where.fromDate;
                     delete where.toDate;
                 }
-                console.log('where', where);
+       
 
                 if (app.allowMemory) {
                     let list = app.memoryList.filter(

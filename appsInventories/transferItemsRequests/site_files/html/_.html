@@ -5,7 +5,14 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="transferItemsRequestsAdd || transferItemsRequestsManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-button type="search" x-permissions="transferItemsRequestsSearch || transferItemsRequestsManage" label="##word.Search##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="transferItemsRequestsSearch || transferItemsRequestsManage" label="##word.Approved##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="transferItemsRequestsSearch || transferItemsRequestsManage" label="##word.Not Approved##" ng-click="searchAll(search={approved:false})"></i-button>
+            <i-button
+                type="search"
+                x-permissions="transferItemsRequestsSearch || transferItemsRequestsManage"
+                label="##word.Has Transaction##"
+                ng-click="searchAll(search={hasTransaction:true})"
+            ></i-button>
         </div>
         <div class="row" x-permissions="transferItemsRequestsSearch || transferItemsRequestsManage">
             <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>

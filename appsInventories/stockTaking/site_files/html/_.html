@@ -6,7 +6,8 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="stockTakingAdd || stockTakingManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-button type="search" x-permissions="stockTakingSearch || stockTakingManage" label="##word.Search##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="stockTakingSearch || stockTakingManage" label="##word.Approved##" ng-click="searchAll(search={approved:true})"></i-button>
+            <i-button type="search" x-permissions="stockTakingSearch || stockTakingManage" label="##word.Not Approved##" ng-click="searchAll(search={approved:false})"></i-button>
         </div>
         <div class="row" x-permissions="stockTakingSearch || stockTakingManage">
             <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>

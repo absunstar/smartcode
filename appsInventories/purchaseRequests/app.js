@@ -336,23 +336,14 @@ module.exports = function init(site) {
                     });
                 } else {
                     where['company.id'] = site.getCompany(req).id;
-                    // if (where.date) {
-                    //     let d1 = site.toDate(where.date);
-                    //     let d2 = site.toDate(where.date);
-                    //     d2.setDate(d2.getDate() + 1);
-                    //     where.requestDate = {
-                    //         $gte: d1,
-                    //         $lt: d2,
-                    //     };
-                    //     delete where.date;
-                    // } else
+
                     if (where && where.fromDate && where.toDate) {
                         let d1 = site.toDate(where.fromDate);
                         let d2 = site.toDate(where.toDate);
                         d2.setDate(d2.getDate() + 1);
                         where.requestDate = {
                             $gte: d1,
-                            $lt: d2,
+                            $lte: d2,
                         };
                         delete where.fromDate;
                         delete where.toDate;

@@ -146,7 +146,7 @@
                                 ng-click="unapproveItem(elem)"
                             >
                             </i-button>
-                            <i-button type="delete" ng-show="!item.approved && item.sourceType.id !== 1" ng-click="item.itemsList.splice($index,1)"> </i-button>
+                            <i-button type="delete" ng-show="!elem.approved && item.sourceType.id !== 1" ng-click="item.itemsList.splice($index,1)"> </i-button>
                         </td>
                     </tr>
                 </table>
