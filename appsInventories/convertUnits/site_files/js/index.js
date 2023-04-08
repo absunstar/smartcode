@@ -699,7 +699,7 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
         item.toBatchesList = item.toBatchesList || [];
         if (item.toBatchesList.length > 0) {
             if (item.workByQrCode || item.workBySerial) {
-                let remain = item.count - item.toBatchesList.length;
+                let remain = item.toCount - item.toBatchesList.length;
                 if (remain > 0) {
                     for (let i = 0; i < remain; i++) {
                         let obj = { count: 1 };
@@ -717,11 +717,11 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
                     productionDate: new Date(),
                     expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
                     validityDays: item.validityDays || 0,
-                    count: item.count + item.bonusCount,
+                    count: item.toCount,
                 };
                 item.toBatchesList = [obj];
             } else {
-                for (let i = 0; i < item.count; i++) {
+                for (let i = 0; i < item.toCount; i++) {
                     let obj = { count: 1 };
                     if (item.workBySerial) {
                         obj.productionDate = new Date();

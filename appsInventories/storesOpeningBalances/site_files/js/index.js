@@ -811,7 +811,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
                     productionDate: new Date(),
                     expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
                     validityDays: item.validityDays || 0,
-                    count: item.count + item.bonusCount,
+                    count: item.count,
                 };
                 item.batchesList = [obj];
             } else {
