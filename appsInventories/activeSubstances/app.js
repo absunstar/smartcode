@@ -274,7 +274,6 @@ module.exports = function init(site) {
                     image: 1,
                     active: 1,
                 };
-          
 
                 if (search) {
                     where.$or = [];
@@ -427,6 +426,7 @@ module.exports = function init(site) {
                                     code: doc.code,
                                     nameAr: doc.nameAr,
                                     nameEn: doc.nameEn,
+
                                     image: { url: '/images/activeSubstances.png' },
                                     active: true,
                                 };

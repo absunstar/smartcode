@@ -26,6 +26,7 @@ app.controller('jobsAdvertisements', function ($scope, $http, $timeout) {
 
     $scope.showAdd = function (_item) {
         $scope.error = '';
+        $scope.skillError = '';
         $scope.mode = 'add';
         $scope.item = { ...$scope.structure, skillsList: [], status: 'new', date: new Date(), approved: false };
         site.showModal($scope.modalID);
@@ -66,6 +67,7 @@ app.controller('jobsAdvertisements', function ($scope, $http, $timeout) {
 
     $scope.showUpdate = function (_item) {
         $scope.error = '';
+        $scope.skillError = '';
         $scope.mode = 'edit';
         $scope.view(_item);
         $scope.item = {};
@@ -196,6 +198,7 @@ app.controller('jobsAdvertisements', function ($scope, $http, $timeout) {
 
     $scope.showView = function (_item) {
         $scope.error = '';
+        $scope.skillError = '';
         $scope.mode = 'view';
         $scope.item = {};
         $scope.view(_item);
@@ -228,6 +231,7 @@ app.controller('jobsAdvertisements', function ($scope, $http, $timeout) {
 
     $scope.showDelete = function (_item) {
         $scope.error = '';
+        $scope.skillError = '';
         $scope.mode = 'delete';
         $scope.item = {};
         $scope.view(_item);

@@ -153,11 +153,7 @@
                                         <div ng-repeat="f in item.printerProgram.invoiceHeader2 track by $index" class="row">
                                             <i-control class="col9" ng-model="f.name"></i-control>
 
-                                            <i-button
-                                                class="col2"
-                                                type="delete"
-                                                ng-click="item.printerProgram.invoiceHeader2.length ==1 || item.printerProgram.invoiceHeader2.splice($index,1)"
-                                            >
+                                            <i-button class="col2" type="delete" ng-click="item.printerProgram.invoiceHeader2.length ==1 || item.printerProgram.invoiceHeader2.splice($index,1)">
                                             </i-button>
                                         </div>
                                     </fieldset>
@@ -499,7 +495,15 @@
                             <legend class="blue bold">##word.Nationalities Social Insurance##</legend>
 
                             <div class="row">
-                                <i-list class="col2" display="name##session.lang##" ng-model="nathionalityInsurance.nationality" label="##word.Nathionality##" items="nationalitiesList"> </i-list>
+                                <i-list
+                                    class="col2"
+                                    display="name##session.lang##"
+                                    ng-model="nathionalityInsurance.nationality"
+                                    label="##word.Nathionality##"
+                                    items="nationalitiesList"
+                                    ng-get="getNationalitiesList($search)"
+                                >
+                                </i-list>
                                 <div class="col3">
                                     <div class="row">
                                         <div class="col9">
@@ -641,7 +645,15 @@
                             <legend class="blue bold">##word.Nationalities Vacations Balance##</legend>
 
                             <div class="row">
-                                <i-list class="col2" display="name##session.lang##" ng-model="nathionalityVacations.nationality" label="##word.Nathionality##" items="nationalitiesList"> </i-list>
+                                <i-list
+                                    class="col2"
+                                    display="name##session.lang##"
+                                    ng-model="nathionalityVacations.nationality"
+                                    label="##word.Nathionality##"
+                                    items="nationalitiesList"
+                                    ng-get="getNationalitiesList($search)"
+                                >
+                                </i-list>
 
                                 <div class="col3">
                                     <div class="row">

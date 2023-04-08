@@ -239,7 +239,14 @@ module.exports = function init(site) {
                 _data.approveDate = new Date();
                 _data.acceptUserInfo = req.getUserFinger();
                 // const employeeApp = site.getApp('employees');
-                const employeeApp = site.getApp('users_info');
+                // site.connectCollection('users_info');
+                // const employeeApp = site.getApp('users_info');
+                const employeeApp = site.connectCollection('users_info');
+
+                if (!_data.email) {
+                    const splitName = _data.fullNameEn.split(' ');
+                    _data.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
+                }
 
                 const employee = {
                     fullNameAr: _data.fullNameAr,
@@ -251,6 +258,7 @@ module.exports = function init(site) {
                     totalSubscriptions: _data.totalSubscriptions,
                     employeePercentage: _data.employeePercentage,
                     companyPercentage: _data.companyPercentage,
+                    email: _data.email,
                     gender: _data.gender,
                     idType: _data.idType,
                     idNumber: _data.idNumber,
@@ -272,9 +280,9 @@ module.exports = function init(site) {
                     active: true,
                     company: _data.company,
                     mobile: _data.mobile,
-                    'type.id': 4,
+                    type: site.usersTypesList[3],
                 };
-                employeeApp.$collection.add(employee, (err, doc) => {
+                employeeApp.add(employee, (err, doc) => {
                     if (doc) {
                         app.update(_data, (err, result) => {
                             if (!err) {

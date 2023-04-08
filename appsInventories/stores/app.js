@@ -351,6 +351,7 @@ module.exports = function init(site) {
                                 code: doc.code,
                                 nameAr: doc.nameAr,
                                 nameEn: doc.nameEn,
+
                                 image: { url: '/images/store.png' },
                                 active: true,
                             };

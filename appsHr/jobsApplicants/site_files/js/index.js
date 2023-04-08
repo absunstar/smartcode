@@ -250,6 +250,9 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
                     $scope.item.interViewTime = new Date($scope.item.interViewTime);
                     $scope.item.attendTime = new Date($scope.item.attendTime);
                     $scope.item.attendTime = new Date($scope.item.attendTime);
+                    if (!response.data.doc.receiveWorkDate) {
+                        $scope.item.receiveWorkDate = new Date();
+                    }
                 } else {
                     $scope.error = response.data.error;
                 }
@@ -592,15 +595,37 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
 
     $scope.validateInputData = function (item) {
         let success = false;
+
+        if (!item.idType) {
+            $scope.error = '##word.Please Select Id Type##';
+            return success;
+        }
+
+        if (!item.qualificationDegree || !item.qualificationDegree.id) {
+            $scope.error = '##word.Please Select Qualification##';
+            return success;
+        }
+
+        if (!item.skillsList.length) {
+            $scope.error = '##word.Please Enter Skill##';
+            return success;
+        }
+
         if (item && item.applicantStatus != 'acceptable' && item.applicantStatus != 'unacceptable') {
             $scope.error = '##word.Please Set Applicant Status##';
             return success;
         }
 
+        // if (!item.attended) {
+        //     $scope.error = '##word.Please Set Attended Informations##';
+        //     return success;
+        // }
+
         if (item.attended && (!item.interviewStatus || !item.interviewStatus.id)) {
             $scope.error = '##word.Please Set Interview Status##';
             return success;
         }
+
         return { success: true };
     };
 

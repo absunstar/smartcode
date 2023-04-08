@@ -675,7 +675,10 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getNationalitiesList = function () {
+    $scope.getNationalitiesList = function ($search) {
+        if ($search && !$search.length) {
+            return;
+        }
         $scope.busy = true;
         $scope.nationalitiesList = [];
         $http({
@@ -690,6 +693,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     image: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {

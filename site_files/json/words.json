@@ -504,5 +504,15 @@
         "name": "Must Set Attendance",
         "En": "Must Set Attendance",
         "Ar": "يجب تسجيل الوقت"
+    },
+    {
+        "name": "Please Select Id Type",
+        "En": "Please Select Id Type",
+        "Ar": "يرجي تحديد نوع تحقيق الشخصية"
+    },
+    {
+        "name": "Please Select Id Type",
+        "En": "Please Select Id Type",
+        "Ar": "يرجي تسجيل بيانات حضور المقابلة"
     }
 ]

@@ -410,7 +410,7 @@ app.controller('employeesContracts', function ($scope, $http, $timeout) {
             method: 'POST',
             url: '/api/sections/all',
             data: {
-                where: { active: true, department },
+                where: { active: true, 'department.id': department.id },
                 select: {
                     id: 1,
                     code: 1,
@@ -433,14 +433,14 @@ app.controller('employeesContracts', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getJobs = function (department) {
+    $scope.getJobs = function (section) {
         $scope.busy = true;
         $scope.jobsList = [];
         $http({
             method: 'POST',
             url: '/api/jobs/all',
             data: {
-                where: { active: true, department },
+                where: { active: true, 'section.id': section.id },
                 select: {
                     id: 1,
                     code: 1,
@@ -486,7 +486,6 @@ app.controller('employeesContracts', function ($scope, $http, $timeout) {
                             elem.date = new Date(elem.date).toISOString().slice(0, 10);
                             $scope.jobsApplicantsList.push(elem);
                         });
-                        // $scope.jobsApplicantsList = response.data.list;
                     }
                 },
                 function (err) {
