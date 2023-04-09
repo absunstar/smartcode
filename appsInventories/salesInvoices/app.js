@@ -271,11 +271,11 @@ module.exports = function init(site) {
                                 };
                                 if (doc.salesType.code == 'patient') {
                                     obj.patient = doc.patient;
-                                    obj.appName = 'salesPatientsInvoices';
+                                    // obj.appName = 'salesPatientsInvoices';
                                     site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id });
                                 } else if (doc.salesType.code == 'company') {
                                     obj.customer = doc.customer;
-                                    obj.appName = 'salesCompaniesInvoices';
+                                    // obj.appName = 'salesCompaniesInvoices';
                                 } else if (doc.salesType.code == 'customer') {
                                     obj.customer = doc.customer;
                                 }

@@ -1,7 +1,7 @@
 module.exports = function init(site) {
   let app = {
     name: 'journalEntry',
-    allowMemory: true,
+    allowMemory: false,
     memoryList: [],
     allowCache: false,
     cacheList: [],
@@ -188,7 +188,7 @@ module.exports = function init(site) {
             errAccountAllValuesList.push(itemName);
           }
           if (_ac.costCentersList && _ac.costCentersList.length > 0) {
-            if (_ac.costCentersList.reduce((a, b) => a +b.rate, 0) != 100) {
+            if (_ac.costCentersList.reduce((a, b) => a + b.rate, 0) != 100) {
               let itemName = req.session.lang == 'Ar' ? _ac.nameAr : _ac.nameEn;
               errCostCentersRateList.push(itemName);
             }
@@ -308,94 +308,114 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1 };
+        let limit = req.body.limit || 50;
         let list = [];
-        app.memoryList
-          .filter((g) => g.company && g.company.id == site.getCompany(req).id)
-          .forEach((doc) => {
-            let obj = { ...doc };
+        if (app.allowMemory) {
+          app.memoryList
+            .filter((g) => g.company && g.company.id == site.getCompany(req).id)
+            .forEach((doc) => {
+              let obj = { ...doc };
 
-            for (const p in obj) {
-              if (!Object.hasOwnProperty.call(select, p)) {
-                delete obj[p];
+              for (const p in obj) {
+                if (!Object.hasOwnProperty.call(select, p)) {
+                  delete obj[p];
+                }
               }
-            }
-            if (!where.active || doc.active) {
-              list.push(obj);
-            }
+              if (!where.active || doc.active) {
+                list.push(obj);
+              }
+            });
+          res.json({
+            done: true,
+            list: list,
           });
-        res.json({
-          done: true,
-          list: list,
-        });
+        } else {
+          where['company.id'] = site.getCompany(req).id;
+
+          if (where && where.fromDate && where.toDate) {
+            let d1 = site.toDate(where.fromDate);
+            let d2 = site.toDate(where.toDate);
+            d2.setDate(d2.getDate() + 1);
+            where.requestDate = {
+              $gte: d1,
+              $lte: d2,
+            };
+            delete where.fromDate;
+            delete where.toDate;
+          }
+          app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+            res.json({
+              done: true,
+              list: docs,
+            });
+          });
+        }
       });
     }
   }
 
   site.autoJournalEntry = function (session, obj) {
-    let setting = site.getSystemSetting({ session });
-    if (setting.establishingAccountsList) {
-      let index = setting.establishingAccountsList.findIndex((itm) => itm.screen.name === obj.appName);
-      if (index !== -1) {
-        let establish = setting.establishingAccountsList[index];
+    let establishingAccountsList = site.getSystemSetting({ session }).establishingAccountsList;
+    if (establishingAccountsList) {
+      let numObj = {
+        company: site.getCompany({ session }),
+        screen: app.name,
+        date: new Date(),
+      };
 
-        if (establish.screen.active) {
-          let numObj = {
-            company: site.getCompany({ session }),
-            screen: app.name,
-            date: new Date(),
-          };
-          let journalEntry = {
-            date: new Date(),
-            image: obj.image,
-            active: true,
-            totalDebtor: 0,
-            totalCreditor: 0,
-            accountsList: [],
-            company: site.getCompany({ session }),
-            branch: site.getBranch({ session }),
-            addUserInfo: obj.userInfo,
-            nameAr: setting.establishingAccountsList[index].screen.nameAr + ' ' + obj.code,
-            nameEn: setting.establishingAccountsList[index].screen.nameEn + ' ' + obj.code,
-          };
+      let journalEntry = {
+        date: new Date(),
+        image: obj.image,
+        active: true,
+        totalDebtor: 0,
+        totalCreditor: 0,
+        accountsList: [],
+        company: site.getCompany({ session }),
+        branch: site.getBranch({ session }),
+        addUserInfo: obj.userInfo,
+      };
 
-          let cb = site.getNumbering(numObj);
-          if (!journalEntry.code && !cb.auto) {
-            response.error = 'Must Enter Code';
-            return;
-          } else if (cb.auto) {
-            journalEntry.code = cb.code;
-          }
-
-          establish.list.forEach((_l) => {
-            if (_l.active && obj[_l.name] > 0 && _l.debtorAccountGuide && _l.debtorAccountGuide.id && _l.creditorAccountGuide && _l.creditorAccountGuide.id) {
-              journalEntry.accountsList.push(
-                {
-                  id: _l.debtorAccountGuide.id,
-                  code: _l.debtorAccountGuide.code,
-                  nameAr: _l.debtorAccountGuide.nameAr,
-                  nameEn: _l.debtorAccountGuide.nameEn,
-                  side: 'debtor',
-                  debtor: obj[_l.name],
-                  creditor: 0,
-                },
-                {
-                  id: _l.creditorAccountGuide.id,
-                  code: _l.creditorAccountGuide.code,
-                  nameAr: _l.creditorAccountGuide.nameAr,
-                  nameEn: _l.creditorAccountGuide.nameEn,
-                  side: 'creditor',
-                  creditor: obj[_l.name],
-                  debtor: 0,
-                }
-              );
-
-              journalEntry.totalCreditor += obj[_l.name];
-              journalEntry.totalDebtor += obj[_l.name];
-            }
-          });
-          app.add(journalEntry, (err, doc) => {});
-        }
+      if (obj.appName === 'salesInvoices') {
+        journalEntry.nameAr = 'فاتورة مبيعات' + ' ' + obj.code;
+        journalEntry.nameEn = 'Sales Invoice' + ' ' + obj.code;
       }
+
+      let cb = site.getNumbering(numObj);
+      if (!journalEntry.code && !cb.auto) {
+        response.error = 'Must Enter Code';
+        return;
+      } else if (cb.auto) {
+        journalEntry.code = cb.code;
+      }
+
+      establishingAccountsList.forEach((_acc) => {
+        if (obj.appName === 'salesInvoices') {
+          if (_acc.id == 8) {
+            journalEntry.accountsList.push({
+              id: _acc.accountGuide.id,
+              code: _acc.accountGuide.code,
+              nameAr: _acc.accountGuide.nameAr,
+              nameEn: _acc.accountGuide.nameEn,
+              side: 'debtor',
+              debtor: obj.totalNet,
+              creditor: 0,
+            });
+            journalEntry.totalDebtor += obj.totalNet;
+          } else if (_acc.id == 2) {
+            journalEntry.accountsList.push({
+              id: _acc.accountGuide.id,
+              code: _acc.accountGuide.code,
+              nameAr: _acc.accountGuide.nameAr,
+              nameEn: _acc.accountGuide.nameEn,
+              side: 'creditor',
+              creditor: obj.totalNet,
+              debtor: 0,
+            });
+            journalEntry.totalCreditor += obj.totalNet;
+          }
+        }
+      });
+      app.add(journalEntry, (err, doc) => {});
     }
   };
 
