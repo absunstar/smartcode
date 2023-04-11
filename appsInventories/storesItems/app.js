@@ -322,15 +322,14 @@ module.exports = function init(site) {
     if (batchesList && batchesList.length > 0) {
       for (let i = 0; i < batchesList.length; i++) {
         let b = batchesList[i];
-        obj.batchesList.forEach((_b) => {
-          if ((_b.sn && _b.sn === b.sn) || _b.code === b.code) {
-            if (type == '+') {
-              _b.count = _b.count + b.count;
-            } else if (type == '-') {
-              _b.count = _b.count - b.count;
-            }
+        let batchIndex = obj.batchesList.findIndex((_b) => (_b.sn && _b.sn === b.sn) || _b.code === b.code);
+        if (batchIndex != -1) {
+          if (type == '+') {
+            obj.batchesList[batchIndex].count = obj.batchesList[batchIndex].count + b.count;
+          } else if (type == '-') {
+            obj.batchesList[batchIndex].count = obj.batchesList[batchIndex].count - b.count;
           }
-        });
+        }
       }
     }
     return obj;
@@ -1095,7 +1094,6 @@ module.exports = function init(site) {
                   doc: batch,
                 });
               } else {
-
                 res.json({
                   done: false,
                   error: 'Not Found Count',

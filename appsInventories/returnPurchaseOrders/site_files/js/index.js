@@ -323,7 +323,7 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
             vendor: invoice.vendor,
             store: invoice.store,
             sourceType: invoice.sourceType,
-            paymentType: invoice.paymentType,
+            invoicePaymentType: invoice.paymentType,
             totalPrice: invoice.totalPrice,
             totalVendorDiscounts: invoice.totalVendorDiscounts,
             totalLegalDiscounts: invoice.totalLegalDiscounts,

@@ -351,26 +351,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getItemUnits = function (item) {
-        $scope.unitsList = [];
-
-        for (const elem of item.unitsList) {
-            $scope.unitsList.push({
-                id: elem.unit.id,
-                barcode: elem.barcode,
-                code: elem.unit.code,
-                nameEn: elem.unit.nameEn,
-                nameAr: elem.unit.nameAr,
-                price: elem.salesPrice,
-                maxDiscount: elem.maxDiscount,
-                discount: elem.discount,
-                discountType: elem.discountType,
-                storesList: elem.storesList,
-            });
-            $scope.orderItem.unit = $scope.unitsList[0];
-        }
-    };
-
     $scope.addToItemsList = function (orderItem) {
         $scope.itemsError = '';
         if (!orderItem.item || !orderItem.item?.id) {
@@ -608,7 +588,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
                             itemGroup: elem.itemGroup,
                             unit: elem.unit,
                             count: elem.count,
-                            price: elem.price,
                             workByBatch: elem.workByBatch,
                             workBySerial: elem.workBySerial,
                             gtin: elem.gtin,
@@ -622,6 +601,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
                             barcode: elem.barcode,
                             batchesList: [],
                             price: elem.price,
+                            averageCost: elem.averageCost,
                             discount: elem.discount,
                             discountType: elem.discountType,
                             extraDiscount: 0,
@@ -692,142 +672,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         });
     };
 
-    $scope.getBarcode = function (ev) {
-        $scope.error = '';
-        let where = {
-            active: true,
-            allowSale: true,
-        };
-        if (!$scope.item.store || !$scope.item.store.id) {
-            $scope.error = '##word.Please Select Store';
-            return;
-        }
-        if (ev && ev.which != 13) {
-            return;
-        }
-
-        if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
-            $scope.qr = site.getQRcode($scope.orderItem.barcode);
-            where['gtinList.gtin'] = $scope.qr.gtin;
-            where.$and = [{ 'unitsList.storesList.batchesList.code': $scope.qr.code }, { 'unitsList.storesList.batchesList.count': { $gt: 0 } }];
-        } else {
-            where['unitsList.barcode'] = $scope.orderItem.barcode;
-        }
-
-        $scope.busy = true;
-        $scope.itemsList = [];
-        $http({
-            method: 'POST',
-            url: '/api/storesItems/all',
-            data: {
-                storeId: $scope.item.store.id,
-                where: where,
-                select: {
-                    id: 1,
-                    code: 1,
-                    nameEn: 1,
-                    nameAr: 1,
-                    noVat: 1,
-                    hasMedicalData: 1,
-                    workByBatch: 1,
-                    workBySerial: 1,
-                    gtinList: 1,
-                    workByQrCode: 1,
-                    validityDays: 1,
-                    unitsList: 1,
-                    itemGroup: 1,
-                },
-            },
-        }).then(
-            function (response) {
-                $scope.busy = false;
-                if (response.data.done && response.data.list.length > 0) {
-                    $scope.itemsList = response.data.list;
-                    if ($scope.itemsList && $scope.itemsList.length == 1) {
-                        let _unit = $scope.itemsList[0].unitsList.find((_u) => {
-                            return _u.barcode == $scope.orderItem.barcode;
-                        });
-                        if (!_unit) {
-                            _unit = $scope.itemsList[0].unitsList[0];
-                        }
-                        $scope.addToItemsList({
-                            item: $scope.itemsList[0],
-                            unit: {
-                                id: _unit.unit.id,
-                                barcode: _unit.barcode,
-                                code: _unit.unit.code,
-                                nameEn: _unit.unit.nameEn,
-                                nameAr: _unit.unit.nameAr,
-                                price: _unit.salesPrice,
-                                maxDiscount: _unit.maxDiscount,
-                                discount: _unit.discount,
-                                extraDiscount: _unit.extraDiscount,
-                                discountType: _unit.discountType,
-                                storesList: _unit.storesList,
-                            },
-                            count: 1,
-                        });
-                    }
-                }
-            },
-            function (err) {
-                $scope.busy = false;
-                $scope.error = err;
-            }
-        );
-    };
-
-    $scope.getStoresItems = function ($search) {
-        $scope.error = '';
-        if ($search && $search.length < 1) {
-            return;
-        }
-
-        if (!$scope.item.store || !$scope.item.store.id) {
-            $scope.error = '##word.Please Select Store';
-            return;
-        }
-        $scope.busy = true;
-        $scope.itemsList = [];
-        $http({
-            method: 'POST',
-            url: '/api/storesItems/all',
-            data: {
-                storeId: $scope.item.store.id,
-                where: {
-                    active: true,
-                    allowSale: true,
-                },
-                select: {
-                    id: 1,
-                    code: 1,
-                    nameEn: 1,
-                    nameAr: 1,
-                    noVat: 1,
-                    hasMedicalData: 1,
-                    workByBatch: 1,
-                    workBySerial: 1,
-                    workByQrCode: 1,
-                    gtinList: 1,
-                    validityDays: 1,
-                    unitsList: 1,
-                    itemGroup: 1,
-                },
-                search: $search,
-            },
-        }).then(
-            function (response) {
-                $scope.busy = false;
-                if (response.data.done && response.data.list.length > 0) {
-                    $scope.itemsList = response.data.list;
-                }
-            },
-            function (err) {
-                $scope.busy = false;
-                $scope.error = err;
-            }
-        );
-    };
 
     $scope.getPaymentTypes = function () {
         $scope.busy = true;
@@ -1474,7 +1318,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.getTaxTypes();
     $scope.getStores();
     $scope.getCustomers();
-    $scope.getStoresItems();
     $scope.getNumberingAuto();
     $scope.getDoctorDeskTopList();
     $scope.getMedicineDurationsList();

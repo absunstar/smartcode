@@ -362,6 +362,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
                 nameEn: elem.unit.nameEn,
                 nameAr: elem.unit.nameAr,
                 price: elem.salesPrice,
+                averageCost: elem.averageCost,
                 maxDiscount: elem.maxDiscount,
                 discount: elem.discount,
                 discountType: elem.discountType,
@@ -398,6 +399,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
             unit: { id: orderItem.unit.id, code: orderItem.unit.code, nameAr: orderItem.unit.nameAr, nameEn: orderItem.unit.nameEn },
             count: orderItem.count,
             price: orderItem.unit.price,
+            averageCost: orderItem.unit.averageCost,
             noVat: orderItem.item.noVat,
             extraDiscount: orderItem.extraDiscount || 0,
             hasMedicalData: orderItem.item.hasMedicalData,
@@ -672,6 +674,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
                                 nameEn: _unit.unit.nameEn,
                                 nameAr: _unit.unit.nameAr,
                                 price: _unit.salesPrice,
+                                averageCost: _unit.averageCost,
                                 maxDiscount: _unit.maxDiscount,
                                 discount: _unit.discount,
                                 extraDiscount: _unit.extraDiscount,
@@ -832,6 +835,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
             obj.taxesList.forEach((t) => {
                 obj.totalCashTaxes += (obj.totalPrice * t.value) / 100;
             });
+
             obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
             obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
             obj.totalVat = site.toNumber(obj.totalVat);

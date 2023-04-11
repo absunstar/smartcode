@@ -395,7 +395,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
             salesType: invoice.salesType,
             store: invoice.store,
             sourceType: invoice.sourceType,
-            paymentType: invoice.paymentType,
+            invoicePaymentType: invoice.paymentType,
             itemsList: invoice.itemsList,
             totalDiscounts: invoice.totalDiscounts,
             totalItemsDiscounts: invoice.totalItemsDiscounts,

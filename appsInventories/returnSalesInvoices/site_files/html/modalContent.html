@@ -3,8 +3,8 @@
     <legend>##word.Invoice Informations##</legend>
     <div class="row">
       <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
-      <i-date class="col6" label="##word.Date##" ng-model="item.date"> </i-date>
-
+      <i-date class="col5" label="##word.Date##" ng-model="item.date"> </i-date>
+      <i-list type="text" v="r" class="col3" ng-model="item.paymentType" label="##word.Payment Type##" items="paymentTypesList" display="name##session.lang##"></i-list>
       <div class="col2">
         <br />
         <i-button type="search" label="##word.Search##" ng-click="showModalGetSalesInvoicesData()"> </i-button>
