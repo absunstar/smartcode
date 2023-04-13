@@ -1,0 +1,65 @@
+[
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersManage",
+        "En": "Manage",
+        "Ar": "إدارة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersAdd",
+        "En": "Add",
+        "Ar": "إضافة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersUpdate",
+        "En": "Edit",
+        "Ar": "تعديل"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersDelete",
+        "En": "Delete",
+        "Ar": "حذف"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersView",
+        "En": "View",
+        "Ar": "عرض"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersSearch",
+        "En": "Search",
+        "Ar": "بحث"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersExport",
+        "En": "Export",
+        "Ar": "تصدير"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersPrint",
+        "En": "Print",
+        "Ar": "طباعة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "exchangeVouchers",
+        "name": "exchangeVouchersUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    }
+]

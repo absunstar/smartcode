@@ -110,7 +110,9 @@
             "jobsAdvertisementsManage",
             "jobsApplicantsManage",
             "employeesContractsManage",
-            "attendanceManage"
+            "attendanceManage",
+            "receiptVouchersManage",
+            "exchangeVouchersManage"
         ]
     }
 ]

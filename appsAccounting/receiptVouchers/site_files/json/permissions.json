@@ -1,0 +1,65 @@
+[
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersManage",
+        "En": "Manage",
+        "Ar": "إدارة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersAdd",
+        "En": "Add",
+        "Ar": "إضافة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersUpdate",
+        "En": "Edit",
+        "Ar": "تعديل"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersDelete",
+        "En": "Delete",
+        "Ar": "حذف"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersView",
+        "En": "View",
+        "Ar": "عرض"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersSearch",
+        "En": "Search",
+        "Ar": "بحث"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersExport",
+        "En": "Export",
+        "Ar": "تصدير"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersPrint",
+        "En": "Print",
+        "Ar": "طباعة"
+    },
+    {
+        "moduleName": "accounting",
+        "screenName": "receiptVouchers",
+        "name": "receiptVouchersUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    }
+]

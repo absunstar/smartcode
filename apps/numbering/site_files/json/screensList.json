@@ -215,6 +215,18 @@
         "name": "Safes"
     },
     {
+        "category": "accounting",
+        "feature": "public",
+        "id": "receiptVouchers",
+        "name": "Receipt Vouchers"
+    },
+    {
+        "category": "accounting",
+        "feature": "public",
+        "id": "exchangeVouchers",
+        "name": "Exchange Vouchers"
+    },
+    {
         "category": "inventory",
         "feature": "public",
         "id": "vendorsGroups",

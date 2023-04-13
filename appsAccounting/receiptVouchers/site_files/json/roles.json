@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "accounting",
+        "name": "receiptVouchersAdmin",
+        "En": "receipt Vouchers Admin",
+        "Ar": "إدارة سندات القبض",
+        "permissions": ["receiptVouchersManage"]
+    }
+]
