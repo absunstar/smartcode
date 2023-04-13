@@ -1,25 +1,29 @@
 <div class="row">
     <div class="row padding">
-        <div class="col9">
-            <div class="row">
-                <div class="row">
-                    <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-date v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
+        <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
 
-                    <i-date v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
-                    <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
-                </div>
+        <i-list class="col4" v="r" label="##word.Voucher Type##" ng-model="item.voucherType" items="vouchersTypesList" display="name##session.lang##" ng-search="item.$voucherType"> </i-list>
+        <i-list class="col4" v="r" label="##word.Safe##" ng-model="item.safe" items="safesList" display="name##session.lang##" ng-search="item.$safe"> </i-list>
+        <i-list class="col4" v="r" label="##word.Currency##" ng-model="item.currency" items="currenciesList" display="name##session.lang##" ng-search="item.$currency"> </i-list>
+    </div>
 
-                <i-list class="col4" v="r" label="##word.Voucher Type##" ng-model="item.voucherType" items="vouchersTypesList" display="name##session.lang##" ng-search="item.$voucherType"> </i-list>
-                <i-list class="col4" v="r" label="##word.Safe##" ng-model="item.safe" items="safesList" display="name##session.lang##" ng-search="item.$safe"> </i-list>
-                <i-list class="col4" v="r" label="##word.Currency##" ng-model="item.currency" items="currenciesList" display="name##session.lang##" ng-search="item.$currency"> </i-list>
-            </div>
+    <div class="row">
+        <div class="col4" ng-show=" (mode =='add' || mode =='edit') && item.voucherType && item.voucherType.id == 1">
+            <br />
+            <i-button type="search" label="##word.Sales Invoice##" ng-click="getSalesInvoices()"></i-button>
         </div>
-        <div class="col3 center">
-            <i-image class="img128 center" ng-model="item.image"></i-image>
+        <div class="col4" ng-show=" (mode =='add' || mode =='edit') && item.voucherType && item.voucherType.id == 2">
+            <br />
+            <i-button type="search" label="##word.Return Purchase##" ng-click="getPurchaseReturn()"></i-button>
+        </div>
+        <div class="col4">
+            <i-control disabled label="##word.Total##" ng-model="item.total"> </i-control>
         </div>
     </div>
-    
 </div>
+
 <div ng-show="mode !== 'add' " class="row">
     <table class="table hover border">
         <tr>

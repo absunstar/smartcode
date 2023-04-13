@@ -12,10 +12,15 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     $scope.item = {};
     $scope.list = [];
 
+    $scope.setTotalValue = function (item) {
+        $scope.item.total = item.totalNet;
+        site.hideModal('#receiptVouchersModalDataList');
+    };
+
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
-        $scope.item = { ...$scope.structure };
+        $scope.item = { ...$scope.structure, date: new Date() };
         site.showModal($scope.modalID);
     };
 
@@ -227,12 +232,16 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         $http({
             method: 'POST',
             url: '/api/vouchersTypes',
-            data: {},
         }).then(
             function (response) {
                 $scope.busy = false;
                 if (response.data.done && response.data.list.length > 0) {
-                    $scope.vouchersTypesList = response.data.list;
+                    response.data.list;
+                    response.data.list.forEach((type) => {
+                        if ((type && type.id === 1) || type.id === 2) {
+                            $scope.vouchersTypesList.push(type);
+                        }
+                    });
                 }
             },
             function (err) {
@@ -271,6 +280,66 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getSalesInvoices = function () {
+        $scope.busy = true;
+        $scope.dataList = [];
+        $http({
+            method: 'POST',
+            url: '/api/salesInvoices/all',
+            data: {
+                where: {},
+                select: {
+                    id: 1,
+                    code: 1,
+                    date: 1,
+                    totalNet: 1,
+                },
+            },
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.dataList = response.data.list;
+                    site.showModal('#receiptVouchersModalDataList');
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = response.data.error || err;
+            }
+        );
+    };
+
+    $scope.getPurchaseReturn = function () {
+        $scope.busy = true;
+        $scope.dataList = [];
+        $http({
+            method: 'POST',
+            url: '/api/returnPurchaseOrders/all',
+            data: {
+                where: {},
+                select: {
+                    id: 1,
+                    code: 1,
+                    date: 1,
+                    totalNet: 1,
+                },
+            },
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.dataList = response.data.list;
+                    site.showModal('#receiptVouchersModalDataList');
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = response.data.error || err;
+            }
+        );
+    };
+
     $scope.getCurrencies = function () {
         $scope.busy = true;
         $scope.currenciesList = [];
@@ -303,6 +372,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
             }
         );
     };
+
     $scope.getAll();
     $scope.getSafes();
     $scope.getCurrencies();

@@ -2,6 +2,7 @@
     <div class="row" x-permissions="receiptVouchersUi || receiptVouchersManage">
         <div x-import="receiptVouchers/modal.html"></div>
         <div x-import="receiptVouchers/modalSearch.html"></div>
+        <div x-import="receiptVouchers/modalDataList.html"></div>
 
         <div class="top-actions">
             <i-button type="add" x-permissions="receiptVouchersAdd || receiptVouchersManage" label="##word.New##" ng-click="showAdd()"></i-button>
@@ -13,18 +14,18 @@
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
                 <tr>
-                    <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
-                    <th>##word.Name##</th>
+                    <th>##word.Type##</th>
+                    <th>##word.Date##</th>
+                    <th>##word.Total##</th>
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
-                    <td>
-                        <i-image view class="logo center" ng-model="item.image"></i-image>
-                    </td>
                     <td class="center blue">{{item.code}}</td>
-                    <td class="center">{{item.name##session.lang##}}</td>
+                    <td class="center">{{item.voucherType.name##session.lang##}}</td>
+                    <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+                    <td class="center"><span class="text-success">{{item.total|number:'0.3'}}</span> <span class="currency">##word.$##</span></td>
                     <td class="center">
                         <span ng-show="item.active" class="text-success"> ##word.Active##</span>
                         <span ng-show="!item.active" class="text-danger">##word.Not Active##</span>

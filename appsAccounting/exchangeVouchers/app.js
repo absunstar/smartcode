@@ -1,7 +1,7 @@
 module.exports = function init(site) {
     let app = {
         name: 'exchangeVouchers',
-        allowMemory: true,
+        allowMemory: false,
         memoryList: [],
         allowCache: false,
         cacheList: [],
@@ -249,99 +249,31 @@ module.exports = function init(site) {
         if (app.allowRouteAll) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || {};
-                let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, active: 1 };
-                let list = [];
-                app.memoryList
-                    .filter((g) => g.company && g.company.id == site.getCompany(req).id)
-                    .forEach((doc) => {
-                        let obj = { ...doc };
+                let search = req.body.search || '';
+                let limit = req.body.limit || 10;
+                let select = req.body.select || { id: 1, code: 1, date: 1, voucherType: 1, safe: 1, currency: 1, total: 1, active: 1 };
+                if (app.allowMemory) {
+                    if (!search) {
+                        search = 'id';
+                    }
+                    let list = app.memoryList
+                        .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
+                        .slice(0, limit);
 
-                        for (const p in obj) {
-                            if (!Object.hasOwnProperty.call(select, p)) {
-                                delete obj[p];
-                            }
-                        }
-                        if (!where.active || doc.active) {
-                            list.push(obj);
-                        }
+                    res.json({
+                        done: true,
+                        list: list,
                     });
-                res.json({
-                    done: true,
-                    list: list,
-                });
-            });
-
-            site.post(`api/${app.name}/import`, (req, res) => {
-                let response = {
-                    done: false,
-                    file: req.form.files.fileToUpload,
-                };
-
-                if (site.isFileExistsSync(response.file.filepath)) {
-                    let docs = [];
-                    if (response.file.originalFilename.like('*.xls*')) {
-                        let workbook = site.XLSX.readFile(response.file.filepath);
-                        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-                    } else {
-                        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
-                    }
-
-                    if (Array.isArray(docs)) {
-                        console.log(`Importing ${app.name} : ${docs.length}`);
-                        let systemCode = 0;
-                        docs.forEach((doc) => {
-                            let numObj = {
-                                company: site.getCompany(req),
-                                screen: app.name,
-                                date: new Date(),
-                            };
-                            let cb = site.getNumbering(numObj);
-
-                            if (cb.auto) {
-                                systemCode = cb.code || ++systemCode;
-                            } else {
-                                systemCode++;
-                            }
-
-                            if (!doc.code) {
-                                doc.code = systemCode;
-                            }
-
-                            let newDoc = {
-                                code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
-                                smallCurrencyAr: doc.smallCurrencyAr,
-                                smallCurrencyEn: doc.smallCurrencyEn,
-                                exchangePrice: doc.exchangePrice,
-                                image: { url: '/images/exchangeVouchers.png' },
-                                active: true,
-                            };
-
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
-
-                            app.add(newDoc, (err, doc2) => {
-                                if (!err && doc2) {
-                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                    console.log(site.dbMessage);
-                                } else {
-                                    site.dbMessage = err.message;
-                                    console.log(site.dbMessage);
-                                }
-                            });
-                        });
-                    } else {
-                        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
-                        console.log(site.dbMessage);
-                    }
                 } else {
-                    site.dbMessage = 'file not exists : ' + response.file.filepath;
-                    console.log(site.dbMessage);
-                }
+                    where['company.id'] = site.getCompany(req).id;
 
-                res.json(response);
+                    app.all({ where, select, limit }, (err, docs) => {
+                        res.json({
+                            done: true,
+                            list: docs,
+                        });
+                    });
+                }
             });
         }
     }
