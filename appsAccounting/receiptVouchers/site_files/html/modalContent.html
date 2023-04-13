@@ -3,22 +3,22 @@
         <div class="col9">
             <div class="row">
                 <div class="row">
-                    <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code"> </i-control>
-                    <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
-                </div>
-                <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
-                <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+                    <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
 
-                <i-control type="text" v="r" ng-model="item.smallCurrencyEn" label="##word.Small Currency##"></i-control>
-                <i-control type="text" v="r" ng-model="item.smallCurrencyAr" label="##word.Small Currency Arabic##"></i-control>
-                <i-control type="number" v="r" ng-model="item.exchangePrice" label="##word.Exchange Price##"></i-control>
+                    <i-date v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
+                    <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+                </div>
+
+                <i-list class="col4" v="r" label="##word.Voucher Type##" ng-model="item.voucherType" items="vouchersTypesList" display="name##session.lang##" ng-search="item.$voucherType"> </i-list>
+                <i-list class="col4" v="r" label="##word.Safe##" ng-model="item.safe" items="safesList" display="name##session.lang##" ng-search="item.$safe"> </i-list>
+                <i-list class="col4" v="r" label="##word.Currency##" ng-model="item.currency" items="currenciesList" display="name##session.lang##" ng-search="item.$currency"> </i-list>
             </div>
         </div>
         <div class="col3 center">
             <i-image class="img128 center" ng-model="item.image"></i-image>
         </div>
     </div>
-    <div class="row padding"></div>
+    
 </div>
 <div ng-show="mode !== 'add' " class="row">
     <table class="table hover border">
