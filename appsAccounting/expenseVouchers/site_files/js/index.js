@@ -281,7 +281,9 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
       method: 'POST',
       url: url,
       data: {
-        where: {},
+        where: {
+          voucher : { $ne: true }
+        },
         select: {
           id: 1,
           code: 1,

@@ -60,11 +60,12 @@ module.exports = function init(site) {
     ];
 
     site.paymentTypes = [
-        { id: 1, code: 001, nameEn: 'CASH', nameAr: 'النقد' },
-        { id: 2, code: 002, nameEn: 'CHEQUE', nameAr: 'بالشيك' },
-        { id: 3, code: 003, nameEn: 'CREDIT CARD', nameAr: 'بطاقة أجلا' },
-        { id: 4, code: 004, nameEn: 'SPAN', nameAr: 'بطاقة سبان' },
-        { id: 5, code: 005, nameEn: 'BANK DEPOSIT', nameAr: 'إيداع بنكي' },
+        { id: 1, nameEn: 'CASH', nameAr: 'النقد' },
+        { id: 2, nameEn: 'DEFERRED', nameAr: 'آجل' },
+        { id: 3, nameEn: 'CHEQUE', nameAr: 'بالشيك' },
+        { id: 4, nameEn: 'CREDIT CARD', nameAr: 'بطاقة أجلا' },
+        { id: 5, nameEn: 'SPAN', nameAr: 'بطاقة سبان' },
+        { id: 6, nameEn: 'BANK DEPOSIT', nameAr: 'إيداع بنكي' },
     ];
 
     site.maritalStatus = [
