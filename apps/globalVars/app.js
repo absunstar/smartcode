@@ -256,10 +256,10 @@ module.exports = function init(site) {
     ];
 
     site.workflowScreensList = [
-        { id: 1, code: 'employeesBonuses', nameEn: 'Employees Bonuses', nameAr: 'مكافات الموظفين' },
-        { id: 2, code: 'employeesPenalties', nameEn: 'Employees Penalties', nameAr: 'جزاءات الموظفين' },
-        { id: 3, code: 'overtimeRequests', nameEn: 'Overtime Requests', nameAr: 'طلبات الوقت الإضافي' },
-        { id: 4, code: 'vacationsRequests', nameEn: 'Vacations Requests', nameAr: 'طلبات الأجازات' },
+        { id: 1, code: 'employeesBonuses', nameEn: 'Employees Bonuses', nameAr: 'مكافات الموظفين', hasWorkFlow: false, approvalList: [] },
+        { id: 2, code: 'employeesPenalties', nameEn: 'Employees Penalties', nameAr: 'جزاءات الموظفين', hasWorkFlow: false, approvalList: [] },
+        { id: 3, code: 'overtimeRequests', nameEn: 'Overtime Requests', nameAr: 'طلبات الوقت الإضافي', hasWorkFlow: false, approvalList: [] },
+        { id: 4, code: 'vacationsRequests', nameEn: 'Vacations Requests', nameAr: 'طلبات الأجازات', hasWorkFlow: false, approvalList: [] },
     ];
 
     site.printersTypes = [

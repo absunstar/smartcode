@@ -28,13 +28,14 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
             financialManagerDeputy: {},
             financialManagerDeputy: {},
         },
-        workflowAssignmentSettings: {},
+        workflowAssignmentSettings: {
+            workflowScreensList: [],
+        },
         hrSettings: {
             nathionalitiesVacationsList: [],
             publicVacations: { annualVacation: 0, casualVacation: 0, regularVacation: 0 },
             nathionalitiesInsurance: [],
             publicInsuranceList: { totalSubscriptions: 21.5, employeePercentage: 9.75, companyPercentage: 11.75 },
-
             absenceDays: 1,
             forgetFingerprint: 0.5,
         },
@@ -100,19 +101,31 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     };
 
     $scope.addToApprovalList = function (screen) {
-        if (!screen.posiotion || !screen.posiotion.id) {
+        if (!screen.$position || !screen.$position.id) {
             $scope.workflowAssignmentSettingsError = '##word.Please select Position##';
             return;
         }
-        screen['approvalList'] = screen['approvalList'] || [];
-        const exisitIndex = screen['approvalList'].findIndex((_pos) => _pos.id == screen.posiotion.id);
+        screen.approvalList = screen.approvalList || [];
+        const exisitIndex = screen.approvalList.findIndex((_pos) => _pos.id == screen.$position.id);
         if (exisitIndex !== -1) {
             $scope.workflowAssignmentSettingsError = '##word.Position Exisit##';
             return;
         }
-        screen['approvalList'].push(screen.posiotion);
+        screen.approvalList.push(screen.$position);
+        // const exisitScreen = $scope.item.workflowAssignmentSettings.findIndex((item) => item.id === screen.id);
+        // if (exisitScreen !== -1) {
+        //     $scope.workflowAssignmentSettingsError = '##word.Screen Exisit##';
+        //     return;
+        // }
+
+        // $scope.item.workflowAssignmentSettings.workflowScreensList.push({
+        //     // screen: { id: screen.id, code: screen.code, nameAr: screen.nameAr, nameEn: screen.nameEn },
+        //     hasWorkFlow: screen.hasWorkFlow,
+        //     approvalList: screen.approvalList,
+        // });
+
         $scope.workflowAssignmentSettingsError = '';
-        screen.posiotion = {};
+        screen.$position = undefined;
     };
 
     $scope.addVatList = function () {
@@ -540,16 +553,25 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     $scope.workflowScreens = function () {
         $scope.busy = true;
         $scope.workflowScreensList = [];
+        // console.log('1111', $scope.item.workflowAssignmentSettings.workflowScreensList);
+
         $http({
             method: 'POST',
             url: '/api/workflowScreensList',
-            data: {},
         }).then(
             function (response) {
                 $scope.busy = false;
                 if (response.data.done && response.data.list.length > 0) {
                     $scope.workflowScreensList = response.data.list;
+
+                    // response.data.list.forEach((scr) => {
+                    //     scr.hasWorkFlow = false;
+                    //     console.log('scr', scr);
+
+                    //     $scope.item.workflowAssignmentSettings.workflowScreensList.push(scr);
+                    // });
                 }
+                // console.log('22222', $scope.item.workflowAssignmentSettings.workflowScreensList);
             },
             function (err) {
                 $scope.busy = false;
