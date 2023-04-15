@@ -56,7 +56,6 @@ module.exports = function init(site) {
 
     app.$collection = site.connectCollection(app.name);
     app.init = function () {
-        console.log('workflowScreensList', app.workflowScreensList);
         if (app.allowMemory) {
             app.$collection.findMany({}, (err, docs) => {
                 if (!err) {

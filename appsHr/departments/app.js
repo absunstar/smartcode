@@ -1,7 +1,7 @@
 module.exports = function init(site) {
     let app = {
         name: 'departments',
-        allowMemory: false,
+        allowMemory: true,
         memoryList: [],
         allowCache: false,
         cacheList: [],

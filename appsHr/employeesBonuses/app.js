@@ -219,6 +219,15 @@ module.exports = function init(site) {
                         return;
                     }
 
+                    const systemSetting = site.getSystemSetting(req);
+                    const exisitScreen = systemSetting.workflowAssignmentSettings.find((elm) => elm.code === app.name);
+
+                    if (exisitScreen && exisitScreen.hasWorkFlow) {
+                        _data.approvalList = exisitScreen.approvalList;
+                        _data.hasWorkFlow = true;
+                    }
+
+                    
                     app.add(_data, (err, doc) => {
                         if (!err && doc) {
                             response.done = true;
@@ -364,7 +373,7 @@ module.exports = function init(site) {
                 });
             });
         }
-        
+
         if (app.allowRouteDelete) {
             site.post({ name: `/api/${app.name}/delete`, require: { permissions: ['login'] } }, (req, res) => {
                 let response = {
