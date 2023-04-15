@@ -1,21 +1,16 @@
-app.controller('receiptVouchers', function ($scope, $http, $timeout) {
+app.controller('expenseVouchers', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'receiptVouchers';
-  $scope.modalID = '#receiptVouchersManageModal';
-  $scope.modalSearchID = '#receiptVouchersSearchModal';
+  $scope.appName = 'expenseVouchers';
+  $scope.modalID = '#expenseVouchersManageModal';
+  $scope.modalSearchID = '#expenseVouchersSearchModal';
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { url: '/images/receiptVouchers.png' },
+    image: { url: '/images/expenseVouchers.png' },
     active: true,
   };
   $scope.item = {};
   $scope.list = [];
-
-  $scope.setTotalValue = function (item) {
-    $scope.item.total = item.totalNet;
-    site.hideModal('#receiptVouchersModalDataList');
-  };
 
   $scope.showAdd = function (_item) {
     $scope.error = '';
@@ -236,7 +231,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 1 || g.id == 2);
+          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 3 || g.id == 4);
         }
       },
       function (err) {
@@ -278,9 +273,9 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   $scope.getSourceInvoices = function () {
     $scope.busy = true;
     $scope.dataList = [];
-    let url = '/api/salesInvoices/all'
-    if($scope.item.voucherType.id == 2){
-        url = '/api/returnPurchaseOrders/all'
+    let url = '/api/purchaseOrders/all'
+    if($scope.item.voucherType.id == 4){
+        url = '/api/returnSalesInvoices/all'
     } 
     $http({
       method: 'POST',
@@ -299,7 +294,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.dataList = response.data.list;
-          site.showModal('#receiptVouchersModalDataList');
+          site.showModal('#expenseVouchersModalDataList');
         }
       },
       function (err) {
@@ -307,6 +302,11 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         $scope.error = response.data.error || err;
       }
     );
+  };
+
+  $scope.setTotalValue = function (item) {
+    $scope.item.total = item.totalNet;
+    site.hideModal('#expenseVouchersModalDataList');
   };
 
   $scope.getCurrencies = function () {

@@ -1010,9 +1010,9 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
             });
             item.totalDiscounts = item.totalCashDiscounts + item.totalItemsDiscounts;
             item.totalNet = item.totalAfterVat - item.totalCashDiscounts + item.totalCashTaxes;
-            obj.totalVat = site.toNumber(obj.totalVat);
-            obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
-            obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
+            item.totalVat = site.toNumber(item.totalVat);
+            item.totalAfterVat = site.toNumber(item.totalAfterVat);
+            item.totalDiscounts = site.toNumber(item.totalDiscounts);
 
             item.totalNet = site.toNumber(item.totalNet);
         }, 300);

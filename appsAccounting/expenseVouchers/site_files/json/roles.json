@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "accounting",
+        "name": "expenseVouchersAdmin",
+        "En": "Expense Vouchers Admin",
+        "Ar": "إدارة سندات الصرف",
+        "permissions": ["expenseVouchersManage"]
+    }
+]

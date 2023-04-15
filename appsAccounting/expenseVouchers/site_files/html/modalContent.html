@@ -7,9 +7,9 @@
 
   <div class="row">
     <i-list class="col4" v="r" label="##word.Voucher Type##" ng-model="item.voucherType" items="vouchersTypesList" display="name##session.lang##" ng-search="item.$voucherType"> </i-list>
-    <div class="col4" ng-show=" (mode =='add' || mode =='edit') && item.voucherType">
+    <div class="col4" ng-show=" (mode =='add' || mode =='edit') && item.voucherType.id">
       <br />
-      <i-button type="search" label="##word.Sales Invoice##" ng-click="getSourceInvoices()"></i-button>
+      <i-button type="search" label="##word.Invoices List##" ng-click="getSourceInvoices()"></i-button>
     </div>
   </div>
 

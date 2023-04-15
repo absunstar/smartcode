@@ -112,7 +112,7 @@
             "employeesContractsManage",
             "attendanceManage",
             "receiptVouchersManage",
-            "exchangeVouchersManage"
+            "expenseVouchersManage"
         ]
     }
 ]

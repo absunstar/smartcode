@@ -223,8 +223,8 @@
     {
         "category": "accounting",
         "feature": "public",
-        "id": "exchangeVouchers",
-        "name": "Exchange Vouchers"
+        "id": "expenseVouchers",
+        "name": "Expense Vouchers"
     },
     {
         "category": "inventory",

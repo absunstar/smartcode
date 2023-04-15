@@ -1,64 +1,64 @@
 [
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersManage",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersManage",
         "En": "Manage",
         "Ar": "إدارة"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersAdd",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersAdd",
         "En": "Add",
         "Ar": "إضافة"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersUpdate",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersUpdate",
         "En": "Edit",
         "Ar": "تعديل"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersDelete",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersDelete",
         "En": "Delete",
         "Ar": "حذف"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersView",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersView",
         "En": "View",
         "Ar": "عرض"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersSearch",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersSearch",
         "En": "Search",
         "Ar": "بحث"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersExport",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersExport",
         "En": "Export",
         "Ar": "تصدير"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersPrint",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersPrint",
         "En": "Print",
         "Ar": "طباعة"
     },
     {
         "moduleName": "accounting",
-        "screenName": "exchangeVouchers",
-        "name": "exchangeVouchersUi",
+        "screenName": "expenseVouchers",
+        "name": "expenseVouchersUi",
         "En": "UI",
         "Ar": "الواجهة الرسومية"
     }

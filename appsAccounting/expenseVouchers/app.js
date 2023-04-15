@@ -1,6 +1,7 @@
 module.exports = function init(site) {
     let app = {
-        name: 'exchangeVouchers',
+        name: 'expenseVouchers',
+        
         allowMemory: false,
         memoryList: [],
         allowCache: false,
@@ -144,7 +145,7 @@ module.exports = function init(site) {
                     name: app.name,
                 },
                 (req, res) => {
-                    res.render(app.name + '/index.html', { title: app.name, appName: 'Exchange Vouchers' }, { parser: 'html', compres: true });
+                    res.render(app.name + '/index.html', { title: app.name, appName: 'Expense Vouchers' }, { parser: 'html', compres: true });
                 }
             );
         }
