@@ -278,15 +278,17 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   $scope.getSourceInvoices = function () {
     $scope.busy = true;
     $scope.dataList = [];
-    let url = '/api/salesInvoices/all'
-    if($scope.item.voucherType.id == 2){
-        url = '/api/returnPurchaseOrders/all'
-    } 
+    let url = '/api/salesInvoices/all';
+    if ($scope.item.voucherType.id == 2) {
+      url = '/api/returnPurchaseOrders/all';
+    }
     $http({
       method: 'POST',
       url: url,
       data: {
-        where: {},
+        where: {
+          voucher: { $ne: true },
+        },
         select: {
           id: 1,
           code: 1,
