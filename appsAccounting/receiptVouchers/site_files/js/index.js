@@ -7,13 +7,15 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   $scope._search = {};
   $scope.structure = {
     image: { url: '/images/receiptVouchers.png' },
-    active: true,
   };
   $scope.item = {};
   $scope.list = [];
 
   $scope.setTotalValue = function (item) {
     $scope.item.total = item.totalNet;
+    $scope.item.invoiceId = item.id;
+    $scope.item.invoiceCode = item.code;
+    $scope.item.invoiceTotal = item.totalNet;
     site.hideModal('#receiptVouchersModalDataList');
   };
 
@@ -287,7 +289,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       url: url,
       data: {
         where: {
-          voucher: { $ne: true },
+          remainPaid: { $gt: 0 },
         },
         select: {
           id: 1,

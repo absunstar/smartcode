@@ -304,7 +304,7 @@ module.exports = function init(site) {
         { id: 1, code: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
         { id: 2, code: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
         { id: 3, code: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
-        { id: 4, code: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجعغ مبيعات' },
+        { id: 4, code: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
     ];
 
     site.post('/api/usersTypesList', (req, res) => {

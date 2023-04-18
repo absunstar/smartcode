@@ -215,6 +215,7 @@ module.exports = function init(site) {
         let response = {
           done: false,
         };
+        const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
         let _data = req.data;
 
@@ -223,21 +224,41 @@ module.exports = function init(site) {
           items: _data.itemsList,
         };
         _data.addApprovedInfo = req.getUserFinger();
+
+        if (accountsSetting.linkAccountsToStores && _data.paymentType.id != 2 && _data.safe && _data.safe.id) {
+          let obj = {
+            date: new Date(),
+            voucherType: site.vouchersTypes[2],
+            invoiceId: _data.id,
+            invoiceCode: _data.code,
+            total: _data.amountPaid,
+            safe: _data.safe,
+            paymentType: _data.paymentType,
+            addUserInfo: _data.approveUserInfo,
+            company: _data.company,
+            branch: _data.branch,
+          };
+          _data.remainPaid = _data.totalNet - _data.amountPaid;
+          site.addExpenseVouchers(obj);
+        } else {
+          _data.remainPaid = _data.totalNet;
+        }
+
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
             const salesInvoicesApp = site.getApp('salesInvoices');
             salesInvoicesApp.$collection.update({ where: { id: _data.invoiceId, code: _data.invoiceCode }, set: { hasReturnTransaction: true } });
-            let obj = {
+            let objJournal = {
               code: result.doc.code,
               image: result.doc.image,
               appName: app.name,
               totalNet: result.doc.totalNet,
               userInfo: result.doc.addApprovedInfo,
             };
-            
+
             result.doc.itemsList.forEach((_item) => {
-              obj.totalAverageCost += _item.averageCost;
+              objJournal.totalAverageCost += _item.averageCost;
               let item = { ..._item };
               item.store = { ...result.doc.store };
               site.editItemsBalance(item, app.name);
@@ -251,16 +272,16 @@ module.exports = function init(site) {
             });
 
             if (result.doc.salesType.code == 'patient') {
-              obj.customer = result.doc.patient;
+              objJournal.customer = result.doc.patient;
             }
 
             // else if (result.doc.salesType.code == 'company') {
-            //     obj.customer = result.doc.customer;
+            //     objJournal.customer = result.doc.customer;
             // } else if (result.doc.salesType.code == 'customer') {
-            //     obj.customer = result.doc.customer;
+            //     objJournal.customer = result.doc.customer;
             // }
 
-            site.autoJournalEntrySalesInvoice(req.session, obj);
+            // site.autoJournalEntrySalesInvoice(req.session, objJournal);
             response.result = result;
           } else {
             response.error = err.message;
@@ -346,6 +367,15 @@ module.exports = function init(site) {
       });
     }
   }
+
+  site.changeRemainPaidReturnSales = function (obj) {
+    app.view({ id: obj.id }, (err, doc) => {
+      if (!err && doc) {
+        doc.remainPaid -= obj.total;
+        app.update(doc, (err, result) => {});
+      }
+    });
+  };
 
   app.init();
   site.addApp(app);
