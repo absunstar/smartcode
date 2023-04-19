@@ -406,6 +406,8 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       totalVat: invoice.totalVat,
       totalAfterVat: invoice.totalAfterVat,
       totalNet: invoice.totalNet,
+      amountPaid: invoice.totalNet,
+
       totalPrice: invoice.totalPrice,
     };
     if ($scope.item.salesType.code == 'patient') {

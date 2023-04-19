@@ -8,5 +8,6 @@
     { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersPrint", "En": "Print", "Ar": "طباعة" },
     { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "returnPurchaseOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" },
-    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "approveReturnPurchaseOrder", "En": "Approve Return Purchase Order", "Ar": "إعتماد مرتجع فاتورة شراء" }
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "approveReturnPurchaseOrder", "En": "Approve Return Purchase Order", "Ar": "إعتماد مرتجع فاتورة شراء" },
+    { "moduleName": "inventory", "screenName": "returnPurchaseOrders", "name": "voucherReturnPurchaseOrders", "En": "Add Voucher", "Ar": "إضافة سند" }
 ]

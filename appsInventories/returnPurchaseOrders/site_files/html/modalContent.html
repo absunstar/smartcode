@@ -136,6 +136,12 @@
         </div>
       </div>
     </fieldset>
+
+    <div class="row" ng-show="item.paymentType.id != 2 && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
+      <i-list class="col4" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+      <i-control class="col3" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
+    </div>
+  
   </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">

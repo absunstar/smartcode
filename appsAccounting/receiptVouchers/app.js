@@ -158,6 +158,17 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
 
+        if (!_data.date) {
+          _data.date = new Date();
+        }
+        if (_data.voucherType.id == 1 || _data.voucherType.id == 2) {
+          if (_data.total > _data.$remainPaid) {
+            response.error = 'The amount paid is greater than the remaining invoice amount ';
+            res.json(response);
+            return;
+          }
+        }
+
         let numObj = {
           company: site.getCompany(req),
           screen: app.name,
@@ -173,12 +184,23 @@ module.exports = function init(site) {
           _data.code = cb.code;
         }
 
+
+
         _data.addUserInfo = req.getUserFinger();
 
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
             response.doc = doc;
+            let obj = {
+              id: doc.invoiceId,
+              total: doc.total,
+            };
+            if (doc.voucherType.id == 1) {
+              site.changeRemainPaidSalesInvoices(obj);
+            } else if (doc.voucherType.id == 2) {
+              site.changeRemainPaidReturnPurchases(obj);
+            }
           } else {
             response.error = err.mesage;
           }
@@ -275,6 +297,20 @@ module.exports = function init(site) {
       });
     }
   }
+
+  site.addReceiptVouchers = function (obj) {
+    let numObj = {
+      company: obj.company,
+      screen: app.name,
+      date: new Date(),
+    };
+
+    let cb = site.getNumbering(numObj);
+    obj.code = cb.code;
+    if (obj.code) {
+      app.add(obj, (err, doc) => {});
+    }
+  };
 
   app.init();
   site.addApp(app);

@@ -533,7 +533,8 @@ module.exports = function init(site) {
         app.update(doc, (err, result) => {})
       }
     });
-    
+
+
 
     // app.$collection.updateOne(
     //   {

@@ -228,7 +228,7 @@ module.exports = function init(site) {
         if (accountsSetting.linkAccountsToStores && _data.paymentType.id != 2 && _data.safe && _data.safe.id) {
           let obj = {
             date: new Date(),
-            voucherType: site.vouchersTypes[2],
+            voucherType: site.vouchersTypes[3],
             invoiceId: _data.id,
             invoiceCode: _data.code,
             total: _data.amountPaid,
@@ -335,7 +335,7 @@ module.exports = function init(site) {
         let where = req.body.where || {};
         let search = req.body.search || '';
         let limit = req.body.limit || 10;
-        let select = req.body.select || { id: 1, code: 1, invoiceCode: 1, invoiceId: 1, date: 1, customer: 1, itemsList: 1, paymentType: 1, store: 1, active: 1, approved: 1 };
+        let select = req.body.select || { id: 1, code: 1, invoiceCode: 1, invoiceId: 1, date: 1, customer: 1, paymentType: 1, store: 1, active: 1, approved: 1, remainPaid: 1 };
 
         if (where && where.fromDate && where.toDate) {
           let d1 = site.toDate(where.fromDate);

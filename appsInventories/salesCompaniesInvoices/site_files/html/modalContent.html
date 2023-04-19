@@ -225,36 +225,42 @@
       <div class="row">
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Prices## : {{item.totalPrice}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Prices## : {{item.totalPrice  | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Discounts## : {{item.totalDiscounts}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Discounts## : {{item.totalDiscounts  | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Before VAT## : {{item.totalBeforeVat}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Before VAT## : {{item.totalBeforeVat  | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Vat## : {{item.totalVat}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Vat## : {{item.totalVat  | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total After VAT## : {{item.totalAfterVat}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total After VAT## : {{item.totalAfterVat  | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Net## : {{item.totalNet}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Net## : {{item.totalNet  | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
       </div>
     </fieldset>
+
+    <div class="row" ng-show="item.paymentType.id != 2 && setting.accountsSetting.linkAccountsToStores">
+      <i-list class="col4" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+      <i-control class="col3" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
+    </div>
+
   </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">

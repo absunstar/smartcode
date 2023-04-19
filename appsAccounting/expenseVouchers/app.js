@@ -15,19 +15,7 @@ module.exports = function init(site) {
     allowRouteAll: true,
   };
 
-  site.addExpenseVouchers = function (obj) {
-    let numObj = {
-      company: obj.company,
-      screen: app.name,
-      date: new Date(),
-    };
-
-    let cb = site.getNumbering(numObj);
-    obj.code = cb.code;
-    if (obj.code) {
-      app.add(obj, (err, doc) => {});
-    }
-  };
+ 
   app.$collection = site.connectCollection(app.name);
 
   app.init = function () {
@@ -309,6 +297,20 @@ module.exports = function init(site) {
       });
     }
   }
+
+  site.addExpenseVouchers = function (obj) {
+    let numObj = {
+      company: obj.company,
+      screen: app.name,
+      date: new Date(),
+    };
+
+    let cb = site.getNumbering(numObj);
+    obj.code = cb.code;
+    if (obj.code) {
+      app.add(obj, (err, doc) => {});
+    }
+  };
 
   app.init();
   site.addApp(app);
