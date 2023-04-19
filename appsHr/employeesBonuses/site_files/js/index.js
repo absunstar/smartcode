@@ -7,8 +7,7 @@ app.controller('employeesBonuses', function ($scope, $http, $timeout) {
     $scope._search = { fromDate: new Date(), toDate: new Date() };
     $scope.structure = {
         image: {},
-        approved: false,
-        requestStatus: 'new',
+
         active: true,
     };
     $scope.item = {};
@@ -28,7 +27,7 @@ app.controller('employeesBonuses', function ($scope, $http, $timeout) {
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
-        $scope.item = { ...$scope.structure, date: new Date() };
+        $scope.item = { ...$scope.structure, requestStatus: 'new', approved: false, finalApproval: false, date: new Date() };
         site.showModal($scope.modalID);
     };
 

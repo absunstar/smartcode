@@ -430,36 +430,43 @@ module.exports = function init(site) {
 
         site.security.login(obj_where, function (err, user) {
             if (!err && user) {
-                if ((department = site.getApp('departments').memoryList.find((dep) => dep.manager.id == user.id))) {
+                if ((department = site.getApp('departments').memoryList.find((dep) => dep.manager && dep.manager.id == user.id))) {
                     user.isDepartmentManager = true;
                     user.department = department;
+                    user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 4);
                 }
-                if ((section = site.getApp('sections').memoryList.find((dep) => dep.manager.id == user.id))) {
+
+                if ((section = site.getApp('sections').memoryList.find((sec) => sec.manager && sec.manager.id == user.id))) {
                     user.isSectionManager = true;
                     user.section = section;
+                    user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 5);
                 }
+
                 if (site.getSystemSetting(req).administrativeStructure.ceo.id == user.id) {
                     user.isCeo = true;
+                    user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 1);
                 }
 
                 if (site.getSystemSetting(req).administrativeStructure.ceoDeputy.id == user.id) {
                     user.isCeoDeputy = true;
                 }
 
-                if (site.getSystemSetting(req).administrativeStructure.hrManager.id == user.id) {
-                    user.isHrManager = true;
-                }
-
-                if (site.getSystemSetting(req).administrativeStructure.hrManagerDeputy.id == user.id) {
-                    user.isHrManagerDeputy = true;
-                }
-
                 if (site.getSystemSetting(req).administrativeStructure.financialManager.id == user.id) {
                     user.isFinancialManager = true;
+                    user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 2);
                 }
 
                 if (site.getSystemSetting(req).administrativeStructure.financialManagerDeputy.id == user.id) {
                     user.isFinancialManagerDeputy = true;
+                }
+
+                if (site.getSystemSetting(req).administrativeStructure.hrManager.id == user.id) {
+                    user.isHrManager = true;
+                    user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 3);
+                }
+
+                if (site.getSystemSetting(req).administrativeStructure.hrManagerDeputy.id == user.id) {
+                    user.isHrManagerDeputy = true;
                 }
 
                 req.session.user = user;

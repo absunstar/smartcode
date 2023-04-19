@@ -225,9 +225,9 @@ module.exports = function init(site) {
                     if (exisitScreen && exisitScreen.hasWorkFlow) {
                         _data.approvalList = exisitScreen.approvalList;
                         _data.hasWorkFlow = true;
+                        _data.requiredApproval = exisitScreen.approvalList[0];
                     }
 
-                    
                     app.add(_data, (err, doc) => {
                         if (!err && doc) {
                             response.done = true;
@@ -305,6 +305,9 @@ module.exports = function init(site) {
                     done: false,
                 };
 
+                const user = req.session.user;
+                // console.log('user', user);
+
                 let _data = req.data;
 
                 _data['requestStatus'] = 'accepted';
@@ -317,16 +320,37 @@ module.exports = function init(site) {
 
                     const exisitIndex = docs.findIndex((doc) => d1.getTime() == site.toDate(doc.date).getTime() && doc.employeesBonusName.id == _data.employeesBonusName.id);
 
-                    if (exisitIndex == -1 || (exisitIndex !== -1 && docs[exisitIndex].id == _data.id)) {
-                        app.update(_data, (err, result) => {
-                            if (!err) {
-                                response.done = true;
-                                response.result = result;
-                            } else {
-                                response.error = err.message;
-                            }
-                            res.json(response);
-                        });
+                    // console.log(
+                    //     'docs[exisitIndex].id == _data.id',
+                    //     docs[exisitIndex].id == _data.id,
+                    //     docs[exisitIndex].hasWorkFlow,
+                    //     docs[exisitIndex].approvalList,
+                    //     docs[exisitIndex].requiredApproval
+                    // );
+
+                    console.log('match', user.workflowPosition, docs[exisitIndex].requiredApproval);
+                    // console.log('match', user.workflowPosition.id == docs[exisitIndex].requiredApproval.id);
+
+                    if (exisitIndex !== -1 && docs[exisitIndex].id == _data.id) {
+                        if (docs[exisitIndex].hasWorkFlow) {
+
+                        } else {
+
+                        }
+                        // app.update(_data, (err, result) => {
+                        //     if (!err) {
+                        response.done = true;
+                        //         response.result = result;
+                        //     } else {
+                        //         response.error = err.message;
+                        //     }
+                        res.json(response);
+                        // });
+                    } else if (exisitIndex == -1) {
+                        response.done = false;
+                        response.error = 'Employee Penality Not Exisit';
+                        res.json(response);
+                        return;
                     } else {
                         response.done = false;
                         response.error = 'Employee Penality Exisit In Same Date';
@@ -479,31 +503,6 @@ module.exports = function init(site) {
                         list: list,
                     });
                 } else {
-                    // where['company.id'] = site.getCompany(req).id;
-                    // if (where && where.dateTo) {
-                    //     let d1 = site.toDate(where.date);
-                    //     let d2 = site.toDate(where.dateTo);
-                    //     d2.setDate(d2.getDate() + 1);
-                    //     where.date = {
-                    //         $gte: d1,
-                    //         $lt: d2,
-                    //     };
-                    //     delete where.dateTo;
-                    // } else if (where.date) {
-                    //     let d1 = site.toDate(where.date);
-                    //     let d2 = site.toDate(where.date);
-                    //     d2.setDate(d2.getDate() + 1);
-                    //     where.date = {
-                    //         $gte: d1,
-                    //         $lt: d2,
-                    //     };
-                    // }
-                    // app.all({ where, select, sort: { id: -1 }, limit: req.body.limit }, (err, docs) => {
-                    //     res.json({
-                    //         done: true,
-                    //         list: docs,
-                    //     });
-                    // });
                     where['company.id'] = site.getCompany(req).id;
                     app.all({ where, select, limit }, (err, docs) => {
                         res.json({

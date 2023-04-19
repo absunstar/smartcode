@@ -259,6 +259,7 @@ module.exports = function init(site) {
                     employeePercentage: _data.employeePercentage,
                     companyPercentage: _data.companyPercentage,
                     email: _data.email,
+                    password: _data.mobile,
                     gender: _data.gender,
                     idType: _data.idType,
                     idNumber: _data.idNumber,
@@ -281,6 +282,14 @@ module.exports = function init(site) {
                     company: _data.company,
                     mobile: _data.mobile,
                     type: site.usersTypesList[3],
+                    roles: [
+                        {
+                            moduleName: 'public',
+                            name: 'employeePermissions',
+                            En: 'Employee Permissions',
+                            Ar: 'صلاحيات الموظف',
+                        },
+                    ],
                 };
                 employeeApp.add(employee, (err, doc) => {
                     if (doc) {

@@ -627,7 +627,7 @@ module.exports = function init(site) {
                         name: 'employeePermissions',
                         En: 'Employee Permissions',
                         Ar: 'صلاحيات الموظف',
-                    },
+                    }
                 ];
                 _data.type = site.usersTypesList[3];
 

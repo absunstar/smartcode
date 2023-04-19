@@ -783,32 +783,6 @@
 
                             <div class="col6">
                                 <fieldset>
-                                    <legend>##word.HR##</legend>
-                                    <div class="row">
-                                        <i-list
-                                            class="col6"
-                                            ng-model="item.administrativeStructure.hrManager"
-                                            items="employeesList"
-                                            display="fullName##session.lang##"
-                                            label="##word.Manager##"
-                                            ng-search="hr.$manager"
-                                        >
-                                        </i-list>
-                                        <i-list
-                                            class="col6"
-                                            ng-model="item.administrativeStructure.hrManagerDeputy"
-                                            items="employeesList"
-                                            display="fullName##session.lang##"
-                                            label="##word.Deputy##"
-                                            ng-search="hr.$hrDeputy"
-                                        >
-                                        </i-list>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-                            <div class="col6">
-                                <fieldset>
                                     <legend>##word.Financial Manager##</legend>
                                     <div class="row">
                                         <i-list
@@ -832,13 +806,39 @@
                                     </div>
                                 </fieldset>
                             </div>
+
+                            <div class="col6">
+                                <fieldset>
+                                    <legend>##word.HR##</legend>
+                                    <div class="row">
+                                        <i-list
+                                            class="col6"
+                                            ng-model="item.administrativeStructure.hrManager"
+                                            items="employeesList"
+                                            display="fullName##session.lang##"
+                                            label="##word.Manager##"
+                                            ng-search="hr.$manager"
+                                        >
+                                        </i-list>
+                                        <i-list
+                                            class="col6"
+                                            ng-model="item.administrativeStructure.hrManagerDeputy"
+                                            items="employeesList"
+                                            display="fullName##session.lang##"
+                                            label="##word.Deputy##"
+                                            ng-search="hr.$hrDeputy"
+                                        >
+                                        </i-list>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
                     </fieldset>
                 </div>
 
                 <div id="workflowAssignmentSettings" class="tab-content">
                     <h3 class="bold error">{{workflowAssignmentSettingsError}}</h3>
-            
+
                     <fieldset ng-repeat="screen in item.workflowAssignmentSettings">
                         <legend>{{screen.name##session.lang##}}</legend>
                         <div class="row">
