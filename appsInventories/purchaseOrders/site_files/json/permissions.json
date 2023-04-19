@@ -10,5 +10,6 @@
     { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" },
     { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "purchaseOrdersItem", "En": "Approve Item", "Ar": "إعتماد أصناف فاتورة مشتريات" },
     { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "unapprovePurchaseOrdersItem", "En": "Unapprove Item", "Ar": "إلغاء إعتماد أصناف فاتورة شراء" },
-    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "approvePurchaseOrders", "En": "Approve Order", "Ar": "إعتماد فاتورة مشتريات" }
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "approvePurchaseOrders", "En": "Approve Order", "Ar": "إعتماد فاتورة مشتريات" },
+    { "moduleName": "inventory", "screenName": "purchaseOrders", "name": "voucherPurchaseOrders", "En": "Add Voucher", "Ar": "إضافة سند" }
 ]

@@ -8,5 +8,6 @@
     { "moduleName": "inventory", "screenName": "returnSalesInvoices", "name": "returnSalesInvoicesExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "returnSalesInvoices", "name": "returnSalesInvoicesPrint", "En": "Print", "Ar": "طباعة" },
     { "moduleName": "inventory", "screenName": "returnSalesInvoices", "name": "returnSalesInvoicesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
-    { "moduleName": "inventory", "screenName": "returnSalesInvoices", "name": "approveReturnSalesInvoice", "En": "Approve Return Sales Invoice", "Ar": "الموافقة علي إرجاع فاتورة بيع" }
+    { "moduleName": "inventory", "screenName": "returnSalesInvoices", "name": "approveReturnSalesInvoice", "En": "Approve Return Sales Invoice", "Ar": "الموافقة علي إرجاع فاتورة بيع" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoices", "name": "voucherReturnSalesInvoices", "En": "Add Voucher", "Ar": "إضافة سند" }
 ]

@@ -7,13 +7,16 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   $scope._search = {};
   $scope.structure = {
     image: { url: '/images/receiptVouchers.png' },
-    active: true,
   };
   $scope.item = {};
   $scope.list = [];
 
   $scope.setTotalValue = function (item) {
-    $scope.item.total = item.totalNet;
+    $scope.error = '';
+    $scope.item.invoiceId = item.id;
+    $scope.item.invoiceCode = item.code;
+    $scope.item.$remainPaid = item.remainPaid;
+    $scope.item.total = item.remainPaid;
     site.hideModal('#receiptVouchersModalDataList');
   };
 
@@ -287,13 +290,14 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       url: url,
       data: {
         where: {
-          voucher: { $ne: true },
+          remainPaid: { $gt: 0 },
         },
         select: {
           id: 1,
           code: 1,
           date: 1,
           totalNet: 1,
+          remainPaid: 1,
         },
       },
     }).then(
@@ -302,6 +306,9 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         if (response.data.done && response.data.list.length > 0) {
           $scope.dataList = response.data.list;
           site.showModal('#receiptVouchersModalDataList');
+        } else {
+          $scope.error = 'Data Not Found';
+          return;
         }
       },
       function (err) {

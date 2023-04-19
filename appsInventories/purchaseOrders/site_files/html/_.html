@@ -3,6 +3,7 @@
         <div x-import="purchaseOrders/modal.html"></div>
         <div x-import="purchaseOrders/modalSearch.html"></div>
         <div x-import="purchaseOrders/batchModal.html"></div>
+        <div x-import="purchaseOrders/expenseVouchersModal.html"></div>
 
         <div class="top-actions">
             <i-button type="add" x-permissions="purchaseOrdersAdd || purchaseOrdersManage" label="##word.New##" ng-click="showAdd()"></i-button>
@@ -51,6 +52,7 @@
                     </td>
 
                     <td class="center not-print">
+                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherPurchaseOrders || purchaseOrdersManage" ng-show="item.approved && item.paymentType.id == 2 && item.remainPaid > 0" ng-click="showAddVoucher(item)"></i-button>
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button type="edit" ng-show="!item.approved" x-permissions="purchaseOrdersUpdate || purchaseOrdersManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>

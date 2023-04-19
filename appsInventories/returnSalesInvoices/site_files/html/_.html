@@ -4,6 +4,7 @@
         <div x-import="returnSalesInvoices/modal.html"></div>
         <div x-import="returnSalesInvoices/modalSearch.html"></div>
         <div x-import="returnSalesInvoices/getSalesInvoicesModal.html"></div>
+        <div x-import="purchaseOrders/expenseVouchersModal.html"></div>
 
         <div class="top-actions">
             <i-button type="add" x-permissions="returnSalesInvoicesAdd || returnSalesInvoicesManage" label="##word.New##" ng-click="showAdd()"></i-button>
@@ -45,6 +46,7 @@
                     </td>
 
                     <td class="center not-print">
+                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherReturnSalesInvoices || returnSalesInvoicesManage" ng-show="item.approved && item.paymentType.id == 2 && item.remainPaid > 0" ng-click="showAddVoucher(item)"></i-button>
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button

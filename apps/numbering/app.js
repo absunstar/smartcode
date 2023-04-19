@@ -119,7 +119,7 @@ module.exports = function init(site) {
     $numbering.update(data, (err, result) => {
       if (!err) {
         Numbering.forEach((n, i) => {
-          if (n.company.id == result.doc.company.id) {
+          if (result.doc && n.company.id == result.doc.company.id) {
             Numbering[i] = result.doc;
           }
         });

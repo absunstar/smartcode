@@ -7,5 +7,6 @@
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesSearch", "En": "Search", "Ar": "بحث" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesPrint", "En": "Print", "Ar": "طباعة" },
-    { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+    { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "voucherSalesCompaniesInvoices", "En": "Add Voucher", "Ar": "إضافة سند" }
 ]

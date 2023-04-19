@@ -156,6 +156,9 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        if (_data.paymentType.id == 2) {
+          _data.amountPaid = 0;
+        }
         _data['approved'] = true;
         _data.company = site.getCompany(req);
         const storesSetting = site.getSystemSetting(req).storesSetting;
@@ -237,6 +240,7 @@ module.exports = function init(site) {
             store: _data.store,
             items: _data.itemsList,
           };
+          const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
           site.checkOverDraft(req, overDraftObj, (overDraftCb) => {
             if (!overDraftCb.done) {
@@ -247,6 +251,26 @@ module.exports = function init(site) {
               return;
             }
             _data.addUserInfo = req.getUserFinger();
+
+            if (accountsSetting.linkAccountsToStores && _data.paymentType.id != 2 && _data.safe && _data.safe.id) {
+              let obj = {
+                date: new Date(),
+                voucherType: site.vouchersTypes[0],
+                invoiceId: _data.id,
+                invoiceCode: _data.code,
+                total: _data.amountPaid,
+                safe: _data.safe,
+                paymentType: _data.paymentType,
+                addUserInfo: _data.approveUserInfo,
+                company: _data.company,
+                branch: _data.branch,
+              };
+              _data.remainPaid = _data.totalNet - _data.amountPaid;
+              site.addReceiptVouchers(obj);
+            } else {
+              _data.remainPaid = _data.totalNet;
+            }
+
             app.add(_data, (err, doc) => {
               if (!err) {
                 response.done = true;
@@ -284,7 +308,7 @@ module.exports = function init(site) {
                 } else if (doc.salesType.code == 'customer') {
                   obj.customer = doc.customer;
                 }
-                site.autoJournalEntrySalesInvoice(req.session, obj);
+                // site.autoJournalEntrySalesInvoice(req.session, obj);
                 response.doc = doc;
               } else {
                 response.error = err.message;
@@ -393,6 +417,15 @@ module.exports = function init(site) {
       });
     }
   }
+
+  site.changeRemainPaidSalesInvoices = function (obj) {
+    app.view({ id: obj.id }, (err, doc) => {
+      if (!err && doc) {
+        doc.remainPaid -= obj.total;
+        app.update(doc, (err, result) => {});
+      }
+    });
+  };
 
   app.init();
   site.addApp(app);

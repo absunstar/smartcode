@@ -492,6 +492,9 @@ app.controller('damageItems', function ($scope, $http, $timeout) {
             if (item.workByBatch) {
                 item.batchesList[index].count += 1;
                 item.$batchCount += 1;
+                $timeout(() => {
+                    $scope.addBatch = '';
+                  }, 1500);
             } else {
                 $scope.errorBatch = 'Item Is Exist';
             }
