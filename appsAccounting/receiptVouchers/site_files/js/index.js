@@ -249,14 +249,17 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSafes = function () {
+  $scope.getSafes = function (paymentType) {
     $scope.busy = true;
     $scope.safesList = [];
     $http({
       method: 'POST',
       url: '/api/safes/all',
       data: {
-        where: { active: true },
+        where: {
+          active: true,
+          'type.id': paymentType.safeType.id,
+        },
         select: {
           id: 1,
           code: 1,
@@ -350,9 +353,35 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       }
     );
   };
-
+  $scope.getPaymentTypes = function () {
+    $scope.busy = true;
+    $scope.paymentTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/paymentTypes',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.paymentTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+  $scope.getPaymentTypes();
   $scope.getAll();
-  $scope.getSafes();
   $scope.getCurrencies();
   $scope.getVouchersTypes();
   $scope.getNumberingAuto();

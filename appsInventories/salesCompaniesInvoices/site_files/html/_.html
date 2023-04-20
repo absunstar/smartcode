@@ -46,7 +46,7 @@
               type="add"
               label="##word.Add Vouchers##"
               x-permissions="voucherSalesCompaniesInvoices || salesCompaniesInvoicesManage"
-              ng-show="item.paymentType.id == 2 && item.remainPaid > 0"
+              ng-show="item.remainPaid > 0"
               ng-click="showAddVoucher(item)"
             ></i-button>
             <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>

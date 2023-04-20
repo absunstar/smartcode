@@ -57,9 +57,21 @@
               </div>
             </div>
           </fieldset>
-          <i-list v="r" class="col4" ng-model="item.paymentType" display="name##session.lang##" items="paymentTypesList" label="##word.Payment Type##" ng-search="item.orderPaymentType"></i-list>
-          <i-control class="col4" type="text" ng-model="item.importPermitNumber" label="##word.Import Permit Number##"></i-control>
-          <i-date class="col4" ng-model="item.importAuthorizationDate" label="##word.Import Authorization Date##"></i-date>
+          <div class="row">
+            <i-list class="col4" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Payment Type##" ng-search="item.$invoiceType"></i-list>
+            <i-list
+              class="col4"
+              ng-show="item.invoiceType.id == 1"
+              ng-change="getSafes(item.paymentType)"
+              ng-model="item.paymentType"
+              display="name##session.lang##"
+              items="paymentTypesList"
+              label="##word.Payment Type##"
+              ng-search="item.$paymentType"
+            ></i-list>
+            <!-- <i-control class="col4" type="text" ng-model="item.importPermitNumber" label="##word.Import Permit Number##"></i-control>  -->
+            <i-date class="col4" ng-model="item.importAuthorizationDate" label="##word.Import Authorization Date##"></i-date>
+          </div>
         </div>
       </div>
       <div class="col3 center">
@@ -332,10 +344,16 @@
       </fieldset>
     </div>
 
-    <div class="row" ng-show="item.paymentType.id != 2 && canApprove && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
-      <i-list class="col4" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
-      <i-control class="col3" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
-    </div>
+    <fieldset ng-show="item.invoiceType.id == 1 && canApprove && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
+      <div class="row">
+        <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+        <i-control class="col2" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
+        <div class="col1">
+          <br />
+          <span class="currency">##word.$##</span>
+        </div>
+      </div>
+    </fieldset>
   </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">

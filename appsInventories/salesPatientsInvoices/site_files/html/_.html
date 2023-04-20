@@ -41,7 +41,7 @@
                     </td>
 
                     <td class="center not-print">
-                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherSalesPatientsInvoices || salesPatientsInvoicesManage" ng-show="item.paymentType.id == 2 && item.remainPaid > 0" ng-click="showAddVoucher(item)"></i-button>
+                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherSalesPatientsInvoices || salesPatientsInvoicesManage" ng-show="item.remainPaid > 0" ng-click="showAddVoucher(item)"></i-button>
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
                         <!-- <i-button type="edit" x-permissions="salesPatientsInvoicesUpdate || salesPatientsInvoicesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->

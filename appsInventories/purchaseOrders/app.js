@@ -338,6 +338,7 @@ module.exports = function init(site) {
         const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
+
           if (callbackErrorBatches.errBatchList.length > 0) {
             let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
             response.error = `The Batches is not correct in ( ${error} )`;
@@ -358,7 +359,20 @@ module.exports = function init(site) {
           _data.approveUserInfo = req.getUserFinger();
           _data.approved = true;
           _data.approvedDate = new Date();
-          if (accountsSetting.linkAccountsToStores && _data.paymentType.id != 2 && _data.safe && _data.safe.id) {
+
+          if (_data.invoiceType.id == 1) {
+            if (!_data.paymentType || !_data.paymentType.id) {
+              response.error = 'Must Select Payment Type';
+              res.json(response);
+              return;
+            } else if (!_data.safe || !_data.safe.id) {
+              response.error = 'Must Select Safe';
+              res.json(response);
+              return;
+            }
+          }
+
+          if (accountsSetting.linkAccountsToStores && _data.invoiceType.id == 1 && _data.safe && _data.safe.id) {
             let obj = {
               date: new Date(),
               voucherType: site.vouchersTypes[2],
@@ -530,11 +544,9 @@ module.exports = function init(site) {
     app.view({ id: obj.id }, (err, doc) => {
       if (!err && doc) {
         doc.remainPaid -= obj.total;
-        app.update(doc, (err, result) => {})
+        app.update(doc, (err, result) => {});
       }
     });
-
-
 
     // app.$collection.updateOne(
     //   {
@@ -548,8 +560,6 @@ module.exports = function init(site) {
     //     console.log(err, result.doc);
     //   }
     // );
-
-   
   };
 
   app.init();

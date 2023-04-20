@@ -3,8 +3,18 @@
     <legend>##word.Invoice Informations##</legend>
     <div class="row">
       <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
-      <i-date class="col5" label="##word.Date##" ng-model="item.date"> </i-date>
-      <i-list type="text" v="r" class="col3" ng-model="item.paymentType" label="##word.Payment Type##" items="paymentTypesList" display="name##session.lang##"></i-list>
+      <i-date class="col4" label="##word.Date##" ng-model="item.date"> </i-date>
+      <i-list class="col2" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Payment Type##" ng-search="item.$invoiceType"></i-list>
+      <i-list
+        class="col2"
+        ng-show="item.invoiceType.id == 1"
+        ng-change="getSafes(item.paymentType)"
+        ng-model="item.paymentType"
+        display="name##session.lang##"
+        items="paymentTypesList"
+        label="##word.Payment Type##"
+        ng-search="item.$paymentType"
+      ></i-list>
       <div class="col2">
         <br />
         <i-button type="search" label="##word.Search##" ng-click="showModalGetSalesInvoicesData()"> </i-button>
@@ -139,10 +149,16 @@
     </fieldset>
   </div>
 
-  <div class="row" ng-show="item.paymentType.id != 2 && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
-    <i-list class="col4" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
-    <i-control class="col3" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
-  </div>
+  <fieldset ng-show="item.invoiceType.id == 1 && canApprove && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
+    <div class="row">
+      <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+      <i-control class="col2" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
+      <div class="col1">
+        <br />
+        <span class="currency">##word.$##</span>
+      </div>
+    </div>
+  </fieldset>
 
 </div>
 <div ng-show="mode !== 'add' " class="row">

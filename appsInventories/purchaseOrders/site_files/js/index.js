@@ -93,11 +93,11 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       });
     }
 
-    if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
+    /* if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.paymentType.id;
       });
-    }
+    } */
 
     if ($scope.setting.storesSetting.store && $scope.setting.storesSetting.store.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
@@ -224,6 +224,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
+          $scope.getSafes($scope.item.paymentType);
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
               ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
@@ -300,6 +301,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           sourceType: 1,
           date: 1,
           paymentType: 1,
+          invoiceType: 1,
           importPermitNumber: 1,
           importAuthorizationDate: 1,
           vendor: 1,
@@ -364,6 +366,27 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.purchaseOrdersSourcesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getInvoiceTypes = function () {
+    $scope.busy = true;
+    $scope.invoiceTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/invoiceTypes',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.invoiceTypesList = response.data.list;
         }
       },
       function (err) {
@@ -462,7 +485,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSafes = function () {
+  $scope.getSafes = function (paymentType) {
     $scope.busy = true;
     $scope.safesList = [];
     $http({
@@ -471,6 +494,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
+          'type.id': paymentType.safeType.id,
         },
         select: {
           id: 1,
@@ -1514,9 +1538,9 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       invoiceCode: _item.code,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
+      $remainAmount : 0,
       voucherType: { id: 3, code: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
     };
-    $scope.paymentTypesList2 = $scope.paymentTypesList.filter((p) => p.id != 2);
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');
   };
@@ -1526,11 +1550,6 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     const v = site.validated('#expenseVouchersModal');
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
-      return;
-    }
-
-    if (_item.amountPaid > _item.$remainPaid) {
-      $scope.error = 'The amount paid is greater than the amount required ';
       return;
     }
 
@@ -1556,6 +1575,12 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.calcRemainVoucher = function (item) {
+    $timeout(() => {
+      item.$remainAmount = item.$remainPaid - item.total;
+    }, 300);
+  };
+
   $scope.getCurrentMonthDate();
   $scope.getAll();
   $scope.getPaymentTypes();
@@ -1566,5 +1591,5 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
   $scope.getStores();
   $scope.getNumberingAuto();
   $scope.getStoresItems();
-  $scope.getSafes();
+  $scope.getInvoiceTypes();
 });

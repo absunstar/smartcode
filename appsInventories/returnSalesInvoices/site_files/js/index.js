@@ -828,11 +828,11 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     $scope.item = {
       invoiceId: _item.id,
       invoiceCode: _item.code,
+      $remainAmount : 0,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 4, code: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
     };
-    $scope.paymentTypesList2 = $scope.paymentTypesList.filter((p) => p.id != 2);
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');
   };
@@ -842,11 +842,6 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     const v = site.validated('#expenseVouchersModal');
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
-      return;
-    }
-
-    if (_item.amountPaid > _item.$remainPaid) {
-      $scope.error = 'The amount paid is greater than the amount required ';
       return;
     }
 
@@ -872,7 +867,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSafes = function () {
+  $scope.getSafes = function (paymentType) {
     $scope.busy = true;
     $scope.safesList = [];
     $http({
@@ -881,6 +876,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
+          'type.id': paymentType.safeType.id,
         },
         select: {
           id: 1,
@@ -903,6 +899,33 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getInvoiceTypes = function () {
+    $scope.busy = true;
+    $scope.invoiceTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/invoiceTypes',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.invoiceTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.calcRemainVoucher = function (item) {
+    $timeout(() => {
+      item.$remainAmount = item.$remainPaid - item.total;
+    }, 300);
+  };
+
   $scope.getCurrentMonthDate();
   $scope.getAll();
   $scope.getPaymentTypes();
@@ -910,5 +933,5 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
   $scope.getStores();
   $scope.getStoresItems();
   $scope.getNumberingAuto();
-  $scope.getSafes();
+  $scope.getInvoiceTypes();
 });

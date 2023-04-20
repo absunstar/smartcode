@@ -199,6 +199,37 @@ module.exports = function init(site) {
             }
           });
 
+          if (_data.invoiceType.id == 1) {
+            if (!_data.paymentType || !_data.paymentType.id) {
+              response.error = 'Must Select Payment Type';
+              res.json(response);
+              return;
+            } else if (!_data.safe || !_data.safe.id) {
+              response.error = 'Must Select Safe';
+              res.json(response);
+              return;
+            }
+          }
+
+          if (accountsSetting.linkAccountsToStores && _data.invoiceType.id == 1 && _data.safe && _data.safe.id) {
+            let obj = {
+              date: new Date(),
+              voucherType: site.vouchersTypes[2],
+              invoiceId: _data.id,
+              invoiceCode: _data.code,
+              total: _data.amountPaid,
+              safe: _data.safe,
+              paymentType: _data.paymentType,
+              addUserInfo: _data.approveUserInfo,
+              company: _data.company,
+              branch: _data.branch,
+            };
+            _data.remainPaid = _data.totalNet - _data.amountPaid;
+            site.addExpenseVouchers(obj);
+          } else {
+            _data.remainPaid = _data.totalNet;
+          }
+
           if (errBatchList.length > 0) {
             let error = errBatchList.map((m) => m).join('-');
             response.error = `The Batches Count is not correct in ( ${error} )`;
@@ -251,25 +282,6 @@ module.exports = function init(site) {
               return;
             }
             _data.addUserInfo = req.getUserFinger();
-
-            if (accountsSetting.linkAccountsToStores && _data.paymentType.id != 2 && _data.safe && _data.safe.id) {
-              let obj = {
-                date: new Date(),
-                voucherType: site.vouchersTypes[0],
-                invoiceId: _data.id,
-                invoiceCode: _data.code,
-                total: _data.amountPaid,
-                safe: _data.safe,
-                paymentType: _data.paymentType,
-                addUserInfo: _data.approveUserInfo,
-                company: _data.company,
-                branch: _data.branch,
-              };
-              _data.remainPaid = _data.totalNet - _data.amountPaid;
-              site.addReceiptVouchers(obj);
-            } else {
-              _data.remainPaid = _data.totalNet;
-            }
 
             app.add(_data, (err, doc) => {
               if (!err) {
