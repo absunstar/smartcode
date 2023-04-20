@@ -4,15 +4,12 @@
     <div class="row padding">
       <div class="col9">
         <div class="row">
-          <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
+          <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
           <i-date class="col5" label="##word.Date##" ng-model="item.date"> </i-date>
-          <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
-        </div>
-        <div class="row">
           <i-list
             type="text"
             v="r"
-            class="col4"
+            class="col3"
             ng-disabled="item.itemsList.length"
             ng-model="item.store"
             label="##word.Store##"
@@ -20,12 +17,12 @@
             items="storesList"
             display="name##session.lang##"
           ></i-list>
-          <i-list type="text" v="r" class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
+          <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
         </div>
         <div class="row">
-          <i-list class="col2" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Payment Type##" ng-search="item.$invoiceType"></i-list>
+          <i-list class="col4" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
           <i-list
-            class="col2"
+            class="col4"
             ng-show="item.invoiceType.id == 1"
             ng-change="getSafes(item.paymentType)"
             ng-model="item.paymentType"
@@ -34,6 +31,8 @@
             label="##word.Payment Type##"
             ng-search="item.$paymentType"
           ></i-list>
+
+          <i-list type="text" v="r" class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
         </div>
       </div>
       <div class="col3 center">
@@ -227,32 +226,32 @@
       <div class="row">
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Prices## : {{item.totalPrice  | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Prices## : {{item.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Discounts## : {{item.totalDiscounts  | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Discounts## : {{item.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Before VAT## : {{item.totalBeforeVat  | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Before VAT## : {{item.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Vat## : {{item.totalVat  | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Vat## : {{item.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total After VAT## : {{item.totalAfterVat  | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total After VAT## : {{item.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Net## : {{item.totalNet  | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total Net## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
       </div>
@@ -261,14 +260,21 @@
     <fieldset ng-show="item.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores">
       <div class="row">
         <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
-        <i-control class="col2" disabled label="##word.Amount paid##" ng-model="item.amountPaid"> </i-control>
+        <i-control class="col2" label="##word.Paid By Customer##" ng-change="calculateCustomerPaid(item)" ng-model="item.$paidByCustomer"> </i-control>
         <div class="col1">
           <br />
           <span class="currency">##word.$##</span>
         </div>
+        <div class="col2 font-18">
+          <p>##word.Amount paid##</p>
+          <p>{{item.amountPaid| xmoney2}} <span class="currency">##word.$##</span></p>
+        </div>
+        <div class="col2 font-18" ng-hide="item.id">
+          <p>##word.Remain For Customer##</p>
+          <p>{{item.$remainForCustomer| xmoney2}} <span class="currency">##word.$##</span></p>
+        </div>
       </div>
     </fieldset>
-    
   </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">

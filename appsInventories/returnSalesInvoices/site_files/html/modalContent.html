@@ -4,7 +4,7 @@
     <div class="row">
       <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
       <i-date class="col4" label="##word.Date##" ng-model="item.date"> </i-date>
-      <i-list class="col2" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Payment Type##" ng-search="item.$invoiceType"></i-list>
+      <i-list class="col2" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
       <i-list
         class="col2"
         ng-show="item.invoiceType.id == 1"

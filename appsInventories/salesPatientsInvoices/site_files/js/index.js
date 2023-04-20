@@ -769,9 +769,18 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
       obj.totalNet = site.toNumber(obj.totalNet);
       obj.amountPaid = obj.totalNet;
+      obj.$paidByCustomer = obj.totalNet;
+      obj.$remainForCustomer = 0;
     }, 300);
 
     $scope.itemsError = '';
+  };
+
+  $scope.calculateCustomerPaid = function (obj) {
+    $timeout(() => {
+      obj.$remainForCustomer = obj.$paidByCustomer - obj.amountPaid;
+      obj.$remainForCustomer = site.toNumber(obj.$remainForCustomer);
+    }, 300);
   };
 
   $scope.validateData = function (_item) {
@@ -1309,7 +1318,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.item = {
       invoiceId: _item.id,
       invoiceCode: _item.code,
-      $remainAmount : 0,
+      $remainAmount: 0,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 1, code: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },

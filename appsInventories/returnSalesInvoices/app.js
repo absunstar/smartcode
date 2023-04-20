@@ -225,7 +225,8 @@ module.exports = function init(site) {
         };
         _data.addApprovedInfo = req.getUserFinger();
 
-        if (_data.invoiceType.id == 1) {
+        if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+          
           if (!_data.paymentType || !_data.paymentType.id) {
             response.error = 'Must Select Payment Type';
             res.json(response);
@@ -235,12 +236,9 @@ module.exports = function init(site) {
             res.json(response);
             return;
           }
-        }
-
-        if (accountsSetting.linkAccountsToStores && _data.invoiceType.id == 1 && _data.safe && _data.safe.id) {
           let obj = {
             date: new Date(),
-            voucherType: site.vouchersTypes[2],
+            voucherType: site.vouchersTypes[3],
             invoiceId: _data.id,
             invoiceCode: _data.code,
             total: _data.amountPaid,

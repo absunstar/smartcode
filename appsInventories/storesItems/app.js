@@ -770,10 +770,6 @@ module.exports = function init(site) {
                     where.$or = [];
 
                     where.$or.push({
-                        id: site.get_RegExp(search, 'i'),
-                    });
-
-                    where.$or.push({
                         code: site.get_RegExp(search, 'i'),
                     });
 

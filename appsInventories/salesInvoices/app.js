@@ -159,6 +159,7 @@ module.exports = function init(site) {
         if (_data.paymentType.id == 2) {
           _data.amountPaid = 0;
         }
+
         _data['approved'] = true;
         _data.company = site.getCompany(req);
         const storesSetting = site.getSystemSetting(req).storesSetting;
@@ -199,7 +200,12 @@ module.exports = function init(site) {
             }
           });
 
-          if (_data.invoiceType.id == 1) {
+          if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+            if (_data.$paidByCustomer < _data.totalNet) {
+              response.error = 'Must Paid By Customer greater than or equal to ';
+              res.json(response);
+              return;
+            }
             if (!_data.paymentType || !_data.paymentType.id) {
               response.error = 'Must Select Payment Type';
               res.json(response);
@@ -209,12 +215,9 @@ module.exports = function init(site) {
               res.json(response);
               return;
             }
-          }
-
-          if (accountsSetting.linkAccountsToStores && _data.invoiceType.id == 1 && _data.safe && _data.safe.id) {
             let obj = {
               date: new Date(),
-              voucherType: site.vouchersTypes[2],
+              voucherType: site.vouchersTypes[0],
               invoiceId: _data.id,
               invoiceCode: _data.code,
               total: _data.amountPaid,
@@ -225,10 +228,11 @@ module.exports = function init(site) {
               branch: _data.branch,
             };
             _data.remainPaid = _data.totalNet - _data.amountPaid;
-            site.addExpenseVouchers(obj);
+            site.addReceiptVouchers(obj);
           } else {
             _data.remainPaid = _data.totalNet;
           }
+
 
           if (errBatchList.length > 0) {
             let error = errBatchList.map((m) => m).join('-');

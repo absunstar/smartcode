@@ -299,7 +299,7 @@ module.exports = function init(site) {
     { id: 3, nameEn: 'waiting List', nameAr: 'قائمة إنتظار' },
     { id: 4, nameEn: 'Rejecting', nameAr: 'رافض' },
     { id: 5, nameEn: 'Acceptable And Processing Papers', nameAr: 'مقبول وتجهيز أوراق' },
-  ];
+  ]; 
 
   site.applicantStatusAfterContracting = [
     { id: 1, nameEn: 'Work Received', nameAr: 'تم إستلام العمل' },

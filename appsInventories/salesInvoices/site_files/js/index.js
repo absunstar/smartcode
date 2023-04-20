@@ -844,9 +844,18 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
       obj.totalNet = site.toNumber(obj.totalNet);
       obj.amountPaid = obj.totalNet;
+      obj.$paidByCustomer = obj.totalNet;
+      obj.$remainForCustomer = 0;
     }, 300);
 
     $scope.itemsError = '';
+  };
+
+  $scope.calculateCustomerPaid = function (obj) {
+    $timeout(() => {
+      obj.$remainForCustomer = obj.$paidByCustomer - obj.amountPaid;
+      obj.$remainForCustomer = site.toNumber(obj.$remainForCustomer);
+    }, 300);
   };
 
   $scope.validateData = function (_item) {
@@ -1393,7 +1402,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.item = {
       invoiceId: _item.id,
       invoiceCode: _item.code,
-      $remainAmount : 0,
+      $remainAmount: 0,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 1, code: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
@@ -1488,6 +1497,30 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
       item.$remainAmount = item.$remainPaid - item.total;
+    }, 300);
+  };
+
+  $scope.setInstallments = function (_item) {
+    $scope.installmentError = '';
+
+    if (!_item.$numberOfMonths || _item.$numberOfMonths < 1) {
+      $scope.installmentError = '##word.Please Enter Number Of Payment Months##';
+      return;
+    }
+
+    $timeout(() => {
+      const amount = _item.totalNet / _item.$numberOfMonths;
+      _item.$installmentsList = _item.$installmentsList || [];
+      if (!_item.$installmentsList.length) {
+        for (let i = 0; i < _item.$numberOfMonths; i++) {
+          _item.$installmentsList.push({
+            date: new Date(new Date(_item.$firstDueDate).getFullYear(), new Date(_item.$firstDueDate).getMonth() + i + 1, new Date(_item.$firstDueDate).getDate()),
+            amount,
+            paid: false,
+            paidDate: '',
+          });
+        }
+      }
     }, 300);
   };
 
