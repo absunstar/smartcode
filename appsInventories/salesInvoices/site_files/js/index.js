@@ -1399,14 +1399,28 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.showAddVoucher = function (_item) {
     $scope.error = '';
+
     $scope.item = {
       invoiceId: _item.id,
       invoiceCode: _item.code,
+      $invoiceType: _item.invoiceType,
       $remainAmount: 0,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 1, code: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
     };
+
+    if (_item.invoiceType.id == 2 && _item.installmentsList && _item.installmentsList.length > 0) {
+      let index = _item.installmentsList.findIndex((itm) => !itm.paid);
+
+      _item.installmentsList[index].$beingPaid = true;
+      $scope.item.$installmentsList = _item.installmentsList;
+      $scope.item.installment = _item.installmentsList[index];
+      $scope.item.total = _item.installmentsList[index].amount;
+    }
+
+    $scope.item.$remainAmount = _item.remainPaid - $scope.item.total;
+
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');
   };
@@ -1500,6 +1514,11 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }, 300);
   };
 
+  $scope.showInstallmentsModal = function (item) {
+    item.$firstDueDate = new Date();
+    site.showModal('#installmentsModal');
+  };
+
   $scope.setInstallments = function (_item) {
     $scope.installmentError = '';
 
@@ -1508,18 +1527,21 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       return;
     }
 
+    if (!_item.totalNet) {
+      $scope.installmentError = '##word.Not Found Amount##';
+      return;
+    }
+
     $timeout(() => {
-      const amount = _item.totalNet / _item.$numberOfMonths;
-      _item.$installmentsList = _item.$installmentsList || [];
-      if (!_item.$installmentsList.length) {
-        for (let i = 0; i < _item.$numberOfMonths; i++) {
-          _item.$installmentsList.push({
-            date: new Date(new Date(_item.$firstDueDate).getFullYear(), new Date(_item.$firstDueDate).getMonth() + i + 1, new Date(_item.$firstDueDate).getDate()),
-            amount,
-            paid: false,
-            paidDate: '',
-          });
-        }
+      let amount = _item.totalNet / _item.$numberOfMonths;
+      amount = site.toMoney(amount);
+      _item.installmentsList = [];
+      for (let i = 0; i < _item.$numberOfMonths; i++) {
+        _item.installmentsList.push({
+          date: new Date(new Date(_item.$firstDueDate).getFullYear(), new Date(_item.$firstDueDate).getMonth() + i + 1, new Date(_item.$firstDueDate).getDate()),
+          amount,
+          paid: false,
+        });
       }
     }, 300);
   };

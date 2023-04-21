@@ -156,9 +156,6 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        if (_data.paymentType.id == 2) {
-          _data.amountPaid = 0;
-        }
 
         _data['approved'] = true;
         _data.company = site.getCompany(req);
@@ -201,7 +198,7 @@ module.exports = function init(site) {
           });
 
           if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-            if (_data.$paidByCustomer < _data.totalNet) {
+            if (site.toMoney(_data.$paidByCustomer) < site.toMoney(_data.totalNet)) {
               response.error = 'Must Paid By Customer greater than or equal to ';
               res.json(response);
               return;
@@ -231,8 +228,18 @@ module.exports = function init(site) {
             site.addReceiptVouchers(obj);
           } else {
             _data.remainPaid = _data.totalNet;
+            if (_data.invoiceType.id == 2) {
+              if (_data.installmentsList && _data.installmentsList.length > 0) {
+                let totalInstallment = _data.installmentsList.reduce((a, b) => a + b.amount, 0);
+                totalInstallment = site.toMoney(totalInstallment);
+                if (totalInstallment != _data.totalNet) {
+                  response.error = `The installments amount is not equal invoice total net`;
+                  res.json(response);
+                  return;
+                }
+              }
+            }
           }
-
 
           if (errBatchList.length > 0) {
             let error = errBatchList.map((m) => m).join('-');
@@ -437,6 +444,13 @@ module.exports = function init(site) {
   site.changeRemainPaidSalesInvoices = function (obj) {
     app.view({ id: obj.id }, (err, doc) => {
       if (!err && doc) {
+        if (doc.invoiceType.id == 2 && doc.installmentsList && doc.installmentsList.length > 0) {
+          let index = doc.installmentsList.findIndex((itm) => itm.date.toString() === obj.installment.date.toString());
+          if (index !== -1) {
+            doc.installmentsList[index].paid = true;
+          }
+        }
+
         doc.remainPaid -= obj.total;
         app.update(doc, (err, result) => {});
       }

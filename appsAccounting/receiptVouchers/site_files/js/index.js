@@ -6,17 +6,29 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { url: '/images/receiptVouchers.png' },
   };
   $scope.item = {};
   $scope.list = [];
 
   $scope.setTotalValue = function (item) {
     $scope.error = '';
+    $scope.item = { ...$scope.structure, date: new Date() };
+
     $scope.item.invoiceId = item.id;
     $scope.item.invoiceCode = item.code;
     $scope.item.$remainPaid = item.remainPaid;
     $scope.item.total = item.remainPaid;
+    if (item.installmentsList && item.installmentsList.length > 0) {
+      let index = item.installmentsList.findIndex((itm) => !itm.paid);
+      item.installmentsList[index].$beingPaid = true;
+      $scope.item.$installmentsList = item.installmentsList;
+      $scope.item.installment = item.installmentsList[index];
+      $scope.item.total = item.installmentsList[index].amount;
+    }
+    $scope.item.total = site.toMoney($scope.item.total);
+    $scope.item.$remainAmount = item.remainPaid - $scope.item.total;
+    $scope.item.$remainAmount = site.toMoney($scope.item.$remainAmount);
+
     site.hideModal('#receiptVouchersModalDataList');
   };
 
@@ -293,7 +305,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       url: url,
       data: {
         where: {
-          remainPaid: { $gt: 0 },
+          remainPaid: { $gte: 1 },
         },
         select: {
           id: 1,
@@ -301,6 +313,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
           date: 1,
           totalNet: 1,
           remainPaid: 1,
+          installmentsList: 1,
         },
       },
     }).then(
@@ -379,6 +392,11 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         $scope.error = err;
       }
     );
+  };
+  $scope.calcRemainVoucher = function (item) {
+    $timeout(() => {
+      item.$remainAmount = item.$remainPaid - item.total;
+    }, 300);
   };
   $scope.getPaymentTypes();
   $scope.getAll();

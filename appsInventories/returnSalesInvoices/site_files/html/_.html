@@ -46,7 +46,7 @@
                     </td>
 
                     <td class="center not-print">
-                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherReturnSalesInvoices || returnSalesInvoicesManage" ng-show="item.approved && item.remainPaid > 0" ng-click="showAddVoucher(item)"></i-button>
+                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherReturnSalesInvoices || returnSalesInvoicesManage" ng-show="item.approved && item.remainPaid >= 1" ng-click="showAddVoucher(item)"></i-button>
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button

@@ -162,7 +162,7 @@ module.exports = function init(site) {
           _data.date = new Date();
         }
         if (_data.voucherType.id == 1 || _data.voucherType.id == 2) {
-          if (_data.total > _data.$remainPaid) {
+          if (site.toMoney(_data.total) > site.toMoney(_data.$remainPaid)) {
             response.error = 'The amount paid is greater than the remaining invoice amount ';
             res.json(response);
             return;
@@ -184,8 +184,6 @@ module.exports = function init(site) {
           _data.code = cb.code;
         }
 
-
-
         _data.addUserInfo = req.getUserFinger();
 
         app.add(_data, (err, doc) => {
@@ -195,6 +193,7 @@ module.exports = function init(site) {
             let obj = {
               id: doc.invoiceId,
               total: doc.total,
+              installment: doc.installment,
             };
             if (doc.voucherType.id == 1) {
               site.changeRemainPaidSalesInvoices(obj);

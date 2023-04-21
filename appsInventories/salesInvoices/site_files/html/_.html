@@ -26,7 +26,7 @@
                     <th>##word.Code##</th>
                     <th>##word.Date##</th>
                     <th>##word.Name##</th>
-                    <th>##word.Payment Type##</th>
+                    <th>##word.Invoice Type##</th>
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
@@ -34,14 +34,14 @@
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
                     <td class="center">{{item.customer.name##session.lang##}}</td>
-                    <td class="center">{{item.paymentType.name##session.lang##}}</td>
+                    <td class="center">{{item.invoiceType.name##session.lang##}}</td>
                     <td class="center">
                         <span class="text-success" ng-show="item.active">##word.Active##</span>
                         <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
                     </td>
 
                     <td class="center not-print">
-                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherSalesInvoices || salesInvoicesManage" ng-show="item.remainPaid > 0" ng-click="showAddVoucher(item)"></i-button>
+                        <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherSalesInvoices || salesInvoicesManage" ng-show="item.remainPaid >= 1" ng-click="showAddVoucher(item)"></i-button>
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
                         <!-- <i-button type="edit" x-permissions="salesInvoicesUpdate || salesInvoicesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->

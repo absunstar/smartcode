@@ -284,7 +284,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
       url: url,
       data: {
         where: {
-          remainPaid: { $gt: 0 },
+          remainPaid: { $gte: 1 },
         },
         select: {
           id: 1,
@@ -381,6 +381,13 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
       }
     );
   };
+
+  $scope.calcRemainVoucher = function (item) {
+    $timeout(() => {
+      item.$remainAmount = item.$remainPaid - item.total;
+    }, 300);
+  };
+
   $scope.getPaymentTypes();
   $scope.getAll();
   $scope.getCurrencies();

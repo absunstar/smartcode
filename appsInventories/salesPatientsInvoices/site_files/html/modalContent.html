@@ -11,7 +11,7 @@
         <div class="row">
           <i-list
             v="r"
-            class="col3"
+            class="col4"
             ng-disabled="item.itemsList.length"
             ng-model="item.store"
             label="##word.Store##"
@@ -19,9 +19,9 @@
             items="storesList"
             display="name##session.lang##"
           ></i-list>
-          <i-list class="col3" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
+          <i-list class="col4" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
           <i-list
-            class="col3"
+            class="col4"
             ng-show="item.invoiceType.id == 1"
             ng-change="getSafes(item.paymentType)"
             ng-model="item.paymentType"
