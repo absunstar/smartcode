@@ -35,6 +35,39 @@
     </div>
 
     <i-textarea label="##word.Description##" rows="4" ng-model="item.description"> </i-textarea>
+
+    <fieldset ng-show="mode !== 'add' && item.hasWorkFlow ">
+        <legend>##word.Approval List##</legend>
+        <div class="table-responsive">
+            <table class="table hover border">
+                <tr>
+                    <th>##word.S##</th>
+                    <th>##word.Position##</th>
+                    <th>##word.Status##</th>
+                    <th>##word.Approved By##</th>
+                </tr>
+
+                <tr ng-repeat="approve in item.approvalList">
+                    <td class="center">
+                        <p>{{$index+1}}</p>
+                    </td>
+                    <td class="center">
+                        <p>{{approve.name##session.lang##}}</p>
+                    </td>
+                    <td class="center">
+                        <p class="text-danger" ng-show="!approve.approved">##word.Not Approved##</p>
+                        <p class="text-success" ng-show="approve.approved">##word.Approved##</p>
+                    </td>
+                    <td class="center">
+                        <p class="blue">{{approve.approvedUserInfo.name}}</p>
+                        <small class="green"> {{approve.approvedUserInfo.date |date:"hh:mm"}} </small>
+                        <small> {{approve.approvedUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                        <p class="bold">IP : {{approve.approvedUserInfo.ip}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
 </div>
 
 <div ng-show="mode !== 'add' " class="row">

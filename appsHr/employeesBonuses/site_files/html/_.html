@@ -5,9 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="employeesBonusesAdd || employeesBonusesManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.New##" ng-click="searchAll(search={requestStatus:'new'})"></i-button>
             <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.Need Approval##" ng-click="searchAll(search={finalApproval:false})"></i-button>
-            <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.Accepted##" ng-click="searchAll(search={requestStatus:'accepted'})"></i-button>
+            <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.New##" ng-click="searchAll(search={requestStatus:'new'})"></i-button>
+            <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.Accepted##" ng-click="searchAll(search={finalApproval:true})"></i-button>
             <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.Rejected##" ng-click="searchAll(search={requestStatus:'rejected'})"></i-button>
             <i-button type="search" x-permissions="employeesBonusesSearch || employeesBonusesManage" label="##word.Canceled##" ng-click="searchAll(search={requestStatus:'canceled'})"></i-button>
         </div>

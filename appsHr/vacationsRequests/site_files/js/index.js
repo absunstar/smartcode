@@ -7,7 +7,7 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
     $scope._search = { fromDate: new Date(), toDate: new Date() };
     $scope.structure = {
         image: { url: '/images/vacationsRequests.png' },
-        requestStatus: 'new',
+
         active: true,
     };
     $scope.item = {};
@@ -28,7 +28,7 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
-        $scope.item = { ...$scope.structure, date: new Date(), fromDate: new Date() };
+        $scope.item = { ...$scope.structure, requestStatus: 'new', approved: false, finalApproval: false, date: new Date(), fromDate: new Date() };
         site.showModal($scope.modalID);
     };
 
@@ -41,6 +41,9 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
         }
         $scope.item.approvedVacationType = $scope.item.approvedVacationType || _item.vacationType;
         $scope.item.approvedDays = $scope.item.approvedDays || _item.days;
+
+        $scope.item.department = $scope.item.employee.department;
+        $scope.item.section = $scope.item.employee.section;
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -88,6 +91,8 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
         delete $scope.item.regularVacation;
         delete $scope.item.casualVacation;
         delete $scope.item.annualVacation;
+        _item.department = _item.employee.department;
+        _item.section = _item.employee.section;
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -405,6 +410,8 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
                     fullNameEn: 1,
                     fullNameAr: 1,
                     image: 1,
+                    department: 1,
+                    section: 1,
                 },
             },
         }).then(

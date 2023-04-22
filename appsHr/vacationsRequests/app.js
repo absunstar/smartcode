@@ -225,6 +225,17 @@ module.exports = function init(site) {
                         res.json(response);
                         return;
                     }
+
+                    const systemSetting = site.getSystemSetting(req);
+                    const exisitScreen = systemSetting.workflowAssignmentSettings.find((elm) => elm.code === app.name);
+
+                    _data.hasWorkFlow = false;
+                    if (exisitScreen && exisitScreen.hasWorkFlow) {
+                        _data.approvalList = exisitScreen.approvalList;
+                        _data.hasWorkFlow = true;
+                        _data.requiredApproval = exisitScreen.approvalList[0];
+                    }
+
                     app.add(_data, (err, doc) => {
                         if (!err && doc) {
                             response.done = true;
@@ -325,15 +336,7 @@ module.exports = function init(site) {
                 let response = {
                     done: false,
                 };
-
                 let _data = req.data;
-
-                _data['requestStatus'] = 'accepted';
-                _data['acceptDate'] = new Date();
-                _data['approved'] = true;
-                _data['approveDate'] = new Date();
-                _data.acceptUserInfo = req.getUserFinger();
-
                 app.$collection.findMany({ where: { 'employee.id': _data.employee.id, requestStatus: { $nin: ['rejected', 'canceled'] } } }, (err, docs) => {
                     const d1 = site.toDate(_data.fromDate);
 
@@ -363,6 +366,35 @@ module.exports = function init(site) {
                                 employeeApp.update(doc);
                             });
                         }
+                        // if (exisitIndex !== -1 && docs[exisitIndex].id == _data.id) {
+                        if (docs[exisitIndex].hasWorkFlow) {
+                            const totalLength = _data.approvalList.length;
+                            const currentIndex = _data.approvalList.findIndex((item) => item.id == _data.requiredApproval.id);
+                            const nextIndex = currentIndex + 1;
+
+                            if (nextIndex < totalLength) {
+                                _data.approvalList[currentIndex].approved = true;
+                                _data.approvalList[currentIndex].approvedUserInfo = req.getUserFinger();
+                                _data.requiredApproval = _data.approvalList[nextIndex];
+                                _data.finalApproval = false;
+                            } else if (nextIndex == totalLength) {
+                                _data.requestStatus = 'accepted';
+                                _data.acceptDate = new Date();
+                                _data.approved = true;
+                                _data.approveDate = new Date();
+                                _data.finalApproval = true;
+                                _data.approvalList[totalLength - 1].approved = true;
+                                _data.approvalList[totalLength - 1].approvedUserInfo = req.getUserFinger();
+                                _data.requiredApproval = null;
+                            }
+                            response.done = true;
+                        } else {
+                            _data.requestStatus = 'accepted';
+                            _data.acceptDate = new Date();
+                            _data.approved = true;
+                            _data.approveDate = new Date();
+                            _data.finalApproval = true;
+                        }
                         app.update(_data, (err, result) => {
                             if (!err) {
                                 response.done = true;
@@ -372,6 +404,12 @@ module.exports = function init(site) {
                             }
                             res.json(response);
                         });
+                    } else if (exisitIndex == -1) {
+                        response.done = false;
+                        response.error = 'Employee Vacation Not Exisit';
+                        res.json(response);
+                        return;
+                        // }
                     } else {
                         response.done = false;
                         response.error = 'Employee Has Vacation In Same Date';
@@ -483,6 +521,8 @@ module.exports = function init(site) {
                     rejectDate: 1,
                     cancelDate: 1,
                     active: 1,
+                    hasWorkFlow: 1,
+                    finalApproval: 1,
                 };
 
                 if (search) {
@@ -518,6 +558,21 @@ module.exports = function init(site) {
                     delete where.toDate;
                 }
 
+                // if (req.session.user.department) {
+                //     where['department.id'] = req.session.user.department.id;
+                // }
+
+                // if (req.session.user.section) {
+                //     where['section.id'] = req.session.user.section.id;
+                // }
+
+                if (where && where.finalApproval) {
+                    where.finalApproval = true;
+                } else {
+                    where.finalApproval = false;
+                }
+
+                console.log('where', where);
                 if (app.allowMemory) {
                     if (!search) {
                         search = 'id';

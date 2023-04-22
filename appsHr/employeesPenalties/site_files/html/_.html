@@ -5,8 +5,9 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="employeesPenaltiesAdd || employeesPenaltiesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="search" x-permissions="employeesPenaltiesSearch || employeesPenaltiesManage" label="##word.Need Approval##" ng-click="searchAll(search={finalApproval:false})"></i-button>
             <i-button type="search" x-permissions="employeesPenaltiesSearch || employeesPenaltiesManage" label="##word.New##" ng-click="searchAll(search={requestStatus:'new'})"></i-button>
-            <i-button type="search" x-permissions="employeesPenaltiesSearch || employeesPenaltiesManage" label="##word.Accepted##" ng-click="searchAll(search={requestStatus:'accepted'})"></i-button>
+            <i-button type="search" x-permissions="employeesPenaltiesSearch || employeesPenaltiesManage" label="##word.Accepted##" ng-click="searchAll(search={finalApproval:true})"></i-button>
             <i-button type="search" x-permissions="employeesPenaltiesSearch || employeesPenaltiesManage" label="##word.Rejected##" ng-click="searchAll(search={requestStatus:'rejected'})"></i-button>
             <i-button type="search" x-permissions="employeesPenaltiesSearch || employeesPenaltiesManage" label="##word.Canceled##" ng-click="searchAll(search={requestStatus:'canceled'})"></i-button>
         </div>

@@ -39,6 +39,8 @@ app.controller('employeesBonuses', function ($scope, $http, $timeout) {
             return;
         }
 
+        $scope.item.department = $scope.item.employee.department;
+        $scope.item.section = $scope.item.employee.section;
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -79,6 +81,8 @@ app.controller('employeesBonuses', function ($scope, $http, $timeout) {
             $scope.error = v.messages[0].ar;
             return;
         }
+        _item.department = _item.employee.department;
+        _item.section = _item.employee.section;
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -303,6 +307,8 @@ app.controller('employeesBonuses', function ($scope, $http, $timeout) {
                     fullNameEn: 1,
                     fullNameAr: 1,
                     image: 1,
+                    department: 1,
+                    section: 1,
                 },
             },
         }).then(

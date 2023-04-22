@@ -21,7 +21,7 @@ module.exports = function init(site) {
     site.getEmployeeOvertime = function (req, paySlip, callback) {
         const d1 = site.toDate(paySlip.fromDate);
         const d2 = site.toDate(paySlip.toDate);
-        // const systemSetting = site.getSystemSetting(req).hrSettings;
+
         app.$collection.findMany({ where: { 'employee.id': paySlip.employeeId, date: { $gte: d1, $lte: d2 }, active: true, requestStatus: 'accepted' } }, (err, docs) => {
             if (docs && docs.length) {
                 docs.forEach((doc) => {
@@ -213,6 +213,16 @@ module.exports = function init(site) {
                         return;
                     }
 
+                    const systemSetting = site.getSystemSetting(req);
+                    const exisitScreen = systemSetting.workflowAssignmentSettings.find((elm) => elm.code === app.name);
+
+                    _data.hasWorkFlow = false;
+                    if (exisitScreen && exisitScreen.hasWorkFlow) {
+                        _data.approvalList = exisitScreen.approvalList;
+                        _data.hasWorkFlow = true;
+                        _data.requiredApproval = exisitScreen.approvalList[0];
+                    }
+
                     app.add(_data, (err, doc) => {
                         if (!err && doc) {
                             response.done = true;
@@ -293,18 +303,40 @@ module.exports = function init(site) {
 
                 let _data = req.data;
 
-                _data['requestStatus'] = 'accepted';
-                _data['acceptDate'] = new Date();
-                _data['approved'] = true;
-                _data['approveDate'] = new Date();
-                _data.acceptUserInfo = req.getUserFinger();
-
                 app.$collection.findMany({ where: { 'employee.id': _data.employee.id, requestStatus: { $nin: ['rejected', 'canceled'] } } }, (err, docs) => {
                     const d1 = site.toDate(_data.date);
 
                     const exisitIndex = docs.findIndex((doc) => d1.getTime() == site.toDate(doc.date).getTime());
 
-                    if (exisitIndex == -1 || (exisitIndex !== -1 && docs[exisitIndex].id == _data.id)) {
+                    if (exisitIndex !== -1 && docs[exisitIndex].id == _data.id) {
+                        if (docs[exisitIndex].hasWorkFlow) {
+                            const totalLength = _data.approvalList.length;
+                            const currentIndex = _data.approvalList.findIndex((item) => item.id == _data.requiredApproval.id);
+                            const nextIndex = currentIndex + 1;
+
+                            if (nextIndex < totalLength) {
+                                _data.approvalList[currentIndex].approved = true;
+                                _data.approvalList[currentIndex].approvedUserInfo = req.getUserFinger();
+                                _data.requiredApproval = _data.approvalList[nextIndex];
+                                _data.finalApproval = false;
+                            } else if (nextIndex == totalLength) {
+                                _data.requestStatus = 'accepted';
+                                _data.acceptDate = new Date();
+                                _data.approved = true;
+                                _data.approveDate = new Date();
+                                _data.finalApproval = true;
+                                _data.approvalList[totalLength - 1].approved = true;
+                                _data.approvalList[totalLength - 1].approvedUserInfo = req.getUserFinger();
+                                _data.requiredApproval = null;
+                            }
+                            response.done = true;
+                        } else {
+                            _data.requestStatus = 'accepted';
+                            _data.acceptDate = new Date();
+                            _data.approved = true;
+                            _data.approveDate = new Date();
+                            _data.finalApproval = true;
+                        }
                         app.update(_data, (err, result) => {
                             if (!err) {
                                 response.done = true;
@@ -314,6 +346,11 @@ module.exports = function init(site) {
                             }
                             res.json(response);
                         });
+                    } else if (exisitIndex == -1) {
+                        response.done = false;
+                        response.error = 'Employee Penality Not Exisit';
+                        res.json(response);
+                        return;
                     } else {
                         response.done = false;
                         response.error = 'Employee Has Request In Same Date';
@@ -420,8 +457,10 @@ module.exports = function init(site) {
                     requestStatus: 1,
                     rejectDate: 1,
                     cancelDate: 1,
+                    hasWorkFlow: 1,
+                    finalApproval: 1,
                 };
-                let list = [];
+
                 if (search) {
                     where.$or = [];
 
@@ -455,6 +494,22 @@ module.exports = function init(site) {
                     delete where.fromDate;
                     delete where.toDate;
                 }
+
+                if (req.session.user.department) {
+                    where['department.id'] = req.session.user.department.id;
+                }
+
+                if (req.session.user.section) {
+                    where['section.id'] = req.session.user.section.id;
+                }
+
+                if (where && where.finalApproval) {
+                    where.finalApproval = true;
+                } else {
+                    where.finalApproval = false;
+                }
+
+        
 
                 if (app.allowMemory) {
                     if (!search) {
