@@ -1,22 +1,15 @@
 <div ng-controller="reorderLimits" class="loaded">
     <div class="row" x-permissions="reorderLimitsUi || reorderLimitsManage">
         <div x-import="reorderLimits/modal.html"></div>
-        <div x-import="reorderLimits/modalSearch.html"></div>
 
-        <div class="top-actions">
-            <i-button type="add" x-permissions="reorderLimitsAdd || reorderLimitsManage" label="##word.New##" ng-click="showAdd()"></i-button>
-        </div>
-
-        <div class="row padding">
-            <i-control ng-model="$search" x-permissions="reorderLimitsSearch || reorderLimitsManage"></i-control>
-        </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
                 <tr>
                     <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
-                    <th>##word.Calling Code##</th>
+                    <th>##word.Medical Item##</th>
+                    <th>##word.Work By##</th>
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
@@ -26,18 +19,25 @@
                     </td>
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
-                    <td class="center blue">{{item.callingCode}}</td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.hasMedicalData">##word.Yes##</span>
+                        <span class="text-danger" ng-show="!item.hasMedicalData">##word.No##</span>
+                    </td>
+
+                    <td class="center">
+                        <span class="text-success" ng-if="item.workByBatch">##word.Batch## - {{item.validityDays}} - ##word.Days##</span>
+                        <span class="text-primary" ng-if="item.workBySerial">##word.Serial##</span>
+                        <span class="text-primary" ng-if="item.workByQrCode">##word.Qr Code##</span>
+                        <span class="text-danger" ng-if="!item.workByBatch && !item.workBySerial && !item.workByQrCode">##word.Not Set##</span>
+                    </td>
                     <td class="center">
                         <span ng-show="item.active" class="text-success">##word.Active##</span>
                         <span ng-show="!item.active" class="text-danger">##word.Not Active##</span>
                     </td>
 
                     <td class="center not-print">
+                        <!-- onclick="site.showModal('#storesItemsManageModal');" -->
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
-
-                        <i-button type="edit" x-permissions="reorderLimitsUpdate || reorderLimitsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
-
-                        <i-button type="delete" x-permissions="reorderLimitsDelete || reorderLimitsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>

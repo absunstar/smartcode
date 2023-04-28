@@ -1,10 +1,6 @@
 [
     { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsManage", "En": "Manage", "Ar": "إدارة" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsAdd", "En": "Add", "Ar": "إضافة" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsUpdate", "En": "Edit", "Ar": "تعديل" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsDelete", "En": "Delete", "Ar": "حذف" },
     { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsView", "En": "View", "Ar": "عرض" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsSearch", "En": "Search", "Ar": "بحث" },
     { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsPrint", "En": "Print", "Ar": "طباعة" },
     { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsUi", "En": "UI", "Ar": "الواجهة الرسومية" }

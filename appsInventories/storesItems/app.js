@@ -926,6 +926,7 @@ module.exports = function init(site) {
                                         workByQrCode: true,
                                         allowSale: true,
                                         allowBuy: true,
+                                        reorderLimit: 0,
                                         image: { url: '/images/storesItems.png' },
                                         active: true,
                                     };
