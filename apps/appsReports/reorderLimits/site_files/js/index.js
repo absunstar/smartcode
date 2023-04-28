@@ -1,4 +1,4 @@
-app.controller('reorderLimits', function ($scope, $http, $timeout) {
+app.controller('reportReorderLimits', function ($scope, $http, $timeout) {
     $scope.baseURL = '';
     $scope.appName = 'reportReorderLimits';
     // $scope.modalID = '#reorderLimitsManageModal';

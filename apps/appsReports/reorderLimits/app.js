@@ -7,11 +7,11 @@ module.exports = function init(site) {
         cacheList: [],
         allowRoute: true,
         allowRouteGet: true,
-        allowRouteAdd: true,
-        allowRouteUpdate: true,
-        allowRouteDelete: true,
-        allowRouteView: true,
-        allowRouteAll: true,
+        // allowRouteAdd: true,
+        // allowRouteUpdate: true,
+        // allowRouteDelete: true,
+        // allowRouteView: true,
+        // allowRouteAll: true,
     };
 
     app.$collection = site.connectCollection(app.name);
@@ -37,7 +37,7 @@ module.exports = function init(site) {
     //         });
     //     }
     // };
-    
+
     // app.add = function (_item, callback) {
     //     app.$collection.add(_item, (err, doc) => {
     //         if (callback) {
