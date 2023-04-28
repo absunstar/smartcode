@@ -5,6 +5,7 @@
         <button x-feature="m-hr" onclick="toggleShow('#m-hr')"><i class="fas fa-users"></i> <span>HR</span></button>
         <button x-feature="m-hmis" onclick="toggleShow('#m-hmis')"><i class="fas fa-hospital-user"></i> <span>Hospital</span></button>
         <button onclick="toggleShow('#systemSetting')"><i class="fas fa-tools"></i> <span>Setting</span></button>
+        <button onclick="toggleShow('#reports')"><i class="fas fa-file-alt"></i> <span>Reports</span></button>
     </div>
 </div>
 
@@ -530,5 +531,12 @@
     <a class="menu-item no-line" x-permissions="systemSettingManage" href="/systemSetting">
         <img src="/images/systemSetting.png" alt="" />
         <span> ##word.System Setting## </span>
+    </a>
+</div>
+
+<div id="reports" class="menu-bottom loaded x-hide">
+    <a x-feature="m-reports" class="menu-item no-line" x-permissions="reorderLimitsUi || reorderLimitsManage" href="/reportReorderLimits">
+        <img src="/images/reorderLimits.png" alt="" />
+        <span> ##word.Report Reorder Limit## </span>
     </a>
 </div>
