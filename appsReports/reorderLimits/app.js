@@ -1,10 +1,10 @@
 module.exports = function init(site) {
     let app = {
         name: 'reorderLimits',
-        allowMemory: false,
-        memoryList: [],
-        allowCache: false,
-        cacheList: [],
+        // allowMemory: false,
+        // memoryList: [],
+        // allowCache: false,
+        // cacheList: [],
         allowRoute: true,
         allowRouteGet: true,
         // allowRouteAdd: true,
@@ -356,6 +356,6 @@ module.exports = function init(site) {
         // }
     }
 
-    app.init();
+    // app.init();
     site.addApp(app);
 };

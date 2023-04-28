@@ -1,9 +1,9 @@
-app.controller('reportReorderLimits', function ($scope, $http, $timeout) {
+app.controller('reorderLimits', function ($scope, $http, $timeout) {
     $scope.baseURL = '';
-    $scope.appName = 'reportReorderLimits';
+    $scope.appName = 'reorderLimits';
     // $scope.modalID = '#reorderLimitsManageModal';
     // $scope.modalSearchID = '#reorderLimitsSearchModal';
-    $scope.mode = 'add';
+    // $scope.mode = 'add';
     $scope._search = {};
     // $scope.structure = {
     //     image: { url: '/images/reorderLimits.png' },
