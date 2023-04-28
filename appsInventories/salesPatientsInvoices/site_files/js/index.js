@@ -70,9 +70,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       });
     }
 
-    if ($scope.setting.storesSetting.subStore && $scope.setting.storesSetting.subStore.id) {
+    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.subStore.id;
+        return _t.id == $scope.setting.storesSetting.customersStore.id;
       });
     }
 
@@ -428,7 +428,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'type.id': 2,
+          salesForCustomers : true,
         },
         select: {
           id: 1,

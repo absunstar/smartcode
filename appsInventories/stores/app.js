@@ -291,6 +291,8 @@ module.exports = function init(site) {
                                 g.company &&
                                 g.company.id == site.getCompany(req).id &&
                                 (typeof where.active != 'boolean' || g.active === where.active) &&
+                                (typeof where.salesForBusiness != 'boolean' || g.salesForBusiness === where.salesForBusiness) &&
+                                (typeof where.salesForCustomers != 'boolean' || g.salesForCustomers === where.salesForCustomers) &&
                                 (typeof where['type.id'] != 'number' || g.type.id === where['type.id']) &&
                                 JSON.stringify(g).contains(search)
                         )

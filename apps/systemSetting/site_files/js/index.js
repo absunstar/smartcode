@@ -239,7 +239,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
             data: {
                 where: {
                     active: true,
-                    'type.id': 1,
+                    salesForBusiness : true,
                 },
                 select: {
                     id: 1,
@@ -261,16 +261,16 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getSubStores = function () {
+    $scope.getCustomersStores = function () {
         $scope.busy = true;
-        $scope.subStoresList = [];
+        $scope.customersStoresList = [];
         $http({
             method: 'POST',
             url: '/api/stores/all',
             data: {
                 where: {
                     active: true,
-                    'type.id': 2,
+                    salesForCustomers : true,
                 },
                 select: {
                     id: 1,
@@ -282,7 +282,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
             function (response) {
                 $scope.busy = false;
                 if (response.data.done && response.data.list.length > 0) {
-                    $scope.subStoresList = response.data.list;
+                    $scope.customersStoresList = response.data.list;
                 }
             },
             function (err) {
@@ -758,7 +758,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     $scope.getPlaceQRList();
     $scope.getCountryQRList();
     $scope.getStores();
-    $scope.getSubStores();
+    $scope.getCustomersStores();
     $scope.getVendors();
     $scope.getCustomers();
     $scope.getItemsGroups();
