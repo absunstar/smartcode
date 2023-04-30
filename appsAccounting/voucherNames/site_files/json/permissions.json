@@ -1,0 +1,11 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesAdd" , "En":"Add" , "Ar":"إضافة"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesUpdate" , "En":"Edit" , "Ar":"تعديل"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesDelete" , "En":"Delete" , "Ar":"حذف"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesView" , "En":"View" , "Ar":"عرض"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "voucherNames" , "name":"voucherNamesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]

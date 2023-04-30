@@ -245,6 +245,9 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
                     id: 1,
                     nameEn: 1,
                     nameAr: 1,
+                    rasdUser: 1,
+                    rasdPass: 1,
+                    linkWithRasd : 1,
                 },
             },
         }).then(

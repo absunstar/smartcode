@@ -1,12 +1,13 @@
-app.controller('expenseVouchers', function ($scope, $http, $timeout) {
+app.controller('voucherNames', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'expenseVouchers';
-  $scope.modalID = '#expenseVouchersManageModal';
-  $scope.modalSearchID = '#expenseVouchersSearchModal';
+  $scope.appName = 'voucherNames';
+  $scope.modalID = '#voucherNamesManageModal';
+  $scope.modalSearchID = '#voucherNamesSearchModal';
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { url: '/images/expenseVouchers.png' },
+    image: {url : '/images/voucherNames.png'},
+    active: true,
   };
   $scope.item = {};
   $scope.list = [];
@@ -14,7 +15,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure, date: new Date() };
+    $scope.item = { ...$scope.structure };
     site.showModal($scope.modalID);
   };
 
@@ -220,210 +221,6 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
     $scope.search = {};
   };
 
-  $scope.getVouchersTypes = function () {
-    $scope.busy = true;
-    $scope.vouchersTypesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/vouchersTypes',
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done) {
-          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 'purchaseInvoice' || g.id == 'salesReturn');
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getSafes = function (paymentType) {
-    $scope.busy = true;
-    $scope.safesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/safes/all',
-      data: {
-        where: {
-          active: true,
-          'type.id': paymentType.safeType.id,
-        },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.safesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getSourceInvoices = function () {
-    $scope.busy = true;
-    $scope.dataList = [];
-    let url = '/api/purchaseOrders/all';
-    if ($scope.item.voucherType.id == 'salesReturn') {
-      url = '/api/returnSalesInvoices/all';
-    }
-    $http({
-      method: 'POST',
-      url: url,
-      data: {
-        where: {
-          remainPaid: { $gte: 1 },
-        },
-        select: {
-          id: 1,
-          code: 1,
-          date: 1,
-          totalNet: 1,
-          remainPaid: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.dataList = response.data.list;
-          site.showModal('#expenseVouchersModalDataList');
-        } else {
-          $scope.error = 'Data Not Found';
-          return;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = response.data.error || err;
-      }
-    );
-  };
-
-  $scope.setTotalValue = function (item) {
-    $scope.error = '';
-    $scope.item.invoiceId = item.id;
-    $scope.item.invoiceCode = item.code;
-    $scope.item.$remainPaid = item.remainPaid;
-    $scope.item.total = item.remainPaid;
-    site.hideModal('#expenseVouchersModalDataList');
-  };
-
-  $scope.getCurrencies = function () {
-    $scope.busy = true;
-    $scope.currenciesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/currencies/all',
-      data: {
-        where: {
-          active: true,
-        },
-        select: {
-          id: 1,
-          nameEn: 1,
-          nameAr: 1,
-          exchangePrice: 1,
-          smallCurrencyAr: 1,
-          smallCurrencyEn: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.currenciesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getPaymentTypes = function () {
-    $scope.busy = true;
-    $scope.paymentTypesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/paymentTypes',
-      data: {
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.paymentTypesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getVoucherNames = function () {
-    $scope.busy = true;
-    $scope.voucherNamesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/voucherNames/all',
-      data: {
-        where: {
-          active: true,
-          outgoing: true,
-        },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.voucherNamesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.calcRemainVoucher = function (item) {
-    $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
-    }, 300);
-  };
-
-  $scope.getPaymentTypes();
   $scope.getAll();
-  $scope.getCurrencies();
-  $scope.getVouchersTypes();
   $scope.getNumberingAuto();
-  $scope.getVoucherNames();
 });

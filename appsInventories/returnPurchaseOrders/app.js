@@ -282,6 +282,15 @@ module.exports = function init(site) {
                 site.setItemCard(item, app.name);
               });
 
+              if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
+                site.sendRasdData({
+                  rasdUser: result.doc.store.rasdUser,
+                  rasdPass: result.doc.store.rasdPass,
+                  appName: app.name,
+                  items: result.doc.itemsList,
+                });
+              }
+
               let obj = {
                 vendor: result.doc.vendor,
                 code: result.doc.code,

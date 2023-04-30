@@ -281,6 +281,15 @@ module.exports = function init(site) {
               site.setItemCard(item, app.name);
             });
 
+            if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
+              site.sendRasdData({
+                rasdUser: result.doc.store.rasdUser,
+                rasdPass: result.doc.store.rasdPass,
+                appName: app.name,
+                items: result.doc.itemsList,
+              });
+            }
+
             if (result.doc.salesType.code == 'patient') {
               objJournal.customer = result.doc.patient;
             }

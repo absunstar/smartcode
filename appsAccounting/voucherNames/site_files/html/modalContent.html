@@ -2,31 +2,19 @@
   <div class="row padding">
     <div class="col9">
       <div class="row">
-        <div class="row">
-          <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code"> </i-control>
-        </div> 
-        <i-list help-id="" v="r" label="##word.Type##" ng-model="item.type" display="name##session.lang##" items="storesTypesList" ng-search="item.$storeType"></i-list>
+        <i-control ng-hide="disabledCode" label="##word.Code##" ng-model="item.code"> </i-control>
         <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-        <i-control type="text" ng-show="item.linkWithRasd" ng-model="item.rasdUser" label="##word.Rasd User##"></i-control>
-        <i-control type="text" ng-show="item.linkWithRasd" ng-model="item.rasdPass" label="##word.Rasd Pass##"></i-control>
       </div>
     </div>
     <div class="col3 center">
       <i-image class="img128 center" ng-model="item.image"></i-image>
       <i-checkbox ng-model="item.active" label="##word.Active##"></i-checkbox>
-      <i-checkbox ng-model="item.linkWithRasd" label="##word.Link With Rasd##"></i-checkbox>
-      <i-checkbox ng-model="item.salesForBusiness" label="##word.Sales For Business##"></i-checkbox>
-      <i-checkbox ng-model="item.salesForCustomers" label="##word.Sales For Customers##"></i-checkbox>
+      <i-checkbox ng-model="item.incoming" label="##word.Incoming##"></i-checkbox>
+      <i-checkbox ng-model="item.outgoing" label="##word.Outgoing##"></i-checkbox>
     </div>
   </div>
-  <fieldset>
-    <legend>##word.Accounting##</legend>
-    <div class="row padding">
-      <i-list class="col5" ng-model="item.linkBy" label="##word.Link By##" ng-change="getAccountingList(item.linkBy)" items="accountingLinkList" display="name##session.lang##"></i-list>
-      <i-list class="col7" ng-model="item.account" label="##word.Account##" items="accountingList" display="name##session.lang##"></i-list>
-    </div>
-  </fieldset>
+  <div class="row padding"></div>
 </div>
 <div ng-show="mode !== 'add' " class="row">
   <table class="table hover border">

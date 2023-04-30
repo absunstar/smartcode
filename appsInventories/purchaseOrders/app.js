@@ -338,7 +338,6 @@ module.exports = function init(site) {
         const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
-
           if (callbackErrorBatches.errBatchList.length > 0) {
             let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
             response.error = `The Batches is not correct in ( ${error} )`;
@@ -361,7 +360,6 @@ module.exports = function init(site) {
           _data.approvedDate = new Date();
 
           if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-          
             if (!_data.paymentType || !_data.paymentType.id) {
               response.error = 'Must Select Payment Type';
               res.json(response);
@@ -404,6 +402,15 @@ module.exports = function init(site) {
                 item.orderCode = result.doc.code;
                 site.setItemCard(item, app.name);
               });
+
+              if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
+                site.sendRasdData({
+                  rasdUser: result.doc.store.rasdUser,
+                  rasdPass: result.doc.store.rasdPass,
+                  appName: app.name,
+                  items: result.doc.itemsList,
+                });
+              }
 
               let obj = {
                 vendor: result.doc.vendor,

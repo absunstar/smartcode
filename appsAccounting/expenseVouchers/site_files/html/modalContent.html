@@ -6,15 +6,15 @@
 
   <div class="row">
     <i-list
-    class="col3"
-    ng-change="getSafes(item.paymentType)"
-    ng-model="item.paymentType"
-    display="name##session.lang##"
-    items="paymentTypesList"
-    label="##word.Payment Type##"
-    ng-search="item.$paymentType"
-  ></i-list>    
-  <i-list class="col3" v="r" label="##word.Safe##" ng-model="item.safe" items="safesList" display="name##session.lang##" ng-search="item.$safe"> </i-list>
+      class="col3"
+      ng-change="getSafes(item.paymentType)"
+      ng-model="item.paymentType"
+      display="name##session.lang##"
+      items="paymentTypesList"
+      label="##word.Payment Type##"
+      ng-search="item.$paymentType"
+    ></i-list>
+    <i-list class="col3" v="r" label="##word.Safe##" ng-model="item.safe" items="safesList" display="name##session.lang##" ng-search="item.$safe"> </i-list>
     <i-list class="col3" v="r" label="##word.Voucher Type##" ng-model="item.voucherType" items="vouchersTypesList" display="name##session.lang##" ng-search="item.$voucherType"> </i-list>
     <div class="col3" ng-show=" (mode =='add' || mode =='edit') && item.voucherType.id">
       <br />
@@ -23,8 +23,17 @@
   </div>
 
   <div class="row">
-    <i-control class="col3" type="number" ng-hide="item.id" disabled label="##word.Remaining Invoice##" ng-model="item.$remainPaid"> </i-control>
-    <i-control class="col3" type="number" label="##word.Amount Paid##" ng-model="item.total"> </i-control>
+    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn'">
+      <p>##word.Amount required##</p>
+      <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
+    </div>
+
+    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##" type="number" ng-change="calcRemainVoucher(item)" ng-model="item.total"> </i-control>
+
+    <div class="col3 font-18" ng-show="item.voucherType.id == 'purchaseInvoice' || item.voucherType.id == 'salesReturn'">
+      <p>##word.Remain Amount##</p>
+      <p>({{item.$remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
+    </div>
   </div>
 </div>
 

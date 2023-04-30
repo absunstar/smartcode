@@ -321,6 +321,15 @@ module.exports = function init(site) {
                   site.setItemCard(item, app.name);
                 });
 
+                if (doc.store.linkWithRasd && doc.store.rasdUser && doc.store.rasdPass) {
+                  site.sendRasdData({
+                    rasdUser: doc.store.rasdUser,
+                    rasdPass: doc.store.rasdPass,
+                    appName: app.name,
+                    items: doc.itemsList,
+                  });
+                }
+
                 if (doc.salesType.code == 'patient') {
                   obj.customer = doc.patient;
                   // obj.appName = 'salesPatientsInvoices';

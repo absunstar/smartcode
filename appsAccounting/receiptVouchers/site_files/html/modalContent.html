@@ -50,24 +50,22 @@
   </div>
 
   <div class="row">
-    <div class="col3 font-18">
+    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn'">
       <p>##word.Amount required##</p>
       <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
-  
-    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##"  ng-hide="item.$installmentsList.length > 0" ng-change="calcRemainVoucher(item)" ng-model="item.total">
-    </i-control>
+
+    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##" type="number" ng-hide="item.$installmentsList.length > 0" ng-change="calcRemainVoucher(item)" ng-model="item.total"> </i-control>
     <div class="col3 font-18" ng-show="item.$installmentsList.length > 0">
       <p>##word.Amount paid##</p>
       <p>({{item.total | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
 
-    <div class="col3 font-18">
+    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn'">
       <p>##word.Remain Amount##</p>
       <p>({{item.$remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
   </div>
-</div>
 </div>
 
 <div ng-show="mode !== 'add' " class="row">

@@ -1,7 +1,7 @@
 module.exports = function init(site) {
   let app = {
-    name: 'receiptVouchers',
-    allowMemory: false,
+    name: 'voucherNames',
+    allowMemory: true,
     memoryList: [],
     allowCache: false,
     cacheList: [],
@@ -139,12 +139,14 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
+
+
       site.get(
         {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Receipt Vouchers' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name,appName:'Voucher Names' }, { parser: 'html', compres: true });
         }
       );
     }
@@ -158,21 +160,10 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
 
-        if (!_data.date) {
-          _data.date = new Date();
-        }
-        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn') {
-          if (site.toMoney(_data.total) > site.toMoney(_data.$remainPaid)) {
-            response.error = 'The amount paid is greater than the remaining invoice amount ';
-            res.json(response);
-            return;
-          }
-        }
-
         let numObj = {
           company: site.getCompany(req),
           screen: app.name,
-          date: new Date(),
+          date: new Date()
         };
 
         let cb = site.getNumbering(numObj);
@@ -180,6 +171,7 @@ module.exports = function init(site) {
           response.error = 'Must Enter Code';
           res.json(response);
           return;
+
         } else if (cb.auto) {
           _data.code = cb.code;
         }
@@ -190,16 +182,6 @@ module.exports = function init(site) {
           if (!err && doc) {
             response.done = true;
             response.doc = doc;
-            let obj = {
-              id: doc.invoiceId,
-              total: doc.total,
-              installment: doc.installment,
-            };
-            if (doc.voucherType.id == 'salesInvoice') {
-              site.changeRemainPaidSalesInvoices(obj);
-            } else if (doc.voucherType.id == 'purchaseReturn') {
-              site.changeRemainPaidReturnPurchases(obj);
-            }
           } else {
             response.error = err.mesage;
           }
@@ -270,46 +252,29 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let search = req.body.search || '';
-        let limit = req.body.limit || 10;
-        let select = req.body.select || { id: 1, code: 1, date: 1, voucherType: 1, safe: 1, currency: 1, total: 1 };
-        if (app.allowMemory) {
-          if (!search) {
-            search = 'id';
+        let select = req.body.select || { id: 1,code: 1, nameEn: 1, nameAr: 1, image: 1 , active: 1};
+        let list = [];
+        app.memoryList
+        .filter((g) => (typeof where.outgoing != 'boolean' || g.outgoing === where.outgoing) && (typeof where.incoming != 'boolean' || g.incoming === where.incoming) && g.company && g.company.id == site.getCompany(req).id)
+        .forEach((doc) => {
+          let obj = { ...doc };
+
+          for (const p in obj) {
+            if (!Object.hasOwnProperty.call(select, p)) {
+              delete obj[p];
+            }
           }
-          let list = app.memoryList.filter((g) => g.company && g.company.id == site.getCompany(req).id && JSON.stringify(g).contains(search)).slice(0, limit);
-
-          res.json({
-            done: true,
-            list: list,
-          });
-        } else {
-          where['company.id'] = site.getCompany(req).id;
-
-          app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
-            res.json({
-              done: true,
-              list: docs,
-            });
-          });
-        }
+          if (!where.active || doc.active) {
+            list.push(obj);
+          }
+        });
+        res.json({
+          done: true,
+          list: list,
+        });
       });
     }
   }
-
-  site.addReceiptVouchers = function (obj) {
-    let numObj = {
-      company: obj.company,
-      screen: app.name,
-      date: new Date(),
-    };
-
-    let cb = site.getNumbering(numObj);
-    obj.code = cb.code;
-    if (obj.code) {
-      app.add(obj, (err, doc) => {});
-    }
-  };
 
   app.init();
   site.addApp(app);

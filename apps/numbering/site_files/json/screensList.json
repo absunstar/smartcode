@@ -18,6 +18,12 @@
     {
         "category": "accounting",
         "feature": "public",
+        "id": "voucherNames",
+        "name": "Voucher Names"
+    },
+    {
+        "category": "accounting",
+        "feature": "public",
         "id": "accountsGuide",
         "name": "Accounts Guide"
     },
