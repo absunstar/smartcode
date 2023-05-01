@@ -220,7 +220,7 @@ module.exports = function init(site) {
               total: _data.amountPaid,
               safe: _data.safe,
               paymentType: _data.paymentType,
-              addUserInfo: _data.approveUserInfo,
+              addUserInfo: _data.approvedUserInfo,
               company: _data.company,
               branch: _data.branch,
             };
@@ -320,6 +320,15 @@ module.exports = function init(site) {
                   item.orderCode = doc.code;
                   site.setItemCard(item, app.name);
                 });
+
+                if (doc.store.linkWithRasd && doc.store.rasdUser && doc.store.rasdPass) {
+                  site.sendRasdData({
+                    rasdUser: doc.store.rasdUser,
+                    rasdPass: doc.store.rasdPass,
+                    appName: app.name,
+                    items: doc.itemsList,
+                  });
+                }
 
                 if (doc.salesType.code == 'patient') {
                   obj.customer = doc.patient;

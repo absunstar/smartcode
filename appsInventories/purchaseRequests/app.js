@@ -253,7 +253,7 @@ module.exports = function init(site) {
                 };
 
                 let _data = req.data;
-                _data.unapproveUserInfo = req.getUserFinger();
+                _data.unapprovedUserInfo = req.getUserFinger();
                 _data.unapprovedDate = new Date();
 
                 app.update(_data, (err, result) => {

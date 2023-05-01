@@ -113,6 +113,8 @@
             "attendanceManage",
             "receiptVouchersManage",
             "expenseVouchersManage",
+            "voucherNamesManage",
+            "transferSafesManage",
             "reportReorderLimitsManage"
         ]
     }

@@ -509,6 +509,9 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          rasdUser: 1,
+          rasdPass: 1,
+          linkWithRasd : 1,
         },
       },
     }).then(
@@ -831,7 +834,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       $remainAmount : 0,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
-      voucherType: { id: 4, code: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
+      voucherType: { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
     };
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');

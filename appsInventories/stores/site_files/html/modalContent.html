@@ -4,11 +4,12 @@
       <div class="row">
         <div class="row">
           <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code"> </i-control>
-        </div>
+        </div> 
         <i-list help-id="" v="r" label="##word.Type##" ng-model="item.type" display="name##session.lang##" items="storesTypesList" ng-search="item.$storeType"></i-list>
         <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-        <i-control type="text" ng-show="item.linkWithRasd" ng-model="item.glCode" label="##word.GL Code##"></i-control>
+        <i-control type="text" ng-show="item.linkWithRasd" ng-model="item.rasdUser" label="##word.Rasd User##"></i-control>
+        <i-control type="text" ng-show="item.linkWithRasd" ng-model="item.rasdPass" label="##word.Rasd Pass##"></i-control>
       </div>
     </div>
     <div class="col3 center">

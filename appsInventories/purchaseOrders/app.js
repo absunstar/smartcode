@@ -338,7 +338,6 @@ module.exports = function init(site) {
         const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
-
           if (callbackErrorBatches.errBatchList.length > 0) {
             let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
             response.error = `The Batches is not correct in ( ${error} )`;
@@ -356,12 +355,11 @@ module.exports = function init(site) {
             return;
           }
 
-          _data.approveUserInfo = req.getUserFinger();
+          _data.approvedUserInfo = req.getUserFinger();
           _data.approved = true;
           _data.approvedDate = new Date();
 
           if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-          
             if (!_data.paymentType || !_data.paymentType.id) {
               response.error = 'Must Select Payment Type';
               res.json(response);
@@ -379,7 +377,7 @@ module.exports = function init(site) {
               total: _data.amountPaid,
               safe: _data.safe,
               paymentType: _data.paymentType,
-              addUserInfo: _data.approveUserInfo,
+              addUserInfo: _data.approvedUserInfo,
               company: _data.company,
               branch: _data.branch,
             };
@@ -405,13 +403,22 @@ module.exports = function init(site) {
                 site.setItemCard(item, app.name);
               });
 
+              if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
+                site.sendRasdData({
+                  rasdUser: result.doc.store.rasdUser,
+                  rasdPass: result.doc.store.rasdPass,
+                  appName: app.name,
+                  items: result.doc.itemsList,
+                });
+              }
+
               let obj = {
                 vendor: result.doc.vendor,
                 code: result.doc.code,
                 image: result.doc.image,
                 appName: app.name,
                 totalNet: result.doc.totalNet,
-                userInfo: result.doc.approveUserInfo,
+                userInfo: result.doc.approvedUserInfo,
               };
 
               // site.autoJournalEntry(req.session, obj);

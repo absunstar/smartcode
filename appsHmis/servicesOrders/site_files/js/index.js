@@ -3,14 +3,15 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   $scope.appName = 'servicesOrders';
   $scope.modalID = '#servicesOrdersManageModal';
   $scope.modalSearchID = '#servicesOrdersSearchModal';
+  $scope.setting = site.showObject(`##data.#setting##`);
   $scope.mode = 'add';
   $scope.structure = {
     type: 'out',
     grossAmount: 0,
     totalDiscount: 0,
-    totalPatientVat: 0,
+    totalPVat: 0,
     totalVat: 0,
-    totalCompanyVat: 0,
+    totalComVat: 0,
     patientBalance: 0,
     accBalance: 0,
     totalNet: 0,
@@ -26,6 +27,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.item = { ...$scope.structure, servicesList: [], date: new Date() };
     site.resetValidated($scope.modalID);
     site.showModal($scope.modalID);
+
   };
 
   $scope.add = function (_item) {
@@ -766,6 +768,37 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     }
   };
 
+  $scope.getSafes = function () {
+    $scope.busy = true;
+    $scope.safesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/safes/all',
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.safesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.calc = function (_item) {
     $scope.error = '';
     $timeout(() => {
@@ -803,6 +836,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   };
 
   $scope.getAll({ date: new Date() });
+  $scope.getSafes();
   $scope.getNumberingAuto();
   $scope.getservicesOrdersTypeList();
   $scope.getServicesList();

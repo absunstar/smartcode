@@ -355,6 +355,9 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          rasdUser: 1,
+          rasdPass: 1,
+          linkWithRasd : 1,
         },
       },
     }).then(
@@ -698,7 +701,7 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
       $remainPaid: _item.remainPaid,
       $remainAmount : 0,
       total: _item.remainPaid,
-      voucherType: { id: 2, code: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
+      voucherType: { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
     };
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');

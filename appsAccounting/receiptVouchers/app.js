@@ -161,7 +161,7 @@ module.exports = function init(site) {
         if (!_data.date) {
           _data.date = new Date();
         }
-        if (_data.voucherType.id == 1 || _data.voucherType.id == 2) {
+        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn') {
           if (site.toMoney(_data.total) > site.toMoney(_data.$remainPaid)) {
             response.error = 'The amount paid is greater than the remaining invoice amount ';
             res.json(response);
@@ -195,11 +195,14 @@ module.exports = function init(site) {
               total: doc.total,
               installment: doc.installment,
             };
-            if (doc.voucherType.id == 1) {
+            if (doc.voucherType.id == 'salesInvoice') {
               site.changeRemainPaidSalesInvoices(obj);
-            } else if (doc.voucherType.id == 2) {
+            } else if (doc.voucherType.id == 'purchaseReturn') {
               site.changeRemainPaidReturnPurchases(obj);
             }
+            
+            site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'sum'});
+
           } else {
             response.error = err.mesage;
           }
@@ -307,7 +310,10 @@ module.exports = function init(site) {
     let cb = site.getNumbering(numObj);
     obj.code = cb.code;
     if (obj.code) {
-      app.add(obj, (err, doc) => {});
+      app.add(obj, (err, doc) => {
+        site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'sum'});
+
+      });
     }
   };
 

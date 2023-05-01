@@ -589,7 +589,7 @@ module.exports = function init(site) {
             servicesList[0].pVat = hmisSetting.pVat || 0;
             servicesList[0].comVat = hmisSetting.comVat || 0;
           }
-          servicesList[0].totalVat = (servicesList[0].totalAfterDisc *  servicesList[0].vat || 0) / 100;
+          servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
           servicesList[0].totalPVat = (servicesList[0].totalAfterDisc * hmisSetting.pVat || 0) / 100;
           servicesList[0].totalComVat = (servicesList[0].totalAfterDisc * hmisSetting.comVat || 0) / 100;
 
@@ -600,7 +600,9 @@ module.exports = function init(site) {
             if (_data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
               datuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
             } else {
-              datuct = _data.insuranceContract.insuranceClass.serviceDeduct;
+              if (_data.insuranceContract.insuranceClass) {
+                datuct = _data.insuranceContract.insuranceClass.serviceDeduct;
+              }
             }
           } else {
             if (_data.insuranceContract.insuranceClass.consultationType == 'percent') {

@@ -230,7 +230,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 3 || g.id == 4);
+          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 'purchaseInvoice' || g.id == 'salesReturn');
         }
       },
       function (err) {
@@ -276,7 +276,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.dataList = [];
     let url = '/api/purchaseOrders/all';
-    if ($scope.item.voucherType.id == 4) {
+    if ($scope.item.voucherType.id == 'salesReturn') {
       url = '/api/returnSalesInvoices/all';
     }
     $http({
@@ -382,6 +382,38 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getVoucherNames = function () {
+    $scope.busy = true;
+    $scope.voucherNamesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/voucherNames/all',
+      data: {
+        where: {
+          active: true,
+          outgoing: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.voucherNamesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
       item.$remainAmount = item.$remainPaid - item.total;
@@ -393,4 +425,5 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
   $scope.getCurrencies();
   $scope.getVouchersTypes();
   $scope.getNumberingAuto();
+  $scope.getVoucherNames();
 });

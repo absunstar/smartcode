@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "accounting" ,
+    "name": "voucherNamesAdmin",
+    "En": "Voucher Names Admin",
+    "Ar": "إدارة مسميات السندات",
+    "permissions": ["voucherNamesManage"]
+}]

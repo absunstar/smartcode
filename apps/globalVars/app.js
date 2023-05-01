@@ -152,8 +152,6 @@ module.exports = function init(site) {
     { id: 7, index: 5, nameEn: 'Friday', nameAr: 'الجمعة' },
   ];
 
-
-
   site.delayDiscountsTypes = [
     { id: 1, nameEn: 'Day', nameAr: 'يوم' },
     { id: 2, nameEn: 'Hour', nameAr: 'ساعة' },
@@ -299,18 +297,21 @@ module.exports = function init(site) {
     { id: 3, nameEn: 'waiting List', nameAr: 'قائمة إنتظار' },
     { id: 4, nameEn: 'Rejecting', nameAr: 'رافض' },
     { id: 5, nameEn: 'Acceptable And Processing Papers', nameAr: 'مقبول وتجهيز أوراق' },
-  ]; 
+  ];
 
   site.applicantStatusAfterContracting = [
     { id: 1, nameEn: 'Work Received', nameAr: 'تم إستلام العمل' },
     { id: 2, nameEn: 'Cancellation By Employee', nameAr: 'إلغاء من طرف الموظف' },
     { id: 3, nameEn: 'Cancellation By Company', nameAr: 'إلغاء من طرف الشركة' },
   ];
+
   site.vouchersTypes = [
-    { id: 1, code: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
-    { id: 2, code: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
-    { id: 3, code: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
-    { id: 4, code: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
+    { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
+    { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
+    { id: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
+    { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
+    { id: 'transferSafes', nameEn: 'Transfer Safes', nameAr: 'تحويل خزن' },
+    { id: 'serviceOrder', nameEn: 'Service Order', nameAr: 'طلب خدمة' },
   ];
 
   site.post('/api/usersTypesList', (req, res) => {
@@ -410,14 +411,12 @@ module.exports = function init(site) {
     });
   });
 
-  
   site.post('/api/paymentTypes', (req, res) => {
     res.json({
       done: true,
       list: site.paymentTypes,
     });
   });
-
 
   site.post('/api/maritalStatus', (req, res) => {
     res.json({

@@ -1,0 +1,94 @@
+<div class="row">
+  <fieldset>
+    <legend>##word.Basic Informations##</legend>
+    <div class="row padding">
+      <div class="row">
+        <div class="row">
+          <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+          <i-control class="col4" v="r" label="##word.Title##" ng-model="item.title"> </i-control>
+          <i-date class="col4" v="r" label="##word.Date##" ng-model="item.date"> </i-date>
+          <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+        </div>
+        <fieldset>
+          <legend>
+            <i-button type="push" ng-click="addFiles()"></i-button>
+            ##word.Files##
+          </legend>
+          <div class="row" ng-repeat="doc in item.filesList">
+            <div class="col10">
+              <i-file ng-model="doc.file"></i-file>
+            </div>
+            <div class="col2">
+              <br />
+              <i-button type="delete" label="##word.Delete##" ng-click="item.filesList.splice($index,1)"> </i-button>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="row">
+          <div class="col6">
+            <fieldset>
+              <legend>##word.From##</legend>
+              <div class="row">
+                <i-list v="r" class="col8" ng-model="item.safe" ng-change="validateSafes()" label="##word.From Safe##" display="name##session.lang##" items="safesList"></i-list>
+                <i-control class="col4" v="r" type="number" ng-change="calc()" label="##word.Transfer Value## (##word.$##)" ng-model="item.total"> </i-control>
+              </div>
+              <div class="row">
+                <div class="col4 center">
+                  <p>##word.Balance Before##</p>
+                  <p>{{item.safe.balance | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col4 center">
+                  <p>##word.Balance After##</p>
+                  <p>{{item.safeAfterBalance | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col6">
+            <fieldset>
+              <legend>##word.To##</legend>
+              <div class="row">
+                <i-list v="r" class="col8" ng-model="item.toSafe" ng-change="validateSafes()" label="##word.To Safe##" display="name##session.lang##" items="safesList"></i-list>
+              </div>
+              <div class="row">
+                <div class="col4 center">
+                  <p>##word.Balance Before##</p>
+                  <p>{{item.toSafe.balance | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col4 center">
+                  <p>##word.Balance After##</p>
+                  <p>{{item.toSafeAfterBalance | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.Add Info##</th>
+      <th>##word.Last Edit Info##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

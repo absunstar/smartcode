@@ -594,6 +594,7 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
     };
 
     $scope.validateInputData = function (item) {
+        $scope.error = '';
         let success = false;
 
         if (!item.idType) {
