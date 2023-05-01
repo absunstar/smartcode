@@ -115,7 +115,9 @@
             "expenseVouchersManage",
             "voucherNamesManage",
             "transferSafesManage",
-            "reportReorderLimitsManage"
+            "reportReorderLimitsManage",
+            "reportMostSellingItemsManage",
+            "reportLowestSellingItemsManage"
         ]
     }
 ]
