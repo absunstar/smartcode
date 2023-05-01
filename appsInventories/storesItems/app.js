@@ -302,6 +302,22 @@ module.exports = function init(site) {
         return item;
     };
 
+    site.getReorderItems = function (doc) {
+        let count = 0;
+
+        if (doc && doc.unitsList && doc.unitsList.length) {
+            doc.unitsList.forEach((unt) => {
+                count += unt.currentCount;
+            });
+
+            if (doc.reorderLimit >= count) {
+                return doc;
+            } else {
+                return null;
+            }
+        }
+    };
+
     site.handelAddBatches = function (obj, batchesList) {
         obj.batchesList = obj.batchesList || [];
         if (batchesList && batchesList.length > 0) {
@@ -763,7 +779,16 @@ module.exports = function init(site) {
                     image: 1,
                     unitsList: 1,
                     itemGroup: 1,
+                    reorderLimit: 1,
+                    hasMedicalData: 1,
+                    workByBatch: 1,
+                    workBySerial: 1,
+                    workByQrCode: 1,
                     active: 1,
+                    workByBatch: 1,
+                    workBySerial: 1,
+                    workByQrCode: 1,
+                    hasMedicalData: 1,
                 };
 
                 if (search) {
@@ -797,10 +822,27 @@ module.exports = function init(site) {
                             where['id'] = { $nin: stockTakingItemsIdsCb };
                         }
                         //  sort: { id: -1 }
+                        let reportReorderLimits;
+                        if (where.reportReorderLimits) {
+                            reportReorderLimits = true;
+                            delete where.reportReorderLimits;
+                        }
+
                         app.all({ where, select, limit }, (err, docs) => {
+                            const selectedDocs = [];
+                            if (where && reportReorderLimits) {
+                                docs.forEach((doc) => {
+                                    let selectedDoc = site.getReorderItems(doc);
+
+                                    if (selectedDoc) {
+                                        selectedDocs.push(selectedDoc);
+                                    }
+                                });
+                            }
+
                             res.json({
                                 done: true,
-                                list: docs,
+                                list: selectedDocs.length ? selectedDocs : docs,
                             });
                         });
                     });

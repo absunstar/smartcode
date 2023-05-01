@@ -5,11 +5,11 @@ app.controller('reorderLimits', function ($scope, $http, $timeout) {
     $scope.item = {};
     $scope.showView = function (_item) {
         $scope.error = '';
-        // $scope.mode = 'view';
+        $scope.mode = 'view';
         $scope.item = {};
         $scope.view(_item);
         site.showModal('#storesItemsManageModal');
-        // document.querySelector(`${'#storesItemsManageModal'} .tab-link`).click();
+        document.querySelector(`${'#storesItemsManageModal'} .tab-link`).click();
     };
 
     $scope.view = function (_item) {
@@ -46,7 +46,7 @@ app.controller('reorderLimits', function ($scope, $http, $timeout) {
             data: {
                 where: {
                     active: true,
-                    reorderLimit: { $gt: 0 },
+                    reportReorderLimits: true,
                 },
                 select: {
                     id: 1,
@@ -55,10 +55,12 @@ app.controller('reorderLimits', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     image: 1,
                     active: 1,
+                    unitsList: 1,
                     workByBatch: 1,
                     workBySerial: 1,
                     workByQrCode: 1,
                     hasMedicalData: 1,
+                    reorderLimit: 1,
                 },
             },
         }).then(
