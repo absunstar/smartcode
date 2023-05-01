@@ -200,6 +200,9 @@ module.exports = function init(site) {
             } else if (doc.voucherType.id == 'purchaseReturn') {
               site.changeRemainPaidReturnPurchases(obj);
             }
+            
+            site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'sum'});
+
           } else {
             response.error = err.mesage;
           }
@@ -307,7 +310,10 @@ module.exports = function init(site) {
     let cb = site.getNumbering(numObj);
     obj.code = cb.code;
     if (obj.code) {
-      app.add(obj, (err, doc) => {});
+      app.add(obj, (err, doc) => {
+        site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'sum'});
+
+      });
     }
   };
 

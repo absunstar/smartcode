@@ -355,7 +355,7 @@ module.exports = function init(site) {
             return;
           }
 
-          _data.approveUserInfo = req.getUserFinger();
+          _data.approvedUserInfo = req.getUserFinger();
           _data.approved = true;
           _data.approvedDate = new Date();
 
@@ -377,7 +377,7 @@ module.exports = function init(site) {
               total: _data.amountPaid,
               safe: _data.safe,
               paymentType: _data.paymentType,
-              addUserInfo: _data.approveUserInfo,
+              addUserInfo: _data.approvedUserInfo,
               company: _data.company,
               branch: _data.branch,
             };
@@ -418,7 +418,7 @@ module.exports = function init(site) {
                 image: result.doc.image,
                 appName: app.name,
                 totalNet: result.doc.totalNet,
-                userInfo: result.doc.approveUserInfo,
+                userInfo: result.doc.approvedUserInfo,
               };
 
               // site.autoJournalEntry(req.session, obj);

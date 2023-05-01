@@ -302,7 +302,7 @@ module.exports = function init(site) {
                     return;
                 }
 
-                _data.approveUserInfo = req.getUserFinger();
+                _data.approvedUserInfo = req.getUserFinger();
                 app.update(_data, (err, result) => {
                     if (!err) {
                         response.done = true;

@@ -144,7 +144,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Services Orders' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Services Orders', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -173,7 +173,10 @@ module.exports = function init(site) {
           _data.code = cb.code;
         }
         _data.addUserInfo = req.getUserFinger();
-
+        if (_data.approved) {
+          _data.approvedUserInfo = req.getUserFinger();
+          _data.approveDate = new Date();
+        }
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
@@ -212,6 +215,20 @@ module.exports = function init(site) {
               } else if (doc.source.id == 2 && doc.doctorDeskTop && doc.doctorDeskTop.id) {
                 site.hasOrderDoctorDeskTop({ id: doc.doctorDeskTop.id });
               }
+
+              let objVoucher = {
+                date: new Date(),
+                voucherType: site.vouchersTypes[5],
+                invoiceId: doc.id,
+                invoiceCode: doc.code,
+                total: doc.totalNet,
+                safe: doc.safe,
+                paymentType: site.paymentTypes[0],
+                addUserInfo: doc.approvedUserInfo,
+                company: doc.company,
+                branch: doc.branch,
+              };
+              site.addReceiptVouchers(objVoucher);
             }
           } else {
             response.error = err.mesage;
@@ -283,7 +300,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, code: 1, patient: 1, approved: 1 };
+        let select = req.body.select || { id: 1, code: 1, patient: 1, approved: 1, approvedDate: 1 };
         let list = [];
         if (app.allowMemory) {
           app.memoryList
@@ -340,7 +357,8 @@ module.exports = function init(site) {
     };
 
     let _data = req.data;
-    _data.editUserInfo = req.getUserFinger();
+    _data.approvedUserInfo = req.getUserFinger();
+    _data.approveDate = new Date();
     _data.approved = true;
     app.update(_data, (err, result) => {
       if (!err) {
@@ -380,6 +398,20 @@ module.exports = function init(site) {
         } else if (result.doc.source.id == 2 && result.doc.doctorDeskTop && result.doc.doctorDeskTop.id) {
           site.hasOrderDoctorDeskTop({ id: result.doc.doctorDeskTop.id });
         }
+
+        let objVoucher = {
+          date: new Date(),
+          voucherType: site.vouchersTypes[5],
+          invoiceId: result.doc.id,
+          invoiceCode: result.doc.code,
+          total: result.doc.totalNet,
+          safe: result.doc.safe,
+          paymentType: site.paymentTypes[0],
+          addUserInfo: result.doc.approvedUserInfo,
+          company: result.doc.company,
+          branch: result.doc.branch,
+        };
+        site.addReceiptVouchers(objVoucher);
       } else {
         response.error = err.message;
       }
@@ -388,7 +420,7 @@ module.exports = function init(site) {
   });
 
   site.post({ name: `/api/${app.name}/needApprove`, public: true }, (req, res) => {
-    let select = req.body.select || { id: 1, code: 1, patient: 1, date: 1, servicesList: 1, doctor: 1,mainInsuranceCompany:1 };
+    let select = req.body.select || { id: 1, code: 1, patient: 1, date: 1, servicesList: 1, doctor: 1, mainInsuranceCompany: 1 };
 
     app.all({ where: { approved: false }, select, sort: { id: -1 } }, (err, docs) => {
       let list = [];

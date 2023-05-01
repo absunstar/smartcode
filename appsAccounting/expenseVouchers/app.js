@@ -15,7 +15,6 @@ module.exports = function init(site) {
     allowRouteAll: true,
   };
 
- 
   app.$collection = site.connectCollection(app.name);
 
   app.init = function () {
@@ -169,8 +168,6 @@ module.exports = function init(site) {
           }
         }
 
-
-
         _data.company = site.getCompany(req);
 
         let numObj = {
@@ -203,6 +200,7 @@ module.exports = function init(site) {
             } else if (doc.voucherType.id == 'salesReturn') {
               site.changeRemainPaidReturnSales(obj);
             }
+            site.changeSafeBalance({ id: doc.safe.id, total: doc.total, type: 'min' });
           } else {
             response.error = err.mesage;
           }
@@ -310,7 +308,10 @@ module.exports = function init(site) {
     let cb = site.getNumbering(numObj);
     obj.code = cb.code;
     if (obj.code) {
-      app.add(obj, (err, doc) => {});
+      app.add(obj, (err, doc) => {
+        site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'min'});
+
+      });
     }
   };
 

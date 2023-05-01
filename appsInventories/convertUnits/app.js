@@ -223,7 +223,7 @@ module.exports = function init(site) {
 
                 let _data = req.data;
 
-                _data.approveUserInfo = req.getUserFinger();
+                _data.approvedUserInfo = req.getUserFinger();
 
                 let overDraftObj = {
                     store: _data.store,

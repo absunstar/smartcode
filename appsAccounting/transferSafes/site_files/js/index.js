@@ -1,22 +1,22 @@
-app.controller('safes', function ($scope, $http, $timeout) {
+app.controller('transferSafes', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'safes';
-  $scope.modalID = '#safesManageModal';
-  $scope.modalSearchID = '#safesSearchModal';
+  $scope.appName = 'transferSafes';
+  $scope.modalID = '#transferSafesManageModal';
+  $scope.modalSearchID = '#transferSafesSearchModal';
   $scope.mode = 'add';
-  $scope._search = {};
+  $scope._search = { fromDate: new Date(), toDate: new Date() };
   $scope.structure = {
-    image: { url: '/images/safes.png' },
+    approved: false,
     active: true,
-    balance : 0,
+    safeAfterBalance: 0,
+    toSafeAfterBalance: 0,
   };
   $scope.item = {};
   $scope.list = [];
-
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure };
+    $scope.item = { ...$scope.structure, date: new Date(),total:0 };
     site.showModal($scope.modalID);
   };
 
@@ -68,6 +68,7 @@ app.controller('safes', function ($scope, $http, $timeout) {
       $scope.error = v.messages[0].ar;
       return;
     }
+
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -91,6 +92,77 @@ app.controller('safes', function ($scope, $http, $timeout) {
         console.log(err);
       }
     );
+  };
+
+  $scope.approve = function (_item) {
+    $scope.error = '';
+    const v = site.validated($scope.modalID);
+    if (!v.ok) {
+      $scope.error = v.messages[0].ar;
+      return;
+    }
+
+   
+
+    _item['approved'] = true;
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/approve`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal($scope.modalID);
+          site.resetValidated($scope.modalID);
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.result.doc;
+          }
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.unapprove = function (_item) {
+    $scope.error = '';
+    const v = site.validated($scope.modalID);
+    if (!v.ok) {
+      $scope.error = v.messages[0].ar;
+      return;
+    }
+
+    _item['approved'] = false;
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/unapprove`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal($scope.modalID);
+          site.resetValidated($scope.modalID);
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.result.doc;
+          }
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+    $scope.item = {};
   };
 
   $scope.showView = function (_item) {
@@ -169,7 +241,7 @@ app.controller('safes', function ($scope, $http, $timeout) {
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
       data: {
-        where: where,
+        where: where || { approved: false },
       },
     }).then(
       function (response) {
@@ -179,33 +251,6 @@ app.controller('safes', function ($scope, $http, $timeout) {
           $scope.count = response.data.count;
           site.hideModal($scope.modalSearchID);
           $scope.search = {};
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getsafesTypesList = function () {
-    $scope.busy = true;
-    $scope.safesTypesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/safesTypes',
-      data: {
-        select: {
-          id: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.safesTypesList = response.data.list;
         }
       },
       function (err) {
@@ -238,80 +283,83 @@ app.controller('safes', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getAccountingLinkList = function () {
-    $scope.busy = true;
-    $scope.accountingLinkList = [];
-    $http({
-      method: 'POST',
-      url: '/api/accountingLinkList',
-      data: {},
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.accountingLinkList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getAccountingList = function (linkBy) {
-    $scope.busy = true;
-    $scope.accountingList = [];
-    let url = '/api/accountsGuide/all';
-    let where = {};
-    let select = { id: 1, code: 1, nameAr: 1, nameEn: 1 };
-
-    if (linkBy.id == 1) {
-      url = '/api/accountsGuide/all';
-      where = {
-        status: 'active',
-        type: 'detailed',
-      };
-    } else {
-      url = '/api/assistantGeneralLedger/all';
-      where = {
-        active: true,
-      };
-    }
-    $http({
-      method: 'POST',
-      url: url,
-      data: {
-        where,
-        select,
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.accountingList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
   $scope.showSearch = function () {
     $scope.error = '';
     site.showModal($scope.modalSearchID);
   };
 
   $scope.searchAll = function () {
+    $scope.search = { ...$scope._search, ...$scope.search };
     $scope.getAll($scope.search);
     site.hideModal($scope.modalSearchID);
     $scope.search = {};
   };
 
+  $scope.addFiles = function () {
+    $scope.error = '';
+    $scope.item.filesList = $scope.item.filesList || [];
+    $scope.item.filesList.push({
+      file_date: new Date(),
+      file_upload_date: new Date(),
+      upload_by: '##user.name##',
+    });
+  };
+
+  $scope.getSafesList = function () {
+    $scope.error = '';
+    $scope.safesList = [];
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: '/api/safes/all',
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+          balance: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        $scope.safesList = response.data.list;
+      },
+      function (err) {
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.validateSafes = function () {
+    $scope.error = '';
+    if ($scope.item.safe && $scope.item.toSafe && $scope.item.safe.id === $scope.item.toSafe.id) {
+      $scope.error = '##word.Same Safe##';
+      return;
+    } else {
+      $scope.calc();
+    }
+  };
+
+  $scope.calc = function () {
+    $timeout(() => {
+      if ($scope.item.total && $scope.item.safe && $scope.item.toSafe && $scope.item.safe.id && $scope.item.toSafe.id) {
+        $scope.item.safeAfterBalance = $scope.item.safe.balance - $scope.item.total;
+        $scope.item.toSafeAfterBalance = $scope.item.toSafe.balance + $scope.item.total;
+      } else {
+        return;
+      }
+
+    }, 300);
+  
+  };
+
+
   $scope.getAll();
+  $scope.getSafesList();
   $scope.getNumberingAuto();
-  $scope.getsafesTypesList();
-  $scope.getAccountingLinkList();
 });

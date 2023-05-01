@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "transferSafesAdmin",
+        "En": "Transfer Safes Admin",
+        "Ar": "إدارة تحويل الخزن",
+        "permissions": ["transferSafesManage"]
+    }
+]

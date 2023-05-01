@@ -1,27 +1,27 @@
-<div id="transferItemsRequestsManageModal" class="modal " fixed>
+<div id="transferSafesManageModal" class="modal " fixed>
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
             <p class="center" ng-show="mode == 'add' ">
-                ##word.New## ##word.Transfer Items Request##
+                ##word.New## ##word.Transfer Safe##
                 <i class="fa fa-plus"></i>
             </p>
             <p class="center" ng-show="mode == 'edit' ">
-                ##word.Edit## ##word.Transfer Items Request##
+                ##word.Edit## ##word.Transfer Safe##
                 <i class="fa fa-pencil"></i>
             </p>
             <p class="center" ng-show="mode == 'delete' ">
-                ##word.Delete## ##word.Transfer Items Request##
+                ##word.Delete## ##word.Transfer Safe##
                 <i class="fa fa-trash"></i>
             </p>
             <p class="center" ng-show="mode == 'view' ">
-                ##word.Transfer Items Request## ##word.Details##
+                ##word.Transfer Safe## ##word.Details##
                 <i class="fa fa-file"></i>
             </p>
         </div>
 
         <div class="modal-body">
-            <div x-import="transferItemsRequests/modalContent.html"></div>
+            <div x-import="transferSafes/modalContent.html"></div>
         </div>
 
         <div class="modal-footer center">
@@ -30,22 +30,22 @@
             <i-button ng-show="mode == 'edit' " type="edit" label="##word.Save##" ng-click="update(item)"></i-button>
             <i-button ng-show="mode == 'delete' " type="delete" label="##word.Delete##" ng-click="delete(item)"> </i-button>
             <i-button
-                ng-show="mode == 'edit' && item.approved && !item.hasTransaction"
-                x-permissions="approveTransferItemsRequest||transferItemsRequestsManage"
+                ng-show="mode == 'edit' && item.approved"
+                x-permissions="approveTransferItemsRequest||transferSafesManage"
                 type="unapprove"
                 label="##word.Unapprove##"
                 ng-click="unapprove(item)"
             >
             </i-button>
             <i-button
-                ng-show="mode == 'edit' && !item.approved && canApprove"
-                x-permissions="unapproveTransferItemsRequest||transferItemsRequestsManage"
+                ng-show="mode == 'edit' && !item.approved"
+                x-permissions="unapproveTransferItemsRequest||transferSafesManage"
                 type="approve"
                 label="##word.Approve##"
                 ng-click="approve(item)"
             >
             </i-button>
-            <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#transferItemsRequestsManageModal')"></i-button>
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#transferSafesManageModal')"></i-button>
         </div>
     </div>
 </div>

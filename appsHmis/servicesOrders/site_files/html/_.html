@@ -15,12 +15,16 @@
                 <tr>
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
+                    <th>##word.Approved##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.patient.fullName##session.lang##}}</td>
-
+                    <td class="center">
+                        <span class="text-success" ng-show="item.approved">( ##word.Yes## ) <span> {{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}} </span> </span>
+                        <span class="text-danger" ng-show="!item.approved">##word.No##</span>
+                    </td>
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 

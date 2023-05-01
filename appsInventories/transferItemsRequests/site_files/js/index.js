@@ -436,6 +436,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     };
 
     $scope.validateStores = function () {
+        $scope.error = '';
         if ($scope.item.store && $scope.item.toStore && $scope.item.store.id === $scope.item.toStore.id) {
             $scope.error = '##word.Same Store##';
             return;

@@ -790,6 +790,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     };
 
     $scope.validateData = function (_item) {
+        $scope.error = '';
         let success = false;
 
         if (!_item.unitsList.length) {

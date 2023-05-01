@@ -114,6 +114,7 @@
             "receiptVouchersManage",
             "expenseVouchersManage",
             "voucherNamesManage",
+            "transferSafesManage",
             "reportReorderLimitsManage"
         ]
     }

@@ -304,11 +304,14 @@ module.exports = function init(site) {
     { id: 2, nameEn: 'Cancellation By Employee', nameAr: 'إلغاء من طرف الموظف' },
     { id: 3, nameEn: 'Cancellation By Company', nameAr: 'إلغاء من طرف الشركة' },
   ];
+
   site.vouchersTypes = [
     { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
     { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
     { id: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
     { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
+    { id: 'transferSafes', nameEn: 'Transfer Safes', nameAr: 'تحويل خزن' },
+    { id: 'serviceOrder', nameEn: 'Service Order', nameAr: 'طلب خدمة' },
   ];
 
   site.post('/api/usersTypesList', (req, res) => {

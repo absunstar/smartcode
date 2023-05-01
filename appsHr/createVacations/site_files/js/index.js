@@ -397,6 +397,7 @@ app.controller('createVacations', function ($scope, $http, $timeout) {
     };
 
     $scope.validateData = function (_data) {
+        $scope.error = '';
         let success = false;
         if (!_data.fromDate || !_data.toDate || new Date(_data.fromDate) > new Date(_data.toDate)) {
             $scope.error = '##word.Please Check Date##';

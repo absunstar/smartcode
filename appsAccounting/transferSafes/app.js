@@ -1,7 +1,7 @@
 module.exports = function init(site) {
   let app = {
-    name: 'safes',
-    allowMemory: true,
+    name: 'transferSafes',
+    allowMemory: false,
     memoryList: [],
     allowCache: false,
     cacheList: [],
@@ -9,25 +9,14 @@ module.exports = function init(site) {
     allowRouteGet: true,
     allowRouteAdd: true,
     allowRouteUpdate: true,
+    allowRouteApprove: true,
+    allowRouteUnapprove: true,
     allowRouteDelete: true,
     allowRouteView: true,
     allowRouteAll: true,
   };
 
   app.$collection = site.connectCollection(app.name);
-
-  site.changeSafeBalance = function (obj) {
-    app.view({ id: obj.id }, (err, doc) => {
-      if (!err && doc) {
-        if (obj.type == 'sum') {
-          doc.balance += obj.total;
-        } else if (obj.type == 'min') {
-          doc.balance -= obj.total;
-        }
-        app.update(doc, (err, result) => {});
-      }
-    });
-  };
 
   app.init = function () {
     if (app.allowMemory) {
@@ -157,7 +146,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Safes' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Transfer Safes' }, { parser: 'html', compres: true });
         }
       );
     }
@@ -169,6 +158,16 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        if (_data.safe && _data.toSafe && _data.safe.id === _data.toSafe.id) {
+          response.error = 'Same Safe';
+          res.json(response);
+          return;
+        }
+        if (_data.safeAfterBalance < 0) {
+          response.error = 'Transfer Value greater than safe balance';
+          res.json(response);
+          return;
+        }
         _data.company = site.getCompany(req);
         _data.branch = site.getBranch(req);
 
@@ -210,6 +209,16 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.editUserInfo = req.getUserFinger();
 
+        if (_data.safe && _data.toSafe && _data.safe.id === _data.toSafe.id) {
+          response.error = 'Same Safe';
+          res.json(response);
+          return;
+        }
+        if (_data.safeAfterBalance < 0) {
+          response.error = 'Transfer Value greater than safe balance';
+          res.json(response);
+          return;
+        }
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
@@ -222,6 +231,74 @@ module.exports = function init(site) {
       });
     }
 
+    if (app.allowRouteApprove) {
+      site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+        if (_data.safe && _data.toSafe && _data.safe.id === _data.toSafe.id) {
+          response.error = 'Same Safe';
+          res.json(response);
+          return;
+        }
+        if (_data.safeAfterBalance < 0) {
+          response.error = 'Transfer Value greater than safe balance';
+          res.json(response);
+          return;
+        }
+
+        _data.approvedUserInfo = req.getUserFinger();
+        _data.approvedDate = new Date();
+
+        app.update(_data, (err, result) => {
+          if (!err) {
+            response.done = true;
+            response.result = result;
+
+            let obj = {
+              date: new Date(),
+              voucherType: site.vouchersTypes[4],
+              invoiceId: result.doc.id,
+              invoiceCode: result.doc.code,
+              total: result.doc.total,
+              paymentType: site.paymentTypes[0],
+              addUserInfo: result.doc.approvedUserInfo,
+              company: result.doc.company,
+              branch: result.doc.branch,
+            };
+            site.addReceiptVouchers({ ...obj, safe: result.doc.toSafe });
+            site.addExpenseVouchers({ ...obj, safe: result.doc.safe });
+          } else {
+            response.error = err.message;
+          }
+          res.json(response);
+        });
+      });
+    }
+
+    if (app.allowRouteUnapprove) {
+      site.post({ name: `/api/${app.name}/unapprove`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+        _data.unapprovedUserInfo = req.getUserFinger();
+        _data.unapprovedDate = new Date();
+
+        app.update(_data, (err, result) => {
+          if (!err) {
+            response.done = true;
+            response.result = result;
+          } else {
+            response.error = err.message;
+          }
+          res.json(response);
+        });
+      });
+    }
     if (app.allowRouteDelete) {
       site.post({ name: `/api/${app.name}/delete`, require: { permissions: ['login'] } }, (req, res) => {
         let response = {
@@ -264,109 +341,47 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let search = req.body.search || '';
-        let limit = req.body.limit || 10;
-        where['company.id'] = site.getCompany(req).id;
+        let limit = req.body.limit || 50;
+        let select = req.body.select || {
+          id: 1,
+          code: 1,
+          approvedDate: 1,
+          safe: 1,
+          toSafe: 1,
+          active: 1,
+          approved: 1,
+          date: 1,
+          title: 1,
+          image: 1,
+        };
 
-        let select = req.body.select || { id: 1, code: 1, type: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, balance: 1 };
-
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
         if (app.allowMemory) {
-          if (!search) {
-            search = 'id';
-          }
-          let list = app.memoryList
-            .filter(
-              (g) =>
-                g.company &&
-                g.company.id == site.getCompany(req).id &&
-                (!where.active || g.active === where.active) &&
-                (!where['type.id'] || g.type.id === where['type.id']) &&
-                JSON.stringify(g).contains(search)
-            )
-            .slice(0, limit);
+          let list = app.memoryList.filter(
+            (g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(where.search)
+          );
 
           res.json({
             done: true,
-            list: list,
+            list: list.slice(-limit),
           });
         } else {
           where['company.id'] = site.getCompany(req).id;
-          app.all({ where: where, select: select, limit }, (err, docs) => {
-            res.json({
-              done: true,
-              list: docs,
-            });
+
+          app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+            res.json({ done: true, list: docs });
           });
         }
-      });
-
-      site.post(`api/${app.name}/import`, (req, res) => {
-        let response = {
-          done: false,
-          file: req.form.files.fileToUpload,
-        };
-
-        if (site.isFileExistsSync(response.file.filepath)) {
-          let docs = [];
-          if (response.file.originalFilename.like('*.xls*')) {
-            let workbook = site.XLSX.readFile(response.file.filepath);
-            docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-          } else {
-            docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
-          }
-
-          if (Array.isArray(docs)) {
-            console.log(`Importing ${app.name} : ${docs.length}`);
-            let systemCode = 0;
-            docs.forEach((doc) => {
-              let numObj = {
-                company: site.getCompany(req),
-                screen: app.name,
-                date: new Date(),
-              };
-              let cb = site.getNumbering(numObj);
-
-              if (cb.auto) {
-                systemCode = cb.code || ++systemCode;
-              } else {
-                systemCode++;
-              }
-
-              if (!doc.code) {
-                doc.code = systemCode;
-              }
-
-              let newDoc = {
-                code: doc.code,
-                nameAr: doc.nameAr,
-                nameEn: doc.nameEn,
-                image: { url: '/images/safes.png' },
-                active: true,
-              };
-
-              newDoc.company = site.getCompany(req);
-              newDoc.branch = site.getBranch(req);
-              newDoc.addUserInfo = req.getUserFinger();
-
-              app.add(newDoc, (err, doc2) => {
-                if (!err && doc2) {
-                  site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                  console.log(site.dbMessage);
-                } else {
-                  site.dbMessage = err.message;
-                  console.log(site.dbMessage);
-                }
-              });
-            });
-          } else {
-            site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
-            console.log(site.dbMessage);
-          }
-        } else {
-          site.dbMessage = 'file not exists : ' + response.file.filepath;
-          console.log(site.dbMessage);
-        }
-
-        res.json(response);
       });
     }
   }

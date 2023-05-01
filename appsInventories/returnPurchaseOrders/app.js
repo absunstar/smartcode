@@ -242,7 +242,7 @@ module.exports = function init(site) {
             total: _data.amountPaid,
             safe: _data.safe,
             paymentType: _data.paymentType,
-            addUserInfo: _data.approveUserInfo,
+            addUserInfo: _data.approvedUserInfo,
             company: _data.company,
             branch: _data.branch,
           };
