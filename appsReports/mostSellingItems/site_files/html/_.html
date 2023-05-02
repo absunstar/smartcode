@@ -3,6 +3,17 @@
         <div x-import="mostSellingItems/modal.html"></div>
         <div x-import="storesItems/modal.html"></div>
 
+        <div class="row" x-permissions="purchaseOrdersSearch || purchaseOrdersManage">
+            <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+            <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+            <i-list v="r" class="col3" display="name##session.lang##" ng-model="_search.store" items="storesList" label="##word.Store##" ng-search="item.$store"></i-list>
+
+            <div class="col1">
+                <br />
+                <i-button type="search" x-permissions="purchaseOrdersSearch || mostSellingItemsManage" label="##word.Search##" ng-click="searchAll()"></i-button>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
                 <tr>
