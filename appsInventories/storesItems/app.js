@@ -132,6 +132,7 @@ module.exports = function init(site) {
                     } else if (screenName === 'salesInvoices') {
                         doc.unitsList[index].storesList[storeIndex].salesCount += _elm.count;
                         doc.unitsList[index].storesList[storeIndex].salesPrice += _elm.total;
+                        doc.unitsList[index].storesList[storeIndex].lastSellingDate = new Date();
                         if (_elm.workByBatch || _elm.workBySerial || _elm.workByQrCode) {
                             doc.unitsList[index].storesList[storeIndex] = site.handelBalanceBatches(doc.unitsList[index].storesList[storeIndex], _elm.batchesList, '-');
                         }
@@ -368,7 +369,19 @@ module.exports = function init(site) {
                     str.bonusReturnCount;
                 str.currentCount = totalIncome - totalOut;
                 unt.currentCount += str.currentCount || 0;
+
+                if (str.currentCount <= item.reorderLimit) {
+                    str.storeNeedReorder = true;
+                } else {
+                    str.storeNeedReorder = false;
+                }
             });
+
+            if (unt.currentCount <= item.reorderLimit) {
+                unt.unitNeedReorder = true;
+            } else {
+                unt.unitNeedReorder = false;
+            }
         });
         return item;
     };
@@ -881,6 +894,8 @@ module.exports = function init(site) {
                         if (where.reportReorderLimits) {
                             reportReorderLimits = true;
                             delete where.reportReorderLimits;
+                            // unitsList.storesList.id = where.store.id
+                            // unitsList.storesList.currentCount = { $lte: doc.reorderLimit };
                         }
 
                         app.all({ where, select, limit }, (err, docs) => {
