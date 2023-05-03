@@ -1,9 +1,9 @@
 [
     {
-        "moduleName": "public",
+        "moduleName": "report",
         "name": "lowestSellingItemsAdmin",
-        "En": "Lowest Selling Items Admin",
+        "En": "Lowest Selling Items Report",
         "Ar": "تقرير الأصناف الأقل مبيعا",
-        "permissions": ["reportLowestSellingItemsManage"]
+        "permissions": ["lowestSellingItemsManage"]
     }
 ]

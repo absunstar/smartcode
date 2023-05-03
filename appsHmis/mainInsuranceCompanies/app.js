@@ -580,7 +580,7 @@ module.exports = function init(site) {
           hmisSetting.vatList = hmisSetting.vatList || [];
           let vatIndex = hmisSetting.vatList.findIndex((itm) => itm.id === _data.nationalityId);
           servicesList[0].totalDisc = (servicesList[0].price * servicesList[0].discount) / 100;
-          servicesList[0].totalAfterDisc = servicesList[0].price - servicesList[0].discount;
+          servicesList[0].totalAfterDisc = servicesList[0].price - servicesList[0].totalDisc;
 
           if (vatIndex !== -1) {
             servicesList[0].pVat = hmisSetting.vatList[vatIndex].pVat;
@@ -592,7 +592,6 @@ module.exports = function init(site) {
           servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
           servicesList[0].totalPVat = (servicesList[0].totalAfterDisc * hmisSetting.pVat || 0) / 100;
           servicesList[0].totalComVat = (servicesList[0].totalAfterDisc * hmisSetting.comVat || 0) / 100;
-
           servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat + servicesList[0].totalPVat + servicesList[0].totalComVat;
           servicesList[0].total = site.toNumber(servicesList[0].total);
           let datuct = 0;
@@ -616,9 +615,11 @@ module.exports = function init(site) {
             _data.insuranceContract.insuranceClass.maxDeductAmount &&
             _data.insuranceContract.insuranceClass.maxDeductAmount < servicesList[0].total - datuct
           ) {
-            servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
+            servicesList[0].patientCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
+            servicesList[0].comDeduct = _data.insuranceContract.insuranceClass.maxDeductAmount;
           } else {
             servicesList[0].patientCash = servicesList[0].total - datuct;
+            servicesList[0].comDeduct = datuct;
           }
           if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {
             servicesList[0].hospitalResponsibility = _data.hospitalResponsibility;

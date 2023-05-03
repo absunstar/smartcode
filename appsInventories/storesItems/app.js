@@ -277,7 +277,6 @@ module.exports = function init(site) {
                 branch_pass: rasdData.rasdPass,
                 product_list: productList,
             };
-            console.log(JSON.stringify(body));
             site.fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(body),

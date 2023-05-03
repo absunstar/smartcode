@@ -357,6 +357,12 @@
             </div>
 
             <div class="row">
+              <i-list class="col4" ng-model="item.accountsSetting.safeCash" items="safesCashList" display="name##session.lang##" ng-search="item.accountsSetting.$_safeCash" label="##word.Safe Cash##"></i-list>
+              <i-list class="col4" ng-model="item.accountsSetting.safeBank" items="safesBankList" display="name##session.lang##" ng-search="item.accountsSetting.$_safeBank" label="##word.Safe Bank##"></i-list>
+              <i-list class="col4" ng-model="item.accountsSetting.safeNet" items="safesVisaList" display="name##session.lang##" ng-search="item.accountsSetting.$_safeVisa" label="##word.Safe Visa##"></i-list>
+            </div>
+
+            <div class="row">
               <i-checkbox class="col4" label="##word.Auto Generate Account Guide & Cost Center Code##" ng-model="item.accountsSetting.autoGenerateAccountsGuideAndCostCenterCode"> </i-checkbox>
               <i-control ng-show="item.accountsSetting.autoGenerateAccountsGuideAndCostCenterCode" class="col2" label="##word.Length Level##" type="number" ng-model="item.accountsSetting.lengthLevel">
               </i-control>

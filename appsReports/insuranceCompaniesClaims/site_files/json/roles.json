@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "insuranceCompaniesClaimsAdmin",
+        "En": "Insurance Companies Claims Report",
+        "Ar": "تقرير مطالبات شركات التأمين",
+        "permissions": ["insuranceCompaniesClaimsManage"]
+    }
+]

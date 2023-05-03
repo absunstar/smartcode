@@ -807,12 +807,15 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       _item.totalVat = 0;
       _item.totalPVat = 0;
       _item.totalComVat = 0;
+      _item.comDeduct = 0;
+      _item.totalNet = 0;
       _item.servicesList.forEach((_service) => {
         _item.grossAmount += _service.totalAfterDisc;
         _item.totalDiscount += _service.totalDisc;
         _item.totalVat += _service.totalVat;
         _item.totalPVat += _service.totalPVat;
         _item.totalComVat += _service.totalComVat;
+        _item.comDeduct += _service.comDeduct;
         _item.totalNet += _service.patientCash;
       });
 

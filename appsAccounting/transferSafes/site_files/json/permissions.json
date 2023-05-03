@@ -1,13 +1,13 @@
 [
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesManage", "En": "Manage", "Ar": "إدارة" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesAdd", "En": "Add", "Ar": "إضافة" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesUpdate", "En": "Edit", "Ar": "تعديل" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesDelete", "En": "Delete", "Ar": "حذف" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesView", "En": "View", "Ar": "عرض" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesSearch", "En": "Search", "Ar": "بحث" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesExport", "En": "Export", "Ar": "تصدير" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesPrint", "En": "Print", "Ar": "طباعة" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "transferSafesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "approveTransferSafes", "En": "Approve Transfer Safes", "Ar": "إعتماد تحويل خزن" },
-    { "moduleName": "inventory", "screenName": "transferSafes", "name": "unapproveTransferSafes", "En": "Unapprove Transfer Safes", "Ar": "إلغاء إعتماد تحويل خزن" }
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "transferSafesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "approveTransferSafes", "En": "Approve Transfer Safes", "Ar": "إعتماد تحويل خزن" },
+    { "moduleName": "accounting", "screenName": "transferSafes", "name": "unapproveTransferSafes", "En": "Unapprove Transfer Safes", "Ar": "إلغاء إعتماد تحويل خزن" }
 ]

@@ -43,7 +43,7 @@ site.importApps(__dirname + '/appsHr');
 
 site.loadLocalApp('client-side');
 site.loadLocalApp('ui-print');
-
+site.addFeature('m-reports');
 site.addFeature('m-accounting')
 site.addFeature('m-inventory')
 site.addFeature('m-hr')

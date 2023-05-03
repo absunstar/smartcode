@@ -1,9 +1,9 @@
 [
     {
-        "moduleName": "public",
+        "moduleName": "report",
         "name": "reorderLimitsAdmin",
         "En": "Reorder Limit Admin",
         "Ar": "تقرير الأصناف الناقصة",
-        "permissions": ["reportReorderLimitsManage"]
+        "permissions": ["reorderLimitsManage"]
     }
 ]

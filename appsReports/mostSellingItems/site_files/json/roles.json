@@ -1,9 +1,9 @@
 [
     {
-        "moduleName": "public",
+        "moduleName": "report",
         "name": "mostSellingItemsAdmin",
-        "En": "Most Selling Items Admin",
+        "En": "Most Selling Items Report",
         "Ar": "تقرير الأصناف الأكثر مبيعا",
-        "permissions": ["reportMostSellingItemsManage"]
+        "permissions": ["mostSellingItemsManage"]
     }
 ]

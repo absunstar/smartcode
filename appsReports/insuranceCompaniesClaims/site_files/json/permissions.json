@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "insuranceCompaniesClaims", "name": "insuranceCompaniesClaimsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "insuranceCompaniesClaims", "name": "insuranceCompaniesClaimsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "insuranceCompaniesClaims", "name": "insuranceCompaniesClaimsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "insuranceCompaniesClaims", "name": "insuranceCompaniesClaimsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "insuranceCompaniesClaims", "name": "insuranceCompaniesClaimsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

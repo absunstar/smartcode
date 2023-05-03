@@ -115,9 +115,10 @@
             "expenseVouchersManage",
             "voucherNamesManage",
             "transferSafesManage",
-            "reportReorderLimitsManage",
-            "reportMostSellingItemsManage",
-            "reportLowestSellingItemsManage"
+            "insuranceCompaniesClaimsManage",
+            "reorderLimitsManage",
+            "mostSellingItemsManage",
+            "lowestSellingItemsManage"
         ]
     }
 ]

@@ -1,7 +1,7 @@
 [
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsManage", "En": "Manage", "Ar": "إدارة" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsView", "En": "View", "Ar": "عرض" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsExport", "En": "Export", "Ar": "تصدير" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsPrint", "En": "Print", "Ar": "طباعة" },
-    { "moduleName": "public", "screenName": "reorderLimits", "name": "reorderLimitsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+    { "moduleName": "report", "screenName": "reorderLimits", "name": "reorderLimitsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reorderLimits", "name": "reorderLimitsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reorderLimits", "name": "reorderLimitsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reorderLimits", "name": "reorderLimitsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reorderLimits", "name": "reorderLimitsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
 ]

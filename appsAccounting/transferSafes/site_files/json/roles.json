@@ -1,6 +1,6 @@
 [
     {
-        "moduleName": "inventory",
+        "moduleName": "accounting",
         "name": "transferSafesAdmin",
         "En": "Transfer Safes Admin",
         "Ar": "إدارة تحويل الخزن",

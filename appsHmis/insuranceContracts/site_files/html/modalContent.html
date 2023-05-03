@@ -49,7 +49,7 @@
         <i-list label="##word.Insurance Class##" class="col6" ng-model="item.$insuranceClass" display="name##session.lang##" items="insuranceClassesList" ng-search="item.$insuranceClasses"></i-list>
         <div class="col2">
           <br />
-          <i-button type="add" ng-click="addInsuranceClass()"></i-button>
+          <i-button type="push" ng-click="addInsuranceClass()"></i-button>
         </div>
       </div>
 
@@ -69,7 +69,7 @@
             <td class="center blue">{{c.code}}</td>
             <td class="center">{{c.name##session.lang##}}</td>
             <td class="center">
-              <br>
+              <br />
               <i-control type="number" ng-model="c.serviceDeduct"> </i-control>
               <div class="row">
                 <i-radio class="col6" group="{{$index}}serviceType" label="##word.Percent##" ng-value="percent" ng-model="c.serviceType"> </i-radio>
@@ -77,7 +77,7 @@
               </div>
             </td>
             <td class="center">
-              <br>
+              <br />
               <i-control type="number" ng-model="c.consultationDeduct"> </i-control>
               <div class="row">
                 <i-radio class="col6" group="{{$index}}cons" label="##word.Percent##" ng-value="percent" ng-model="c.consultationType"> </i-radio>
@@ -91,8 +91,6 @@
           </tr>
         </table>
       </div>
-
-     
     </fieldset>
   </div>
 </div>

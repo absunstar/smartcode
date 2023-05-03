@@ -1,7 +1,7 @@
 [
-    { "moduleName": "public", "screenName": "lowestSellingItems", "name": "lowestSellingItemsManage", "En": "Manage", "Ar": "إدارة" },
-    { "moduleName": "public", "screenName": "lowestSellingItems", "name": "lowestSellingItemsView", "En": "View", "Ar": "عرض" },
-    { "moduleName": "public", "screenName": "lowestSellingItems", "name": "lowestSellingItemsExport", "En": "Export", "Ar": "تصدير" },
-    { "moduleName": "public", "screenName": "lowestSellingItems", "name": "lowestSellingItemsPrint", "En": "Print", "Ar": "طباعة" },
-    { "moduleName": "public", "screenName": "lowestSellingItems", "name": "lowestSellingItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+    { "moduleName": "report", "screenName": "lowestSellingItems", "name": "lowestSellingItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "lowestSellingItems", "name": "lowestSellingItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "lowestSellingItems", "name": "lowestSellingItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "lowestSellingItems", "name": "lowestSellingItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "lowestSellingItems", "name": "lowestSellingItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
 ]

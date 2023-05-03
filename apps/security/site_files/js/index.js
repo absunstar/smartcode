@@ -91,8 +91,8 @@ app.controller('security', function ($scope, $http, $interval) {
                 $scope.screens.forEach((s) => {
                   let newname = data.find((el) => el.name == s.name.replace(/-/g, '_'));
                   if (newname) {
-                    s.nameAr = newname.Ar;
-                    s.nameEn = newname.En;
+                    s.nameAr = newname.ar;
+                    s.nameEn = newname.en;
                   }
                 });
               }
@@ -104,9 +104,8 @@ app.controller('security', function ($scope, $http, $interval) {
           $scope.accountingScreens = $scope.screens.filter((s) => s.moduleName == 'accounting');
           $scope.inventoryScreens = $scope.screens.filter((s) => s.moduleName == 'inventory');
           $scope.publicScreens = $scope.screens.filter((s) => s.moduleName == 'public');
-          $scope.hmisRoles = $scope.roles.filter((s) => s.moduleName == 'hmis');
+          $scope.hmisScreens = $scope.screens.filter((s) => s.moduleName == 'hmis');
           $scope.reportScreens = $scope.screens.filter((s) => s.moduleName == 'report');
-
           $scope.permissions = response.data.permissions;
         }
       },
@@ -181,8 +180,8 @@ app.controller('security', function ($scope, $http, $interval) {
     }
     $scope.user.roles.push({
       name: role.name,
-      En: role.En,
-      Ar: role.Ar,
+      en: role.en,
+      ar: role.ar,
     });
     $scope.role = {};
   };
@@ -209,6 +208,7 @@ app.controller('security', function ($scope, $http, $interval) {
     $scope.permissionEditor = false;
     $scope.imageEditor = false;
     $scope.fileEditor = false;
+    $scope.mode = 'add';
     $scope.user = { image: { url: '/images/user.png' }, active: true, files: [], branchList: [{}], permissions: [], roles: [] };
     site.showModal('#addUserModal');
     document.querySelector('#addUserModal .tab-link').click();
@@ -236,8 +236,10 @@ app.controller('security', function ($scope, $http, $interval) {
 
   $scope.edit = function (user) {
     $scope.view(user);
+    $scope.mode = 'edit';
     $scope.user = { image: { url: '/images/user.png' }, files: [], permissions: [], roles: [] };
-    site.showModal('#updateUserModal');
+    site.showModal('#addUserModal');
+    document.querySelector('#addUserModal .tab-link').click();
     /*     document.querySelector('#updateUserModal .tab-link').click();
      */
   };
@@ -252,8 +254,7 @@ app.controller('security', function ($scope, $http, $interval) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal('#updateUserModal');
-          site.hideModal('#viewUserModal');
+          site.hideModal('#addUserModal');
           $scope.loadAll();
         } else {
           $scope.error = response.data.error;
@@ -265,9 +266,10 @@ app.controller('security', function ($scope, $http, $interval) {
 
   $scope.remove = function (user) {
     $scope.view(user);
+    $scope.mode = 'delete';
     $scope.user = { image: { url: '/images/user.png' }, files: [], permissions: [], newpermissions: [], roles: [] };
-    site.showModal('#deleteUserModal');
-    document.querySelector('#deleteUserModal .tab-link').click();
+    site.showModal('#addUserModal');
+    document.querySelector('#addUserModal .tab-link').click();
   };
 
   $scope.view = function (user) {
@@ -319,8 +321,7 @@ app.controller('security', function ($scope, $http, $interval) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal('#deleteUserModal');
-          site.hideModal('#viewUserModal');
+          site.hideModal('#addUserModal');
           $scope.loadAll();
         } else {
           $scope.error = response.data.error;
@@ -382,6 +383,30 @@ app.controller('security', function ($scope, $http, $interval) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.storesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.loadSafes = function () {
+    $scope.error = '';
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: '/api/safes/all',
+      data: { select: { id: 1, nameAr: 1, nameEn: 1,type:1} },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.safesCashList = response.data.list.filter((s) => s.type.id == 1);
+          $scope.safesBankList = response.data.list.filter((s) => s.type.id == 2);
+          $scope.safesVisaList = response.data.list.filter((s) => s.type.id == 3);
+
         }
       },
       function (err) {
@@ -520,6 +545,7 @@ app.controller('security', function ($scope, $http, $interval) {
 
   $scope.getCompanyList();
   $scope.loadStores();
+  $scope.loadSafes();
   $scope.getPrintersPath();
   $scope.loadAll();
   $scope.loadRoles();
