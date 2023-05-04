@@ -50,6 +50,9 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
           $scope.list.unshift(response.data.doc);
+          if (response.data.doc.approved && $scope.setting.printerProgram.autoThermalPrintVoucher) {
+            $scope.thermalPrint(response.data.doc);
+          }
         } else {
           $scope.error = response.data.error;
           if (response.data.error && response.data.error.like('*Must Enter Code*')) {
@@ -124,6 +127,10 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
+          }
+
+          if (response.data.result.doc.approved && $scope.setting.printerProgram.autoThermalPrintVoucher) {
+            $scope.thermalPrint(response.data.result.doc);
           }
         } else {
           $scope.error = response.data.error;
@@ -837,6 +844,89 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     site.hideModal($scope.modalSearchID);
     $scope.search = {};
   };
+
+  $scope.thermalPrint = function (obj) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    obj.netTxt = site.stringfiy(obj.total);
+    if ($scope.setting.printerProgram.thermalPrinter) {
+      $('#thermalPrint').removeClass('hidden');
+      $scope.thermal = { ...obj };
+      $scope.thermal.vouchersName = { nameEn: 'Receipt Voucher', nameAr: 'سند قبض' };
+
+      $scope.localPrint = function () {
+        if ($scope.setting.printerProgram.placeQr) {
+          if ($scope.setting.printerProgram.placeQr.id == 1) {
+            site.qrcode({
+              width: 140,
+              height: 140,
+              selector: document.querySelector('.qrcode'),
+              text: document.location.protocol + '//' + document.location.hostname + `/qr_storeout?id=${$scope.thermal.id}`,
+            });
+          } else if ($scope.setting.printerProgram.placeQr.id == 2) {
+            if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
+              let qrString = {
+                vatNumber: '##session.company.taxNumber##',
+                time: new Date($scope.thermal.date).toISOString(),
+                total: $scope.thermal.total,
+              };
+              if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
+                qrString.name = '##session.company.nameAr##';
+              } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
+                qrString.name = '##session.company.nameEn##';
+              }
+              qrString.name = '##session.company.nameEn##';
+              site.zakat2(
+                {
+                  name: qrString.name,
+                  vatNumber: qrString.vatNumber,
+                  time: qrString.time,
+                  total: qrString.total.toString(),
+                },
+                (data) => {
+                  site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });
+                }
+              );
+            } else {
+              let datetime = new Date($scope.thermal.date);
+              let formattedDate =
+                datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate() + ' ' + datetime.getHours() + ':' + datetime.getMinutes() + ':' + datetime.getSeconds();
+              let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
+                $scope.thermal.code
+              }]\nتاريخ : [${formattedDate}]\nالصافي : [${$scope.thermal.total}]`;
+              site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: qrString });
+            }
+          }
+        }
+        let printer = $scope.setting.printerProgram.thermalPrinter;
+        if ('##user.printerPath##' && site.toNumber('##user.printerPath.id##') > 0) {
+          printer = JSON.parse('##user.printerPath##');
+        }
+        $timeout(() => {
+          site.print({
+            selector: '#thermalPrint',
+            ip: printer.ipDevice,
+            port: printer.portDevice,
+            pageSize: 'Letter',
+            printer: printer.ip.name.trim(),
+          });
+        }, 500);
+      };
+
+      $scope.localPrint();
+    } else {
+      $scope.error = '##word.thermal_printer_must_select##';
+    }
+    $scope.busy = false;
+    $timeout(() => {
+      $('#thermalPrint').addClass('hidden');
+    }, 8000);
+  };
+
+  if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+    $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+  }
 
   $scope.getAll({ date: new Date() });
   $scope.getSafes();

@@ -235,7 +235,6 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
               en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
-          $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
         } else {
           $scope.error = response.data.error;
         }
@@ -1259,6 +1258,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
+    obj.netTxt = site.stringfiy(obj.totalNet);
     if ($scope.setting.printerProgram.thermalPrinter) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
@@ -1337,6 +1337,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     if ($scope.busy) return;
     $scope.busy = true;
     $('#purchaseOrdersDetails').removeClass('hidden');
+    $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
 
     if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
       $scope.invList = [];
