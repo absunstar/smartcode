@@ -1,9 +1,9 @@
 module.exports = function init(site) {
   let app = {
-    name: 'safes',
-    allowMemory: true,
+    name: 'safesTransactions',
+    allowMemory: false,
     memoryList: [],
-    allowCache: false,
+    allowCache: true,
     cacheList: [],
     allowRoute: true,
     allowRouteGet: true,
@@ -14,34 +14,41 @@ module.exports = function init(site) {
     allowRouteAll: true,
   };
 
-  app.$collection = site.connectCollection(app.name);
+  site.setSafesTransactions = function (_elm) {
+    app.all(
+      {
+        where: { 'safe.id': _elm.safe.id },
+        sort: { id: -1 },
+        limit: 1,
+      },
+      (err, docs) => {
+        if (!err) {
+          docs = docs || [];
 
-  site.changeSafeBalance = function (obj) {
-    app.view({ id: obj.safe.id }, (err, doc) => {
-      if (!err && doc) {
-        if (obj.type == 'sum') {
-          if (obj.voucherType.id == 'transferSafes') {
-            doc.receiptBalanceTransfer += obj.total;
-          } else {
-            doc.receiptBalance += obj.total;
+          let total = _elm.total;
+          if (_elm.type == 'min') {
+            -Math.abs(total);
           }
-          doc.totalReceiptBalance = doc.receiptBalance + doc.receiptBalanceTransfer;
-          site.setSafesTransactions(obj);
-        } else if (obj.type == 'min') {
-          if (obj.voucherType.id == 'transferSafes') {
-            doc.expenseBalanceTransfer += obj.total;
-          } else {
-            doc.expenseBalance += obj.total;
-          }
-          doc.totalExpenseBalance = doc.expenseBalance + doc.expenseBalanceTransfer;
-          site.setSafesTransactions(obj);
+          let obj = {
+            date: new Date(),
+            invoiceCode: _elm.invoiceCode,
+            invoiceId: _elm.invoiceId,
+            safe: _elm.safe,
+            voucherType: _elm.voucherType,
+            total: _elm.total,
+            currentBalance: docs[0] ? docs[0].currentBalance + total : total,
+            lastBalance: docs[0] ? docs[0].currentBalance : 0,
+            company: _elm.company,
+            type: _elm.type,
+          };
+          app.$collection.add(obj);
         }
-
-        doc.totalBalance = doc.totalReceiptBalance - doc.totalExpenseBalance;
-        app.update(doc, (err, result) => {});
       }
-    });
+    );
   };
+
+  app.$collection = site.connectCollection(app.name);
+  //   where['name'] = site.get_RegExp(where['name'], 'i');
 
   app.init = function () {
     if (app.allowMemory) {
@@ -171,7 +178,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Safes' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Safes Transactions' }, { parser: 'html', compres: true });
         }
       );
     }
@@ -184,7 +191,6 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.company = site.getCompany(req);
-        _data.branch = site.getBranch(req);
 
         let numObj = {
           company: site.getCompany(req),
@@ -277,110 +283,65 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let search = req.body.search || '';
-        let limit = req.body.limit || 10;
-        where['company.id'] = site.getCompany(req).id;
+        let select = req.body.select || {};
+        let list = [];
+    
+        if (where.safe) {
+          where['safe.id'] = where.safe.id;
+          delete where.safe;
+        }
+     
+        if (where.voucherType) {
+          where['voucherType.id'] = where.voucherType.id;
+          delete where.voucherType;
+        }
 
-        let select = req.body.select || { id: 1, code: 1, type: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, totalBalance: 1 };
+        if (where && where.dateTo) {
+          let d1 = site.toDate(where.date);
+          let d2 = site.toDate(where.dateTo);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+          delete where.dateTo;
+        } else if (where.date) {
+          let d1 = site.toDate(where.date);
+          let d2 = site.toDate(where.date);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+        }
 
         if (app.allowMemory) {
-          if (!search) {
-            search = 'id';
-          }
-          let list = app.memoryList
-            .filter(
-              (g) =>
-                g.company &&
-                g.company.id == site.getCompany(req).id &&
-                (!where.active || g.active === where.active) &&
-                (!where['type.id'] || g.type.id === where['type.id']) &&
-                JSON.stringify(g).contains(search)
-            )
-            .slice(0, limit);
+          app.memoryList
+            .filter((g) => g.company && g.company.id == site.getCompany(req).id)
+            .forEach((doc) => {
+              let obj = { ...doc };
 
+              for (const p in obj) {
+                if (!Object.hasOwnProperty.call(select, p)) {
+                  delete obj[p];
+                }
+              }
+              if (!where.active || doc.active) {
+                list.push(obj);
+              }
+            });
           res.json({
             done: true,
             list: list,
           });
         } else {
-          where['company.id'] = site.getCompany(req).id;
-          app.all({ where: where, select: select, limit }, (err, docs) => {
+          app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
             res.json({
               done: true,
               list: docs,
             });
           });
         }
-      });
-
-      site.post(`api/${app.name}/import`, (req, res) => {
-        let response = {
-          done: false,
-          file: req.form.files.fileToUpload,
-        };
-
-        if (site.isFileExistsSync(response.file.filepath)) {
-          let docs = [];
-          if (response.file.originalFilename.like('*.xls*')) {
-            let workbook = site.XLSX.readFile(response.file.filepath);
-            docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-          } else {
-            docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
-          }
-
-          if (Array.isArray(docs)) {
-            console.log(`Importing ${app.name} : ${docs.length}`);
-            let systemCode = 0;
-            docs.forEach((doc) => {
-              let numObj = {
-                company: site.getCompany(req),
-                screen: app.name,
-                date: new Date(),
-              };
-              let cb = site.getNumbering(numObj);
-
-              if (cb.auto) {
-                systemCode = cb.code || ++systemCode;
-              } else {
-                systemCode++;
-              }
-
-              if (!doc.code) {
-                doc.code = systemCode;
-              }
-
-              let newDoc = {
-                code: doc.code,
-                nameAr: doc.nameAr,
-                nameEn: doc.nameEn,
-                image: { url: '/images/safes.png' },
-                active: true,
-              };
-
-              newDoc.company = site.getCompany(req);
-              newDoc.branch = site.getBranch(req);
-              newDoc.addUserInfo = req.getUserFinger();
-
-              app.add(newDoc, (err, doc2) => {
-                if (!err && doc2) {
-                  site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                  console.log(site.dbMessage);
-                } else {
-                  site.dbMessage = err.message;
-                  console.log(site.dbMessage);
-                }
-              });
-            });
-          } else {
-            site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
-            console.log(site.dbMessage);
-          }
-        } else {
-          site.dbMessage = 'file not exists : ' + response.file.filepath;
-          console.log(site.dbMessage);
-        }
-
-        res.json(response);
       });
     }
   }

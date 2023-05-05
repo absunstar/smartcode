@@ -29,9 +29,12 @@
       <i-button ng-show="mode == 'add' " type="add" label="##word.Add##" ng-click="add(item)"></i-button>
       <i-button ng-show="mode == 'edit' " type="edit" label="##word.Save##" ng-click="update(item)"></i-button>
       <i-button ng-show="mode == 'delete' " type="delete" label="##word.Delete##" ng-click="delete(item)"> </i-button>
+      <i-button x-permissions="servicesOrdersPrint || servicesOrdersManage" ng-if="item.id" label="##word.Thermal print##" ng-click="thermalPrint(receiptVoucher)"></i-button>
       <i-button
         ng-show="mode == 'edit' && !item.approved && item.doneApproval"
-        x-permissions="servicesOrdersApprove || servicesOrdersManage"
+        x-permissions="servicesOrdersApprove || servicesOrdersManage"-+
+
+        
         type="approve"
         label="##word.Approve##"
         ng-click="approved(item)"

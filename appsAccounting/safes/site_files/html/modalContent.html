@@ -9,7 +9,43 @@
         <i-list help-id="" v="r" label="##word.Type##" ng-model="item.type" display="name##session.lang##" items="safesTypesList" ng-search="item.$type"></i-list>
         <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-        <i-control type="number" ng-disabled="item.id" ng-model="item.balance" label="##word.Balance##"></i-control>
+        <!-- <i-control type="number" ng-disabled="item.id" ng-model="item.balance" label="##word.Balance##"></i-control> -->
+      </div>
+      <div class="row">
+        <table class="table hover bold">
+          <tr>
+            <th>##word.Receipt Balance##</th>
+            <th>##word.Receipt Balance Transfer##</th>
+            <th>##word.Total Receipt Balance##</th>
+          </tr>
+          <tr>
+            <td class="center">{{item.receiptBalance | xmoney2}} <span class="currency">##word.$##</span></td>
+            <td class="center">{{item.receiptBalanceTransfer | xmoney2}} <span class="currency">##word.$##</span></td>
+            <td class="center">{{item.totalReceiptBalance | xmoney2}} <span class="currency">##word.$##</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="row">
+        <table class="table hover bold">
+          <tr>
+            <th>##word.Expense Balance##</th>
+            <th>##word.Expense Balance Transfer##</th>
+            <th>##word.Total Expense Balance##</th>
+          </tr>
+          <tr>
+            <td class="center">{{item.expenseBalance | xmoney2}} <span class="currency">##word.$##</span></td>
+            <td class="center">{{item.expenseBalanceTransfer | xmoney2}} <span class="currency">##word.$##</span></td>
+            <td class="center">{{item.totalExpenseBalance | xmoney2}} <span class="currency">##word.$##</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="row">
+        <fieldset class="col4">
+          <p class="font-20">##word.Current Balance##</p>
+          <p class="font-20 center">{{item.totalBalance | xmoney2}} <span class="currency">##word.$##</span></p>
+        </fieldset>
       </div>
     </div>
     <div class="col3 center">

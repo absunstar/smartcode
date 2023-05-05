@@ -273,7 +273,7 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data['approved'] = true;
-                _data['approveDate'] = new Date();
+                _data['approvedDate'] = new Date();
                 _data.approvedUserInfo = req.getUserFinger();
                 app.$collection.find({ where: { fromDate: { $eq: new Date(_data.fromDate) }, toDate: { $eq: new Date(_data.toDate) }, vacationFor: 'all' } }, (err, doc) => {
                     if (doc && doc.id !== _data.id) {
@@ -305,7 +305,7 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data['approved'] = false;
-                _data['approveDate'] = null;
+                _data['approvedDate'] = null;
                 _data.unapprovedUserInfo = req.getUserFinger();
 
                 app.update(_data, (err, result) => {
@@ -367,7 +367,7 @@ module.exports = function init(site) {
                     id: 1,
                     code: 1,
                     image: 1,
-                    approveDate: 1,
+                    approvedDate: 1,
                     vacationFor: 1,
                     employeesList: 1,
                     vacationName: 1,

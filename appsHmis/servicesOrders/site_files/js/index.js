@@ -51,7 +51,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           site.resetValidated($scope.modalID);
           $scope.list.unshift(response.data.doc);
           if (response.data.doc.approved && $scope.setting.printerProgram.autoThermalPrintVoucher) {
-            $scope.thermalPrint(response.data.doc);
+            $scope.thermalPrint(response.data.receiptVoucherDoc);
           }
         } else {
           $scope.error = response.data.error;
@@ -70,6 +70,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.mode = 'edit';
     $scope.view(_item);
+    $scope.getReceiptVoucher(_item.id);
     $scope.item = {};
     site.showModal($scope.modalID);
   };
@@ -106,6 +107,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     );
   };
 
+
   $scope.approved = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
@@ -130,7 +132,8 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           }
 
           if (response.data.result.doc.approved && $scope.setting.printerProgram.autoThermalPrintVoucher) {
-            $scope.thermalPrint(response.data.result.doc);
+            $scope.thermalPrint(response.data.receiptVoucherDoc);
+
           }
         } else {
           $scope.error = response.data.error;
@@ -157,6 +160,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.mode = 'view';
     $scope.item = {};
     $scope.view(_item);
+    $scope.getReceiptVoucher(_item.id);
     site.showModal($scope.modalID);
   };
 
@@ -184,11 +188,36 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getReceiptVoucher = function (id) {
+    $scope.busy = true;
+    $scope.error = '';
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/receiptVouchers/view`,
+      data: {
+        invoiceId: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.receiptVoucher = response.data.doc;
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
   $scope.showDelete = function (_item) {
     $scope.error = '';
     $scope.mode = 'delete';
     $scope.item = {};
     $scope.view(_item);
+    $scope.getReceiptVoucher(_item.id);
     site.showModal($scope.modalID);
   };
 
@@ -784,6 +813,8 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
+          'type.id': 1,
+
         },
         select: {
           id: 1,

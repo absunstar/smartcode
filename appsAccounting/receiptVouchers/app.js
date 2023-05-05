@@ -113,8 +113,14 @@ module.exports = function init(site) {
           return;
         }
       }
+      let where = {};
+      if (_item.invoiceId) {
+        where = { invoiceId: _item.invoiceId };
+      } else {
+        where = { id: _item.id };
+      }
 
-      app.$collection.find({ id: _item.id }, (err, doc) => {
+      app.$collection.find(where, (err, doc) => {
         callback(err, doc);
 
         if (!err && doc) {
@@ -144,7 +150,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Receipt Vouchers' , setting: site.getSystemSetting(req)}, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Receipt Vouchers', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -200,9 +206,8 @@ module.exports = function init(site) {
             } else if (doc.voucherType.id == 'purchaseReturn') {
               site.changeRemainPaidReturnPurchases(obj);
             }
-            
-            site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'sum'});
 
+            site.changeSafeBalance({company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
           } else {
             response.error = err.mesage;
           }
@@ -300,7 +305,7 @@ module.exports = function init(site) {
     }
   }
 
-  site.addReceiptVouchers = function (obj) {
+  site.addReceiptVouchers = function (obj, callback) {
     let numObj = {
       company: obj.company,
       screen: app.name,
@@ -311,9 +316,15 @@ module.exports = function init(site) {
     obj.code = cb.code;
     if (obj.code) {
       app.add(obj, (err, doc) => {
-        site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'sum'});
-
+        if (!err) {
+          callback(doc);
+          site.changeSafeBalance({company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
+        } else {
+          callback(err);
+        }
       });
+    } else {
+      callback(false);
     }
   };
 

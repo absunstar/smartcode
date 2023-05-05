@@ -17,7 +17,7 @@ module.exports = function init(site) {
     site.setItemCard = function (_elm, screenName) {
         app.all(
             {
-                where: { id: _elm.id, 'unit.id': _elm.unit.id, 'store.id': _elm.store.id },
+                where: { itemId: _elm.id, 'unit.id': _elm.unit.id, 'store.id': _elm.store.id },
                 sort: { id: -1 },
                 limit: 1,
             },
@@ -31,7 +31,7 @@ module.exports = function init(site) {
                     }
 
                     let obj = {
-                        date: _elm.date,
+                        date: new Date(),
                         itemId: _elm.id,
                         itemCode: _elm.code,
                         orderCode: _elm.orderCode,
@@ -48,7 +48,7 @@ module.exports = function init(site) {
                         price: _elm.price,
                         totalPrice: _elm.total,
                         currentCount: docs[0] ? docs[0].currentCount + count : count,
-                        lastCount: docs[0] ? docs[0].lastCount + count : 0,
+                        lastCount: docs[0] ? docs[0].currentCount : 0,
                         company: _elm.company,
                         countType: _elm.countType,
                     };
@@ -364,7 +364,6 @@ module.exports = function init(site) {
                         $lt: d2,
                     };
                 }
-                console.log('where', where);
 
                 if (app.allowMemory) {
                     app.memoryList

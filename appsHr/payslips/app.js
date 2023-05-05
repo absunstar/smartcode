@@ -233,7 +233,7 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data['approved'] = true;
-                _data['approveDate'] = new Date();
+                _data['approvedDate'] = new Date();
                 _data.approvedUserInfo = req.getUserFinger();
                 const checkShiftData = { id: _data.shift.id };
                 site.checkShiftApprove(checkShiftData, (result) => {
@@ -323,7 +323,7 @@ module.exports = function init(site) {
                         // paySlip: 1,
                         // image: 1,
                         // approved: 1,
-                        // approveDate: 1,
+                        // approvedDate: 1,
                         // fromDate: 1,
                         // toDate: 1,
                         // image: 1,

@@ -58,8 +58,10 @@
     </div>
 
     <div class="row center">
-      <span class="black font-18 bold border-1"> {{thermal.voucherType.name##session.lang##}} </span>
-      <span class="black font-18 bold border-1" ng-show="thermal.invoiceCode"> ({{thermal.invoiceCode}}) </span>
+      <span class="black font-18 bold border-1">
+        {{thermal.voucherType.name##session.lang##}}
+        <span ng-show="thermal.invoiceCode"> ({{thermal.invoiceCode}}) </span>
+      </span>
     </div>
 
     <div class="row center">
@@ -86,6 +88,30 @@
 
     <br />
 
+    <div class="row center bold border-1" ng-show="item.servicesList.length > 0">
+      <div class="col-6">
+        <p class="bold center font-12">إسم الخدمة</p>
+        <p class="bold center font-12">Service Name</p>
+      </div>
+
+      <div class="col-2">
+        <p class="bold center font-12">الإجمالي</p>
+        <p class="bold center font-12">Total</p>
+      </div>
+    </div>
+
+    <div class="row" ng-show="item.servicesList.length > 0" ng-repeat="itm in thermal.servicesList">
+      <div class="border-1">
+        <div class="col-6">
+          <p class="black bold center font-14">{{itm.code}}-{{itm.name##session.lang##}}</p>
+        </div>
+
+        <div class="col-2 black">
+          <p class="black bold center font-14">{{itm.patientCash | xmoney2}} <span class="currency">##word.$##</span></p>
+        </div>
+      </div>
+    </div>
+
     <div class="row center col-12 border-1">
       <p class="bold black">Total : {{thermal.total | xmoney2}} <span class="currency">##word.$##</span> : المجموع</p>
     </div>
@@ -93,10 +119,10 @@
 
     <div class="row" ng-show="setting.printerProgram.printWrittenAmount">
       <div class="col-1"></div>
-      <p ng-show="setting.printerProgram.thermalLang.id == 1 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar'" class="bold center font-10 col-10 black">
+      <p ng-show="setting.printerProgram.thermalLang.id == 1 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar'" class="bold center font-14 col-10 black">
         {{thermal.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}
       </p>
-      <p ng-show="setting.printerProgram.thermalLang.id == 2 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En'" class="bold center font-10 col-10 black">
+      <p ng-show="setting.printerProgram.thermalLang.id == 2 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En'" class="bold center font-14 col-10 black">
         {{thermal.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}
       </p>
     </div>

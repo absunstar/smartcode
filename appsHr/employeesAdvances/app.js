@@ -292,7 +292,7 @@ module.exports = function init(site) {
                 _data['requestStatus'] = 'accepted';
                 _data['acceptDate'] = new Date();
                 _data['approved'] = true;
-                _data['approveDate'] = new Date();
+                _data['approvedDate'] = new Date();
                 _data.acceptUserInfo = req.getUserFinger();
 
                 app.$collection.findMany({ where: { 'employee.id': _data.employee.id, requestStatus: { $nin: ['rejected', 'canceled'] } } }, (err, docs) => {
@@ -413,7 +413,7 @@ module.exports = function init(site) {
                     reason: 1,
                     file: 1,
                     requestStatus: 1,
-                    approveDate: 1,
+                    approvedDate: 1,
                     rejectDate: 1,
                     installmentsList: 1,
                     hasPaidtransaction: 1,

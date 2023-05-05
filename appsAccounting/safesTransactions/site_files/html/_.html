@@ -1,0 +1,59 @@
+<div ng-controller="safesTransactions" class="loaded">
+  <div class="row" x-permissions="safesTransactionsUi || safesTransactionsManage">
+    <div x-import="safesTransactions/modalSearch.html"></div>
+
+    <div class="top-actions">
+      <i-button type="search" x-permissions="safesTransactionsSearch || safesTransactionsManage" label="##word.Search##" ng-click="showSearch()"></i-button>
+    </div>
+
+    <div class="row padding">
+      <i-control ng-model="$search" x-permissions="safesTransactionsSearch || safesTransactionsManage"></i-control>
+    </div>
+    <div class="table-responsive">
+      <table class="table hover bold" id="t1">
+        <tr>
+          <th>##word.Safe##</th>
+          <th>##word.Balance In##</th>
+          <th>##word.Balance Out##</th>
+          <th>##word.Current Balance##</th>
+          <th>##word.Last Balance##</th>
+          <th>##word.Date##</th>
+          <th>##word.Voucher Type##</th>
+        </tr>
+        <tr ng-repeat="elem in list | filter:$search">
+          <td class="center">{{elem.safe.name##session.lang##}}</td>
+          <td class="center">
+            <p class="text-success" >
+              <span class="text-success"> ##word.+##</span> 
+              <span ng-if="elem.type =='sum'">{{elem.total | xmoney2}} <span class="currency"> ##word.$##</span></span> 
+              <span ng-if="elem.type =='min'">0 <span class="currency"> ##word.$##</span></span> 
+            </p>
+          </td>
+          <td class="center">
+            <p class="text-danger" >
+              <span class="text-danger"> ##word.-##</span> 
+              <span ng-if="elem.type =='min'">{{elem.total | xmoney2}} <span class="currency"> ##word.$##</span></span> 
+              <span ng-if="elem.type =='sum'">0 <span class="currency"> ##word.$##</span></span> 
+            </p>
+          </td>
+          <td>
+            <p class="text-center green" ng-show="elem.currentBalance > 0"> ##word.+##{{elem.currentBalance | xmoney2}} <span class="currency"> ##word.$##</span> </p>
+            <p class="text-center red" ng-show="elem.currentBalance <= 0">##word.-##{{elem.currentBalance | xmoney2}} <span class="currency"> ##word.$##</span></p>
+          </td>
+
+          <td>
+            <p class="text-center green" ng-show="elem.lastBalance > 0"> ##word.+## {{elem.lastBalance | xmoney2}} <span class="currency"> ##word.$##</span></p>
+            <p class="text-center red" ng-show="elem.lastBalance <= 0">##word.-##{{elem.lastBalance | xmoney2}} <span class="currency"> ##word.$##</span></p>
+          </td>
+
+          <td class="center blue">{{elem.date|date:'dd/MM/yyyy'}} - {{elem.date|date:'hh:mm:ss a'}}</td>
+          <td class="center">{{elem.voucherType.name##session.lang##}}</td>
+
+   
+        </tr>
+      </table>
+    </div>
+    <i-button x-permissions="safesTransactionsPrint || safesTransactionsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="safesTransactionsExport || safesTransactionsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+  </div>
+</div>

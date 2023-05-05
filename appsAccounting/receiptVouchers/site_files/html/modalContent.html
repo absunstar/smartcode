@@ -26,6 +26,26 @@
     <!-- <i-list class="col4" v="r" label="##word.Currency##" ng-model="item.currency" items="currenciesList" display="name##session.lang##" ng-search="item.$currency"> </i-list> -->
   </div>
 
+  <fieldset ng-show="item.servicesList.length > 0">
+    <legend>##word.Services##</legend>
+    <table class="table hover center bold">
+      <tr>
+        <th>##word.Service Name##</th>
+        <th>##word.Total##</th>
+      </tr>
+
+      <tr ng-repeat="s in item.servicesList">
+        <td class="center word-line">
+          <p>{{s.code}}-{{s.name##session.lang##}}</p>
+        </td>
+
+        <td class="center">
+          <p class="center">{{s.patientCash | xmoney2}} <span class="currency">##word.$##</span></p>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+
   <div class="row">
     <table class="table hover bold border" ng-show="item.$installmentsList.length > 0">
       <tr>
@@ -55,7 +75,8 @@
       <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
 
-    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##" type="number" ng-hide="item.$installmentsList.length > 0" ng-change="calcRemainVoucher(item)" ng-model="item.total"> </i-control>
+    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##" type="number" ng-hide="item.$installmentsList.length > 0" ng-change="calcRemainVoucher(item)" ng-model="item.total">
+    </i-control>
     <div class="col3 font-18" ng-show="item.$installmentsList.length > 0">
       <p>##word.Amount paid##</p>
       <p>({{item.total | xmoney2}} <span class="currency">##word.$##</span>)</p>

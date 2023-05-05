@@ -8,7 +8,13 @@ app.controller('safes', function ($scope, $http, $timeout) {
   $scope.structure = {
     image: { url: '/images/safes.png' },
     active: true,
-    balance : 0,
+    receiptBalance : 0,
+    expenseBalance : 0,
+    receiptBalanceTransfer : 0,
+    expenseBalanceTransfer : 0,
+    totalReceiptBalance : 0,
+    totalExpenseBalance : 0,
+    totalBalance : 0,
   };
   $scope.item = {};
   $scope.list = [];

@@ -236,7 +236,7 @@ module.exports = function init(site) {
                 _data.status = 'accepted';
                 _data.acceptDate = new Date();
                 _data.approved = true;
-                _data.approveDate = new Date();
+                _data.approvedDate = new Date();
                 _data.acceptUserInfo = req.getUserFinger();
                 // const employeeApp = site.getApp('employees');
                 // site.connectCollection('users_info');
