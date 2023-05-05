@@ -229,19 +229,17 @@ module.exports = function init(site) {
         });
     };
 
-    site.getReorderItems = function (doc) {
+    site.getReorderItems = function (doc, where) {
+        console.log('where', where);
+
         let count = 0;
 
-        if (doc && doc.unitsList && doc.unitsList.length) {
+        if (doc && doc.unitsList && doc.unitsList.length && doc.unitsList.storesList.store.id == where.id) {
             doc.unitsList.forEach((unt) => {
                 count += unt.currentCount;
             });
 
-            if (doc.reorderLimit >= count) {
-                return doc;
-            } else {
-                return null;
-            }
+            return count <= doc.reorderLimit ? doc : '';
         }
     };
 
@@ -746,9 +744,11 @@ module.exports = function init(site) {
                         } else {
                             let barcodesList = [];
                             docs.forEach((_doc) => {
-                                _doc.unitsList.forEach((_unit) => {
-                                    if (_data.unitsList.some((u) => u.barcode == _unit.barcode)) barcodesList.push(_unit.barcode);
-                                });
+                                if (_doc.unitsList) {
+                                    _doc.unitsList.forEach((_unit) => {
+                                        if (_data.unitsList.some((u) => u.barcode == _unit.barcode)) barcodesList.push(_unit.barcode);
+                                    });
+                                }
                             });
                             if (barcodesList.length > 0) {
                                 let errorBarcode = '';
@@ -874,7 +874,7 @@ module.exports = function init(site) {
                         nameEn: site.get_RegExp(search, 'i'),
                     });
                 }
-
+                console.log('1111', where);
                 if (app.allowMemory) {
                     let list = app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (!where.active || g.active === where.active) && JSON.stringify(g).contains(search))
@@ -894,15 +894,24 @@ module.exports = function init(site) {
                         if (where.reportReorderLimits) {
                             reportReorderLimits = true;
                             delete where.reportReorderLimits;
-                            // unitsList.storesList.id = where.store.id
-                            // unitsList.storesList.currentCount = { $lte: doc.reorderLimit };
-                        }
 
+                            // where.unitsList.currentCount;
+                            // unitsList.storesList.id = where.store.id
+                            // where.unitsList.currentCount = { $lte: doc.reorderLimit };
+                        }
+                        console.log('2222', where);
                         app.all({ where, select, limit }, (err, docs) => {
+                            console.log('docs', docs.length);
+
                             const selectedDocs = [];
-                            if (where && reportReorderLimits) {
+                            if (reportReorderLimits) {
                                 docs.forEach((doc) => {
-                                    let selectedDoc = site.getReorderItems(doc);
+                                    let selectedDoc = site.getReorderItems(doc, where);
+
+                                    // if (selectedDoc) {
+                                    //     console.log('mmmmmmmmmm', selectedDoc);
+                                    //     console.log('aaaa', selectedDoc);
+                                    // }
 
                                     if (selectedDoc) {
                                         selectedDocs.push(selectedDoc);
@@ -1031,9 +1040,11 @@ module.exports = function init(site) {
                                         nameEn: String(doc['Trade Name']).trim(),
                                         scientificName: String(doc['Scientific Name']).trim(),
                                         hasMedicalData: true,
+                                        collectionItem: false,
                                         itemType: site.itemsTypes.find((type) => type.id === 1),
                                         sfdaCodeList: [{ sfdaCode: String(doc['Register Number']).trim() }],
                                         gtinList,
+                                        unitsList: [],
                                         medicalInformations: {},
                                         workByQrCode: true,
                                         allowSale: true,

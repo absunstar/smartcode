@@ -129,6 +129,7 @@ app.controller('mostSellingItems', function ($scope, $http, $timeout) {
         $scope.getAll($scope.search);
         $scope.search = {};
     };
+    
     $scope.getAll = function (where) {
         $scope.busy = true;
         $scope.list = [];
