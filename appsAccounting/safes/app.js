@@ -281,7 +281,7 @@ module.exports = function init(site) {
                 let limit = req.body.limit || 10;
                 where['company.id'] = site.getCompany(req).id;
 
-                let select = req.body.select || { id: 1, code: 1, type: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, balance: 1 };
+                let select = req.body.select || { id: 1, code: 1, type: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, totalBalance: 1 };
 
                 if (app.allowMemory) {
                     if (!search) {
@@ -293,7 +293,7 @@ module.exports = function init(site) {
                                 g.company &&
                                 g.company.id == site.getCompany(req).id &&
                                 (!where.active || g.active === where.active) &&
-                                (!where['type.id'] || (g.type && g.type.id === where['type.id'])) &&
+                                (!where['type.id'] || g.type.id === where['type.id']) &&
                                 JSON.stringify(g).contains(search)
                         )
                         .slice(0, limit);
