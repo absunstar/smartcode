@@ -229,17 +229,15 @@ module.exports = function init(site) {
         });
     };
 
-    site.getReorderItems = function (doc, where) {
-        console.log('where', where);
-
+    site.getReorderItems = function (doc) {
         let count = 0;
 
-        if (doc && doc.unitsList && doc.unitsList.length && doc.unitsList.storesList.store.id == where.id) {
+        if (doc && doc.unitsList && doc.unitsList.length) {
             doc.unitsList.forEach((unt) => {
                 count += unt.currentCount;
             });
 
-            return count <= doc.reorderLimit ? doc : '';
+            return doc.reorderLimit >= count ? doc : null;
         }
     };
 
@@ -874,7 +872,7 @@ module.exports = function init(site) {
                         nameEn: site.get_RegExp(search, 'i'),
                     });
                 }
-                console.log('1111', where);
+
                 if (app.allowMemory) {
                     let list = app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (!where.active || g.active === where.active) && JSON.stringify(g).contains(search))
@@ -894,24 +892,13 @@ module.exports = function init(site) {
                         if (where.reportReorderLimits) {
                             reportReorderLimits = true;
                             delete where.reportReorderLimits;
-
-                            // where.unitsList.currentCount;
-                            // unitsList.storesList.id = where.store.id
-                            // where.unitsList.currentCount = { $lte: doc.reorderLimit };
                         }
-                        console.log('2222', where);
-                        app.all({ where, select, limit }, (err, docs) => {
-                            console.log('docs', docs.length);
 
+                        app.all({ where, select, limit }, (err, docs) => {
                             const selectedDocs = [];
                             if (reportReorderLimits) {
                                 docs.forEach((doc) => {
-                                    let selectedDoc = site.getReorderItems(doc, where);
-
-                                    // if (selectedDoc) {
-                                    //     console.log('mmmmmmmmmm', selectedDoc);
-                                    //     console.log('aaaa', selectedDoc);
-                                    // }
+                                    let selectedDoc = site.getReorderItems(doc);
 
                                     if (selectedDoc) {
                                         selectedDocs.push(selectedDoc);

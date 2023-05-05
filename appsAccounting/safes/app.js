@@ -293,7 +293,7 @@ module.exports = function init(site) {
                                 g.company &&
                                 g.company.id == site.getCompany(req).id &&
                                 (!where.active || g.active === where.active) &&
-                                (!where['type.id'] || g.type.id === where['type.id']) &&
+                                (!where['type.id'] || (g.type && g.type.id === where['type.id'])) &&
                                 JSON.stringify(g).contains(search)
                         )
                         .slice(0, limit);
