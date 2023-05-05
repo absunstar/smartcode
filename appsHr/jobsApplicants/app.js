@@ -180,13 +180,13 @@ module.exports = function init(site) {
                 if (_data.applicantStatus == 'unacceptable' || (_data.interviewStatus && _data.interviewStatus.id == 2) || (_data.interviewStatus && _data.interviewStatus.id == 4)) {
                     _data.status = 'rejected';
                     _data.approved = true;
-                    _data.approveDate = new Date();
+                    _data.approvedDate = new Date();
                     _data.rejectDate = new Date();
                 }
                 if ((_data.applicantStatusAfterContract && _data.applicantStatusAfterContract.id == 2) || (_data.applicantStatusAfterContract && _data.applicantStatusAfterContract.id == 3)) {
                     _data.status = 'rejected';
                     _data.approved = true;
-                    _data.approveDate = new Date();
+                    _data.approvedDate = new Date();
                     _data.rejectDate = new Date();
                 }
 
@@ -214,13 +214,13 @@ module.exports = function init(site) {
                 if (_data.applicantStatus == 'unacceptable') {
                     _data.status = 'rejected';
                     _data.approved = true;
-                    _data.approveDate = new Date();
+                    _data.approvedDate = new Date();
                     _data.rejectDate = new Date();
                 }
                 if ((_data.applicantStatusAfterContract && _data.applicantStatusAfterContract.id == 2) || (_data.applicantStatusAfterContract && _data.applicantStatusAfterContract.id == 3)) {
                     _data.status = 'rejected';
                     _data.approved = true;
-                    _data.approveDate = new Date();
+                    _data.approvedDate = new Date();
                     _data.rejectDate = new Date();
                 }
                 _data.editUserInfo = req.getUserFinger();
@@ -271,19 +271,19 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data.approved = true;
-                _data.approveDate = new Date();
+                _data.approvedDate = new Date();
                 _data.status = 'accepted';
                 _data.acceptDate = new Date();
                 if (_data.applicantStatusAfterContract && _data.applicantStatusAfterContract.id == 2) {
                     _data.status = 'canceled';
                     _data.approved = true;
-                    _data.approveDate = new Date();
+                    _data.approvedDate = new Date();
                     _data.cancelDate = new Date();
                 }
                 if (_data.applicantStatusAfterContract && _data.applicantStatusAfterContract.id == 3) {
                     _data.status = 'rejected';
                     _data.approved = true;
-                    _data.approveDate = new Date();
+                    _data.approvedDate = new Date();
                     _data.rejectDate = new Date();
                 }
                 _data.acceptUserInfo = req.getUserFinger();
@@ -310,7 +310,7 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data.approved = false;
-                _data.approveDate = new Date();
+                _data.approvedDate = new Date();
                 _data.status = 'rejected';
                 _data.rejectDate = new Date();
 

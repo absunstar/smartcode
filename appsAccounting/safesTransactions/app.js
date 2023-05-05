@@ -1,9 +1,9 @@
 module.exports = function init(site) {
   let app = {
-    name: 'receiptVouchers',
+    name: 'safesTransactions',
     allowMemory: false,
     memoryList: [],
-    allowCache: false,
+    allowCache: true,
     cacheList: [],
     allowRoute: true,
     allowRouteGet: true,
@@ -14,7 +14,41 @@ module.exports = function init(site) {
     allowRouteAll: true,
   };
 
+  site.setSafesTransactions = function (_elm) {
+    app.all(
+      {
+        where: { 'safe.id': _elm.safe.id },
+        sort: { id: -1 },
+        limit: 1,
+      },
+      (err, docs) => {
+        if (!err) {
+          docs = docs || [];
+
+          let total = _elm.total;
+          if (_elm.type == 'min') {
+            -Math.abs(total);
+          }
+          let obj = {
+            date: new Date(),
+            invoiceCode: _elm.invoiceCode,
+            invoiceId: _elm.invoiceId,
+            safe: _elm.safe,
+            voucherType: _elm.voucherType,
+            total: _elm.total,
+            currentBalance: docs[0] ? docs[0].currentBalance + total : total,
+            lastBalance: docs[0] ? docs[0].currentBalance : 0,
+            company: _elm.company,
+            type: _elm.type,
+          };
+          app.$collection.add(obj);
+        }
+      }
+    );
+  };
+
   app.$collection = site.connectCollection(app.name);
+  //   where['name'] = site.get_RegExp(where['name'], 'i');
 
   app.init = function () {
     if (app.allowMemory) {
@@ -113,14 +147,8 @@ module.exports = function init(site) {
           return;
         }
       }
-      let where = {};
-      if (_item.invoiceId) {
-        where = { invoiceId: _item.invoiceId };
-      } else {
-        where = { id: _item.id };
-      }
 
-      app.$collection.find(where, (err, doc) => {
+      app.$collection.find({ id: _item.id }, (err, doc) => {
         callback(err, doc);
 
         if (!err && doc) {
@@ -150,7 +178,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Receipt Vouchers', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Safes Transactions' }, { parser: 'html', compres: true });
         }
       );
     }
@@ -163,17 +191,6 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.company = site.getCompany(req);
-
-        if (!_data.date) {
-          _data.date = new Date();
-        }
-        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn') {
-          if (site.toMoney(_data.total) > site.toMoney(_data.$remainPaid)) {
-            response.error = 'The amount paid is greater than the remaining invoice amount ';
-            res.json(response);
-            return;
-          }
-        }
 
         let numObj = {
           company: site.getCompany(req),
@@ -196,18 +213,6 @@ module.exports = function init(site) {
           if (!err && doc) {
             response.done = true;
             response.doc = doc;
-            let obj = {
-              id: doc.invoiceId,
-              total: doc.total,
-              installment: doc.installment,
-            };
-            if (doc.voucherType.id == 'salesInvoice') {
-              site.changeRemainPaidSalesInvoices(obj);
-            } else if (doc.voucherType.id == 'purchaseReturn') {
-              site.changeRemainPaidReturnPurchases(obj);
-            }
-
-            site.changeSafeBalance({company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
           } else {
             response.error = err.mesage;
           }
@@ -278,23 +283,59 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let search = req.body.search || '';
-        let limit = req.body.limit || 10;
-        let select = req.body.select || { id: 1, code: 1, date: 1, voucherType: 1, safe: 1, currency: 1, total: 1 };
-        if (app.allowMemory) {
-          if (!search) {
-            search = 'id';
-          }
-          let list = app.memoryList.filter((g) => g.company && g.company.id == site.getCompany(req).id && JSON.stringify(g).contains(search)).slice(0, limit);
+        let select = req.body.select || {};
+        let list = [];
+    
+        if (where.safe) {
+          where['safe.id'] = where.safe.id;
+          delete where.safe;
+        }
+     
+        if (where.voucherType) {
+          where['voucherType.id'] = where.voucherType.id;
+          delete where.voucherType;
+        }
 
+        if (where && where.dateTo) {
+          let d1 = site.toDate(where.date);
+          let d2 = site.toDate(where.dateTo);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+          delete where.dateTo;
+        } else if (where.date) {
+          let d1 = site.toDate(where.date);
+          let d2 = site.toDate(where.date);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+        }
+
+        if (app.allowMemory) {
+          app.memoryList
+            .filter((g) => g.company && g.company.id == site.getCompany(req).id)
+            .forEach((doc) => {
+              let obj = { ...doc };
+
+              for (const p in obj) {
+                if (!Object.hasOwnProperty.call(select, p)) {
+                  delete obj[p];
+                }
+              }
+              if (!where.active || doc.active) {
+                list.push(obj);
+              }
+            });
           res.json({
             done: true,
             list: list,
           });
         } else {
-          where['company.id'] = site.getCompany(req).id;
-
-          app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
+          app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
             res.json({
               done: true,
               list: docs,
@@ -304,29 +345,6 @@ module.exports = function init(site) {
       });
     }
   }
-
-  site.addReceiptVouchers = function (obj, callback) {
-    let numObj = {
-      company: obj.company,
-      screen: app.name,
-      date: new Date(),
-    };
-
-    let cb = site.getNumbering(numObj);
-    obj.code = cb.code;
-    if (obj.code) {
-      app.add(obj, (err, doc) => {
-        if (!err) {
-          callback(doc);
-          site.changeSafeBalance({company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
-        } else {
-          callback(err);
-        }
-      });
-    } else {
-      callback(false);
-    }
-  };
 
   app.init();
   site.addApp(app);

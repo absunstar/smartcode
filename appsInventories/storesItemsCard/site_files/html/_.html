@@ -1,65 +1,65 @@
 <div ng-controller="storesItemsCard" class="loaded">
-    <div class="row" x-permissions="storesItemsCardUi || storesItemsCardManage">
-        <div x-import="storesItemsCard/modal.html"></div>
-        <div x-import="storesItemsCard/modalSearch.html"></div>
+  <div class="row" x-permissions="storesItemsCardUi || storesItemsCardManage">
+    <div x-import="storesItemsCard/modal.html"></div>
+    <div x-import="storesItemsCard/modalSearch.html"></div>
 
-        <div class="top-actions">
-            <i-button type="add" x-permissions="storesItemsCardSearch || storesItemsCardManage" label="##word.Search##" ng-click="showSearch()"></i-button>
-        </div>
-
-        <div class="row padding">
-            <i-control ng-model="$search" x-permissions="storesItemsCardSearch || storesItemsCardManage"></i-control>
-        </div>
-        <div class="table-responsive">
-            <table class="table hover bold" id="t1">
-                <tr>
-                    <th>##word.Item##</th>
-                    <th>##word.Unit##</th>
-                    <th>##word.Count##</th>
-                    <th>##word.Price##</th>
-                    <!-- <th>##word.Current Count##</th> -->
-                    <!-- <th>##word.Last Count##</th> -->
-                    <th>##word.Store##</th>
-                    <th>##word.Date##</th>
-                    <th>##word.Transaction Type##</th>
-                </tr>
-                <tr ng-repeat="elem in list | filter:$search">
-                    <td class="center">{{elem.name##session.lang##}}</td>
-                    <td class="center">{{elem.unit.name##session.lang##}}</td>
-                    <td class="center">
-                        <p class=" text-success" ng-if="elem.countType =='in'"><span class="text-success"> ##word.+##</span> {{elem.count}}</p>
-                        <p class=" text-danger" ng-if="elem.countType =='out'"><span class="text-danger"> ##word.-##</span> {{elem.count}}</p>
-                        <p class=" blue" ng-show="elem.bonusCount">({{elem.purshaseCount}} + {{elem.bonusCount}})</p>
-                    </td>
-                    <td class="center">
-                        <p class=" green">{{elem.totalPrice}} <span class="green"> ##word.$##</span></p>
-                        <p class=" blue">( {{elem.price}} <span class="green"> ##word.$##</span> )</p>
-                    </td>
-                    <!-- <td>
-                        <p class="text-center green" ng-show="elem.currentCount > 0">{{elem.currentCount}} ##word.+##</p>
-                        <p class="text-center red" ng-show="elem.currentCount <= 0">{{elem.currentCount}}</p>
-                    </td> -->
-
-                    <!-- <td>
-                        <p class="text-center green" ng-show="elem.lastCount > 0">{{elem.lastCount}} ##word.+##</p>
-                        <p class="text-center red" ng-show="elem.lastCount <= 0">{{elem.lastCount}}</p>
-                    </td> -->
-
-                    <td class="center">{{elem.store.name##session.lang##}}</td>
-                    <td class="center blue">{{elem.date|date:'dd/MM/yyyy'}} - {{elem.date|date:'hh:mm:ss a'}}</td>
-                    <td class="center">{{elem.transactionType.name##session.lang##}}</td>
-
-                    <!-- <td class="center not-print"> -->
-                    <!-- <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button> -->
-
-                    <!-- <i-button type="edit" x-permissions="storesItemsCardUpdate || storesItemsCardManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->
-
-                    <!-- <i-button type="delete" x-permissions="storesItemsCardDelete || storesItemsCardManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button> -->
-                    <!-- </td> -->
-                </tr>
-            </table>
-        </div>
-        <i-button x-permissions="storesItemsCardPrint || storesItemsCardManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="storesItemsCardExport || storesItemsCardManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+    <div class="top-actions">
+      <i-button type="search" x-permissions="storesItemsCardSearch || storesItemsCardManage" label="##word.Search##" ng-click="showSearch()"></i-button>
     </div>
+
+    <div class="row padding">
+      <i-control ng-model="$search" x-permissions="storesItemsCardSearch || storesItemsCardManage"></i-control>
+    </div>
+    <div class="table-responsive">
+      <table class="table hover bold" id="t1">
+        <tr>
+          <th>##word.Item##</th>
+          <th>##word.Unit##</th>
+          <th>##word.Count##</th>
+          <th>##word.Price##</th>
+          <th>##word.Current Count##</th>
+          <th>##word.Last Count##</th>
+          <th>##word.Store##</th>
+          <th>##word.Date##</th>
+          <th>##word.Transaction Type##</th>
+        </tr>
+        <tr ng-repeat="elem in list | filter:$search">
+          <td class="center">{{elem.name##session.lang##}}</td>
+          <td class="center">{{elem.unit.name##session.lang##}}</td>
+          <td class="center">
+            <p class="text-success" ng-if="elem.countType =='in'"><span class="text-success"> ##word.+##</span> {{elem.count}}</p>
+            <p class="text-danger" ng-if="elem.countType =='out'"><span class="text-danger"> ##word.-##</span> {{elem.count}}</p>
+            <p class="blue" ng-show="elem.bonusCount">({{elem.purshaseCount}} + {{elem.bonusCount}})</p>
+          </td>
+          <td class="center">
+            <p class="green">{{elem.totalPrice}} <span class="green"> ##word.$##</span></p>
+            <p class="blue">( {{elem.price}} <span class="green"> ##word.$##</span> )</p>
+          </td>
+          <td>
+            <p class="text-center green" ng-show="elem.currentCount > 0">{{elem.currentCount}} ##word.+##</p>
+            <p class="text-center red" ng-show="elem.currentCount <= 0">{{elem.currentCount}}</p>
+          </td>
+
+          <td>
+            <p class="text-center green" ng-show="elem.lastCount > 0">{{elem.lastCount}} ##word.+##</p>
+            <p class="text-center red" ng-show="elem.lastCount <= 0">{{elem.lastCount}}</p>
+          </td>
+
+          <td class="center">{{elem.store.name##session.lang##}}</td>
+          <td class="center blue">{{elem.date|date:'dd/MM/yyyy'}} - {{elem.date|date:'hh:mm:ss a'}}</td>
+          <td class="center">{{elem.transactionType.name##session.lang##}}</td>
+
+          <!-- <td class="center not-print"> -->
+          <!-- <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button> -->
+
+          <!-- <i-button type="edit" x-permissions="storesItemsCardUpdate || storesItemsCardManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->
+
+          <!-- <i-button type="delete" x-permissions="storesItemsCardDelete || storesItemsCardManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button> -->
+          <!-- </td> -->
+        </tr>
+      </table>
+    </div>
+    <i-button x-permissions="storesItemsCardPrint || storesItemsCardManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="storesItemsCardExport || storesItemsCardManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+  </div>
 </div>

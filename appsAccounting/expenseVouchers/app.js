@@ -115,7 +115,14 @@ module.exports = function init(site) {
         }
       }
 
-      app.$collection.find({ id: _item.id }, (err, doc) => {
+      let where = {};
+      if (_item.invoiceId) {
+        where = { invoiceId: _item.invoiceId };
+      } else {
+        where = { id: _item.id };
+      }
+
+      app.$collection.find(where, (err, doc) => {
         callback(err, doc);
 
         if (!err && doc) {
@@ -145,7 +152,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Expense Vouchers' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Expense Vouchers', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -200,7 +207,7 @@ module.exports = function init(site) {
             } else if (doc.voucherType.id == 'salesReturn') {
               site.changeRemainPaidReturnSales(obj);
             }
-            site.changeSafeBalance({ id: doc.safe.id, total: doc.total, type: 'min' });
+            site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode:doc.invoiceCode, invoiceId:doc.invoiceId, voucherType: doc.voucherType, type: 'min' });
           } else {
             response.error = err.mesage;
           }
@@ -309,8 +316,7 @@ module.exports = function init(site) {
     obj.code = cb.code;
     if (obj.code) {
       app.add(obj, (err, doc) => {
-        site.changeSafeBalance({id : doc.safe.id,total : doc.total,type:'min'});
-
+        site.changeSafeBalance({company: doc.company, safe: doc.safe, voucherType: doc.voucherType, invoiceCode:doc.invoiceCode, invoiceId:doc.invoiceId, total: doc.total, type: 'min' });
       });
     }
   };

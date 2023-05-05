@@ -17,13 +17,27 @@ module.exports = function init(site) {
     app.$collection = site.connectCollection(app.name);
 
     site.changeSafeBalance = function (obj) {
-        app.view({ id: obj.id }, (err, doc) => {
+        app.view({ id: obj.safe.id }, (err, doc) => {
             if (!err && doc) {
                 if (obj.type == 'sum') {
-                    doc.balance += obj.total;
+                    if (obj.voucherType.id == 'transferSafes') {
+                        doc.receiptBalanceTransfer += obj.total;
+                    } else {
+                        doc.receiptBalance += obj.total;
+                    }
+                    doc.totalReceiptBalance = doc.receiptBalance + doc.receiptBalanceTransfer;
+                    site.setSafesTransactions(obj);
                 } else if (obj.type == 'min') {
-                    doc.balance -= obj.total;
+                    if (obj.voucherType.id == 'transferSafes') {
+                        doc.expenseBalanceTransfer += obj.total;
+                    } else {
+                        doc.expenseBalance += obj.total;
+                    }
+                    doc.totalExpenseBalance = doc.expenseBalance + doc.expenseBalanceTransfer;
+                    site.setSafesTransactions(obj);
                 }
+
+                doc.totalBalance = doc.totalReceiptBalance - doc.totalExpenseBalance;
                 app.update(doc, (err, result) => {});
             }
         });

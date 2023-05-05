@@ -116,6 +116,7 @@
             "voucherNamesManage",
             "transferSafesManage",
             "insuranceCompaniesClaimsManage",
+            "safesTransactionsManage",
             "reorderLimitsManage",
             "mostSellingItemsManage",
             "lowestSellingItemsManage"

@@ -323,7 +323,7 @@ module.exports = function init(site) {
                                 _data.requestStatus = 'accepted';
                                 _data.acceptDate = new Date();
                                 _data.approved = true;
-                                _data.approveDate = new Date();
+                                _data.approvedDate = new Date();
                                 _data.finalApproval = true;
                                 _data.approvalList[totalLength - 1].approved = true;
                                 _data.approvalList[totalLength - 1].approvedUserInfo = req.getUserFinger();
@@ -334,7 +334,7 @@ module.exports = function init(site) {
                             _data.requestStatus = 'accepted';
                             _data.acceptDate = new Date();
                             _data.approved = true;
-                            _data.approveDate = new Date();
+                            _data.approvedDate = new Date();
                             _data.finalApproval = true;
                         }
                         app.update(_data, (err, result) => {
@@ -453,7 +453,7 @@ module.exports = function init(site) {
                     hours: 1,
                     minutes: 1,
                     approved: 1,
-                    approveDate: 1,
+                    approvedDate: 1,
                     requestStatus: 1,
                     rejectDate: 1,
                     cancelDate: 1,

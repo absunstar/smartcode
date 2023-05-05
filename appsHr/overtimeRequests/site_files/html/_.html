@@ -41,7 +41,7 @@
                         <span class="blue" ng-show="item.requestStatus == 'new' || item.requestStatus =='canceled'">{{item.requestStatus|uppercase}}</span>
                         <span class="text-success" ng-show="item.requestStatus == 'accepted'">##word.Accepted##</span>
                         <span class="text-danger" ng-show="item.requestStatus == 'rejected'">##word.Refused##</span>
-                        <p ng-show="item.requestStatus == 'accepted'">{{item.approveDate | date:'dd/MM/yyyy'}} - {{item.approveDate | date:'hh:mm:ss a'}}</p>
+                        <p ng-show="item.requestStatus == 'accepted'">{{item.approvedDate | date:'dd/MM/yyyy'}} - {{item.approvedDate | date:'hh:mm:ss a'}}</p>
                         <p ng-show="item.requestStatus == 'rejected'">{{item.rejectDate | date:'dd/MM/yyyy'}} - {{item.rejectDate | date:'hh:mm:ss a'}}</p>
                         <p ng-show="item.requestStatus == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
                     </td>

@@ -245,7 +245,7 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data['approved'] = true;
-                _data['approveDate'] = new Date();
+                _data['approvedDate'] = new Date();
                 _data['status'] = 'accepted';
                 _data['acceptDate'] = new Date();
 
@@ -273,7 +273,7 @@ module.exports = function init(site) {
                 let _data = req.data;
 
                 _data['approved'] = false;
-                _data['approveDate'] = null;
+                _data['approvedDate'] = null;
                 _data['status'] = 'rejected';
                 _data['rejectDate'] = new Date();
 

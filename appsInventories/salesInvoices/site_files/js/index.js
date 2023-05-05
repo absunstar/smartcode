@@ -202,7 +202,6 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
               en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
-          $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
         } else {
           $scope.error = response.data.error;
         }
@@ -464,7 +463,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          salesForCustomers : true,
+          salesForCustomers: true,
         },
         select: {
           id: 1,
@@ -473,7 +472,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           nameAr: 1,
           rasdUser: 1,
           rasdPass: 1,
-          linkWithRasd : 1,
+          linkWithRasd: 1,
         },
       },
     }).then(
@@ -914,6 +913,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
+    obj.netTxt = site.stringfiy(obj.totalNet);
+
     if ($scope.setting.printerProgram.thermalPrinter) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
@@ -993,6 +994,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     if ($scope.busy) return;
     $scope.busy = true;
     $('#salesInvoicesDetails').removeClass('hidden');
+    $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
 
     if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
       $scope.invList = [];
@@ -1340,8 +1342,6 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }, 300);
   };
 
- 
-
   if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
     $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
   }
@@ -1356,7 +1356,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       $remainAmount: 0,
       $remainPaid: _item.remainPaid,
       total: _item.remainPaid,
-      voucherType: {id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
+      voucherType: { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
     };
 
     if (_item.invoiceType.id == 2 && _item.installmentsList && _item.installmentsList.length > 0) {

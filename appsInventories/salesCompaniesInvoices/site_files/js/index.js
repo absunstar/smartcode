@@ -902,6 +902,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
+    obj.netTxt = site.stringfiy(obj.totalNet);
     if ($scope.setting.printerProgram.thermalPrinter) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
@@ -980,6 +981,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
+    $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
     $('#salesInvoicesDetails').removeClass('hidden');
 
     if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {

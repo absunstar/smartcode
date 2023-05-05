@@ -175,7 +175,7 @@ module.exports = function init(site) {
         _data.addUserInfo = req.getUserFinger();
         if (_data.approved) {
           _data.approvedUserInfo = req.getUserFinger();
-          _data.approveDate = new Date();
+          _data.approvedDate = new Date();
         }
         app.add(_data, (err, doc) => {
           if (!err && doc) {
@@ -220,6 +220,7 @@ module.exports = function init(site) {
                 date: new Date(),
                 voucherType: site.vouchersTypes[5],
                 invoiceId: doc.id,
+                servicesList: doc.servicesList,
                 invoiceCode: doc.code,
                 total: doc.totalNet,
                 safe: doc.safe,
@@ -228,12 +229,17 @@ module.exports = function init(site) {
                 company: doc.company,
                 branch: doc.branch,
               };
-              site.addReceiptVouchers(objVoucher);
+              site.addReceiptVouchers(objVoucher, (callback) => {
+                response.receiptVoucherDoc = callback;
+                res.json(response);
+              });
+            } else {
+              res.json(response);
             }
           } else {
             response.error = err.mesage;
+            res.json(response);
           }
-          res.json(response);
         });
       });
     }
@@ -358,7 +364,7 @@ module.exports = function init(site) {
 
     let _data = req.data;
     _data.approvedUserInfo = req.getUserFinger();
-    _data.approveDate = new Date();
+    _data.approvedDate = new Date();
     _data.approved = true;
     app.update(_data, (err, result) => {
       if (!err) {
@@ -402,6 +408,7 @@ module.exports = function init(site) {
         let objVoucher = {
           date: new Date(),
           voucherType: site.vouchersTypes[5],
+          servicesList: result.doc.servicesList,
           invoiceId: result.doc.id,
           invoiceCode: result.doc.code,
           total: result.doc.totalNet,
@@ -411,16 +418,20 @@ module.exports = function init(site) {
           company: result.doc.company,
           branch: result.doc.branch,
         };
-        site.addReceiptVouchers(objVoucher);
+
+        site.addReceiptVouchers(objVoucher, (callback) => {
+          response.receiptVoucherDoc = callback;
+          res.json(response);
+        });
       } else {
         response.error = err.message;
+        res.json(response);
       }
-      res.json(response);
     });
   });
 
   site.post({ name: `/api/${app.name}/needApprove`, public: true }, (req, res) => {
-    let select = req.body.select || { id: 1, code: 1, patient: 1, date: 1, servicesList: 1, doctor: 1, mainInsuranceCompany: 1 };
+    let select = req.body.select || { id: 1, code: 1, patient: 1, date: 1, servicesList: 1, doctor: 1, mainInsuranceCompany: 1};
 
     app.all({ where: { approved: false }, select, sort: { id: -1 } }, (err, docs) => {
       let list = [];

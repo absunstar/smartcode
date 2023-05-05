@@ -210,41 +210,41 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         site.showModal($scope.modalID);
     };
 
-    $scope.view = function (_item) {
-        $scope.busy = true;
-        $scope.error = '';
-        $http({
-            method: 'POST',
-            url: `${$scope.baseURL}/api/${$scope.appName}/view`,
-            data: {
-                id: _item.id,
-            },
-        }).then(
-            function (response) {
-                $scope.busy = false;
-                if (response.data.done) {
-                    $scope.item = response.data.doc;
-                    $scope.getSafes($scope.item.paymentType);
-                    if ($scope.setting.accountsSetting.currency) {
-                        site.strings['currency'] = {
-                            ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
-                            en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
-                        };
-                        site.strings['from100'] = {
-                            ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
-                            en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
-                        };
-                    }
-                    $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
-                } else {
-                    $scope.error = response.data.error;
-                }
-            },
-            function (err) {
-                console.log(err);
-            }
-        );
-    };
+  $scope.view = function (_item) {
+    $scope.busy = true;
+    $scope.error = '';
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/view`,
+      data: {
+        id: _item.id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.item = response.data.doc;
+          $scope.getSafes($scope.item.paymentType);
+          if ($scope.setting.accountsSetting.currency) {
+            site.strings['currency'] = {
+              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+            };
+            site.strings['from100'] = {
+              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+            };
+          }
+          $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
 
     $scope.showDelete = function (_item) {
         $scope.error = '';
@@ -1256,13 +1256,13 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         }, 250);
     };
 
-    $scope.thermalPrint = function (obj) {
-        $scope.error = '';
-        if ($scope.busy) return;
-        $scope.busy = true;
-        if ($scope.setting.printerProgram.thermalPrinter) {
-            $('#thermalPrint').removeClass('hidden');
-            $scope.thermal = { ...obj };
+  $scope.thermalPrint = function (obj) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    if ($scope.setting.printerProgram.thermalPrinter) {
+      $('#thermalPrint').removeClass('hidden');
+      $scope.thermal = { ...obj };
 
             $scope.localPrint = function () {
                 if ($scope.setting.printerProgram.placeQr) {
@@ -1343,11 +1343,11 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         }, 8000);
     };
 
-    $scope.print = function (type) {
-        $scope.error = '';
-        if ($scope.busy) return;
-        $scope.busy = true;
-        $('#purchaseOrdersDetails').removeClass('hidden');
+  $scope.print = function (type) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#purchaseOrdersDetails').removeClass('hidden');
 
         if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
             $scope.invList = [];

@@ -1,0 +1,7 @@
+[
+    { "moduleName" : "accounting" , "screenName" : "safesTransactions" , "name":"safesTransactionsManage" , "En":"Manage" , "Ar":"إدارة"},
+    { "moduleName" : "accounting" , "screenName" : "safesTransactions" , "name":"safesTransactionsSearch" , "En":"Search" , "Ar":"بحث"},
+    { "moduleName" : "accounting" , "screenName" : "safesTransactions" , "name":"safesTransactionsExport" , "En":"Export" , "Ar":"تصدير"},
+    { "moduleName" : "accounting" , "screenName" : "safesTransactions" , "name":"safesTransactionsPrint" , "En":"Print" , "Ar":"طباعة"},
+    { "moduleName" : "accounting" , "screenName" : "safesTransactions" , "name":"safesTransactionsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+]
