@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "specialties" , "name":"specialtiesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "specialtiesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "specialties", "name": "importSpecialties", "En": "Import", "Ar": "إستيراد" }
 ]

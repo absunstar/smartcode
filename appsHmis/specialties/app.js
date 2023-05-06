@@ -48,8 +48,6 @@ module.exports = function init(site) {
         });
     };
     app.update = function (_item, callback) {
-
-
         app.$collection.edit(
             {
                 where: {
@@ -141,13 +139,12 @@ module.exports = function init(site) {
 
     if (app.allowRoute) {
         if (app.allowRouteGet) {
-        
             site.get(
                 {
                     name: app.name,
                 },
                 (req, res) => {
-                    res.render(app.name + '/index.html', { title: app.name ,appName:'Specialties'}, { parser: 'html', compres: true });
+                    res.render(app.name + '/index.html', { title: app.name, appName: 'Specialties' }, { parser: 'html', compres: true });
                 }
             );
         }
@@ -272,6 +269,77 @@ module.exports = function init(site) {
                     done: true,
                     list: list,
                 });
+            });
+
+            site.post(`api/${app.name}/import`, (req, res) => {
+                let response = {
+                    done: false,
+                    file: req.form.files.fileToUpload,
+                };
+
+                if (site.isFileExistsSync(response.file.filepath)) {
+                    let docs = [];
+                    if (response.file.originalFilename.like('*.xls*')) {
+                        let workbook = site.XLSX.readFile(response.file.filepath);
+                        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                    } else {
+                        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+                    }
+
+                    if (Array.isArray(docs)) {
+                        console.log(`Importing ${app.name} : ${docs.length}`);
+                        let systemCode = 0;
+                        docs.forEach((doc) => {
+                            let numObj = {
+                                company: site.getCompany(req),
+                                screen: app.name,
+                                date: new Date(),
+                            };
+                            let cb = site.getNumbering(numObj);
+
+                            if (cb.auto) {
+                                systemCode = cb.code || ++systemCode;
+                            } else {
+                                systemCode++;
+                            }
+
+                            if (!doc.code) {
+                                doc.code = systemCode;
+                            }
+
+                            let newDoc = {
+                                code: doc.code,
+                                nphisCode: doc.nphisCode,
+                                nameAr: doc.nameAr,
+                                nameEn: doc.nameEn,
+                                image: { url: '/images/specialties.png' },
+                                active: true,
+                            };
+
+                            newDoc.company = site.getCompany(req);
+                            newDoc.branch = site.getBranch(req);
+                            newDoc.addUserInfo = req.getUserFinger();
+
+                            app.add(newDoc, (err, doc2) => {
+                                if (!err && doc2) {
+                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                    console.log(site.dbMessage);
+                                } else {
+                                    site.dbMessage = err.message;
+                                    console.log(site.dbMessage);
+                                }
+                            });
+                        });
+                    } else {
+                        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+                        console.log(site.dbMessage);
+                    }
+                } else {
+                    site.dbMessage = 'file not exists : ' + response.file.filepath;
+                    console.log(site.dbMessage);
+                }
+
+                res.json(response);
             });
         }
     }
