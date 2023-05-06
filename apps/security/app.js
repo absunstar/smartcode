@@ -443,30 +443,30 @@ module.exports = function init(site) {
         }
 
         if (site.getSystemSetting(req).administrativeStructure) {
-          if (site.getSystemSetting(req).administrativeStructure.ceo.id == user.id) {
+          if (site.getSystemSetting(req).administrativeStructure.ceo && site.getSystemSetting(req).administrativeStructure.ceo.id == user.id) {
             user.isCeo = true;
             user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 1);
           }
 
-          if (site.getSystemSetting(req).administrativeStructure.ceoDeputy.id == user.id) {
+          if (site.getSystemSetting(req).administrativeStructure.ceoDeputy && site.getSystemSetting(req).administrativeStructure.ceoDeputy.id == user.id) {
             user.isCeoDeputy = true;
           }
 
-          if (site.getSystemSetting(req).administrativeStructure.financialManager.id == user.id) {
+          if (site.getSystemSetting(req).administrativeStructure.financialManager && site.getSystemSetting(req).administrativeStructure.financialManager.id == user.id) {
             user.isFinancialManager = true;
             user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 2);
           }
 
-          if (site.getSystemSetting(req).administrativeStructure.financialManagerDeputy.id == user.id) {
+          if (site.getSystemSetting(req).administrativeStructure.financialManagerDeputy && site.getSystemSetting(req).administrativeStructure.financialManagerDeputy.id == user.id) {
             user.isFinancialManagerDeputy = true;
           }
 
-          if (site.getSystemSetting(req).administrativeStructure.hrManager.id == user.id) {
+          if (site.getSystemSetting(req).administrativeStructure.hrManager && site.getSystemSetting(req).administrativeStructure.hrManager.id == user.id) {
             user.isHrManager = true;
             user.workflowPosition = site.workflowPositionsList.find((pos) => pos.id == 3);
           }
 
-          if (site.getSystemSetting(req).administrativeStructure.hrManagerDeputy.id == user.id) {
+          if (site.getSystemSetting(req).administrativeStructure.hrManagerDeputy && site.getSystemSetting(req).administrativeStructure.hrManagerDeputy.id == user.id) {
             user.isHrManagerDeputy = true;
           }
         }
