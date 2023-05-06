@@ -4,8 +4,10 @@
         <div x-import="servicesGroups/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="servicesGroupsAdd || servicesGroupsManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-upload api="api/servicesGroups/import" label="Import"></i-upload>
+            <i-button type="add" x-permissions="servicesGroupsAdd || servicesGroupsManage" label="##word.New##"
+                ng-click="showAdd()"></i-button>
+            <i-upload api="api/servicesGroups/import" label="Import"
+                x-permissions="importServicesGroups || servicesGroupsManage"></i-upload>
         </div>
 
         <div class="row padding">
@@ -31,14 +33,18 @@
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="servicesGroupsUpdate || servicesGroupsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="servicesGroupsUpdate || servicesGroupsManage"
+                            label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="servicesGroupsDelete || servicesGroupsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="servicesGroupsDelete || servicesGroupsManage"
+                            label="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="servicesGroupsPrint || servicesGroupsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="servicesGroupsExport || servicesGroupsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+        <i-button x-permissions="servicesGroupsPrint || servicesGroupsManage" type="print" label="##word.Print##"
+            onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="servicesGroupsExport || servicesGroupsManage" type="export"
+            label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
     </div>
 </div>
