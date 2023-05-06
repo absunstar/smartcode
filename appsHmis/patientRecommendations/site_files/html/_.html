@@ -4,11 +4,15 @@
         <div x-import="patientRecommendations/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="patientRecommendationsAdd || patientRecommendationsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="add" x-permissions="patientRecommendationsAdd || patientRecommendationsManage"
+                label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-upload api="api/patientRecommendations/import" label="Import"
+                x-permissions="importPatientRecommendations || patientRecommendationsManage"></i-upload>
         </div>
 
         <div class="row padding">
-            <i-control ng-model="$search" x-permissions="patientRecommendationsSearch || patientRecommendationsManage"></i-control>
+            <i-control ng-model="$search"
+                x-permissions="patientRecommendationsSearch || patientRecommendationsManage"></i-control>
         </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
@@ -33,20 +37,21 @@
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="patientRecommendationsUpdate || patientRecommendationsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit"
+                            x-permissions="patientRecommendationsUpdate || patientRecommendationsManage"
+                            label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="patientRecommendationsDelete || patientRecommendationsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete"
+                            x-permissions="patientRecommendationsDelete || patientRecommendationsManage"
+                            label="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="patientRecommendationsPrint || patientRecommendationsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button
-            x-permissions="patientRecommendationsExport || patientRecommendationsManage"
-            type="export"
-            label="##word.Export to excel##"
-            onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"
-        >
+        <i-button x-permissions="patientRecommendationsPrint || patientRecommendationsManage" type="print"
+            label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="patientRecommendationsExport || patientRecommendationsManage" type="export"
+            label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
         </i-button>
     </div>
 </div>
