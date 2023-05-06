@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "insuranceClasses" , "name":"insuranceClassesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "insuranceClassesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "insuranceClasses", "name": "importInsuranceClasses", "En": "Import", "Ar": "إستيراد" }
 ]
