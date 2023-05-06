@@ -23,14 +23,18 @@
                     <div class="row padding">
                         <div class="col9">
                             <div class="row">
-                                <i-list class="col6" label="##word.Cost Center##" ng-model="item.costCenter" items="costCentersList" display="name##session.lang##" ng-search="item.$costCenter">
+                                <i-list class="col6" label="##word.Cost Center##" ng-model="item.costCenter"
+                                    items="costCentersList" display="name##session.lang##" ng-search="item.$costCenter">
                                 </i-list>
-                                <i-list class="col6" label="##word.Type##" ng-model="item.type" items="centersTypesList" display="name##session.lang##" ng-search="item.$type"> </i-list>
+                                <i-list class="col6" label="##word.Type##" ng-model="item.type" items="centersTypesList"
+                                    display="name##session.lang##" ng-search="item.$type"> </i-list>
                             </div>
                             <div class="row">
                                 <i-checkbox ng-model="item.subStore" label="##word.Sub Store##"></i-checkbox>
-                                <i-checkbox ng-model="item.inPatientPespCenter" label="##word.In-Patient Pesp Center##"></i-checkbox>
-                                <i-checkbox ng-model="item.balanceNotRequired" label="##word.Balance Not Required##"></i-checkbox>
+                                <i-checkbox ng-model="item.inPatientPespCenter"
+                                    label="##word.In-Patient Pesp Center##"></i-checkbox>
+                                <i-checkbox ng-model="item.balanceNotRequired"
+                                    label="##word.Balance Not Required##"></i-checkbox>
                                 <i-checkbox ng-model="item.autoCalcQty" label="##word.Auto Calc Qty##"></i-checkbox>
                             </div>
                         </div>
@@ -42,20 +46,15 @@
                 <div id="serviceGroup" class="tab-content">
                     <div class="row padding">
                         <div class="row">
-                            <i-list
-                                help-id=""
-                                label="##word.Service Group##"
-                                class="col7"
-                                ng-model="item.$serviceGroup"
-                                display="name##session.lang##"
-                                items="servicesGroupsList"
-                                ng-search="item.$servicesGroup"
-                            ></i-list>
+                            <i-list help-id="" label="##word.Service Group##" class="col7" ng-model="item.$serviceGroup"
+                                display="name##session.lang##" items="servicesGroupsList"
+                                ng-search="item.$servicesGroup"></i-list>
                             <div class="col2">
                                 <br />
-                                <i-button type="add" label="##word.Add Service Group##" ng-click="addServicesGroups(item)"></i-button>
+                                <i-button type="push" ng-click="addServicesGroups(item)"></i-button>
                             </div>
-                            <i-checkbox class="col3" ng-model="item.linkAllServiceGroup" label="##word.Link All Service Group##"></i-checkbox>
+                            <i-checkbox class="col3" ng-model="item.linkAllServiceGroup"
+                                label="##word.Link All Service Group##"></i-checkbox>
                         </div>
                         <div class="row">
                             <div class="table-responsive">
@@ -69,7 +68,8 @@
                                         <td class="center blue">{{s.code}}</td>
                                         <td class="center">{{s.name##session.lang##}}</td>
                                         <td class="center not-print">
-                                            <i-button type="delete" ng-click="item.servicesGroupsList.splice($index,1)"> </i-button>
+                                            <i-button type="delete" ng-click="item.servicesGroupsList.splice($index,1)">
+                                            </i-button>
                                         </td>
                                     </tr>
                                 </table>
