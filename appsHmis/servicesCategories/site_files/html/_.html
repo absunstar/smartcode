@@ -4,12 +4,15 @@
         <div x-import="servicesCategories/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="servicesCategoriesAdd || servicesCategoriesManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-upload api="api/servicesCategories/import" label="Import"></i-upload>
+            <i-button type="add" x-permissions="servicesCategoriesAdd || servicesCategoriesManage" label="##word.New##"
+                ng-click="showAdd()"></i-button>
+            <i-upload api="api/servicesCategories/import" label="Import"
+                x-permissions="importServicesCategories || servicesCategoriesManage"></i-upload>
         </div>
 
         <div class="row padding">
-            <i-control ng-model="$search" x-permissions="servicesCategoriesSearch || servicesCategoriesManage"></i-control>
+            <i-control ng-model="$search"
+                x-permissions="servicesCategoriesSearch || servicesCategoriesManage"></i-control>
         </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
@@ -30,15 +33,19 @@
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="servicesCategoriesUpdate || servicesCategoriesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="servicesCategoriesUpdate || servicesCategoriesManage"
+                            label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="servicesCategoriesDelete || servicesCategoriesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="servicesCategoriesDelete || servicesCategoriesManage"
+                            label="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="servicesCategoriesPrint || servicesCategoriesManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="servicesCategoriesExport || servicesCategoriesManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
+        <i-button x-permissions="servicesCategoriesPrint || servicesCategoriesManage" type="print"
+            label="##word.Print##" onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="servicesCategoriesExport || servicesCategoriesManage" type="export"
+            label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
         </i-button>
     </div>
 </div>
