@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "patientEducations" , "name":"patientEducationsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "patientEducationsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "patientEducations", "name": "importPatientEducations", "En": "Import", "Ar": "إستيراد" }
 ]
