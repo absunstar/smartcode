@@ -26,44 +26,17 @@
         </fieldset>
 
         <div class="row">
-          <div class="col6">
-            <fieldset>
-              <legend>##word.From##</legend>
-              <div class="row">
-                <i-list v="r" class="col8" ng-model="item.safe" ng-change="validateSafes()" label="##word.From Safe##" display="name##session.lang##" items="safesList"></i-list>
-                <i-control class="col4" v="r" type="number" ng-change="calc()" label="##word.Transfer Value## (##word.$##)" ng-model="item.total"> </i-control>
+          <fieldset>
+            <div class="row">
+              <i-list v="r" class="col6" ng-model="item.safe" label="##word.Safe##" display="name##session.lang##" items="safesList"></i-list>
+              <div class="col3 center">
+                <p>##word.Safe Balance##</p>
+                <p class="font-18">{{item.safe.totalBalance | xmoney2}} <span class="currency">##word.$##</span></p>
               </div>
-              <div class="row">
-                <div class="col4 center">
-                  <p>##word.Balance Before##</p>
-                  <p>{{item.safe.totalBalance | xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
-                <div class="col4 center">
-                  <p>##word.Balance After##</p>
-                  <p>{{item.safeAfterBalance | xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-
-          <div class="col6">
-            <fieldset>
-              <legend>##word.To##</legend>
-              <div class="row">
-                <i-list v="r" class="col8" ng-model="item.toSafe" ng-change="validateSafes()" label="##word.To Safe##" display="name##session.lang##" items="safesList"></i-list>
-              </div>
-              <div class="row">
-                <div class="col4 center">
-                  <p>##word.Balance Before##</p>
-                  <p>{{item.toSafe.totalBalance | xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
-                <div class="col4 center">
-                  <p>##word.Balance After##</p>
-                  <p>{{item.toSafeAfterBalance | xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
-              </div>
-            </fieldset>
-          </div>
+              <i-control class="col3" v="r" type="number" label="##word.New Balance## (##word.$##)" ng-model="item.total"> </i-control>
+            </div>
+           
+          </fieldset>
         </div>
       </div>
     </div>

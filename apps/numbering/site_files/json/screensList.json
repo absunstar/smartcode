@@ -211,6 +211,12 @@
   {
     "category": "accounting",
     "feature": "public",
+    "id": "safesAdjusting",
+    "name": "Safes Adjusting"
+  },
+  {
+    "category": "accounting",
+    "feature": "public",
     "id": "taxesTypes",
     "name": "Taxes Types"
   },

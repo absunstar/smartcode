@@ -1,15 +1,13 @@
-app.controller('transferSafes', function ($scope, $http, $timeout) {
+app.controller('safesAdjusting', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'transferSafes';
-  $scope.modalID = '#transferSafesManageModal';
-  $scope.modalSearchID = '#transferSafesSearchModal';
+  $scope.appName = 'safesAdjusting';
+  $scope.modalID = '#safesAdjustingManageModal';
+  $scope.modalSearchID = '#safesAdjustingSearchModal';
   $scope.mode = 'add';
   $scope._search = { fromDate: new Date(), toDate: new Date() };
   $scope.structure = {
     approved: false,
     active: true,
-    safeAfterBalance: 0,
-    toSafeAfterBalance: 0,
   };
   $scope.item = {};
   $scope.list = [];
@@ -335,28 +333,6 @@ app.controller('transferSafes', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.validateSafes = function () {
-    $scope.error = '';
-    if ($scope.item.safe && $scope.item.toSafe && $scope.item.safe.id === $scope.item.toSafe.id) {
-      $scope.error = '##word.Same Safe##';
-      return;
-    } else {
-      $scope.calc();
-    }
-  };
-
-  $scope.calc = function () {
-    $timeout(() => {
-      if ($scope.item.total && $scope.item.safe && $scope.item.toSafe && $scope.item.safe.id && $scope.item.toSafe.id) {
-        $scope.item.safeAfterBalance = $scope.item.safe.totalBalance - $scope.item.total;
-        $scope.item.toSafeAfterBalance = $scope.item.toSafe.totalBalance + $scope.item.total;
-      } else {
-        return;
-      }
-
-    }, 300);
-  
-  };
 
 
   $scope.getAll();

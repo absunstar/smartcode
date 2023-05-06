@@ -1,6 +1,6 @@
 module.exports = function init(site) {
   let app = {
-    name: 'receiptVouchers',
+    name: 'safesAdjusting',
     allowMemory: false,
     memoryList: [],
     allowCache: false,
@@ -9,6 +9,8 @@ module.exports = function init(site) {
     allowRouteGet: true,
     allowRouteAdd: true,
     allowRouteUpdate: true,
+    allowRouteApprove: true,
+    allowRouteUnapprove: true,
     allowRouteDelete: true,
     allowRouteView: true,
     allowRouteAll: true,
@@ -113,14 +115,8 @@ module.exports = function init(site) {
           return;
         }
       }
-      let where = {};
-      if (_item.invoiceId) {
-        where = { invoiceId: _item.invoiceId };
-      } else {
-        where = { id: _item.id };
-      }
 
-      app.$collection.find(where, (err, doc) => {
+      app.$collection.find({ id: _item.id }, (err, doc) => {
         callback(err, doc);
 
         if (!err && doc) {
@@ -150,7 +146,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Receipt Vouchers', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Safes Adjusting' }, { parser: 'html', compres: true });
         }
       );
     }
@@ -162,18 +158,15 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        _data.company = site.getCompany(req);
 
-        if (!_data.date) {
-          _data.date = new Date();
+        if (_data.safe.totalBalance == _data.total) {
+          response.error = 'New Balance Equal Safe Balance';
+          res.json(response);
+          return;
         }
-        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn') {
-          if (site.toMoney(_data.total) > site.toMoney(_data.$remainPaid)) {
-            response.error = 'The amount paid is greater than the remaining invoice amount ';
-            res.json(response);
-            return;
-          }
-        }
+
+        _data.company = site.getCompany(req);
+        _data.branch = site.getBranch(req);
 
         let numObj = {
           company: site.getCompany(req),
@@ -196,18 +189,6 @@ module.exports = function init(site) {
           if (!err && doc) {
             response.done = true;
             response.doc = doc;
-            let obj = {
-              id: doc.invoiceId,
-              total: doc.total,
-              installment: doc.installment,
-            };
-            if (doc.voucherType.id == 'salesInvoice') {
-              site.changeRemainPaidSalesInvoices(obj);
-            } else if (doc.voucherType.id == 'purchaseReturn') {
-              site.changeRemainPaidReturnPurchases(obj);
-            }
-
-            site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
           } else {
             response.error = err.mesage;
           }
@@ -223,6 +204,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        if (_data.safe.totalBalance == _data.total) {
+          response.error = 'New Balance Equal Safe Balance';
+          res.json(response);
+          return;
+        }
         _data.editUserInfo = req.getUserFinger();
 
         app.update(_data, (err, result) => {
@@ -237,6 +223,74 @@ module.exports = function init(site) {
       });
     }
 
+    if (app.allowRouteApprove) {
+      site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+
+        if (_data.safe.totalBalance == _data.total) {
+          response.error = 'New Balance Equal Safe Balance';
+          res.json(response);
+          return;
+        }
+
+        _data.approvedUserInfo = req.getUserFinger();
+        _data.approvedDate = new Date();
+
+        app.update(_data, (err, result) => {
+          if (!err) {
+            response.done = true;
+            response.result = result;
+
+            let obj = {
+              date: new Date(),
+              voucherType: site.vouchersTypes[7],
+              invoiceId: result.doc.id,
+              invoiceCode: result.doc.code,
+              paymentType: site.paymentTypes[0],
+              addUserInfo: result.doc.approvedUserInfo,
+              company: result.doc.company,
+              branch: result.doc.branch,
+            };
+            obj.total = result.doc.total - result.doc.safe.totalBalance;
+
+            if (obj.total > 0) {
+              site.addReceiptVouchers({ ...obj, safe: result.doc.safe });
+            } else {
+              site.addExpenseVouchers({ ...obj, safe: result.doc.safe });
+            }
+          } else {
+            response.error = err.message;
+          }
+          res.json(response);
+        });
+      });
+    }
+
+    if (app.allowRouteUnapprove) {
+      site.post({ name: `/api/${app.name}/unapprove`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+        _data.unapprovedUserInfo = req.getUserFinger();
+        _data.unapprovedDate = new Date();
+
+        app.update(_data, (err, result) => {
+          if (!err) {
+            response.done = true;
+            response.result = result;
+          } else {
+            response.error = err.message;
+          }
+          res.json(response);
+        });
+      });
+    }
     if (app.allowRouteDelete) {
       site.post({ name: `/api/${app.name}/delete`, require: { permissions: ['login'] } }, (req, res) => {
         let response = {
@@ -279,60 +333,50 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let search = req.body.search || '';
-        let limit = req.body.limit || 10;
-        let select = req.body.select || { id: 1, code: 1, date: 1, voucherType: 1, safe: 1, currency: 1, total: 1 };
+        let limit = req.body.limit || 50;
+        let select = req.body.select || {
+          id: 1,
+          code: 1,
+          approvedDate: 1,
+          safe: 1,
+          toSafe: 1,
+          active: 1,
+          approved: 1,
+          date: 1,
+          title: 1,
+          image: 1,
+        };
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
         if (app.allowMemory) {
-          if (!search) {
-            search = 'id';
-          }
-          let list = app.memoryList.filter((g) => g.company && g.company.id == site.getCompany(req).id && JSON.stringify(g).contains(search)).slice(0, limit);
+          let list = app.memoryList.filter(
+            (g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(where.search)
+          );
 
           res.json({
             done: true,
-            list: list,
+            list: list.slice(-limit),
           });
         } else {
           where['company.id'] = site.getCompany(req).id;
 
-          app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
-            res.json({
-              done: true,
-              list: docs,
-            });
+          app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+            res.json({ done: true, list: docs });
           });
         }
       });
     }
   }
-
-  site.addReceiptVouchers = function (obj, callback) {
-    let numObj = {
-      company: obj.company,
-      screen: app.name,
-      date: new Date(),
-    };
-
-    let cb = site.getNumbering(numObj);
-    obj.code = cb.code;
-    if (obj.code) {
-      app.add(obj, (err, doc) => {
-        if (!err) {
-          site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
-          if (callback) {
-            callback(doc);
-          }
-        } else {
-          if (callback) {
-            callback(err);
-          }
-        }
-      });
-    } else {
-      if (callback) {
-        callback(false);
-      }
-    }
-  };
 
   app.init();
   site.addApp(app);

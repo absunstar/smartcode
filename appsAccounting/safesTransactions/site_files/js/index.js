@@ -44,5 +44,37 @@ app.controller('safesTransactions', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getSafes = function () {
+    $scope.busy = true;
+    $scope.safesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/safes/all',
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.safesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getAll({ date: new Date() });
+  $scope.getSafes();
 });

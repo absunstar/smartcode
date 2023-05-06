@@ -1,0 +1,13 @@
+[
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "safesAdjustingUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "approveSafesAdjusting", "En": "Approve Safes Adjusting", "Ar": "إعتماد تسوية خزينة" },
+    { "moduleName": "accounting", "screenName": "safesAdjusting", "name": "unapproveSafesAdjusting", "En": "Unapprove Safes Adjusting", "Ar": "إلغاء إعتماد تسوية خزينة" }
+]

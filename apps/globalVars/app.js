@@ -312,6 +312,8 @@ module.exports = function init(site) {
     { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
     { id: 'transferSafes', nameEn: 'Transfer Safes', nameAr: 'تحويل خزن' },
     { id: 'serviceOrder', nameEn: 'Service Order', nameAr: 'طلب خدمة' },
+    { id: 'openingBalance', nameEn: 'Opening Balance', nameAr: 'رصيد إفتتاحي' },
+    { id: 'safesAdjusting', nameEn: 'Safes Adjusting', nameAr: 'تسوية خزينة' },
   ];
 
   site.post('/api/usersTypesList', (req, res) => {

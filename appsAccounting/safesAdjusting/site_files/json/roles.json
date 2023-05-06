@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "accounting",
+        "name": "safesAdjustingAdmin",
+        "En": "Safes Adjusting Admin",
+        "Ar": "إدارة تسوية الخزن",
+        "permissions": ["safesAdjustingManage"]
+    }
+]
