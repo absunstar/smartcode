@@ -27,6 +27,11 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.item = { ...$scope.structure, servicesList: [], date: new Date() };
     site.resetValidated($scope.modalID);
     site.showModal($scope.modalID);
+    if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
+      $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
+        return _t.id == $scope.setting.storesSetting.paymentType.id;
+      });
+    }
 
   };
 
@@ -804,7 +809,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     }
   };
 
-  $scope.getSafes = function () {
+  $scope.getSafes = function (paymentType) {
     $scope.busy = true;
     $scope.safesList = [];
     $http({
@@ -813,8 +818,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'type.id': 1,
-
+          'type.id': paymentType.safeType.id,
         },
         select: {
           id: 1,
@@ -863,6 +867,34 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         $scope.item.doneApproval = true;
       }
     }, 300);
+  };
+
+  $scope.getPaymentTypes = function () {
+    $scope.busy = true;
+    $scope.paymentTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/paymentTypes',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.paymentTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
   };
 
   $scope.showSearch = function () {
@@ -960,7 +992,6 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   }
 
   $scope.getAll({ date: new Date() });
-  $scope.getSafes();
   $scope.getNumberingAuto();
   $scope.getservicesOrdersTypeList();
   $scope.getServicesList();
@@ -969,4 +1000,5 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   $scope.getHospitalResponsibilitiesList();
   $scope.getservicesOrdersSourcesList();
   $scope.getBookingTypesList();
+  $scope.getPaymentTypes();
 });
