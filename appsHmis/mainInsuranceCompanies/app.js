@@ -350,12 +350,12 @@ module.exports = function init(site) {
         if (serviceMemory && serviceMemory.id) {
           if (mainInsurance) {
             serviceMemory.servicesCategoriesList = serviceMemory.servicesCategoriesList || [];
-            if (_data.insuranceContract.insuranceClass && _data.patientClass) {
+            if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.patientClass) {
               if (!foundService && mainInsurance.servicesList && mainInsurance.servicesList.length > 0) {
                 let serviceIndex = mainInsurance.servicesList.findIndex((_cService) => _cService.id === serviceMemory.id);
                 if (serviceIndex != -1) {
                   foundService = true;
-                  if (mainInsurance.servicesList[serviceIndex].coverage && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                  if (mainInsurance.servicesList[serviceIndex].coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
                     foundCoverage = true;
                     let service = {
                       id: serviceMemory.id,
@@ -407,7 +407,7 @@ module.exports = function init(site) {
 
                     if (!foundService && categoryInsurance && categoryInsurance.id) {
                       foundService = true;
-                      if (categoryInsurance.coverage && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                      if (categoryInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
                         foundCoverage = true;
                         let service = {
                           id: serviceMemory.id,
@@ -453,7 +453,7 @@ module.exports = function init(site) {
                   if (!foundService && goupInsurance && goupInsurance.id) {
                     foundService = true;
 
-                    if (goupInsurance.coverage && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                    if (goupInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
                       foundCoverage = true;
                       let service = {
                         id: serviceMemory.id,
@@ -500,7 +500,7 @@ module.exports = function init(site) {
                         if (serviceCategory && serviceCategory.id == _gCateGory.id) {
                           foundService = true;
 
-                          if (goupInsurance.coverage && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                          if (goupInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
                             foundCoverage = true;
 
                             let service = {
@@ -596,21 +596,22 @@ module.exports = function init(site) {
           servicesList[0].total = site.toNumber(servicesList[0].total);
           let datuct = 0;
           if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
-            if (_data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
+            if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
               datuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
             } else {
-              if (_data.insuranceContract.insuranceClass) {
+              if (_data.insuranceContract &&_data.insuranceContract.insuranceClass) {
                 datuct = _data.insuranceContract.insuranceClass.serviceDeduct;
               }
             }
           } else {
-            if (_data.insuranceContract.insuranceClass.consultationType == 'percent') {
+            if (_data.insuranceContract && _data.insuranceContract.insuranceClass.consultationType == 'percent') {
               datuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
             } else {
               datuct = _data.insuranceContract.insuranceClass.consultationDeduct;
             }
           }
           if (
+            _data.insuranceContract &&
             _data.insuranceContract.insuranceClass &&
             _data.insuranceContract.insuranceClass.maxDeductAmount &&
             _data.insuranceContract.insuranceClass.maxDeductAmount < servicesList[0].total - datuct
