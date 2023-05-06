@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "significantSigns" , "name":"significantSignsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "significantSignsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "significantSigns", "name": "importSignificantSigns", "En": "Import", "Ar": "إستيراد" }
 ]
