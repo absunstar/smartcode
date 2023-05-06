@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "drinks" , "name":"drinksUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "drinksUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "drinks", "name": "importDrinks", "En": "Import", "Ar": "إستيراد" }
 ]

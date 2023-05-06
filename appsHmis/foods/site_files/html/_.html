@@ -4,7 +4,9 @@
         <div x-import="foods/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="foodsAdd || foodsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="add" x-permissions="foodsAdd || foodsManage" label="##word.New##"
+                ng-click="showAdd()"></i-button>
+            <i-upload api="api/foods/import" label="Import" x-permissions="importFoods || foodsManage"></i-upload>
         </div>
 
         <div class="row padding">
@@ -33,14 +35,18 @@
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="foodsUpdate || foodsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="foodsUpdate || foodsManage" label="##word.Edit##"
+                            ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="foodsDelete || foodsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="foodsDelete || foodsManage" label="##word.Delete##"
+                            ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="foodsPrint || foodsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="foodsExport || foodsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+        <i-button x-permissions="foodsPrint || foodsManage" type="print" label="##word.Print##"
+            onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="foodsExport || foodsManage" type="export" label="##word.Export to excel##"
+            onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
     </div>
 </div>
