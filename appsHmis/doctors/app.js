@@ -377,6 +377,7 @@ module.exports = function init(site) {
                                         code: doc.code,
                                         nameAr: doc.nameAr,
                                         nameEn: doc.nameEn,
+                                        gender: site.genders.find((t) => t.nameEn.toLowerCase().trim() == doc.gender.toLowerCase().trim()),
                                         email: doc.email,
                                         password: doc.password || doc.mobile || doc.email,
                                         mobile: doc.mobile,

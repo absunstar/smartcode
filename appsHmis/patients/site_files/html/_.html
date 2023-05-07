@@ -4,7 +4,10 @@
     <div x-import="patients/modalSearch.html"></div>
 
     <div class="top-actions">
-      <i-button type="add" x-permissions="patientsAdd || patientsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+      <i-button type="add" x-permissions="patientsAdd || patientsManage" label="##word.New##"
+        ng-click="showAdd()"></i-button>
+
+      <i-upload api="api/patients/import" label="Import" x-permissions="importPatients || patientsManage"></i-upload>
     </div>
 
     <div class="row padding">
@@ -32,22 +35,34 @@
             <p class="center">{{item.fullNameAr}}</p>
           </td>
 
-          <td class="center"><p class="center">{{item.age}} Y</p></td>
-          <td class="center"><p class="center">{{item.gender.name##session.lang##}}</p></td>
-          <td class="center"><p class="center">{{item.nationality.name##session.lang##}}</p></td>
-          <td class="center"><p class="center">{{item.havisaNum}}</p></td>
+          <td class="center">
+            <p class="center">{{item.age}} Y</p>
+          </td>
+          <td class="center">
+            <p class="center">{{item.gender.name##session.lang##}}</p>
+          </td>
+          <td class="center">
+            <p class="center">{{item.nationality.name##session.lang##}}</p>
+          </td>
+          <td class="center">
+            <p class="center">{{item.havisaNum}}</p>
+          </td>
 
           <td class="center not-print">
             <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-            <i-button type="edit" x-permissions="patientsUpdate || patientsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+            <i-button type="edit" x-permissions="patientsUpdate || patientsManage" label="##word.Edit##"
+              ng-click="showUpdate(item)"></i-button>
 
-            <i-button type="delete" x-permissions="patientsDelete || patientsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+            <i-button type="delete" x-permissions="patientsDelete || patientsManage" label="##word.Delete##"
+              ng-click="showDelete(item)"></i-button>
           </td>
         </tr>
       </table>
     </div>
-    <i-button x-permissions="patientsPrint || patientsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-    <i-button x-permissions="patientsExport || patientsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+    <i-button x-permissions="patientsPrint || patientsManage" type="print" label="##word.Print##"
+      onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="patientsExport || patientsManage" type="export" label="##word.Export to excel##"
+      onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
   </div>
 </div>
