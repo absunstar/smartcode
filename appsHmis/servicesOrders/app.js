@@ -200,7 +200,9 @@ module.exports = function init(site) {
                     doctor: { ...doc.doctor },
                     status: { id: 1, nameEn: 'Pending', nameAr: 'قيد الإنتظار' },
                   };
-
+                  if (doc.doctorDeskTop && doc.doctorDeskTop.id) {
+                    obj.doctorDeskTopId = doc.doctorDeskTop.id;
+                  }
                   if (_s.serviceGroup.type.id == 2) {
                     site.addDoctorDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 3) {
@@ -389,6 +391,10 @@ module.exports = function init(site) {
               status: { id: 1, nameEn: 'Pending', nameAr: 'قيد الإنتظار' },
             };
 
+            if (result.doc.doctorDeskTop && result.doc.doctorDeskTop.id) {
+              obj.doctorDeskTopId = result.doc.doctorDeskTop.id;
+            }
+
             if (_s.serviceGroup.type.id == 2) {
               site.addDoctorDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 3) {
@@ -431,7 +437,7 @@ module.exports = function init(site) {
   });
 
   site.post({ name: `/api/${app.name}/needApprove`, public: true }, (req, res) => {
-    let select = req.body.select || { id: 1, code: 1, patient: 1, date: 1, servicesList: 1, doctor: 1, mainInsuranceCompany: 1};
+    let select = req.body.select || { id: 1, code: 1, patient: 1, date: 1, servicesList: 1, doctor: 1, mainInsuranceCompany: 1 };
 
     app.all({ where: { approved: false }, select, sort: { id: -1 } }, (err, docs) => {
       let list = [];

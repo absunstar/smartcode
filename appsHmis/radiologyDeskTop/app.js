@@ -290,11 +290,13 @@ module.exports = function init(site) {
               $lt: d2,
             };
           }
+          
           if (where['doctor']) {
             where['doctor.id'] = where['doctor'].id;
             delete where['doctor'];
           }
-          app.all({ where, select, sort: { code: -1 }, limit: req.body.limit }, (err, docs) => {
+
+          app.all({ where, select, sort: { id: -1 }, limit: req.body.limit }, (err, docs) => {
             let newDate = new Date();
             docs.forEach((_d) => {
               _d.$hours = parseInt((Math.abs(new Date(_d.date) - newDate) / (1000 * 60 * 60)) % 24);

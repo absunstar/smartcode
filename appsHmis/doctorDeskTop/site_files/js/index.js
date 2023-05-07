@@ -224,9 +224,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
       where['doctor.id'] == site.toNumber('##user.id##');
     }
 
-    /*   if ($scope.today) {
+    if ($scope.today) {
       where['date'] = new Date();
-    } */
+    }
 
     if (type == 'all') {
       delete where['status.id'];
