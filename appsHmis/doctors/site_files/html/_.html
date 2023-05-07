@@ -4,7 +4,9 @@
         <div x-import="doctors/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="doctorsAdd || doctorsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="add" x-permissions="doctorsAdd || doctorsManage" label="##word.New##"
+                ng-click="showAdd()"></i-button>
+            <i-upload api="api/doctors/import" label="Import" x-permissions="importDoctors || doctorsManage"></i-upload>
         </div>
 
         <div class="row padding">
@@ -28,14 +30,18 @@
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="doctorsUpdate || doctorsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="doctorsUpdate || doctorsManage" label="##word.Edit##"
+                            ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="doctorsDelete || doctorsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="doctorsDelete || doctorsManage" label="##word.Delete##"
+                            ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="doctorsPrint || doctorsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="doctorsExport || doctorsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+        <i-button x-permissions="doctorsPrint || doctorsManage" type="print" label="##word.Print##"
+            onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="doctorsExport || doctorsManage" type="export" label="##word.Export to excel##"
+            onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
     </div>
 </div>

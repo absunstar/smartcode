@@ -1,11 +1,12 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "doctors" , "name":"doctorsUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "doctorsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "doctors", "name": "importDoctors", "En": "Import", "Ar": "إستيراد" }
 ]
