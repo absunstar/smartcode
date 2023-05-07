@@ -173,13 +173,6 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
     site.showModal('#recommendationsModal');
   };
 
-  $scope.showVitalsNotes = function (_item) {
-    $scope.error = '';
-    $scope.item = {};
-    $scope.view(_item);
-    site.showModal('#vitalsNotesModal');
-  };
-
   $scope.showDelete = function (_item) {
     $scope.error = '';
     $scope.mode = 'delete';
@@ -276,6 +269,7 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
           nationality: 1,
           clinicExt: 1,
           mobile: 1,
+          gender: 1,
           homeTel: 1,
         },
       },

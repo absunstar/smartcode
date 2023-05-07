@@ -113,8 +113,7 @@
 }
 .list:hover {
   border-radius: 10px;
-  background: darkgrey;
-  color: white;
+  background: #ffff00bf;
 }
 .code-list {
   border: 1px solid;

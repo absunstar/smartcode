@@ -27,8 +27,9 @@
           <div class="row">
             <div class="col9">
               <p class="bold">
-                <span class="darkGray">##word.Full Name## : </span> {{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> )
+                <span class="darkGray">##word.Name## : </span> {{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> )
                 <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+                ({{item.patient.gender.name##session.lang##}})
               </p>
             </div>
             <div class="col3">
@@ -46,7 +47,7 @@
               <p class="bold"><span class="darkGray">##word.Age## : </span> {{item.patient.age}}</p>
             </div>
             <div class="col6">
-              <p class="bold text-right"><span class="darkGray">الإسم بالكامل : </span> {{item.patient.fullNameAr}}</p>
+              <p class="bold text-right"><span class="darkGray">الإسم : </span> {{item.patient.fullNameAr}}</p>
             </div>
           </div>
           <div class="row">
@@ -100,12 +101,14 @@
             <div class="row">
               <div class="col7">
                 <p class="bold">
-                  <span class="darkGray">##word.Name English## : </span> {{item.doctor.nameEn}} ( <span class="blue">{{item.doctor.code}}</span> )
+                  <span class="darkGray">##word.Name## : </span> {{item.doctor.nameEn}} ( <span class="blue">{{item.doctor.code}}</span> )
                   <img class="img-logo" ng-src="{{item.doctor.image.url}}" alt="" />
+                  ({{item.doctor.gender.name##session.lang##}})
+
                 </p>
               </div>
               <div class="col5">
-                <p class="bold text-right"><span class="darkGray">الإسم بالعربي : </span> {{item.doctor.nameAr}}</p>
+                <p class="bold text-right"><span class="darkGray">الإسم : </span> {{item.doctor.nameAr}}</p>
               </div>
             </div>
             <div class="row">

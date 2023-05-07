@@ -655,6 +655,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           nationality: 1,
           clinicExt: 1,
           mobile: 1,
+          gender: 1,
           homeTel: 1,
         },
       },

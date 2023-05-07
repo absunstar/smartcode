@@ -16,7 +16,33 @@
             <i-content ng-model="item.treatment"></i-content>
           </fieldset>
 
-          <div class="row padding">
+          <fieldset>
+            <legend>##word.Files## <i-button type="push" ng-click="item.filesList.push({})"></i-button></legend>
+            <div class="row" ng-repeat="f in item.filesList">
+              <div class="col10">
+                <i-file ng-model="f.file"></i-file>
+              </div>
+              <div class="col2">
+                <i-button type="delete" ng-click="item.filesList.splice($index,1)"> </i-button>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>##word.Diagnoses##</legend>
+            <div class="col10">
+              <div class="row list" ng-repeat="s in item.doctorReccomendList | filter:{code :'DIAG'}">
+                <div class="col1 code-list">
+                  <p>{{s.code}}</p>
+                </div>
+                <div class="col10">
+                  <p class="bold">{{s.name##session.lang##}}</p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!--    <div class="row padding">
             <div class="tabs">
               <div class="tabs-header full">
                 <a class="tab-link" onclick="site.showTabContent(event, '#diagnoses')">
@@ -40,65 +66,51 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="row list" ng-repeat="s in item.diagnosesList">
-                      <div class="col1 code-list">
-                        <p>{{s.code}}</p>
-                      </div>
-                      <div class="col10">
-                        <p class="bold">{{s.name##session.lang##}}</p>
-                      </div>
-                      <div class="col1">
-                        <i-button type="delete" ng-click="item.diagnosesList.splice($index,1)"> </i-button>
-                      </div>
-                    </div>
+                   
                   </div>
                 </div>
 
                 <div id="files" class="tab-content">
                   <div class="col8">
-                    <fieldset>
-                      <legend><i-button type="push" ng-click="item.filesList.push({})"></i-button></legend>
-                      <div class="row" ng-repeat="f in item.filesList">
-                        <i-file class="col10" ng-model="f.file"></i-file>
-                        <div class="col2">
-                          <i-button type="delete" ng-click="item.filesList.splice($index,1)"> </i-button>
-                        </div>
-                      </div>
-                    </fieldset>
+                    
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col3">
           <fieldset>
             <legend>##word.Patient##</legend>
-            <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+            <p class="bold">
+              <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+              ({{item.patient.gender.name##session.lang##}})
+            </p>
             <p class="bold">{{item.patient.fullName##session.lang##}} ( <span class="blue">{{item.patient.code}}</span> )</p>
             <p class="bold">{{item.mainInsuranceCompany.name##session.lang##}} ( <span class="blue">{{item.mainInsuranceCompany.code}}</span> )</p>
             <p class="bold">##word.Class## : {{item.patient.insuranceClass.name##session.lang##}}</p>
             <p class="bold brown">##word.EXP## : {{item.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
-            <p class="bold blue">{{item.patient.mobile}}</p>
+            <p class="bold blue">##word.Mobile## : {{item.patient.mobile}}</p>
             <p class="bold">{{item.patient.nationality.name##session.lang##}} <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" /></p>
             <p class="bold">##word.Age## : {{item.patient.age}}Y</p>
           </fieldset>
+
           <fieldset>
-            <legend>##word.Vitals Notes##</legend>
-            <div class="row">
-              <i-control type="text" label="##word.Height## / CM" ng-model="item.Height"></i-control>
-              <i-control type="text" label="##word.Weight## / KG" ng-model="item.weight"></i-control>
-              <i-control type="text" label="##word.Temperature##" ng-model="item.temperature"></i-control>
-              <i-control type="text" label="##word.Pulse##" ng-model="item.pulse"></i-control>
-        <i-control type="text" label="##word.Blood Pressure High##" ng-model="item.bloodPressureHigh"></i-control>
-        <i-control type="text" label="##word.Blood Pressure Low##" ng-model="item.bloodPressureLow"></i-control>
-              <i-control type="text" label="##word.Respiratory Rate##" ng-model="item.respiratoryRate"></i-control>
-              <i-control type="text" label="##word.Oxygen Saturation##" ng-model="item.oxygenSaturation"></i-control>
-              <i-control type="text" label="##word.BMI##" ng-model="item.bmi"></i-control>
-              <i-control type="text" label="##word.FBS##" ng-model="item.fbs"></i-control>
-              <i-control type="text" label="##word.Rbs##" ng-model="item.rbs"></i-control>
-              <i-textarea label="##word.notes##" ng-model="item.notesAfter"></i-textarea>
-            </div>
+            <legend>##word.Doctor##</legend>
+            <p class="bold">
+              <img class="img-logo" ng-src="{{item.doctor.image.url}}" alt="" />
+              ( {{item.doctor.gender.name##session.lang##}} )
+            </p>
+            <p class="bold">{{item.doctor.name##session.lang##}} ( <span class="blue">{{item.doctor.code}}</span> )</p>
+            <p class="bold">##word.Mobile## : {{item.doctor.mobile}}</p>
+            <p class="bold">##word.Doctor Type## : {{item.doctor.doctorType.name##session.lang##}}</p>
+            <p class="bold">##word.Specialty## : {{item.doctor.specialty.name##session.lang##}}</p>
+            <p class="bold">{{item.doctor.nationality.name##session.lang##}} <img class="img-logo" ng-src="{{item.doctor.nationality.image.url}}" alt="" /></p>
+          </fieldset>
+
+          <fieldset>
+            <legend>##word.Radiology##</legend>
+            <p class="bold">##word.Name## : {{item.service.name##session.lang##}}</p>
           </fieldset>
         </div>
       </div>

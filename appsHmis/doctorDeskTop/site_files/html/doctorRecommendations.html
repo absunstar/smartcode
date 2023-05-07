@@ -22,8 +22,8 @@
               <i-checkbox class="col2" ng-model="item.checkup" label="##word.Checkup##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.psychiatric" label="##word.Psychiatric##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.infertility" label="##word.Infertility##"></i-checkbox>
-              <i-checkbox class="col2" ng-hide="item.patient.gender.id == 'm'" ng-model="item.pregnancy" label="##word.Pregnancy##"></i-checkbox>
-              <i-checkbox class="col2" ng-hide="item.patient.gender.id == 'm'" ng-model="item.lactation" label="##word.Lactation##"></i-checkbox>
+              <i-checkbox class="col2" ng-hide="item.patient.gender.id == 1" ng-model="item.pregnancy" label="##word.Pregnancy##"></i-checkbox>
+              <i-checkbox class="col2" ng-hide="item.patient.gender.id == 2" ng-model="item.lactation" label="##word.Lactation##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.acute" label="##word.Acute##"></i-checkbox>
             </div>
           </fieldset>
@@ -344,7 +344,10 @@
         <div class="col3">
           <fieldset>
             <legend>##word.Patient##</legend>
-            <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+            <p class="bold">
+              <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+              ({{item.patient.gender.name##session.lang##}})
+            </p>
             <p class="bold">{{item.patient.fullName##session.lang##}} ( <span class="blue">{{item.patient.code}}</span> )</p>
             <p class="bold">{{item.mainInsuranceCompany.name##session.lang##}} ( <span class="blue">{{item.mainInsuranceCompany.code}}</span> )</p>
             <p class="bold">##word.Class## : {{item.patient.insuranceClass.name##session.lang##}}</p>

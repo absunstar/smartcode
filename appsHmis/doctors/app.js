@@ -270,7 +270,7 @@ module.exports = function init(site) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || { 'type.id': 8 };
                 let search = req.body.search || undefined;
-                let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1 };
+                let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1 , gender: 1 , consItem: 1 };
                 let limit = req.body.limit || 10;
                 let list = [];
                 app.memoryList

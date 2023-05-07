@@ -69,6 +69,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.paymentType.id;
       });
+      $scope.getSafes($scope.item.paymentType);
+
     }
 
     if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {

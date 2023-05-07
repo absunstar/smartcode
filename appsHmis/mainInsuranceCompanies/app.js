@@ -622,6 +622,7 @@ module.exports = function init(site) {
             servicesList[0].patientCash = servicesList[0].total - datuct;
             servicesList[0].comDeduct = datuct;
           }
+
           if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {
             servicesList[0].hospitalResponsibility = _data.hospitalResponsibility;
           }

@@ -2,7 +2,6 @@
     <div class="row" x-permissions="radiologyDeskTopUi || radiologyDeskTopManage">
         <div x-import="radiologyDeskTop/modal.html"></div>
         <div x-import="radiologyDeskTop/modalSearch.html"></div>
-        <div x-import="radiologyDeskTop/vitalsNotes.html"></div>
         <div x-import="radiologyDeskTop/recommendations.html"></div>
         <div x-import="radiologyDeskTop/modalDelivered.html"></div>
         <div id="alert" class="modal alert small">
@@ -89,7 +88,7 @@
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
                     <td class="center">
-                        <p class="center">( {{item.code}} )</p>
+                        <p class="center">( {{item.detectionNum}} )</p>
                         <p class="center darkGray">{{item.service.name##session.lang##}}</p>
                     </td>
                     <td class="center">
@@ -107,10 +106,11 @@
                     </td>
                     <td class="center">
                         <p class="darkGray center">
-                            <i class="fas fa-hourglass-start"></i> <span ng-show="item.$hours" class="blue"> H {{item.$hours}} </span> <span ng-show="item.$hours && item.$minutes">:</span>
-                            <span ng-show="item.$minutes" class="blue">{{item.$minutes}} MIN </span> <i class="fas fa-male" ng-show="item.patient.gender.id == 'm'"></i>
-                            <i class="fas fa-female" ng-show="item.patient.gender.id == 'f'"></i>
-                        </p>
+                            <i class="fas fa-hourglass-start"></i> <span ng-show="item.$days" class="blue"> D {{item.$days}} - </span> <span ng-show="item.$hours" class="blue"> H {{item.$hours}} </span>
+                            <span ng-show="item.$hours && item.$minutes">:</span> <span ng-show="item.$minutes" class="blue">{{item.$minutes}} MIN </span>
+                            <i class="fas fa-male" ng-show="item.patient.gender.id == 1"></i>
+                            <i class="fas fa-female" ng-show="item.patient.gender.id == 2"></i>
+                          </p>
                         <p class="brown center"><i class="fas fa-clock darkGray"></i> {{item.date | date:"dd / MM / yyyy"}} - <span class="green">{{item.date | date:"hh:mm"}}</span></p>
                         <p class="blue center">( {{item.status.name##session.lang##}} )</p>
                     </td>
@@ -127,7 +127,6 @@
                         <a class="btn btn-warning btn-lg" x-permissions="radiologyDeskTopUpdate || radiologyDeskTopManage" ng-show="item.status.id == 4" ng-click="showDelivered(item)"
                             >##word.Hand over to## <i class="fas fa-pen"></i
                         ></a>
-                        <a title="##word.Vitals Notes##" ng-show="item.status.id == 1" class="btn btn-primary btn-lg" ng-click="showVitalsNotes(item)"><i class="fas fa-file-medical-alt"></i></a>
                         <a ng-hide="item.status.id == 1" title="##word.Doctor recommendations##" class="btn btn-success btn-lg" ng-click="showRecommendations(item)"
                             ><i class="fas fa-x-ray font-22 pointer"></i
                         ></a>

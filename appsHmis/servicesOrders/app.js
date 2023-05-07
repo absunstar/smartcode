@@ -202,10 +202,14 @@ module.exports = function init(site) {
                   };
                   if (doc.doctorDeskTop && doc.doctorDeskTop.id) {
                     obj.doctorDeskTopId = doc.doctorDeskTop.id;
+                    obj.doctorReccomendList = doc.doctorDeskTop.doctorReccomendList;
                   }
                   if (_s.serviceGroup.type.id == 2) {
                     site.addDoctorDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 3) {
+                    let ageDay = obj.patient.age * 365;
+                    obj.normalRange = obj.service.normalRangeList.find((_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && _s.gender.id == obj.patient.gender.id);
+
                     site.addLaboratoryDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 4) {
                     site.addRadiologyDeskTop(obj);
@@ -393,11 +397,15 @@ module.exports = function init(site) {
 
             if (result.doc.doctorDeskTop && result.doc.doctorDeskTop.id) {
               obj.doctorDeskTopId = result.doc.doctorDeskTop.id;
+              obj.doctorReccomendList = result.doc.doctorDeskTop.doctorReccomendList;
             }
 
             if (_s.serviceGroup.type.id == 2) {
               site.addDoctorDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 3) {
+              let ageDay = obj.patient.age * 365;
+              obj.normalRange = obj.service.normalRangeList.find((_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && _s.gender.id == obj.patient.gender.id);
+
               site.addLaboratoryDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 4) {
               site.addRadiologyDeskTop(obj);

@@ -237,8 +237,10 @@ module.exports = function init(site) {
           if (!err && doc) {
             response.done = true;
             let newDate = new Date();
-            doc.$hours = parseInt((Math.abs(new Date(doc.date) - newDate) / (1000 * 60 * 60)) % 24);
-            doc.$minutes = parseInt((Math.abs(new Date(doc.date).getTime() - newDate.getTime()) / (1000 * 60)) % 60);
+            let diffMs = newDate - new Date(doc.date);
+            doc.$days = Math.floor(diffMs / 86400000);
+            doc.$hours = Math.floor((diffMs % 86400000) / 3600000);
+            doc.$minutes = Math.round(((diffMs % 86400000) % 3600000) / 60000);
             response.doc = doc;
           } else {
             response.error = err?.message || 'Not Exists';
@@ -251,7 +253,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, patient: 1, doctor: 1, code: 1, service: 1, mainInsuranceCompany: 1, date: 1, status: 1 };
+        let select = req.body.select || { id: 1, patient: 1, doctor: 1, code: 1, detectionNum:1, service: 1, mainInsuranceCompany: 1, date: 1, status: 1 };
         let list = [];
         if (app.allowMemory) {
           app.memoryList
@@ -297,8 +299,12 @@ module.exports = function init(site) {
           app.all({ where, select, sort: { id: -1 }, limit: req.body.limit }, (err, docs) => {
             let newDate = new Date();
             docs.forEach((_d) => {
-              _d.$hours = parseInt((Math.abs(new Date(_d.date) - newDate) / (1000 * 60 * 60)) % 24);
-              _d.$minutes = parseInt((Math.abs(new Date(_d.date).getTime() - newDate.getTime()) / (1000 * 60)) % 60);
+              // _d.$hours = parseInt((Math.abs(new Date(_d.date) - newDate) / (1000 * 60 * 60)) % 24);
+              // _d.$minutes = parseInt((Math.abs(new Date(_d.date).getTime() - newDate.getTime()) / (1000 * 60)) % 60);
+              let diffMs = newDate - new Date(_d.date);
+              _d.$days = Math.floor(diffMs / 86400000);
+              _d.$hours = Math.floor((diffMs % 86400000) / 3600000);
+              _d.$minutes = Math.round(((diffMs % 86400000) % 3600000) / 60000);
             });
             res.json({
               done: true,
@@ -325,8 +331,7 @@ module.exports = function init(site) {
     //   delete where['patientId'];
     // }
 
-    app.all({ where, select, sort: { code: -1 }, limit: req.body.limit }, (err, docs) => {
-
+    app.all({ where, select, sort: { id: -1 }, limit: req.body.limit }, (err, docs) => {
       let result = {
         consultationList: [],
         laboratoryList: [],
@@ -338,13 +343,13 @@ module.exports = function init(site) {
           doc.ordersList.forEach((_order) => {
             if (_order.type == 'CO' && !result.consultationList.some((s) => s.id == _order.id)) {
               result.consultationList.push(_order);
-            } else  if (_order.type == 'LA' && !result.laboratoryList.some((s) => s.id == _order.id)) {
+            } else if (_order.type == 'LA' && !result.laboratoryList.some((s) => s.id == _order.id)) {
               result.laboratoryList.push(_order);
-            }  else  if (_order.type == 'X-R' && !result.radiologyList.some((s) => s.id == _order.id)) {
+            } else if (_order.type == 'X-R' && !result.radiologyList.some((s) => s.id == _order.id)) {
               result.radiologyList.push(_order);
-            }  else  if (_order.type == 'MD' && !result.medicineList.some((s) => s.id == _order.id)) {
+            } else if (_order.type == 'MD' && !result.medicineList.some((s) => s.id == _order.id)) {
               result.medicineList.push(_order);
-            } 
+            }
           });
         });
       }
@@ -428,22 +433,33 @@ module.exports = function init(site) {
     if (obj.doctor && obj.doctor.id) {
       where['doctor.id'] = obj.doctor.id;
     }
-    app.all(
-      {
-        where,
-        limit: 1,
-        sort: {
-          id: -1,
+
+    let numObj = {
+      company: obj.company,
+      screen: app.name,
+      date: new Date(),
+    };
+
+    let cb = site.getNumbering(numObj);
+    obj.code = cb.code;
+    if (obj.code) {
+      app.all(
+        {
+          where,
+          limit: 1,
+          sort: {
+            id: -1,
+          },
         },
-      },
-      (err, docs) => {
-        if (!err) {
-          obj.code = docs && docs.length > 0 ? docs[0].code + 1 : 1;
-          obj.ordersList = [];
-          app.add(obj, (err, doc1) => {});
+        (err, docs) => {
+          if (!err) {
+            obj.detectionNum = docs && docs.length > 0 ? docs[0].detectionNum + 1 : 1;
+            obj.ordersList = [];
+            app.add(obj, (err, doc1) => {});
+          }
         }
-      }
-    );
+      );
+    }
   };
 
   site.hasOrderDoctorDeskTop = function (where) {

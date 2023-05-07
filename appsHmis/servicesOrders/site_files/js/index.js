@@ -31,8 +31,9 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.paymentType.id;
       });
-    }
 
+      $scope.getSafes($scope.item.paymentType);
+    }
   };
 
   $scope.add = function (_item) {
@@ -112,7 +113,6 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     );
   };
 
-
   $scope.approved = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
@@ -138,7 +138,6 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
 
           if (response.data.result.doc.approved && $scope.setting.printerProgram.autoThermalPrintVoucher) {
             $scope.thermalPrint(response.data.receiptVoucherDoc);
-
           }
         } else {
           $scope.error = response.data.error;
@@ -385,7 +384,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           fullNameAr: 1,
           patientType: 1,
           maritalStatus: 1,
-          dateOfBirth : 1,
+          dateOfBirth: 1,
           gender: 1,
           age: 1,
           motherNameEn: 1,
@@ -625,6 +624,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           doctor: 1,
           ordersList: 1,
           diagnosis: 1,
+          doctorReccomendList: 1,
           type: 1,
         },
       },
@@ -696,6 +696,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           doctorType: 1,
           nationality: 1,
           clinicExt: 1,
+          gender: 1,
           mobile: 1,
           homeTel: 1,
         },
