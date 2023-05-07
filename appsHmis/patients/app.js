@@ -277,7 +277,7 @@ module.exports = function init(site) {
         if (app.allowRouteAll) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || { 'type.id': 5 };
-                let select = req.body.select || { id: 1, code: 1, fullNameEn: 1, fullNameAr: 1, gender: 1, nationality: 1, age: 1, image: 1 };
+                let select = req.body.select || { id: 1, code: 1, fullNameEn: 1, fullNameAr: 1, gender: 1, nationality: 1, age: 1, image: 1, havisaNum: 1 };
                 let search = req.body.search || undefined;
 
                 if (app.allowMemory) {
@@ -385,85 +385,67 @@ module.exports = function init(site) {
                                 doc.code = systemCode;
                             }
                             let newDoc = {};
-                            const specialtyApp = site.getApp('specialties');
-
-                            specialtyApp.all({}, (err, specialtiesDocs) => {
-                                const nationalityApp = site.getApp('nationalities');
-                                let selectedSpecialty;
-                                let specialty;
-                                if (specialtiesDocs.length) {
-                                    selectedSpecialty = specialtiesDocs.find((s) => s.nameEn.toLowerCase().trim() == doc.specialty.toLowerCase().trim());
-
-                                    if (selectedSpecialty) {
-                                        specialty = {
-                                            _id: selectedSpecialty._id,
-                                            id: selectedSpecialty.id,
-                                            code: selectedSpecialty.code,
-                                            nameAr: selectedSpecialty.nameAr,
-                                            nameEn: selectedSpecialty.nameEn,
-                                        };
-                                    }
+                            const nationalityApp = site.getApp('nationalities');
+                            nationalityApp.all({}, (err, nationalitiesDocs) => {
+                                let selectedNationality;
+                                let nationality;
+                                let age = 0;
+                                if (nationalitiesDocs.length) {
+                                    selectedNationality = nationalitiesDocs.find((n) => n.nameEn.toLowerCase().trim() == doc.nationality.toLowerCase().trim());
                                 }
 
-                                nationalityApp.all({}, (err, nationalitiesDocs) => {
-                                    let selectedNationality;
-                                    let nationality;
-                                    if (nationalitiesDocs.length) {
-                                        selectedNationality = nationalitiesDocs.find((n) => n.nameEn.toLowerCase().trim() == doc.nationality.toLowerCase().trim());
-                                    }
-
-                                    if (selectedNationality) {
-                                        nationality = {
-                                            _id: selectedNationality._id,
-                                            id: selectedNationality.id,
-                                            code: selectedNationality.code,
-                                            nameAr: selectedNationality.nameAr,
-                                            nameEn: selectedNationality.nameEn,
-                                        };
-                                    }
-
-                                    if (!doc.email) {
-                                        const splitName = doc.nameEn.split(' ');
-                                        doc.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
-                                    }
-                                    newDoc = {
-                                        code: doc.code,
-                                        nameAr: doc.nameAr,
-                                        nameEn: doc.nameEn,
-                                        type: site.patientTypes.find((t) => t.nameEn.toLowerCase().trim() == doc.patientType.toLowerCase().trim()),
-                                        gender: site.genders.find((t) => t.nameEn.toLowerCase().trim() == doc.gender.toLowerCase().trim()),
-                                        email: doc.email,
-                                        password: doc.password || doc.mobile || doc.email,
-                                        mobile: doc.mobile,
-                                        homeTel: doc.homeTel,
-                                        specialty,
-                                        nationality,
-                                        roles: [
-                                            {
-                                                moduleName: 'public',
-                                                name: 'doctorPermissions',
-                                                En: 'Doctor Permissions',
-                                                Ar: 'صلاحيات الطبيب',
-                                            },
-                                        ],
-                                        type: site.usersTypesList[7],
-                                        image: { url: '/images/doctors.png' },
-                                        active: true,
+                                if (selectedNationality) {
+                                    nationality = {
+                                        _id: selectedNationality._id,
+                                        id: selectedNationality.id,
+                                        code: selectedNationality.code,
+                                        nameAr: selectedNationality.nameAr,
+                                        nameEn: selectedNationality.nameEn,
                                     };
+                                }
 
-                                    newDoc.company = site.getCompany(req);
-                                    newDoc.branch = site.getBranch(req);
-                                    newDoc.addUserInfo = req.getUserFinger();
+                                if (!doc.email) {
+                                    const splitName = doc.nameEn.split(' ');
+                                    doc.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
+                                }
+                                if (doc.dateOfBirth) {
+                                    let birthYear = new Date(doc.dateOfBirth).getFullYear();
+                                    age = new Date().getFullYear() - birthYear;
+                                }
 
-                                    app.add(newDoc, (err, doc2) => {
-                                        if (!err && doc2) {
-                                            site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                            console.log(site.dbMessage);
-                                        } else {
-                                            site.dbMessage = err.message;
-                                            console.log(site.dbMessage);
-                                        }
-                                    });
+                                newDoc = {
+                                    code: doc.code,
+                                    fullNameAr: doc.fullNameAr,
+                                    fullNameEn: doc.fullNameEn,
+                                    patientType: site.patientTypes.find((t) => t.nameEn.toLowerCase().trim() == doc.patientType.toLowerCase().trim()),
+                                    type: site.usersTypesList[4],
+                                    gender: site.genders.find((t) => t.nameEn.toLowerCase().trim() == doc.gender.toLowerCase().trim()),
+                                    maritalStatus: site.maritalStatus.find((s) => s.nameEn.toLowerCase().trim() == doc.maritalStatus.toLowerCase().trim()),
+                                    email: doc.email,
+                                    password: doc.password || doc.mobile || doc.email,
+                                    mobile: doc.mobile,
+                                    mobileList: [{ mobile: doc.mobile }],
+                                    homeTel: doc.homeTel,
+                                    havisaNum: doc.havisaNum,
+                                    dateOfBirth: new Date(doc.dateOfBirth),
+                                    nationality,
+                                    age,
+                                    image: { url: '/images/patients.png' },
+                                    active: true,
+                                };
+
+                                newDoc.company = site.getCompany(req);
+                                newDoc.branch = site.getBranch(req);
+                                newDoc.addUserInfo = req.getUserFinger();
+
+                                app.add(newDoc, (err, doc2) => {
+                                    if (!err && doc2) {
+                                        site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                        console.log(site.dbMessage);
+                                    } else {
+                                        site.dbMessage = err.message;
+                                        console.log(site.dbMessage);
+                                    }
                                 });
                             });
                         });
