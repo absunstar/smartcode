@@ -64,9 +64,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       discountsList: [],
       taxesList: [],
     };
-    if ($scope.setting.storesSetting.paymentType && $scope.setting.storesSetting.paymentType.id) {
+    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.paymentType.id;
+        return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
       $scope.getSafes($scope.item.paymentType);
 
@@ -1317,7 +1317,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'type.id': paymentType.safeType.id,
+          'paymentType.id': paymentType.id,
         },
         select: {
           id: 1,

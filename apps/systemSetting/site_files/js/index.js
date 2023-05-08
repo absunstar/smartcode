@@ -188,6 +188,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         $scope.item = response.data.doc;
         $scope.item.hrSettings = $scope.item.hrSettings || {};
         $scope.item.hmisSetting = $scope.item.hmisSetting || {};
+        $scope.selectInventorySystem();
         document.querySelector(`${$scope.modalID} .tab-link`).click();
       },
       function (err) {
@@ -667,6 +668,57 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.selectInventorySystem = function () {
+    if ($scope.item.inventorySystem && $scope.item.inventorySystem.id) {
+      $scope.item.establishingParchaseAccountsList.forEach((_s) => {
+        if ($scope.item.inventorySystem.id == 1) {
+          if (_s.id == 3) {
+            _s.$hide = true;
+          } else {
+            _s.$hide = false;
+          }
+        } else {
+          if (_s.id == 2) {
+            _s.$hide = true;
+          } else {
+            _s.$hide = false;
+          }
+        }
+      });
+
+      $scope.item.establishingSalesAccountsList.forEach((_s) => {
+        if ($scope.item.inventorySystem.id == 1) {
+          if (_s.id == 7 || _s.id == 8) {
+            _s.$hide = true;
+          } else {
+            _s.$hide = false;
+          }
+        }
+      });
+    }
+  };
+
+  $scope.getInventorySystemList = function () {
+    $scope.busy = true;
+    $scope.inventorySystemList = [];
+    $http({
+      method: 'POST',
+      url: '/api/inventorySystem',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.inventorySystemList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getAccountsGuideList = function () {
     $scope.error = '';
     $scope.accountsGuideList = [];
@@ -747,6 +799,8 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     }).then(
       function (response) {
         $scope.busy = false;
+        console.log(response.data.doc);
+        $scope.item = response.data.doc;
       },
       function (err) {
         console.log(err);
@@ -783,6 +837,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
   $scope.loadSafes();
   $scope.getThermalLangList();
   $scope.getPlaceQRList();
+  $scope.getInventorySystemList();
   $scope.getCountryQRList();
   $scope.getStores();
   $scope.getCustomersStores();

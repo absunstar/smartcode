@@ -62,7 +62,11 @@ module.exports = function init(site) {
   site.safesTypes = [
     { id: 1, code: '001', nameEn: 'Cash', nameAr: 'نقدي' },
     { id: 2, code: '002', nameEn: 'Bank', nameAr: 'بنك' },
-    { id: 3, code: '003', nameEn: 'Visa Network', nameAr: 'شبكة' },
+  ];
+
+  site.inventorySystem = [
+    { id: 1, nameEn: 'Periodic Inventory', nameAr: 'جرد دوري' },
+    { id: 2, nameEn: 'Perpetual Inventory', nameAr: 'جرد مستمر' },
   ];
 
   site.invoiceTypes = [
@@ -73,8 +77,8 @@ module.exports = function init(site) {
   site.paymentTypes = [
     { id: 1, nameEn: 'Cash Payment', nameAr: 'كاش', safeType: site.safesTypes[0] },
     { id: 3, nameEn: 'Cheque', nameAr: 'بالشيك', safeType: site.safesTypes[1] },
-    { id: 4, nameEn: 'Credit Card', nameAr: 'بطاقة أجلا', safeType: site.safesTypes[2] },
-    { id: 5, nameEn: 'Span Card', nameAr: 'بطاقة سبان', safeType: site.safesTypes[2] },
+    { id: 4, nameEn: 'Credit Card', nameAr: 'بطاقة أجلا', safeType: site.safesTypes[1] },
+    { id: 5, nameEn: 'Span Card', nameAr: 'بطاقة سبان', safeType: site.safesTypes[1] },
     { id: 6, nameEn: 'Bank Deposit', nameAr: 'إيداع بنكي', safeType: site.safesTypes[1] },
   ];
 
@@ -403,6 +407,13 @@ module.exports = function init(site) {
     res.json({
       done: true,
       list: site.qualificationsDegrees,
+    });
+  });
+
+  site.post('/api/inventorySystem', (req, res) => {
+    res.json({
+      done: true,
+      list: site.inventorySystem,
     });
   });
 

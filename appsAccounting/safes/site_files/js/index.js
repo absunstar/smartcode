@@ -305,6 +305,37 @@ app.controller('safes', function ($scope, $http, $timeout) {
     );
   };
 
+
+  
+  $scope.getPaymentTypes = function () {
+    $scope.busy = true;
+    $scope.paymentTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/paymentTypes',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.paymentTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+
   $scope.showSearch = function () {
     $scope.error = '';
     site.showModal($scope.modalSearchID);
@@ -320,4 +351,5 @@ app.controller('safes', function ($scope, $http, $timeout) {
   $scope.getNumberingAuto();
   $scope.getsafesTypesList();
   $scope.getAccountingLinkList();
+  $scope.getPaymentTypes();
 });

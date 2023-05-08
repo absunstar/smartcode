@@ -405,7 +405,6 @@ app.controller('security', function ($scope, $http, $interval) {
         if (response.data.done) {
           $scope.safesCashList = response.data.list.filter((s) => s.type.id == 1);
           $scope.safesBankList = response.data.list.filter((s) => s.type.id == 2);
-          $scope.safesVisaList = response.data.list.filter((s) => s.type.id == 3);
 
         }
       },

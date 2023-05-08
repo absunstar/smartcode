@@ -278,8 +278,23 @@
           <fieldset>
             <legend>##word.Stores Setting##</legend>
             <div class="row">
-              <i-list class="col4" ng-model="item.storesSetting.store" items="storesList" display="name##session.lang##" label="##word.Sales For Business Store##" ng-search="item.storesSetting.$store"> </i-list>
-              <i-list class="col4" ng-model="item.storesSetting.customersStore" items="customersStoresList" display="name##session.lang##" label="##word.Sales For Customers Store##" ng-search="item.storesSetting.$customersStore">
+              <i-list
+                class="col4"
+                ng-model="item.storesSetting.store"
+                items="storesList"
+                display="name##session.lang##"
+                label="##word.Sales For Business Store##"
+                ng-search="item.storesSetting.$store"
+              >
+              </i-list>
+              <i-list
+                class="col4"
+                ng-model="item.storesSetting.customersStore"
+                items="customersStoresList"
+                display="name##session.lang##"
+                label="##word.Sales For Customers Store##"
+                ng-search="item.storesSetting.$customersStore"
+              >
               </i-list>
             </div>
             <div class="row">
@@ -298,14 +313,7 @@
                 label="##word.Purchase Source Type##"
                 ng-search="item.$purchaseSourceType"
               ></i-list>
-              <i-list
-                class="col4"
-                ng-model="item.storesSetting.paymentType"
-                display="name##session.lang##"
-                items="paymentTypesList"
-                label="##word.Payment Type##"
-                ng-search="item.$paymentType"
-              ></i-list>
+
               <i-list class="col4" ng-model="item.storesSetting.itemUnit" items="storesUnitsList" display="name##session.lang##" label="##word.Item Unit##" ng-search="item.storesSetting.$itemUnit">
               </i-list>
             </div>
@@ -358,9 +366,32 @@
             </div>
 
             <div class="row">
-              <i-list class="col4" ng-model="item.accountsSetting.safeCash" items="safesCashList" display="name##session.lang##" ng-search="item.accountsSetting.$_safeCash" label="##word.Safe Cash##"></i-list>
-              <i-list class="col4" ng-model="item.accountsSetting.safeBank" items="safesBankList" display="name##session.lang##" ng-search="item.accountsSetting.$_safeBank" label="##word.Safe Bank##"></i-list>
-              <i-list class="col4" ng-model="item.accountsSetting.safeNet" items="safesVisaList" display="name##session.lang##" ng-search="item.accountsSetting.$_safeVisa" label="##word.Safe Visa##"></i-list>
+              <i-list
+                class="col4"
+                ng-model="item.accountsSetting.safeCash"
+                items="safesCashList"
+                display="name##session.lang##"
+                ng-search="item.accountsSetting.$_safeCash"
+                label="##word.Safe Cash##"
+              ></i-list>
+              <i-list
+                class="col4"
+                ng-model="item.accountsSetting.safeBank"
+                items="safesBankList"
+                display="name##session.lang##"
+                ng-search="item.accountsSetting.$_safeBank"
+                label="##word.Safe Bank##"
+              ></i-list>
+            </div>
+            <div class="row">
+              <i-list
+                class="col4"
+                ng-model="item.accountsSetting.paymentType"
+                display="name##session.lang##"
+                items="paymentTypesList"
+                label="##word.Payment Type##"
+                ng-search="item.$paymentType"
+              ></i-list>
             </div>
 
             <div class="row">
@@ -725,8 +756,8 @@
                   </div>
                 </fieldset>
               </div>
-              
-             <div class="col6">
+
+              <div class="col6">
                 <fieldset>
                   <legend>##word.Financial Manager##</legend>
                   <div class="row">
@@ -769,8 +800,6 @@
                   </div>
                 </fieldset>
               </div>
-
- 
             </div>
           </fieldset>
         </div>
@@ -819,7 +848,21 @@
         </div>
 
         <div id="establishingAccountsSettings" class="tab-content">
-          <fieldset>
+          <div class="row">
+            <fieldset class="col4">
+              <i-list
+                ng-model="item.inventorySystem"
+                ng-change="selectInventorySystem()"
+                items="inventorySystemList"
+                display="name##session.lang##"
+                label="##word.Inventory System##"
+                ng-search="item.$inventorySystem"
+              >
+              </i-list>
+            </fieldset>
+          </div>
+          <fieldset ng-show="item.inventorySystem.id">
+            <legend>##word.Purchases##</legend>
             <div class="table-responsive">
               <table class="table hover bold">
                 <tr>
@@ -827,9 +870,31 @@
                   <th>##word.Account Guide##</th>
                 </tr>
 
-                <tr ng-repeat="acc in item.establishingAccountsList">
+                <tr ng-repeat="acc in item.establishingParchaseAccountsList" ng-hide="acc.$hide">
                   <td>
-                    <p class="text-center">{{acc.name##session.lang##}}</p>
+                    <p class="text-center">{{acc.nameAr}} - {{acc.nameEn}}</p>
+                  </td>
+
+                  <td class="center">
+                    <i-list items="accountsGuideList" ng-search="acc.$accountGuides" display="name##session.lang##" ng-model="acc.accountGuide"> </i-list>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </fieldset>
+
+          <fieldset ng-show="item.inventorySystem.id">
+            <legend>##word.Sales##</legend>
+            <div class="table-responsive">
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.Name##</th>
+                  <th>##word.Account Guide##</th>
+                </tr>
+
+                <tr ng-repeat="acc in item.establishingSalesAccountsList" ng-hide="acc.$hide">
+                  <td>
+                    <p class="text-center">{{acc.nameAr}} - {{acc.nameEn}}</p>
                   </td>
 
                   <td class="center">

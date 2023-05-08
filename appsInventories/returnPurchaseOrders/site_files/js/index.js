@@ -748,7 +748,7 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'type.id': paymentType.safeType.id,
+          'paymentType.id': paymentType.id,
         },
         select: {
           id: 1,
