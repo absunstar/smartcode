@@ -4,7 +4,8 @@
         <div class="row">
             <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
             <i-date class="col6" label="##word.Date##" ng-model="item.date"> </i-date>
-            <i-list v="r" ng-model="item.employee" class="col4" items="employeesList" display="fullName##session.lang##" ng-search="item.$employee" label="##word.Employee##"></i-list>
+            <i-list v="r" ng-model="item.employee" class="col4" items="employeesList" display="fullName##session.lang##"
+                ng-get="getEmployees($search)" label="##word.Employee##"></i-list>
             <!-- <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox> -->
 
             <i-date class="col6" label="##word.Deleay Date##" ng-model="item.delayDate"> </i-date>

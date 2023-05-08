@@ -2,15 +2,9 @@
     <div class="col9">
         <div class="row">
             <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
-            <i-list
-                v="r"
-                ng-model="item.vacationName"
-                class="col4"
-                items="vacationsNamesList"
-                display="name##session.lang##"
-                ng-get="getVacationsNames($search)"
-                label="##word.Vacation Name##"
-            ></i-list>
+            <i-list v="r" ng-model="item.vacationName" class="col4" items="vacationsNamesList"
+                display="name##session.lang##" ng-get="getVacationsNames($search)"
+                label="##word.Vacation Name##"></i-list>
             <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
 
             <i-date v="r" ng-model="item.fromDate" class="col6" label="##word.From Date##"></i-date>
@@ -20,20 +14,24 @@
             <fieldset>
                 <legend>##word.Vacation For##</legend>
                 <div class="row">
-                    <i-radio class="col3" v="r" label="##word.All Employees##" ng-value="all" ng-model="item.vacationFor"> </i-radio>
+                    <i-radio class="col3" v="r" label="##word.All Employees##" ng-value="all"
+                        ng-model="item.vacationFor"> </i-radio>
 
-                    <i-radio class="col3" v="r" label="##word.Some Employees##" ng-value="some" ng-model="item.vacationFor"> </i-radio>
+                    <i-radio class="col3" v="r" label="##word.Some Employees##" ng-value="some"
+                        ng-model="item.vacationFor"> </i-radio>
                 </div>
             </fieldset>
 
             <fieldset ng-show="item.vacationFor ==='some'">
                 <legend>##word.Allowed Employees For Vacation##</legend>
                 <div class="row" ng-show="!item.approved ">
-                    <i-list class="col8" ng-model="selectedemployee" display="fullName##session.lang##" items="employeesList" label="##word.Employee##"></i-list>
+                    <i-list class="col8" ng-model="selectedemployee" display="fullName##session.lang##"
+                        items="employeesList" ng-get="getEmployees($search)" label="##word.Employee##"></i-list>
 
                     <div class="col4">
                         <br />
-                        <i-button type="push" ng-click="addEmployeeToVacationEmployeesList(selectedemployee)"> </i-button>
+                        <i-button type="push" ng-click="addEmployeeToVacationEmployeesList(selectedemployee)">
+                        </i-button>
                     </div>
                 </div>
 
@@ -47,8 +45,12 @@
                                 <th class="not-print" ng-show="!item.approved ">##word.Actions##</th>
                             </tr>
                             <tr ng-repeat="emp in item.employeesList">
-                                <td><p class="text-center">{{$index +1}}</p></td>
-                                <td><p class="text-center">{{emp.fullName##session.lang##}}</p></td>
+                                <td>
+                                    <p class="text-center">{{$index +1}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-center">{{emp.fullName##session.lang##}}</p>
+                                </td>
 
                                 <td class="center" ng-show="!item.approved ">
                                     <i-button type="delete" ng-click="item.employeesList.splice($index,1);"> </i-button>

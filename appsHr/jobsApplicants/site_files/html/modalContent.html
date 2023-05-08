@@ -81,7 +81,7 @@
                             <i-control type="text" ng-model="item.address" label="##word.Address##"></i-control>
                             <i-date class="col6" ng-model="item.dateOfBirth" label="##word.Date Of Birth##"></i-date>
                             <i-list class="col3" ng-model="item.gender" v="r" label="##word.Gender##" items="gendersList" display="name##session.lang##"></i-list>
-                            <i-list class="col3" ng-model="item.nationality" v="r" label="##word.Nationality##" items="nationalitiesList" display="name##session.lang##"></i-list>
+                            <i-list class="col3" ng-model="item.nationality" v="r" label="##word.Nationality##" items="nationalitiesList" display="name##session.lang##" ng-search="item.$nationality"></i-list>
                             <fieldset>
                                 <legend>##word.Personal Verification##</legend>
                                 <div class="row">
