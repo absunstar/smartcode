@@ -253,13 +253,35 @@ module.exports = function init(site) {
                 let limit = req.body.limit || 500;
                 let select = req.body.select || { id: 1, code: 1, country: 1, nameEn: 1, nameAr: 1, image: 1, active: 1 };
 
+                if (search) {
+                    where.$or = [];
+
+                    where.$or.push({
+                        id: site.get_RegExp(search, 'i'),
+                    });
+
+                    where.$or.push({
+                        code: site.get_RegExp(search, 'i'),
+                    });
+
+                    where.$or.push({
+                        nameAr: site.get_RegExp(search, 'i'),
+                    });
+
+                    where.$or.push({
+                        nameEn: site.get_RegExp(search, 'i'),
+                    });
+                }
                 if (app.allowMemory) {
                     if (!search) {
                         search = 'id';
                     }
+
                     let list = app.memoryList
+
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
+
                     res.json({
                         done: true,
                         list: list,

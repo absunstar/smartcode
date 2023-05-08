@@ -223,7 +223,8 @@
                     <div class="row padding">
                         <div class="row">
                             <i-list help-id="" label="##word.Offers##" class="col7" ng-model="item.$offer"
-                                display="name##session.lang##" items="offersList" ng-search="item.$offers"></i-list>
+                                display="name##session.lang##" items="offersList"
+                                ng-get="getMedicalOffersList($search)"></i-list>
                             <div class="col5">
                                 <br />
                                 <i-button type="add" label="##word.Add Offer##" ng-click="addOffers(item)"></i-button>
@@ -275,7 +276,7 @@
                                 <div class="row">
                                     <i-list label="##word.Insurance Company##" ng-model="item.insuranceCompany"
                                         display="name##session.lang##" items="insurancecompaniesList"
-                                        ng-search="item.$insurancecompany"></i-list>
+                                        ng-get="getInsuranceCompaniesList($search)"></i-list>
                                     <i-list label="##word.Insurance Class##" ng-model="item.insuranceClass"
                                         items="insuranceClassesList" display="name##session.lang##"
                                         ng-search="item.$insuranceClass">

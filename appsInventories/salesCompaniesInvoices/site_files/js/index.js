@@ -317,34 +317,35 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.customersList = [];
     $http({
-      method: 'POST',
-      url: '/api/customers/all',
-      data: {
-        where: {
-          active: true,
-          commercialCustomer: true,
+        method: 'POST',
+        url: '/api/customers/all',
+        data: {
+            where: {
+                active: true,
+                commercialCustomer: true,
+                'type.id': 6,
+            },
+            select: {
+                id: 1,
+                code: 1,
+                nameEn: 1,
+                nameAr: 1,
+                taxIdentificationNumber: 1,
+                mobile: 1,
+            },
+            search: $search,
         },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-          taxIdentificationNumber: 1,
-          mobile: 1,
-        },
-        search: $search,
-      },
     }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.customersList = response.data.list;
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.customersList = response.data.list;
+            }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
         }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
     );
   };
 
