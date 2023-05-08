@@ -36,16 +36,13 @@
       <p class="center black bold font-12">Tax No. : ##session.company.taxNumber## : الرقم الضريبي</p>
     </div>
 
-    <div class="row center">
-      <p class="center black bold txt18" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">Tax Invoice / فاتورة ضريبية</p>
-      <p class="center black bold txt18" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">Simplified Invoice / فاتورة مبسطة</p>
+    <div class="row center" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">
+      <p class="center black font-14 bold" >Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
     </div>
-    <div class="row center">
-      <p ng-show="!sInvoice.returned" class="black bold font-15">Purchase Invoice: ({{sInvoice.code}}) : فاتورة مشتريات</p>
-      <p ng-show="sInvoice.returned" class="black bold font-15">Purchase Return: ({{sInvoice.code}}) : مرتجع مشتريات</p>
-      <p ng-show="sInvoice.returned" class="center black bold font-16">(Return NOTICE : ( {{item.invoiceCode}} ) : إشعار مرتجع)</p>
+
+    <div class="row center" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">
+      <p class="center black font-14 bold">Simplified Invoice فاتورة مبسطة</p>
     </div>
-    <br>
 
     <div class="row full">
       <div class="center col-6 border-1">

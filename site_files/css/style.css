@@ -104,6 +104,10 @@
   height: 28px;
   vertical-align: top;
 }
+.dashed {
+  border-style: dotted;
+  color: black;
+}
 
 .list {
   margin: 10px !important;

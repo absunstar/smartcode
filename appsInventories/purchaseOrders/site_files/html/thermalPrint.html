@@ -37,19 +37,12 @@
         </div>
 
         <div class="row center" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">
-            <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 1 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar'">
-                فاتورة ضريبية مبسطة
-            </p>
-            <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 2 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En'">
-                Simplified Tax Invoice
-            </p>
-        </div>
-
-        <div class="row center" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">
-            <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 1 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar'">فاتورة مبسطة</p>
-            <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 2 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En'">Simplified Invoice</p>
-        </div>
-
+            <p class="center black font-14 bold" >Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
+          </div>
+      
+          <div class="row center" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">
+            <p class="center black font-14 bold">Simplified Invoice فاتورة مبسطة</p>
+          </div>
         <div class="row center" ng-show="setting.printerProgram.userAppearthermal">
             <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 1 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar'">
                 كاشير : ( ##user.nameAr## )

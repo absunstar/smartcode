@@ -32,10 +32,14 @@
       </div>
     </div>
 
-    <div class="row center">
-      <p class="center black bold txt18" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">Tax Invoice / فاتورة ضريبية</p>
-      <p class="center black bold txt18" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">Simplified Invoice / فاتورة مبسطة</p>
+    <div class="row center" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">
+      <p class="center black font-14 bold" >Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
     </div>
+
+    <div class="row center" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">
+      <p class="center black font-14 bold">Simplified Invoice فاتورة مبسطة</p>
+    </div>
+    
     <div class="row center">
       <p ng-show="!sInvoice.returned" class="black bold font-15">Sales Invoice: ({{sInvoice.code}}) : فاتورة مبيعات</p>
       <p ng-show="sInvoice.returned" class="black bold font-15">Sales Return: ({{sInvoice.code}}) : مرتجع مبيعات</p>

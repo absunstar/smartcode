@@ -507,7 +507,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     }
     $scope.busy = false;
     $timeout(() => {
-      $('#thermalPrint').addClass('hidden');
+     /*  $('#thermalPrint').addClass('hidden'); */
     }, 8000);
   };
 
