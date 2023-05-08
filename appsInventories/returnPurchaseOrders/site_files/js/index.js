@@ -357,7 +357,7 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
           nameAr: 1,
           rasdUser: 1,
           rasdPass: 1,
-          linkWithRasd : 1,
+          linkWithRasd: 1,
         },
       },
     }).then(
@@ -699,9 +699,10 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item = {
       invoiceId: _item.id,
+      vendor: _item.vendor,
       invoiceCode: _item.code,
       $remainPaid: _item.remainPaid,
-      $remainAmount : 0,
+      $remainAmount: 0,
       total: _item.remainPaid,
       voucherType: { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
     };
@@ -806,5 +807,4 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
   $scope.getVendors();
   $scope.getNumberingAuto();
   $scope.getInvoiceTypes();
-
 });

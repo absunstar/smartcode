@@ -46,6 +46,8 @@
         <span ng-show="thermal.invoiceCode"> ({{thermal.invoiceCode}}) </span>
       </span>
     </div>
+    <hr />
+    <br />
     <div class="row center" ng-show="setting.printerProgram.userAppearsInvoice">
       <p class="center black font-20 bold"><span class="left">Casher</span> <span class="center">##user.nameAr##</span> <span class="right">كاشير</span></p>
     </div>
@@ -54,16 +56,39 @@
       <p class="black font-18 bold"><span class="left">Payment Type</span> <span class="center">{{thermal.paymentType.name##session.lang##}}</span> <span class="right">طريقة الدفع</span></p>
       <p class="black font-18 bold"><span class="left">Date</span> <span class="center">{{thermal.date |date:"dd - MM - yyyy"}}</span> <span class="right">التاريخ</span></p>
       <p class="black font-18 bold"><span class="left">Time</span> <span class="center">{{thermal.date |date:"hh : mm a"}}</span> <span class="right">الوقت</span></p>
+
+      <p class="black font-18 bold" ng-show="thermal.customer.id"><span class="left">Customer. MRN</span> <span class="center">{{thermal.customer.code}}</span> <span class="right">رقم الملف</span></p>
+      <p class="black font-18 bold" ng-show="thermal.customer.id"><span class="left">Customer Name</span> <span class="center">{{thermal.customer.fullNameEn}}</span></p>
+      <p class="black font-18 bold" ng-show="thermal.customer.id"><span class="center">{{thermal.customer.fullNameAr}}</span> <span class="right">إسم العميل</span></p>
+
+      <p class="black font-18 bold" ng-show="thermal.vendor.id"><span class="left">Vendor. MRN</span> <span class="center">{{thermal.vendor.code}}</span> <span class="right">رقم الملف</span></p>
+      <p class="black font-18 bold" ng-show="thermal.vendor.id"><span class="left">Vendor Name</span> <span class="center">{{thermal.vendor.fullNameEn}}</span></p>
+      <p class="black font-18 bold" ng-show="thermal.vendor.id"><span class="center">{{thermal.vendor.fullNameAr}}</span> <span class="right">إسم المورد</span></p>
+
+      <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="left">Patient. MRN</span> <span class="center">{{thermal.patient.code}}</span> <span class="right">رقم الملف</span></p>
+      <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="left">Patient Name</span> <span class="center">{{thermal.patient.fullNameEn}}</span></p>
+      <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="center">{{thermal.patient.fullNameAr}}</span> <span class="right">إسم المريض</span></p>
+      <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="left">Nationality</span> <span class="center">{{thermal.patient.nationality.nameAr}}</span> <span class="right">الجنسية</span></p>
+      <p class="black font-18 bold" ng-show="thermal.mainInsuranceCompany.id">
+        <span class="left">Company</span> <span class="center">{{thermal.mainInsuranceCompany.nameAr}}</span> <span class="right">الشركة</span>
+      </p>
     </div>
 
     <br />
 
     <div class="row center bold border-1" ng-show="item.servicesList.length > 0">
-      <div class="col-6">
+      <div class="col-2">
+        <p class="bold center font-12">الرقم</p>
+        <p class="bold center font-12">Code</p>
+      </div>
+      <div class="col-5">
         <p class="bold center font-12">إسم الخدمة</p>
         <p class="bold center font-12">Service Name</p>
       </div>
-
+      <div class="col-2">
+        <p class="bold center font-12">الضريبة</p>
+        <p class="bold center font-12">VAT</p>
+      </div>
       <div class="col-2">
         <p class="bold center font-12">الإجمالي</p>
         <p class="bold center font-12">Total</p>
@@ -72,20 +97,39 @@
 
     <div class="row" ng-show="item.servicesList.length > 0" ng-repeat="itm in thermal.servicesList">
       <div class="border-1">
-        <div class="col-6">
-          <p class="black bold center font-14">{{itm.code}}-{{itm.name##session.lang##}}</p>
+        <div class="col-2">
+          <p class="black bold center font-14">{{itm.code}}</p>
         </div>
-
+        <div class="col-6">
+          <p class="black bold center font-14">{{itm.name##session.lang##}}</p>
+        </div>
+        <div class="col-2">
+          <p class="black bold center font-14">{{itm.pVat}}</p>
+        </div>
         <div class="col-2 black">
-          <p class="black bold center font-14">{{itm.patientCash | xmoney2}} <span class="currency">##word.$##</span></p>
+          <p class="black bold center font-14">{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
         </div>
       </div>
     </div>
-    <br>
-    <hr>
-    <br>
+    <br />
+    <hr />
+    <br />
     <div class="row center col-12">
-      <p class="bold black font-18"><span class="left">Paid Amt.</span> <span class="center">{{thermal.total | xmoney2}} <span class="currency">##word.$##</span></span>  <span class="right">المبلغ المدفوع</span></p>
+      <p class="bold black font-18" ng-show="thermal.grossAmount">
+        <span class="left">Gross</span> <span class="center">{{thermal.grossAmount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الإجمالي</span>
+      </p>
+
+      <p class="bold black font-18" ng-show="thermal.totalDiscount">
+        <span class="left">Discount</span> <span class="center">{{thermal.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الخصم</span>
+      </p>
+
+      <p class="bold black font-18" ng-show="thermal.totalDiscount">
+        <span class="left">Deduct</span> <span class="center">{{thermal.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">نسبة التحمل</span>
+      </p>
+
+      <p class="bold black font-22">
+        <span class="left">Paid Amt.</span> <span class="center">{{thermal.total | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">المبلغ المدفوع</span>
+      </p>
     </div>
     <br />
 
@@ -98,9 +142,9 @@
         {{thermal.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}
       </p>
     </div>
-    <br>
-    <hr>
-    <br>
+    <br />
+    <hr />
+    <br />
 
     <div class="row">
       <div class="center col-12">
@@ -112,16 +156,16 @@
       <p class="center black font-18 bold"><span class="left">Tax Number</span> <span class="center">##session.company.taxNumber##</span> <span class="right">الرقم الضريبي </span></p>
     </div>
 
-    <br>
-    <hr>
-    <br>
+    <br />
+    <hr />
+    <br />
 
     <div class="row" ng-show="thermal.doctor.id">
       <p class="center black font-18 bold">
         <span class="left">Doctor</span> <span class="center">{{thermal.doctor.name##session.lang##}} ({{thermal.doctor.code}})</span> <span class="right">الطبيب </span>
       </p>
     </div>
-    <hr>
+    <hr />
     <!--     <div class="qrcode center"></div>
  -->
     <div class="row" ng-repeat="i in setting.printerProgram.thermalFooter">

@@ -115,11 +115,14 @@ module.exports = function init(site) {
       }
       let where = {};
       if (_item.invoiceId) {
-        where = { invoiceId: _item.invoiceId };
-      } else {
-        where = { id: _item.id };
+        where['invoiceId'] = _item.invoiceId;
       }
-
+      if (_item.id) {
+        where['id'] = _item.id;
+      }
+      if (_item['voucherType.id']) {
+        where['voucherType.id'] = _item['voucherType.id'];
+      }
       app.$collection.find(where, (err, doc) => {
         callback(err, doc);
 

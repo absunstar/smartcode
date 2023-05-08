@@ -590,16 +590,16 @@ module.exports = function init(site) {
             servicesList[0].comVat = hmisSetting.comVat || 0;
           }
           servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
-          servicesList[0].totalPVat = (servicesList[0].totalAfterDisc * hmisSetting.pVat || 0) / 100;
-          servicesList[0].totalComVat = (servicesList[0].totalAfterDisc * hmisSetting.comVat || 0) / 100;
-          servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat + servicesList[0].totalPVat + servicesList[0].totalComVat;
+          servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat;
           servicesList[0].total = site.toNumber(servicesList[0].total);
+          servicesList[0].totalPVat = (servicesList[0].total * servicesList[0].pVat || 0) / 100;
+          servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
           let datuct = 0;
           if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
             if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
               datuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
             } else {
-              if (_data.insuranceContract &&_data.insuranceContract.insuranceClass) {
+              if (_data.insuranceContract && _data.insuranceContract.insuranceClass) {
                 datuct = _data.insuranceContract.insuranceClass.serviceDeduct;
               }
             }
@@ -610,17 +610,18 @@ module.exports = function init(site) {
               datuct = _data.insuranceContract.insuranceClass.consultationDeduct;
             }
           }
+
           if (
             _data.insuranceContract &&
             _data.insuranceContract.insuranceClass &&
             _data.insuranceContract.insuranceClass.maxDeductAmount &&
-            _data.insuranceContract.insuranceClass.maxDeductAmount < servicesList[0].total - datuct
+            _data.insuranceContract.insuranceClass.maxDeductAmount < datuct + servicesList[0].totalPVat
           ) {
-            servicesList[0].patientCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
-            servicesList[0].comDeduct = _data.insuranceContract.insuranceClass.maxDeductAmount;
+            servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
+            servicesList[0].comCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
           } else {
-            servicesList[0].patientCash = servicesList[0].total - datuct;
-            servicesList[0].comDeduct = datuct;
+            servicesList[0].patientCash = datuct + servicesList[0].totalPVat;
+            servicesList[0].comCash = servicesList[0].total - datuct + servicesList[0].totalComVat;
           }
 
           if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {

@@ -45,7 +45,7 @@ app.controller('insuranceCompaniesClaims', function ($scope, $http, $timeout) {
           patient: 1,
           doctor: 1,
           totalNet: 1,
-          comDeduct: 1,
+          comCash: 1,
           totalDiscount: 1,
           grossAmount: 1,
         },

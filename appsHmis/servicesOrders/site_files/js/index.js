@@ -162,9 +162,9 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   $scope.showView = function (_item) {
     $scope.error = '';
     $scope.mode = 'view';
+    $scope.getReceiptVoucher(_item.id);
     $scope.item = {};
     $scope.view(_item);
-    $scope.getReceiptVoucher(_item.id);
     site.showModal($scope.modalID);
   };
 
@@ -200,6 +200,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       url: `${$scope.baseURL}/api/receiptVouchers/view`,
       data: {
         invoiceId: id,
+        'voucherType.id' : 'serviceOrder'
       },
     }).then(
       function (response) {
@@ -850,15 +851,16 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       _item.totalVat = 0;
       _item.totalPVat = 0;
       _item.totalComVat = 0;
-      _item.comDeduct = 0;
+      _item.comCash = 0;
       _item.totalNet = 0;
       _item.servicesList.forEach((_service) => {
-        _item.grossAmount += _service.totalAfterDisc;
+        _item.grossAmount += _service.price;
+        _item.totalAfterDisc += _service.totalAfterDisc;
         _item.totalDiscount += _service.totalDisc;
         _item.totalVat += _service.totalVat;
         _item.totalPVat += _service.totalPVat;
         _item.totalComVat += _service.totalComVat;
-        _item.comDeduct += _service.comDeduct;
+        _item.comCash += _service.comCash;
         _item.totalNet += _service.patientCash;
       });
 
@@ -918,7 +920,6 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
       $scope.thermal.vouchersName = { nameEn: 'Receipt Voucher', nameAr: 'سند قبض' };
-
       $scope.localPrint = function () {
         if ($scope.setting.printerProgram.placeQr) {
           if ($scope.setting.printerProgram.placeQr.id == 1) {

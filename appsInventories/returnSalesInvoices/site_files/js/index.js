@@ -831,6 +831,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item = {
       invoiceId: _item.id,
+      customer: _item.customer,
       invoiceCode: _item.code,
       $remainAmount : 0,
       $remainPaid: _item.remainPaid,

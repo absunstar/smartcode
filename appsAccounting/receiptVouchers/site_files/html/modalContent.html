@@ -30,15 +30,26 @@
     <legend>##word.Services##</legend>
     <table class="table hover center bold">
       <tr>
+        <th>##word.Code##</th>
         <th>##word.Service Name##</th>
+        <th>##word.PVAT##</th>
         <th>##word.Total##</th>
+        <th>##word.Patient Cash##</th>
       </tr>
 
       <tr ng-repeat="s in item.servicesList">
-        <td class="center word-line">
-          <p>{{s.code}}-{{s.name##session.lang##}}</p>
-        </td>
+        <td class="center word-line"><p>{{s.code}}</p></td>
 
+        <td class="center word-line">
+          <p>{{s.name##session.lang##}}</p>
+        </td>
+        <td class="center">
+          <p class="center">{{s.pVat | xmoney2}} <span class="currency">##word.%##</span></p>
+          <p class="center">{{s.totalPVat | xmoney2}} <span class="currency">##word.$##</span></p>
+        </td>
+        <td class="center">
+          <p class="center">{{s.total | xmoney2}} <span class="currency">##word.$##</span></p>
+        </td>
         <td class="center">
           <p class="center">{{s.patientCash | xmoney2}} <span class="currency">##word.$##</span></p>
         </td>

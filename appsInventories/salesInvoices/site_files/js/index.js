@@ -1353,6 +1353,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.item = {
       invoiceId: _item.id,
+      customer: _item.customer,
       invoiceCode: _item.code,
       $invoiceType: _item.invoiceType,
       $remainAmount: 0,

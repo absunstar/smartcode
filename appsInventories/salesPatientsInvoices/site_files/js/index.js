@@ -1268,6 +1268,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item = {
       invoiceId: _item.id,
+      patient: _item.patient,
       invoiceCode: _item.code,
       $remainAmount: 0,
       $remainPaid: _item.remainPaid,

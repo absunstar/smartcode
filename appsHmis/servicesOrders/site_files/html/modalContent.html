@@ -249,11 +249,12 @@
             <th>##word.Name##</th>
             <th>##word.Price##</th>
             <th>##word.Discount##</th>
-            <th>##word.H-Center##</th>
+            <!-- <th>##word.H-Center##</th> -->
             <th>##word.VAT## %</th>
+            <th>##word.Total##</th>
             <th>##word.PVAT##</th>
             <th>##word.Com-VAT##</th>
-            <th>##word.Total##</th>
+            <th>##word.Com-Cash##</th>
             <th>##word.Patient Cash##</th>
             <!-- <th class="not-print">##word.Actions##</th> -->
           </tr>
@@ -273,12 +274,15 @@
               <p class="center">{{s.discount | xmoney2}} <span class="currency">##word.%##</span></p>
               <p class="center">{{s.totalDisc | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
-            <td class="center">
+            <!--    <td class="center">
               <p class="center">{{s.hospitalResponsibility.name##session.lang##}}</p>
-            </td>
+            </td> -->
             <td class="center">
               <p class="center">{{s.vat}} <span class="currency">##word.%##</span></p>
               <p class="center">{{s.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center">
+              <p class="center">{{s.total | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center">
               <p class="center">{{s.pVat | xmoney2}} <span class="currency">##word.%##</span></p>
@@ -288,14 +292,13 @@
               <p class="center">{{s.comVat | xmoney2}} <span class="currency">##word.%##</span></p>
               <p class="center">{{s.totalComVat | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
-            <td class="center">
-              <p class="center">{{s.total | xmoney2}} <span class="currency">##word.$##</span></p>
-            </td>
             <!--  <td class="center not-print">
               <i-button type="delete" ng-click="item.servicesList.splice($index,1)"> </i-button>
             </td> -->
             <td class="center">
-              
+              <p class="center">{{s.comCash | xmoney2}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center">
               <p class="center">{{s.patientCash | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
           </tr>
@@ -309,6 +312,12 @@
           <div class="col4">
             <fieldset class="gray-bg">
               <p class="bold font-22">##word.Gross Amount## : {{item.grossAmount | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total After Disc## : {{item.totalAfterDisc | xmoney2}} <span class="currency">##word.$##</span></p>
             </fieldset>
           </div>
 
@@ -338,7 +347,7 @@
 
           <div class="col4">
             <fieldset class="gray-bg">
-              <p class="bold font-22">##word.Company-Deduction## : {{item.comDeduct | xmoney2}} <span class="currency">##word.$##</span></p>
+              <p class="bold font-22">##word.Company-Deduction## : {{item.comCash | xmoney2}} <span class="currency">##word.$##</span></p>
             </fieldset>
           </div>
 
