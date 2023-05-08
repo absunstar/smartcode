@@ -191,7 +191,10 @@ app.controller('jobs', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getJobsToolsList = function () {
+    $scope.getJobsToolsList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.jobsToolsList = [];
         $http({
@@ -205,6 +208,7 @@ app.controller('jobs', function ($scope, $http, $timeout) {
                     nameEn: 1,
                     nameAr: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {
@@ -220,7 +224,10 @@ app.controller('jobs', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getDepartments = function () {
+    $scope.getDepartments = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.departmentsList = [];
         $http({
@@ -234,6 +241,7 @@ app.controller('jobs', function ($scope, $http, $timeout) {
                     nameEn: 1,
                     nameAr: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {

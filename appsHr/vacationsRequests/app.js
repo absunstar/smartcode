@@ -558,13 +558,13 @@ module.exports = function init(site) {
                     delete where.toDate;
                 }
 
-                // if (req.session.user.department) {
-                //     where['department.id'] = req.session.user.department.id;
-                // }
+                if (req.session.user.department) {
+                    where['department.id'] = req.session.user.department.id;
+                }
 
-                // if (req.session.user.section) {
-                //     where['section.id'] = req.session.user.section.id;
-                // }
+                if (req.session.user.section) {
+                    where['section.id'] = req.session.user.section.id;
+                }
 
                 if (where && where.finalApproval) {
                     where.finalApproval = true;
@@ -572,7 +572,6 @@ module.exports = function init(site) {
                     where.finalApproval = false;
                 }
 
-                console.log('where', where);
                 if (app.allowMemory) {
                     if (!search) {
                         search = 'id';

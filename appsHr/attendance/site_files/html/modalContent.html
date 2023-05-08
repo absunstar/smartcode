@@ -11,7 +11,7 @@
                 v="r"
                 ng-model="item.employee"
                 ng-change="getShiftData(item)"
-                ng-search="item.$employee"
+                ng-get="getEmployees($search)"
                 display="fullName##session.lang##"
                 items="employeesList"
             ></i-list>

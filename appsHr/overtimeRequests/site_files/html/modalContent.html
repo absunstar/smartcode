@@ -5,8 +5,10 @@
     <i-control class="col6" label="##word.Title##" ng-model="item.nameEn"> </i-control>
     <i-control class="col6" label="##word.Title Arabic##" ng-model="item.nameAr"> </i-control>
 
-    <i-list v="r" class="col6" label="##word.Requested By##" ng-model="item.requestedBy" items="employeesList" ng-search="item.$requestedBy" display="fullName##session.lang##"> </i-list>
-    <i-list v="r" class="col6" label="##word.Employee##" ng-model="item.employee" items="employeesList" ng-search="item.$employee" display="fullName##session.lang##"> </i-list>
+    <i-list v="r" class="col6" label="##word.Requested By##" ng-model="item.requestedBy" items="employeesList"
+        ng-search="item.$requestedBy" display="fullName##session.lang##"> </i-list>
+    <i-list v="r" class="col6" label="##word.Employee##" ng-model="item.employee" items="employeesList"
+        ng-get="getEmployees($search)" display="fullName##session.lang##"> </i-list>
 
     <i-control class="col4" v="r" ng-model="item.hours" label="##word.Hours##" type="number"></i-control>
     <i-control class="col4" v="r" ng-model="item.minutes" label="##word.Minutes##" type="number"></i-control>

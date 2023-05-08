@@ -5,22 +5,20 @@
     <i-control class="col6" label="##word.Title##" ng-model="item.nameEn"> </i-control>
     <i-control class="col6" label="##word.Title Arabic##" ng-model="item.nameAr"> </i-control>
 
-    <i-list
-        label="##word.Penality Name##"
-        class="col4"
-        ng-get="getEmployeesPenaltiesNamesList($search)"
-        ng-model="item.employeesPenalityName"
-        items="employeesPenaltiesNamesList"
-        display="name##session.lang##"
-    >
+    <i-list label="##word.Penality Name##" class="col4" ng-get="getEmployeesPenaltiesNamesList($search)"
+        ng-model="item.employeesPenalityName" items="employeesPenaltiesNamesList" display="name##session.lang##">
     </i-list>
 
-    <i-list v="r" class="col4" label="##word.Requested By##" ng-model="item.requestedBy" items="employeesList" ng-search="item.$requestedBy" display="fullName##session.lang##"> </i-list>
+    <i-list v="r" class="col4" label="##word.Requested By##" ng-model="item.requestedBy" items="employeesList"
+        ng-search="item.$requestedBy" display="fullName##session.lang##"> </i-list>
 
-    <i-list label="##word.employee##" class="col4" ng-model="item.employee" items="employeesList" ng-search="item.$employee" display="fullName##session.lang##" ng-search="item.$employee"> </i-list>
+    <i-list label="##word.employee##" class="col4" ng-model="item.employee" items="employeesList"
+        ng-get="getEmployees($search)" display="fullName##session.lang##" ng-search="item.$employee"> </i-list>
 
-    <i-list v="r" class="col4" label="##word.Category##" ng-model="item.category" items="amountCategoriesList" display="name##session.lang##" ng-search="item.$category"> </i-list>
-    <i-list v="r" class="col4" label="##word.Type##" ng-model="item.type" items="amountTypesList" display="name##session.lang##" ng-search="item.$type"> </i-list>
+    <i-list v="r" class="col4" label="##word.Category##" ng-model="item.category" items="amountCategoriesList"
+        display="name##session.lang##" ng-search="item.$category"> </i-list>
+    <i-list v="r" class="col4" label="##word.Type##" ng-model="item.type" items="amountTypesList"
+        display="name##session.lang##" ng-search="item.$type"> </i-list>
     <div class="col4">
         <div class="row">
             <i-control v="r" class="col8" ng-model="item.value" label="##word.Value##" type="number"></i-control>

@@ -358,14 +358,17 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
         $scope.search = {};
     };
 
-    $scope.getEmployees = function () {
+    $scope.getEmployees = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.employeesList = [];
         $http({
             method: 'POST',
             url: '/api/employees/all',
             data: {
-                where: { active: true },
+                where: { active: true, 'type.id': 4 },
                 select: {
                     id: 1,
                     code: 1,
@@ -373,6 +376,7 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
                     fullNameAr: 1,
                     image: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {
