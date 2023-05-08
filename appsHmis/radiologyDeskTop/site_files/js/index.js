@@ -239,6 +239,8 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
           $scope.list = response.data.list;
           $scope.count = response.data.count;
           site.hideModal($scope.modalSearchID);
+          $scope.startWaitingTime();
+
         }
       },
       function (err) {
@@ -246,6 +248,32 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
         $scope.error = err;
       }
     );
+  };
+  $scope.startWaitingTime = function () {
+    setInterval(function () {
+      $scope.list.forEach((_item) => {
+        if (_item.$hours) {
+          if (_item.$hours == 24) {
+            _item.$days = _item.$days + 1 || 1;
+            _item.$hours = 0;
+          }
+        }
+        if (_item.$minutes) {
+          if (_item.$minutes < 60) {
+            _item.$minutes += 1;
+          } else {
+            _item.$hours = _item.$hours + 1 || 1;
+            _item.$minutes = 0;
+
+          }
+        } else {
+          _item.$minutes = _item.$minutes + 1 || 1;
+        }
+        console.log(_item.$minutes);
+      });
+      $scope.$applyAsync();
+
+    }, 1000 * 60);
   };
 
   $scope.getDoctorsList = function () {
