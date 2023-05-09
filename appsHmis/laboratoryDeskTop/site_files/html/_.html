@@ -13,43 +13,52 @@
         </div>
 
         <div class="row padding" ng-hide="'##user.type.id##' == 2">
-            <i-list class="col6" label="##word.Doctor##" ng-model="search.doctor" display="name##session.lang##" ng-change="getAll(search)" items="doctorsList" ng-search="search.$doctor"></i-list>
+            <i-list class="col6" label="##word.Doctor##" ng-model="search.doctor" display="name##session.lang##"
+                ng-change="getAll(search)" items="doctorsList" ng-search="search.$doctor"></i-list>
             <div class="row" ng-show="search.doctor.id">
                 <div class="cart">
                     <div class="row">
                         <div class="col7">
                             <p class="bold">
-                                <span class="darkGray">##word.Name English## : </span> {{search.doctor.nameEn}} ( <span class="blue">{{search.doctor.code}}</span> )
+                                <span class="darkGray">##word.Name English## : </span> {{search.doctor.nameEn}} ( <span
+                                    class="blue">{{search.doctor.code}}</span> )
                                 <img class="img-logo" ng-src="{{search.doctor.image.url}}" alt="" />
                             </p>
                         </div>
                         <div class="col5">
-                            <p class="bold text-right"><span class="darkGray">الإسم بالعربي : </span> {{search.doctor.nameAr}}</p>
+                            <p class="bold text-right"><span class="darkGray">الإسم بالعربي : </span>
+                                {{search.doctor.nameAr}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col6">
-                            <p class="bold"><span class="darkGray"> ##word.Home Tel## : </span> {{search.doctor.homeTel}}</p>
+                            <p class="bold"><span class="darkGray"> ##word.Home Tel## : </span>
+                                {{search.doctor.homeTel}}</p>
                         </div>
                         <div class="col6">
-                            <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{search.doctor.mobile}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col6">
-                            <p class="bold"><span class="darkGray"> ##word.Doctor Type## : </span> {{search.doctor.doctorType.name##session.lang##}}</p>
-                        </div>
-                        <div class="col6">
-                            <p class="bold text-right"><span class="darkGray"> ##word.Hospital Responsibility## : </span> {{search.doctor.hospitalResponsibility.name##session.lang##}}</p>
+                            <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span>
+                                {{search.doctor.mobile}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col6">
-                            <p class="bold"><span class="darkGray"> ##word.Specialty## : </span> {{search.doctor.specialty.name##session.lang##}}</p>
+                            <p class="bold"><span class="darkGray"> ##word.Doctor Type## : </span>
+                                {{search.doctor.doctorType.name##session.lang##}}</p>
+                        </div>
+                        <div class="col6">
+                            <p class="bold text-right"><span class="darkGray"> ##word.Hospital Responsibility## :
+                                </span> {{search.doctor.hospitalResponsibility.name##session.lang##}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col6">
+                            <p class="bold"><span class="darkGray"> ##word.Specialty## : </span>
+                                {{search.doctor.specialty.name##session.lang##}}</p>
                         </div>
                         <div class="col6">
                             <p class="bold text-right">
-                                <span class="darkGray"> ##word.Nationality## : </span> {{search.doctor.nationality.name##session.lang##}}
+                                <span class="darkGray"> ##word.Nationality## : </span>
+                                {{search.doctor.nationality.name##session.lang##}}
                                 <img class="img-logo" ng-src="{{search.doctor.nationality.image.url}}" alt="" />
                             </p>
                         </div>
@@ -58,29 +67,34 @@
             </div>
         </div>
         <div class="row padding">
-            <i-control ng-model="$search.text" x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage"></i-control>
+            <i-control ng-model="$search.text"
+                x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage"></i-control>
         </div>
         <div class="row">
-            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.Pending##" ng-click="search['status.id'] = 1; getAll(search)"></i-button>
-            <i-button
-                x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage"
-                type="search"
-                label="##word.Entrance laboratory##"
-                ng-click="search['status.id'] = 2;getAll(search)"
-            ></i-button>
-            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.Complete analysis##" ng-click="search['status.id'] = 3;getAll(search)"></i-button>
-            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.Put results##" ng-click="search['status.id'] = 4;getAll(search)"></i-button>
-            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.Was delivered##" ng-click="search['status.id'] = 5;getAll(search)"></i-button>
-            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.Cancel detection##" ng-click="search['status.id'] = 6;getAll(search)"></i-button>
-            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.All Status##" ng-click="getAll(search,'all')"></i-button>
-            <i-checkbox class="col2" ng-model="today" ng-click="getAll(search)" label="##word.today's date##"></i-checkbox>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.Pending##" ng-click="search['status.id'] = 1; getAll(search)"></i-button>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.Entrance laboratory##" ng-click="search['status.id'] = 2;getAll(search)"></i-button>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.Complete analysis##" ng-click="search['status.id'] = 3;getAll(search)"></i-button>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.Put results##" ng-click="search['status.id'] = 4;getAll(search)"></i-button>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.Was delivered##" ng-click="search['status.id'] = 5;getAll(search)"></i-button>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.Cancel detection##" ng-click="search['status.id'] = 6;getAll(search)"></i-button>
+            <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                label="##word.All Status##" ng-click="getAll(search,'all')"></i-button>
+            <i-checkbox class="col2" ng-model="today" ng-click="getAll(search)"
+                label="##word.today's date##"></i-checkbox>
         </div>
         <div class="row" ng-show="!today" x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage">
             <i-date ng-model="search.date" label="##word.Date From##" class="col4"></i-date>
             <i-date ng-model="search.dateTo" label="##word.Date To##" class="col4"></i-date>
             <div class="col2">
                 <br />
-                <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search" label="##word.Search Date##" ng-click="getAll(search)"></i-button>
+                <i-button x-permissions="laboratoryDeskTopSearch || laboratoryDeskTopManage" type="search"
+                    label="##word.Search Date##" ng-click="getAll(search)"></i-button>
             </div>
         </div>
         <div class="table-responsive">
@@ -103,7 +117,9 @@
                                 <p class="center darkGray">{{item.patient.age}}Y</p>
                             </div>
                             <div class="col10">
-                                <p class="center">{{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> ) <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" /></p>
+                                <p class="center">{{item.patient.fullNameEn}} ( <span
+                                        class="blue">{{item.patient.code}}</span> ) <img class="img-logo"
+                                        ng-src="{{item.patient.nationality.image.url}}" alt="" /></p>
                                 <p class="center">{{item.patient.fullNameAr}}</p>
                                 <p class="center">( {{item.mainInsuranceCompany.name##session.lang##}} )</p>
                             </div>
@@ -111,46 +127,55 @@
                     </td>
                     <td class="center">
                         <p class="darkGray center">
-                            <i class="fas fa-hourglass-start"></i> <span ng-show="item.$days" class="blue"> D {{item.$days}} - </span> <span ng-show="item.$hours" class="blue"> H {{item.$hours}} </span>
-                            <span ng-show="item.$hours && item.$minutes">:</span> <span ng-show="item.$minutes" class="blue">{{item.$minutes}} MIN </span>
+                            <i class="fas fa-hourglass-start"></i> <span ng-show="item.$days" class="blue"> D
+                                {{item.$days}} - </span> <span ng-show="item.$hours" class="blue"> H {{item.$hours}}
+                            </span>
+                            <span ng-show="item.$hours && item.$minutes">:</span> <span ng-show="item.$minutes"
+                                class="blue">{{item.$minutes}} MIN </span>
                             <i class="fas fa-male" ng-show="item.patient.gender.id == 1"></i>
                             <i class="fas fa-female" ng-show="item.patient.gender.id == 2"></i>
-                          </p>
-                        <p class="brown center"><i class="fas fa-clock darkGray"></i> {{item.date | date:"dd / MM / yyyy"}} - <span class="green">{{item.date | date:"hh:mm"}}</span></p>
+                        </p>
+                        <p class="brown center"><i class="fas fa-clock darkGray"></i> {{item.date | date:"dd / MM /
+                            yyyy"}} - <span class="green">{{item.date | date:"hh:mm"}}</span></p>
                         <p class="blue center">( {{item.status.name##session.lang##}} )</p>
                     </td>
                     <td class="center not-print">
-                        <a class="btn btn-warning btn-lg" x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage" ng-show="item.status.id == 1" ng-click="updateStatus(item,2)"
-                            >##word.Entrance laboratory## <i class="fas fa-pen"></i
-                        ></a>
-                        <a class="btn btn-warning btn-lg" x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage" ng-show="item.status.id == 2" ng-click="updateStatus(item,3)"
-                            >##word.Complete analysis## <i class="fas fa-pen"></i
-                        ></a>
-                        <a class="btn btn-warning btn-lg" x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage" ng-show="item.status.id == 3" ng-click="showRecommendations(item)"
-                            >##word.Put results## <i class="fas fa-pen"></i
-                        ></a>
-                        <a class="btn btn-warning btn-lg" x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage" ng-show="item.status.id == 4" ng-click="showDelivered(item)"
-                            >##word.Hand over to## <i class="fas fa-pen"></i
-                        ></a>
-                        <a ng-hide="item.status.id == 1" title="##word.Doctor recommendations##" class="btn btn-success btn-lg" ng-click="showRecommendations(item)"
-                            ><i class="fas fa-vial font-22 pointer"></i
-                        ></a>
-                        <a title="##word.View##" class="btn btn-info btn-lg" x-permissions="laboratoryDeskTopView || laboratoryDeskTopManage" ng-click="showView(item)"><i class="fas fa-eye"></i></a>
-                        <a
-                            title="##word.Delete##"
-                            class="btn btn-danger btn-lg"
+                        <a class="btn btn-warning btn-lg"
+                            x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage"
+                            ng-show="item.status.id == 1" ng-click="updateStatus(item,2)">##word.Entrance laboratory##
+                            <i class="fas fa-pen"></i></a>
+                        <a class="btn btn-warning btn-lg"
+                            x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage"
+                            ng-show="item.status.id == 2" ng-click="updateStatus(item,3)">##word.Complete analysis## <i
+                                class="fas fa-pen"></i></a>
+                        <a class="btn btn-warning btn-lg"
+                            x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage"
+                            ng-show="item.status.id == 3" ng-click="showRecommendations(item)">##word.Put results## <i
+                                class="fas fa-pen"></i></a>
+                        <a class="btn btn-warning btn-lg"
+                            x-permissions="laboratoryDeskTopUpdate || laboratoryDeskTopManage"
+                            ng-show="item.status.id == 4" ng-click="showDelivered(item)">##word.Hand over to## <i
+                                class="fas fa-pen"></i></a>
+                        <a ng-hide="item.status.id == 1" title="##word.Doctor recommendations##"
+                            class="btn btn-success btn-lg" ng-click="showRecommendations(item)"><i
+                                class="fas fa-vial font-22 pointer"></i></a>
+                        <a title="##word.View##" class="btn btn-info btn-lg"
+                            x-permissions="laboratoryDeskTopView || laboratoryDeskTopManage"
+                            ng-click="showView(item)"><i class="fas fa-eye"></i></a>
+                        <a title="##word.Delete##" class="btn btn-danger btn-lg"
                             ng-hide="item.status.id == 4 || item.status.id == 5 || item.status.id == 6"
                             x-permissions="laboratoryDeskTopDelete || laboratoryDeskTopManage"
-                            ng-click="showDelete(item)"
-                            ><i class="fas fa-trash-alt"></i
-                        ></a>
-                        <i-button type="print" ng-if="item.id" label="##word.Label printer##" ng-click="labelPrint(item)"></i-button>
+                            ng-click="showDelete(item)"><i class="fas fa-trash-alt"></i></a>
+                        <i-button type="print" ng-if="item.id" label="##word.Label printer##"
+                            ng-click="labelPrint(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="laboratoryDeskTopExport || laboratoryDeskTopManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
+        <i-button x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" type="print" label="##word.Print##"
+            onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="laboratoryDeskTopExport || laboratoryDeskTopManage" type="export"
+            label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')">
         </i-button>
         <div id="laboratoryLabels" x-import="laboratoryDeskTop/labelPrint.html"></div>
     </div>

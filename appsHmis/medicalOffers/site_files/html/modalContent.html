@@ -7,24 +7,32 @@
             </div>
             <div class="row">
                 <i-control type="text" class="col6" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
-                <i-control type="text" class="col6" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+                <i-control type="text" class="col6" v="r" ng-model="item.nameAr"
+                    label="##word.Name Arabic##"></i-control>
             </div>
 
             <div class="row">
-                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalCount" label="##word.Total Count##"></i-control>
-                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalVat" label="##word.Total VAT##"></i-control>
+                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalCount"
+                    label="##word.Total Count##"></i-control>
+                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalVat"
+                    label="##word.Total VAT##"></i-control>
             </div>
 
             <div class="row">
-                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalPrice" label="##word.Total Price##"></i-control>
-                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalAfterVat" label="##word.Total After VAT##"></i-control>
+                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalPrice"
+                    label="##word.Total Price##"></i-control>
+                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalAfterVat"
+                    label="##word.Total After VAT##"></i-control>
             </div>
 
             <div class="row">
-                <i-control type="number" ng-change="calc(item)" class="col6" v="r" ng-model="item.discount" label="##word.Discount##"></i-control>
-                <i-radio class="col2" ng-change="calc(item)" ng-model="item.discountType" ng-value="number" group="type" label="##word.Value##"></i-radio>
+                <i-control type="number" ng-change="calc(item)" class="col6" v="r" ng-model="item.discount"
+                    label="##word.Discount##"></i-control>
+                <i-radio class="col2" ng-change="calc(item)" ng-model="item.discountType" ng-value="number" group="type"
+                    label="##word.Value##"></i-radio>
 
-                <i-radio class="col2" ng-change="calc(item)" ng-model="item.discountType" group="type" ng-value="percent" label="##word.Percent##"> </i-radio>
+                <i-radio class="col2" ng-change="calc(item)" ng-model="item.discountType" group="type"
+                    ng-value="percent" label="##word.Percent##"> </i-radio>
             </div>
 
             <div class="row">
@@ -33,7 +41,8 @@
             </div>
 
             <div class="row">
-                <i-list help-id="" label="##word.Service##" class="col6" ng-model="item.$service" display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
+                <i-list help-id="" label="##word.Service##" class="col6" ng-model="item.$service"
+                    display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
                 <div class="col3">
                     <br />
                     <i-button type="add" label="##word.Add Service##" ng-click="addServices(item)"></i-button>
@@ -61,12 +70,14 @@
                             <td class="center">{{s.total}}</td>
                             <td class="center">{{s.totalVat}}</td>
                             <td class="center not-print">
-                                <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)"> </i-button>
+                                <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)">
+                                </i-button>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalNet" label="##word.Total Net##"></i-control>
+                <i-control type="number" disabled class="col6" v="r" ng-model="item.totalNet"
+                    label="##word.Total Net##"></i-control>
             </div>
         </div>
         <div class="col3">

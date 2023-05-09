@@ -42,43 +42,35 @@
         <div id="general" class="tab-content">
           <div class="row padding">
             <div class="row">
-              <i-control type="number" class="col4" ng-model="item.freeRevistPeriod" label="##word.Free Revist Period##"></i-control>
-              <i-control type="number" class="col4" ng-model="item.freeRevistCount" label="##word.Free Revist Count##"></i-control>
-              <i-control type="number" class="col4" ng-model="item.nonDiscountForm" label="##word.Non-Discount Form##"></i-control>
+              <i-control type="number" class="col4" ng-model="item.freeRevistPeriod"
+                label="##word.Free Revist Period##"></i-control>
+              <i-control type="number" class="col4" ng-model="item.freeRevistCount"
+                label="##word.Free Revist Count##"></i-control>
+              <i-control type="number" class="col4" ng-model="item.nonDiscountForm"
+                label="##word.Non-Discount Form##"></i-control>
             </div>
 
             <div class="row">
-              <i-list items="accountsGuideList" class="col4" ng-search="item.$postingAccount" display="name##session.lang##" ng-model="item.postingAccount" label="##word.Posting Account##"></i-list>
+              <i-list items="accountsGuideList" class="col4" ng-search="item.$postingAccount"
+                display="name##session.lang##" ng-model="item.postingAccount" label="##word.Posting Account##"></i-list>
               <i-control type="number" class="col4" ng-model="item.vatNum" label="##word.VAT Number##"></i-control>
               <i-control type="text" class="col4" ng-model="item.crn" label="##word.CRN##"></i-control>
             </div>
 
             <div class="row">
-              <i-list
-                class="col4"
-                label="##word.Country##"
-                ng-change="getGovesList(item.country)"
-                ng-model="item.country"
-                display="name##session.lang##"
-                items="countriesList"
-                ng-search="item.$Country"
-              ></i-list>
-              <i-list
-                help-id=""
-                class="col4"
-                label="##word.Governorate##"
-                ng-change="getCitiesList(item.gov)"
-                ng-model="item.gov"
-                display="name##session.lang##"
-                items="govesList"
-                ng-search="item.$gov"
-              ></i-list>
+              <i-list class="col4" label="##word.Country##" ng-change="getGovesList(item.country)"
+                ng-model="item.country" display="name##session.lang##" items="countriesList"
+                ng-search="item.$Country"></i-list>
+              <i-list help-id="" class="col4" label="##word.Governorate##" ng-change="getCitiesList(item.gov)"
+                ng-model="item.gov" display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
             </div>
 
             <div class="row">
-              <i-list class="col4" label="##word.City##" ng-model="item.city" ng-change="getAreasList(item.city)" items="citiesList" display="name##session.lang##" ng-search="item.$city_search">
+              <i-list class="col4" label="##word.City##" ng-model="item.city" ng-change="getAreasList(item.city)"
+                items="citiesList" display="name##session.lang##" ng-search="item.$city_search">
               </i-list>
-              <i-list class="col4" label="##word.Area##" ng-model="item.area" items="areasList" display="name##session.lang##" ng-search="item.$area_search"> </i-list>
+              <i-list class="col4" label="##word.Area##" ng-model="item.area" items="areasList"
+                display="name##session.lang##" ng-search="item.$area_search"> </i-list>
             </div>
 
             <div class="row">
@@ -90,15 +82,8 @@
 
         <div id="serviceGroup" class="tab-content">
           <div class="row">
-            <i-list
-              help-id=""
-              label="##word.Service Group##"
-              class="col7"
-              ng-model="item.$serviceGroup"
-              display="name##session.lang##"
-              items="servicesGroupsList"
-              ng-search="item.$servicesGroup"
-            ></i-list>
+            <i-list help-id="" label="##word.Service Group##" class="col7" ng-model="item.$serviceGroup"
+              display="name##session.lang##" items="servicesGroupsList" ng-search="item.$servicesGroup"></i-list>
             <div class="col5">
               <br />
               <i-button type="add" label="##word.Add Service Group##" ng-click="addServicesGroups(item)"></i-button>
@@ -163,17 +148,13 @@
 
         <div id="serviceCategory" class="tab-content">
           <div class="row">
-            <i-list
-              label="##word.Service Category##"
-              class="col7"
-              ng-model="item.$serviceCategory"
-              display="name##session.lang##"
-              items="servicesCategoriesList"
-              ng-search="item.$servicesCategory"
-            ></i-list>
+            <i-list label="##word.Service Category##" class="col7" ng-model="item.$serviceCategory"
+              display="name##session.lang##" items="servicesCategoriesList"
+              ng-get="getservicesCategoriesList($search)"></i-list>
             <div class="col5">
               <br />
-              <i-button type="add" label="##word.Add Service Category##" ng-click="addServicesCategories(item)"></i-button>
+              <i-button type="add" label="##word.Add Service Category##"
+                ng-click="addServicesCategories(item)"></i-button>
             </div>
           </div>
           <div class="row">
@@ -234,7 +215,8 @@
 
         <div id="service" class="tab-content">
           <div class="row">
-            <i-list help-id="" label="##word.Service##" class="col7" ng-model="item.$service" display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
+            <i-list help-id="" label="##word.Service##" class="col7" ng-model="item.$service"
+              display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
             <div class="col5">
               <br />
               <i-button type="add" label="##word.Add Service##" ng-click="addServices(item)"></i-button>
@@ -291,7 +273,7 @@
 
                 <td class="center">
                   <p class="">{{s.cashPriceIn}} <span class="currency">##word.$##</span></p>
-                  
+
                   <p class="">{{s.creditPriceIn}} <span class="currency">##word.$##</span></p>
                 </td>
                 <td class="center">
@@ -316,7 +298,7 @@
                 </td>
                 <td class="center">
                   <p class="">{{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
-                  
+
                   <p class="">{{s.creditPriceOut}} <span class="currency">##word.$##</span></p>
                 </td>
                 <td class="center">
@@ -347,7 +329,7 @@
                 </td>
               </tr>
             </table>
-           <!--  <div class="row table-cart bold" ng-repeat="s in item.servicesList">
+            <!--  <div class="row table-cart bold" ng-repeat="s in item.servicesList">
               <div class="row">
                 <div class="col10">
                   <div class="row margin padding font-20">
@@ -449,18 +431,12 @@
         <div id="package" class="tab-content">
           <div class="row padding">
             <div class="row">
-              <i-list
-                help-id=""
-                label="##word.Service Group##"
-                class="col7"
-                ng-model="item.$packageServiceGroup"
-                display="name##session.lang##"
-                items="servicesGroupsList"
-                ng-search="item.$servicesGroup"
-              ></i-list>
+              <i-list help-id="" label="##word.Service Group##" class="col7" ng-model="item.$packageServiceGroup"
+                display="name##session.lang##" items="servicesGroupsList" ng-search="item.$servicesGroup"></i-list>
               <div class="col5">
                 <br />
-                <i-button type="add" label="##word.Add Service Group##" ng-click="addPackageServicesGroups(item)"></i-button>
+                <i-button type="add" label="##word.Add Service Group##"
+                  ng-click="addPackageServicesGroups(item)"></i-button>
               </div>
             </div>
             <div class="row">

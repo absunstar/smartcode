@@ -446,7 +446,10 @@ app.controller('patients', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getinsuranceClassesList = function () {
+    $scope.getinsuranceClassesList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.insuranceClassesList = [];
         $http({
@@ -462,6 +465,7 @@ app.controller('patients', function ($scope, $http, $timeout) {
                     nameEn: 1,
                     nameAr: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {

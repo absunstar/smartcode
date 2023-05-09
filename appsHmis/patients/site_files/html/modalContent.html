@@ -279,7 +279,7 @@
                                         ng-get="getInsuranceCompaniesList($search)"></i-list>
                                     <i-list label="##word.Insurance Class##" ng-model="item.insuranceClass"
                                         items="insuranceClassesList" display="name##session.lang##"
-                                        ng-search="item.$insuranceClass">
+                                        ng-get="getinsuranceClassesList($search)">
                                     </i-list>
                                     <i-control label="##word.Member##" ng-model="item.member"> </i-control>
                                     <i-date label="##word.Expiry Date##" ng-model="item.expiryDate"></i-date>

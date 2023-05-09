@@ -169,7 +169,10 @@ app.controller('doctors', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getSpecialtiesList = function () {
+    $scope.getSpecialtiesList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.specialtiesList = [];
         $http({
@@ -184,6 +187,7 @@ app.controller('doctors', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     nphisCode: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {
@@ -288,7 +292,10 @@ app.controller('doctors', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getHospitalCenterList = function () {
+    $scope.getHospitalCenterList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.hospitalResponsibilitiesList = [];
         $http({
@@ -302,6 +309,7 @@ app.controller('doctors', function ($scope, $http, $timeout) {
                     nameEn: 1,
                     nameAr: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {
@@ -347,22 +355,22 @@ app.controller('doctors', function ($scope, $http, $timeout) {
         $scope.busy = true;
         $scope.gendersList = [];
         $http({
-          method: 'POST',
-          url: '/api/genders',
-          data: {},
+            method: 'POST',
+            url: '/api/genders',
+            data: {},
         }).then(
-          function (response) {
-            $scope.busy = false;
-            if (response.data.done && response.data.list.length > 0) {
-              $scope.gendersList = response.data.list;
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.gendersList = response.data.list;
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = err;
             }
-          },
-          function (err) {
-            $scope.busy = false;
-            $scope.error = err;
-          }
         );
-      };
+    };
 
     $scope.getNumberingAuto = function () {
         $scope.error = '';

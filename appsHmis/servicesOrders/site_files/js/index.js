@@ -367,10 +367,10 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   };
 
   $scope.getPatientsList = function ($search) {
-    $scope.busy = true;
     if ($search && $search.length < 1) {
       return;
     }
+    $scope.busy = true;
     $scope.patientsList = [];
     $http({
       method: 'POST',
