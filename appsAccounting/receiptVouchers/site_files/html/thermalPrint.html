@@ -104,7 +104,7 @@
           <p class="black bold center font-14">{{itm.name##session.lang##}}</p>
         </div>
         <div class="col-2">
-          <p class="black bold center font-14">{{itm.totalPVat}}</p>
+          <p class="black bold center font-14">{{itm.totalPVat | xmoney2}} <span class="currency">##word.$##</span></p>
         </div>
         <div class="col-2 black">
           <p class="black bold center font-14">{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
@@ -123,12 +123,12 @@
         <span class="left">Discount</span> <span class="center">{{thermal.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الخصم</span>
       </p>
 
-      <p class="bold black font-18" ng-show="thermal.totalDiscount">
-        <span class="left">Deduct</span> <span class="center">{{thermal.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">نسبة التحمل</span>
+      <p class="bold black font-18" ng-show="thermal.patientDetuct">
+        <span class="left">Deduct</span> <span class="center">{{thermal.patientDetuct | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">نسبة التحمل</span>
       </p>
 
       <p class="bold black font-18" ng-show="thermal.totalPVat">
-        <span class="left">Patient VAT</span> <span class="center">{{thermal.totalPVat | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">نسبة التحمل</span>
+        <span class="left">Patient VAT</span> <span class="center">{{thermal.totalPVat | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الضريبة</span>
       </p>
 
       <p class="bold black font-22 ">

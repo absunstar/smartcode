@@ -864,6 +864,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       _item.totalComVat = 0;
       _item.comCash = 0;
       _item.totalNet = 0;
+      _item.patientDetuct = 0;
       _item.servicesList.forEach((_service) => {
         _item.grossAmount += _service.price;
         _item.totalAfterDisc += _service.totalAfterDisc;
@@ -872,6 +873,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         _item.totalPVat += _service.totalPVat;
         _item.totalComVat += _service.totalComVat;
         _item.comCash += _service.comCash;
+        _item.patientDetuct += _service.patientDetuct;
         _item.totalNet += _service.patientCash;
       });
 

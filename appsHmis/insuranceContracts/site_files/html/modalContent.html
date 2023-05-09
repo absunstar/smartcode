@@ -84,10 +84,31 @@
                 <i-radio class="col6" group="{{$index}}cons" label="##word.Value##" ng-value="value" ng-model="c.consultationType"> </i-radio>
               </div>
             </td>
-            <td class="center"><i-control type="number" ng-model="c.freeRevisitAmount"> </i-control></td>
-            <td class="center"><i-control type="number" ng-model="c.maxDeductAmount"> </i-control></td>
-            <td class="center"><i-control type="number" ng-model="c.maxServiceAmount"> </i-control></td>
-            <td class="center"><i-control type="number" ng-model="c.maxConsAmount"> </i-control></td>
+            <td class="center">
+              <div class="row">
+                <i-control class="col9" type="number" ng-model="c.freeRevisitAmount"> </i-control>
+                <span class="currency col3">##word.$##</span>
+              </div>
+            </td>
+            <td class="center">
+              <div class="row">
+                <i-control class="col9" type="number" ng-model="c.maxDeductAmount"> </i-control>
+                <span class="currency col3">##word.$##</span>
+              </div>
+            </td>
+
+            <td class="center">
+              <div class="row">
+                <i-control class="col9" type="number" ng-model="c.maxServiceAmount"> </i-control>
+                <span class="currency col3">##word.$##</span>
+              </div>
+            </td>
+            <td class="center">
+              <div class="row">
+                <i-control class="col9" type="number" ng-model="c.maxConsAmount"> </i-control>
+                <span class="currency col3">##word.$##</span>
+              </div>
+            </td>
           </tr>
         </table>
       </div>
