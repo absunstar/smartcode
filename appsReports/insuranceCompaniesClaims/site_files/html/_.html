@@ -1,37 +1,39 @@
 <div ng-controller="insuranceCompaniesClaims" class="loaded">
-    <div class="row" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
-        <div x-import="insuranceCompaniesClaims/modal.html"></div>
-        <div x-import="servicesOrders/modal.html"></div>
+  <div class="row" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
+    <div x-import="insuranceCompaniesClaims/modal.html"></div>
+    <div x-import="servicesOrders/modal.html"></div>
 
-        <div class="table-responsive">
-            <table class="table hover bold" id="t1">
-                <tr>
-                    <th>##word.Code##</th>
-                    <th>##word.Patient##</th>
-                    <th>##word.Doctor##</th>
-                    <th>##word.Net-Amount##</th>
-                    <th>##word.Gross Amount##</th>
-                    <th>##word.Total Discount##</th>
-                    <th>##word.Company-Deduction##</th>
-                  
-                    <th class="not-print">##word.Actions##</th>
-                </tr>
-                <tr ng-repeat="item in list | filter:$search">
-                    <td class="center blue">{{item.code}}</td>
-                    <td class="center">{{item.patient.fullName##session.lang##}}</td>
-                    <td class="center">{{item.doctor.name##session.lang##}}</td>
-                    <td class="center">{{item.totalNet}}</td>
-                    <td class="center">{{item.grossAmount}}</td>
-                    <td class="center">{{item.totalDiscount}}</td>
-                    <td class="center">{{item.comCash}}</td>
+    <div class="table-responsive">
+      <table class="table hover bold" id="t1">
+        <tr>
+          <th>##word.Code##</th>
+          <th>##word.Patient##</th>
+          <th>##word.Doctor##</th>
+          <th>##word.Gross Amount##</th>
+          <th>##word.Company-Deduction##</th>
 
-                    <td class="center not-print">
-                        <i-button x-permissions="insuranceCompaniesClaimsView || insuranceCompaniesClaimsManage" type="view" label="##word.Details##" ng-click="showView(item)"></i-button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <i-button x-permissions="insuranceCompaniesClaimsPrint || insuranceCompaniesClaimsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="insuranceCompaniesClaimsExport || insuranceCompaniesClaimsManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+          <th class="not-print">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="item in list | filter:$search">
+          <td class="center blue">{{item.code}}</td>
+          <td class="center">{{item.patient.fullName##session.lang##}}</td>
+          <td class="center">{{item.doctor.name##session.lang##}}</td>
+          <td class="center">{{item.grossAmount| xmoney2}} <span class="currency">##word.$##</span></td>
+          <td class="center">{{item.comCash| xmoney2}} <span class="currency">##word.$##</span></td>
+
+          <td class="center not-print">
+            <i-button x-permissions="insuranceCompaniesClaimsView || insuranceCompaniesClaimsManage" type="view" label="##word.Details##" ng-click="showView(item)"></i-button>
+          </td>
+        </tr>
+      </table>
     </div>
+    <i-button x-permissions="insuranceCompaniesClaimsPrint || insuranceCompaniesClaimsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button
+      x-permissions="insuranceCompaniesClaimsExport || insuranceCompaniesClaimsManage"
+      type="export"
+      label="##word.Export to excel##"
+      onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"
+    >
+    </i-button>
+  </div>
 </div>

@@ -206,7 +206,9 @@ body {
 .cart:hover {
   background: #69def6;
 }
-
+.underline {
+  text-decoration-line: underline;
+}
 .cart {
   border: 3px solid #00856a;
   display: inline-block;

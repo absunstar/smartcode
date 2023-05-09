@@ -144,7 +144,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop',setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -198,6 +198,9 @@ module.exports = function init(site) {
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
+            let newDate = new Date();
+            result.doc.$hours = parseInt((Math.abs(new Date(result.doc.date) - newDate) / (1000 * 60 * 60)) % 24);
+            result.doc.$minutes = parseInt((Math.abs(new Date(result.doc.date).getTime() - newDate.getTime()) / (1000 * 60)) % 60);
             response.result = result;
           } else {
             response.error = err.message;
@@ -253,7 +256,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, patient: 1, doctor: 1, code: 1, detectionNum:1, service: 1, mainInsuranceCompany: 1, date: 1, status: 1 };
+        let select = req.body.select || { id: 1, patient: 1, doctor: 1, code: 1, detectionNum:1, service: 1, ordersList: 1, mainInsuranceCompany: 1, date: 1, status: 1 };
         let list = [];
         if (app.allowMemory) {
           app.memoryList
@@ -366,7 +369,7 @@ module.exports = function init(site) {
     let servicesList = [];
 
     _data.ordersList.forEach((_s) => {
-      if (_s.type == 'LA' || _s.type == 'X-R') {
+      if (_s.type == 'LA' || _s.type == 'X-R' || _s.type == 'CO') {
         servicesList.push(_s);
       }
     });

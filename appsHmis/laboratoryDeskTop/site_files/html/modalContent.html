@@ -2,6 +2,10 @@
   <div class="row padding">
     <div class="col9">
       <fieldset>
+        <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Label print##" ng-click="labelPrint(item)"></i-button>
+        <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Laboratory print##" ng-click="laboratoryPrint(item)"></i-button>
+      </fieldset>
+      <fieldset>
         <legend>##word.Patient##</legend>
         <div class="row" ng-show="item.patient.id">
           <div class="cart">
@@ -77,7 +81,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </fieldset>
       <fieldset>
@@ -132,7 +135,7 @@
           <tr>
             <th>##word.Name##</th>
             <td class="center" colspan="5">
-              <p >{{item.service.name##session.lang##}}</p>
+              <p>{{item.service.name##session.lang##}}</p>
             </td>
           </tr>
         </table>
@@ -141,7 +144,7 @@
       <fieldset ng-show="item.recipientPerson.id">
         <legend>##word.Delivery Detailes##</legend>
 
-        <h3 class="bold"> ##word.Recipient person## : <span class="blue">{{item.recipientPerson.name##session.lang##}}</span> </h3>
+        <h3 class="bold">##word.Recipient person## : <span class="blue">{{item.recipientPerson.name##session.lang##}}</span></h3>
         <table class="table bold center hover" ng-show="item.recipientPerson.id == 2">
           <tr>
             <th>##word.Recipient Name##</th>
@@ -167,9 +170,7 @@
               <p class="height-5">{{item.recipientRelation}}</p>
             </td>
           </tr>
-      
         </table>
-
       </fieldset>
     </div>
     <div class="col3">
@@ -189,7 +190,6 @@
         </div>
 
         <div class="row center">
-  
           <a title="##word.Doctor recommendations##" class="btn btn-success btn-lg" ng-click="showRecommendations(item)"><i class="fas fa-vial"></i></a>
         </div>
 

@@ -208,8 +208,9 @@ module.exports = function init(site) {
                     site.addDoctorDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 3) {
                     let ageDay = obj.patient.age * 365;
-                    obj.normalRange = obj.service.normalRangeList.find((_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && _s.gender.id == obj.patient.gender.id);
-
+                    obj.normalRangeList = obj.service.normalRangeList.filter(
+                      (_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && ((_s.gender && _s.gender.id && obj.patient.gender && _s.gender.id == obj.patient.gender.id) || (!_s.gender || !_s.gender.id))
+                    );
                     site.addLaboratoryDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 4) {
                     site.addRadiologyDeskTop(obj);
@@ -414,8 +415,9 @@ module.exports = function init(site) {
               site.addDoctorDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 3) {
               let ageDay = obj.patient.age * 365;
-              obj.normalRange = obj.service.normalRangeList.find((_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && _s.gender.id == obj.patient.gender.id);
-
+              obj.normalRangeList = obj.service.normalRangeList.filter(
+                (_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && ((_s.gender && _s.gender.id && obj.patient.gender && _s.gender.id == obj.patient.gender.id) || (!_s.gender || !_s.gender.id))
+              );
               site.addLaboratoryDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 4) {
               site.addRadiologyDeskTop(obj);

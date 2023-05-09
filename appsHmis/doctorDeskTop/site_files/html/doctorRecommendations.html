@@ -244,6 +244,17 @@
                 </div>
                 <div id="orders" class="tab-content">
                   <div class="row">
+                    <i-button class="right" type="view" label="##word.Reference##" ng-click="showReferenceOrders()"> </i-button>
+                    <i-button
+                      type="print"
+                      class="right"
+                      ng-if="item.ordersList.length > 0"
+                      x-permissions="doctorDeskTopPrint || doctorDeskTopManage"
+                      label="##word.Orders Print##"
+                      ng-click="ordersPrint(item)"
+                    ></i-button>
+                  </div>
+                  <div class="row">
                     <i-list label="##word.Order##" class="col6" ng-model="item.$order" display="name##session.lang##" items="ordersList" ng-get="getOrdersList($search)"></i-list>
                     <div class="col4">
                       <br />
@@ -254,10 +265,6 @@
                         <i title="##word.Radiology##" class="fas fa-x-ray icon" id="X-R" ng-click="item.$groupTypeId = 4 ;item.$orderType = 'X-R' ;getOrdersList('')"></i>
                         <i title="##word.Medicine##" class="fas fa-capsules icon" id="MD" ng-click="item.$orderType = 'MD' ;getOrdersList('')"></i>
                       </div>
-                    </div>
-                    <div class="col2">
-                      <br />
-                      <i-button type="view" label="##word.Reference##" ng-click="showReferenceOrders()"> </i-button>
                     </div>
                   </div>
                   <p class="center green bold font-20">{{addOrder}}</p>

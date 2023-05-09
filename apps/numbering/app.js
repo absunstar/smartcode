@@ -75,7 +75,12 @@ module.exports = function init(site) {
               id: 3,
               name: 'Connected',
             };
-
+            if (_ml.id == 'patients') {
+              _ml.typeNumbering = {
+                id: 4,
+                name: 'Manual',
+              };
+            }
             _ml.firstValue = 1;
             _ml.lastValue = 0;
           });

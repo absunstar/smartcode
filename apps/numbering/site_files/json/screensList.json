@@ -487,6 +487,12 @@
   {
     "category": "hmis",
     "feature": "public",
+    "id": "doctorDeskTop",
+    "name": "Doctor DeskTop"
+  },
+  {
+    "category": "hmis",
+    "feature": "public",
     "id": "radiologyDeskTop",
     "name": "Radiology DeskTop"
   },

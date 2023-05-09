@@ -1,5 +1,8 @@
 app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
+  $scope.setting = site.showObject(`##data.#setting##`);
+  $('#ordersDetails').addClass('hidden');
+
   $scope.appName = 'doctorDeskTop';
   $scope.modalID = '#doctorDeskTopManageModal';
   $scope.modalSearchID = '#doctorDeskTopSearchModal';
@@ -654,7 +657,6 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
         } else {
           _item.$minutes = _item.$minutes + 1 || 1;
         }
-        console.log(_item.$minutes);
       });
       $scope.$applyAsync();
 
@@ -890,6 +892,49 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
       return;
     }
   };
+
+  
+  $scope.ordersPrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#ordersDetails').removeClass('hidden');
+    $scope.order = item;
+    document.getElementById("treatment").innerHTML = $scope.order.treatment;
+
+    $scope.localPrint = function () {
+        let printer = {};
+        if ($scope.setting.printerProgram.a4Printer) {
+            printer = $scope.setting.printerProgram.a4Printer;
+        } else {
+            $scope.error = '##word.A4 printer must select##';
+            return;
+        }
+        if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+            printer = JSON.parse('##user.printerPath##');
+        }
+        $timeout(() => {
+            site.print({
+                selector: '#ordersDetails',
+                ip: printer.ipDevice,
+                port: printer.portDevice,
+                pageSize: 'A4',
+                printer: printer.ip.name.trim(),
+            });
+        }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+        $('#ordersDetails').addClass('hidden');
+    }, 8000);
+};
+
+if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+    $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+}
 
   $scope.calc = function (_item) {
     $scope.error = '';

@@ -20,9 +20,23 @@
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
                     <td class="center blue">{{item.code}}</td>
-                    <td class="center">{{item.patient.fullName##session.lang##}}</td>
                     <td class="center">
-                        <span class="text-success" ng-show="item.approved">( ##word.Yes## ) <span> {{item.approvedDate | date:'dd/MM/yyyy'}} - {{item.approvedDate | date:'hh:mm:ss a'}} </span> </span>
+                        <div class="row">
+                            <div class="col2">
+                                <i-image view class="logo center" ng-model="item.patient.image"></i-image>
+                                <p class="center darkGray">{{item.patient.age}}Y</p>
+                            </div>
+                            <div class="col10">
+                                <p class="center">{{item.patient.fullNameEn}} ( <span
+                                        class="blue">{{item.patient.code}}</span> ) <img class="img-logo"
+                                        ng-src="{{item.patient.nationality.image.url}}" alt="" /></p>
+                                <p class="center">{{item.patient.fullNameAr}}</p>
+                                <p class="center" ng-show="item.mainInsuranceCompany">( {{item.mainInsuranceCompany.name##session.lang##}} )</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="center">
+                        <span class="text-success" ng-show="item.approved">( ##word.Yes## ) <span> {{item.approvedDate | date:'dd/MM/yyyy'}} </span> </span>
                         <span class="text-danger" ng-show="!item.approved">##word.No##</span>
                     </td>
                     <td class="center not-print">

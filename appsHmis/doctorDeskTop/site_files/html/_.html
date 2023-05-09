@@ -82,6 +82,7 @@
         <tr>
           <th>##word.Info##</th>
           <th>##word.Patient##</th>
+          <th>##word.Doctor##</th>
           <th>##word.Date##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
@@ -99,9 +100,13 @@
               <div class="col10">
                 <p class="center">{{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> ) <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" /></p>
                 <p class="center">{{item.patient.fullNameAr}}</p>
-                <p class="center">( {{item.mainInsuranceCompany.name##session.lang##}} )</p>
+                <p class="center" ng-show="item.mainInsuranceCompany">( {{item.mainInsuranceCompany.name##session.lang##}} )</p>
               </div>
             </div>
+          </td>
+          <td class="center">
+            <p class="center">{{item.doctor.nameEn}} ( <span class="blue">{{item.doctor.code}}</span> )</p>
+            <p class="center">{{item.doctor.nameAr}}</p>
           </td>
           <td class="center">
             <p class="darkGray center">
@@ -115,7 +120,7 @@
           </td>
           <td class="center not-print">
             <a class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-show="item.status.id == 1" ng-click="updateStatus(item,2)"
-              >##word.Entrance to doctor## <i class="fas fa-pen"></i
+              >##word.Entrance## <i class="fas fa-pen"></i
             ></a>
             <a class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-show="item.status.id == 2" ng-click="showDoctorRecommendations(item)"
               >##word.Detected## <i class="fas fa-pen"></i
@@ -125,9 +130,11 @@
               ><i class="fas fa-stethoscope font-22 pointer"></i
             ></a>
             <a title="##word.View##" class="btn btn-info btn-lg" x-permissions="doctorDeskTopView || doctorDeskTopManage" ng-click="showView(item)"><i class="fas fa-eye"></i></a>
+            <i-button type="print" ng-if="item.ordersList.length > 0" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders Print##" ng-click="ordersPrint(item)"></i-button>
             <a title="##word.Delete##" class="btn btn-danger btn-lg" ng-show="item.status.id == 1" x-permissions="doctorDeskTopDelete || doctorDeskTopManage" ng-click="showDelete(item)"
               ><i class="fas fa-trash-alt"></i
             ></a>
+
             <!-- <a title="##word.Edit##"  class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-click="showUpdate(item)"><i class="fas fa-edit"></i></a>-->
           </td>
         </tr>
@@ -136,4 +143,5 @@
     <i-button x-permissions="doctorDeskTopPrint || doctorDeskTopManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
     <i-button x-permissions="doctorDeskTopExport || doctorDeskTopManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
   </div>
+  <div id="ordersDetails" x-import="doctorDeskTop/ordersPrint.html"></div>
 </div>

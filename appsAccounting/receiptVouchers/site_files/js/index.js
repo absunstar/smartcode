@@ -137,6 +137,16 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
+          if ($scope.setting.accountsSetting.currency) {
+            site.strings['currency'] = {
+              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+            };
+            site.strings['from100'] = {
+              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+            };
+          }
         } else {
           $scope.error = response.data.error;
         }

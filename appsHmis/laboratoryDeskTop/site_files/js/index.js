@@ -5,6 +5,7 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
     $scope.modalID = '#laboratoryDeskTopManageModal';
     $scope.modalSearchID = '#laboratoryDeskTopSearchModal';
     $('#laboratoryLabels').addClass('hidden');
+    $('#laboratoryDetails').addClass('hidden');
 
     $scope.mode = 'add';
     $scope.search = {};
@@ -240,6 +241,7 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
                 $scope.busy = false;
                 if (response.data.done && response.data.list.length > 0) {
                     $scope.list = response.data.list;
+                   
                     $scope.count = response.data.count;
                     site.hideModal($scope.modalSearchID);
                     $scope.startWaitingTime();
@@ -399,7 +401,6 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
                 } else {
                     _item.$minutes = _item.$minutes + 1 || 1;
                 }
-                console.log(_item.$minutes);
             });
             $scope.$applyAsync();
         }, 1000 * 60);
@@ -427,7 +428,7 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
         $scope.item = item;
         $('#laboratoryLabels').removeClass('hidden');
         JsBarcode('.barcode', $scope.item.code);
-        $scope.localPrint = function () {
+        $scope.localLabelPrint = function () {
             let printer = {};
             if ($scope.setting.printerProgram.labelPrinter) {
                 printer = $scope.setting.printerProgram.labelPrinter;
@@ -449,13 +450,53 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
             }, 500);
         };
 
-        $scope.localPrint();
+        $scope.localLabelPrint();
 
         $scope.busy = false;
         $timeout(() => {
             $('#laboratoryLabels').addClass('hidden');
         }, 8000);
     };
+
+    $scope.laboratoryPrint = function (item) {
+        $scope.error = '';
+        if ($scope.busy) return;
+        $scope.busy = true;
+        $('#laboratoryDetails').removeClass('hidden');
+        $scope.order = item;
+        $scope.localPrint = function () {
+            let printer = {};
+            if ($scope.setting.printerProgram.a4Printer) {
+                printer = $scope.setting.printerProgram.a4Printer;
+            } else {
+                $scope.error = '##word.A4 printer must select##';
+                return;
+            }
+            if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+                printer = JSON.parse('##user.printerPath##');
+            }
+            $timeout(() => {
+                site.print({
+                    selector: '#laboratoryDetails',
+                    ip: printer.ipDevice,
+                    port: printer.portDevice,
+                    pageSize: 'A4',
+                    printer: printer.ip.name.trim(),
+                });
+            }, 500);
+        };
+    
+        $scope.localPrint();
+    
+        $scope.busy = false;
+        $timeout(() => {
+            $('#laboratoryDetails').addClass('hidden');
+        }, 8000);
+    };
+    
+    if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+        $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+    }
 
     $scope.getAll({ date: new Date() });
     $scope.getDoctorsList();

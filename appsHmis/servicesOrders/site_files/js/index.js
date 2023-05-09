@@ -182,6 +182,16 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
+          if ($scope.setting.accountsSetting.currency) {
+            site.strings['currency'] = {
+              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+            };
+            site.strings['from100'] = {
+              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+            };
+          }
         } else {
           $scope.error = response.data.error;
         }
@@ -200,7 +210,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       url: `${$scope.baseURL}/api/receiptVouchers/view`,
       data: {
         invoiceId: id,
-        'voucherType.id' : 'serviceOrder'
+        'voucherType.id': 'serviceOrder',
       },
     }).then(
       function (response) {
@@ -611,6 +621,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     where = where || {};
     where['status.id'] = 3;
     where['hasOrder'] = false;
+    where.$or = [{ 'ordersList.type': 'CO' }, { 'ordersList.type': 'LA' }, { 'ordersList.type': 'X-R' }];
     $http({
       method: 'POST',
       url: '/api/doctorDeskTop/all',

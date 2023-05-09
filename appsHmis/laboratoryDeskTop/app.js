@@ -198,6 +198,9 @@ module.exports = function init(site) {
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
+            let newDate = new Date();
+            result.doc.$hours = parseInt((Math.abs(new Date(result.doc.date) - newDate) / (1000 * 60 * 60)) % 24);
+            result.doc.$minutes = parseInt((Math.abs(new Date(result.doc.date).getTime() - newDate.getTime()) / (1000 * 60)) % 60);
             response.result = result;
           } else {
             response.error = err.message;
