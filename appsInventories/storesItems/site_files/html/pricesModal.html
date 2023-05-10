@@ -21,12 +21,12 @@
               </tr>
               <tr ng-if="unitsPrice.$showPrice == 'purchase'" ng-repeat="str in unitsPrice.purchasePriceList">
                 <td>{{$index+1}}</td>
-                <td class="green">{{str.price}}</td>
+                <td class="green">{{str.price}} <span class="currency">##word.$##</span></td>
                 <td class="brown">{{str.date | date:"dd / MM / yyyy" }}</td>
               </tr>
               <tr ng-if="unitsPrice.$showPrice == 'sales'" ng-repeat="str in unitsPrice.salesPriceList">
                 <td>{{$index+1}}</td>
-                <td class="green">{{str.price}}</td>
+                <td class="green">{{str.price}} <span class="currency">##word.$##</span></td>
                 <td class="brown">{{str.date | date:"dd / MM / yyyy" }}</td>
               </tr>
             </table>
