@@ -199,7 +199,7 @@ module.exports = function init(site) {
           });
 
           if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-            if (site.toMoney(_data.$paidByCustomer) < site.toMoney(_data.totalNet)) {
+            if (site.toNumber(_data.$paidByCustomer) < site.toNumber(_data.totalNet)) {
               response.error = 'Must Paid By Customer greater than or equal to ';
               res.json(response);
               return;
@@ -233,7 +233,7 @@ module.exports = function init(site) {
             if (_data.invoiceType.id == 2) {
               if (_data.installmentsList && _data.installmentsList.length > 0) {
                 let totalInstallment = _data.installmentsList.reduce((a, b) => a + b.amount, 0);
-                totalInstallment = site.toMoney(totalInstallment);
+                totalInstallment = site.toNumber(totalInstallment);
                 if (totalInstallment != _data.totalNet) {
                   response.error = `The installments amount is not equal invoice total net`;
                   res.json(response);
