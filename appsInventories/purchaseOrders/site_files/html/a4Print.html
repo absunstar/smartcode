@@ -8,7 +8,7 @@
         <div class="row">
           <h5 class="center bold">##session.branch.nameEn##</h5>
         </div>
-        <br>
+        <br />
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
@@ -25,7 +25,7 @@
         <div class="row">
           <h5 class="center bold">##session.branch.nameAr##</h5>
         </div>
-        <br>
+        <br />
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="row center" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">
-      <p class="center black font-14 bold" >Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
+      <p class="center black font-14 bold">Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
     </div>
 
     <div class="row center" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">
@@ -47,7 +47,7 @@
     <div class="row full">
       <div class="center col-6 border-1">
         <div class="col-3"><p class="black font-12">Date :</p></div>
-        <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd - MM - yyyy : hh - mm a" }}</p></div>
+        <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd / MM / yyyy - hh : mm a" }}</p></div>
         <div class="col-3"><p class="black font-12">: التاريخ</p></div>
       </div>
       <div class="center col-6 border-1" ng-hide="##query.type## == 5">
@@ -56,7 +56,6 @@
         <div class="col-4"><p class="black font-12">: طريقة الدفع</p></div>
       </div>
     </div>
-
 
     <div class="row full">
       <div class="center col-6 border-1">
@@ -228,7 +227,6 @@
 
           <div class="center col-6 border-1">
             <div class="row full m-top-50">
-
               <div class="col-3"><p class="font-14">Total</p></div>
               <div class="col-6">
                 <p class="bold font-18 black">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>

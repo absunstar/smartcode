@@ -591,38 +591,46 @@ module.exports = function init(site) {
           }
           servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
           servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat;
-          servicesList[0].total = site.toNumber(servicesList[0].total);
+          servicesList[0].total = servicesList[0].total;
           servicesList[0].totalPVat = (servicesList[0].total * servicesList[0].pVat || 0) / 100;
           servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
           let detuct = 0;
-          if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
-            if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
-              detuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
+          if (_data.mainInsurance && _data.mainInsurance.id) {
+            if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
+              if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
+                detuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
+              } else {
+                if (_data.insuranceContract && _data.insuranceContract.insuranceClass) {
+                  detuct = _data.insuranceContract.insuranceClass.serviceDeduct;
+                }
+              }
             } else {
-              if (_data.insuranceContract && _data.insuranceContract.insuranceClass) {
-                detuct = _data.insuranceContract.insuranceClass.serviceDeduct;
+              if (_data.insuranceContract && _data.insuranceContract.insuranceClass.consultationType == 'percent') {
+                detuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
+              } else {
+                detuct = _data.insuranceContract.insuranceClass.consultationDeduct;
               }
             }
-          } else {
-            if (_data.insuranceContract && _data.insuranceContract.insuranceClass.consultationType == 'percent') {
-              detuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
+            console.log(detuct, _data.mainInsurance);
+
+            if (
+              _data.insuranceContract &&
+              _data.insuranceContract.insuranceClass &&
+              _data.insuranceContract.insuranceClass.maxDeductAmount &&
+              _data.insuranceContract.insuranceClass.maxDeductAmount < detuct + servicesList[0].totalPVat
+            ) {
+              servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
+              servicesList[0].comCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
             } else {
-              detuct = _data.insuranceContract.insuranceClass.consultationDeduct;
+              servicesList[0].patientCash = detuct + servicesList[0].totalPVat;
+              servicesList[0].comCash = servicesList[0].total - detuct + servicesList[0].totalComVat;
             }
+          } else {
+            servicesList[0].patientCash = servicesList[0].total;
+            servicesList[0].comCash = 0;
+            servicesList[0].totalComVat = 0;
           }
 
-          if (
-            _data.insuranceContract &&
-            _data.insuranceContract.insuranceClass &&
-            _data.insuranceContract.insuranceClass.maxDeductAmount &&
-            _data.insuranceContract.insuranceClass.maxDeductAmount < detuct + servicesList[0].totalPVat
-          ) {
-            servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
-            servicesList[0].comCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
-          } else {
-            servicesList[0].patientCash = detuct + servicesList[0].totalPVat;
-            servicesList[0].comCash = servicesList[0].total - detuct + servicesList[0].totalComVat;
-          }
           servicesList[0].patientDetuct = detuct;
           if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {
             servicesList[0].hospitalResponsibility = _data.hospitalResponsibility;

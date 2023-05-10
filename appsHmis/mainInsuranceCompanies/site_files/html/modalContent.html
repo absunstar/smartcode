@@ -246,7 +246,7 @@
                   <p>##word.Disc## ##word.%##</p>
                 </th>
                 <th>
-                  <p>##word.Cash## ##word.In##</p>
+                  <p>##word.Cash## ##word.Out##</p>
                   <p>##word.Credit## ##word.Out##</p>
                 </th>
 
@@ -321,7 +321,10 @@
                     <span class="currency col4">##word.%##</span>
                   </div>
                 </td>
-                <td class="center"><i-control type="number" ng-model="s.packagePrice"></i-control></td>
+                <td class="center">
+                  <i-control type="number" class="col8" ng-model="s.packagePrice"></i-control>
+                  <span class="currency col4">##word.$##</span>
+                </td>
                 <td class="center not-print">
                   <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
                   <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>

@@ -217,9 +217,10 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.receiptVoucher = response.data.doc;
-        } else {
+        } 
+        /* else {
           $scope.error = response.data.error;
-        }
+        } */
       },
       function (err) {
         console.log(err);
@@ -860,16 +861,19 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       _item.grossAmount = 0;
       _item.totalDiscount = 0;
       _item.totalVat = 0;
+      _item.total = 0;
       _item.totalPVat = 0;
       _item.totalComVat = 0;
       _item.comCash = 0;
       _item.totalNet = 0;
+      _item.totalAfterDisc = 0;
       _item.patientDetuct = 0;
       _item.servicesList.forEach((_service) => {
         _item.grossAmount += _service.price;
         _item.totalAfterDisc += _service.totalAfterDisc;
         _item.totalDiscount += _service.totalDisc;
         _item.totalVat += _service.totalVat;
+        _item.total += _service.total;
         _item.totalPVat += _service.totalPVat;
         _item.totalComVat += _service.totalComVat;
         _item.comCash += _service.comCash;

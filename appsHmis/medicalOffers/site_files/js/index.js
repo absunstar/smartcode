@@ -6,11 +6,14 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: {url : '/images/medicalOffers.png'},
+    image: { url: '/images/medicalOffers.png' },
     active: true,
     discount: 0,
+    totalCount: 0,
+    totalVat: 0,
+    totalPrice: 0,
+    totalAfterVat: 0,
     discountType: 'percent',
-    servicesList: [],
   };
   $scope.item = {};
   $scope.list = [];
@@ -18,7 +21,7 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure };
+    $scope.item = { ...$scope.structure, servicesList: [] };
     site.showModal($scope.modalID);
   };
 
@@ -230,7 +233,6 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
           vat: 1,
         },
         search: $search,
-
       },
     }).then(
       function (response) {

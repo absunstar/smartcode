@@ -41,6 +41,7 @@
               <table class="table hover bold">
                 <tr>
                   <th>##word.Name##</th>
+                  <th>##word.Date##</th>
                   <th>##word.Price##</th>
                   <th>##word.Disc##</th>
                   <th>##word.Duration##</th>
@@ -51,6 +52,9 @@
                 <tr ng-repeat="o in referenceOrders.medicineList">
                   <td class="center">
                     <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">{{o.date | date:"dd / MM / yyyy"}}</p>
                   </td>
                   <td class="center">
                     <p class="center">
@@ -86,6 +90,7 @@
               <table class="table hover bold">
                 <tr>
                   <th>##word.Name##</th>
+                  <th>##word.Date##</th>
                   <th>##word.Price##</th>
                   <th>##word.Disc##</th>
                   <th>##word.Actions##</th>
@@ -93,6 +98,10 @@
                 <tr ng-repeat="o in referenceOrders.laboratoryList">
                   <td class="center">
                     <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+
+                  <td class="center">
+                    <p class="center">{{o.date | date:"dd / MM / yyyy"}}</p>
                   </td>
                   <td class="center">
                     <p class="center">
@@ -103,7 +112,7 @@
                   <td class="center">
                     <p class="center">
                       {{o.discount || 0}}
-                      <span class="currency">##%##</span>
+                      <span class="currency">##word.%##</span>
                     </p>
                   </td>
                   <td class="center">
@@ -118,6 +127,7 @@
               <table class="table hover bold">
                 <tr>
                   <th>##word.Name##</th>
+                  <th>##word.Date##</th>
                   <th>##word.Price##</th>
                   <th>##word.Disc##</th>
                   <th>##word.Actions##</th>
@@ -125,6 +135,9 @@
                 <tr ng-repeat="o in referenceOrders.radiologyList">
                   <td class="center">
                     <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">{{o.date | date:"dd / MM / yyyy"}}</p>
                   </td>
                   <td class="center">
                     <p class="center">
@@ -135,7 +148,7 @@
                   <td class="center">
                     <p class="center">
                       {{o.discount || 0}}
-                      <span class="currency">##%##</span>
+                      <span class="currency">##word.%##</span>
                     </p>
                   </td>
                   <td class="center">
@@ -150,6 +163,7 @@
               <table class="table hover bold">
                 <tr>
                   <th>##word.Name##</th>
+                  <th>##word.Date##</th>
                   <th>##word.Price##</th>
                   <th>##word.Disc##</th>
                   <th>##word.Actions##</th>
@@ -157,6 +171,9 @@
                 <tr ng-repeat="o in referenceOrders.consultationList">
                   <td class="center">
                     <p class="center">{{o.name##session.lang##}}</p>
+                  </td>
+                  <td class="center">
+                    <p class="center">{{o.date | date:"dd / MM / yyyy"}}</p>
                   </td>
                   <td class="center">
                     <p class="center">

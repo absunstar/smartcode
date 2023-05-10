@@ -720,7 +720,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     if (!$scope.item.$allPatients) {
       where['patient.id'] = $scope.item.patient.id;
     }
-    where['service.id'] = $scope.item.service.id;
+    /* where['service.id'] = $scope.item.service.id; */
 
     $http({
       method: 'POST',

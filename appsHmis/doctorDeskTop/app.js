@@ -144,7 +144,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop',setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -256,7 +256,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, patient: 1, doctor: 1, code: 1, detectionNum:1, service: 1, ordersList: 1, mainInsuranceCompany: 1, date: 1, status: 1 };
+        let select = req.body.select || { id: 1, patient: 1, doctor: 1, code: 1, detectionNum: 1, service: 1, ordersList: 1, mainInsuranceCompany: 1, date: 1, status: 1 };
         let list = [];
         if (app.allowMemory) {
           app.memoryList
@@ -321,7 +321,7 @@ module.exports = function init(site) {
 
   site.post({ name: `/api/${app.name}/ordersReference`, public: true }, (req, res) => {
     let where = req.body.where || {};
-    let select = req.body.select || { id: 1, service: 1, ordersList: 1 };
+    let select = req.body.select || { id: 1, date: 1, doctor: 1, patient: 1, service: 1, ordersList: 1 };
 
     where['company.id'] = site.getCompany(req).id;
 
@@ -345,15 +345,16 @@ module.exports = function init(site) {
         docs.forEach((doc) => {
           doc.ordersList.forEach((_order) => {
             if (_order.type == 'CO' && !result.consultationList.some((s) => s.id == _order.id)) {
-              result.consultationList.push(_order);
+              result.consultationList.push({ ..._order, date: doc.date });
             } else if (_order.type == 'LA' && !result.laboratoryList.some((s) => s.id == _order.id)) {
-              result.laboratoryList.push(_order);
+              result.laboratoryList.push({ ..._order, date: doc.date });
             } else if (_order.type == 'X-R' && !result.radiologyList.some((s) => s.id == _order.id)) {
-              result.radiologyList.push(_order);
+              result.radiologyList.push({ ..._order, date: doc.date });
             } else if (_order.type == 'MD' && !result.medicineList.some((s) => s.id == _order.id)) {
-              result.medicineList.push(_order);
+              result.medicineList.push({ ..._order, date: doc.date });
             }
           });
+
         });
       }
       res.json({
