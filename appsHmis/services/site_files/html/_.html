@@ -4,14 +4,21 @@
         <div x-import="services/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="servicesAdd || servicesManage" label="##word.New Service##" ng-click="showAdd()"></i-button>
-            <i-upload api="api/services/import" label="Import"></i-upload>
-            <i-upload api="api/services/import-categories" label="Import Categories"></i-upload>
-            <i-upload api="api/services/import-labs" label="Import Lab Services"></i-upload>
+            <i-button type="add" x-permissions="servicesAdd || servicesManage" label="##word.New Service##"
+                ng-click="showAdd()"></i-button>
+            <i-upload api="api/services/import" x-permissions="importService || servicesManage"
+                label="Import"></i-upload>
+            <i-upload api="api/services/import-categories" x-permissions="importServiceCategories || servicesManage"
+                label="Import Categories"></i-upload>
+            <i-upload api="api/services/import-labs" x-permissions="importServiceLabs || servicesManage"
+                label="Import Lab Services"></i-upload>
+            <i-upload api="api/services/importStandardService" x-permissions="importStandardService || servicesManage"
+                label="Import Standard Services"></i-upload>
         </div>
 
         <div class="row padding">
-            <i-control ng-change="searchAll()" ng-model="search" x-permissions="servicesSearch || servicesManage"></i-control>
+            <i-control ng-change="searchAll()" ng-model="search"
+                x-permissions="servicesSearch || servicesManage"></i-control>
         </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
@@ -36,14 +43,18 @@
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="servicesUpdate || servicesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="servicesUpdate || servicesManage" label="##word.Edit##"
+                            ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="servicesDelete || servicesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="servicesDelete || servicesManage" label="##word.Delete##"
+                            ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="servicesPrint || servicesManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="servicesExport || servicesManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
+        <i-button x-permissions="servicesPrint || servicesManage" type="print" label="##word.Print##"
+            onclick="site.print('#t1')"></i-button>
+        <i-button x-permissions="servicesExport || servicesManage" type="export" label="##word.Export to excel##"
+            onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
     </div>
 </div>

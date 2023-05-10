@@ -371,6 +371,67 @@ module.exports = function init(site) {
                 res.json(response);
             });
 
+                        site.post(`api/${app.name}/importStandardService`, (req, res) => {
+                            let response = {
+                                done: false,
+                                file: req.form.files.fileToUpload,
+                            };
+
+                            if (site.isFileExistsSync(response.file.filepath)) {
+                                let docs = [];
+                                if (response.file.originalFilename.like('*.xls*')) {
+                                    let workbook = site.XLSX.readFile(response.file.filepath);
+                                    docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                                } else {
+                                    docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+                                }
+
+                                if (Array.isArray(docs)) {
+                                    console.log(`Importing ${app.name} : ${docs.length}`);
+                                    docs.forEach((doc) => {
+                                        let newDoc = {
+                                            code: doc.code,
+                                            nameAr: doc.nameAr,
+                                            nameEn: doc.nameEn,
+                                            image: { url: '/images/services.png' },
+                                            active: true,
+                                            cashPriceOut: doc.CashPrice || 0,
+                                            creditPriceOut: doc.CreditPrice || 0,
+                                            cashPriceIn: doc.CashInPrice || 0,
+                                            creditPriceIn: doc.CreditInPrice || 0,
+                                            packagePrice: doc.PackagePrice || 0,
+                                            pharmacyPrice: doc.PharmacyPrice || 0,
+                                            vat: doc.VAT || 0,
+                                            cost: doc.Cost || 0,
+                                            servicesCategoriesList: [],
+                                        };
+                                        newDoc.serviceGroup = site.getApp('servicesGroups').memoryList.find((s) => s.code == doc.gCode);
+                                        newDoc.company = site.getCompany(req);
+                                        newDoc.branch = site.getBranch(req);
+                                        newDoc.addUserInfo = req.getUserFinger();
+
+                                        app.add(newDoc, (err, doc2) => {
+                                            if (!err && doc2) {
+                                                site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                                console.log(site.dbMessage);
+                                            } else {
+                                                site.dbMessage = err.message;
+                                                console.log(site.dbMessage);
+                                            }
+                                        });
+                                    });
+                                } else {
+                                    site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+                                    console.log(site.dbMessage);
+                                }
+                            } else {
+                                site.dbMessage = 'file not exists : ' + response.file.filepath;
+                                console.log(site.dbMessage);
+                            }
+
+                            res.json(response);
+                        });
+
             site.post(`api/${app.name}/import-labs`, (req, res) => {
                 let response = {
                     done: false,

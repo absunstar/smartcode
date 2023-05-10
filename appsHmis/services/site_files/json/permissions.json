@@ -1,11 +1,15 @@
 [
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesManage" , "En":"Manage" , "Ar":"إدارة"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesAdd" , "En":"Add" , "Ar":"إضافة"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesUpdate" , "En":"Edit" , "Ar":"تعديل"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesDelete" , "En":"Delete" , "Ar":"حذف"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesView" , "En":"View" , "Ar":"عرض"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesSearch" , "En":"Search" , "Ar":"بحث"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesExport" , "En":"Export" , "Ar":"تصدير"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesPrint" , "En":"Print" , "Ar":"طباعة"},
-    { "moduleName" : "hmis" , "screenName" : "services" , "name":"servicesUi" , "En":"UI" , "Ar":"الواجهة الرسومية"}
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "services", "name": "servicesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "services", "name": "importService", "En": "Import Service", "Ar": "إستيراد الخدمات" },
+    { "moduleName": "hmis", "screenName": "services", "name": "importServiceCategories", "En": "Import Service Categories", "Ar": "إستيراد تصنيفات الخدمات" },
+    { "moduleName": "hmis", "screenName": "services", "name": "importServiceLabs", "En": "Import Service Labs", "Ar": "إستيراد خدمات المعامل" },
+    { "moduleName": "hmis", "screenName": "services", "name": "importStandardService", "En": "Import Standard Service", "Ar": "إستيراد أسعار الخدمات" }
 ]
