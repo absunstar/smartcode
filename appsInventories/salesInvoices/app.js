@@ -162,6 +162,7 @@ module.exports = function init(site) {
         const storesSetting = site.getSystemSetting(req).storesSetting;
         let errBatchList = [];
         let medicationDosesList = [];
+        const accountsSetting = site.getSystemSetting(req).accountsSetting;
         site.getBatchesToSalesAuto({ store: _data.store, items: _data.itemsList }, (callbackItems) => {
           _data.itemsList.forEach((_item) => {
             if (_item.hasMedicalData && _data.salesType.code != 'company') {
@@ -283,7 +284,6 @@ module.exports = function init(site) {
             store: _data.store,
             items: _data.itemsList,
           };
-          const accountsSetting = site.getSystemSetting(req).accountsSetting;
 
           site.checkOverDraft(req, overDraftObj, (overDraftCb) => {
             if (!overDraftCb.done) {
