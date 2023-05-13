@@ -309,6 +309,12 @@ module.exports = function init(site) {
     { id: 3, nameEn: 'Cancellation By Company', nameAr: 'إلغاء من طرف الشركة' },
   ];
 
+  site.scientificRanks = [
+    { id: 1, nameEn: 'Consultant', nameAr: 'إستشاري' },
+    { id: 2, nameEn: 'Senior Specialist', nameAr: 'أخصائي أول' },
+    { id: 3, nameEn: 'Specialist', nameAr: 'أخصائي' },
+  ];
+
   site.vouchersTypes = [
     { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
     { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
@@ -326,6 +332,14 @@ module.exports = function init(site) {
       list: site.usersTypesList,
     });
   });
+
+  site.post('/api/scientificRanks', (req, res) => {
+    res.json({
+      done: true,
+      list: site.scientificRanks,
+    });
+  });
+
 
   site.post('/api/accountingLinkList', (req, res) => {
     res.json({

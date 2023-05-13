@@ -246,7 +246,7 @@
       <div class="row">
         <table class="table hover center bold">
           <tr>
-            <th>##word.Name##</th>
+            <th>##word.Code## - ##word.Name##</th>
             <th>##word.Price##</th>
             <th>##word.Discount##</th>
             <!-- <th>##word.H-Center##</th> -->
@@ -299,6 +299,7 @@
               <p class="center">{{s.comCash | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center">
+              <p class="center">Deduct : {{s.patientDeduct | xmoney2}} <span class="currency">##word.$##</span></p>
               <p class="center">{{s.patientCash | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
           </tr>
@@ -333,7 +334,7 @@
             </fieldset>
           </div>
 
-            <div class="col4">
+          <div class="col4">
             <fieldset class="gray-bg">
               <p class="bold font-22">##word.Total## : {{item.total | xmoney2}} <span class="currency">##word.$##</span></p>
             </fieldset>
@@ -359,7 +360,7 @@
 
           <div class="col4">
             <fieldset class="gray-bg">
-              <p class="bold font-22 ">##word.Paid-Amount## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+              <p class="bold font-22">##word.Paid-Amount## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
             </fieldset>
           </div>
         </div>

@@ -355,8 +355,10 @@ module.exports = function init(site) {
             mainInsuranceCompany: insuranceCallback.mainInsuranceCompany,
             insuranceContract: insuranceCallback.insuranceContract,
             patientClass: _data.patient.insuranceClass,
+            patient: _data.patient,
             servicesList: [_data.doctor.consItem],
             payment: payment,
+            doctor : _data.doctor,
             hospitalResponsibility: _data.doctor.hospitalResponsibility,
             type: 'out',
             session: req.session

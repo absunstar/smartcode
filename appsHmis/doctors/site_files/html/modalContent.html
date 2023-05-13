@@ -54,16 +54,21 @@
               <div class="row">
                 <i-list class="col6" v="r" label="##word.Cons Item##" ng-model="item.consItem" items="servicesList"
                   display="name##session.lang##" ng-get="getServicesList($search)"> </i-list>
-                <i-list class="col6" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##"
+                <i-list class="col6" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##"
                   items="gendersList" ng-search="item.$genders"></i-list>
+              </div>
+
+              <div class="row">
+                <i-list class="col6" v="r" label="##word.Scientific Ranks##" ng-model="item.scientificRank" display="name##session.lang##"
+                  items="scientificRanksList" ng-search="item.$scientificRanks"></i-list>
               </div>
 
               <fieldset>
                 <div class="row">
-                  <i-control type="number" class="col6" ng-model="item.numOfRevisits"
-                    label="##word.Num Of Revisits##"></i-control>
-                  <i-control type="number" class="col6" ng-model="item.freeRevisitPer"
-                    label="##word.Free Revisit Per##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.freeRevistPeriod"
+                  label="##word.Free Revist Period##"></i-control>
+                <i-control type="number" class="col6" ng-model="item.freeRevistCount"
+                  label="##word.Free Revist Count##"></i-control>
                 </div>
 
                 <div class="row">

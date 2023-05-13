@@ -295,6 +295,8 @@ module.exports = function init(site) {
               code: insuranceContract.code,
               nameAr: insuranceContract.nameAr,
               nameEn: insuranceContract.nameEn,
+              startDate: insuranceContract.startDate,
+              endDate: insuranceContract.endDate,
               insuranceClass: insuranceContract.insuranceClassesList.find((_c) => _c.id == _data.insuranceClassId),
             };
 
@@ -330,326 +332,337 @@ module.exports = function init(site) {
 
   site.serviceMainInsurance = function (_data, callback) {
     let response = { done: false };
-    // if (!_data.mainInsuranceCompany || !_data.mainInsuranceCompany.id) {
-    //   response.error = 'Not Exists';
-    //   callback(response);
-    //   return;
-    // }
     const hmisSetting = site.getSystemSetting({ session: _data.session }).hmisSetting;
     let appServicesGroup = site.getApp('servicesGroups');
     let mainInsurance = app.memoryList.find((_c) => _data.mainInsuranceCompany && _c.id == _data.mainInsuranceCompany.id);
     response.done = true;
     let servicesList = [];
     let servicesIds = _data.servicesList.map((_s) => _s.id);
-
     site.getServices({ id: { $in: servicesIds } }, (servicesCb) => {
-      _data.servicesList.forEach((_service) => {
-        let foundService = false;
-        let foundCoverage = false;
-        let serviceMemory = servicesCb.find((_s) => _s.id == _service.id);
-        if (serviceMemory && serviceMemory.id) {
-          if (mainInsurance) {
-            serviceMemory.servicesCategoriesList = serviceMemory.servicesCategoriesList || [];
-            if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.patientClass) {
-              if (!foundService && mainInsurance.servicesList && mainInsurance.servicesList.length > 0) {
-                let serviceIndex = mainInsurance.servicesList.findIndex((_cService) => _cService.id === serviceMemory.id);
-                if (serviceIndex != -1) {
-                  foundService = true;
-                  if (mainInsurance.servicesList[serviceIndex].coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
-                    foundCoverage = true;
-                    let service = {
-                      id: serviceMemory.id,
-                      nameAr: mainInsurance.servicesList[serviceIndex].coName || serviceMemory.nameAr,
-                      nameEn: mainInsurance.servicesList[serviceIndex].coName || serviceMemory.nameEn,
-                      code: mainInsurance.servicesList[serviceIndex].coCode || serviceMemory.code,
-                      qty: 1,
-                      needApproval: mainInsurance.servicesList[serviceIndex].needApproval,
-                      approved: mainInsurance.servicesList[serviceIndex].needApproval ? false : true,
-                      vat: serviceMemory.vat,
-                      serviceGroup: serviceMemory.serviceGroup,
-                      pVat: 0,
-                      comVat: 0,
-                    };
-                    if (_data.type == 'out') {
-                      if (_data.payment == 'cash') {
-                        service.price = mainInsurance.servicesList[serviceIndex].cashOut;
-                        service.discount = mainInsurance.servicesList[serviceIndex].cashOutDisc;
-                      } else if (_data.payment == 'credit') {
-                        service.price = mainInsurance.servicesList[serviceIndex].creditOut;
-                        service.discount = mainInsurance.servicesList[serviceIndex].creditOutDisc;
+      let whereDoctorDeskTopToPeriod = { servicesIds, doctor: _data.doctor, patient: _data.patient };
+      if(mainInsurance) {
+        whereDoctorDeskTopToPeriod.mainInsurance = {
+          id : mainInsurance.id,
+          freeRevistPeriod : mainInsurance.freeRevistPeriod,
+          freeRevistCount : mainInsurance.freeRevistCount,
+        }
+      }
+      site.getDoctorDeskTopToPeriod(whereDoctorDeskTopToPeriod, (doctorDeskTop) => {
+        _data.servicesList.forEach((_service) => {
+          let foundService = false;
+          let foundCoverage = false;
+          let serviceMemory = servicesCb.find((_s) => _s.id == _service.id);
+          if (serviceMemory && serviceMemory.id) {
+            if (mainInsurance) {
+              serviceMemory.servicesCategoriesList = serviceMemory.servicesCategoriesList || [];
+              if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.patientClass) {
+                if (!foundService && mainInsurance.servicesList && mainInsurance.servicesList.length > 0) {
+                  let serviceIndex = mainInsurance.servicesList.findIndex((_cService) => _cService.id === serviceMemory.id);
+                  if (serviceIndex != -1) {
+                    foundService = true;
+                    if (mainInsurance.servicesList[serviceIndex].coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                      foundCoverage = true;
+                      let service = {
+                        id: serviceMemory.id,
+                        nameAr: mainInsurance.servicesList[serviceIndex].coName || serviceMemory.nameAr,
+                        nameEn: mainInsurance.servicesList[serviceIndex].coName || serviceMemory.nameEn,
+                        code: mainInsurance.servicesList[serviceIndex].coCode || serviceMemory.code,
+                        qty: 1,
+                        needApproval: mainInsurance.servicesList[serviceIndex].needApproval,
+                        approved: mainInsurance.servicesList[serviceIndex].needApproval ? false : true,
+                        vat: serviceMemory.vat,
+                        serviceGroup: serviceMemory.serviceGroup,
+                        pVat: 0,
+                        comVat: 0,
+                      };
+                      if (_data.type == 'out') {
+                        if (_data.payment == 'cash') {
+                          service.price = mainInsurance.servicesList[serviceIndex].cashOut;
+                          service.discount = mainInsurance.servicesList[serviceIndex].cashOutDisc;
+                        } else if (_data.payment == 'credit') {
+                          service.price = mainInsurance.servicesList[serviceIndex].creditOut;
+                          service.discount = mainInsurance.servicesList[serviceIndex].creditOutDisc;
+                        }
+                      } else if (_data.type == 'in') {
+                        if (_data.payment == 'cash') {
+                          service.price = mainInsurance.servicesList[serviceIndex].cashIn;
+                          service.discount = mainInsurance.servicesList[serviceIndex].cashInDisc;
+                        } else if (_data.payment == 'credit') {
+                          service.price = mainInsurance.servicesList[serviceIndex].creditIn;
+                          service.discount = mainInsurance.servicesList[serviceIndex].creditInDisc;
+                        }
                       }
-                    } else if (_data.type == 'in') {
-                      if (_data.payment == 'cash') {
-                        service.price = mainInsurance.servicesList[serviceIndex].cashIn;
-                        service.discount = mainInsurance.servicesList[serviceIndex].cashInDisc;
-                      } else if (_data.payment == 'credit') {
-                        service.price = mainInsurance.servicesList[serviceIndex].creditIn;
-                        service.discount = mainInsurance.servicesList[serviceIndex].creditInDisc;
-                      }
+
+                      // service.total = service.price - (service.price * service.discount) / 100;
+
+                      servicesList.unshift(service);
                     }
-
-                    // service.total = service.price - (service.price * service.discount) / 100;
-
-                    servicesList.unshift(service);
                   }
                 }
-              }
-              if (!foundService) {
-                if (
-                  serviceMemory &&
-                  serviceMemory.servicesCategoriesList &&
-                  serviceMemory.servicesCategoriesList.length > 0 &&
-                  mainInsurance.servicesCategoriesList &&
-                  mainInsurance.servicesCategoriesList.length > 0
-                ) {
-                  serviceMemory.servicesCategoriesList.forEach((_sCateGory) => {
-                    let categoryInsurance = mainInsurance.servicesCategoriesList.find((_c) => _c.id === _sCateGory.id);
+                if (!foundService) {
+                  if (
+                    serviceMemory &&
+                    serviceMemory.servicesCategoriesList &&
+                    serviceMemory.servicesCategoriesList.length > 0 &&
+                    mainInsurance.servicesCategoriesList &&
+                    mainInsurance.servicesCategoriesList.length > 0
+                  ) {
+                    serviceMemory.servicesCategoriesList.forEach((_sCateGory) => {
+                      let categoryInsurance = mainInsurance.servicesCategoriesList.find((_c) => _c.id === _sCateGory.id);
 
-                    if (!foundService && categoryInsurance && categoryInsurance.id) {
+                      if (!foundService && categoryInsurance && categoryInsurance.id) {
+                        foundService = true;
+                        if (categoryInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                          foundCoverage = true;
+                          let service = {
+                            id: serviceMemory.id,
+                            nameAr: serviceMemory.nameAr,
+                            nameEn: serviceMemory.nameEn,
+                            code: serviceMemory.code,
+                            needApproval: categoryInsurance.needApproval,
+                            approved: categoryInsurance.needApproval ? false : true,
+                            qty: 1,
+                            vat: serviceMemory.vat,
+                            serviceGroup: serviceMemory.serviceGroup,
+                            pVat: 0,
+                            comVat: 0,
+                          };
+
+                          if (_data.type == 'out') {
+                            if (_data.payment == 'cash') {
+                              service.price = serviceMemory.cashPriceOut;
+                              service.discount = categoryInsurance.applyDiscOut ? categoryInsurance.cashOut : 0;
+                            } else if (_data.payment == 'credit') {
+                              service.price = serviceMemory.creditPriceOut;
+                              service.discount = categoryInsurance.applyDiscOut ? categoryInsurance.creditOut : 0;
+                            }
+                          } else if (_data.type == 'in') {
+                            if (_data.payment == 'cash') {
+                              service.price = categoryInsurance.cashPriceIn;
+                              service.discount = categoryInsurance.applyDiscIn ? categoryInsurance.cashIn : 0;
+                            } else if (_data.payment == 'credit') {
+                              service.price = categoryInsurance.creditPriceIn;
+                              service.discount = categoryInsurance.applyDiscIn ? categoryInsurance.creditIn : 0;
+                            }
+                          }
+                          // service.total = service.price - (service.price * service.discount) / 100;
+                          servicesList.unshift(service);
+                        }
+                      }
+                    });
+                  }
+                }
+                if (!foundService) {
+                  if (mainInsurance.servicesGroupsList && mainInsurance.servicesGroupsList.length > 0) {
+                    let goupInsurance = mainInsurance.servicesGroupsList.find((_cGroup) => serviceMemory.serviceGroup && _cGroup.id == serviceMemory.serviceGroup.id);
+                    if (!foundService && goupInsurance && goupInsurance.id) {
                       foundService = true;
-                      if (categoryInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+
+                      if (goupInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
                         foundCoverage = true;
                         let service = {
                           id: serviceMemory.id,
                           nameAr: serviceMemory.nameAr,
                           nameEn: serviceMemory.nameEn,
+                          needApproval: goupInsurance.needApproval,
+                          approved: goupInsurance.needApproval ? false : true,
                           code: serviceMemory.code,
-                          needApproval: categoryInsurance.needApproval,
-                          approved: categoryInsurance.needApproval ? false : true,
                           qty: 1,
+                          price: 0,
+                          discount: 0,
+                          total: 0,
                           vat: serviceMemory.vat,
-                          serviceGroup: serviceMemory.serviceGroup,
                           pVat: 0,
+                          serviceGroup: serviceMemory.serviceGroup,
                           comVat: 0,
                         };
-
                         if (_data.type == 'out') {
                           if (_data.payment == 'cash') {
                             service.price = serviceMemory.cashPriceOut;
-                            service.discount = categoryInsurance.applyDiscOut ? categoryInsurance.cashOut : 0;
+                            service.discount = goupInsurance.applyDiscOut ? goupInsurance.cashOut : 0;
                           } else if (_data.payment == 'credit') {
                             service.price = serviceMemory.creditPriceOut;
-                            service.discount = categoryInsurance.applyDiscOut ? categoryInsurance.creditOut : 0;
+                            service.discount = goupInsurance.applyDiscOut ? goupInsurance.creditOut : 0;
                           }
                         } else if (_data.type == 'in') {
                           if (_data.payment == 'cash') {
-                            service.price = categoryInsurance.cashPriceIn;
-                            service.discount = categoryInsurance.applyDiscIn ? categoryInsurance.cashIn : 0;
+                            service.price = goupInsurance.cashPriceIn;
+                            service.discount = goupInsurance.applyDiscIn ? goupInsurance.cashIn : 0;
                           } else if (_data.payment == 'credit') {
-                            service.price = categoryInsurance.creditPriceIn;
-                            service.discount = categoryInsurance.applyDiscIn ? categoryInsurance.creditIn : 0;
+                            service.price = goupInsurance.creditPriceIn;
+                            service.discount = goupInsurance.applyDiscIn ? goupInsurance.creditIn : 0;
                           }
                         }
                         // service.total = service.price - (service.price * service.discount) / 100;
                         servicesList.unshift(service);
                       }
-                    }
-                  });
-                }
-              }
-              if (!foundService) {
-                if (mainInsurance.servicesGroupsList && mainInsurance.servicesGroupsList.length > 0) {
-                  let goupInsurance = mainInsurance.servicesGroupsList.find((_cGroup) => serviceMemory.serviceGroup && _cGroup.id == serviceMemory.serviceGroup.id);
-                  if (!foundService && goupInsurance && goupInsurance.id) {
-                    foundService = true;
+                    } else if (!foundService && goupInsurance && goupInsurance.id) {
+                      let goup = appServicesGroup.memoryList.find((_g) => _g.id === goupInsurance.id);
+                      if (goup && goup.servicesCategoriesList && goup.servicesCategoriesList.length > 0) {
+                        goup.servicesCategoriesList.forEach((_gCateGory) => {
+                          let serviceCategory = serviceMemory.servicesCategoriesList.find((__s) => __s.id === _gCateGory.id);
 
-                    if (goupInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
-                      foundCoverage = true;
-                      let service = {
-                        id: serviceMemory.id,
-                        nameAr: serviceMemory.nameAr,
-                        nameEn: serviceMemory.nameEn,
-                        needApproval: goupInsurance.needApproval,
-                        approved: goupInsurance.needApproval ? false : true,
-                        code: serviceMemory.code,
-                        qty: 1,
-                        price: 0,
-                        discount: 0,
-                        total: 0,
-                        vat: serviceMemory.vat,
-                        pVat: 0,
-                        serviceGroup: serviceMemory.serviceGroup,
-                        comVat: 0,
-                      };
-                      if (_data.type == 'out') {
-                        if (_data.payment == 'cash') {
-                          service.price = serviceMemory.cashPriceOut;
-                          service.discount = goupInsurance.applyDiscOut ? goupInsurance.cashOut : 0;
-                        } else if (_data.payment == 'credit') {
-                          service.price = serviceMemory.creditPriceOut;
-                          service.discount = goupInsurance.applyDiscOut ? goupInsurance.creditOut : 0;
-                        }
-                      } else if (_data.type == 'in') {
-                        if (_data.payment == 'cash') {
-                          service.price = goupInsurance.cashPriceIn;
-                          service.discount = goupInsurance.applyDiscIn ? goupInsurance.cashIn : 0;
-                        } else if (_data.payment == 'credit') {
-                          service.price = goupInsurance.creditPriceIn;
-                          service.discount = goupInsurance.applyDiscIn ? goupInsurance.creditIn : 0;
-                        }
-                      }
-                      // service.total = service.price - (service.price * service.discount) / 100;
-                      servicesList.unshift(service);
-                    }
-                  } else if (!foundService && goupInsurance && goupInsurance.id) {
-                    let goup = appServicesGroup.memoryList.find((_g) => _g.id === goupInsurance.id);
-                    if (goup && goup.servicesCategoriesList && goup.servicesCategoriesList.length > 0) {
-                      goup.servicesCategoriesList.forEach((_gCateGory) => {
-                        let serviceCategory = serviceMemory.servicesCategoriesList.find((__s) => __s.id === _gCateGory.id);
+                          if (serviceCategory && serviceCategory.id == _gCateGory.id) {
+                            foundService = true;
 
-                        if (serviceCategory && serviceCategory.id == _gCateGory.id) {
-                          foundService = true;
+                            if (goupInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
+                              foundCoverage = true;
 
-                          if (goupInsurance.coverage && _data.insuranceContract && _data.insuranceContract.insuranceClass.id == _data.patientClass.id) {
-                            foundCoverage = true;
+                              let service = {
+                                id: serviceMemory.id,
+                                nameAr: serviceMemory.nameAr,
+                                nameEn: serviceMemory.nameEn,
+                                code: serviceMemory.code,
+                                qty: 1,
+                                vat: serviceMemory.vat,
+                                pVat: 0,
+                                serviceGroup: serviceMemory.serviceGroup,
+                                comVat: 0,
+                                needApproval: goupInsurance.needApproval,
+                                approved: goupInsurance.needApproval ? false : true,
+                              };
 
-                            let service = {
-                              id: serviceMemory.id,
-                              nameAr: serviceMemory.nameAr,
-                              nameEn: serviceMemory.nameEn,
-                              code: serviceMemory.code,
-                              qty: 1,
-                              vat: serviceMemory.vat,
-                              pVat: 0,
-                              serviceGroup: serviceMemory.serviceGroup,
-                              comVat: 0,
-                              needApproval: goupInsurance.needApproval,
-                              approved: goupInsurance.needApproval ? false : true,
-                            };
-
-                            if (_data.type == 'out') {
-                              if (_data.payment == 'cash') {
-                                service.price = serviceMemory.cashPriceOut;
-                                service.discount = goupInsurance.applyDiscOut ? goupInsurance.cashOut : 0;
-                              } else if (_data.payment == 'credit') {
-                                service.price = serviceMemory.creditPriceOut;
-                                service.discount = goupInsurance.applyDiscOut ? goupInsurance.creditOut : 0;
+                              if (_data.type == 'out') {
+                                if (_data.payment == 'cash') {
+                                  service.price = serviceMemory.cashPriceOut;
+                                  service.discount = goupInsurance.applyDiscOut ? goupInsurance.cashOut : 0;
+                                } else if (_data.payment == 'credit') {
+                                  service.price = serviceMemory.creditPriceOut;
+                                  service.discount = goupInsurance.applyDiscOut ? goupInsurance.creditOut : 0;
+                                }
+                              } else if (_data.type == 'in') {
+                                if (_data.payment == 'cash') {
+                                  service.price = goupInsurance.cashPriceIn;
+                                  service.discount = goupInsurance.applyDiscIn ? goupInsurance.cashIn : 0;
+                                } else if (_data.payment == 'credit') {
+                                  service.price = goupInsurance.creditPriceIn;
+                                  service.discount = goupInsurance.applyDiscIn ? goupInsurance.creditIn : 0;
+                                }
                               }
-                            } else if (_data.type == 'in') {
-                              if (_data.payment == 'cash') {
-                                service.price = goupInsurance.cashPriceIn;
-                                service.discount = goupInsurance.applyDiscIn ? goupInsurance.cashIn : 0;
-                              } else if (_data.payment == 'credit') {
-                                service.price = goupInsurance.creditPriceIn;
-                                service.discount = goupInsurance.applyDiscIn ? goupInsurance.creditIn : 0;
-                              }
+                              // service.total = service.price - (service.price * service.discount) / 100;
+                              servicesList.unshift(service);
                             }
-                            // service.total = service.price - (service.price * service.discount) / 100;
-                            servicesList.unshift(service);
                           }
-                        }
-                      });
+                        });
+                      }
                     }
                   }
                 }
               }
             }
-          }
-          if (!foundCoverage) {
-            foundCoverage = true;
-            let service = {
-              id: serviceMemory.id,
-              nameAr: serviceMemory.nameAr,
-              nameEn: serviceMemory.nameEn,
-              serviceGroup: serviceMemory.serviceGroup,
-              approved: true,
-              discount: 0,
-              comVat: 0,
-              pVat: 0,
-              vat: serviceMemory.vat,
-              qty: 1,
-            };
-            if (_data.type == 'out') {
-              if (_data.payment == 'cash') {
-                service.price = serviceMemory.creditPriceOut;
-              } else if (_data.payment == 'credit') {
-                service.price = serviceMemory.creditPriceOut;
-              }
-            } else if (_data.type == 'in') {
-              if (_data.payment == 'cash') {
-                service.price = serviceMemory.cashPriceIn;
-              } else if (_data.payment == 'credit') {
-                service.price = serviceMemory.creditPriceIn;
-              }
-            }
-            // service.total = service.price + (service.price * service.vat) / 100;
-            // service.total = site.toNumber(service.total);
-            // service.patientCash = site.toNumber(service.total);
-            servicesList.unshift(service);
-          }
-          hmisSetting.vatList = hmisSetting.vatList || [];
-          let vatIndex = hmisSetting.vatList.findIndex((itm) => itm.id === _data.nationalityId);
-          servicesList[0].totalDisc = (servicesList[0].price * servicesList[0].discount) / 100;
-          servicesList[0].totalAfterDisc = servicesList[0].price - servicesList[0].totalDisc;
-
-          if (vatIndex !== -1) {
-            servicesList[0].pVat = hmisSetting.vatList[vatIndex].pVat;
-            servicesList[0].comVat = hmisSetting.vatList[vatIndex].comVat;
-          } else {
-            servicesList[0].pVat = hmisSetting.pVat || 0;
-            servicesList[0].comVat = hmisSetting.comVat || 0;
-          }
-          servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
-          servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat;
-          servicesList[0].total = servicesList[0].total;
-          servicesList[0].totalPVat = (servicesList[0].total * servicesList[0].pVat || 0) / 100;
-          servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
-          let detuct = 0;
-          if (_data.mainInsurance && _data.mainInsurance.id) {
-            if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
-              if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
-                detuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
-              } else {
-                if (_data.insuranceContract && _data.insuranceContract.insuranceClass) {
-                  detuct = _data.insuranceContract.insuranceClass.serviceDeduct;
+            if (!foundCoverage) {
+              foundCoverage = true;
+              let service = {
+                id: serviceMemory.id,
+                code: serviceMemory.code,
+                nameAr: serviceMemory.nameAr,
+                nameEn: serviceMemory.nameEn,
+                serviceGroup: serviceMemory.serviceGroup,
+                approved: true,
+                discount: 0,
+                comVat: 0,
+                pVat: 0,
+                vat: serviceMemory.vat,
+                qty: 1,
+              };
+              if (_data.type == 'out') {
+                if (_data.payment == 'cash') {
+                  service.price = serviceMemory.creditPriceOut;
+                } else if (_data.payment == 'credit') {
+                  service.price = serviceMemory.creditPriceOut;
+                }
+              } else if (_data.type == 'in') {
+                if (_data.payment == 'cash') {
+                  service.price = serviceMemory.cashPriceIn;
+                } else if (_data.payment == 'credit') {
+                  service.price = serviceMemory.creditPriceIn;
                 }
               }
-            } else {
-              if (_data.insuranceContract && _data.insuranceContract.insuranceClass.consultationType == 'percent') {
-                detuct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
-              } else {
-                detuct = _data.insuranceContract.insuranceClass.consultationDeduct;
-              }
+              // service.total = service.price + (service.price * service.vat) / 100;
+              // service.total = site.toNumber(service.total);
+              // service.patientCash = site.toNumber(service.total);
+              servicesList.unshift(service);
             }
-            console.log(detuct, _data.mainInsurance);
+            hmisSetting.vatList = hmisSetting.vatList || [];
+            let vatIndex = hmisSetting.vatList.findIndex((itm) => itm.id === _data.nationalityId);
+            servicesList[0].totalDisc = (servicesList[0].price * servicesList[0].discount) / 100;
+            servicesList[0].totalAfterDisc = servicesList[0].price - servicesList[0].totalDisc;
 
+            if (vatIndex !== -1) {
+              servicesList[0].pVat = hmisSetting.vatList[vatIndex].pVat;
+              servicesList[0].comVat = hmisSetting.vatList[vatIndex].comVat;
+            } else {
+              servicesList[0].pVat = hmisSetting.pVat || 0;
+              servicesList[0].comVat = hmisSetting.comVat || 0;
+            }
+            servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
+            servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat;
+            servicesList[0].total = servicesList[0].total;
+            servicesList[0].totalPVat = (servicesList[0].total * servicesList[0].pVat || 0) / 100;
+            servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
+            let deduct = 0;
             if (
+              mainInsurance &&
+              mainInsurance.id &&
               _data.insuranceContract &&
-              _data.insuranceContract.insuranceClass &&
-              _data.insuranceContract.insuranceClass.maxDeductAmount &&
-              _data.insuranceContract.insuranceClass.maxDeductAmount < detuct + servicesList[0].totalPVat
+              new Date(_data.insuranceContract.startDate) <= new Date() &&
+              new Date(_data.insuranceContract.endDate) >= new Date()
             ) {
-              servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
-              servicesList[0].comCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
-            } else {
-              servicesList[0].patientCash = detuct + servicesList[0].totalPVat;
-              servicesList[0].comCash = servicesList[0].total - detuct + servicesList[0].totalComVat;
-            }
-          } else {
-            servicesList[0].patientCash = servicesList[0].total;
-            servicesList[0].comCash = 0;
-            servicesList[0].totalComVat = 0;
-          }
 
-          servicesList[0].patientDetuct = detuct;
-          if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {
-            servicesList[0].hospitalResponsibility = _data.hospitalResponsibility;
+              if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
+                if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
+                  deduct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
+                } else {
+                  if (_data.insuranceContract && _data.insuranceContract.insuranceClass) {
+                    deduct = _data.insuranceContract.insuranceClass.serviceDeduct;
+                  }
+                }
+              } else {
+                if (_data.insuranceContract && _data.insuranceContract.insuranceClass.consultationType == 'percent') {
+                  deduct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
+                } else {
+                  deduct = _data.insuranceContract.insuranceClass.consultationDeduct;
+                }
+              }
+
+              if (
+                _data.insuranceContract &&
+                _data.insuranceContract.insuranceClass &&
+                _data.insuranceContract.insuranceClass.maxDeductAmount &&
+                _data.insuranceContract.insuranceClass.maxDeductAmount < deduct + servicesList[0].totalPVat
+              ) {
+                servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
+                servicesList[0].comCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
+              } else {
+                servicesList[0].patientCash = deduct + servicesList[0].totalPVat;
+                servicesList[0].comCash = servicesList[0].total - deduct + servicesList[0].totalComVat;
+              }
+            } else {
+              servicesList[0].patientCash = servicesList[0].total + servicesList[0].totalPVat;
+              servicesList[0].comCash = 0;
+              servicesList[0].totalComVat = 0;
+            }
+
+            servicesList[0].patientDeduct = deduct;
+            if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {
+              servicesList[0].hospitalResponsibility = _data.hospitalResponsibility;
+            }
+            if (serviceMemory.normalRangeList && serviceMemory.normalRangeList.length > 0) {
+              servicesList[0].normalRangeList = serviceMemory.normalRangeList;
+            }
           }
-          if (serviceMemory.normalRangeList && serviceMemory.normalRangeList.length > 0) {
-            servicesList[0].normalRangeList = serviceMemory.normalRangeList;
-          }
+        });
+        if (servicesList.length > 0) {
+          response.done = true;
+          response.servicesList = servicesList;
+          callback(response);
+          return;
+        } else {
+          response.error = 'Not Exists';
+          callback(response);
+          return;
         }
       });
-      if (servicesList.length > 0) {
-        response.done = true;
-        response.servicesList = servicesList;
-        callback(response);
-        return;
-      } else {
-        response.error = 'Not Exists';
-        callback(response);
-        return;
-      }
     });
   };
   app.init();

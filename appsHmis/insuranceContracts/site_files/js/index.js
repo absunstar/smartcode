@@ -6,7 +6,7 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: {url :'/images/insuranceContracts.png'},
+    image: { url: '/images/insuranceContracts.png' },
     active: true,
   };
   $scope.item = {};
@@ -201,7 +201,7 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
-        }
+        },
       },
     }).then(
       function (response) {
@@ -220,7 +220,7 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
   $scope.getInsuranceCompaniesList = function () {
     $scope.busy = true;
     $scope.insuranceCompaniesList = [];
-     $http({
+    $http({
       method: 'POST',
       url: '/api/insuranceCompanies/all',
       data: {
@@ -231,7 +231,7 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
-        }
+        },
       },
     }).then(
       function (response) {
@@ -299,6 +299,175 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getServicesGroupsList = function () {
+    $scope.busy = true;
+    $scope.servicesGroupsList = [];
+    $http({
+        method: 'POST',
+        url: '/api/servicesGroups/all',
+        data: {
+            where: { active: true },
+            select: {
+                id: 1,
+                code: 1,
+                nameEn: 1,
+                nameAr: 1,
+            },
+        },
+    }).then(
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.servicesGroupsList = response.data.list;
+            }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+        }
+    );
+};
+
+$scope.getServicesCategoriesList = function ($search) {
+    if ($search && $search.length < 1) {
+        return;
+    }
+    $scope.busy = true;
+    $scope.servicesCategoriesList = [];
+    $http({
+        method: 'POST',
+        url: '/api/servicesCategories/all',
+        data: {
+            where: { active: true },
+            select: {
+                id: 1,
+                code: 1,
+                nameEn: 1,
+                nameAr: 1,
+            },
+            search: $search,
+        },
+    }).then(
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.servicesCategoriesList = response.data.list;
+            }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+        }
+    );
+};
+
+$scope.getServicesList = function ($search) {
+    $scope.busy = true;
+    $scope.servicesList = [];
+    $http({
+        method: 'POST',
+        url: '/api/services/all',
+        data: {
+            where: { active: true },
+            select: {
+                id: 1,
+                code: 1,
+                nameEn: 1,
+                nameAr: 1,
+                servicesCategoriesList: 1,
+                cashPriceOut: 1,
+                creditPriceOut: 1,
+                cashPriceIn: 1,
+                creditPriceIn: 1,
+                packagePrice: 1,
+                vat: 1,
+            },
+            search: $search,
+        },
+    }).then(
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.servicesList = response.data.list;
+            }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+        }
+    );
+};
+
+  $scope.addServicesGroups = function (_item) {
+    $scope.error = '';
+    if (_item.$serviceGroup && _item.$serviceGroup.id) {
+        if (!_item.servicesGroupsList.some((s) => s.id === _item.$serviceGroup.id)) {
+            _item.servicesGroupsList.unshift({
+                ..._item.$serviceGroup,
+                cashOut: 0,
+                creditOut: 0,
+                cashIn: 0,
+                creditIn: 0,
+                secondAmnt: 0,
+                secoundValuePerDay: 0,
+                coverage: true,
+            
+            });
+        }
+        _item.$serviceGroup = {};
+    } else {
+        $scope.error = 'Must Select Service Group';
+        return;
+    }
+};
+
+$scope.addServicesCategories = function (_item) {
+    $scope.error = '';
+    if (_item.$serviceCategory && _item.$serviceCategory.id) {
+        if (!_item.servicesCategoriesList.some((s) => s.id === _item.$serviceCategory.id)) {
+            _item.servicesCategoriesList.unshift({
+                ..._item.$serviceCategory,
+                cashOut: 0,
+                creditOut: 0,
+                cashIn: 0,
+                creditIn: 0,
+                coverage: true,
+             
+            });
+        }
+        _item.$serviceCategory = {};
+    } else {
+        $scope.error = 'Must Select Service Category';
+        return;
+    }
+};
+
+$scope.addServices = function (_item) {
+    $scope.error = '';
+    if (_item.$service && _item.$service.id) {
+        if (!_item.servicesList.some((s) => s.id === _item.$service.id)) {
+            _item.servicesList.unshift({
+                ..._item.$service,
+                cashIn: 0,
+                creditIn: 0,
+                cashOut: 0,
+                creditOut: 0,
+                packagePrice: 0,
+                cashInDisc: 0,
+                creditInDisc: 0,
+                cashOutDisc: 0,
+                creditOutDisc: 0,
+                coverage: true,
+            });
+        }
+        _item.$service = {};
+    } else {
+        $scope.error = 'Must Select Service';
+        return;
+    }
+};
+
+
   $scope.addInsuranceClass = function () {
     $scope.error = '';
     $scope.item.insuranceClassesList = $scope.item.insuranceClassesList || [];
@@ -309,14 +478,17 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
           nameAr: $scope.item.$insuranceClass.nameAr,
           nameEn: $scope.item.$insuranceClass.nameEn,
           code: $scope.item.$insuranceClass.code,
-          maxServiceAmount : 0,
-          maxConsAmount : 0,
-          freeRevisitAmount : 0,
-          maxDeductAmount : 0,
-          serviceDeduct : 0,
-          serviceType : 'percent',
-          consultationDeduct : 0,
-          consultationType : 'percent',
+          maxServiceAmount: 0,
+          maxConsAmount: 0,
+          freeRevisitAmount: 0,
+          maxDeductAmount: 0,
+          serviceDeduct: 0,
+          serviceType: 'percent',
+          consultationDeduct: 0,
+          consultationType: 'percent',
+          servicesCategoriesList: [],
+          servicesGroupsList: [],
+          servicesList: [],
         });
       }
       delete $scope.item.$insuranceClass;
@@ -341,4 +513,7 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
   $scope.getInsuranceCompaniesList();
   $scope.getNumberingAuto();
   $scope.getInsuranceClassesList();
+  $scope.getServicesGroupsList();
+  $scope.getServicesCategoriesList();
+  $scope.getServicesList();
 });

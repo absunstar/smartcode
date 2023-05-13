@@ -686,6 +686,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           mobile: 1,
           gender: 1,
           homeTel: 1,
+          freeRevistPeriod: 1,
+          freeRevistCount: 1,
+          scientificRank : 1,
         },
       },
     }).then(
@@ -834,7 +837,10 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           }, 1500);
         } else {
           let obj = {
+            doctor: _item.doctor,
+            patient: _item.patient,
             mainInsuranceCompany: _item.mainInsuranceCompany,
+            doctor: _item.doctor,
             patientClass: _item.patient.insuranceClass,
             insuranceContract: _item.insuranceContract,
             servicesList: [_item.$order],

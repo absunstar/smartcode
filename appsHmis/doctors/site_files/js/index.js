@@ -372,6 +372,27 @@ app.controller('doctors', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getScientificRanksList = function () {
+        $scope.busy = true;
+        $scope.scientificRanksList = [];
+        $http({
+            method: 'POST',
+            url: '/api/scientificRanks',
+            data: {},
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.scientificRanksList = response.data.list;
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = err;
+            }
+        );
+    };
+
     $scope.getNumberingAuto = function () {
         $scope.error = '';
         $scope.busy = true;
@@ -436,4 +457,5 @@ app.controller('doctors', function ($scope, $http, $timeout) {
     $scope.getSpecialtiesList();
     $scope.getWeekDaysList();
     $scope.getGendersList();
+    $scope.getScientificRanksList();
 });

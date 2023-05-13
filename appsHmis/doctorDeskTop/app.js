@@ -354,7 +354,6 @@ module.exports = function init(site) {
               result.medicineList.push({ ..._order, date: doc.date });
             }
           });
-
         });
       }
       res.json({
@@ -406,6 +405,8 @@ module.exports = function init(site) {
             mainInsuranceCompany: callback.mainInsuranceCompany,
             insuranceContract: callback.insuranceContract,
             patientClass: _data.patient.insuranceClass,
+            patient: _data.patient,
+            doctor: _data.doctor,
             servicesList: servicesList,
             payment: payment,
             hospitalResponsibility: _data.doctor.hospitalResponsibility,
@@ -464,6 +465,68 @@ module.exports = function init(site) {
         }
       );
     }
+  };
+
+  site.getDoctorDeskTopToPeriod = function (obj, callBack) {
+    let select = {
+      id: 1,
+      code: 1,
+      date: 1,
+      service: 1,
+      patient: 1,
+      doctor: 1,
+    };
+    // { 'service.id': { $in: obj.servicesIds }, select }
+    let freeRevistCount = 0;
+    let freeRevistPeriod = 0;
+
+    if (obj.doctor.freeRevistCount) {
+      freeRevistCount = obj.doctor.freeRevistCount;
+    } else if (obj.mainInsurance) {
+      freeRevistCount = obj.mainInsurance.freeRevistCount;
+    }
+
+    if (obj.doctor.freeRevistPeriod) {
+      freeRevistPeriod = obj.doctor.freeRevistPeriod;
+    } else if (obj.mainInsurance) {
+      freeRevistPeriod = obj.mainInsurance.freeRevistPeriod;
+    }
+
+    let newDate = new Date();
+    let fromDate = new Date();
+    fromDate.setTime(fromDate.getTime() - freeRevistPeriod * 24 * 60 * 60 * 1000);
+    fromDate.setHours(0, 0, 0, 0);
+    newDate.setHours(0, 0, 0, 0);
+    let where = {};
+    // where['service.id'] = { $in: obj.servicesIds };
+    where['doctor.specialty.id'] = obj.doctor.specialty.id;
+    where['patient.id'] = obj.patient.id;
+    app.all({ where, select, sort: { date: -1 } }, (err, docs) => {
+      if (!err) {
+        if (docs && docs.length > 0) {
+          let list = [];
+          docs.forEach((_doc) => {
+            console.log(_doc.date);
+            _doc.date = new Date(_doc.date);
+            _doc.date.setHours(0, 0, 0, 0);
+
+            if (_doc.date >= fromDate && _doc.date <= newDate) {
+              let index = list.findIndex((itm) => itm.serviceId === _doc.service.id);
+              if (index !== -1) {
+                list.push({ serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) });
+              } else {
+                list[index].count += 1;
+              }
+            }
+          });
+          callBack(list);
+        } else {
+          callBack(false);
+        }
+      } else {
+        callBack(false);
+      }
+    });
   };
 
   site.hasOrderDoctorDeskTop = function (where) {

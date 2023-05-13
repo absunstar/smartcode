@@ -53,64 +53,234 @@
         </div>
       </div>
 
-      <div class="row">
-        <table class="table hover bold">
-          <tr>
-            <th>##word.Code##</th>
-            <th>##word.Class Name##</th>
-            <th>##word.Service Deduct##</th>
-            <th>##word.Consultation Deduct##</th>
-            <th>##word.Free Revisit Amount##</th>
-            <th>##word.Max Deduct Amount##</th>
-            <th>##word.Max Service Amount##</th>
-            <th>##word.Max Cons Amount##</th>
-          </tr>
-          <tr ng-repeat="c in item.insuranceClassesList">
-            <td class="center blue">{{c.code}}</td>
-            <td class="center">{{c.name##session.lang##}}</td>
-            <td class="center">
-              <br />
-              <i-control type="number" ng-model="c.serviceDeduct"> </i-control>
-              <div class="row">
-                <i-radio class="col6" group="{{$index}}serviceType" label="##word.Percent##" ng-value="percent" ng-model="c.serviceType"> </i-radio>
-                <i-radio class="col6" group="{{$index}}serviceType" label="##word.Value##" ng-value="value" ng-model="c.serviceType"> </i-radio>
-              </div>
-            </td>
-            <td class="center">
-              <br />
-              <i-control type="number" ng-model="c.consultationDeduct"> </i-control>
-              <div class="row">
-                <i-radio class="col6" group="{{$index}}cons" label="##word.Percent##" ng-value="percent" ng-model="c.consultationType"> </i-radio>
-                <i-radio class="col6" group="{{$index}}cons" label="##word.Value##" ng-value="value" ng-model="c.consultationType"> </i-radio>
-              </div>
-            </td>
-            <td class="center">
-              <div class="row">
-                <i-control class="col9" type="number" ng-model="c.freeRevisitAmount"> </i-control>
-                <span class="currency col3">##word.$##</span>
-              </div>
-            </td>
-            <td class="center">
-              <div class="row">
-                <i-control class="col9" type="number" ng-model="c.maxDeductAmount"> </i-control>
-                <span class="currency col3">##word.$##</span>
-              </div>
-            </td>
+      <div class="row" ng-repeat="c in item.insuranceClassesList">
+        <fieldset>
+          <div class="row">
+            <table class="table hover bold">
+              <tr>
+                <th>##word.Code##</th>
+                <th>##word.Class Name##</th>
+                <th>##word.Service Deduct##</th>
+                <th>##word.Consultation Deduct##</th>
+                <th>##word.Free Revisit Amount##</th>
+                <th>##word.Max Deduct Amount##</th>
+                <th>##word.Max Service Amount##</th>
+                <th>##word.Max Cons Amount##</th>
+              </tr>
+              <tr>
+                <td class="center blue">{{c.code}}</td>
+                <td class="center">{{c.name##session.lang##}}</td>
+                <td class="center">
+                  <br />
+                  <i-control type="number" ng-model="c.serviceDeduct"> </i-control>
+                  <div class="row">
+                    <i-radio class="col6" group="{{$index}}serviceType" label="##word.Percent##" ng-value="percent" ng-model="c.serviceType"> </i-radio>
+                    <i-radio class="col6" group="{{$index}}serviceType" label="##word.Value##" ng-value="value" ng-model="c.serviceType"> </i-radio>
+                  </div>
+                </td>
+                <td class="center">
+                  <br />
+                  <i-control type="number" ng-model="c.consultationDeduct"> </i-control>
+                  <div class="row">
+                    <i-radio class="col6" group="{{$index}}cons" label="##word.Percent##" ng-value="percent" ng-model="c.consultationType"> </i-radio>
+                    <i-radio class="col6" group="{{$index}}cons" label="##word.Value##" ng-value="value" ng-model="c.consultationType"> </i-radio>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col9" type="number" ng-model="c.freeRevisitAmount"> </i-control>
+                    <span class="currency col3">##word.$##</span>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col9" type="number" ng-model="c.maxDeductAmount"> </i-control>
+                    <span class="currency col3">##word.$##</span>
+                  </div>
+                </td>
 
-            <td class="center">
-              <div class="row">
-                <i-control class="col9" type="number" ng-model="c.maxServiceAmount"> </i-control>
-                <span class="currency col3">##word.$##</span>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col9" type="number" ng-model="c.maxServiceAmount"> </i-control>
+                    <span class="currency col3">##word.$##</span>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="row">
+                    <i-control class="col9" type="number" ng-model="c.maxConsAmount"> </i-control>
+                    <span class="currency col3">##word.$##</span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="row">
+            <div class="tabs">
+              <div class="tabs-header full">
+                <a class="tab-link" onclick="site.showTabContent(event, '#serviceGroup')">
+                  <span> ##word.Services Groups##</span>
+                </a>
+
+                <a class="tab-link" onclick="site.showTabContent(event, '#serviceCategory')">
+                  <span> ##word.Services Categories##</span>
+                </a>
+
+                <a class="tab-link" onclick="site.showTabContent(event, '#service')">
+                  <span> ##word.Services##</span>
+                </a>
               </div>
-            </td>
-            <td class="center">
-              <div class="row">
-                <i-control class="col9" type="number" ng-model="c.maxConsAmount"> </i-control>
-                <span class="currency col3">##word.$##</span>
+
+              <div class="tabs-content">
+                <div id="serviceGroup" class="tab-content">
+                  <div class="row">
+                    <i-list
+                      help-id=""
+                      label="##word.Service Group##"
+                      class="col7"
+                      ng-model="c.$serviceGroup"
+                      display="name##session.lang##"
+                      items="servicesGroupsList"
+                      ng-search="c.$servicesGroup"
+                    ></i-list>
+                    <div class="col5">
+                      <br />
+                      <i-button type="add" label="##word.Add Service Group##" ng-click="addServicesGroups(c)"></i-button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <table class="table hover center bold">
+                      <tr>
+                        <th>##word.Code##</th>
+                        <th>##word.Name##</th>
+                        <th class="not-print">##word.Actions##</th>
+                      </tr>
+                      <tr ng-repeat="g in c.servicesGroupsList">
+                        <td class="center blue">
+                          <p class="center">( {{g.code}} )</p>
+                          <i-checkbox label="##word.Coverage##" ng-model="g.coverage"></i-checkbox>
+                          <i-checkbox ng-show="g.coverage" label="##word.NeedApproval##" ng-model="g.needApproval"></i-checkbox>
+                        </td>
+                        <td>
+                          <p class="center word-line">{{g.name##session.lang##}}</p>
+                        </td>
+
+                        <td class="center not-print">
+                        
+                          <i-button type="delete" ng-click="c.servicesGroupsList.splice($index,1)"> </i-button>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+                <div id="serviceCategory" class="tab-content">
+                  <div class="row">
+                    <i-list
+                      label="##word.Service Category##"
+                      class="col7"
+                      ng-model="c.$serviceCategory"
+                      display="name##session.lang##"
+                      items="servicesCategoriesList"
+                      ng-get="getservicesCategoriesList($search)"
+                    ></i-list>
+                    <div class="col5">
+                      <br />
+                      <i-button type="add" label="##word.Add Service Category##" ng-click="addServicesCategories(c)"></i-button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <table class="table hover center bold">
+                      <tr>
+                        <th>##word.Code##</th>
+                        <th>##word.Name##</th>
+
+                        <th class="not-print">##word.Actions##</th>
+                      </tr>
+
+                      <tr ng-repeat="c in c.servicesCategoriesList">
+                        <td class="center blue">
+                          <p class="center">( {{c.code}} )</p>
+                          <i-checkbox label="##word.Coverage##" ng-model="c.coverage"></i-checkbox>
+                          <i-checkbox ng-show="c.coverage" label="##word.NeedApproval##" ng-model="c.needApproval"></i-checkbox>
+                        </td>
+                        <td>
+                          <p class="center word-line">{{c.name##session.lang##}}</p>
+                        </td>
+                        <td class="center not-print word-line">
+                         
+                          <i-button type="delete" ng-click="c.servicesCategoriesList.splice($index,1)"> </i-button>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+                <div id="service" class="tab-content">
+                  <div class="row">
+                    <i-list help-id="" label="##word.Service##" class="col7" ng-model="c.$service" display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
+                    <div class="col5">
+                      <br />
+                      <i-button type="add" label="##word.Add Service##" ng-click="addServices(c)"></i-button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <table class="table hover center bold">
+                      <tr>
+                        <th>
+                          <p>##word.Code##</p>
+                          <p>##word.Co code##</p>
+                        </th>
+                        <th>
+                          <p>##word.Name##</p>
+                          <p>##word.Co Name##</p>
+                        </th>
+                        <th>
+                          <p>##word.Cash## ##word.In##</p>
+                          <p>##word.Credit## ##word.In##</p>
+                        </th>
+                        <th>
+                          <p>##word.Cash## ##word.Out##</p>
+                          <p>##word.Credit## ##word.Out##</p>
+                        </th>
+
+                        <th class="not-print">##word.Actions##</th>
+                      </tr>
+                      <tr ng-repeat="s in c.servicesList">
+                        <td class="center">
+                          <p class="blue text-center">( {{s.code}} )</p>
+                          <i-control type="text" ng-model="s.coCode"></i-control>
+                        </td>
+                        <td>
+                          <p class="text-center">{{s.name##session.lang##}}</p>
+                          <i-control type="text" ng-model="s.coName"></i-control>
+                        </td>
+
+                        <td class="center">
+                          <p class="">{{s.cashPriceIn}} <span class="currency">##word.$##</span></p>
+
+                          <p class="">{{s.creditPriceIn}} <span class="currency">##word.$##</span></p>
+                        </td>
+
+                        <td class="center">
+                          <p class="">{{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
+
+                          <p class="">{{s.creditPriceOut}} <span class="currency">##word.$##</span></p>
+                        </td>
+                        <td class="center not-print">
+                          <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
+                          <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>
+                          <i-button type="delete" ng-click="c.servicesList.splice($index,1)"> </i-button>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
               </div>
-            </td>
-          </tr>
-        </table>
+            </div>
+          </div>
+        </fieldset>
+        <br>
+        <hr>
       </div>
     </fieldset>
   </div>

@@ -242,7 +242,6 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
           $scope.count = response.data.count;
           site.hideModal($scope.modalSearchID);
           $scope.startWaitingTime();
-
         }
       },
       function (err) {
@@ -266,14 +265,12 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
           } else {
             _item.$hours = _item.$hours + 1 || 1;
             _item.$minutes = 0;
-
           }
         } else {
           _item.$minutes = _item.$minutes + 1 || 1;
         }
       });
       $scope.$applyAsync();
-
     }, 1000 * 60);
   };
 
@@ -300,6 +297,9 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
           mobile: 1,
           gender: 1,
           homeTel: 1,
+          freeRevistPeriod: 1,
+          freeRevistCount: 1,
+          scientificRank: 1,
         },
       },
     }).then(
@@ -426,41 +426,40 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#radiologyDetails').removeClass('hidden');
     $scope.order = item;
-    document.getElementById("treatment").innerHTML = $scope.order.treatment;
+    document.getElementById('treatment').innerHTML = $scope.order.treatment;
     $scope.localPrint = function () {
-        let printer = {};
-        if ($scope.setting.printerProgram.a4Printer) {
-            printer = $scope.setting.printerProgram.a4Printer;
-        } else {
-            $scope.error = '##word.A4 printer must select##';
-            return;
-        }
-        if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-            printer = JSON.parse('##user.printerPath##');
-        }
-        $timeout(() => {
-            site.print({
-                selector: '#radiologyDetails',
-                ip: printer.ipDevice,
-                port: printer.portDevice,
-                pageSize: 'A4',
-                printer: printer.ip.name.trim(),
-            });
-        }, 500);
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+        printer = JSON.parse('##user.printerPath##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#radiologyDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
     };
 
     $scope.localPrint();
 
     $scope.busy = false;
     $timeout(() => {
-        $('#radiologyDetails').addClass('hidden');
+      $('#radiologyDetails').addClass('hidden');
     }, 8000);
-};
+  };
 
-if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+  if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
     $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
-}
-
+  }
 
   $scope.getAll({ date: new Date() });
   $scope.getDoctorsList();

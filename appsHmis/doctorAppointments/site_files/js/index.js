@@ -259,6 +259,9 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           mobile: 1,
           homeTel: 1,
           gender: 1,
+          freeRevistPeriod: 1,
+          freeRevistCount: 1,
+          scientificRank : 1,
         },
         search: $search,
         /* limit: 1, */
