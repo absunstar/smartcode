@@ -593,17 +593,18 @@ app.controller('employees', function ($scope, $http, $timeout) {
             return;
         }
 
-        const index = $scope.item.allowancesList.findIndex((_al) => _al.allowance.id === selectedAllowance.allowance.id);
-        if (index !== -1) {
-            $scope.allowancesError = '##word.Allowance Exisit##';
-            return;
+        if ($scope.item.allowancesList) {
+            const index = $scope.item.allowancesList.findIndex((_al) => _al.allowance && _al.allowance.id === selectedAllowance.allowance.id);
+            if (index !== -1) {
+                $scope.allowancesError = '##word.Allowance Exisit##';
+                return;
+            }
         }
-
+        $scope.item.allowancesList = $scope.item.allowancesList || [];
         $scope.item.allowancesList.push({
             allowance: selectedAllowance.allowance,
             value: selectedAllowance.value,
             type: selectedAllowance.type,
-
             active: true,
         });
         $scope.selectedAllowance = {};
@@ -627,12 +628,14 @@ app.controller('employees', function ($scope, $http, $timeout) {
             $scope.deductionsError = '##word.Please Select Deduction Type##';
             return;
         }
-
-        const index = $scope.item.deductionsList.findIndex((_al) => _al.deduction.id === selectedDeduction.deduction.id);
-        if (index !== -1) {
-            $scope.deductionsError = '##word.Deduction Exisit##';
-            return;
+        if ($scope.item.deductionsList) {
+            const index = $scope.item.deductionsList.findIndex((_al) => _al.deduction && _al.deduction.id === selectedDeduction.deduction.id);
+            if (index !== -1) {
+                $scope.deductionsError = '##word.Deduction Exisit##';
+                return;
+            }
         }
+        $scope.item.deductionsList = $scope.item.deductionsList || [];
 
         $scope.item.deductionsList.push({
             deduction: selectedDeduction.deduction,

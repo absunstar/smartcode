@@ -868,6 +868,7 @@ module.exports = function init(site) {
                                         }
                                     });
                                 }
+                                
                                 if (result.bonusList && result.bonusList.length) {
                                     const paySlipItem = {
                                         code: result.bonusList[0].appName,
