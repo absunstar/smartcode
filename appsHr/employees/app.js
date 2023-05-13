@@ -627,7 +627,7 @@ module.exports = function init(site) {
                         name: 'employeePermissions',
                         En: 'Employee Permissions',
                         Ar: 'صلاحيات الموظف',
-                    }
+                    },
                 ];
                 _data.type = site.usersTypesList[3];
 
@@ -837,35 +837,38 @@ module.exports = function init(site) {
 
                                 let totalAllowance = 0;
                                 let totalDeductions = 0;
-                                doc.allowancesList.forEach((_elm) => {
-                                    if (_elm && _elm.active && !_elm.allowance.addToBasicSalary) {
-                                        totalAllowance += _elm.value;
-                                        allowancesList.push(_elm);
-                                    } else if (_elm.allowance.addToBasicSalary) {
-                                        const allowance = site.calculatePaySlipAllownce(_elm, basicSalary);
-                                        allowancesList.push({
-                                            id: _elm.allowance.id,
-                                            code: _elm.allowance.code,
-                                            nameAr: _elm.allowance.nameAr,
-                                            nameEn: _elm.allowance.nameEn,
-                                            type: _elm.type,
-                                            addToBasicSalary: _elm.allowance.addToBasicSalary,
-                                            value: allowance.value,
-                                            basicSalary,
-                                            originalValue: _elm.value,
-                                        });
-                                        totalAllowance += allowance.value;
-                                    }
-                                });
-
-                                doc.deductionsList.forEach((_elm) => {
-                                    if (_elm && _elm.active) {
-                                        const deuction = site.calculatePaySlipDeduction(_elm, basicSalary);
-                                        deuction.basicSalary = basicSalary;
-                                        deductionsList.push(deuction);
-                                    }
-                                });
-
+                                if (doc.allowancesList && doc.allowancesList.length) {
+                                    doc.allowancesList.forEach((_elm) => {
+                                        if (_elm && _elm.active && !_elm.allowance.addToBasicSalary) {
+                                            totalAllowance += _elm.value;
+                                            allowancesList.push(_elm);
+                                        } else if (_elm.allowance.addToBasicSalary) {
+                                            const allowance = site.calculatePaySlipAllownce(_elm, basicSalary);
+                                            allowancesList.push({
+                                                id: _elm.allowance.id,
+                                                code: _elm.allowance.code,
+                                                nameAr: _elm.allowance.nameAr,
+                                                nameEn: _elm.allowance.nameEn,
+                                                type: _elm.type,
+                                                addToBasicSalary: _elm.allowance.addToBasicSalary,
+                                                value: allowance.value,
+                                                basicSalary,
+                                                originalValue: _elm.value,
+                                            });
+                                            totalAllowance += allowance.value;
+                                        }
+                                    });
+                                }
+                                if (doc.deductionsList && doc.deductionsList.length) {
+                                    doc.deductionsList.forEach((_elm) => {
+                                        if (_elm && _elm.active) {
+                                            const deuction = site.calculatePaySlipDeduction(_elm, basicSalary);
+                                            deuction.basicSalary = basicSalary;
+                                            deductionsList.push(deuction);
+                                        }
+                                    });
+                                }
+                                
                                 if (result.bonusList && result.bonusList.length) {
                                     const paySlipItem = {
                                         code: result.bonusList[0].appName,

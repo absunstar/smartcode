@@ -244,7 +244,7 @@ app.controller('services', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getServicesGroupsList = function (country) {
+    $scope.getServicesGroupsList = function () {
         $scope.busy = true;
         $scope.servicesGroupsList = [];
         $http({
