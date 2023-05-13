@@ -4,14 +4,20 @@
         <div class="row padding">
             <div class="col9">
                 <div class="row">
-                    <div class="row">
-                        <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
-                        <i-list class="col4" label="##word.Group##" ng-model="item.group" items="customersGroupsList" display="name##session.lang##" ng-search="item.$vendorGroup"></i-list>
-                        <div class="col4">
-                            <i-checkbox ng-model="item.active" label="##word.Active##"></i-checkbox>
-                            <i-checkbox ng-hide="item.id" ng-click="item.commercialCustomer?setCommercialInformations():''" ng-model="item.commercialCustomer" label="##word.Commercial Customer##"></i-checkbox>
-                        </div>
+
+                    <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code">
+                    </i-control>
+                    <i-list class="col4" label="##word.Group##" ng-model="item.group" items="customersGroupsList"
+                        display="name##session.lang##" ng-search="item.$vendorGroup"></i-list>
+                    <div class="col4">
+                        <i-checkbox ng-hide="item.id" ng-click="item.commercialCustomer?setCommercialInformations():''"
+                            ng-model="item.commercialCustomer" label="##word.Commercial Customer##"></i-checkbox>
+
                     </div>
+                    <div class="col4">
+                        <i-checkbox ng-model="item.active" label="##word.Active##"></i-checkbox>
+                    </div>
+
                     <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
                     <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
                 </div>
@@ -21,16 +27,36 @@
             </div>
         </div>
     </fieldset>
+
+    <fieldset>
+        <legend>##word.Accounting Informations##</legend>
+        <div class="row">
+            <i-control class="col4" type="number" label="##word.Purchase Maturity Period##"
+                ng-model="item.purchaseMaturityPeriod"></i-control>
+
+            <i-control class="col4" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit">
+            </i-control>
+        </div>
+    </fieldset>
 </div>
 <fieldset>
     <div class="tabs">
         <div class="tabs-header full">
-            <a class="tab-link" onclick="site.showTabContent(event, '#contactInformations')"> <span>##word.Contact Informatins## </span></a>
-            <a class="tab-link" ng-show="item.commercialCustomer" onclick="site.showTabContent(event, '#taxAndBusinessInformations')"> <span>##word.Tax And Business Informatins## </span></a>
-            <a class="tab-link" ng-show="item.commercialCustomer" onclick="site.showTabContent(event, '#branchesInformations')"> <span>##word.Branches Informatins## </span></a>
-            <a class="tab-link" ng-show="item.commercialCustomer" onclick="site.showTabContent(event, '#accountingInformations')"> <span>##word.Accounting Informatins## </span></a>
-            <a class="tab-link" ng-show="item.commercialCustomer" onclick="site.showTabContent(event,'#bankingAccounts')"> <span>##word.Banking Accounts## </span></a>
-            <a class="tab-link" ng-show="item.commercialCustomer" onclick="site.showTabContent(event, '#vendorsFiles')"> <span>##word.Files## </span></a>
+            <a class="tab-link" onclick="site.showTabContent(event, '#contactInformations')"> <span>##word.Contact
+                    Informatins## </span></a>
+            <a class="tab-link" ng-show="item.commercialCustomer"
+                onclick="site.showTabContent(event, '#taxAndBusinessInformations')"> <span>##word.Tax And Business
+                    Informatins## </span></a>
+            <a class="tab-link" ng-show="item.commercialCustomer"
+                onclick="site.showTabContent(event, '#branchesInformations')"> <span>##word.Branches Informatins##
+                </span></a>
+            <!-- <a class="tab-link" ng-show="item.commercialCustomer"
+                onclick="site.showTabContent(event, '#accountingInformations')"> <span>##word.Accounting Informatins##
+                </span></a> -->
+            <a class="tab-link" ng-show="item.commercialCustomer"
+                onclick="site.showTabContent(event,'#bankingAccounts')"> <span>##word.Banking Accounts## </span></a>
+            <a class="tab-link" ng-show="item.commercialCustomer" onclick="site.showTabContent(event, '#vendorsFiles')">
+                <span>##word.Files## </span></a>
         </div>
 
         <div class="tabs-content">
@@ -44,7 +70,8 @@
 
                         <i-control class="col3" label="##word.Fax##" ng-model="item.fax"></i-control>
 
-                        <i-control help-id="" class="col3" label="##word.Whatsapp##" ng-model="item.whatsapp"> </i-control>
+                        <i-control help-id="" class="col3" label="##word.Whatsapp##" ng-model="item.whatsapp">
+                        </i-control>
                     </div>
                 </fieldset>
 
@@ -72,15 +99,11 @@
                 <fieldset>
                     <legend>##word.Accounting##</legend>
                     <div class="row padding">
-                        <i-list
-                            class="col3"
-                            ng-model="item.linkBy"
-                            label="##word.Link By##"
-                            ng-change="getAccountingList(item.linkBy)"
-                            items="accountingLinkList"
-                            display="name##session.lang##"
-                        ></i-list>
-                        <i-list class="col3" ng-model="item.account" label="##word.Account##" items="accountingList" display="name##session.lang##"></i-list>
+                        <i-list class="col3" ng-model="item.linkBy" label="##word.Link By##"
+                            ng-change="getAccountingList(item.linkBy)" items="accountingLinkList"
+                            display="name##session.lang##"></i-list>
+                        <i-list class="col3" ng-model="item.account" label="##word.Account##" items="accountingList"
+                            display="name##session.lang##"></i-list>
                     </div>
                 </fieldset>
             </div>
@@ -88,57 +111,66 @@
                 <fieldset>
                     <legend>##word.Tax Informations##</legend>
                     <div class="row">
-                        <i-control class="col3" label="##word.Tax Identification Number##" ng-model="item.taxIdentificationNumber"></i-control>
+                        <i-control class="col3" label="##word.Tax Identification Number##"
+                            ng-model="item.taxIdentificationNumber"></i-control>
 
-                        <i-control class="col3" label="##word.Tax Card Number##" ng-model="item.taxCardNumber"></i-control>
+                        <i-control class="col3" label="##word.Tax Card Number##"
+                            ng-model="item.taxCardNumber"></i-control>
 
-                        <i-control x-features="!protouch" class="col3" label="##word.Tax Office Code##" ng-model="item.taxOfficeCode"></i-control>
+                        <i-control x-features="!protouch" class="col3" label="##word.Tax Office Code##"
+                            ng-model="item.taxOfficeCode"></i-control>
 
-                        <i-control x-features="!protouch" class="col3" label="##word.Tax Office Name##" ng-model="item.taxOfficeName"></i-control>
+                        <i-control x-features="!protouch" class="col3" label="##word.Tax Office Name##"
+                            ng-model="item.taxOfficeName"></i-control>
                     </div>
 
                     <div class="row">
-                        <i-control class="col3" label="##word.Activity Address##" ng-model="item.activityAddress"></i-control>
+                        <i-control class="col3" label="##word.Activity Address##"
+                            ng-model="item.activityAddress"></i-control>
 
                         <i-control class="col3" label="##word.File Number##" ng-model="item.fileNumber"> </i-control>
 
-                        <i-control class="col3" label="##word.Activity Name##" ng-model="item.activityName"> </i-control>
+                        <i-control class="col3" label="##word.Activity Name##" ng-model="item.activityName">
+                        </i-control>
 
-                        <i-control class="col3" label="##word.Financier Name##" ng-model="item.financierName"></i-control>
+                        <i-control class="col3" label="##word.Financier Name##"
+                            ng-model="item.financierName"></i-control>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>##word.Commercial Registeration Information##</legend>
                     <div class="row">
-                        <i-control class="col3" label="##word.Commercial Name##" ng-model="item.commercialName"></i-control>
+                        <i-control class="col3" label="##word.Commercial Name##"
+                            ng-model="item.commercialName"></i-control>
 
-                        <i-control class="col3" label="##word.Business Attribute##" ng-model="item.businessAttribute"></i-control>
+                        <i-control class="col3" label="##word.Business Attribute##"
+                            ng-model="item.businessAttribute"></i-control>
 
-                        <i-control class="col3" label="##word.Commerical Name##" ng-model="item.commericalName"></i-control>
+                        <i-control class="col3" label="##word.Commerical Name##"
+                            ng-model="item.commericalName"></i-control>
 
                         <i-control class="col3" label="##word.Tader Name##" ng-model="item.traderName"> </i-control>
                     </div>
 
                     <div class="row">
-                        <i-list
-                            class="col3"
-                            label="##word.Commerical Nationality##"
-                            ng-model="item.commericalNationality"
-                            items="nationalitiesList"
-                            display="name##session.lang##"
-                            ng-get="getNationalities($search)"
-                        ></i-list>
+                        <i-list class="col3" label="##word.Commerical Nationality##"
+                            ng-model="item.commericalNationality" items="nationalitiesList"
+                            display="name##session.lang##" ng-get="getNationalities($search)"></i-list>
 
-                        <i-control class="col3" label="##word.Financial System##" ng-model="item.financialSystem"></i-control>
+                        <i-control class="col3" label="##word.Financial System##"
+                            ng-model="item.financialSystem"></i-control>
 
-                        <i-control class="col3" label="##word.Commercial Validity##" ng-model="item.commercialValidity"></i-control>
+                        <i-control class="col3" label="##word.Commercial Validity##"
+                            ng-model="item.commercialValidity"></i-control>
 
                         <i-control class="col3" label="##word.Trade Type##" ng-model="item.tradeType"> </i-control>
                     </div>
 
                     <div class="row">
-                        <i-fullDate class="col6" label1="##word.Commercial Start Gregorian Date##" label2="##word.Commercial Start Hijri Date##" ng-model="item.commercialStartDate"></i-fullDate>
+                        <i-fullDate class="col6" label1="##word.Commercial Start Gregorian Date##"
+                            label2="##word.Commercial Start Hijri Date##"
+                            ng-model="item.commercialStartDate"></i-fullDate>
                     </div>
                 </fieldset>
             </div>
@@ -146,7 +178,8 @@
             <div id="branchesInformations" class="tab-content">
                 <fieldset>
                     <legend>
-                        <i-button type="push" ng-click="!item.branchesList.length?item.branchesList=[{}]:item.branchesList.unshift({})"></i-button>
+                        <i-button type="push"
+                            ng-click="!item.branchesList.length?item.branchesList=[{}]:item.branchesList.unshift({})"></i-button>
                         ##word.Branch Information##
                     </legend>
                     <fieldset ng-repeat="branch in item.branchesList">
@@ -160,38 +193,41 @@
                             <i-control class="col4" label="##word.Mobile##" ng-model="branch.mobile"></i-control>
                             <i-control class="col4" label="##word.Email##" ng-model="branch.email"></i-control>
                             <i-control class="col4" label="##word.Manger##" ng-model="branch.manger"></i-control>
-                            <i-control class="col4" label="##word.Manger Phone##" ng-model="branch.mangerPhone"></i-control>
-                            <i-control class="col4" label="##word.Manger Mobile##" ng-model="branch.mangerMobile"></i-control>
-                            <i-control class="col4" label="##word.Manger Email##" ng-model="branch.mangerEmail"></i-control>
+                            <i-control class="col4" label="##word.Manger Phone##"
+                                ng-model="branch.mangerPhone"></i-control>
+                            <i-control class="col4" label="##word.Manger Mobile##"
+                                ng-model="branch.mangerMobile"></i-control>
+                            <i-control class="col4" label="##word.Manger Email##"
+                                ng-model="branch.mangerEmail"></i-control>
                         </div>
                     </fieldset>
                 </fieldset>
             </div>
-
+            <!-- 
             <div id="accountingInformations" class="tab-content">
                 <fieldset>
                     <legend>##word.Accounting Informations##</legend>
                     <div class="row">
-                        <i-control class="col3" type="number" label="##word.Purchase Maturity Period##" ng-model="item.purchaseMaturityPeriod"></i-control>
+                        <i-control class="col3" type="number" label="##word.Purchase Maturity Period##"
+                            ng-model="item.purchaseMaturityPeriod"></i-control>
 
-                        <i-control class="col3" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit"> </i-control>
+                        <i-control class="col3" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit">
+                        </i-control>
                     </div>
                 </fieldset>
-            </div>
+            </div> -->
 
             <div id="bankingAccounts" class="tab-content">
                 <div class="row">
-                    <i-list
-                        class="col4"
-                        label="##word.Bank##"
-                        items="banksList"
-                        display="name##session.lang##"
+                    <i-list class="col4" label="##word.Bank##" items="banksList" display="name##session.lang##"
                         ng-model="selectedBank.bank"
-                        ng-change="selectedBank.swiftCode = selectedBank.bank.swiftCode"
-                    ></i-list>
-                    <i-control class="col4" disabled label="##word.Swift Code##" ng-model="selectedBank.swiftCode"></i-control>
-                    <i-control class="col4" label="##word.Account Number##" ng-model="selectedBank.accountNumber"></i-control>
-                    <i-control class="col4" label="##word.Account Name##" ng-model="selectedBank.accountName"></i-control>
+                        ng-change="selectedBank.swiftCode = selectedBank.bank.swiftCode;selectedBank.iban = selectedBank.bank.ibanSymbol"></i-list>
+                    <i-control class="col4" disabled label="##word.Swift Code##"
+                        ng-model="selectedBank.swiftCode"></i-control>
+                    <i-control class="col4" label="##word.Account Number##"
+                        ng-model="selectedBank.accountNumber"></i-control>
+                    <i-control class="col4" label="##word.Account Name##"
+                        ng-model="selectedBank.accountName"></i-control>
                     <i-control class="col4" label="##word.IBAN##" ng-model="selectedBank.iban"></i-control>
                     <div class="col2">
                         <br />
@@ -220,11 +256,14 @@
                                 <td class="center">{{bank.accountNumber}}</td>
                                 <td class="center">{{bank.accountName}}</td>
                                 <td>
-                                    <i-checkbox ng-model="bank.active" class="text-center text-success" label="##word.Active##" ng-if="bank.active"></i-checkbox>
-                                    <i-checkbox ng-model="bank.active" class="text-center text-danger" label="##word.Not Active##" ng-if="!bank.active"></i-checkbox>
+                                    <i-checkbox ng-model="bank.active" class="text-center text-success"
+                                        label="##word.Active##" ng-if="bank.active"></i-checkbox>
+                                    <i-checkbox ng-model="bank.active" class="text-center text-danger"
+                                        label="##word.Not Active##" ng-if="!bank.active"></i-checkbox>
                                 </td>
                                 <td class="center">
-                                    <i-button type="delete" ng-click="item.bankInformationsList.splice($index,1)"> </i-button>
+                                    <i-button type="delete" ng-click="item.bankInformationsList.splice($index,1)">
+                                    </i-button>
                                 </td>
                             </tr>
                         </table>
@@ -243,9 +282,12 @@
                         <div class="row">
                             <div class="col10">
                                 <div class="row">
-                                    <i-list class="col4" label="##word.File Type##" ng-model="f.fileType" items="filesTypesList" display="name##session.lang##" ng-search="item.$fileType"> </i-list>
+                                    <i-list class="col4" label="##word.File Type##" ng-model="f.fileType"
+                                        items="filesTypesList" display="name##session.lang##"
+                                        ng-search="item.$fileType"> </i-list>
 
-                                    <i-control class="col3" label="##word.File Name##" ng-model="f.fileName"> </i-control>
+                                    <i-control class="col3" label="##word.File Name##" ng-model="f.fileName">
+                                    </i-control>
 
                                     <i-date class="col4" ng-model="f.fileDate" label="##word.File Date##"></i-date>
 
@@ -255,7 +297,8 @@
                             <div class="col2 center">
                                 <br />
                                 <br />
-                                <i-button type="delete" label="##word.Delete##" ng-click="item.filesList.splice($index,1)"> </i-button>
+                                <i-button type="delete" label="##word.Delete##"
+                                    ng-click="item.filesList.splice($index,1)"> </i-button>
                             </div>
                         </div>
                         <br />

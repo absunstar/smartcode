@@ -238,8 +238,10 @@ app.controller('mainInsuranceCompanies', function ($scope, $http, $timeout) {
                 },
                 select: {
                     id: 1,
+                    code: 1,
                     nameEn: 1,
                     nameAr: 1,
+                    callingCode: 1,
                 },
             },
         }).then(

@@ -16,6 +16,16 @@
             <i-image class="img128 center" ng-model="item.image"></i-image>
         </div>
     </fieldset>
+    <fieldset>
+        <legend>##word.Accounting Informations##</legend>
+        <div class="row">
+            <i-control class="col4" type="number" label="##word.Purchase Maturity Period##"
+                ng-model="item.purchaseMaturityPeriod"></i-control>
+
+            <i-control class="col4" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit">
+            </i-control>
+        </div>
+    </fieldset>
 </div>
 
 <fieldset>
@@ -27,8 +37,8 @@
                     And Business Informatins## </span></a>
             <a class="tab-link" onclick="site.showTabContent(event, '#branchesInformations')"> <span>##word.Branches
                     Informatins## </span></a>
-            <a class="tab-link" onclick="site.showTabContent(event, '#accountingInformations')"> <span>##word.Accounting
-                    Informatins## </span></a>
+            <!-- <a class="tab-link" onclick="site.showTabContent(event, '#accountingInformations')"> <span>##word.Accounting
+                    Informatins## </span></a> -->
             <a class="tab-link" onclick="site.showTabContent(event,'#bankingAccounts')"> <span>##word.Banking Accounts##
                 </span></a>
             <a class="tab-link" onclick="site.showTabContent(event, '#vendorsFiles')"> <span>##word.Files## </span></a>
@@ -203,7 +213,7 @@
                 </fieldset>
             </div>
 
-            <div id="accountingInformations" class="tab-content">
+            <!-- <div id="accountingInformations" class="tab-content">
                 <fieldset>
                     <legend>##word.Accounting Informations##</legend>
                     <div class="row">
@@ -214,13 +224,13 @@
                         </i-control>
                     </div>
                 </fieldset>
-            </div>
+            </div> -->
 
             <div id="bankingAccounts" class="tab-content">
                 <div class="row">
                     <i-list class="col4" label="##word.Bank##" items="banksList" display="name##session.lang##"
                         ng-model="selectedBank.bank"
-                        ng-change="selectedBank.swiftCode = selectedBank.bank.swiftCode"></i-list>
+                        ng-change="selectedBank.swiftCode = selectedBank.bank.swiftCode;selectedBank.iban = selectedBank.bank.ibanSymbol"></i-list>
                     <i-control class="col4" disabled label="##word.Swift Code##"
                         ng-model="selectedBank.swiftCode"></i-control>
                     <i-control class="col4" label="##word.Account Number##"

@@ -377,6 +377,7 @@ app.controller('customers', function ($scope, $http, $timeout) {
                     swiftCode: 1,
                     nameEn: 1,
                     nameAr: 1,
+                    ibanSymbol: 1,
                 },
             },
         }).then(

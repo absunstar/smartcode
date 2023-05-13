@@ -59,7 +59,7 @@
 
             <div class="row">
               <i-list class="col4" label="##word.Country##" ng-change="getGovesList(item.country)"
-                ng-model="item.country" display="name##session.lang##" items="countriesList"
+                ng-model="item.country" display="name##session.lang##" display2="callingCode" items="countriesList"
                 ng-search="item.$Country"></i-list>
               <i-list help-id="" class="col4" label="##word.Governorate##" ng-change="getCitiesList(item.gov)"
                 ng-model="item.gov" display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>

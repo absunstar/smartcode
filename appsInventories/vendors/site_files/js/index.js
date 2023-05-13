@@ -21,14 +21,6 @@ app.controller('vendors', function ($scope, $http, $timeout) {
         document.querySelector(`${$scope.modalID} .tab-link`).click();
     };
 
-    // $scope.bank = {
-    //     bankName: '',
-    //     swiftCode: '',
-    //     iban: '',
-    //     accountNumber: '',
-    //     accountName: '',
-    //     active: true,
-    // };
     $scope.add = function (_item) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
@@ -44,7 +36,6 @@ app.controller('vendors', function ($scope, $http, $timeout) {
             data: $scope.item,
         }).then(
             function (response) {
-
                 $scope.busy = false;
                 if (response.data.done) {
                     site.hideModal($scope.modalID);
@@ -371,6 +362,7 @@ app.controller('vendors', function ($scope, $http, $timeout) {
                     swiftCode: 1,
                     nameEn: 1,
                     nameAr: 1,
+                    ibanSymbol: 1,
                 },
             },
         }).then(

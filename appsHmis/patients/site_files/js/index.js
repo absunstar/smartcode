@@ -27,7 +27,7 @@ app.controller('patients', function ($scope, $http, $timeout) {
             $scope.error = v.messages[0].ar;
             return;
         }
-        console.log(v,"Ffffffffffffff");
+        console.log(v, 'Ffffffffffffff');
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -300,6 +300,7 @@ app.controller('patients', function ($scope, $http, $timeout) {
                     code: 1,
                     nameEn: 1,
                     nameAr: 1,
+                    callingCode: 1,
                 },
             },
         }).then(

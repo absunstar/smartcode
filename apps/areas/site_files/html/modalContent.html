@@ -3,31 +3,18 @@
         <div class="col9">
             <div class="row">
                 <div class="row">
-                    <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code"> </i-control>
+                    <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code">
+                    </i-control>
                     <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
                 </div>
-                <i-list
-                    help-id=""
-                    v="r"
-                    label="##word.Country##"
-                    ng-change="getGovesList(item.country)"
-                    ng-model="item.country"
-                    display="name##session.lang##"
-                    items="countriesList"
-                    ng-search="item.$Country"
-                ></i-list>
+                <i-list help-id="" v="r" label="##word.Country##" ng-change="getGovesList(item.country)"
+                    ng-model="item.country" display="name##session.lang##" display2="callingCode" items="countriesList"
+                    ng-search="item.$Country"></i-list>
 
-                <i-list
-                    help-id=""
-                    v="r"
-                    label="##word.Governorate##"
-                    ng-change="getCitiesList(item.gov)"
-                    ng-model="item.gov"
-                    display="name##session.lang##"
-                    items="govesList"
-                    ng-search="item.$gov"
-                ></i-list>
-                <i-list label="##word.City##" ng-model="item.city" v="r" items="citiesList" display="name##session.lang##" ng-search="_search.$area.$city_search"> </i-list>
+                <i-list help-id="" v="r" label="##word.Governorate##" ng-change="getCitiesList(item.gov)"
+                    ng-model="item.gov" display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
+                <i-list label="##word.City##" ng-model="item.city" v="r" items="citiesList"
+                    display="name##session.lang##" ng-search="_search.$area.$city_search"> </i-list>
                 <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
                 <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
             </div>

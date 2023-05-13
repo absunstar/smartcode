@@ -9,6 +9,7 @@
         <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control class="col6" type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
         <i-control class="col6" type="text" v="r" ng-model="item.swiftCode" label="##word.Swift Code##"></i-control>
+        <i-control class="col3" type="text" ng-model="item.ibanSymbol" label="##word.IBAN Symbol##"></i-control>
       </div>
     </div>
   </div>
@@ -28,10 +29,13 @@
   <fieldset>
     <legend>##word.Address Informations##</legend>
     <div class="row">
-      <i-list class="col4" label="##word.Country##" ng-change="getGoves(item.country)" ng-model="item.country" display="name##session.lang##" items="countriesList" ng-search="item.$Country"></i-list>
+      <i-list class="col4" label="##word.Country##" ng-change="getGoves(item.country)" ng-model="item.country"
+        display="name##session.lang##" items="countriesList" display2="callingCode" ng-search="item.$Country"></i-list>
 
-      <i-list class="col4" label="##word.Governorate##" ng-change="getCities(item.gov)" ng-model="item.gov" display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
-      <i-list class="col4" label="##word.City##" ng-model="item.city" items="citiesList" display="name##session.lang##" ng-search="_search.$area.$city_search"> </i-list>
+      <i-list class="col4" label="##word.Governorate##" ng-change="getCities(item.gov)" ng-model="item.gov"
+        display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
+      <i-list class="col4" label="##word.City##" ng-model="item.city" items="citiesList" display="name##session.lang##"
+        ng-search="_search.$area.$city_search"> </i-list>
       <i-control type="text" ng-model="item.address" label="##word.Address##"></i-control>
     </div>
   </fieldset>
@@ -39,8 +43,10 @@
   <fieldset>
     <legend>##word.Accounting##</legend>
     <div class="row padding">
-      <i-list class="col4" ng-model="item.linkBy" label="##word.Link By##" ng-change="getAccountingList(item.linkBy)" items="accountingLinkList" display="name##session.lang##"></i-list>
-      <i-list class="col8" ng-model="item.account" label="##word.Account##" items="accountingList" display="name##session.lang##"></i-list>
+      <i-list class="col4" ng-model="item.linkBy" label="##word.Link By##" ng-change="getAccountingList(item.linkBy)"
+        items="accountingLinkList" display="name##session.lang##"></i-list>
+      <i-list class="col8" ng-model="item.account" label="##word.Account##" items="accountingList"
+        display="name##session.lang##"></i-list>
     </div>
   </fieldset>
 </div>

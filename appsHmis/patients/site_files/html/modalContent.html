@@ -7,7 +7,8 @@
         <div class="row">
             <i-control label="##word.Full Name##" v="r" ng-keydown="changeName('fullNameEn',$event)"
                 ng-model="item.fullNameEn"> </i-control>
-            <i-control label="الإسم بالكامل" v="r" ng-keydown="changeName('fullNameAr',$event)" ng-model="item.fullNameAr">
+            <i-control label="الإسم بالكامل" v="r" ng-keydown="changeName('fullNameAr',$event)"
+                ng-model="item.fullNameAr">
             </i-control>
         </div>
     </div>
@@ -77,8 +78,8 @@
 
                         <div class="row">
                             <i-list class="col6" label="##word.Patient Type##" ng-model="item.patientType"
-                                display="name##session.lang##" items="patientTypesList"
-                                v="r"  ng-search="item.$patientTypes"></i-list>
+                                display="name##session.lang##" items="patientTypesList" v="r"
+                                ng-search="item.$patientTypes"></i-list>
                             <i-list class="col6" label="##word.Marital Status##" ng-model="item.maritalStatus"
                                 display="name##session.lang##" items="maritalStatusList"
                                 ng-search="item.$maritalStatus"></i-list>
@@ -91,7 +92,8 @@
 
                         <div class="row">
                             <fieldset>
-                                <i-control class="col6" v="r" label="##word.Iq/Havisa Num##" ng-model="item.havisaNum">
+                                <i-control class="col6" v="r ll10 ml10" label="##word.Iq/Havisa Num##"
+                                    ng-model="item.havisaNum">
                                 </i-control>
                                 <div class="col6">
                                     <i-file label="##word.Iq/Havisa File##" ng-model="item.havisaFile"></i-file>
@@ -100,10 +102,10 @@
                         </div>
 
                         <div class="row">
-                            <i-list class="col6" label="##word.Nationality##" ng-model="item.nationality"
-                            v="r"  display="name##session.lang##" items="nationalitiesList"
+                            <i-list class="col6" label="##word.Nationality##" ng-model="item.nationality" v="r"
+                                display="name##session.lang##" items="nationalitiesList"
                                 ng-search="item.$nationality"></i-list>
-                            <i-date class="col6" label="##word.Date Of Birth##"  ng-model="item.dateOfBirth"></i-date>
+                            <i-date class="col6" label="##word.Date Of Birth##" ng-model="item.dateOfBirth"></i-date>
                         </div>
 
                         <div class="row">
@@ -190,7 +192,7 @@
                             <div class="row">
                                 <i-list help-id="" class="col6" label="##word.Country##"
                                     ng-change="getGovesList(item.country)" ng-model="item.country"
-                                    display="name##session.lang##" items="countriesList"
+                                    display="name##session.lang##" items="countriesList" display2="callingCode"
                                     ng-search="item.$Country"></i-list>
                                 <i-list help-id="" class="col6" label="##word.Governorate##"
                                     ng-change="getCitiesList(item.gov)" ng-model="item.gov"

@@ -201,6 +201,7 @@ app.controller('goves', function ($scope, $http, $timeout) {
                     code: 1,
                     nameEn: 1,
                     nameAr: 1,
+                    callingCode: 1,
                 },
             },
         }).then(
