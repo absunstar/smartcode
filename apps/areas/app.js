@@ -260,6 +260,11 @@ module.exports = function init(site) {
                     let list = app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
+
+                    if (where && where['city.id']) {
+                        list = list.filter((g) => g.city && g.city.id == where['city.id']);
+                    }
+
                     res.json({
                         done: true,
                         list: list,

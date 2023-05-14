@@ -322,16 +322,18 @@ app.controller('mainInsuranceCompanies', function ($scope, $http, $timeout) {
 
     $scope.getAreasList = function (city) {
         $scope.busy = true;
+        $scope.areasList = [];
         $http({
             method: 'POST',
             url: '/api/areas/all',
             data: {
                 where: {
-                    city: city,
+                    'city.id': city.id,
                     active: true,
                 },
                 select: {
                     id: 1,
+                    code: 1,
                     nameEn: 1,
                     nameAr: 1,
                 },

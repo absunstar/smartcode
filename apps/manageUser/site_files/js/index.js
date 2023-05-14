@@ -277,11 +277,12 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
             url: '/api/areas/all',
             data: {
                 where: {
-                    city: city,
+                    'city.id': city.id,
                     active: true,
                 },
                 select: {
                     id: 1,
+                    code: 1,
                     nameEn: 1,
                     nameAr: 1,
                 },
