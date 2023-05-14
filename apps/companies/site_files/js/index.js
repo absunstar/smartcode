@@ -268,11 +268,15 @@ app.controller('companies', function ($scope, $http, $timeout) {
             return;
         }
         $scope.busy = true;
-        $scope.list = [];
+        $scope.citiesList = [];
         $http({
             method: 'POST',
             url: '/api/cities/all',
             data: {
+                where: {
+                    'gov.id': gov.id,
+                    active: true,
+                },
                 select: {
                     id: 1,
                     nameAr: 1,

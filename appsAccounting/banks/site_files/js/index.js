@@ -286,12 +286,13 @@ app.controller('banks', function ($scope, $http, $timeout) {
 
     $scope.getCities = function (gov) {
         $scope.busy = true;
+        $scope.citiesList = [];
         $http({
             method: 'POST',
             url: '/api/cities/all',
             data: {
                 where: {
-                    gov: gov,
+                    'gov.id': gov.id,
                     active: true,
                 },
                 select: {

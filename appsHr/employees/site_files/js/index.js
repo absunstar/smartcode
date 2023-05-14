@@ -482,7 +482,7 @@ app.controller('employees', function ($scope, $http, $timeout) {
             url: '/api/cities/all',
             data: {
                 where: {
-                    gov: gov,
+                    'gov.id': gov.id,
                     active: true,
                 },
                 select: {

@@ -220,7 +220,7 @@ app.controller('areas', function ($scope, $http, $timeout) {
 
     $scope.getGovesList = function (country) {
         $scope.busy = true;
-        $scope.govesList=[];
+        $scope.govesList = [];
         $http({
             method: 'POST',
             url: '/api/goves/all',
@@ -251,12 +251,13 @@ app.controller('areas', function ($scope, $http, $timeout) {
 
     $scope.getCitiesList = function (gov) {
         $scope.busy = true;
+        $scope.citiesList = [];
         $http({
             method: 'POST',
             url: '/api/cities/all',
             data: {
                 where: {
-                    gov: gov,
+                    'gov.id': gov.id,
                     active: true,
                 },
                 select: {

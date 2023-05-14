@@ -241,12 +241,13 @@ app.controller('insuranceCompanies', function ($scope, $http, $timeout) {
 
     $scope.getCitiesList = function (gov) {
         $scope.busy = true;
+        $scope.citiesList = [];
         $http({
             method: 'POST',
             url: '/api/cities/all',
             data: {
                 where: {
-                    gov: gov,
+                    'gov.id': gov.id,
                     active: true,
                 },
                 select: { id: 1, nameAr: 1, nameEn: 1 },
