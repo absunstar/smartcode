@@ -363,6 +363,7 @@ app.controller('vendors', function ($scope, $http, $timeout) {
                     nameEn: 1,
                     nameAr: 1,
                     ibanSymbol: 1,
+                    ibanLength: 1,
                 },
             },
         }).then(

@@ -314,6 +314,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     nameEn: 1,
                     ibanSymbol: 1,
+                    ibanLength: 1,
                 },
             },
         }).then(
