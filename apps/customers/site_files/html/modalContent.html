@@ -209,7 +209,26 @@
                     <i-control class="col4" disabled label="##word.Swift Code##" ng-model="selectedBank.swiftCode"></i-control>
                     <i-control class="col4" label="##word.Account Number##" ng-model="selectedBank.accountNumber"></i-control>
                     <i-control class="col4" label="##word.Account Name##" ng-model="selectedBank.accountName"></i-control>
-                    <i-control class="col4" label="##word.IBAN##" v="ll15 ml32" ng-model="selectedBank.iban"></i-control>
+
+                    <fieldset class="col6">
+                        <div class="row">
+                            <i-control class="col8" label="##word.IBAN##" ng-model="selectedBank.iban" minlength="selectedBank.iban.length"></i-control>
+                            <div class="col4 center">
+                                <div class="col6">
+                                    <div class="row">
+                                        <p>##word.Requried##</p>
+                                        <p>{{selectedBank.bank.ibanLength}}</p>
+                                    </div>
+                                </div>
+                                <div class="col6">
+                                    <div class="row">
+                                        <p>##word.Enterd##</p>
+                                        <p>{{selectedBank.iban.length}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
                     <div class="col2">
                         <br />
                         <i-button type="push" ng-click="addBank(selectedBank)"></i-button>
