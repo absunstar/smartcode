@@ -214,11 +214,12 @@ app.controller('companies', function ($scope, $http, $timeout) {
 
     $scope.getGovList = function () {
         $scope.busy = true;
-        $scope.list = [];
+        $scope.govesList = [];
         $http({
             method: 'POST',
             url: '/api/goves/all',
             data: {
+                where:{active:true,},
                 select: {
                     id: 1,
                     nameAr: 1,

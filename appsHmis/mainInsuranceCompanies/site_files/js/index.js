@@ -260,12 +260,13 @@ app.controller('mainInsuranceCompanies', function ($scope, $http, $timeout) {
 
     $scope.getGovesList = function (country) {
         $scope.busy = true;
+        $scope.govesList = [];
         $http({
             method: 'POST',
             url: '/api/goves/all',
             data: {
                 where: {
-                    country: country,
+                    'country.id': country.id,
                     active: true,
                 },
                 select: {

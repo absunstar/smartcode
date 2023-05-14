@@ -272,15 +272,18 @@ module.exports = function init(site) {
                         nameEn: site.get_RegExp(search, 'i'),
                     });
                 }
+
                 if (app.allowMemory) {
                     if (!search) {
                         search = 'id';
                     }
-
                     let list = app.memoryList
-
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
+
+                    if (where && where['country.id']) {
+                        list = list.filter((g) => g.country && g.country.id == where['country.id']);
+                    }
 
                     res.json({
                         done: true,

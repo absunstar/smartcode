@@ -273,7 +273,7 @@ module.exports = function init(site) {
                     });
                 }
 
-                console.log('where', where);
+        
 
                 if (app.allowMemory) {
                     if (!search) {

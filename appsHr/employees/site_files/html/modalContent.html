@@ -171,7 +171,7 @@
                                 <i-list help-id="" class="col6" label="##word.Country##"
                                     ng-change="getGovesList(item.country)" ng-model="item.country"
                                     display="name##session.lang##" items="countriesList" display2="callingCode"
-                                    ng-search="item.$Country"></i-list>
+                                    ng-search="item.$country"></i-list>
                                 <i-list help-id="" class="col6" label="##word.Governorate##"
                                     ng-change="getCitiesList(item.gov)" ng-model="item.gov"
                                     display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
@@ -385,8 +385,8 @@
                     <fieldset>
                         <legend>##word.Documents##</legend>
                         <div class="row">
-                            <i-list class="col3" label="##word.File Type##" ng-model="document.fileType"
-                                display="name##session.lang##" items="filesTypesList"
+                            <i-list class="col3" label="##word.Document Type##" ng-model="document.fileType"
+                                display="name##session.lang##" items="documentsTypesList"
                                 ng-search="item.$documentType"></i-list>
 
                             <i-checkbox ng-model="document.renewable" class="col2"

@@ -215,7 +215,7 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
             url: '/api/goves/all',
             data: {
                 where: {
-                    country: country,
+                    'country.id': country.id,
                     active: true,
                 },
                 select: {

@@ -256,12 +256,12 @@ app.controller('vendors', function ($scope, $http, $timeout) {
         $scope.search = {};
     };
 
-    $scope.getFilesTypes = function () {
+    $scope.getDocumentsTypes = function () {
         $scope.busy = true;
-        $scope.filesTypesList = [];
+        $scope.documentsTypesList = [];
         $http({
             method: 'POST',
-            url: '/api/filesTypes',
+            url: '/api/documentsTypes',
             data: {
                 select: {
                     id: 1,
@@ -273,7 +273,7 @@ app.controller('vendors', function ($scope, $http, $timeout) {
             function (response) {
                 $scope.busy = false;
                 if (response.data.done && response.data.list.length > 0) {
-                    $scope.filesTypesList = response.data.list;
+                    $scope.documentsTypesList = response.data.list;
                 }
             },
             function (err) {
@@ -443,7 +443,7 @@ app.controller('vendors', function ($scope, $http, $timeout) {
     $scope.getAll();
     $scope.getBanks();
     $scope.getNumberingAuto();
-    $scope.getFilesTypes();
+    $scope.getDocumentsTypes();
     $scope.getNationalities();
     $scope.getVendorsGroups();
     $scope.getAccountingLinkList();
