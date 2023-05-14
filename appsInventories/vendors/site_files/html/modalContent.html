@@ -18,9 +18,21 @@
     <fieldset>
         <legend>##word.Accounting Informations##</legend>
         <div class="row">
-            <i-control class="col4" type="number" label="##word.Maturity Period##" ng-model="item.maturityPeriod"></i-control><span>##word.Day##</span>
+            <div class="col4">
+                <div class="col9"><i-control type="number" label="##word.Maturity Period##" ng-model="item.maturityPeriod"></i-control></div>
+                <div class="col3 padding">
+                    <br />
+                    <span>##word.$##</span>
+                </div>
+            </div>
 
-            <i-control class="col4" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit"> </i-control><span>##word.$##</span>
+            <div class="col4">
+                <div class="col9"><i-control type="number" label="##word.Credit Limit##" ng-model="item.creditLimit"> </i-control></div>
+                <div class="col3 padding">
+                    <br />
+                    <span>##word.$##</span>
+                </div>
+            </div>
         </div>
     </fieldset>
 </div>
@@ -205,10 +217,10 @@
                     <i-control class="col4" disabled label="##word.Swift Code##" ng-model="selectedBank.swiftCode"></i-control>
                     <i-control class="col4" label="##word.Account Number##" ng-model="selectedBank.accountNumber"></i-control>
                     <i-control class="col4" label="##word.Account Name##" ng-model="selectedBank.accountName"></i-control>
-      
+
                     <fieldset class="col6">
                         <div class="row">
-                            <i-control class="col8" label="##word.IBAN##" ng-model="selectedBank.iban" ></i-control>
+                            <i-control class="col8" label="##word.IBAN##" ng-model="selectedBank.iban"></i-control>
                             <div class="col4 center">
                                 <div class="col6">
                                     <div class="row">

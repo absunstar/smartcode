@@ -31,9 +31,22 @@
     <fieldset>
         <legend>##word.Accounting Informations##</legend>
         <div class="row">
-            <i-control class="col4" type="number" label="##word.Maturity Period##" ng-model="item.maturityPeriod"></i-control><span>##word.Day##</span>
-
-            <i-control class="col4" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit"> </i-control><span>##word.$##</span>
+            <div class="col4">
+                <div class="col9">
+                    <i-control type="number" label="##word.Maturity Period##" ng-model="item.maturityPeriod"></i-control>
+                </div>
+                <div class="col3 padding">
+                    <br />
+                    <span>##word.Day##</span>
+                </div>
+            </div>
+            <div class="col4">
+                <div class="col9"><i-control type="number" label="##word.Credit Limit##" ng-model="item.creditLimit"> </i-control></div>
+                <div class="col3 padding">
+                    <br />
+                    <span>##word.$##</span>
+                </div>
+            </div>
         </div>
     </fieldset>
 </div>
@@ -182,19 +195,6 @@
                     </fieldset>
                 </fieldset>
             </div>
-            <!-- 
-            <div id="accountingInformations" class="tab-content">
-                <fieldset>
-                    <legend>##word.Accounting Informations##</legend>
-                    <div class="row">
-                        <i-control class="col3" type="number" label="##word.Purchase Maturity Period##"
-                            ng-model="item.purchaseMaturityPeriod"></i-control>
-
-                        <i-control class="col3" type="number" label="##word.Credit Limit##" ng-model="item.creditLimit">
-                        </i-control>
-                    </div>
-                </fieldset>
-            </div> -->
 
             <div id="bankingAccounts" class="tab-content">
                 <div class="row">
