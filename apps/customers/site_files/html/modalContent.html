@@ -228,7 +228,8 @@
                         ng-model="selectedBank.accountNumber"></i-control>
                     <i-control class="col4" label="##word.Account Name##"
                         ng-model="selectedBank.accountName"></i-control>
-                    <i-control class="col4" label="##word.IBAN##" ng-model="selectedBank.iban"></i-control>
+                    <i-control class="col4" label="##word.IBAN##" v="ll15 ml32"
+                        ng-model="selectedBank.iban"></i-control>
                     <div class="col2">
                         <br />
                         <i-button type="push" ng-click="addBank(selectedBank)"></i-button>
