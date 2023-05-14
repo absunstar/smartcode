@@ -1,76 +1,80 @@
 <div class="row">
-  <div class="col9">
-    <div class="row">
-      <div class="row">
-        <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code"> </i-control>
-        <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
-      </div>
-      <div class="row">
-        <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
-        <i-control class="col6" type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-        <i-control class="col6" type="text" v="r" ng-model="item.swiftCode" label="##word.Swift Code##"></i-control>
-        <i-control class="col3" type="text" ng-model="item.ibanSymbol" label="##word.IBAN Symbol##"></i-control>
-        <i-control class="col3" type="number" v="r" ng-model="item.ibanLength" label="##word.IBAN Length##"></i-control>
-      </div>
+    <div class="col9">
+        <div class="row">
+            <div class="row">
+                <i-control ng-hide="disabledCode" class="col9" label="##word.Code##" ng-model="item.code"> </i-control>
+                <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+            </div>
+            <div class="row">
+                <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+                <i-control class="col6" type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+                <i-control class="col6" type="text" v="r" ng-model="item.swiftCode" label="##word.Swift Code##"></i-control>
+                <i-control class="col3" type="text" ng-model="item.ibanSymbol" label="##word.IBAN Symbol##"></i-control>
+                <i-control class="col3" type="number" v="r" ng-model="item.ibanLength" label="##word.IBAN Length##"></i-control>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="col3 center">
-    <i-image class="img128 center" ng-model="item.image"></i-image>
-  </div>
-  <fieldset>
-    <legend>##word.Contact Informations##</legend>
-
-    <div class="row">
-      <i-control class="col4" type="text" ng-model="item.hotline" label="##word.Hotline##"></i-control>
-      <i-control class="col4" type="text" ng-model="item.email" label="##word.Email##"></i-control>
-      <i-control class="col4" type="text" ng-model="item.website" label="##word.Website##"></i-control>
+    <div class="col3 center">
+        <i-image class="img128 center" ng-model="item.image"></i-image>
     </div>
-  </fieldset>
+    <fieldset>
+        <legend>##word.Contact Informations##</legend>
 
-  <fieldset>
-    <legend>##word.Address Informations##</legend>
-    <div class="row">
-      <i-list class="col4" label="##word.Country##" ng-change="getGoves(item.country)" ng-model="item.country"
-        display="name##session.lang##" items="countriesList" display2="callingCode" ng-search="item.$Country"></i-list>
+        <div class="row">
+            <i-control class="col4" type="text" ng-model="item.hotline" label="##word.Hotline##"></i-control>
+            <i-control class="col4" type="text" ng-model="item.email" label="##word.Email##"></i-control>
+            <i-control class="col4" type="text" ng-model="item.website" label="##word.Website##"></i-control>
+        </div>
+    </fieldset>
 
-      <i-list class="col4" label="##word.Governorate##" ng-change="getCities(item.gov)" ng-model="item.gov"
-        display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
-      <i-list class="col4" label="##word.City##" ng-model="item.city" items="citiesList" display="name##session.lang##"
-        ng-search="_search.$area.$city_search"> </i-list>
-      <i-control type="text" ng-model="item.address" label="##word.Address##"></i-control>
-    </div>
-  </fieldset>
+    <fieldset>
+        <legend>##word.Address Informations##</legend>
+        <div class="row">
+            <i-list
+                class="col4"
+                label="##word.Country##"
+                ng-change="getGoves(item.country)"
+                ng-model="item.country"
+                display="name##session.lang##"
+                items="countriesList"
+                display2="callingCode"
+                ng-get="getCountries($search)"
+            ></i-list>
 
-  <fieldset>
-    <legend>##word.Accounting##</legend>
-    <div class="row padding">
-      <i-list class="col4" ng-model="item.linkBy" label="##word.Link By##" ng-change="getAccountingList(item.linkBy)"
-        items="accountingLinkList" display="name##session.lang##"></i-list>
-      <i-list class="col8" ng-model="item.account" label="##word.Account##" items="accountingList"
-        display="name##session.lang##"></i-list>
-    </div>
-  </fieldset>
+            <i-list class="col4" label="##word.Governorate##" ng-change="getCities(item.gov)" ng-model="item.gov" display="name##session.lang##" items="govesList" ng-search="item.$gov"></i-list>
+            <i-list class="col4" label="##word.City##" ng-model="item.city" items="citiesList" display="name##session.lang##" ng-search="_search.$area.$city_search"> </i-list>
+            <i-control type="text" ng-model="item.address" label="##word.Address##"></i-control>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>##word.Accounting##</legend>
+        <div class="row padding">
+            <i-list class="col4" ng-model="item.linkBy" label="##word.Link By##" ng-change="getAccountingList(item.linkBy)" items="accountingLinkList" display="name##session.lang##"></i-list>
+            <i-list class="col8" ng-model="item.account" label="##word.Account##" items="accountingList" display="name##session.lang##"></i-list>
+        </div>
+    </fieldset>
 </div>
 <div ng-show="mode !== 'add' " class="row">
-  <table class="table hover border">
-    <tr>
-      <th>##word.Add Info##</th>
-      <th>##word.Last Edit Info##</th>
-    </tr>
-    <tr>
-      <td class="center">
-        <p class="blue">{{item.addUserInfo.name}}</p>
-        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
-        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
-        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
-      </td>
+    <table class="table hover border">
+        <tr>
+            <th>##word.Add Info##</th>
+            <th>##word.Last Edit Info##</th>
+        </tr>
+        <tr>
+            <td class="center">
+                <p class="blue">{{item.addUserInfo.name}}</p>
+                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+            </td>
 
-      <td class="center">
-        <p class="blue">{{item.editUserInfo.name}}</p>
-        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
-        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
-        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
-      </td>
-    </tr>
-  </table>
+            <td class="center">
+                <p class="blue">{{item.editUserInfo.name}}</p>
+                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+            </td>
+        </tr>
+    </table>
 </div>

@@ -162,7 +162,6 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
         $scope.order = order;
         site.showModal('#orderModal');
     };
-
     $scope.showTab = function (event, selector) {
         site.showTabContent(event, selector);
     };
@@ -175,7 +174,10 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
         $scope.manageUser.$mobile = '';
     };
 
-    $scope.getCountriesList = function () {
+    $scope.getCountriesList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $scope.countriesList = [];
         $http({
@@ -192,6 +194,7 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     callingCode: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {

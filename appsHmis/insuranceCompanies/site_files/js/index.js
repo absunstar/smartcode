@@ -187,7 +187,10 @@ app.controller('insuranceCompanies', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getCountriesList = function () {
+    $scope.getCountriesList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -197,6 +200,7 @@ app.controller('insuranceCompanies', function ($scope, $http, $timeout) {
                     active: true,
                 },
                 select: { id: 1, code: 1, nameEn: 1, nameAr: 1, callingCode: 1 },
+                search: $search,
             },
         }).then(
             function (response) {

@@ -221,7 +221,10 @@ app.controller('banks', function ($scope, $http, $timeout) {
         $scope.search = {};
     };
 
-    $scope.getCountries = function () {
+    $scope.getCountries = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -237,6 +240,7 @@ app.controller('banks', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     callingCode: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {
@@ -254,7 +258,7 @@ app.controller('banks', function ($scope, $http, $timeout) {
 
     $scope.getGoves = function (country) {
         $scope.busy = true;
-        $scope.govesList=[];
+        $scope.govesList = [];
         $http({
             method: 'POST',
             url: '/api/goves/all',

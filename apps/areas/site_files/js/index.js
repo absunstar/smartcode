@@ -187,7 +187,10 @@ app.controller('areas', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getCountriesList = function () {
+    $scope.getCountriesList = function ($search) {
+        if ($search && $search.length < 1) {
+            return;
+        }
         $scope.busy = true;
         $http({
             method: 'POST',
@@ -203,6 +206,7 @@ app.controller('areas', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     callingCode: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {
