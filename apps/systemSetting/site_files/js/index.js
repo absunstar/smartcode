@@ -128,6 +128,22 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         screen.$position = undefined;
     };
 
+    $scope.upDownList = function (list, type, index) {
+
+        let element = list[index];
+        let toIndex = index;
+    
+        if (type == 'up') {
+          toIndex = index - 1
+        } else if (type == 'down') {
+          toIndex = index + 1
+        }
+    
+        list.splice(index, 1);
+        list.splice(toIndex, 0, element);
+    
+      };
+
     $scope.addVatList = function () {
         $scope.item.hmisSetting.vatList = $scope.item.hmisSetting.vatList || [];
         if ($scope.item.$nationalityVat.nationality && $scope.item.$nationalityVat.nationality.id) {

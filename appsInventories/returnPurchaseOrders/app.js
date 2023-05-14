@@ -223,36 +223,7 @@ module.exports = function init(site) {
           items: _data.itemsList,
         };
 
-        if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
       
-          if (!_data.paymentType || !_data.paymentType.id) {
-            response.error = 'Must Select Payment Type';
-            res.json(response);
-            return;
-          } else if (!_data.safe || !_data.safe.id) {
-            response.error = 'Must Select Safe';
-            res.json(response);
-            return;
-          }
-          let obj = {
-            date: new Date(),
-            voucherType: site.vouchersTypes[1],
-            customer: _data.customer,
-            invoiceId: _data.id,
-            invoiceCode: _data.code,
-            total: _data.amountPaid,
-            safe: _data.safe,
-            paymentType: _data.paymentType,
-            addUserInfo: _data.approvedUserInfo,
-            company: _data.company,
-            branch: _data.branch,
-          };
-          _data.remainPaid = _data.totalNet - _data.amountPaid;
-          site.addReceiptVouchers(obj);
-        } else {
-          _data.remainPaid = _data.totalNet;
-        }
-
         site.checkOverDraft(req, overDraftObj, (overDraftCb) => {
           if (!overDraftCb.done) {
             let error = '';
@@ -262,7 +233,36 @@ module.exports = function init(site) {
             return;
           }
           _data.addApprovedInfo = req.getUserFinger();
-
+          if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+      
+            if (!_data.paymentType || !_data.paymentType.id) {
+              response.error = 'Must Select Payment Type';
+              res.json(response);
+              return;
+            } else if (!_data.safe || !_data.safe.id) {
+              response.error = 'Must Select Safe';
+              res.json(response);
+              return;
+            }
+            let obj = {
+              date: new Date(),
+              voucherType: site.vouchersTypes[1],
+              customer: _data.customer,
+              invoiceId: _data.id,
+              invoiceCode: _data.code,
+              total: _data.amountPaid,
+              safe: _data.safe,
+              paymentType: _data.paymentType,
+              addUserInfo: _data.approvedUserInfo,
+              company: _data.company,
+              branch: _data.branch,
+            };
+            _data.remainPaid = _data.totalNet - _data.amountPaid;
+            site.addReceiptVouchers(obj);
+          } else {
+            _data.remainPaid = _data.totalNet;
+          }
+  
           app.update(_data, (err, result) => {
             if (!err) {
               response.done = true;

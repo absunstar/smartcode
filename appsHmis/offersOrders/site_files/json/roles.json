@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "offersOrdersAdmin",
+    "En": "Offers Orders Admin",
+    "Ar": "إدارة طلبات العروض",
+    "permissions": ["offersOrdersManage"]
+}]

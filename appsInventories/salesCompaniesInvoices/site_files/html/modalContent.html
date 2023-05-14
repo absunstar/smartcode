@@ -33,7 +33,7 @@
           ></i-list>
         </div>
         <div class="row">
-          <i-list class="col4" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
+          <i-list class="col4" v="r" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
           <i-list
             class="col4"
             ng-show="item.invoiceType.id == 1"

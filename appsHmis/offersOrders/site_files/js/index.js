@@ -1,28 +1,26 @@
-app.controller('medicalOffers', function ($scope, $http, $timeout) {
+app.controller('offersOrders', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'medicalOffers';
-  $scope.modalID = '#medicalOffersManageModal';
-  $scope.modalSearchID = '#medicalOffersSearchModal';
+  $scope.appName = 'offersOrders';
+  $scope.modalID = '#offersOrdersManageModal';
+  $scope.modalSearchID = '#offersOrdersSearchModal';
+  $scope.setting = site.showObject(`##data.#setting##`);
   $scope.mode = 'add';
   $scope._search = {};
-  $scope.structure = {
-    image: { url: '/images/medicalOffers.png' },
-    active: true,
-    discount: 0,
-    totalCount: 0,
-    totalVat: 0,
-    totalPrice: 0,
-    totalAfterVat: 0,
-    discountType: 'percent',
-  };
+  $scope.structure = {};
   $scope.item = {};
   $scope.list = [];
 
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure, servicesList: [] };
+    $scope.item = { ...$scope.structure , date: new Date()};
     site.showModal($scope.modalID);
+    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+      $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
+        return _t.id == $scope.setting.accountsSetting.paymentType.id;
+      });
+      $scope.getSafes($scope.item.paymentType);
+    }
   };
 
   $scope.add = function (_item) {
@@ -141,6 +139,7 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
   $scope.delete = function (_item) {
     $scope.busy = true;
     $scope.error = '';
+
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/delete`,
@@ -215,22 +214,37 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getServicesList = function ($search) {
+  $scope.getPatientsList = function ($search) {
+    if ($search && $search.length < 1) {
+      return;
+    }
     $scope.busy = true;
+    $scope.patientsList = [];
     $http({
       method: 'POST',
-      url: '/api/services/all',
+      url: '/api/patients/all',
       data: {
-        where: {
-          active: true,
-        },
+        where: { active: true, 'type.id': 5 },
         select: {
           id: 1,
-          nameEn: 1,
-          nameAr: 1,
           code: 1,
-          cashPriceOut: 1,
-          vat: 1,
+          image: 1,
+          fullNameEn: 1,
+          fullNameAr: 1,
+          patientType: 1,
+          maritalStatus: 1,
+          dateOfBirth: 1,
+          gender: 1,
+          age: 1,
+          motherNameEn: 1,
+          motherNameAr: 1,
+          newBorn: 1,
+          nationality: 1,
+          mobile: 1,
+          patientType: 1,
+          insuranceCompany: 1,
+          insuranceClass: 1,
+          expiryDate: 1,
         },
         search: $search,
       },
@@ -238,7 +252,7 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.servicesList = response.data.list;
+          $scope.patientsList = response.data.list;
         }
       },
       function (err) {
@@ -248,64 +262,129 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.addServices = function (_item) {
-    $scope.error = '';
-    if (_item.$service && _item.$service.id) {
-      let found = false;
-      _item.servicesList.forEach((s) => {
-        if (s.id === _item.$service.id) {
-          s.qty += 1;
-          found = true;
-        }
-      });
-
-      if (!found) {
-        _item.servicesList.push({ ..._item.$service, qty: 1 });
-      }
-      $scope.calc(_item);
-      _item.$service = {};
-    } else {
-      $scope.error = 'Must Select Service';
+  $scope.getMedicalOffersList = function ($search) {
+    if ($search && $search.length < 1) {
       return;
     }
-  };
-
-  $scope.calc = function (_item) {
-    $scope.error = '';
-    $timeout(() => {
-      _item.totalCount = 0;
-      _item.totalVat = 0;
-      _item.totalPrice = 0;
-      _item.totalAfterVat = 0;
-      _item.totalNet = 0;
-      _item.totalDiscount = 0;
-
-      _item.servicesList.forEach((_service) => {
-        _service.totalAfterVat = 0;
-        _service.totalVat = _service.qty * ((_service.vat * _service.cashPriceOut) / 100);
-        _service.total = _service.qty * _service.cashPriceOut;
-        _service.totalVat = site.toNumber(_service.totalVat);
-        _service.total = site.toNumber(_service.total);
-        _service.totalAfterVat = _service.total + _service.totalVat;
-        _service.totalAfterVat = site.toNumber(_service.totalAfterVat);
-
-        _item.totalCount += _service.qty;
-        _item.totalVat += _service.totalVat;
-        _item.totalPrice += _service.total;
-        _item.totalAfterVat += _service.totalAfterVat;
-      });
-
-      if (_item.discountType == 'percent') {
-        _item.totalDiscount = (_item.discount * _item.totalAfterVat) / 100;
-      } else {
-        _item.totalDiscount = _item.discount;
+    $scope.busy = true;
+    $scope.medicalOffersList = [];
+    $http({
+      method: 'POST',
+      url: '/api/medicalOffers/all',
+      data: {
+        where: { active: true, availableMedical : true },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+          startDate: 1,
+          expiryDate: 1,
+          totalVat: 1,
+          totalCount: 1,
+          totalAfterVat: 1,
+          totalPrice: 1,
+          totalNet: 1,
+          totalDiscount : 1,
+          servicesList : 1,
+        },
+        search: $search,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.medicalOffersList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
       }
-
-      _item.totalNet = _item.totalAfterVat - _item.totalDiscount;
-      _item.totalAfterVat = site.toNumber(_item.totalAfterVat);
-      _item.totalNet = site.toNumber(_item.totalNet);
-    }, 300);
+    );
   };
+
+  $scope.getSafes = function (paymentType) {
+    $scope.busy = true;
+    $scope.safesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/safes/all',
+      data: {
+        where: {
+          active: true,
+          'paymentType.id': paymentType.id,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.safesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getInvoiceTypes = function () {
+    $scope.busy = true;
+    $scope.invoiceTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/invoiceTypes',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.invoiceTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getPaymentTypes = function () {
+    $scope.busy = true;
+    $scope.paymentTypesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/paymentTypes',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.paymentTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
 
   $scope.showSearch = function () {
     $scope.error = '';
@@ -317,8 +396,10 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
     site.hideModal($scope.modalSearchID);
     $scope.search = {};
   };
-
   $scope.getAll();
-  $scope.getServicesList();
+  $scope.getPaymentTypes();
+  $scope.getInvoiceTypes();
+  $scope.getPatientsList();
+  $scope.getMedicalOffersList();
   $scope.getNumberingAuto();
 });

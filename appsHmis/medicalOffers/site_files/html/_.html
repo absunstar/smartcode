@@ -16,6 +16,8 @@
                     <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
+                    <th>##word.Start Date##</th>
+                    <th>##word.Expiry Date##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
@@ -24,6 +26,8 @@
                     </td>
                     <td class="center blue">{{item.code}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
+                    <td class="center">{{item.startDate | date:"dd / MM / yyyy"}}</td>
+                    <td class="center">{{item.expiryDate | date:"dd / MM / yyyy"}}</td>
 
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>

@@ -1,6 +1,6 @@
 module.exports = function init(site) {
   let app = {
-    name: 'medicalOffers',
+    name: 'offersOrders',
     allowMemory: false,
     memoryList: [],
     allowCache: false,
@@ -144,7 +144,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Medical Offers' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Offers Orders', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -158,6 +158,20 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
         _data.branch = site.getBranch(req);
+
+        if (_data.invoiceType.id == 1) {
+          if (_data.amountPaid != _data.medicalOffer.totalNet) {
+            response.error = 'The full amount must be paid in case of cash';
+            res.json(response);
+            return;
+          }
+        }
+
+        if (_data.amountPaid && (!_data.safe || !_data.safe.id)) {
+          response.error = 'Payment safe must be selected';
+          res.json(response);
+          return;
+        }
 
         let numObj = {
           company: site.getCompany(req),
@@ -175,7 +189,23 @@ module.exports = function init(site) {
         }
 
         _data.addUserInfo = req.getUserFinger();
-
+        if (_data.amountPaid) {
+          let obj = {
+            date: new Date(),
+            patient: _data.patient,
+            voucherType: site.vouchersTypes[4],
+            invoiceId: _data.id,
+            invoiceCode: _data.code,
+            total: _data.amountPaid,
+            safe: _data.safe,
+            paymentType: _data.paymentType,
+            addUserInfo: _data.addUserInfo,
+            company: _data.company,
+            branch: _data.branch,
+          };
+          _data.remainPaid = _data.totalNet - _data.amountPaid;
+          site.addReceiptVouchers(obj);
+        }
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
@@ -250,7 +280,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, startDate: 1, expiryDate: 1 };
+        let select = req.body.select || { id: 1, code: 1, date: 1, patient: 1, medicalOffer: 1 };
         let limit = req.body.limit || 50;
 
         if (app.allowMemory) {
@@ -286,16 +316,6 @@ module.exports = function init(site) {
             };
             delete where.fromDate;
             delete where.toDate;
-          }
-
-          if (where && where.availableMedical) {
-            let date = new Date();
-            let d1 = site.toDate(date);
-            let d2 = site.toDate(date);
-            d2.setDate(d2.getDate() + 1);
-            where.startDate = { $lte: d2 };
-            where.expiryDate = { $gte: d2 };
-            delete where.availableMedical
           }
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
             res.json({

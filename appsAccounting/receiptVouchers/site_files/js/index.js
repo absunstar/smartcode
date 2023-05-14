@@ -264,7 +264,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 'salesInvoice' || g.id == 'purchaseReturn' || g.id == 'openingBalance');
+          $scope.vouchersTypesList = response.data.list.filter((g) => g.id == 'salesInvoice' || g.id == 'purchaseReturn' || g.id == 'openingBalance' || g.id == 'offersOrders');
           $http({
             method: 'POST',
             url: '/api/voucherNames/all',

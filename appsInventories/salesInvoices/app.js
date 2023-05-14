@@ -198,50 +198,7 @@ module.exports = function init(site) {
             }
           });
 
-          if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-            if (site.toNumber(_data.$paidByCustomer) < site.toNumber(_data.totalNet)) {
-              response.error = 'Must Paid By Customer greater than or equal to ';
-              res.json(response);
-              return;
-            }
-            if (!_data.paymentType || !_data.paymentType.id) {
-              response.error = 'Must Select Payment Type';
-              res.json(response);
-              return;
-            } else if (!_data.safe || !_data.safe.id) {
-              response.error = 'Must Select Safe';
-              res.json(response);
-              return;
-            }
-            let obj = {
-              date: new Date(),
-              customer: _data.customer,
-              voucherType: site.vouchersTypes[0],
-              invoiceId: _data.id,
-              invoiceCode: _data.code,
-              total: _data.amountPaid,
-              safe: _data.safe,
-              paymentType: _data.paymentType,
-              addUserInfo: _data.approvedUserInfo,
-              company: _data.company,
-              branch: _data.branch,
-            };
-            _data.remainPaid = _data.totalNet - _data.amountPaid;
-            site.addReceiptVouchers(obj);
-          } else {
-            _data.remainPaid = _data.totalNet;
-            if (_data.invoiceType.id == 2) {
-              if (_data.installmentsList && _data.installmentsList.length > 0) {
-                let totalInstallment = _data.installmentsList.reduce((a, b) => a + b.amount, 0);
-                totalInstallment = site.toNumber(totalInstallment);
-                if (totalInstallment != _data.totalNet) {
-                  response.error = `The installments amount is not equal invoice total net`;
-                  res.json(response);
-                  return;
-                }
-              }
-            }
-          }
+        
 
           if (errBatchList.length > 0) {
             let error = errBatchList.map((m) => m).join('-');
@@ -294,6 +251,51 @@ module.exports = function init(site) {
               return;
             }
             _data.addUserInfo = req.getUserFinger();
+
+            if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+              if (site.toNumber(_data.$paidByCustomer) < site.toNumber(_data.totalNet)) {
+                response.error = 'Must Paid By Customer greater than or equal to ';
+                res.json(response);
+                return;
+              }
+              if (!_data.paymentType || !_data.paymentType.id) {
+                response.error = 'Must Select Payment Type';
+                res.json(response);
+                return;
+              } else if (!_data.safe || !_data.safe.id) {
+                response.error = 'Must Select Safe';
+                res.json(response);
+                return;
+              }
+              let obj = {
+                date: new Date(),
+                customer: _data.customer,
+                voucherType: site.vouchersTypes[0],
+                invoiceId: _data.id,
+                invoiceCode: _data.code,
+                total: _data.amountPaid,
+                safe: _data.safe,
+                paymentType: _data.paymentType,
+                addUserInfo: _data.addUserInfo,
+                company: _data.company,
+                branch: _data.branch,
+              };
+              _data.remainPaid = _data.totalNet - _data.amountPaid;
+              site.addReceiptVouchers(obj);
+            } else {
+              _data.remainPaid = _data.totalNet;
+              if (_data.invoiceType.id == 2) {
+                if (_data.installmentsList && _data.installmentsList.length > 0) {
+                  let totalInstallment = _data.installmentsList.reduce((a, b) => a + b.amount, 0);
+                  totalInstallment = site.toNumber(totalInstallment);
+                  if (totalInstallment != _data.totalNet) {
+                    response.error = `The installments amount is not equal invoice total net`;
+                    res.json(response);
+                    return;
+                  }
+                }
+              }
+            }
 
             app.add(_data, (err, doc) => {
               if (!err) {

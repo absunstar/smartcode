@@ -10,6 +10,14 @@
   {
     "category": "hmis",
     "feature": "public",
+    "id": "offersOrders",
+    "name": "offersOrders",
+    "nameEn": "Offers Orders",
+    "nameAr": "طلبات العروض"
+  },
+  {
+    "category": "hmis",
+    "feature": "public",
     "id": "services",
     "name": "Services",
     "nameEn": "Services",

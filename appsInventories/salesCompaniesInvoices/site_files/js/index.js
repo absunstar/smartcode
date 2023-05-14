@@ -1340,7 +1340,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
   $scope.selectBatch = function (item, batch) {
     $scope.addBatch = '';
     $scope.errorBatch = '';
-    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || itm.sn == batch.sn);
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sm && itm.sn == batch.sn));
     if (index === -1) {
       batch.currentCount = batch.count;
       batch.count = 1;

@@ -1,0 +1,233 @@
+<div class="row">
+  <div class="row padding">
+    <div class="row">
+      <div class="row">
+        <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-date class="col6" v="r" ng-model="item.date" label="##word.Date##"> </i-date>
+      </div>
+      <div class="row">
+        <div class="row">
+          <i-list
+            v="r"
+            class="col6"
+            label="##word.Patient##"
+            ng-model="item.patient"
+            display="fullName##session.lang##"
+            items="patientsList"
+            ng-get="getPatientsList($search)"
+            ng-disabled="item.servicesList.length"
+          ></i-list>
+          <div class="col3" ng-show="item.patient.id">
+            <br />
+            <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
+          </div>
+        </div>
+        <div class="row" ng-show="item.patient.id">
+          <div class="cart">
+            <div class="row">
+              <div class="col9">
+                <p class="bold">
+                  <span class="darkGray">##word.Name## : </span> {{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> )
+                  <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+                  ({{item.patient.gender.name##session.lang##}})
+                </p>
+              </div>
+              <div class="col3">
+                <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.patient.mobile}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col4">
+                <p class="bold">
+                  <span class="darkGray"> ##word.Nationality## : </span> {{item.patient.nationality.name##session.lang##}}
+                  <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" />
+                </p>
+              </div>
+              <div class="col2">
+                <p class="bold"><span class="darkGray">##word.Age## : </span> {{item.patient.age}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray">الإسم : </span> {{item.patient.fullNameAr}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col7">
+                <p class="bold">
+                  <span class="darkGray">##word.Mother Name## : </span> {{item.patient.motherNameEn}}
+                  <span class="blue" ng-show="item.patient.newBorn">(##word.New Born##)</span>
+                </p>
+              </div>
+              <div class="col5">
+                <p class="bold text-right"><span class="darkGray"> إسم الأم : </span> {{item.patient.motherNameAr}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Marital Status## : </span> {{item.patient.maritalStatus.name##session.lang##}}</p>
+              </div>
+
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray"> ##word.Gender## : </span> {{item.patient.gender.name##session.lang##}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col8">
+                <p class="bold">
+                  <span class="darkGray">##word.Insurance Company##: </span> {{item.mainInsuranceCompany.name##session.lang##}} ( <span class="blue">{{item.mainInsuranceCompany.code}}</span> )
+                </p>
+              </div>
+              <div class="col4">
+                <p class="bold text-right">
+                  <span class="darkGray">##word.Patient Type##: </span> {{item.patient.patientType.name##session.lang##}} ( <span class="blue">{{item.patient.patientType.code}}</span> )
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col6">
+                <p class="bold"><span class="darkGray"> ##word.Insurance Class## : </span> {{item.patient.insuranceClass.name##session.lang##}}</p>
+              </div>
+              <div class="col6">
+                <p class="bold text-right"><span class="darkGray"> ##word.Expiry Date## : </span> {{item.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <fieldset>
+          <i-list v="r" class="col6" label="##word.Medical Offer##" ng-model="item.medicalOffer" display="name##session.lang##" items="medicalOffersList"></i-list>
+          <div class="row" ng-show="item.medicalOffer.id">
+            <div class="row">
+              <div class="col6">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Start Date## : {{item.medicalOffer.startDate| date:"dd / MM / yyyy"}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+              <div class="col6">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Expiry Date## : {{item.medicalOffer.expiryDate| date:"dd / MM / yyyy"}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Cash Price##</th>
+                    <th>##word.Qty##</th>
+                    <th>##word.Total##</th>
+                    <th>##word.Total VAT##</th>
+                    <th>##word.T.After VAT##</th>
+                    <th class="not-print">##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="s in item.medicalOffer.servicesList">
+                    <td class="center blue">{{s.code}}</td>
+                    <td class="center">{{s.name##session.lang##}}</td>
+                    <td class="center">
+                      <p>{{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
+                    </td>
+
+                    <td class="center">
+                      <p>{{s.qty}}</p>
+                    </td>
+                    <td class="center">
+                      <p>{{s.total}} <span class="currency">##word.$##</span></p>
+                    </td>
+                    <td class="center">
+                      <p>{{s.totalVat}} <span class="currency">##word.$##</span></p>
+                    </td>
+                    <td class="center">
+                      <p>{{s.totalAfterVat}} <span class="currency">##word.$##</span></p>
+                    </td>
+                    <td class="center not-print">
+                      <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col4">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Total Count## : {{item.medicalOffer.totalCount | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+              <div class="col4">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Total Price## : {{item.medicalOffer.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+              <div class="col4">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Total Discount## : {{item.medicalOffer.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+              <div class="col4">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Total VAT## : {{item.medicalOffer.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+              <div class="col4">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Total After VAT## : {{item.medicalOffer.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+              <div class="col4">
+                <fieldset class="gray-bg">
+                  <p class="bold font-24">##word.Total Net## : {{item.medicalOffer.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row">
+              <i-list class="col4" v="r" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
+              <i-list
+                class="col4"
+                ng-change="getSafes(item.paymentType)"
+                ng-model="item.paymentType"
+                display="name##session.lang##"
+                items="paymentTypesList"
+                label="##word.Payment Type##"
+                ng-search="item.$paymentType"
+              ></i-list>
+            </div>
+            <div class="row">
+              <i-list class="col4" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+              <i-control class="col2" label="##word.Amount Paid##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.amountPaid"> </i-control>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="row padding"></div>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.Add Info##</th>
+      <th>##word.Last Edit Info##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

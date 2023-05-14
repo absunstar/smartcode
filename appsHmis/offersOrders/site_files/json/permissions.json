@@ -1,0 +1,12 @@
+[
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "offersOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "offersOrders", "name": "importoffersOrders", "En": "Import", "Ar": "إستيراد" }
+]

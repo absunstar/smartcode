@@ -30,6 +30,16 @@
         </div>
         <div class="col6">
           <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total Price## : {{item.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col6">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total Discount## : {{item.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col6">
+          <fieldset class="gray-bg">
             <p class="bold font-22">##word.Total VAT## : {{item.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
@@ -40,64 +50,62 @@
         </div>
         <div class="col6">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Total Price## : {{item.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-24">##word.Total Net## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
           </fieldset>
-        </div>
-      </div>
-
-      <div class="row">
-        <i-list help-id="" label="##word.Service##" class="col8" ng-model="item.$service" display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
-        <div class="col4">
-          <br />
-          <i-button type="add" label="##word.Add Service##" ng-click="addServices(item)"></i-button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="table-responsive">
-          <table class="table hover bold">
-            <tr>
-              <th>##word.Code##</th>
-              <th>##word.Name##</th>
-              <th>##word.Cash Price##</th>
-              <th class="w150">##word.Qty##</th>
-              <th>##word.Total##</th>
-              <th>##word.Total VAT##</th>
-              <th class="not-print">##word.Actions##</th>
-            </tr>
-            <tr ng-repeat="s in item.servicesList">
-              <td class="center blue">{{s.code}}</td>
-              <td class="center">{{s.name##session.lang##}}</td>
-              <td class="center">
-                <p>{{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
-              </td>
-
-              <td class="center">
-                <i-control type="number" ng-change="calc(item)" ng-model="s.qty"></i-control>
-              </td>
-              <td class="center">
-                <p>{{s.total}} <span class="currency">##word.$##</span></p>
-              </td>
-              <td class="center">
-                <p>{{s.totalVat}} <span class="currency">##word.$##</span></p>
-              </td>
-              <td class="center not-print">
-                <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)"> </i-button>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="row">
-          <div class="col6">
-            <fieldset class="gray-bg">
-              <p class="bold font-22">##word.Total Net## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
-            </fieldset>
-          </div>
         </div>
       </div>
     </div>
     <div class="col3">
       <i-image class="img128 center" ng-model="item.image"></i-image>
     </div>
+  </div>
+  <div class="row">
+    <fieldset>
+      <div class="row">
+        <i-list help-id="" label="##word.Service##" class="col6" ng-model="item.$service" display="name##session.lang##" items="servicesList" ng-get="getServicesList($search)"></i-list>
+        <div class="col4">
+          <br />
+          <i-button type="add" label="##word.Add Service##" ng-click="addServices(item)"></i-button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table hover bold">
+          <tr>
+            <th>##word.Code##</th>
+            <th>##word.Name##</th>
+            <th>##word.Cash Price##</th>
+            <th class="w150">##word.Qty##</th>
+            <th>##word.Total##</th>
+            <th>##word.Total VAT##</th>
+            <th>##word.T.After VAT##</th>
+            <th class="not-print">##word.Actions##</th>
+          </tr>
+          <tr ng-repeat="s in item.servicesList">
+            <td class="center blue">{{s.code}}</td>
+            <td class="center">{{s.name##session.lang##}}</td>
+            <td class="center">
+              <p>{{s.cashPriceOut}} <span class="currency">##word.$##</span></p>
+            </td>
+
+            <td class="center">
+              <i-control type="number" ng-change="calc(item)" ng-model="s.qty"></i-control>
+            </td>
+            <td class="center">
+              <p>{{s.total}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center">
+              <p>{{s.totalVat}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center">
+              <p>{{s.totalAfterVat}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center not-print">
+              <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)"> </i-button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </fieldset>
   </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">
