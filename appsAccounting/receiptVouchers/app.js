@@ -170,8 +170,8 @@ module.exports = function init(site) {
         if (!_data.date) {
           _data.date = new Date();
         }
-        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn') {
-          if (site.toMoney(_data.total) > site.toMoney(_data.$remainPaid)) {
+        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn'|| _data.voucherType.id == 'offersOrders') {
+          if (site.toNumber(_data.total) > site.toNumber(_data.$remainPaid)) {
             response.error = 'The amount paid is greater than the remaining invoice amount ';
             res.json(response);
             return;
@@ -208,6 +208,8 @@ module.exports = function init(site) {
               site.changeRemainPaidSalesInvoices(obj);
             } else if (doc.voucherType.id == 'purchaseReturn') {
               site.changeRemainPaidReturnPurchases(obj);
+            }else if (doc.voucherType.id == 'offersOrders') {
+              site.changeRemainPaidOffersOrders(obj);
             }
 
             site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });

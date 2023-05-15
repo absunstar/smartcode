@@ -28,7 +28,7 @@
       <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
 
-    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##" type="number" ng-change="calcRemainVoucher(item)" ng-model="item.total"> </i-control>
+    <i-control v="r" class="col3" label="##word.Amount Paid## ##word.$##" type="number" ng-change="calcRemainVoucher(item)" ng-model="item.total"> </i-control>
 
     <div class="col3 font-18" ng-show="item.voucherType.id == 'purchaseInvoice' || item.voucherType.id == 'salesReturn'">
       <p>##word.Remain Amount##</p>

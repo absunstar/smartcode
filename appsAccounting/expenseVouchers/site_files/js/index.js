@@ -15,7 +15,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure, date: new Date() , total :0 };
+    $scope.item = { ...$scope.structure, date: new Date(), total: 0 };
     site.showModal($scope.modalID);
   };
 
@@ -264,9 +264,9 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
             function (response) {
               $scope.busy = false;
               if (response.data.done && response.data.list.length > 0) {
-                  for (let i = 0; i < response.data.list.length; i++) {
-                    $scope.vouchersTypesList.push(response.data.list[i])
-                  }
+                for (let i = 0; i < response.data.list.length; i++) {
+                  $scope.vouchersTypesList.push(response.data.list[i]);
+                }
               }
             },
             function (err) {
@@ -335,6 +335,10 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
           date: 1,
           totalNet: 1,
           remainPaid: 1,
+          installmentsList: 1,
+          vendor: 1,
+          customer: 1,
+          patient: 1,
         },
       },
     }).then(
@@ -357,10 +361,19 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
 
   $scope.setTotalValue = function (item) {
     $scope.error = '';
+    $scope.item = { ...$scope.structure, paymentType: $scope.item.paymentType, safe: $scope.item.safe, voucherType: $scope.item.voucherType };
+
     $scope.item.invoiceId = item.id;
     $scope.item.invoiceCode = item.code;
     $scope.item.$remainPaid = item.remainPaid;
     $scope.item.total = item.remainPaid;
+    if (item.vendor) {
+      $scope.item.vendor = item.vendor;
+    } else if (item.customer) {
+      $scope.item.customer = item.customer;
+    } else if (item.patient) {
+      $scope.item.patient = item.patient;
+    }
     site.hideModal('#expenseVouchersModalDataList');
   };
 
@@ -440,7 +453,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
 
-      $scope.thermal.vouchersName = {nameEn : 'Expense Voucher', nameAr : 'سند صرف'};
+      $scope.thermal.vouchersName = { nameEn: 'Expense Voucher', nameAr: 'سند صرف' };
 
       $scope.localPrint = function () {
         if ($scope.setting.printerProgram.placeQr) {

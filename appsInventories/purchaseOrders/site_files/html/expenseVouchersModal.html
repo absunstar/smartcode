@@ -52,11 +52,27 @@
           <p>##word.Amount required##</p>
           <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
         </div>
-      
-        <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##"  ng-hide="item.$installmentsList.length > 0 && item.$invoiceType.id == 2" ng-change="calcRemainVoucher(item)" ng-model="item.total">
-        </i-control>
+        <div class="col4">
+          <div class="row">
+            <i-control
+              v="r"
+              class="col9"
+              type="number"
+              label="##word.Amount Paid##"
+              ng-hide="item.$installmentsList.length > 0 && item.$invoiceType.id == 2"
+              ng-change="calcRemainVoucher(item)"
+              ng-model="item.total"
+            >
+            </i-control>
+            <div class="col3">
+              <br />
+              <br />
+              <span class="currency">##word.$##</span>
+            </div>
+          </div>
+        </div>
         <div class="col3 font-18" ng-show="item.$installmentsList.length > 0 && item.$invoiceType.id == 2">
-          <p>##word.Amount paid##</p>
+          <p>##word.Amount Paid##</p>
           <p>({{item.total | xmoney2}} <span class="currency">##word.$##</span>)</p>
         </div>
 

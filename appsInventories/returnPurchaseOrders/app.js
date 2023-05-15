@@ -247,7 +247,7 @@ module.exports = function init(site) {
             let obj = {
               date: new Date(),
               voucherType: site.vouchersTypes[1],
-              customer: _data.customer,
+              vendor: _data.vendor,
               invoiceId: _data.id,
               invoiceCode: _data.code,
               total: _data.amountPaid,

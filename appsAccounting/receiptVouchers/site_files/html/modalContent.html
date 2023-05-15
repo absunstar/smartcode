@@ -16,7 +16,7 @@
     ></i-list>
     <i-list class="col3" v="r" label="##word.Safe##" ng-model="item.safe" items="safesList" display="name##session.lang##" ng-search="item.$safe"> </i-list>
     <i-list class="col3" v="r" label="##word.Voucher Type##" ng-model="item.voucherType" items="vouchersTypesList" display="name##session.lang##" ng-search="item.$voucherType"> </i-list>
-    <div class="col3" ng-show=" (mode =='add' || mode =='edit') && (item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn') ">
+    <div class="col3" ng-show=" (mode =='add' || mode =='edit') && (item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn' || item.voucherType.id == 'offersOrders') ">
       <br />
       <i-button type="search" label="##word.Invoices List##" ng-click="getSourceInvoices()"></i-button>
     </div>
@@ -81,19 +81,19 @@
   </div>
 
   <div class="row">
-    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn'">
+    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn' || item.voucherType.id == 'offersOrders'">
       <p>##word.Amount required##</p>
       <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
 
-    <i-control v="r" class="col3" label="##word.Amount paid## ##word.$##" type="number" ng-hide="item.$installmentsList.length > 0" ng-change="calcRemainVoucher(item)" ng-model="item.total">
+    <i-control v="r" class="col3" label="##word.Amount Paid## ##word.$##" type="number" ng-hide="item.$installmentsList.length > 0" ng-change="calcRemainVoucher(item)" ng-model="item.total">
     </i-control>
     <div class="col3 font-18" ng-show="item.$installmentsList.length > 0">
-      <p>##word.Amount paid##</p>
+      <p>##word.Amount Paid##</p>
       <p>({{item.total | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
 
-    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn'">
+    <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn' || item.voucherType.id == 'offersOrders'">
       <p>##word.Remain Amount##</p>
       <p>({{item.$remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>

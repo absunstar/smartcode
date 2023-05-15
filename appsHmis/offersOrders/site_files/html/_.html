@@ -2,6 +2,9 @@
     <div class="row" x-permissions="offersOrdersUi || offersOrdersManage">
         <div x-import="offersOrders/modal.html"></div>
         <div x-import="offersOrders/modalSearch.html"></div>
+        <div x-import="offersOrders/attendModal.html"></div>
+        <div x-import="offersOrders/acceptAttendModal.html"></div>
+        <div x-import="purchaseOrders/expenseVouchersModal.html"></div>
 
         <div class="top-actions">
             <i-button type="add" x-permissions="offersOrdersAdd || offersOrdersManage" label="##word.New##"
@@ -17,28 +20,25 @@
                     <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
-                    <th>##word.Status##</th>
+                    <th>##word.Patient##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
                     <td>
-                        <i-image view class="logo center" ng-model="item.image"></i-image>
+                        <i-image view class="logo center" ng-model="item.medicalOffer.image"></i-image>
                     </td>
                     <td class="center blue">{{item.code}}</td>
-                    <td class="center">{{item.name##session.lang##}}</td>
-                    <td class="center">
-                        <span class="text-success" ng-show="item.active">##word.Active##</span>
-                        <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
-                    </td>
+                    <td class="center">{{item.medicalOffer.name##session.lang##}}</td>
+                    <td class="center">{{item.patient.fullName##session.lang##}}</td>
 
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="offersOrdersUpdate || offersOrdersManage" label="##word.Edit##"
-                            ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" ng-show="item.availableAttend" x-permissions="offersOrdersUpdate || offersOrdersManage" label="##word.Attend Service##"
+                            ng-click="showAttend(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="offersOrdersDelete || offersOrdersManage" label="##word.Delete##"
-                            ng-click="showDelete(item)"></i-button>
+                        <!-- <i-button type="delete" x-permissions="offersOrdersDelete || offersOrdersManage" label="##word.Delete##"
+                            ng-click="showDelete(item)"></i-button> -->
                     </td>
                 </tr>
             </table>
