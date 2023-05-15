@@ -281,51 +281,51 @@ module.exports = function init(site) {
                     let docs = [];
                     if (response.file.originalFilename.like('*.xls*')) {
                         let workbook = site.XLSX.readFile(response.file.filepath);
+
                         docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
                     } else {
                         docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
                     }
 
                     if (Array.isArray(docs)) {
-                        console.log(`Importing ${app.name} : ${docs.length}`);
-                        let systemCode = 0;
                         docs.forEach((doc) => {
-                            let numObj = {
-                                company: site.getCompany(req),
-                                screen: app.name,
-                                date: new Date(),
-                            };
-                            let cb = site.getNumbering(numObj);
+                            let appSpecialties = site.getApp('specialties');
+                            appSpecialties.all({}, (err, specialtiesDocs) => {
+                                let specialty;
 
-                            if (cb.auto) {
-                                systemCode = cb.code || ++systemCode;
-                            } else {
-                                systemCode++;
-                            }
+                                if (doc['Specialty']) {
+                                    specialty = specialtiesDocs.find((sp) => sp && sp.nameEn.toLowerCase().trim() == doc['Specialty'].toLowerCase().trim());
 
-                            if (!doc.code) {
-                                doc.code = systemCode;
-                            }
+                                    let newDoc = {
+                                        code: doc['CODE'] || doc['CODE '],
+                                        specialty,
+                                        nameAr: doc['الـوصـــــــــــــــــــف'] || doc['الـوصـــــــــــــــــــف '] || doc['الـوصـــــــــــــــــــف  '],
+                                        nameEn: doc['DESCRIPTION'],
+                                        image: { url: '/images/packages.png' },
+                                        active: true,
+                                        cashPriceOut: doc['Credit Standard'] || 0,
+                                        creditPriceOut: doc['Credit Standard'] || 0,
+                                        cashPriceIn: doc['Credit Standard'] || 0,
+                                        creditPriceIn: doc['Credit Standard'] || 0,
+                                        packagePrice: doc.PackagePrice || 0,
+                                        pharmacyPrice: doc.PharmacyPrice || 0,
+                                        // vat: doc.VAT || 0,
+                                        cost: doc['Credit Standard'] || 0,
+                                    };
 
-                            let newDoc = {
-                                code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
-                                image: { url: '/images/packages.png' },
-                                active: true,
-                            };
+                                    newDoc.company = site.getCompany(req);
+                                    newDoc.branch = site.getBranch(req);
+                                    newDoc.addUserInfo = req.getUserFinger();
 
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
-
-                            app.add(newDoc, (err, doc2) => {
-                                if (!err && doc2) {
-                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                    console.log(site.dbMessage);
-                                } else {
-                                    site.dbMessage = err.message;
-                                    console.log(site.dbMessage);
+                                    app.add(newDoc, (err, doc2) => {
+                                        if (!err && doc2) {
+                                            site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                            console.log(site.dbMessage);
+                                        } else {
+                                            site.dbMessage = err.message;
+                                            console.log(site.dbMessage);
+                                        }
+                                    });
                                 }
                             });
                         });
