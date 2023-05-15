@@ -381,55 +381,53 @@ module.exports = function init(site) {
                     let docs = [];
                     if (response.file.originalFilename.like('*.xls*')) {
                         let workbook = site.XLSX.readFile(response.file.filepath);
+
                         docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
                     } else {
                         docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
                     }
 
                     if (Array.isArray(docs)) {
-                        // console.log(`Importing ${app.name} : ${docs.length}`);
-                        // console.log('length', docs.length);
-                        // console.log('0', docs[0]);
-                        // console.log('1', docs[1]);
-                        // console.log('2', docs[2]);
-                        // console.log('3', docs[3]);
-                        // console.log('4', docs[4]);
-                        // console.log('5', docs[5]);
-
                         docs.forEach((doc) => {
-                            // console.log('CODE NO', doc['CATEGORY']);
+                            let appServiceGroup = site.getApp('servicesGroups');
+                            appServiceGroup.all({}, (err, serviceGroupDocs) => {
+                                let serviceGroup;
+                                if (doc['CATEGORY']) {
+                                    serviceGroup = serviceGroupDocs.find((sg) => sg && sg.nameEn.toLowerCase().trim() == doc['CATEGORY'].toLowerCase().trim());
 
-                            let newDoc = {
-                                code: doc['CODE NO'],
-                                nameAr: doc['الوصف'],
-                                nameEn: doc['DESCRIPTION'],
-                                image: { url: '/images/services.png' },
-                                active: true,
-                                cashPriceOut: doc['Credit Standard'] || 0,
-                                creditPriceOut: doc['Credit Standard'] || 0,
-                                // cashPriceIn: doc['Credit Standard'] || 0,
-                                // creditPriceIn: doc['Credit Standard'] || 0,
-                                // packagePrice: doc.PackagePrice || 0,
-                                // pharmacyPrice: doc.PharmacyPrice || 0,
-                                // vat: doc.VAT || 0,
-                                // cost: doc.Cost || 0,
-                                servicesCategoriesList: [],
-                            };
-                            newDoc.servicesCategoriesList = site.getApp('servicesCategories').memoryList.find((s) => s.nameEn && s.nameEn.toLowerCase().trim() == doc['CATEGORY'].toLowerCase().trim());
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
-                            console.log('newDoc', newDoc);
+                                    let newDoc = {
+                                        code: doc['CODE NO'],
+                                        nameAr: doc['الوصف'] || doc['الوصف '],
+                                        nameEn: doc['DESCRIPTION'],
+                                        image: { url: '/images/services.png' },
+                                        serviceGroup,
+                                        active: true,
+                                        cashPriceOut: doc['Credit Standard'] || 0,
+                                        creditPriceOut: doc['Credit Standard'] || 0,
+                                        cashPriceIn: doc['Credit Standard'] || 0,
+                                        creditPriceIn: doc['Credit Standard'] || 0,
+                                        packagePrice: doc.PackagePrice || 0,
+                                        pharmacyPrice: doc.PharmacyPrice || 0,
+                                        // vat: doc.VAT || 0,
+                                        cost: doc['Credit Standard'] || 0,
+                                        servicesCategoriesList: [],
+                                    };
 
-                            // app.add(newDoc, (err, doc2) => {
-                            //     if (!err && doc2) {
-                            //         site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                            //         console.log(site.dbMessage);
-                            //     } else {
-                            //         site.dbMessage = err.message;
-                            //         console.log(site.dbMessage);
-                            //     }
-                            // });
+                                    newDoc.company = site.getCompany(req);
+                                    newDoc.branch = site.getBranch(req);
+                                    newDoc.addUserInfo = req.getUserFinger();
+
+                                    app.add(newDoc, (err, doc2) => {
+                                        if (!err && doc2) {
+                                            site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                            console.log(site.dbMessage);
+                                        } else {
+                                            site.dbMessage = err.message;
+                                            console.log(site.dbMessage);
+                                        }
+                                    });
+                                }
+                            });
                         });
                     } else {
                         site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);

@@ -1,0 +1,12 @@
+[
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "packagesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "packages", "name": "importPackages", "En": "Import", "Ar": "إستيراد" }
+]

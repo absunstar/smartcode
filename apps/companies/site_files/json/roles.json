@@ -121,7 +121,8 @@
             "reorderLimitsManage",
             "mostSellingItemsManage",
             "safesAdjustingManage",
-            "lowestSellingItemsManage"
+            "lowestSellingItemsManage",
+            "packagesManage"
         ]
     }
 ]
