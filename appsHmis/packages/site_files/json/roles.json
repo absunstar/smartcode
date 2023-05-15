@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "packagesAdmin",
+    "En": "Packages Admin",
+    "Ar": "إدارة الباقات",
+    "permissions": ["packagesManage"]
+}]
