@@ -404,12 +404,12 @@ module.exports = function init(site) {
                                         active: true,
                                         cashPriceOut: doc['Credit Standard'] || 0,
                                         creditPriceOut: doc['Credit Standard'] || 0,
-                                        // cashPriceIn: doc['Credit Standard'] || 0,
-                                        // creditPriceIn: doc['Credit Standard'] || 0,
-                                        // packagePrice: doc.PackagePrice || 0,
-                                        // pharmacyPrice: doc.PharmacyPrice || 0,
+                                        cashPriceIn: doc['Credit Standard'] || 0,
+                                        creditPriceIn: doc['Credit Standard'] || 0,
+                                        packagePrice: doc.PackagePrice || 0,
+                                        pharmacyPrice: doc.PharmacyPrice || 0,
                                         // vat: doc.VAT || 0,
-                                        // cost: doc.Cost || 0,
+                                        cost: doc['Credit Standard'] || 0,
                                         servicesCategoriesList: [],
                                     };
 
