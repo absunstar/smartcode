@@ -13,7 +13,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure , date: new Date()};
+    $scope.item = { ...$scope.structure, date: new Date() };
     site.showModal($scope.modalID);
     if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
@@ -80,8 +80,8 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal($scope.modalID);
-          site.resetValidated($scope.modalID);
+          site.hideModal('#attendModal');
+          site.resetValidated('#attendModal');
           let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
@@ -118,6 +118,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
+          $scope.$applyAsync();
         } else {
           $scope.error = response.data.error;
         }
@@ -272,9 +273,10 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       method: 'POST',
       url: '/api/medicalOffers/all',
       data: {
-        where: { active: true, availableMedical : true },
+        where: { active: true, availableMedical: true },
         select: {
           id: 1,
+          image: 1,
           code: 1,
           nameEn: 1,
           nameAr: 1,
@@ -285,8 +287,8 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
           totalAfterVat: 1,
           totalPrice: 1,
           totalNet: 1,
-          totalDiscount : 1,
-          servicesList : 1,
+          totalDiscount: 1,
+          servicesList: 1,
         },
         search: $search,
       },
@@ -385,6 +387,104 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.showAcceptAttend = function (_s) {
+    $scope.error = '';
+
+    $scope.service = _s;
+    site.showModal('#acceptAttendModal');
+  };
+
+  $scope.calcRemainVoucher = function (item) {
+    $timeout(() => {
+      item.$remainAmount = item.$remainPaid - item.total;
+    }, 300);
+  };
+
+  $scope.showAttend = function (_item) {
+    $scope.error = '';
+    $scope.mode = 'view';
+    $scope.item = {};
+    $scope.view(_item);
+    site.showModal('#attendModal');
+  };
+
+  $scope.acceptAttend = function (_s) {
+    $scope.error = '';
+    _s.qtyAvailable -= 1;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/update`,
+      data: $scope.item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal('#acceptAttendModal');
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.result.doc;
+          }
+          $scope.item = response.data.result.doc;
+          $scope.$applyAsync();
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.showAddVoucher = function (_item) {
+    $scope.error = '';
+
+    $scope.item = {
+      invoiceId: _item.id,
+      patient: _item.patient,
+      invoiceCode: _item.code,
+      $invoiceType: _item.invoiceType,
+      $remainAmount: 0,
+      $remainPaid: _item.remainPaid,
+      total: _item.remainPaid,
+      voucherType: { id: 'offersOrders', nameEn: 'Offers Orders', nameAr: 'طلبات العروض' },
+    };
+
+    $scope.item.$remainAmount = _item.remainPaid - $scope.item.total;
+
+    site.showModal('#expenseVouchersModal');
+    site.resetValidated('#expenseVouchersModal');
+  };
+
+  $scope.addExpenseVoucher = function (_item) {
+    $scope.error = '';
+    const v = site.validated('#expenseVouchersModal');
+    if (!v.ok) {
+      $scope.error = v.messages[0].ar;
+      return;
+    }
+
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `/api/receiptVouchers/add`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.view({ id: _item.invoiceId });
+          site.hideModal('#expenseVouchersModal');
+          site.resetValidated('#expenseVouchersModal');
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
 
   $scope.showSearch = function () {
     $scope.error = '';

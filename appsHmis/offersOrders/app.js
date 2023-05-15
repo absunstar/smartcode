@@ -160,7 +160,7 @@ module.exports = function init(site) {
         _data.branch = site.getBranch(req);
 
         if (_data.invoiceType.id == 1) {
-          if (_data.amountPaid != _data.medicalOffer.totalNet) {
+          if (_data.amountPaid != _data.totalNet) {
             response.error = 'The full amount must be paid in case of cash';
             res.json(response);
             return;
@@ -187,29 +187,33 @@ module.exports = function init(site) {
         } else if (cb.auto) {
           _data.code = cb.code;
         }
-
+        _data.remainPaid = _data.totalNet - (_data.amountPaid || 0);
         _data.addUserInfo = req.getUserFinger();
-        if (_data.amountPaid) {
-          let obj = {
-            date: new Date(),
-            patient: _data.patient,
-            voucherType: site.vouchersTypes[4],
-            invoiceId: _data.id,
-            invoiceCode: _data.code,
-            total: _data.amountPaid,
-            safe: _data.safe,
-            paymentType: _data.paymentType,
-            addUserInfo: _data.addUserInfo,
-            company: _data.company,
-            branch: _data.branch,
-          };
-          _data.remainPaid = _data.totalNet - _data.amountPaid;
-          site.addReceiptVouchers(obj);
-        }
+        _data.medicalOffer.servicesList.forEach((_s) => {
+          _s.qtyAvailable = _s.qty;
+        });
+
+        _data.availableAttend = true;
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
             response.doc = doc;
+            if (doc.amountPaid) {
+              let obj = {
+                date: new Date(),
+                patient: doc.patient,
+                voucherType: site.vouchersTypes[4],
+                invoiceId: doc.id,
+                invoiceCode: doc.code,
+                total: doc.amountPaid,
+                safe: doc.safe,
+                paymentType: doc.paymentType,
+                addUserInfo: doc.addUserInfo,
+                company: doc.company,
+                branch: doc.branch,
+              };
+              site.addReceiptVouchers(obj);
+            }
           } else {
             response.error = err.mesage;
           }
@@ -226,7 +230,15 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.editUserInfo = req.getUserFinger();
-
+        let date = new Date();
+        let expiry = new Date(_data.expiryDate);
+        date = date.setHours(0, 0, 0, 0);
+        expiry = expiry.setHours(0, 0, 0, 0);
+        if (_data.medicalOffer.servicesList.some((n) => n.qtyAvailable != n.qty) && date <= expiry) {
+          _data.availableAttend = true;
+        } else {
+          _data.availableAttend = false;
+        }
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
@@ -280,7 +292,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, code: 1, date: 1, patient: 1, medicalOffer: 1 };
+        let select = req.body.select || { id: 1, code: 1, date: 1, patient: 1, medicalOffer: 1, availableAttend: 1 };
         let limit = req.body.limit || 50;
 
         if (app.allowMemory) {
@@ -318,6 +330,21 @@ module.exports = function init(site) {
             delete where.toDate;
           }
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+            if (docs && docs.length > 0) {
+              docs.forEach((_doc) => {
+                if (_doc.medicalOffer) {
+                  let date = new Date();
+                  let expiry = new Date(_doc.medicalOffer.expiryDate);
+                  date = date.setHours(0, 0, 0, 0);
+                  expiry = expiry.setHours(0, 0, 0, 0);
+                  if (_doc.medicalOffer.servicesList.every((n) => n.qtyAvailable > 0) && new Date(date) <= new Date(expiry)) {
+                    _doc.availableAttend = true;
+                  } else {
+                    _doc.availableAttend = false;
+                  }
+                }
+              });
+            }
             res.json({
               done: true,
               list: docs,
@@ -327,6 +354,15 @@ module.exports = function init(site) {
       });
     }
   }
+
+  site.changeRemainPaidOffersOrders = function (obj) {
+    app.view({ id: obj.id }, (err, doc) => {
+      if (!err && doc) {
+        doc.remainPaid -= obj.total;
+        app.update(doc, (err, result) => {});
+      }
+    });
+  };
 
   app.init();
   site.addApp(app);

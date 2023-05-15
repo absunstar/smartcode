@@ -243,6 +243,8 @@ module.exports = function init(site) {
             invoiceCode: _data.code,
             total: _data.amountPaid,
             safe: _data.safe,
+            customer: _data.customer,
+            patient: _data.patient,
             paymentType: _data.paymentType,
             addUserInfo: _data.approvedUserInfo,
             company: _data.company,

@@ -12,7 +12,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
 
   $scope.setTotalValue = function (item) {
     $scope.error = '';
-    $scope.item = { ...$scope.structure, date: new Date() };
+    $scope.item = { ...$scope.structure,paymentType : $scope.item.paymentType ,safe : $scope.item.safe , voucherType: $scope.item.voucherType };
 
     $scope.item.invoiceId = item.id;
     $scope.item.invoiceCode = item.code;
@@ -28,7 +28,13 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     $scope.item.total = site.toMoney($scope.item.total);
     $scope.item.$remainAmount = item.remainPaid - $scope.item.total;
     $scope.item.$remainAmount = site.toMoney($scope.item.$remainAmount);
-
+    if (item.vendor) {
+      $scope.item.vendor = item.vendor;
+    } else if (item.customer) {
+      $scope.item.customer = item.customer;
+    } else if (item.patient) {
+      $scope.item.patient = item.patient;
+    }
     site.hideModal('#receiptVouchersModalDataList');
   };
 
@@ -341,6 +347,8 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     let url = '/api/salesInvoices/all';
     if ($scope.item.voucherType.id == 'purchaseReturn') {
       url = '/api/returnPurchaseOrders/all';
+    } else  if ($scope.item.voucherType.id == 'offersOrders') {
+      url = '/api/offersOrders/all';
     }
     $http({
       method: 'POST',
@@ -356,6 +364,9 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
           totalNet: 1,
           remainPaid: 1,
           installmentsList: 1,
+          vendor: 1,
+          customer: 1,
+          patient: 1,
         },
       },
     }).then(

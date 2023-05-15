@@ -175,7 +175,10 @@ module.exports = function init(site) {
         }
 
         _data.addUserInfo = req.getUserFinger();
-
+        _data.startDate = new Date(_data.startDate);
+        _data.expiryDate = new Date(_data.expiryDate);
+        _data.startDate.setHours(0, 0, 0, 0);
+        _data.expiryDate.setHours(0, 0, 0, 0);
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
@@ -196,6 +199,10 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.editUserInfo = req.getUserFinger();
+        _data.startDate = new Date(_data.startDate);
+        _data.expiryDate = new Date(_data.expiryDate);
+        _data.startDate.setHours(0, 0, 0, 0);
+        _data.expiryDate.setHours(0, 0, 0, 0);
 
         app.update(_data, (err, result) => {
           if (!err) {
@@ -292,10 +299,12 @@ module.exports = function init(site) {
             let date = new Date();
             let d1 = site.toDate(date);
             let d2 = site.toDate(date);
-            d2.setDate(d2.getDate() + 1);
-            where.startDate = { $lte: d2 };
-            where.expiryDate = { $gte: d2 };
+            // d2.setDate(d2.getDate() + 1);
+            date.setHours(0, 0, 0, 0);
+            where.startDate = { $lte: date };
+            where.expiryDate = { $gte: date };
             delete where.availableMedical
+         
           }
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
             res.json({

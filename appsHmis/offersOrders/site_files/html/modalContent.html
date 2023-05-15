@@ -97,17 +97,17 @@
 
       <div class="row">
         <fieldset>
-          <i-list v="r" class="col6" label="##word.Medical Offer##" ng-model="item.medicalOffer" display="name##session.lang##" items="medicalOffersList"></i-list>
+          <i-list v="r" class="col6" label="##word.Medical Offer##" ng-change="item.totalNet = item.medicalOffer.totalNet" ng-model="item.medicalOffer" display="name##session.lang##" items="medicalOffersList"></i-list>
           <div class="row" ng-show="item.medicalOffer.id">
             <div class="row">
               <div class="col6">
                 <fieldset class="gray-bg">
-                  <p class="bold font-22">##word.Start Date## : {{item.medicalOffer.startDate| date:"dd / MM / yyyy"}} <span class="currency">##word.$##</span></p>
+                  <p class="bold font-22">##word.Start Date## : {{item.medicalOffer.startDate| date:"dd / MM / yyyy"}}</p>
                 </fieldset>
               </div>
               <div class="col6">
                 <fieldset class="gray-bg">
-                  <p class="bold font-22">##word.Expiry Date## : {{item.medicalOffer.expiryDate| date:"dd / MM / yyyy"}} <span class="currency">##word.$##</span></p>
+                  <p class="bold font-22">##word.Expiry Date## : {{item.medicalOffer.expiryDate| date:"dd / MM / yyyy"}}</p>
                 </fieldset>
               </div>
             </div>
@@ -123,7 +123,6 @@
                     <th>##word.Total##</th>
                     <th>##word.Total VAT##</th>
                     <th>##word.T.After VAT##</th>
-                    <th class="not-print">##word.Actions##</th>
                   </tr>
                   <tr ng-repeat="s in item.medicalOffer.servicesList">
                     <td class="center blue">{{s.code}}</td>
@@ -144,9 +143,7 @@
                     <td class="center">
                       <p>{{s.totalAfterVat}} <span class="currency">##word.$##</span></p>
                     </td>
-                    <td class="center not-print">
-                      <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)"> </i-button>
-                    </td>
+                   
                   </tr>
                 </table>
               </div>

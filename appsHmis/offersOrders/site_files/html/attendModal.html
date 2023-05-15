@@ -1,0 +1,86 @@
+<div id="attendModal" class="modal ">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">##word.Get Data## <i class="fa fa-search"></i></p>
+    </div>
+
+    <div class="modal-body">
+      <form class="form">
+        <fieldset>
+          <div class="row">
+            <div class="col6">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Offer Name## : {{item.medicalOffer.name##session.lang##}}</p>
+              </fieldset>
+            </div>
+            <div class="col4">
+              <i-button type="add" ng-show="item.remainPaid > 0" label="##word.Add Receipt Voucher##" ng-click="showAddVoucher(item)"> </i-button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col6">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Start Date## : {{item.medicalOffer.startDate| date:"dd / MM / yyyy"}}</p>
+              </fieldset>
+            </div>
+            <div class="col6">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Expiry Date## : {{item.medicalOffer.expiryDate| date:"dd / MM / yyyy"}}</p>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col6">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Net Amount## : {{item.totalNet}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+            <div class="col6">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Remain Paid## : {{item.remainPaid}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.Code##</th>
+                  <th>##word.Name##</th>
+                  <th>##word.Qty##</th>
+                  <th>##word.Qty Available##</th>
+                  <th>##word.Total Price##</th>
+                  <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="s in item.medicalOffer.servicesList">
+                  <td class="center blue">{{s.code}}</td>
+                  <td class="center">{{s.name##session.lang##}}</td>
+                  <td class="center">
+                    <p>{{s.qty}}</p>
+                  </td>
+                  <td class="center">
+                    <p>{{s.qtyAvailable}}</p>
+                  </td>
+                  <td class="center">
+                    <p>{{s.totalAfterVat}} <span class="currency">##word.$##</span></p>
+                  </td>
+                  <td class="center not-print">
+                    <i-button ng-show="s.qtyAvailable > 0" type="edit" label="##word.Attend Service##" ng-click="showAcceptAttend(s)"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <p class="error">{{error}}</p>
+    <div class="modal-footer center">
+      <i-button type="Save" label="##word.Save##" ng-click="update(item)"></i-button>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#attendModal')"> </i-button>
+    </div>
+  </div>
+</div>
