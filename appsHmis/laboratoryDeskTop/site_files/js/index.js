@@ -280,6 +280,7 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
           freeRevistPeriod: 1,
           freeRevistCount: 1,
           scientificRank: 1,
+          onDuty : 1,
         },
       },
     }).then(

@@ -13,6 +13,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     totalVat: 0,
     totalComVat: 0,
     patientBalance: 0,
+    totalAfterDisc : 0,
     accBalance: 0,
     totalNet: 0,
     total: 0,
@@ -24,6 +25,8 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
 
   $scope.showAdd = function (_item) {
     $scope.error = '';
+    $scope.item.errMsgDoctor = '';
+    $scope.item.errMsg = '';
     $scope.mode = 'add';
     $scope.item = { ...$scope.structure, servicesList: [], date: new Date() };
     site.resetValidated($scope.modalID);
@@ -429,6 +432,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   $scope.getMainInsuranceFromSub = function (patient) {
     $scope.busy = true;
     $scope.item.errMsg = '';
+    $scope.item.errMsgDoctor = '';
     if (patient.insuranceCompany && patient.insuranceCompany.id) {
       $http({
         method: 'POST',
@@ -532,6 +536,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
 
   $scope.selectDoctorAppointment = function (doctorAppointment) {
     $scope.item.errMsg = '';
+    $scope.item.errMsgDoctor = '';
     $scope.item.patient = doctorAppointment.patient;
     $scope.item.doctor = doctorAppointment.doctor;
     $scope.item.sourceId = doctorAppointment.id;
@@ -726,6 +731,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           freeRevistPeriod: 1,
           freeRevistCount: 1,
           scientificRank: 1,
+          onDuty : 1,
         },
       },
     }).then(
@@ -781,6 +787,11 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
 
   $scope.addServices = function (s, mainInsuranceCompany) {
     $scope.error = '';
+    $scope.item.errMsgDoctor = '';
+    if(!$scope.item.doctor.onDuty) {
+      $scope.item.errMsgDoctor = "The Doctor Isn't  On Duty";
+      return;
+    }
     if (s && s.id) {
       if (!$scope.item.servicesList.some((s) => s.id === service.id)) {
         let service = {};

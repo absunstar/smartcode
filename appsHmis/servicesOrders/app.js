@@ -156,6 +156,13 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+
+        if(!_data.doctor.onDuty) {
+          response.error = "The Doctor Isn't  On Duty";
+          res.json(response);
+          return;
+        }
+
         _data.company = site.getCompany(req);
         _data.branch = site.getBranch(req);
         let numObj = {
@@ -269,6 +276,13 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        
+        if(!_data.doctor.onDuty) {
+          response.error = "The Doctor Isn't  On Duty";
+          res.json(response);
+          return;
+        }
+
         _data.editUserInfo = req.getUserFinger();
 
         app.update(_data, (err, result) => {

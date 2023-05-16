@@ -95,7 +95,7 @@
       </div>
 
       <div class="row">
-        <i-list class="col6" v="r" label="##word.Doctor##" ng-model="item.doctor" display="name##session.lang##" items="doctorsList" ng-get="getDoctorsList($search)"></i-list>
+        <i-list class="col6" v="r" label="##word.Doctor##" ng-model="item.doctor" display="name##session.lang##" items="doctorsList" ng-change="selectDoctor()" ng-get="getDoctorsList($search)"></i-list>
         <div class="row" ng-show="item.doctor.id">
           <div class="cart">
             <div class="row">

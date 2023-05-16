@@ -274,7 +274,7 @@ module.exports = function init(site) {
   }
 
   site.getInsuranceContract = function (contract, callBack) {
-    if (contract && contract.id) {
+    if (contract && contract.id && contract.insuranceClass && contract.insuranceClass.id) {
       app.view({ id: contract.id }, (err, doc) => {
         if (!err && doc) {
           let obj = doc.insuranceClassesList.find((itm) => itm.id == contract.insuranceClass.id);

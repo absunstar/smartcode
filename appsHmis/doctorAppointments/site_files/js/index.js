@@ -262,6 +262,7 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           freeRevistPeriod: 1,
           freeRevistCount: 1,
           scientificRank : 1,
+          onDuty : 1,
         },
         search: $search,
         /* limit: 1, */
@@ -338,10 +339,19 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
     site.hideModal('#doctorsVisitsDays');
   };
 
+  $scope.selectDoctor = function () {
+    $scope.error = '';
+    if(!$scope.item.doctor.onDuty) {
+    $scope.error = 'Doctor Isn`t On Duty';
+      return;
+    }
+  };
+
   $scope.showSearch = function () {
     $scope.error = '';
     site.showModal($scope.modalSearchID);
   };
+
 
   $scope.searchAll = function () {
     $scope.getAll($scope.search);
