@@ -421,8 +421,8 @@ module.exports = function init(site) {
 
                                 newDoc = {
                                     code: doc.code,
-                                    fullNameAr: doc.fullNameAr,
-                                    fullNameEn: doc.fullNameEn,
+                                    fullNameAr: doc.fullNameAr ? doc.fullNameAr.trim() : '',
+                                    fullNameEn: doc.fullNameEn ? doc.fullNameEn.trim() : '',
                                     patientType: doc.patientType
                                         ? site.patientTypes.find((t) => t.nameEn.toLowerCase().trim() == doc.patientType.toLowerCase().trim())
                                         : site.patientTypes.find((t) => t.id == 1),

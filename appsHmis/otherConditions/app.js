@@ -309,7 +309,7 @@ module.exports = function init(site) {
 
                             let newDoc = {
                                 code: doc.code,
-                                name: doc.name,
+                                name: doc.name ? doc.name.trim() : '',
                                 image: { url: '/images/otherConditions.png' },
                                 active: true,
                             };

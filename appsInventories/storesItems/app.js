@@ -1139,11 +1139,11 @@ module.exports = function init(site) {
                                         const storesUnitsApp = site.getApp('storesUnits');
                                         storesUnitsApp.$collection.find({ where: { nameEn: String(doc['PackageTypes']).trim() } }, (err, foundUnit) => {
                                             const unit = {
-                                                _id: foundUnit._id,
-                                                id: foundUnit.id,
-                                                nameAr: foundUnit.nameAr,
-                                                nameEn: foundUnit.nameEn,
-                                                image: foundUnit.image,
+                                                _id: foundUnit?._id,
+                                                id: foundUnit?.id,
+                                                nameAr: foundUnit.nameAr ? foundUnit?.nameAr.trim() : '',
+                                                nameEn: foundUnit.nameEn ? foundUnit?.nameEn.trim() : '',
+                                                image: foundUnit?.image,
                                             };
                                             const conversion = Number(String(doc['PackageSize']).trim());
                                             const salesPrice = Number(String(doc['Public price']).trim());

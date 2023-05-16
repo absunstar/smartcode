@@ -330,8 +330,8 @@ module.exports = function init(site) {
                         docs.forEach((doc) => {
                             let newDoc = {
                                 code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
+                                nameAr: doc.nameAr.trim(),
+                                nameEn: doc.nameEn.trim(),
                                 image: { url: '/images/services.png' },
                                 active: true,
                                 cashPriceOut: doc.CashPrice || 0,
@@ -396,9 +396,9 @@ module.exports = function init(site) {
                                     serviceGroup = serviceGroupDocs.find((sg) => sg && sg.nameEn.toLowerCase().trim() == doc['CATEGORY'].toLowerCase().trim());
 
                                     let newDoc = {
-                                        code: doc['CODE NO'],
-                                        nameAr: doc['الوصف'] || doc['الوصف '],
-                                        nameEn: doc['DESCRIPTION'],
+                                        code: doc['CODE NO'].trim(),
+                                        nameAr: doc['الوصف'].trim() || doc['الوصف '].trim(),
+                                        nameEn: doc['DESCRIPTION'].trim(),
                                         image: { url: '/images/services.png' },
                                         serviceGroup,
                                         active: true,
@@ -489,8 +489,8 @@ module.exports = function init(site) {
                             } else {
                                 let newDoc = {
                                     code: doc.code,
-                                    nameEn: doc.nameEn,
-                                    nameAr: doc.nameAr || doc.nameEn,
+                                    nameEn: doc.nameEn.trim(),
+                                    nameAr: doc.nameAr || doc.nameEn.trim(),
                                     image: { url: '/images/services.png' },
                                     active: true,
                                     normalRangeList: [

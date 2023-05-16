@@ -341,8 +341,8 @@ module.exports = function init(site) {
 
                                 let newDoc = {
                                     code: doc.code,
-                                    nameAr: doc.nameAr,
-                                    nameEn: doc.nameEn,
+                                    nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                    nameEn: doc.nameEn ? doc.nameEn.trim() : '',
                                     image: { url: '/images/storesUnits.png' },
                                     active: true,
                                 };
@@ -398,8 +398,8 @@ module.exports = function init(site) {
 
                                         let newDoc = {
                                             code: systemCode,
-                                            nameAr: item.nameEn,
-                                            nameEn: item.nameEn,
+                                            nameAr: item.nameAr ? item.nameAr.trim() : '',
+                                            nameEn: item.nameEn ? item.nameEn.trim() : '',
                                             image: { url: '/images/storesUnits.png' },
                                             active: true,
                                         };

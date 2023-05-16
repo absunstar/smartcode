@@ -339,15 +339,15 @@ module.exports = function init(site) {
                                 let selectedSpecialty;
                                 let specialty;
                                 if (specialtiesDocs.length) {
-                                    selectedSpecialty = specialtiesDocs.find((s) => s.nameEn.toLowerCase().trim() == doc.specialty.toLowerCase().trim());
+                                    selectedSpecialty = specialtiesDocs.find((s) => s.nameEn && s.nameEn.toLowerCase().trim() == doc.specialty.toLowerCase().trim());
 
                                     if (selectedSpecialty) {
                                         specialty = {
                                             _id: selectedSpecialty._id,
                                             id: selectedSpecialty.id,
                                             code: selectedSpecialty.code,
-                                            nameAr: selectedSpecialty.nameAr,
-                                            nameEn: selectedSpecialty.nameEn,
+                                            nameAr: selectedSpecialty.nameAr ? selectedSpecialty.nameAr.trim() : '',
+                                            nameEn: selectedSpecialty.nameEn ? selectedSpecialty.nameEn.trim() : '',
                                         };
                                     }
                                 }
@@ -356,7 +356,7 @@ module.exports = function init(site) {
                                     let selectedNationality;
                                     let nationality;
                                     if (nationalitiesDocs.length) {
-                                        selectedNationality = nationalitiesDocs.find((n) => n.nameEn.toLowerCase().trim() == doc.nationality.toLowerCase().trim());
+                                        selectedNationality = nationalitiesDocs.find((n) => n.nameEn && n.nameEn.toLowerCase().trim() == doc.nationality.toLowerCase().trim());
                                     }
 
                                     if (selectedNationality) {
@@ -364,8 +364,8 @@ module.exports = function init(site) {
                                             _id: selectedNationality._id,
                                             id: selectedNationality.id,
                                             code: selectedNationality.code,
-                                            nameAr: selectedNationality.nameAr,
-                                            nameEn: selectedNationality.nameEn,
+                                            nameAr: selectedNationality.nameAr ? selectedNationality.nameAr.trim() : '',
+                                            nameEn: selectedNationality.nameEn ? selectedNationality.nameEn.trim() : '',
                                         };
                                     }
 
@@ -375,9 +375,11 @@ module.exports = function init(site) {
                                     }
                                     newDoc = {
                                         code: doc.code,
-                                        nameAr: doc.nameAr,
-                                        nameEn: doc.nameEn,
-                                        gender: site.genders ? site.genders.find((t) => t.nameEn.toLowerCase().trim() == doc.gender.toLowerCase().trim()) : site.genders.find((t) => t.id == 1),
+                                        nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                        nameEn: doc.nameEn ? doc.nameEn.trim() : '',
+                                        gender: site.genders
+                                            ? site.genders.find((t) => t.nameEn && t.nameEn.toLowerCase().trim() == doc.gender.toLowerCase().trim())
+                                            : site.genders.find((t) => t.id == 1),
                                         email: doc.email,
                                         password: doc.password || doc.mobile || doc.email,
                                         mobile: doc.mobile,

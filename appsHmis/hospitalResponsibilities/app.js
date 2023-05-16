@@ -306,12 +306,12 @@ module.exports = function init(site) {
                             if (!doc.code) {
                                 doc.code = systemCode;
                             }
-                            
+
                             let newDoc = {
                                 code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
-                                type: site.centersTypes.find((t) => t.nameEn.toLowerCase().trim() == doc.type.toLowerCase().trim()),
+                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
+                                type: site.centersTypes.find((t) => t.nameEn && t.nameEn.toLowerCase().trim() == doc.type.toLowerCase().trim()),
                                 image: { url: '/images/hospitalResponsibilities.png' },
                                 active: true,
                             };

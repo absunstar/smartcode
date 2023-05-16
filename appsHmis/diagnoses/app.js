@@ -320,8 +320,8 @@ module.exports = function init(site) {
                                 active: true,
                                 image: { url: '/images/diagnoses.png' },
                                 code: doc.code,
-                                nameEn: doc.nameEn,
-                                nameAr: doc.nameAr,
+                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
+                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
                             };
                             newDoc.company = site.getCompany(req);
                             newDoc.branch = site.getBranch(req);

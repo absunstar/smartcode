@@ -309,8 +309,8 @@ module.exports = function init(site) {
 
                             let newDoc = {
                                 code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
+                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
                                 image: { url: '/images/chiefComplaints.png' },
                                 active: true,
                             };

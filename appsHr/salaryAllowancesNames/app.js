@@ -336,15 +336,14 @@ module.exports = function init(site) {
                                 systemCode++;
                             }
 
-       
                             if (!doc.code) {
                                 doc.code = systemCode;
                             }
 
                             let newDoc = {
                                 code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
+                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
                                 addToBasicSalary,
                                 image: { url: '/images/salaryAllowancesNames.png' },
                                 active: true,

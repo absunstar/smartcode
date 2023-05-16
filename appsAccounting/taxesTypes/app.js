@@ -291,7 +291,6 @@ module.exports = function init(site) {
                     let list = app.memoryList
                         .filter((g) => g.company && g.company.id == site.getCompany(req).id && (!where.active || g.active === where.active) && JSON.stringify(g).contains(search))
                         .slice(0, limit);
-                
 
                     res.json({
                         done: true,
@@ -346,8 +345,8 @@ module.exports = function init(site) {
 
                             let newDoc = {
                                 code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
+                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
                                 value: doc.value,
                                 image: { url: '/images/taxesTypes.png' },
                                 active: true,

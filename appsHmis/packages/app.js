@@ -297,10 +297,16 @@ module.exports = function init(site) {
                                     specialty = specialtiesDocs.find((sp) => sp && sp.nameEn.toLowerCase().trim() == doc['Specialty'].toLowerCase().trim());
 
                                     let newDoc = {
-                                        code: doc['CODE'] || doc['CODE '],
+                                        code: doc['CODE'] || doc['CODE '].trim(),
                                         specialty,
-                                        nameAr: doc['الـوصـــــــــــــــــــف'] || doc['الـوصـــــــــــــــــــف '] || doc['الـوصـــــــــــــــــــف  '],
-                                        nameEn: doc['DESCRIPTION'],
+                                        nameAr: doc['الـوصـــــــــــــــــــف']
+                                            ? doc['الـوصـــــــــــــــــــف'].trim()
+                                            : '' || doc['الـوصـــــــــــــــــــف ']
+                                            ? doc['الـوصـــــــــــــــــــف '].trim()
+                                            : '' || doc['الـوصـــــــــــــــــــف  ']
+                                            ? doc['الـوصـــــــــــــــــــف  '].trim()
+                                            : '',
+                                        nameEn: doc['DESCRIPTION'].trim(),
                                         image: { url: '/images/packages.png' },
                                         active: true,
                                         cashPriceOut: doc['Credit Standard'] || 0,

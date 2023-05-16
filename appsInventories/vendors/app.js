@@ -347,8 +347,8 @@ module.exports = function init(site) {
 
                             let newDoc = {
                                 code: doc.code,
-                                nameAr: doc.nameAr,
-                                nameEn: doc.nameEn,
+                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
+                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
                                 email: doc.email,
                                 mobile: '0' + doc.mobile,
                                 type: site.usersTypesList[6],

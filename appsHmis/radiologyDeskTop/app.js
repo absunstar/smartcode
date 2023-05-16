@@ -318,8 +318,7 @@ module.exports = function init(site) {
   }
 
   site.post({ name: `/api/selectRadiologyDeskTop`, require: { permissions: ['login'] } }, (req, res) => {
-    let appServices = site.getApp('services');
-    let response = { done: false };
+    let appServices = site.getApp('services');let response = { done: false };
     let _data = req.body;
     let service = appServices.memoryList.find((_c) => _c.id == _data.doctor.consItem.id);
     if (_data.patient.insuranceCompany && _data.patient.insuranceCompany.id) {
