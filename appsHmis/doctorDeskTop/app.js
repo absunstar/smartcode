@@ -299,7 +299,6 @@ module.exports = function init(site) {
             where['doctor.id'] = where['doctor'].id;
             delete where['doctor'];
           }
-          console.log(where);
           app.all({ where, select, sort: { id: -1 }, limit: req.body.limit }, (err, docs) => {
             let newDate = new Date();
             docs.forEach((_d) => {
