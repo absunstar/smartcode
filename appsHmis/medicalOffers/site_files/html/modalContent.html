@@ -91,13 +91,13 @@
               <i-control type="number" ng-change="calc(item)" ng-model="s.qty"></i-control>
             </td>
             <td class="center">
-              <p>{{s.total}} <span class="currency">##word.$##</span></p>
+              <p>{{s.total | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center">
-              <p>{{s.totalVat}} <span class="currency">##word.$##</span></p>
+              <p>{{s.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center">
-              <p>{{s.totalAfterVat}} <span class="currency">##word.$##</span></p>
+              <p>{{s.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center not-print">
               <i-button type="delete" ng-click="item.servicesList.splice($index,1);calc(item)"> </i-button>

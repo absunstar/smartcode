@@ -112,7 +112,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="mode == 'add' ">
               <div class="table-responsive">
                 <table class="table hover bold">
                   <tr>
@@ -135,15 +135,42 @@
                       <p>{{s.qty}}</p>
                     </td>
                     <td class="center">
-                      <p>{{s.total}} <span class="currency">##word.$##</span></p>
+                      <p>{{s.total | xmoney2}} <span class="currency">##word.$##</span></p>
                     </td>
                     <td class="center">
-                      <p>{{s.totalVat}} <span class="currency">##word.$##</span></p>
+                      <p>{{s.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                     </td>
                     <td class="center">
-                      <p>{{s.totalAfterVat}} <span class="currency">##word.$##</span></p>
+                      <p>{{s.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
                     </td>
                    
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="row"  ng-show="mode == 'view' ">
+              <div class="table-responsive">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th>##word.Qty##</th>
+                    <th>##word.Qty Available##</th>
+                    <th>##word.Total Price##</th>
+                  </tr>
+                  <tr ng-repeat="s in item.medicalOffer.servicesList">
+                    <td class="center blue">{{s.code}}</td>
+                    <td class="center">{{s.name##session.lang##}}</td>
+                    <td class="center">
+                      <p>{{s.qty}}</p>
+                    </td>
+                    <td class="center">
+                      <p>{{s.qtyAvailable}}</p>
+                    </td>
+                    <td class="center">
+                      <p>{{s.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -175,9 +202,14 @@
                   <p class="bold font-22">##word.Total After VAT## : {{item.medicalOffer.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 </fieldset>
               </div>
+              <div class="col4" ng-show="mode == 'view' ">
+                <fieldset class="gray-bg">
+                  <p class="bold font-22">##word.Remain Paid## : {{item.remainPaid | xmoney2}} <span class="currency">##word.$##</span></p>
+                </fieldset>
+              </div>
               <div class="col4">
                 <fieldset class="gray-bg">
-                  <p class="bold font-24">##word.Total Net## : {{item.medicalOffer.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                  <p class="bold font-24">##word.Total Net## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
                 </fieldset>
               </div>
             </div>

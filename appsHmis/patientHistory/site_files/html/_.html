@@ -2,21 +2,19 @@
   <div x-import="doctorDeskTop/doctorRecommendations.html"></div>
   <div x-import="laboratoryDeskTop/recommendations.html"></div>
   <div x-import="radiologyDeskTop/recommendations.html"></div>
+  <div x-import="offersOrders/modal.html"></div>
   <div class="row" x-permissions="patientHistoryUi || patientHistoryManage">
     <div class="row" ng-hide="patientId > 0">
       <i-list
         class="col6"
         label="##word.Patient##"
         ng-model="patient"
-        ng-change="getDoctorDeskTopList(patient.id);getLaboratoryDeskTopList(patient.id) ;getRadiologyDeskTopList(patient.id)"
+        ng-change="getDoctorDeskTopList(patient.id);getLaboratoryDeskTopList(patient.id) ;getRadiologyDeskTopList(patient.id) ;getOffersOrdersList(patient.id)"
         display="fullName##session.lang##"
         items="patientsList"
         ng-get="getPatientsList($search)"
       ></i-list>
-      <div class="col3" ng-show="patient.id">
-        <br />
-        <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
-      </div>
+
     </div>
     <div class="row" ng-show="patient.id">
       <div class="cart">
@@ -101,8 +99,12 @@
             <span> ##word.Radiology Desktop##</span>
           </a>
 
-          <a class="tab-link" onclick="site.showTabContent(event, '#medicineOrder')">
-            <span> ##word.Medicine Order##</span>
+          <a class="tab-link" onclick="site.showTabContent(event, '#medicineOrders')">
+            <span> ##word.Medicine Orders##</span>
+          </a>
+
+          <a class="tab-link" onclick="site.showTabContent(event, '#offersOrders')">
+            <span> ##word.Offers Orders##</span>
           </a>
         </div>
         <div class="tabs-content">
@@ -180,13 +182,37 @@
           </div>
 
           
-          <div id="medicineOrder" class="tab-content">
+          <div id="medicineOrders" class="tab-content">
             <div class="row padding">
               <fieldset>
-                <div class="row list" ng-repeat="m in medicineOrderList">
+                <div class="row list" ng-repeat="m in medicineOrdersList">
                   <p class="bold">
                     <span class="darkGray">##word.Medicine Name## : </span>
                     <span>{{m.name##session.lang##}} &nbsp; &nbsp; &nbsp;</span>
+                  </p>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <div id="offersOrders" class="tab-content">
+            <div class="row padding">
+              <fieldset>
+                <div class="row list" ng-repeat="o in offersOrdersList">
+                  <p class="bold">
+                    <span class="darkGray">##word.Offer Name## : </span>
+                    <span>{{o.medicalOffer.name##session.lang##}} &nbsp; &nbsp; &nbsp;</span>
+
+                    <span class="darkGray">##word.Total Net## : </span>
+                    <span>{{o.totalNet  | xmoney2}} <span class="currency">##word.$##</span> &nbsp; &nbsp; &nbsp;</span>
+
+                    <span class="darkGray">##word.Remain Paid## : </span>
+                    <span>{{o.remainPaid  | xmoney2}} <span class="currency">##word.$##</span> &nbsp; &nbsp; &nbsp;</span>
+
+                    <span class="darkGray">##word.Date## : </span>
+                    <span>{{o.date | date:"dd / MM / yyyy"}} &nbsp; &nbsp; &nbsp;</span>
+
+                     <i-button type="view" label="##word.Details##" ng-click="showOffersOrders(o)"></i-button> 
                   </p>
                 </div>
               </fieldset>

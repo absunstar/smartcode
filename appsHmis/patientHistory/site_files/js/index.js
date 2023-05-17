@@ -18,13 +18,13 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
       }).then(
         function (response) {
           $scope.busy = false;
-
           if (response.data.done && response.data.doc) {
             $scope.patient = response.data.doc;
             document.querySelector(`#patientHistory .tab-link`).click();
             $scope.getDoctorDeskTopList($scope.patient.id);
             $scope.getLaboratoryDeskTopList($scope.patient.id);
             $scope.getRadiologyDeskTopList($scope.patient.id);
+            $scope.getOffersOrdersList($scope.patient.id);
           }
         },
         function (err) {
@@ -55,7 +55,7 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
           fullNameAr: 1,
           patientType: 1,
           maritalStatus: 1,
-          dateOfBirth : 1,
+          dateOfBirth: 1,
           gender: 1,
           age: 1,
           motherNameEn: 1,
@@ -86,7 +86,7 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
 
   $scope.getDoctorDeskTopList = function (id) {
     $scope.doctorDeskTopList = [];
-    $scope.medicineOrderList = [];
+    $scope.medicineOrdersList = [];
     $http({
       method: 'POST',
       url: '/api/doctorDeskTop/all',
@@ -94,22 +94,23 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
         where: { 'patient.id': id },
         select: {
           id: 1,
+          code: 1,
           doctor: 1,
           service: 1,
           status: 1,
           ordersList: 1,
-          date : 1
+          date: 1,
         },
       },
     }).then(
       function (response) {
         if (response.data.done && response.data.list.length > 0) {
           $scope.doctorDeskTopList = response.data.list;
-          $scope.doctorDeskTopList.forEach(_d => {
+          $scope.doctorDeskTopList.forEach((_d) => {
             _d.ordersList = _d.ordersList || [];
-            _d.ordersList.forEach(_o => {
-              if(_o.type== 'MD') {
-                $scope.medicineOrderList.push(_o)
+            _d.ordersList.forEach((_o) => {
+              if (_o.type == 'MD') {
+                $scope.medicineOrdersList.push(_o);
               }
             });
           });
@@ -130,16 +131,45 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
         where: { 'patient.id': id },
         select: {
           id: 1,
+          code: 1,
           doctor: 1,
           service: 1,
           status: 1,
-          date : 1
+          date: 1,
         },
       },
     }).then(
       function (response) {
         if (response.data.done && response.data.list.length > 0) {
           $scope.laboratoryDeskTopList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getOffersOrdersList = function (id) {
+    $scope.offersOrdersList = [];
+    $http({
+      method: 'POST',
+      url: '/api/offersOrders/all',
+      data: {
+        where: { 'patient.id': id },
+        select: {
+          id: 1,
+          code: 1,
+          medicalOffer: 1,
+          totalNet: 1,
+          remainPaid: 1,
+          date: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.offersOrdersList = response.data.list;
         }
       },
       function (err) {
@@ -157,10 +187,11 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
         where: { 'patient.id': id },
         select: {
           id: 1,
+          code: 1,
           doctor: 1,
           service: 1,
           status: 1,
-          date : 1
+          date: 1,
         },
       },
     }).then(
@@ -174,6 +205,33 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
       }
     );
   };
+
+  $scope.showOffersOrders = function (_item) {
+    $scope.error = '';
+    $http({
+      method: 'POST',
+      url: `/api/offersOrders/view`,
+      data: {
+        id: _item.id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.item = response.data.doc;
+          $scope.item.$view = true;
+          $scope.mode = 'view';
+          site.showModal('#offersOrdersManageModal');
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
 
   $scope.showDoctorRecommendations = function (_item) {
     $scope.error = '';
@@ -201,6 +259,7 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
     );
   };
 
+ 
   $scope.showLaboratoryRecommendations = function (_item) {
     $scope.error = '';
     $http({
