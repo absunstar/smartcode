@@ -3,6 +3,7 @@ module.exports = function init(site) {
         { id: 1, nameAr: 'مبيعات للعملاء', nameEn: 'Sales For Customers', code: 'customer' },
         { id: 2, nameAr: 'مبيعات للشركات', nameEn: 'Sales For Companies', code: 'company' },
         { id: 3, nameAr: 'مبيعات للمرضى', nameEn: 'Sales For Patients', code: 'patient' },
+        { id: 4, nameAr: 'مبيعات للطوارئ', nameEn: 'Sales For ER', code: 'er' },
     ];
 
     site.patientTypes = [

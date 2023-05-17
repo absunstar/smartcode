@@ -1,0 +1,236 @@
+<div>
+  <div class="border page-a4">
+    <div class="row">
+      <div class="col-5 center">
+        <div class="row">
+          <h4 class="center bold">##session.company.nameEn##</h4>
+        </div>
+        <div class="row">
+          <h5 class="center bold">##session.branch.nameEn##</h5>
+        </div>
+        <br />
+        <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
+          <p class="font-12 bold black center">{{i.name}}</p>
+        </div>
+      </div>
+
+      <div class="col-2 center">
+        <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
+      </div>
+
+      <div class="col-5 center">
+        <div class="row">
+          <h4 class="center bold">##session.company.nameAr##</h4>
+        </div>
+        <div class="row">
+          <h5 class="center bold">##session.branch.nameAr##</h5>
+        </div>
+        <br />
+        <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
+          <p class="font-12 bold black center">{{i.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row center" ng-show="##session.company.taxNumber##">
+      <p class="center black bold font-12">Tax No. : ##session.company.taxNumber## : الرقم الضريبي</p>
+    </div>
+
+    <p class="center font-30">إشعار حضور للمستشفى</p>
+    <p class="center font-30 underline">Hospital Attendance Notice</p>
+    <br />
+    <div class="row full border-1">
+      <div class="row full">
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">إسم المريض : {{order.patient.fullNameAr}}</p></div>
+        </div>
+
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">Patient Name : {{order.patient.fullNameEn}}</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">رقم الملف</p></div>
+        </div>
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">{{order.patient.code}}</p></div>
+        </div>
+
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">Medical Record</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">رقم الهوية</p></div>
+        </div>
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">{{order.patient.havisaNum}}</p></div>
+        </div>
+
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">Identity No.</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">الجنس : {{order.patient.gender.nameAr}}</p></div>
+        </div>
+
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">Gender : {{order.patient.gender.nameEn}}</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">الجنسية : {{order.patient.nationality.nameAr}}</p></div>
+        </div>
+
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">Nationality : {{order.patient.nationality.nameEn}}</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">تاريخ الميلاد</p></div>
+        </div>
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">{{order.patient.dateOfBirth |date:"dd / MM / yyyy}} ({{order.patient.age}} Y)</p></div>
+        </div>
+
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">Data Of Birth</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">تاريخ المراجعة</p></div>
+        </div>
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">{{order.patient.date |date:"dd / MM / yyyy}}</p></div>
+        </div>
+
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">Date Of Visit</p></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">##word.Age## : {{order.patient.age}}</p></div>
+        </div>
+
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">##word.Gender## : {{order.patient.gender.nameEn}}</p></div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="row full border-1">
+      <div class="row">
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">المريض المذكور أعلاه حضر إلى المستشفى و راجع عيادة</p></div>
+        </div>
+
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">The above-mentioned patient attended to the hospital and see a clinic</p></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="center col-6">
+          <p class="font-12 userPrint">لدى د. : {{order.doctor.nameAr}}</p>
+        </div>
+
+        <div class="center col-6">
+          <p class="font-12 userPrint">By Dr. : {{order.doctor.nameEn}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">و ذلك بتاريخ</p></div>
+        </div>
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">{{order.patient.date |date:"dd / MM / yyyy}}</p></div>
+        </div>
+
+        <div class="center col-3">
+          <div><p class="font-12 userPrint">By Date</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">وقد تم عمل اللازم</p></div>
+        </div>
+
+        <div class="center col-6">
+          <div><p class="font-12 userPrint">The work has been done</p></div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="row full border-1">
+      <div class="row full">
+        <div class="center col-3">
+          <p class="font-12 userPrint">التشخيص</p>
+        </div>
+        <div class="center col-6">
+          <p class="bold font-12 userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'DIAG'}">{{s.name##session.lang##}}</p>
+        </div>
+
+        <div class="center col-3">
+          <p class="font-12 userPrint">Diagnosis</p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-12">
+          <div class="col-2">
+            <p class="black font-12">Notes :</p>
+          </div>
+          <div class="col-8"><p class="font-12 userPrint">{{order.notes}}</p></div>
+          <div class="col-2">
+            <p class="black font-12">: ملاحظات</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row full border-1">
+      <div class="row">
+        <div class="center col-6">
+          <p class="font-12 userPrint">إسم الطبيب المعالج : {{order.doctor.nameAr}}</p>
+        </div>
+
+        <div class="center col-6">
+          <p class="font-12 userPrint">Doctor Name : {{order.doctor.nameEn}}</p>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-6">
+          <p class="font-12 userPrint">التوقيع :</p>
+        </div>
+
+        <div class="col-6">
+          <p class="font-12 userPrint">Signature :</p>
+        </div>
+      </div>
+    </div>
+    <div class="row full border-1">
+      <p class="font-25 center userPrint">هذا الإشعار غير صالح كإجازة مرضية</p>
+      <p class="font-25 center userPrint">This is not authorization for sick leave</p>
+    </div>
+  </div>
+</div>

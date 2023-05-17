@@ -337,7 +337,11 @@ module.exports = function init(site) {
                 if (doc.salesType.code == 'patient') {
                   obj.customer = doc.patient;
                   // obj.appName = 'salesPatientsInvoices';
-                  site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id });
+                  site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id,items : doc.itemsList });
+                } if (doc.salesType.code == 'er') {
+                  obj.customer = doc.patient;
+                  // obj.appName = 'salesPatientsInvoices';
+                  site.hasErDoctorDeskTop({ id: doc.doctorDeskTop.id,items : doc.itemsList });
                 } else if (doc.salesType.code == 'company') {
                   obj.customer = doc.customer;
                   // obj.appName = 'salesCompaniesInvoices';

@@ -484,6 +484,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     document.getElementById('LA').classList.remove('icon-select');
     document.getElementById('X-R').classList.remove('icon-select');
     document.getElementById('MD').classList.remove('icon-select');
+    document.getElementById('ER').classList.remove('icon-select');
     document.getElementById($scope.item.$orderType).classList.add('icon-select');
 
     $scope.ordersList = [];
@@ -494,7 +495,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     let select = { id: 1, nameEn: 1, nameAr: 1, code: 1 };
 
     let url = '/api/services/all';
-    if ($scope.item.$groupTypeId && $scope.item.$orderType != 'MD') {
+    if ($scope.item.$groupTypeId && $scope.item.$orderType != 'MD' && $scope.item.$orderType != 'ER') {
       where['serviceGroup.type.id'] = $scope.item.$groupTypeId;
     } else {
       url = '/api/storesItems/all';
@@ -786,7 +787,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.errorOrder = '';
     let urlName = 'storesItems';
-    if (_item.type == 'MD') {
+    if (_item.type == 'MD' || _item.type == 'ER') {
       urlName = 'storesItems';
     } else {
       urlName = 'services';
@@ -824,7 +825,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
       _item.ordersList = _item.ordersList || [];
       if (!_item.ordersList.some((s) => s.id === _item.$order.id && s.type === _item.$orderType)) {
         let order = { ..._item.$order, type: _item.$orderType, count: 1 };
-        if (order.type == 'MD') {
+        if (order.type == 'MD' || order.type == 'ER') {
+          order.hasOrder = false;
           order.unit = _item.$order.unitsList[0].unit;
           order.barcode = _item.$order.unitsList[0].barcode;
           order.price = _item.$order.unitsList[0].salesPrice;

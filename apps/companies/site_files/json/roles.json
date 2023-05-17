@@ -91,6 +91,7 @@
             "salesInvoicesManage",
             "salesCompaniesInvoicesManage",
             "salesPatientsInvoicesManage",
+            "salesErInvoicesManage",
             "storesItemsCardManage",
             "transferItemsOrdersManage",
             "transferItemsRequestsManage",

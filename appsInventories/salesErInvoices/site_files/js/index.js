@@ -1,13 +1,13 @@
-app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
+app.controller('salesErInvoices', function ($scope, $http, $timeout) {
   $scope.setting = site.showObject(`##data.#setting##`);
   $scope.baseURL = '';
   $scope.appName = 'salesInvoices';
-  $scope.modalID = '#salesPatientsInvoicesManageModal';
-  $scope.modalSearchID = '#salesPatientsInvoicesSearchModal';
+  $scope.modalID = '#salesErInvoicesManageModal';
+  $scope.modalSearchID = '#salesErInvoicesSearchModal';
   $scope.mode = 'add';
   $scope._search = { fromDate: new Date(), toDate: new Date() };
   $scope.structure = {
-    image: { url: '/images/salesPatientsInvoices.png' },
+    image: { url: '/images/salesErInvoices.png' },
     totalPrice: 0,
     totalItemsDiscounts: 0,
     totalDiscounts: 0,
@@ -59,7 +59,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.getDoctorDeskTopList();
     $scope.item = {
       ...$scope.structure,
-      salesType: { id: 3, nameAr: 'مبيعات للمرضى', nameEn: 'Sales For Patients', code: 'patient' },
+      salesType: { id: 4, nameAr: 'مبيعات للطوارئ', nameEn: 'Sales For ER', code: 'er' },
       date: new Date(),
       itemsList: [],
       discountsList: [],
@@ -72,10 +72,13 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       $scope.getSafes($scope.item.paymentType);
     }
 
-    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
+    if ($scope.setting.storesSetting.erStore && $scope.setting.storesSetting.erStore.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.customersStore.id;
+        return _t.id == $scope.setting.storesSetting.erStore.id;
       });
+    } else {
+      $scope.mainError = 'Must Select ER Store From System Setting';
+      return;
     }
 
     site.showModal($scope.modalID);
@@ -249,7 +252,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     where = where || { approved: false };
-    where['salesType.code'] = 'patient';
+    where['salesType.code'] = 'er';
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
@@ -287,7 +290,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       method: 'POST',
       url: '/api/numbering/getAutomatic',
       data: {
-        screen: 'salesPatientsInvoices',
+        screen: 'salesErInvoices',
       },
     }).then(
       function (response) {
@@ -459,9 +462,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
   $scope.getDoctorDeskTopList = function () {
     $scope.busy = true;
     $scope.doctorDeskTopList = [];
-  
-    let where = { 'status.id': 3, ordersList :{ $elemMatch: { type: 'MD', hasOrder: false } } };
-
+    let where = { 'status.id': 3, ordersList :{ $elemMatch: { type: 'ER', hasOrder: false } } };
     $http({
       method: 'POST',
       url: '/api/doctorDeskTop/all',
@@ -481,8 +482,8 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     }).then(
       function (response) {
         $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {2
-          $scope.doctorDeskTopList = response.data.list
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.doctorDeskTopList = response.data.list;
         }
       },
       function (err) {
@@ -580,7 +581,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $http({
       method: 'POST',
       url: '/api/storesItems/handelItemsData',
-      data: { items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'MD' && g.hasOrder == false), storeId: $scope.item.store.id },
+      data: { items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'ER' && g.hasOrder == false), storeId: $scope.item.store.id },
     }).then(
       function (response) {
         $scope.busy = false;

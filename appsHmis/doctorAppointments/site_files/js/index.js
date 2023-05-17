@@ -218,6 +218,7 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           insuranceCompany: 1,
           insuranceClass: 1,
           expiryDate: 1,
+          havisaNum: 1,
         },
         search: $search,
       },

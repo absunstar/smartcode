@@ -297,6 +297,16 @@
                 ng-search="item.storesSetting.$customersStore"
               >
               </i-list>
+              <i-list
+              x-feature="m-hmis"
+              class="col4"
+              ng-model="item.storesSetting.erStore"
+              items="customersStoresList"
+              display="name##session.lang##"
+              label="##word.Sales For ER Store##"
+              ng-search="item.storesSetting.$erStore"
+            >
+            </i-list>
             </div>
             <div class="row">
               <i-list class="col4" ng-model="item.storesSetting.itemType" items="itemsTypesList" display="name##session.lang##" label="##word.Item Type##" ng-search="item.storesSetting.$itemType">

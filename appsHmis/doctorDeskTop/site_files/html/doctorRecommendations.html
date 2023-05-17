@@ -264,6 +264,7 @@
                         <i title="##word.Laboratory##" class="fas fa-vial icon" id="LA" ng-click="item.$groupTypeId = 3 ;item.$orderType = 'LA' ;getOrdersList('')"></i>
                         <i title="##word.Radiology##" class="fas fa-x-ray icon" id="X-R" ng-click="item.$groupTypeId = 4 ;item.$orderType = 'X-R' ;getOrdersList('')"></i>
                         <i title="##word.Medicine##" class="fas fa-capsules icon" id="MD" ng-click="item.$orderType = 'MD' ;getOrdersList('')"></i>
+                        <i title="##word.ER##" class="fas fa-first-aid icon" id="ER" ng-click="item.$orderType = 'ER' ;getOrdersList('')"></i>
                       </div>
                     </div>
                   </div>
@@ -279,6 +280,7 @@
                           <i class="fas fa-vial" ng-show="s.type== 'LA'"></i>
                           <i class="fas fa-x-ray" ng-show="s.type== 'X-R'"></i>
                           <i class="fas fa-capsules" ng-show="s.type== 'MD'"></i>
+                          <i class="fas fa-capsules" ng-show="s.type== 'ER'"></i>
                           {{s.type}}-{{s.code}}
                         </p>
                       </div>
@@ -288,7 +290,7 @@
                       </div>
                       <div class="col6">
                         <div class="row">
-                          <i-control type="number" ng-change="calc(s)" ng-show="s.type == 'MD'" class="col3" label="##word.QTY.##" ng-model="s.count"></i-control>
+                          <i-control type="number" ng-change="calc(s)" ng-show="s.type == 'MD' || s.type == 'ER'" class="col3" label="##word.QTY.##" ng-model="s.count"></i-control>
                           <div class="col3">
                             <p class="bold center">##word.Price##</p>
                             <p class="bold center">
@@ -314,7 +316,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row" ng-show="s.type == 'MD'">
+                    <div class="row" ng-show="s.type == 'MD' || s.type == 'ER'">
                       <i-list
                         label="##word.Duration##"
                         class="col3"
@@ -339,7 +341,7 @@
                       <div class="col1"></div>
                       <div class="col1">
                         <br />
-                        <i-button type="delete" ng-click="item.ordersList.splice($index,1)"> </i-button>
+                        <i-button type="delete" ng-hide="s.hasOrder" ng-click="item.ordersList.splice($index,1)"> </i-button>
                       </div>
                     </div>
                   </div>
@@ -388,7 +390,7 @@
       <p class="error">{{error}}</p>
       <i-button
         type="edit"
-        ng-hide="mode == 'view'|| item.$view || item.hasOrder || item.hasSales"
+        ng-hide="mode == 'view'|| item.$view || item.hasOrder"
         label="##word.Save##"
         x-permissions="doctorDeskTopUpdate || doctorDeskTopManage"
         ng-click="update(item,'#doctorRecommendationsModal')"

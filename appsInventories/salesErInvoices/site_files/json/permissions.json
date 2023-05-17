@@ -1,0 +1,12 @@
+[
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "salesErInvoicesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "salesErInvoices", "name": "voucherSalesErInvoices", "En": "Add Voucher", "Ar": "إضافة سند" }
+]

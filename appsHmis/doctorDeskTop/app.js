@@ -299,6 +299,7 @@ module.exports = function init(site) {
             where['doctor.id'] = where['doctor'].id;
             delete where['doctor'];
           }
+          console.log(where);
           app.all({ where, select, sort: { id: -1 }, limit: req.body.limit }, (err, docs) => {
             let newDate = new Date();
             docs.forEach((_d) => {
@@ -435,6 +436,7 @@ module.exports = function init(site) {
     };
     obj.hasOrder = false;
     obj.hasSales = false;
+    obj.hasEr = false;
     if (obj.doctor && obj.doctor.id) {
       where['doctor.id'] = obj.doctor.id;
     }
@@ -506,18 +508,16 @@ module.exports = function init(site) {
         if (docs && docs.length > 0) {
           let list = [];
           docs.forEach((_doc) => {
-            console.log(_doc.date);
             _doc.date = new Date(_doc.date);
             _doc.date.setHours(0, 0, 0, 0);
-
-            if (_doc.date >= fromDate && _doc.date <= newDate) {
-              let index = list.findIndex((itm) => itm.serviceId === _doc.service.id);
-              if (index !== -1) {
-                list.push({ serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) });
-              } else {
-                list[index].count += 1;
-              }
-            }
+            // if (_doc.date >= fromDate && _doc.date <= newDate) {
+            //   let index = list.findIndex((itm) => itm.serviceId === _doc.service.id);
+            //   if (index !== -1) {
+            //     list.push({ serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) });
+            //   } else {
+            //     list[index].count += 1;
+            //   }
+            // }
           });
           callBack(list);
         } else {
@@ -533,9 +533,39 @@ module.exports = function init(site) {
     app.$collection.update({ where, set: { hasOrder: true } });
   };
 
-  site.hasSalesDoctorDeskTop = function (where) {
-    app.$collection.update({ where, set: { hasSales: true } });
+  site.hasSalesDoctorDeskTop = function (obj) {
+    app.view({ id: obj.id }, (err, doc) => {
+      if (!err && doc) {
+        obj.items.forEach(_item => {
+          doc.ordersList.forEach(_o => {
+            if(_o.type == 'MD' &&_item.id == _o.id) {
+              _o.hasOrder = true;
+            }
+          });
+        });
+        app.update(doc, (err, result) => {});
+      }
+    });
+
   };
+
+  site.hasErDoctorDeskTop = function (obj) {
+    app.view({ id: obj.id }, (err, doc) => {
+      if (!err && doc) {
+        obj.items.forEach(_item => {
+          doc.ordersList.forEach(_o => {
+            if(_o.type == 'ER' &&_item.id == _o.id) {
+              _o.hasOrder = true;
+            }
+          });
+        });
+        app.update(doc, (err, result) => {});
+      }
+    });
+
+  };
+
+
 
   app.init();
   site.addApp(app);
