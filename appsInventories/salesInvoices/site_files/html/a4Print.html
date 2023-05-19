@@ -12,6 +12,9 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
+        <div class="row center" ng-show="##session.company.taxNumber##">
+          <p class="font-14 bold black center">Tax # : ##session.company.taxNumber##</p>
+        </div> 
       </div>
 
       <div class="col-2 center">
@@ -28,6 +31,9 @@
         <br />
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
           <p class="font-12 bold black center">{{i.name}}</p>
+        </div>
+        <div class="row center" ng-show="##session.company.taxNumber##">
+          <p class="font-14 bold black center">##session.company.taxNumber##  : الرقم الضريبي </p>
         </div>
       </div>
     </div>
@@ -49,12 +55,12 @@
     <div class="row full">
       <div class="center col-6 border-1">
         <div class="col-3"><p class="black font-12">Date :</p></div>
-        <div class="col-6"><p class="black font-12">{{sInvoice.date |date:"dd / MM / yyyy - hh : mm a" }}</p></div>
+        <div class="col-6"><p class="black bold font-12">{{sInvoice.date |date:"dd / MM / yyyy - hh : mm a" }}</p></div>
         <div class="col-3"><p class="black font-12">: التاريخ</p></div>
       </div>
       <div class="center col-6 border-1" ng-hide="##query.type## == 5">
         <div class="col-4"><p class="black font-12">Pay Method :</p></div>
-        <div class="col-4"><p class="black font-12">{{sInvoice.paymentType.name##session.lang##}}</p></div>
+        <div class="col-4"><p class="black bold font-12">{{sInvoice.paymentType.name##session.lang##}}</p></div>
         <div class="col-4"><p class="black font-12">: طريقة الدفع</p></div>
       </div>
     </div>
@@ -64,7 +70,7 @@
         <div class="col-3">
           <p class="black font-12">Customer :</p>
         </div>
-        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
+        <div class="col-6"><p class="font-12 bold userPrint">{{sInvoice.customer.name##session.lang##}}</p></div>
         <div class="col-3">
           <p class="black font-12">: العميل</p>
         </div>
@@ -72,7 +78,7 @@
 
       <div class="center col-6 border-1">
         <div class="col-3"><p class="black font-12">Mobile :</p></div>
-        <div class="col-6"><p class="black font-12">{{sInvoice.customer.mobile }}</p></div>
+        <div class="col-6"><p class="black bold font-12">{{sInvoice.customer.mobile }}</p></div>
         <div class="col-3"><p class="black font-12">: الجوال</p></div>
       </div>
     </div>
@@ -81,7 +87,7 @@
         <div class="col-3">
           <p class="black font-12">Company :</p>
         </div>
-        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.company.name##session.lang##}}</p></div>
+        <div class="col-6"><p class="font-12 bold userPrint">{{sInvoice.company.name##session.lang##}}</p></div>
         <div class="col-3">
           <p class="black font-12">: الشركة</p>
         </div>
@@ -89,16 +95,16 @@
 
       <div class="center col-6 border-1">
         <div class="col-3"><p class="black font-12">Mobile :</p></div>
-        <div class="col-6"><p class="black font-12">{{sInvoice.company.mobile }}</p></div>
+        <div class="col-6"><p class="black bold font-12">{{sInvoice.company.mobile }}</p></div>
         <div class="col-3"><p class="black font-12">: الجوال</p></div>
       </div>
     </div>
-    <div class="row full" ng-show="item.salesType.code == 'patient'">
+    <div class="row full" ng-show="item.salesType.code == 'patient' || item.salesType.code == 'er'">
       <div class="center col-6 border-1">
         <div class="col-3">
           <p class="black font-12">Patient :</p>
         </div>
-        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}}</p></div>
+        <div class="col-6"><p class="font-12 bold userPrint">{{sInvoice.doctorDeskTop.patient.fullName##session.lang##}}</p></div>
         <div class="col-3">
           <p class="black font-12">: المريض</p>
         </div>
@@ -106,7 +112,7 @@
 
       <div class="center col-6 border-1">
         <div class="col-3"><p class="black font-12">Mobile :</p></div>
-        <div class="col-6"><p class="black font-12">{{sInvoice.doctorDeskTop.patient.mobile }}</p></div>
+        <div class="col-6"><p class="black bold font-12">{{sInvoice.doctorDeskTop.patient.mobile }}</p></div>
         <div class="col-3"><p class="black font-12">: الجوال</p></div>
       </div>
     </div>
@@ -115,7 +121,7 @@
         <div class="col-4">
           <p class="black font-12">VAT Registration Number :</p>
         </div>
-        <div class="col-4"><p class="font-12 userPrint">{{sInvoice.customer.taxIdentificationNumber}}</p></div>
+        <div class="col-4"><p class="font-12 bold userPrint">{{sInvoice.customer.taxIdentificationNumber}}</p></div>
         <div class="col-4">
           <p class="black font-12">: رقم تسجيل ضريبة القيمة المضافة</p>
         </div>
@@ -126,7 +132,7 @@
         <div class="col-3">
           <p class="black font-12">Notes:</p>
         </div>
-        <div class="col-6"><p class="font-12 userPrint">{{sInvoice.notes}}</p></div>
+        <div class="col-6"><p class="font-12 bold userPrint">{{sInvoice.notes}}</p></div>
         <div class="col-3">
           <p class="black font-12">: ملاحظات</p>
         </div>

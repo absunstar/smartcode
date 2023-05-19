@@ -1,0 +1,308 @@
+<div>
+  <div class="border page-a4">
+    <div class="row">
+      <div class="col-5 center">
+        <div class="row">
+          <h4 class="center bold">##session.company.nameEn##</h4>
+        </div>
+        <div class="row">
+          <h5 class="center bold">##session.branch.nameEn##</h5>
+        </div>
+        <br />
+        <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
+          <p class="font-14 bold black center">{{i.name}}</p>
+        </div>
+        <div class="row center" ng-show="##session.company.taxNumber##">
+          <p class="font-14 bold black center">Tax # : ##session.company.taxNumber##</p>
+        </div> 
+      </div>
+
+      <div class="col-2 center">
+        <img ng-show="invoiceLogo" class="logoPrint" ng-src="{{invoiceLogo}}" />
+      </div>
+
+      <div class="col-5 center">
+        <div class="row">
+          <h4 class="center bold">##session.company.nameAr##</h4>
+        </div>
+        <div class="row">
+          <h5 class="center bold">##session.branch.nameAr##</h5>
+        </div>
+        <br />
+        <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
+          <p class="font-14 bold black center">{{i.name}}</p>
+        </div>
+        <div class="row center" ng-show="##session.company.taxNumber##">
+          <p class="font-14 bold black center">##session.company.taxNumber##  : الرقم الضريبي </p>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="row gray-bg">
+      <p class="center font-25 bold">تقرير بإجازة مرضية</p>
+      <p class="center font-25 bold">Sick Leave Report</p>
+    </div>
+    <br />
+    <div class="row full border-1">
+      <div class="row full">
+        <div class="col-6">
+          <div><p class="font-14 userPrint">Patient Name : <span class="bold">{{order.patient.fullNameEn}}</span> </p></div>
+        </div>
+        <div class="col-6">
+         <p class="t-right font-14 userPrint">إسم المريض : <span class="bold">{{order.patient.fullNameAr}}</span> </p>
+        </div>
+      </div>
+
+      <div class="row full gray-bg">
+        <div class="col-3">
+          <p class="font-14 userPrint">Medical Record</p>
+        </div>
+        <div class="col-6 center">
+          <p class="font-14 bold userPrint">( {{order.patient.code}} )</p>
+        </div>
+        <div class="col-3">
+          <p class="font-14 userPrint t-right">رقم الملف</p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-6">
+          <p class="font-14 userPrint">Gender : <span class="bold">{{order.patient.gender.nameEn}}</span> </p>
+        </div>
+        <div class="col-6">
+          <p class="font-14 userPrint t-right">الجنس :  <span class="bold">{{order.patient.gender.nameAr}}</span></p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-6">
+          <p class="font-14 userPrint">Nationality : <span class="bold">{{order.patient.nationality.nameEn}}</span> </p>
+        </div>
+        <div class="col-6">
+          <p class="font-14 userPrint t-right">الجنسية :  <span class="bold">{{order.patient.nationality.nameAr}}</span></p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-3">
+          <p class="font-14 userPrint">Data Of Birth</p>
+        </div>
+        <div class="col-6">
+          <p class="font-14 center bold userPrint">{{order.patient.dateOfBirth |date:"dd / MM / yyyy"}} ({{order.patient.age}} Y)</p>
+        </div>
+        <div class="col-3">
+          <p class="font-14 userPrint t-right">تاريخ الميلاد</p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-3">
+          <p class="font-14 userPrint">Occupation</p>
+        </div>
+        <div class="col-6 center">
+          <p class="font-14 bold userPrint">{{order.leave.occupation}}</p>
+        </div>
+        <div class="col-3">
+          <p class="font-14 userPrint t-right">المهنة</p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-3">
+          <p class="font-14 userPrint">Place Of Work</p>
+        </div>
+        <div class="col-6 center">
+          <p class="font-14 bold userPrint">{{order.leave.placeOfWork}}</p>
+        </div>
+        <div class="col-3">
+          <p class="font-14 userPrint t-right">جهة العمل</p>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="col-3">
+          <p class="font-14 userPrint">Date Of Visit</p>
+        </div>
+        <div class="col-6">
+          <p class="font-14 bold center userPrint">{{order.date |date:"dd / MM / yyyy"}}</p>
+        </div>
+        <div class="col-3">
+          <p class="font-14 userPrint t-right">تاريخ المراجعة</p>
+        </div>
+      </div>
+
+      <div class="row full gray-bg">
+        <div class="col-3">
+          <p class="font-14 userPrint">Recommendation</p>
+        </div>
+        <div class="col-6 center">
+          <p class="font-14 bold userPrint"></p>
+        </div>
+        <div class="col-3">
+          <p class="font-14 userPrint t-right">التوصيات</p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="row full border-1">
+      <div class="row bold">
+        <div class="col-6">
+          <p class="font-12 userPrint">TFollowing Medical Examination, it is Recommended</p>
+        </div>
+        <div class="col-6">
+          <p class="t-right font-12 userPrint">بالكشف علي المريض نوصي بالآتي</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <p class="font-14 userPrint">Sick Leave for</p>
+        </div>
+        <div class="col-4 gray-bg">
+          <p class="font-14 center bold userPrint">{{order.leave.day}} يوم</p>
+        </div>
+        <div class="col-4">
+          <p class="font-14 userPrint t-right">منحه أجازة مرضية</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-3">
+              <div><p class="font-14 userPrint">To Date</p></div>
+            </div>
+            <div class="center col-6">
+              <div><p class="font-14 bold userPrint">{{order.leave.toDate |date:"dd/MM/yyyy"}}</p></div>
+            </div>
+
+            <div class="col-3">
+              <div><p class="font-14 userPrint t-right">إلى تاريخ</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              <p class="font-4 userPrint">From Date</p>
+            </div>
+            <div class="center col-5">
+              <p class="font-14 bold userPrint">{{order.leave.fromDate |date:"dd/MM/yyyy"}}</p>
+            </div>
+
+            <div class="col-3">
+              <p class="font-14 userPrint t-right">من تاريخ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row full border-1">
+      <br />
+      <div class="row bold">
+        <div class="col-1">
+          <p class="square"></p>
+        </div>
+        <p class="userPrint col-11 font-13">
+          <span>Refered to General Medical for Adoption the medical report &nbsp; - &nbsp;</span>
+          <span>إحالته إلي الهيئة الطبية العامة لإعتماد التقرير الطبي</span>
+        </p>
+      </div>
+      <br />
+      <div class="row bold">
+        <div class="col-1">
+          <p class="square"></p>
+        </div>
+        <p class="userPrint col-11 font-13">
+          <span>Impossible to treat in hospital &nbsp; - &nbsp;</span>
+          <span>من غير الممكن علاجه بالمستشفي</span>
+        </p>
+      </div>
+      <br />
+      <div class="row bold">
+        <div class="col-1">
+          <p class="square"></p>
+        </div>
+        <p class="userPrint col-11 font-13">
+          <span>Review the Physician befor the end of his Sick Leave &nbsp; - &nbsp;</span>
+          <span>مراجعة الطبيب المعالج قبل إنتهاء أجازته</span>
+        </p>
+      </div>
+      <br />
+      <div class="row t-right">
+        <p class="userPrint bold font-13">
+          <span>It is because of his health condition &nbsp; - &nbsp;</span>
+          <span>ذلك بسبب حالته الصحية</span>
+        </p>
+
+        <div class="row">
+          <p class="font-14">
+            <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'DIAG'}">{{s.name##session.lang##}} , </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row full border-1">
+      <div class="col-6  center">
+        <p class="font-16 userPrint">Treating Physician's Name</p>
+        <p class="font-16 userPrint">إسم الطبيب المعالج</p>
+        <p class="font-16 bold userPrint">د. {{order.doctor.nameAr}}</p>
+      </div>
+      <div class="col-6  center">
+        <p class="font-16 userPrint">Medical Director</p>
+        <p class="font-16 userPrint">المدير الطبي</p>
+        <p class="font-16 bold userPrint">د. {{setting.hmisSetting.medicalDirector.nameAr}}</p>
+      </div>
+      <div class="h-60"></div>
+    </div>
+    <br />
+
+    <div class="row full border-1">
+      <div class="row">
+        <div class="col-6">
+          <p class="font-16 t-right bold userPrint">المحترم</p>
+        </div>
+        <div class="col-6">
+          <p class="font-16 t-right bold userPrint">سعادة</p>
+        </div>
+      </div>
+
+      <div class="row t-right">
+        <p class="t-right font-14 col-5">بشأن طلب الكشف الطبي علي الموضح أعلاه</p>
+        <p class="t-right col-2"></p>
+        <p class="t-right font-14 col-1 underline">بتاريخ</p>
+        <p class="t-right col-1"></p>
+        <p class="t-right font-14 col-3 userPrint">إشارة إلي حالتكم رقم</p>
+      </div>
+      <div class="row">
+        <p class="font-14 t-right userPrint">إشارة إلي مراجعة الموظف لديكم الموضح إسمه أعلاه للكشف عليه تجدون بعاليه التقرير الصادر بشأنه</p>
+      </div>
+      <div class="row">
+        <p class="font-16 bold">الختم الرسمي</p>
+      </div>
+      <br />
+      <div class="row t-right">
+        <div class="col-2"></div>
+        <div class="col-5">
+          <div class="row">
+            <p class="font-14 t-right bold col-4 userPrint">التاريخ</p>
+            <p class="dotted t-right col-6"></p>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="row">
+            <p class="font-14 t-right bold col-4 userPrint">التوقيع</p>
+            <p class="dotted t-right col-6"></p>
+          </div>
+        </div>
+      </div>
+      <div class="h-20"></div>
+    </div>
+  </div>
+</div>

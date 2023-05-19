@@ -824,6 +824,43 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getDoctorsList = function ($search) {
+        $scope.busy = true;
+        $scope.doctorsList = [];
+        $http({
+          method: 'POST',
+          url: '/api/doctors/all',
+          data: {
+            where: { active: true },
+            select: {
+              id: 1,
+              code: 1,
+              image: 1,
+              nameEn: 1,
+              nameAr: 1,
+              specialty: 1,
+              hospitalResponsibility: 1,
+              gender: 1,
+              scientificRank : 1,
+              onDuty : 1,
+            },
+            search: $search,
+            /* limit: 1, */
+          },
+        }).then(
+          function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+              $scope.doctorsList = response.data.list;
+            }
+          },
+          function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+          }
+        );
+      };
+
     $scope.loadSafes = function () {
         $scope.error = '';
         $scope.busy = true;
@@ -871,4 +908,5 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     $scope.workflowScreens();
     $scope.getSystemSetting();
     $scope.getCurrencies();
+    $scope.getDoctorsList();
 });

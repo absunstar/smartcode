@@ -5,6 +5,7 @@
     <div x-import="doctorDeskTop/vitalsNotes.html"></div>
     <div x-import="doctorDeskTop/doctorRecommendations.html"></div>
     <div x-import="doctorDeskTop/referenceOrdersModal.html"></div>
+    <div x-import="doctorDeskTop/sickLeaveModal.html"></div>
     <div id="alert" class="modal alert small">
       <div class="modal-content height-auto">
         <div class="modal-body">
@@ -119,10 +120,10 @@
             <p class="blue center">( {{item.status.name##session.lang##}} )</p>
           </td>
           <td class="center not-print">
-            <a class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-show="item.status.id == 1" ng-click="updateStatus(item,2)"
+            <a class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-show="item.status.id == 1" ng-click="updateStatus(item,2);mode = ''"
               >##word.Entrance## <i class="fas fa-pen"></i
             ></a>
-            <a class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-show="item.status.id == 2" ng-click="showDoctorRecommendations(item)"
+            <a class="btn btn-warning btn-lg" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-show="item.status.id == 2" ng-click="showDoctorRecommendations(item);mode = ''"
               >##word.Detected## <i class="fas fa-pen"></i
             ></a>
             <a title="##word.Vitals Notes##" ng-show="item.status.id == 1" class="btn btn-primary btn-lg" ng-click="showVitalsNotes(item)"><i class="fas fa-file-medical-alt"></i></a>
@@ -130,7 +131,7 @@
               ><i class="fas fa-stethoscope font-22 pointer"></i
             ></a>
             <a title="##word.View##" class="btn btn-info btn-lg" x-permissions="doctorDeskTopView || doctorDeskTopManage" ng-click="showView(item)"><i class="fas fa-eye"></i></a>
-            <i-button type="print" ng-if="item.ordersList.length > 0" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders Print##" ng-click="ordersPrint(item)"></i-button>
+            <i-button type="print" ng-if="item.ordersList.length > 0" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders##" ng-click="ordersPrint(item)"></i-button>
             <a title="##word.Delete##" class="btn btn-danger btn-lg" ng-show="item.status.id == 1" x-permissions="doctorDeskTopDelete || doctorDeskTopManage" ng-click="showDelete(item)"
               ><i class="fas fa-trash-alt"></i
             ></a>
@@ -144,4 +145,7 @@
     <i-button x-permissions="doctorDeskTopExport || doctorDeskTopManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
   </div>
   <div id="ordersDetails" x-import="doctorDeskTop/ordersPrint.html"></div>
+  <div id="attendanceNoticDetails" x-import="doctorDeskTop/attendanceNoticPrint.html"></div>
+  <div id="sickLeaveDetails" x-import="doctorDeskTop/sickLeavePrint.html"></div>
+  <div id="medicalReportDetails" x-import="doctorDeskTop/medicalReportPrint.html"></div>
 </div>

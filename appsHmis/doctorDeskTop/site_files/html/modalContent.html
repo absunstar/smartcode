@@ -2,12 +2,21 @@
   <div class="row padding">
     <div class="col9">
       <fieldset>
+        <legend>##word.Printers##</legend>
+        <div class="row">
+          <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders##" ng-click="ordersPrint(item)"></i-button>
+          <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Attendance Notic##" ng-click="attendanceNoticPrint(item)"></i-button>
+          <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Medical Report##" ng-click="medicalReportPrint(item)"></i-button>
+          <i-button type="print" ng-show="item.leave.done" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Sick Leave##" ng-click="sickLeavePrint(item)"></i-button>
+        </div>
+      </fieldset>
+      <fieldset>
         <legend>##word.Patient##</legend>
         <div class="row" ng-show="item.patient.id">
           <div class="col3">
-            <br />
             <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
           </div>
+          <i-button class="col3" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" label="##word.Vacation Request##" onclick="site.showModal('#sickLeaveModal')"></i-button>
           <div class="cart">
             <div class="row">
               <div class="col9">
@@ -127,7 +136,7 @@
       </fieldset>
 
       <fieldset>
-        <legend>##word.Service##</legend>
+        <legend>##word.Consultation##</legend>
         <table class="table bold center hover">
           <tr>
             <th>##word.Name##</th>

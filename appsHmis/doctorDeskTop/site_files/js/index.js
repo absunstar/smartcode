@@ -2,6 +2,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
   $scope.setting = site.showObject(`##data.#setting##`);
   $('#ordersDetails').addClass('hidden');
+  $('#attendanceNoticDetails').addClass('hidden');
+  $('#sickLeaveDetails').addClass('hidden');
+  $('#medicalReportDetails').addClass('hidden');
 
   $scope.appName = 'doctorDeskTop';
   $scope.modalID = '#doctorDeskTopManageModal';
@@ -78,6 +81,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
       });
     }
 
+    if (modalID == '#sickLeaveModal') {
+      _item.leave.done = true;
+    }
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -653,14 +659,12 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           } else {
             _item.$hours = _item.$hours + 1 || 1;
             _item.$minutes = 0;
-
           }
         } else {
           _item.$minutes = _item.$minutes + 1 || 1;
         }
       });
       $scope.$applyAsync();
-
     }, 1000 * 60);
   };
 
@@ -689,8 +693,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           homeTel: 1,
           freeRevistPeriod: 1,
           freeRevistCount: 1,
-          scientificRank : 1,
-          onDuty : 1,
+          scientificRank: 1,
+          onDuty: 1,
         },
       },
     }).then(
@@ -902,48 +906,159 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     }
   };
 
-  
   $scope.ordersPrint = function (item) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
     $('#ordersDetails').removeClass('hidden');
     $scope.order = item;
-    document.getElementById("treatment").innerHTML = $scope.order.treatment;
+    document.getElementById('treatment').innerHTML = $scope.order.treatment;
 
     $scope.localPrint = function () {
-        let printer = {};
-        if ($scope.setting.printerProgram.a4Printer) {
-            printer = $scope.setting.printerProgram.a4Printer;
-        } else {
-            $scope.error = '##word.A4 printer must select##';
-            return;
-        }
-        if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-            printer = JSON.parse('##user.printerPath##');
-        }
-        $timeout(() => {
-            site.print({
-                selector: '#ordersDetails',
-                ip: printer.ipDevice,
-                port: printer.portDevice,
-                pageSize: 'A4',
-                printer: printer.ip.name.trim(),
-            });
-        }, 500);
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+        printer = JSON.parse('##user.printerPath##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#ordersDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
     };
 
     $scope.localPrint();
 
     $scope.busy = false;
     $timeout(() => {
-        $('#ordersDetails').addClass('hidden');
+      $('#ordersDetails').addClass('hidden');
     }, 8000);
-};
+  };
 
-if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+  $scope.attendanceNoticPrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#attendanceNoticDetails').removeClass('hidden');
+    $scope.order = item;
+
+    $scope.localPrint = function () {
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+        printer = JSON.parse('##user.printerPath##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#attendanceNoticDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+      $('#attendanceNoticDetails').addClass('hidden');
+    }, 8000);
+  };
+
+  $scope.sickLeavePrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#sickLeaveDetails').removeClass('hidden');
+    $scope.order = item;
+
+    $scope.localPrint = function () {
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+        printer = JSON.parse('##user.printerPath##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#sickLeaveDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+      $('#sickLeaveDetails').addClass('hidden');
+    }, 8000);
+  };
+
+  $scope.medicalReportPrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#medicalReportDetails').removeClass('hidden');
+    $scope.order = item;
+    document.getElementById('treatment').innerHTML = $scope.order.treatment;
+
+    $scope.localPrint = function () {
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
+        printer = JSON.parse('##user.printerPath##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#medicalReportDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+      $('#medicalReportDetails').addClass('hidden');
+    }, 8000);
+  };
+
+  if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
     $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
-}
+  }
 
   $scope.calc = function (_item) {
     $scope.error = '';

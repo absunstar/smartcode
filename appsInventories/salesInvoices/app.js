@@ -220,6 +220,8 @@ module.exports = function init(site) {
             appName = 'salesCompaniesInvoices';
           } else if (_data.salesType.code == 'patient') {
             appName = 'salesPatientsInvoices';
+          } else if (_data.salesType.code == 'er') {
+            appName = 'salesErInvoices';
           }
 
           let numObj = {

@@ -185,10 +185,10 @@
 
                     <div class="col6">
                       <div class="row">
-                        <i-list label="##word.Forbidden Foods##" class="col10" ng-model="item.$forbiddenFood" display="name##session.lang##" items="foodsList" ng-search="item.$forbiddenFood"></i-list>
+                        <i-list label="##word.Banned Foods##" class="col10" ng-model="item.$bannedFood" display="name##session.lang##" items="foodsList" ng-search="item.$bannedFood"></i-list>
                         <div class="col2">
                           <br />
-                          <i-button type="add" ng-click="addPatientReccomend('$forbiddenFood','FF')"></i-button>
+                          <i-button type="add" ng-click="addPatientReccomend('$bannedFood','FF')"></i-button>
                         </div>
                       </div>
                     </div>
@@ -215,16 +215,16 @@
                     <div class="col6">
                       <div class="row">
                         <i-list
-                          label="##word.Forbidden Drinks##"
+                          label="##word.Banned Drinks##"
                           class="col10"
-                          ng-model="item.$forbiddenDrink"
+                          ng-model="item.$bannedDrink"
                           display="name##session.lang##"
                           items="drinksList"
-                          ng-search="item.$forbiddenDrink"
+                          ng-search="item.$bannedDrink"
                         ></i-list>
                         <div class="col2">
                           <br />
-                          <i-button type="add" ng-click="addPatientReccomend('$forbiddenDrink','FD')"></i-button>
+                          <i-button type="add" ng-click="addPatientReccomend('$bannedDrink','FD')"></i-button>
                         </div>
                       </div>
                     </div>

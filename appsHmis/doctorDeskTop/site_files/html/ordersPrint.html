@@ -12,6 +12,9 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
+        <div class="row center" ng-show="##session.company.taxNumber##">
+          <p class="font-14 bold black center">Tax # : ##session.company.taxNumber##</p>
+        </div>
       </div>
 
       <div class="col-2 center">
@@ -29,60 +32,47 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
+        <div class="row center" ng-show="##session.company.taxNumber##">
+          <p class="font-14 bold black center">##session.company.taxNumber## : الرقم الضريبي</p>
+        </div>
       </div>
     </div>
-    <div class="row center" ng-show="##session.company.taxNumber##">
-      <p class="center black bold font-12">Tax No. : ##session.company.taxNumber## : الرقم الضريبي</p>
-    </div>
 
-    <p class="center font-30 underline">##word.Clinicians Order`s##</p>
+    <p class="center font-30 bold gray-bg">##word.Clinicians Order`s##</p>
     <br />
     <div class="row full">
       <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.MRN## : {{order.patient.code}}</p></div>
+        <p class="font-12 userPrint">##word.MRN## : <span class="bold">{{order.patient.code}}</span></p>
       </div>
 
       <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Patient Name## : {{order.patient.fullNameEn}}</p></div>
+        <p class="font-12 userPrint">##word.Patient Name## : <span class="bold">{{order.patient.fullNameEn}}</span></p>
       </div>
     </div>
 
     <div class="row full">
       <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Age## : {{order.patient.age}}</p></div>
+        <p class="font-12 userPrint">##word.Age## : <span class="bold">{{order.patient.age}}</span></p>
       </div>
 
       <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Gender## : {{order.patient.gender.nameEn}}</p></div>
+        <p class="font-12 userPrint">##word.Gender## : <span class="bold">{{order.patient.gender.nameEn}}</span></p>
       </div>
     </div>
 
     <div class="row full">
       <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Company Code## : {{order.mainInsuranceCompany.code}}</p></div>
+        <p class="font-12 userPrint">##word.Company Name## : <span class="bold">{{order.mainInsuranceCompany.nameEn}} ({{order.mainInsuranceCompany.code}})</span></p>
       </div>
 
       <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Company Name## : {{order.mainInsuranceCompany.nameEn}}</p></div>
+        <p class="font-12 userPrint">##word.Doctor Name## : <span class="bold">{{order.doctor.nameEn}} ({{order.mainInsuranceCompany.code}})</span></p>
       </div>
     </div>
 
     <div class="row full">
-      <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Doctor Code## : {{order.doctor.code}}</p></div>
-      </div>
-
-      <div class="center col-6 border-1">
-        <div><p class="font-12 userPrint">##word.Doctor Name## : {{order.doctor.nameEn}}</p></div>
-      </div>
-    </div>
-
-    <div class="row full">
-      <div class="center col-6 border-1">
-        <div><p class="black font-12">Trans.Date : {{order.date |date:"dd / MM / yyyy - hh : mm a" }}</p></div>
-      </div>
-      <div class="center col-6 border-1">
-        <div><p class="black font-12">Doctor Speciali : {{order.doctor.specialty.nameEn }}</p></div>
+      <div class="center border-1">
+        <p class="black font-12">Trans.Date : <span class="bold">{{order.date |date:"dd / MM / yyyy - hh : mm a" }} </span></p>
       </div>
     </div>
 

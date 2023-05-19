@@ -1,0 +1,110 @@
+<div id="sickLeaveModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">
+        ##word.Vitals Notes##
+        <i class="fa fa-pencil"></i>
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <div class="row" ng-show="item.patient.id">
+        <div class="col3">
+          <br />
+          <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
+        </div>
+        <div class="cart">
+          <div class="row">
+            <div class="col9">
+              <p class="bold">
+                <span class="darkGray">##word.Name## : </span> {{item.patient.fullNameEn}} ( <span class="blue">{{item.patient.code}}</span> )
+                <img class="img-logo" ng-src="{{item.patient.image.url}}" alt="" />
+                ({{item.patient.gender.name##session.lang##}})
+              </p>
+            </div>
+            <div class="col3">
+              <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.patient.mobile}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col4">
+              <p class="bold">
+                <span class="darkGray"> ##word.Nationality## : </span> {{item.patient.nationality.name##session.lang##}}
+                <img class="img-logo" ng-src="{{item.patient.nationality.image.url}}" alt="" />
+              </p>
+            </div>
+            <div class="col2">
+              <p class="bold"><span class="darkGray">##word.Age## : </span> {{item.patient.age}}</p>
+            </div>
+            <div class="col6">
+              <p class="bold text-right"><span class="darkGray">الإسم : </span> {{item.patient.fullNameAr}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col7">
+              <p class="bold">
+                <span class="darkGray">##word.Mother Name## : </span> {{item.patient.motherNameEn}}
+                <span class="blue" ng-show="item.patient.newBorn">(##word.New Born##)</span>
+              </p>
+            </div>
+            <div class="col5">
+              <p class="bold text-right"><span class="darkGray"> إسم الأم : </span> {{item.patient.motherNameAr}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col6">
+              <p class="bold"><span class="darkGray"> ##word.Marital Status## : </span> {{item.patient.maritalStatus.name##session.lang##}}</p>
+            </div>
+
+            <div class="col6">
+              <p class="bold text-right"><span class="darkGray"> ##word.Gender## : </span> {{item.patient.gender.name##session.lang##}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col8">
+              <p class="bold">
+                <span class="darkGray">##word.Insurance Company##: </span> {{item.mainInsuranceCompany.name##session.lang##}} ( <span class="blue">{{item.mainInsuranceCompany.code}}</span> )
+              </p>
+            </div>
+            <div class="col4">
+              <p class="bold text-right">
+                <span class="darkGray">##word.Patient Type##: </span> {{item.patient.patientType.name##session.lang##}} ( <span class="blue">{{item.patient.patientType.code}}</span> )
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col6">
+              <p class="bold"><span class="darkGray"> ##word.Insurance Class## : </span> {{item.patient.insuranceClass.name##session.lang##}}</p>
+            </div>
+            <div class="col6">
+              <p class="bold text-right"><span class="darkGray"> ##word.Expiry Date## : </span> {{item.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <i-date v="r" label="##word.From Date##" ng-model="item.leave.fromDate"></i-date>
+        <i-date v="r" label="##word.To Date##" ng-model="item.leave.toDate"></i-date>
+        <div class="row">
+          <i-control class="col9" v="r" type="number" label="##word.Leave for##" ng-model="item.leave.day"></i-control>
+          <div class="col3">
+            <br />
+            <span class="font-14"> ##word.Day##</span>
+          </div>
+        </div>
+        <i-control type="text" label="##word.Occupation##" ng-model="item.leave.occupation"></i-control>
+        <i-control type="text" label="##word.Place Of Work##" ng-model="item.leave.placeOfWork"></i-control>
+      </div>
+    </div>
+
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+      <i-button type="edit" label="##word.Save##" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" ng-click="update(item,'#sickLeaveModal')"></i-button>
+      <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Sick Leave##" ng-click="sickLeavePrint(item)"></i-button>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#sickLeaveModal')"></i-button>
+    </div>
+  </div>
+</div>
