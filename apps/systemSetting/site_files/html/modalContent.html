@@ -224,16 +224,21 @@
         </div>
         <div id="hmisSettings" x-feature="m-hmis" class="tab-content">
           <fieldset>
-            <legend>##word.Workflow</legend>
+            <legend>##word.Workflow##</legend>
             <div class="row">
               <i-list
-                class="col6"
+                class="col4"
                 label="##word.Medical Director##"
                 ng-model="item.hmisSetting.medicalDirector"
                 display="name##session.lang##"
                 items="doctorsList"
                 ng-get="getDoctorsList($search)"
               ></i-list>
+              <i-control class="col3" type="number" label="##word.Validity period of doctor's orders##" ng-model="item.hmisSetting.medicalDirector"></i-control>
+              <div class="col1">
+                <br />
+                <span>##word.Day##</span>
+              </div>
             </div>
           </fieldset>
           <fieldset>
