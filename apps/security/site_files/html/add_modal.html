@@ -50,7 +50,9 @@
         <div class="tabs" ng-show="user.type.id">
           <div class="tabs-header full">
             <a class="tab-link" onclick="site.showTabContent(event, '#basicInformation')"> ##word.Basic Information## </a>
-
+            <a class="tab-link" ng-show="user.type.id == 4" onclick="site.showTabContent(event, '#printersData')">
+              <span> ##word.Printers Data## </span>
+            </a>
             <a class="tab-link" onclick="site.showTabContent(event, '#securityRoles')"> ##word.Roles## </a>
 
             <a class="tab-link" onclick="site.showTabContent(event, '#securityPublicPermissions')"> ##word.Public Permissions## </a>
@@ -107,16 +109,6 @@
                       <i-list class="col4" ng-model="user.safeCash" items="safesCashList" display="name##session.lang##" ng-search="user.$_safeCash" label="##word.Safe Cash##"></i-list>
                       <i-list class="col4" ng-model="user.safeBank" items="safesBankList" display="name##session.lang##" ng-search="user.$_safeBank" label="##word.Safe Bank##"></i-list>
                     </div>
-                    <div class="row" ng-show="user.type.id == 4">
-                      <i-list ng-search="_search.$printersPath" class="col4" display="name##session.lang##" ng-model="user.printerPath" label="##word.Thermal Print##" items="printersPathList">
-                      </i-list>
-
-                      <i-list ng-search="user.$a4Printer" class="col4" display="name##session.lang##" ng-model="user.a4Printer" label="##word.A4 Printer##" items="printersPathList"> </i-list>
-
-                      <i-list ng-search="user.$barcodePrinter" class="col4" display="name##session.lang##" ng-model="user.barcodePrinter" label="##word.Barcode Printer##" items="printersPathList">
-                      </i-list>
-                    </div>
-
                     <i-textarea ng-model="user.notes" label="##word.notes##"></i-textarea>
                   </form>
                 </div>
@@ -124,6 +116,68 @@
                   <i-image class="img128 center" category="users" ng-model="user.image"></i-image>
                 </div>
               </div>
+            </div>
+
+            <div id="printersData" class="tab-content">
+              <fieldset>
+                <div class="row">
+                  <i-list
+                    ng-search="user.$printerPath" 
+                    class="col4"
+                    display="name##session.lang##"
+                    ng-model="user.thermalPrinter"
+                    label="##word.Thermal printer##"
+                    items="printersPathsList"
+                  >
+                  </i-list>
+    
+                  <i-list
+                    ng-search="user.$a4Printer"
+                    class="col4"
+                    display="name##session.lang##"
+                    ng-model="user.a4Printer"
+                    label="##word.A4 printer##"
+                    items="printersPathsList"
+                  >
+                  </i-list>
+    
+                  <i-list
+                    ng-search="user.$pdfPrinter"
+                    class="col4"
+                    display="name##session.lang##"
+                    ng-model="user.pdfPrinter"
+                    label="##word.PDF printer##"
+                    items="printersPathsList"
+                  >
+                  </i-list>
+    
+                  <i-list
+                    ng-search="user.$barcodePrinter"
+                    class="col4"
+                    display="name##session.lang##"
+                    ng-model="user.barcodePrinter"
+                    label="##word.Barcode printer##"
+                    items="printersPathsList"
+                  >
+                  </i-list>
+    
+                  <i-list
+                    ng-search="user.$labelPrinter"
+                    class="col4"
+                    display="name##session.lang##"
+                    ng-model="user.labelPrinter"
+                    label="##word.Label printer##"
+                    items="printersPathsList"
+                  >
+                  </i-list>
+                </div>
+    
+                <div class="row">
+                  <i-checkbox class="col4" label="##word.Auto thermal print order screen##" ng-model="user.autoThermalPrintOrderScreen"> </i-checkbox>
+                  <i-checkbox class="col4" label="##word.Auto thermal print sales invoice##" ng-model="user.autoThermalPrintSalesInvo"> </i-checkbox>
+                  <i-checkbox class="col4" label="##word.Auto thermal print Vouchers##" ng-model="user.autoThermalPrintVoucher"> </i-checkbox>
+                </div>
+              </fieldset>
             </div>
 
             <div id="securityRoles" class="tab-content">

@@ -448,6 +448,39 @@ app.controller('doctors', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getPrintersPaths = function () {
+        $scope.busy = true;
+        $scope.printersPathsList = [];
+        $http({
+            method: 'POST',
+            url: '/api/printersPaths/all',
+            data: {
+                where: { active: true },
+                select: {
+                    id: 1,
+                    code: 1,
+                    ip: 1,
+                    nameEn: 1,
+                    nameAr: 1,
+                    ipDevice: 1,
+                    portDevice: 1,
+                },
+            },
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.printersPathsList = response.data.list;
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = err;
+            }
+        );
+    };
+
+
     $scope.getAll();
     $scope.getNumberingAuto();
     $scope.getServicesList();
@@ -458,4 +491,5 @@ app.controller('doctors', function ($scope, $http, $timeout) {
     $scope.getWeekDaysList();
     $scope.getGendersList();
     $scope.getScientificRanksList();
+    $scope.getPrintersPaths();
 });

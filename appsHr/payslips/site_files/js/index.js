@@ -382,8 +382,8 @@ app.controller('payslips', function ($scope, $http, $timeout) {
                 $scope.error = '##word.A4 printer must select##';
                 return;
             }
-            if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-                printer = JSON.parse('##user.printerPath##');
+            if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+                printer = JSON.parse('##user.a4Printer##');
             }
             $timeout(() => {
                 site.print({

@@ -101,10 +101,11 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     $scope.mode = 'view';
     $scope.item = {};
     $scope.view(_item);
+
     site.showModal($scope.modalID);
   };
 
-  $scope.view = function (_item) {
+  $scope.view = function (_item, type) {
     $scope.busy = true;
     $scope.error = '';
     $http({
@@ -117,7 +118,11 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.item = response.data.doc;
+          if (type == 'attend') {
+            $scope.attend = response.data.doc;
+          } else {
+            $scope.item = response.data.doc;
+          }
           $scope.$applyAsync();
         } else {
           $scope.error = response.data.error;
@@ -404,8 +409,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
   $scope.showAttend = function (_item) {
     $scope.error = '';
     $scope.mode = 'view';
-    $scope.item = {};
-    $scope.view(_item);
+    $scope.view(_item,'attend');
     site.showModal('#attendModal');
   };
 

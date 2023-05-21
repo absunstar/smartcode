@@ -508,8 +508,8 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
           }
         }
         let printer = $scope.setting.printerProgram.thermalPrinter;
-        if ('##user.printerPath##' && site.toNumber('##user.printerPath.id##') > 0) {
-          printer = JSON.parse('##user.printerPath##');
+        if ('##user.thermalPrinter##' && site.toNumber('##user.thermalPrinter.id##') > 0) {
+          printer = JSON.parse('##user.thermalPrinter##');
         }
         $timeout(() => {
           site.print({
@@ -524,7 +524,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
 
       $scope.localPrint();
     } else {
-      $scope.error = '##word.thermal_printer_must_select##';
+      $scope.error = '##word.Thermal Printer Must Select##';
     }
     $scope.busy = false;
     $timeout(() => {

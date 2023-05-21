@@ -5,7 +5,6 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   $('#attendanceNoticDetails').addClass('hidden');
   $('#sickLeaveDetails').addClass('hidden');
   $('#medicalReportDetails').addClass('hidden');
-
   $scope.appName = 'doctorDeskTop';
   $scope.modalID = '#doctorDeskTopManageModal';
   $scope.modalSearchID = '#doctorDeskTopSearchModal';
@@ -18,14 +17,12 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   };
   $scope.item = {};
   $scope.list = [];
-
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
     $scope.item = { ...$scope.structure };
     site.showModal($scope.modalID);
   };
-
   $scope.add = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
@@ -229,7 +226,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     where = where || {};
-    if ('##user.type.id##' == 2) {
+    if ('##user.type.id##' == 8) {
       where['doctor.id'] == site.toNumber('##user.id##');
     }
 
@@ -922,8 +919,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
         $scope.error = '##word.A4 printer must select##';
         return;
       }
-      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-        printer = JSON.parse('##user.printerPath##');
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
       }
       $timeout(() => {
         site.print({
@@ -959,8 +956,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
         $scope.error = '##word.A4 printer must select##';
         return;
       }
-      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-        printer = JSON.parse('##user.printerPath##');
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
       }
       $timeout(() => {
         site.print({
@@ -996,8 +993,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
         $scope.error = '##word.A4 printer must select##';
         return;
       }
-      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-        printer = JSON.parse('##user.printerPath##');
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
       }
       $timeout(() => {
         site.print({
@@ -1034,8 +1031,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
         $scope.error = '##word.A4 printer must select##';
         return;
       }
-      if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-        printer = JSON.parse('##user.printerPath##');
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
       }
       $timeout(() => {
         site.print({

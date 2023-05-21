@@ -229,6 +229,10 @@
             <div class="row">
               <i-list class="col4" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
               <i-control class="col2" label="##word.Amount Paid##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.amountPaid"> </i-control>
+              <div class="col2">
+                <br>
+                <span class="currency">##word.$##</span>
+              </div>
             </div>
           </div>
         </fieldset>

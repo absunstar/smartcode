@@ -956,8 +956,8 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
           }
         }
         let printer = $scope.setting.printerProgram.thermalPrinter;
-        if ('##user.printerPath##' && '##.printerPath.id##' > 0) {
-          printer = JSON.parse('##user.printerPath##');
+        if ('##user.thermalPrinter##' && '##user.thermalPrinter.id##' > 0) {
+          printer = JSON.parse('##user.thermalPrinter##');
         }
         $timeout(() => {
           site.print({
@@ -972,7 +972,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
 
       $scope.localPrint();
     } else {
-      $scope.error = '##word.thermal_printer_must_select##';
+      $scope.error = '##word.Thermal Printer Must Select##';
     }
     $scope.busy = false;
     $timeout(() => {
@@ -1081,8 +1081,8 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
           $scope.error = '##word.A4 printer must select##';
           return;
         }
-        if ('##user.printerPath##' && '##user.printerPath.id##' > 0) {
-          printer = JSON.parse('##user.printerPath##');
+        if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+          printer = JSON.parse('##user.a4Printer##');
         }
       } else if (type === 'pdf') {
         if ($scope.setting.printerProgram.pdfPrinter) {

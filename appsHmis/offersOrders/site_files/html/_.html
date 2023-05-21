@@ -19,6 +19,7 @@
                 <tr>
                     <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
+                    <th>##word.Date##</th>
                     <th>##word.Name##</th>
                     <th>##word.Patient##</th>
                     <th class="not-print">##word.Actions##</th>
@@ -28,13 +29,14 @@
                         <i-image view class="logo center" ng-model="item.medicalOffer.image"></i-image>
                     </td>
                     <td class="center blue">{{item.code}}</td>
+                    <td class="center">{{item.date | date:"dd/MM/yyyy"}}</td>
                     <td class="center">{{item.medicalOffer.name##session.lang##}}</td>
                     <td class="center">{{item.patient.fullName##session.lang##}}</td>
 
                     <td class="center not-print">
                         <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" ng-show="item.availableAttend" x-permissions="offersOrdersUpdate || offersOrdersManage" label="##word.Attend Service##"
+                        <i-button type="edit" x-permissions="offersOrdersUpdate || offersOrdersManage" label="##word.Attend Service##"
                             ng-click="showAttend(item)"></i-button>
 
                         <!-- <i-button type="delete" x-permissions="offersOrdersDelete || offersOrdersManage" label="##word.Delete##"
