@@ -459,8 +459,8 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
   $scope.getDoctorDeskTopList = function () {
     $scope.busy = true;
     $scope.doctorDeskTopList = [];
-  
-    let where = { 'status.id': 3, ordersList :{ $elemMatch: { type: 'MD', hasOrder: false } } };
+
+    let where = { 'status.id': 3, toOrder: true, ordersList: { $elemMatch: { type: 'MD', hasOrder: false } } };
 
     $http({
       method: 'POST',
@@ -481,8 +481,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     }).then(
       function (response) {
         $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {2
-          $scope.doctorDeskTopList = response.data.list
+        if (response.data.done && response.data.list.length > 0) {
+          2;
+          $scope.doctorDeskTopList = response.data.list;
         }
       },
       function (err) {

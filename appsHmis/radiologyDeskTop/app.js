@@ -367,6 +367,7 @@ module.exports = function init(site) {
           if (!err) {
             obj.detectionNum = docs && docs.length > 0 ? docs[0].detectionNum + 1 : 1;
             obj.filesList = [{}];
+            obj.date = new Date();
             app.add(obj, (err, doc1) => {});
           }
         }

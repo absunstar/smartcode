@@ -194,7 +194,6 @@ module.exports = function init(site) {
                   let obj = {
                     orderId: doc.id,
                     patient: { ...doc.patient },
-                    date: doc.date,
                     type: doc.type,
                     company: doc.company,
                     branch: doc.branch,
@@ -407,7 +406,6 @@ module.exports = function init(site) {
             let obj = {
               orderId: result.doc.id,
               patient: { ...result.doc.patient },
-              date: result.doc.date,
               type: result.doc.type,
               company: result.doc.company,
               branch: result.doc.branch,

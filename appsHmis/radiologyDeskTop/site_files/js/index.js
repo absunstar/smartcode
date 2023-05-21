@@ -172,7 +172,7 @@ app.controller('radiologyDeskTop', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item = {};
     $scope.view(_item);
-    site.showModal('#recommendationsModal');
+    site.showModal('#recommendationsRadiologyModal');
   };
 
   $scope.showDelete = function (_item) {

@@ -2,7 +2,7 @@
   <div class="row padding">
     <div class="col9">
       <fieldset>
-        <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Label print##" ng-click="labelPrint(item)"></i-button>
+        <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Label print##" ng-click="labelLaboratoryPrint(item)"></i-button>
         <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Laboratory print##" ng-click="laboratoryPrint(item)"></i-button>
       </fieldset>
       <fieldset>
@@ -101,7 +101,7 @@
             </div>
             <div class="row">
               <div class="col6">
-                <p class="bold"><span class="darkGray"> ##word.Home Tel## : </span> {{item.doctor.homeTel}}</p>
+                <p class="bold"><span class="darkGray"> ##word.Scientific Rank## : </span> {{item.doctor.scientificRank.name##session.language##}}</p>
               </div>
               <div class="col6">
                 <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.doctor.mobile}}</p>

@@ -295,6 +295,21 @@ module.exports = function init(site) {
               $lt: d2,
             };
           }
+          if (where.toOrder) {
+            const hmisSetting = site.getSystemSetting(req).hmisSetting;
+
+            let newDate = new Date();
+            let d1 = site.toDate(newDate);
+            let d2 = site.toDate(newDate);
+            d2.setDate(d2.getDate() - hmisSetting.medicalDirector || 3);
+            d1.setDate(d1.getDate() + 1);
+            where.date = {
+              $gte: d2,
+              $lt: d1,
+            };
+            delete where.toOrder;
+          }
+
           if (where['doctor']) {
             where['doctor.id'] = where['doctor'].id;
             delete where['doctor'];
@@ -461,6 +476,7 @@ module.exports = function init(site) {
           if (!err) {
             obj.detectionNum = docs && docs.length > 0 ? docs[0].detectionNum + 1 : 1;
             obj.ordersList = [];
+            obj.date = new Date();
             app.add(obj, (err, doc1) => {});
           }
         }
@@ -478,47 +494,55 @@ module.exports = function init(site) {
       doctor: 1,
     };
     // { 'service.id': { $in: obj.servicesIds }, select }
-    let freeRevistCount = 0;
-    let freeRevistPeriod = 0;
+    let cb = { list: [], freeRevistCount: 0, freeRevistPeriod: 0 };
 
     if (obj.doctor.freeRevistCount) {
-      freeRevistCount = obj.doctor.freeRevistCount;
+      cb.freeRevistCount = obj.doctor.freeRevistCount;
     } else if (obj.mainInsurance) {
-      freeRevistCount = obj.mainInsurance.freeRevistCount;
+      cb.freeRevistCount = obj.mainInsurance.freeRevistCount;
     }
 
     if (obj.doctor.freeRevistPeriod) {
-      freeRevistPeriod = obj.doctor.freeRevistPeriod;
+      cb.freeRevistPeriod = obj.doctor.freeRevistPeriod;
     } else if (obj.mainInsurance) {
-      freeRevistPeriod = obj.mainInsurance.freeRevistPeriod;
+      cb.freeRevistPeriod = obj.mainInsurance.freeRevistPeriod;
     }
 
     let newDate = new Date();
     let fromDate = new Date();
-    fromDate.setTime(fromDate.getTime() - freeRevistPeriod * 24 * 60 * 60 * 1000);
+    fromDate.setTime(fromDate.getTime() - cb.freeRevistPeriod * 24 * 60 * 60 * 1000);
     fromDate.setHours(0, 0, 0, 0);
     newDate.setHours(0, 0, 0, 0);
     let where = {};
     // where['service.id'] = { $in: obj.servicesIds };
     where['doctor.specialty.id'] = obj.doctor.specialty.id;
     where['patient.id'] = obj.patient.id;
-    app.all({ where, select, sort: { date: -1 } }, (err, docs) => {
+    app.all({ where, select }, (err, docs) => {
       if (!err) {
         if (docs && docs.length > 0) {
-          let list = [];
           docs.forEach((_doc) => {
             _doc.date = new Date(_doc.date);
             _doc.date.setHours(0, 0, 0, 0);
-            // if (_doc.date >= fromDate && _doc.date <= newDate) {
-            //   let index = list.findIndex((itm) => itm.serviceId === _doc.service.id);
-            //   if (index !== -1) {
-            //     list.push({ serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) });
-            //   } else {
-            //     list[index].count += 1;
-            //   }
-            // }
+            if (_doc.date >= fromDate && _doc.date <= newDate) {
+              let index = list.findIndex((itm) => itm.serviceId === _doc.service.id);
+              if (index !== -1) {
+                cb.list[index].count += 1;
+              } else {
+                let _l = { serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) }
+                if(_doc.doctor.scientificRanks.id >= obj.doctor.scientificRanks.id) {
+                  _l.free = true;
+                } else {
+                  _l.free = false;
+                }
+                cb.list.push(_l);
+              }
+            }
           });
-          callBack(list);
+          if (cb.list.length > 0) {
+            callBack(cb);
+          } else {
+            callBack(false);
+          }
         } else {
           callBack(false);
         }
@@ -535,9 +559,9 @@ module.exports = function init(site) {
   site.hasSalesDoctorDeskTop = function (obj) {
     app.view({ id: obj.id }, (err, doc) => {
       if (!err && doc) {
-        obj.items.forEach(_item => {
-          doc.ordersList.forEach(_o => {
-            if(_o.type == 'MD' &&_item.id == _o.id) {
+        obj.items.forEach((_item) => {
+          doc.ordersList.forEach((_o) => {
+            if (_o.type == 'MD' && _item.id == _o.id) {
               _o.hasOrder = true;
             }
           });
@@ -545,15 +569,14 @@ module.exports = function init(site) {
         app.update(doc, (err, result) => {});
       }
     });
-
   };
 
   site.hasErDoctorDeskTop = function (obj) {
     app.view({ id: obj.id }, (err, doc) => {
       if (!err && doc) {
-        obj.items.forEach(_item => {
-          doc.ordersList.forEach(_o => {
-            if(_o.type == 'ER' &&_item.id == _o.id) {
+        obj.items.forEach((_item) => {
+          doc.ordersList.forEach((_o) => {
+            if (_o.type == 'ER' && _item.id == _o.id) {
               _o.hasOrder = true;
             }
           });
@@ -561,10 +584,7 @@ module.exports = function init(site) {
         app.update(doc, (err, result) => {});
       }
     });
-
   };
-
-
 
   app.init();
   site.addApp(app);

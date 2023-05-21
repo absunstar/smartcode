@@ -12,6 +12,11 @@
       <div class="row">
         <div class="col9">
           <fieldset>
+            <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Label print##" ng-click="labelLaboratoryPrint(item)"></i-button>
+            <i-button type="print" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" label="##word.Laboratory print##" ng-click="laboratoryPrint(item)"></i-button>
+          </fieldset>
+          
+          <fieldset>
             <legend>##word.Treatment##</legend>
             <i-content ng-model="item.treatment"></i-content>
           </fieldset>

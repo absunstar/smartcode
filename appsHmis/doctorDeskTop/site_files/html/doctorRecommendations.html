@@ -28,6 +28,15 @@
             </div>
           </fieldset>
           <fieldset>
+            <legend>##word.Printers##</legend>
+            <div class="row">
+              <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders##" ng-click="ordersPrint(item)"></i-button>
+              <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Attendance Notic##" ng-click="attendanceNoticPrint(item)"></i-button>
+              <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Medical Report##" ng-click="medicalReportPrint(item)"></i-button>
+              <i-button type="print" ng-show="item.leave.done" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Sick Leave##" ng-click="sickLeavePrint(item)"></i-button>
+            </div>
+          </fieldset>
+          <fieldset>
             <legend>##word.Treatment##</legend>
             <i-content ng-model="item.treatment"></i-content>
           </fieldset>

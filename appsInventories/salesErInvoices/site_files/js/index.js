@@ -462,7 +462,8 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
   $scope.getDoctorDeskTopList = function () {
     $scope.busy = true;
     $scope.doctorDeskTopList = [];
-    let where = { 'status.id': 3, ordersList :{ $elemMatch: { type: 'ER', hasOrder: false } } };
+    let where = { 'status.id': 3, toOrder : true, ordersList :{ $elemMatch: { type: 'ER', hasOrder: false } } };
+
     $http({
       method: 'POST',
       url: '/api/doctorDeskTop/all',

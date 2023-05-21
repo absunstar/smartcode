@@ -348,7 +348,7 @@ module.exports = function init(site) {
             freeRevistCount: mainInsurance.freeRevistCount,
           };
         }
-        site.getDoctorDeskTopToPeriod(whereDoctorDeskTopToPeriod, (doctorDeskTop) => {
+        site.getDoctorDeskTopToPeriod(whereDoctorDeskTopToPeriod, (doctorDeskTopCb) => {
           _data.servicesList.forEach((_service) => {
             let foundService = false;
             let foundCoverage = false;
@@ -517,6 +517,7 @@ module.exports = function init(site) {
                           // service.total = service.price - (service.price * service.discount) / 100;
                           servicesList.unshift(service);
                         }
+
                       } else if (!foundService && goupInsurance && goupInsurance.id) {
                         let goup = appServicesGroup.memoryList.find((_g) => _g.id === goupInsurance.id);
                         if (goup && goup.servicesCategoriesList && goup.servicesCategoriesList.length > 0) {
@@ -630,6 +631,7 @@ module.exports = function init(site) {
               servicesList[0].totalPVat = (servicesList[0].total * servicesList[0].pVat || 0) / 100;
               servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
               let deduct = 0;
+
               if (
                 mainInsurance &&
                 mainInsurance.id &&
@@ -652,7 +654,6 @@ module.exports = function init(site) {
                     deduct = _data.insuranceContract.insuranceClass.consultationDeduct;
                   }
                 }
-
                 if (
                   _data.insuranceContract &&
                   _data.insuranceContract.insuranceClass &&
@@ -678,6 +679,9 @@ module.exports = function init(site) {
               if (serviceMemory.normalRangeList && serviceMemory.normalRangeList.length > 0) {
                 servicesList[0].normalRangeList = serviceMemory.normalRangeList;
               }
+              
+              let dDeskTop = doctorDeskTopCb.list.find((itm) => itm.serviceId == servicesList[0].id);
+
             }
           });
           if (servicesList.length > 0) {

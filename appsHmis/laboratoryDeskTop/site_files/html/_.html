@@ -29,7 +29,7 @@
           </div>
           <div class="row">
             <div class="col6">
-              <p class="bold"><span class="darkGray"> ##word.Home Tel## : </span> {{search.doctor.homeTel}}</p>
+              <p class="bold"><span class="darkGray"> ##word.Scientific Rank## : </span> {{search.doctor.scientificRank.name##session.language##}}</p>
             </div>
             <div class="col6">
               <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{search.doctor.mobile}}</p>
@@ -143,14 +143,14 @@
               ng-click="showDelete(item)"
               ><i class="fas fa-trash-alt"></i
             ></a>
-            <i-button type="print" label="##word.Label print##" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" ng-click="labelPrint(item)"></i-button>
+            <i-button type="print" label="##word.Label print##" x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" ng-click="labelLaboratoryPrint(item)"></i-button>
           </td>
         </tr>
       </table>
     </div>
     <i-button x-permissions="laboratoryDeskTopPrint || laboratoryDeskTopManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
     <i-button x-permissions="laboratoryDeskTopExport || laboratoryDeskTopManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
-    <div id="laboratoryLabels" x-import="laboratoryDeskTop/labelPrint.html"></div>
+    <div id="laboratoryLabels" x-import="laboratoryDeskTop/labelLaboratoryPrint.html"></div>
     <div id="laboratoryDetails" x-import="laboratoryDeskTop/laboratoryPrint.html"></div>
   </div>
 </div>

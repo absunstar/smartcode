@@ -2,6 +2,12 @@
   <div class="row padding">
     <div class="col9">
       <fieldset>
+        <legend>##word.Print##</legend>
+        <div class="row">
+          <i-button type="print" x-permissions="radiologyDeskTopPrint || radiologyDeskTopManage" label="##word.Radiology print##" ng-click="radiologyPrint(item)"></i-button>
+        </div>
+      </fieldset>
+      <fieldset>
         <legend>##word.Patient##</legend>
         <div class="row" ng-show="item.patient.id">
           <div class="col3">
@@ -97,7 +103,7 @@
             </div>
             <div class="row">
               <div class="col6">
-                <p class="bold"><span class="darkGray"> ##word.Home Tel## : </span> {{item.doctor.homeTel}}</p>
+                <p class="bold"><span class="darkGray"> ##word.Scientific Rank## : </span> {{item.doctor.scientificRank.name##session.language##}}</p>
               </div>
               <div class="col6">
                 <p class="bold text-right"><span class="darkGray">##word.Mobile## : </span> {{item.doctor.mobile}}</p>

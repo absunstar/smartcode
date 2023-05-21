@@ -425,7 +425,7 @@ app.controller('laboratoryDeskTop', function ($scope, $http, $timeout) {
     $scope.search = {};
   };
 
-  $scope.labelPrint = function (item) {
+  $scope.labelLaboratoryPrint = function (item) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;

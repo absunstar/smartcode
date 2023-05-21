@@ -639,6 +639,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     where = where || {};
     where['status.id'] = 3;
     where['hasOrder'] = false;
+    where['toOrder'] = true;
     where.$or = [{ 'ordersList.type': 'CO' }, { 'ordersList.type': 'LA' }, { 'ordersList.type': 'X-R' }];
     $http({
       method: 'POST',

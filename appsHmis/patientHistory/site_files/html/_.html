@@ -225,4 +225,12 @@
     <i-button x-permissions="patientHistoryPrint || patientHistoryManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
     <i-button x-permissions="patientHistoryExport || patientHistoryManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
   </div>
+  <div id="ordersDetails" x-import="doctorDeskTop/ordersPrint.html"></div>
+  <div id="attendanceNoticDetails" x-import="doctorDeskTop/attendanceNoticPrint.html"></div>
+  <div id="sickLeaveDetails" x-import="doctorDeskTop/sickLeavePrint.html"></div>
+  <div id="medicalReportDetails" x-import="doctorDeskTop/medicalReportPrint.html"></div>
+  <div id="laboratoryLabels" x-import="laboratoryDeskTop/labelLaboratoryPrint.html"></div>
+  <div id="laboratoryDetails" x-import="laboratoryDeskTop/laboratoryPrint.html"></div>
+  <div id="radiologyDetails" x-import="radiologyDeskTop/radiologyPrint.html"></div>
+
 </div>
