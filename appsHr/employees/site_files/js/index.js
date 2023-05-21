@@ -199,7 +199,8 @@ app.controller('employees', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getNationalitiesList = function () {
+    $scope.getNationalitiesList = function ($search) {
+        if ($search && $search.lengtg < 1) return;
         $scope.busy = true;
         $scope.nationalitiesList = [];
         $http({
@@ -214,6 +215,7 @@ app.controller('employees', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     image: 1,
                 },
+                search: $search,
             },
         }).then(
             function (response) {

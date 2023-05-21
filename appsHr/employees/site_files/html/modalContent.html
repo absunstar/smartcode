@@ -19,7 +19,7 @@
             ng-change="setDefaultVacations(item.nationality);setDefaultInsurance(item.nationality)"
             items="nationalitiesList"
             display="name##session.lang##"
-            ng-search="item.$nationality"
+            ng-get="getNationalitiesList($search)"
           >
           </i-list>
           <i-list class="col4" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##" items="gendersList" ng-search="item.$genders"></i-list>
