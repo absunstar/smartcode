@@ -322,6 +322,7 @@ module.exports = function init(site) {
                     if (Array.isArray(docs)) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
                         let systemCode = 0;
+
                         docs.forEach((doc) => {
                             let numObj = {
                                 company: site.getCompany(req),
@@ -339,29 +340,44 @@ module.exports = function init(site) {
                             if (!doc.code) {
                                 doc.code = systemCode;
                             }
+                            let nameAr;
+                            let nameEn;
+                            let addToBasicSalary;
 
-                            let newDoc = {
-                                code: doc.code,
-                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
-                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
-                                addToBasicSalary,
-                                image: { url: '/images/salaryAllowancesNames.png' },
-                                active: true,
-                            };
+                            if (doc.nameAr || doc['name ar']) {
+                                nameAr = doc.nameAr || doc['name ar'];
+                            }
 
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
+                            if (doc.nameEn || doc['name en']) {
+                                nameEn = doc.nameEn || doc['name en'];
+                            }
+                            if (doc.addToBasicSalary || doc['add to basic salary']) {
+                                addToBasicSalary = doc.addToBasicSalary || doc['add to basic salary'] || false;
+                            }
+                            if (nameEn) {
+                                let newDoc = {
+                                    code: doc.code,
+                                    nameAr: nameAr.trim(),
+                                    nameEn: nameEn.trim(),
+                                    addToBasicSalary: addToBasicSalary,
+                                    image: { url: '/images/salaryAllowancesNames.png' },
+                                    active: true,
+                                };
 
-                            app.add(newDoc, (err, doc2) => {
-                                if (!err && doc2) {
-                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                    console.log(site.dbMessage);
-                                } else {
-                                    site.dbMessage = err.message;
-                                    console.log(site.dbMessage);
-                                }
-                            });
+                                newDoc.company = site.getCompany(req);
+                                newDoc.branch = site.getBranch(req);
+                                newDoc.addUserInfo = req.getUserFinger();
+
+                                app.add(newDoc, (err, doc2) => {
+                                    if (!err && doc2) {
+                                        site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                        console.log(site.dbMessage);
+                                    } else {
+                                        site.dbMessage = err.message;
+                                        console.log(site.dbMessage);
+                                    }
+                                });
+                            }
                         });
                     } else {
                         site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);

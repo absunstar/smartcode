@@ -248,16 +248,17 @@ module.exports = function init(site) {
     ];
 
     site.vacationsTypes = [
-        { id: 1, code: '001', nameEn: 'Annual', nameAr: 'سنوية' },
+        { id: 1, code: '001', nameEn: 'Annual Leave', nameAr: 'إجازة سنوية' },
         { id: 2, code: '002', nameEn: 'Regular', nameAr: 'إعتيادي' },
         { id: 3, code: '003', nameEn: 'Casual', nameAr: 'عارضة' },
-        { id: 4, code: '004', nameEn: 'Without Salary', nameAr: 'بدون مرتب' },
-        { id: 5, code: '005', nameEn: 'Rest Allowance', nameAr: 'بدل راحة' },
-        { id: 6, code: '006', nameEn: 'Pilgrimage', nameAr: 'حج' },
-        { id: 7, code: '007', nameEn: 'Sick', nameAr: 'مرضي' },
-        { id: 8, code: '008', nameEn: 'Marriage', nameAr: 'زواج' },
-        { id: 9, code: '009', nameEn: 'Paid', nameAr: 'مدفوعة الأجر' },
-        { id: 10, code: '010', nameEn: 'Exams', nameAr: 'إمتحانات' },
+        { id: 4, code: '004', nameEn: 'Un-paid Leave', nameAr: 'إجازة غير مدفوعة' },
+        { id: 5, code: '005', nameEn: 'Time Back', nameAr: 'إجازة تعويضية' },
+        { id: 6, code: '006', nameEn: 'Sick Leave', nameAr: 'إجازة مرضية' },
+        { id: 7, code: '007', nameEn: 'Study Leave', nameAr: 'إجازة دراسة' },
+        { id: 8, code: '008', nameEn: 'Maternity Leave', nameAr: 'إجازة أمومة' },
+        { id: 9, code: '009', nameEn: 'Paternity Leave', nameAr: 'إجازة أبوة' },
+        { id: 10, code: '010', nameEn: 'Wedding Leave', nameAr: 'إجازة زواج' },
+        { id: 11, code: '011', nameEn: 'Death leave for a relative', nameAr: 'إجازة وفاة أحد الأقارب' },
     ];
 
     site.workflowPositionsList = [

@@ -338,27 +338,41 @@ module.exports = function init(site) {
                             if (!doc.code) {
                                 doc.code = systemCode;
                             }
-                            let newDoc = {
-                                code: doc.code,
-                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
-                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
-                                image: { url: '/images/vacationsNames.png' },
-                                active: true,
-                            };
 
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
+                            let nameAr;
+                            let nameEn;
 
-                            app.add(newDoc, (err, doc2) => {
-                                if (!err && doc2) {
-                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                    console.log(site.dbMessage);
-                                } else {
-                                    site.dbMessage = err.message;
-                                    console.log(site.dbMessage);
-                                }
-                            });
+                            if (doc.nameAr || doc['name ar']) {
+                                nameAr = doc.nameAr || doc['name ar'];
+                            }
+
+                            if (doc.nameEn || doc['name en']) {
+                                nameEn = doc.nameEn || doc['name en'];
+                            }
+
+                            if (nameEn) {
+                                let newDoc = {
+                                    code: doc.code,
+                                    nameAr: nameAr.trim(),
+                                    nameEn: nameEn.trim(),
+                                    image: { url: '/images/vacationsNames.png' },
+                                    active: true,
+                                };
+
+                                newDoc.company = site.getCompany(req);
+                                newDoc.branch = site.getBranch(req);
+                                newDoc.addUserInfo = req.getUserFinger();
+
+                                app.add(newDoc, (err, doc2) => {
+                                    if (!err && doc2) {
+                                        site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                        console.log(site.dbMessage);
+                                    } else {
+                                        site.dbMessage = err.message;
+                                        console.log(site.dbMessage);
+                                    }
+                                });
+                            }
                         });
                     } else {
                         site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);

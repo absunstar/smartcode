@@ -413,7 +413,6 @@ module.exports = function init(site) {
                     id: 1,
                     code: 1,
                     employee: 1,
-                    vacationType: 1,
                     days: 1,
                     requestDate: 1,
                     fromTime: 1,
@@ -424,7 +423,6 @@ module.exports = function init(site) {
                     requestStatus: 1,
                     approvedDate: 1,
                     rejectDate: 1,
-
                     cancelDate: 1,
                     date: 1,
                     delayDate: 1,
