@@ -7,12 +7,10 @@
             </div>
             <div class="row">
                 <i-control type="text" v="r" class="col6" ng-model="item.nameEn" label="##word.Name##"></i-control>
-                <i-control type="text" v="r" class="col6" ng-model="item.nameAr"
-                    label="##word.Name Arabic##"></i-control>
+                <i-control type="text" v="r" class="col6" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
             </div>
             <div class="row">
-                <i-list help-id="" v="r" class="col6" label="##word.Type##" ng-model="item.type"
-                    display="name##session.lang##" items="servicesGroupsTypesList" ng-search="item.$type"></i-list>
+                <i-list help-id="" v="r" class="col6" label="##word.Type##" ng-model="item.type" display="name##session.lang##" items="servicesGroupsTypesList" ng-search="item.$type"></i-list>
             </div>
         </div>
         <div class="col3">
@@ -22,13 +20,18 @@
     <fieldset>
         <div class="row padding">
             <div class="row">
-                <i-list help-id="" label="##word.Service Category##" class="col7" ng-model="item.$serviceCategory"
-                    display="name##session.lang##" items="servicesCategoriesList"
-                    ng-get="getservicesCategoriesList($search)"></i-list>
-                <div class=" col5">
+                <i-list
+                    help-id=""
+                    label="##word.Service Category##"
+                    class="col7"
+                    ng-model="item.$serviceCategory"
+                    display="name##session.lang##"
+                    items="servicesCategoriesList"
+                    ng-get="getservicesCategoriesList($search)"
+                ></i-list>
+                <div class="col5">
                     <br />
-                    <i-button type="add" label="##word.Add Service Category##"
-                        ng-click="addServicesCategories(item)"></i-button>
+                    <i-button type="push" ng-click="addServicesCategories(item)"></i-button>
                 </div>
             </div>
             <div class="row">
@@ -44,8 +47,7 @@
                             <td class="center">{{s.name##session.lang##}}</td>
 
                             <td class="center not-print">
-                                <i-button type="delete" ng-click="item.servicesCategoriesList.splice($index,1)">
-                                </i-button>
+                                <i-button type="delete" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
                             </td>
                         </tr>
                     </table>
