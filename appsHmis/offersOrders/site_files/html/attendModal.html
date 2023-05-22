@@ -52,7 +52,6 @@
                   <th>##word.Name##</th>
                   <th>##word.Qty##</th>
                   <th>##word.Qty Available##</th>
-                  <th>##word.Total Price##</th>
                   <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="s in attend.medicalOffer.servicesList">
@@ -64,9 +63,7 @@
                   <td class="center">
                     <p>{{s.qtyAvailable}}</p>
                   </td>
-                  <td class="center">
-                    <p>{{s.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
-                  </td>
+                
                   <td class="center not-print">
                     <i-button ng-show="s.qtyAvailable > 0" type="edit" label="##word.Attend Service##" ng-click="showAcceptAttend(s)"> </i-button>
                   </td>

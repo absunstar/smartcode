@@ -520,24 +520,24 @@ module.exports = function init(site) {
     app.all({ where, select }, (err, docs) => {
       if (!err) {
         if (docs && docs.length > 0) {
-          docs.forEach((_doc) => {
-            _doc.date = new Date(_doc.date);
-            _doc.date.setHours(0, 0, 0, 0);
-            if (_doc.date >= fromDate && _doc.date <= newDate) {
-              let index = list.findIndex((itm) => itm.serviceId === _doc.service.id);
-              if (index !== -1) {
-                cb.list[index].count += 1;
-              } else {
-                let _l = { serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) }
-                if(_doc.doctor.scientificRanks.id >= obj.doctor.scientificRanks.id) {
-                  _l.free = true;
-                } else {
-                  _l.free = false;
-                }
-                cb.list.push(_l);
-              }
-            }
-          });
+          // docs.forEach((_doc) => {
+          //   _doc.date = new Date(_doc.date);
+          //   _doc.date.setHours(0, 0, 0, 0);
+          //   if (_doc.date >= fromDate && _doc.date <= newDate) {
+          //     let index = cb.list.findIndex((itm) => itm.serviceId === _doc.service.id);
+          //     if (index !== -1) {
+          //       cb.list[index].count += 1;
+          //     } else {
+          //       let _l = { serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) }
+          //       if(_doc.doctor.scientificRanks.id >= obj.doctor.scientificRanks.id) {
+          //         _l.free = true;
+          //       } else {
+          //         _l.free = false;
+          //       }
+          //       cb.list.push(_l);
+          //     }
+          //   }
+          // });
           if (cb.list.length > 0) {
             callBack(cb);
           } else {

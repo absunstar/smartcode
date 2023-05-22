@@ -157,7 +157,6 @@
                     <th>##word.Name##</th>
                     <th>##word.Qty##</th>
                     <th>##word.Qty Available##</th>
-                    <th>##word.Total Price##</th>
                   </tr>
                   <tr ng-repeat="s in item.medicalOffer.servicesList">
                     <td class="center blue">{{s.code}}</td>
@@ -168,9 +167,7 @@
                     <td class="center">
                       <p>{{s.qtyAvailable}}</p>
                     </td>
-                    <td class="center">
-                      <p>{{s.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
-                    </td>
+                  
                   </tr>
                 </table>
               </div>
@@ -215,7 +212,7 @@
             </div>
 
             <div class="row">
-              <i-list class="col4" v="r" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
+              <i-list class="col4" v="r" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-change="changeInvoiceType()" ng-search="item.$invoiceType"></i-list>
               <i-list
                 class="col4"
                 ng-change="getSafes(item.paymentType)"

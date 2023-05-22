@@ -277,7 +277,7 @@ module.exports = function init(site) {
                     .slice(-limit)
                     .filter(
                         (g) =>
-                            (!search || JSON.stringify(g).contains(search)) && (!where['type.id'] || (g.type && g.type.id == where['type.id'])) && g.company && g.company.id == site.getCompany(req).id
+                            (!search || JSON.stringify(g).contains(search)) && (!where['type.id'] || (g.type && g.type.id == where['type.id'])) && (!where['doctorType.id'] || (g.doctorType && g.doctorType.id == where['doctorType.id'])) && g.company && g.company.id == site.getCompany(req).id
                     )
                     .forEach((doc) => {
                         let obj = { ...doc };

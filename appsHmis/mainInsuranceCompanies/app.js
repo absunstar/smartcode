@@ -680,10 +680,11 @@ module.exports = function init(site) {
                 servicesList[0].normalRangeList = serviceMemory.normalRangeList;
               }
               
-              let dDeskTop = doctorDeskTopCb.list.find((itm) => itm.serviceId == servicesList[0].id);
+              // let dDeskTop = doctorDeskTopCb.list.find((itm) => itm.serviceId == servicesList[0].id);
 
             }
           });
+          console.log(servicesList);
           if (servicesList.length > 0) {
             response.done = true;
             response.servicesList = servicesList;

@@ -142,6 +142,16 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     site.showModal($scope.modalID);
   };
 
+  $scope.changeInvoiceType = function (_item) {
+    $scope.error = '';
+  if($scope.item.invoiceType && $scope.item.invoiceType.id == 1) {
+    $scope.item.amountPaid = $scope.item.totalNet;
+  } else {
+    $scope.item.amountPaid = 0;
+
+  }
+  };
+
   $scope.delete = function (_item) {
     $scope.busy = true;
     $scope.error = '';
@@ -419,7 +429,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/update`,
-      data: $scope.item,
+      data: $scope.attend,
     }).then(
       function (response) {
         $scope.busy = false;
@@ -429,7 +439,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
-          $scope.item = response.data.result.doc;
+          $scope.attend = response.data.result.doc;
           $scope.$applyAsync();
         } else {
           $scope.error = response.data.error;
@@ -478,9 +488,11 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.view({ id: _item.invoiceId });
+          $scope.view({ id: _item.invoiceId },'attend');
           site.hideModal('#expenseVouchersModal');
           site.resetValidated('#expenseVouchersModal');
+          $scope.$applyAsync();
+
         } else {
           $scope.error = response.data.error;
         }

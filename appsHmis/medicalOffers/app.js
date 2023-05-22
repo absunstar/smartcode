@@ -179,6 +179,27 @@ module.exports = function init(site) {
         _data.expiryDate = new Date(_data.expiryDate);
         _data.startDate.setHours(0, 0, 0, 0);
         _data.expiryDate.setHours(0, 0, 0, 0);
+
+        if (_data.startDate > _data.expiryDate) {
+          response.error = 'Start Date Must Be Less Than Expiry Date';
+          res.json(response);
+          return;
+        }
+
+        if (_data.discountType == 'percent') {
+          if (_data.discount > 100 || _data.discount < 0) {
+            response.error = 'Discount Value Err';
+            res.json(response);
+            return;
+          }
+        } else if (_data.discountType == 'value') {
+          if (_data.discount > _data.totalAfterVat) {
+            response.error = 'Discount Value Greater than Total';
+            res.json(response);
+            return;
+          }
+        }
+
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
@@ -203,6 +224,26 @@ module.exports = function init(site) {
         _data.expiryDate = new Date(_data.expiryDate);
         _data.startDate.setHours(0, 0, 0, 0);
         _data.expiryDate.setHours(0, 0, 0, 0);
+        
+        if (_data.startDate > _data.expiryDate) {
+          response.error = 'Start Date Must Be Less Than Expiry Date';
+          res.json(response);
+          return;
+        }
+
+        if (_data.discountType == 'percent') {
+          if (_data.discount > 100 || _data.discount < 0) {
+            response.error = 'Discount Value Err';
+            res.json(response);
+            return;
+          }
+        } else if (_data.discountType == 'value') {
+          if (_data.discount > _data.totalAfterVat) {
+            response.error = 'Discount Value Greater than Total';
+            res.json(response);
+            return;
+          }
+        }
 
         app.update(_data, (err, result) => {
           if (!err) {
@@ -303,8 +344,7 @@ module.exports = function init(site) {
             date.setHours(0, 0, 0, 0);
             where.startDate = { $lte: date };
             where.expiryDate = { $gte: date };
-            delete where.availableMedical
-         
+            delete where.availableMedical;
           }
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
             res.json({
