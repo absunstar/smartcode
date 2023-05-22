@@ -279,7 +279,6 @@ module.exports = function init(site) {
                     });
                 }
             });
-
             site.post(`api/${app.name}/import`, (req, res) => {
                 let response = {
                     done: false,
@@ -298,45 +297,83 @@ module.exports = function init(site) {
                     if (Array.isArray(docs)) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
                         let systemCode = 0;
+
                         docs.forEach((doc) => {
-                            let numObj = {
-                                company: site.getCompany(req),
-                                screen: app.name,
-                                date: new Date(),
-                            };
-                            let cb = site.getNumbering(numObj);
+                            const docDepartment = doc.department || doc['department'];
+                            const docSection = doc.section || doc['section'];
+                            let department;
+                            let selectedDepartment;
+                            let section;
+                            let selectedSection;
 
-                            if (cb.auto) {
-                                systemCode = cb.code || ++systemCode;
-                            } else {
-                                systemCode++;
+                            let nameAr;
+                            let nameEn;
+                            if (doc.nameAr || doc['name ar']) {
+                                nameAr = doc.nameAr || doc['name ar'];
                             }
 
-                            if (!doc.code) {
-                                doc.code = systemCode;
+                            if (doc.nameEn || doc['name en']) {
+                                nameEn = doc.nameEn || doc['name en'];
+                            }
+                            if (docDepartment && nameEn) {
+                                department = site.getApp('departments').memoryList.find((dep) => dep && dep.nameEn.toLowerCase().trim() == docDepartment.toLowerCase().trim());
+
+                                department
+                                    ? (selectedDepartment = { _id: department._id, id: department.id, code: department.code, nameAr: department.nameAr, nameEn: department.nameEn })
+                                    : selectedDepartment;
                             }
 
-                            let newDoc = {
-                                code: doc.code,
-                                nameAr: doc.nameAr ? doc.nameAr.trim() : '',
-                                nameEn: doc.nameEn ? doc.nameEn.trim() : '',
-                                image: { url: '/images/jobs.png' },
-                                active: true,
-                            };
+                            if (docSection && nameEn) {
+                                section = site.getApp('sections').memoryList.find((sec) => sec && sec.nameEn.toLowerCase().trim() == docSection.toLowerCase().trim());
+                                section ? (selectedSection = { _id: section._id, id: section.id, code: section.code, nameAr: section.nameAr, nameEn: section.nameEn }) : selectedSection;
+                            }
 
-                            newDoc.company = site.getCompany(req);
-                            newDoc.branch = site.getBranch(req);
-                            newDoc.addUserInfo = req.getUserFinger();
+                            if (nameEn) {
+                                app.$collection.find({ nameEn: nameEn.toLowerCase().trim() }, (err, doc) => {
+                                    if (!doc) {
+                                        let numObj = {
+                                            company: site.getCompany(req),
+                                            screen: app.name,
+                                            date: new Date(),
+                                        };
+                                        let cb = site.getNumbering(numObj);
 
-                            app.add(newDoc, (err, doc2) => {
-                                if (!err && doc2) {
-                                    site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                    console.log(site.dbMessage);
-                                } else {
-                                    site.dbMessage = err.message;
-                                    console.log(site.dbMessage);
-                                }
-                            });
+                                        if (cb.auto) {
+                                            systemCode = cb.code || ++systemCode;
+                                        } else {
+                                            systemCode++;
+                                        }
+
+                                        let newDoc = {
+                                            code: systemCode,
+                                            department: selectedDepartment,
+                                            section: selectedSection,
+                                            nameAr: nameAr.trim(),
+                                            nameEn: nameEn.trim(),
+                                            image: { url: '/images/jobs.png' },
+                                            active: true,
+                                        };
+
+                                        newDoc.company = site.getCompany(req);
+                                        newDoc.branch = site.getBranch(req);
+                                        newDoc.addUserInfo = req.getUserFinger();
+
+                                        app.add(newDoc, (err, doc2) => {
+                                            if (!err && doc2) {
+                                                site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+                                                setTimeout(() => {
+                                                    response.done = true;
+                                                    res.json(response);
+                                                }, 3000);
+                                                console.log(site.dbMessage);
+                                            } else {
+                                                site.dbMessage = err.message;
+                                                console.log(site.dbMessage);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
                         });
                     } else {
                         site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);

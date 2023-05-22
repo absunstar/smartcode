@@ -321,24 +321,8 @@ module.exports = function init(site) {
                     if (Array.isArray(docs)) {
                         console.log(`Importing ${app.name} : ${docs.length}`);
                         let systemCode = 0;
+
                         docs.forEach((doc) => {
-                            let numObj = {
-                                company: site.getCompany(req),
-                                screen: app.name,
-                                date: new Date(),
-                            };
-                            let cb = site.getNumbering(numObj);
-
-                            if (cb.auto) {
-                                systemCode = cb.code || ++systemCode;
-                            } else {
-                                systemCode++;
-                            }
-
-                            if (!doc.code) {
-                                doc.code = systemCode;
-                            }
-
                             let nameAr;
                             let nameEn;
 
@@ -349,27 +333,47 @@ module.exports = function init(site) {
                             if (doc.nameEn || doc['name en']) {
                                 nameEn = doc.nameEn || doc['name en'];
                             }
-
                             if (nameEn) {
-                                let newDoc = {
-                                    code: doc.code,
-                                    nameAr: nameAr.trim(),
-                                    nameEn: nameEn.trim(),
-                                    image: { url: '/images/vacationsNames.png' },
-                                    active: true,
-                                };
+                                app.$collection.find({ nameEn: nameEn.toLowerCase().trim() }, (err, doc) => {
+                                    if (!doc) {
+                                        let numObj = {
+                                            company: site.getCompany(req),
+                                            screen: app.name,
+                                            date: new Date(),
+                                        };
+                                        let cb = site.getNumbering(numObj);
 
-                                newDoc.company = site.getCompany(req);
-                                newDoc.branch = site.getBranch(req);
-                                newDoc.addUserInfo = req.getUserFinger();
+                                        if (cb.auto) {
+                                            systemCode = cb.code || ++systemCode;
+                                        } else {
+                                            systemCode++;
+                                        }
 
-                                app.add(newDoc, (err, doc2) => {
-                                    if (!err && doc2) {
-                                        site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                                        console.log(site.dbMessage);
-                                    } else {
-                                        site.dbMessage = err.message;
-                                        console.log(site.dbMessage);
+                                        let newDoc = {
+                                            code: systemCode,
+                                            nameAr: nameAr.trim(),
+                                            nameEn: nameEn.trim(),
+                                            image: { url: '/images/vacationsNames.png' },
+                                            active: true,
+                                        };
+
+                                        newDoc.company = site.getCompany(req);
+                                        newDoc.branch = site.getBranch(req);
+                                        newDoc.addUserInfo = req.getUserFinger();
+
+                                        app.add(newDoc, (err, doc2) => {
+                                            if (!err && doc2) {
+                                                site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
+
+                                                setTimeout(() => {
+                                                    res.json({ done: true });
+                                                }, 2000);
+                                                console.log(site.dbMessage);
+                                            } else {
+                                                site.dbMessage = err.message;
+                                                console.log(site.dbMessage);
+                                            }
+                                        });
                                     }
                                 });
                             }
