@@ -48,37 +48,37 @@
       </div>
 
       <div class="row">
-        <div class="col3 font-18">
-          <p>##word.Amount required##</p>
-          <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
+        <div class="col4 font-17">
+          <fieldset>
+            <p class="center">##word.Amount required##</p>
+            <p class="center">({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
+          </fieldset>
         </div>
         <div class="col4">
-          <div class="row">
             <i-control
               v="r"
-              class="col9"
+              class="center"
               type="number"
-              label="##word.Amount Paid##"
+              label="##word.Amount Paid## / ##word.$##"
               ng-hide="item.$installmentsList.length > 0 && item.$invoiceType.id == 2"
               ng-change="calcRemainVoucher(item)"
               ng-model="item.total"
             >
             </i-control>
-            <div class="col3">
-              <br />
-              <br />
-              <span class="currency">##word.$##</span>
-            </div>
-          </div>
+           
         </div>
-        <div class="col3 font-18" ng-show="item.$installmentsList.length > 0 && item.$invoiceType.id == 2">
-          <p>##word.Amount Paid##</p>
-          <p>({{item.total | xmoney2}} <span class="currency">##word.$##</span>)</p>
+        <div class="col3 font-17" ng-show="item.$installmentsList.length > 0 && item.$invoiceType.id == 2">
+          <fieldset>
+            <p class="center">##word.Amount Paid##</p>
+            <p class="center">({{item.total | xmoney2}} <span class="currency">##word.$##</span>)</p>
+          </fieldset>
         </div>
 
-        <div class="col3 font-18">
-          <p>##word.Remain Amount##</p>
-          <p>({{item.$remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
+        <div class="col3 font-17">
+          <fieldset>
+            <p class="center">##word.Remain Amount##</p>
+            <p class="center">({{item.$remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
+          </fieldset>
         </div>
       </div>
     </div>
@@ -86,7 +86,6 @@
     <div class="modal-footer center">
       <p class="error">{{error}}</p>
       <i-button type="add" label="##word.Add##" ng-click="addExpenseVoucher(item)"></i-button>
-
       <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#expenseVouchersModal')"></i-button>
     </div>
   </div>

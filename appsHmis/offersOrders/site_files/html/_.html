@@ -38,7 +38,7 @@
 
                         <i-button type="edit" x-permissions="offersOrdersUpdate || offersOrdersManage" label="##word.Attend Service##"
                             ng-click="showAttend(item)"></i-button>
-
+                            <i-button type="add" ng-show="item.remainPaid > 0" label="##word.Add Receipt Voucher##" ng-click="showAddVoucher(item)"> </i-button>
                         <!-- <i-button type="delete" x-permissions="offersOrdersDelete || offersOrdersManage" label="##word.Delete##"
                             ng-click="showDelete(item)"></i-button> -->
                     </td>

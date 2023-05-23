@@ -123,6 +123,11 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
           } else {
             $scope.item = response.data.doc;
           }
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.doc;
+          }
+
           $scope.$applyAsync();
         } else {
           $scope.error = response.data.error;
@@ -489,6 +494,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.view({ id: _item.invoiceId },'attend');
+         
           site.hideModal('#expenseVouchersModal');
           site.resetValidated('#expenseVouchersModal');
           $scope.$applyAsync();
