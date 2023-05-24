@@ -27,6 +27,11 @@
   margin: 2px !important;
   border-radius: 5px;
 }
+.border {
+  border: 2px black solid;
+  margin: 2px !important;
+}
+
 .space {
   word-spacing: 7px;
 }

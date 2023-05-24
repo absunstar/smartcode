@@ -139,12 +139,14 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
+      site.get({ name: '/css', path: __dirname + '/site_files/css' });
+
       site.get(
         {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getSystemSetting(req) }, { parser: 'html css', compres: true });
         }
       );
     }
@@ -494,7 +496,7 @@ module.exports = function init(site) {
       doctor: 1,
     };
     // { 'service.id': { $in: obj.servicesIds }, select }
-    let cb = { list: [], freeRevistCount: 0, freeRevistPeriod: 0 };
+    let cb = { doctorDescTop: {}, freeRevistCount: 0, freeRevistPeriod: 0 };
 
     if (obj.doctor.freeRevistCount) {
       cb.freeRevistCount = obj.doctor.freeRevistCount;
@@ -520,25 +522,22 @@ module.exports = function init(site) {
     app.all({ where, select }, (err, docs) => {
       if (!err) {
         if (docs && docs.length > 0) {
-          // docs.forEach((_doc) => {
-          //   _doc.date = new Date(_doc.date);
-          //   _doc.date.setHours(0, 0, 0, 0);
-          //   if (_doc.date >= fromDate && _doc.date <= newDate) {
-          //     let index = cb.list.findIndex((itm) => itm.serviceId === _doc.service.id);
-          //     if (index !== -1) {
-          //       cb.list[index].count += 1;
-          //     } else {
-          //       let _l = { serviceId: _doc.service.id, count: 1, date: new Date(_doc.date) }
-          //       if(_doc.doctor.scientificRanks.id >= obj.doctor.scientificRanks.id) {
-          //         _l.free = true;
-          //       } else {
-          //         _l.free = false;
-          //       }
-          //       cb.list.push(_l);
-          //     }
-          //   }
-          // });
-          if (cb.list.length > 0) {
+          docs.forEach((_doc) => {
+            _doc.date = new Date(_doc.date);
+            _doc.date.setHours(0, 0, 0, 0);
+            if (new Date(_doc.date) >= new Date(fromDate) && new Date(_doc.date) <= new Date(newDate)) {
+              if (cb.doctorDescTop.id) {
+                if (cb.doctorDescTop.doctor.scientificRank.id > _doc.doctor.scientificRank.id) {
+                  cb.doctorDescTop = { id: _doc.id, count: 1, doctor: _doc.doctor, date: new Date(_doc.date) };
+                } else {
+                  cb.doctorDescTop = { id: _doc.id, count: cb.doctorDescTop.count + 1, doctor: _doc.doctor, date: new Date(_doc.date) };
+                }
+              } else {
+                cb.doctorDescTop = { id: _doc.id, count: 1, doctor: _doc.doctor, date: new Date(_doc.date) };
+              }
+            }
+          });
+          if (cb.doctorDescTop.id) {
             callBack(cb);
           } else {
             callBack(false);

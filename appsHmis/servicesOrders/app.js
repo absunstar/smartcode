@@ -157,7 +157,7 @@ module.exports = function init(site) {
 
         let _data = req.data;
 
-        if(!_data.doctor.onDuty) {
+        if (!_data.doctor.onDuty) {
           response.error = "The Doctor Isn't  On Duty";
           res.json(response);
           return;
@@ -214,9 +214,12 @@ module.exports = function init(site) {
                     site.addDoctorDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 3) {
                     let ageDay = obj.patient.age * 365;
-                    obj.normalRangeList = obj.service.normalRangeList.filter(
-                      (_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && ((_s.gender && _s.gender.id && obj.patient.gender && _s.gender.id == obj.patient.gender.id) || (!_s.gender || !_s.gender.id))
-                    );
+                    if (obj.service.normalRangeList && obj.service.normalRangeList.length > 0) {
+                      obj.normalRangeList = obj.service.normalRangeList.filter(
+                        (_s) =>
+                          ageDay >= _s.fromDays && ageDay <= _s.toDays && ((_s.gender && _s.gender.id && obj.patient.gender && _s.gender.id == obj.patient.gender.id) || !_s.gender || !_s.gender.id)
+                      );
+                    }
                     site.addLaboratoryDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 4) {
                     site.addRadiologyDeskTop(obj);
@@ -275,8 +278,8 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        
-        if(!_data.doctor.onDuty) {
+
+        if (!_data.doctor.onDuty) {
           response.error = "The Doctor Isn't  On Duty";
           res.json(response);
           return;
@@ -429,7 +432,7 @@ module.exports = function init(site) {
             } else if (_s.serviceGroup.type.id == 3) {
               let ageDay = obj.patient.age * 365;
               obj.normalRangeList = obj.service.normalRangeList.filter(
-                (_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && ((_s.gender && _s.gender.id && obj.patient.gender && _s.gender.id == obj.patient.gender.id) || (!_s.gender || !_s.gender.id))
+                (_s) => ageDay >= _s.fromDays && ageDay <= _s.toDays && ((_s.gender && _s.gender.id && obj.patient.gender && _s.gender.id == obj.patient.gender.id) || !_s.gender || !_s.gender.id)
               );
               site.addLaboratoryDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 4) {

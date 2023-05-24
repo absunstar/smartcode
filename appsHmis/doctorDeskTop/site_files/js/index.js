@@ -5,6 +5,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   $('#attendanceNoticDetails').addClass('hidden');
   $('#sickLeaveDetails').addClass('hidden');
   $('#medicalReportDetails').addClass('hidden');
+  $('#ucafDetails').addClass('hidden');
   $scope.appName = 'doctorDeskTop';
   $scope.modalID = '#doctorDeskTopManageModal';
   $scope.modalSearchID = '#doctorDeskTopSearchModal';
@@ -394,6 +395,27 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getPeriodsList = function () {
+    $scope.busy = true;
+    $scope.periodsList = [];
+    $http({
+      method: 'POST',
+      url: '/api/periods',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.periodsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getPatientRecommendationsList = function () {
     $scope.busy = true;
     $scope.patientRecommendationsList = [];
@@ -771,7 +793,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.item.patientReccomendList = $scope.item.patientReccomendList || [];
     if ($scope.item[name] && $scope.item[name].id) {
       if (!$scope.item.patientReccomendList.some((s) => s.id === $scope.item[name].id && code == s.code)) {
-        $scope.item.patientReccomendList.push({
+        $scope.item.patientReccomendList.unshift({
           id: $scope.item[name].id,
           nameEn: $scope.item[name].nameEn,
           nameAr: $scope.item[name].nameAr,
@@ -1053,6 +1075,44 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     }, 8000);
   };
 
+  $scope.ucafPrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#ucafDetails').removeClass('hidden');
+    $scope.order = item;
+    document.getElementById('treatment').innerHTML = $scope.order.treatment;
+
+    $scope.localPrint = function () {
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#ucafDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+      $('#ucafDetails').addClass('hidden');
+    }, 8000);
+  };
+
   if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
     $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
   }
@@ -1086,6 +1146,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
 
   $scope.getAll();
   $scope.getDoctorsList();
+  $scope.getPeriodsList();
   $scope.getChiefComplaintsList();
   $scope.getSignificantSignsList();
   $scope.getOtherConditionsList();

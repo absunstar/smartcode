@@ -11,6 +11,13 @@ module.exports = function init(site) {
         { id: 2, code: 'V', nameEn: 'VIP PATIENT', nameAr: 'مميز' },
     ];
 
+    site.visitTypes = [
+        { id: 1, nameEn: 'New Visit', nameAr: 'زيارة جديدة' },
+        { id: 1, nameEn: 'Follow up / Refill', nameAr: 'متابعة / إعادة التعبئة' },
+        { id: 1, nameEn: 'Walkin', nameAr: 'دخول' },
+        { id: 1, nameEn: 'Referral', nameAr: 'إحالة' },
+    ];
+
     site.usersTypesList = [
         { id: 1, nameEn: 'Developer', nameAr: 'مطور', name: 'developers' },
         { id: 2, nameEn: 'Owner', nameAr: 'مالك', name: 'owners' },
@@ -314,6 +321,13 @@ module.exports = function init(site) {
         { id: 3, nameEn: 'Cancellation By Company', nameAr: 'إلغاء من طرف الشركة' },
     ];
 
+    site.periods = [
+        { id: 1, nameEn: 'Day', nameAr: 'يوم' },
+        { id: 2, nameEn: 'Month', nameAr: 'شهر' },
+        { id: 3, nameEn: 'Year', nameAr: 'سنة' },
+    
+    ];
+
     site.scientificRanks = [
         { id: 1, nameEn: 'Consultant', nameAr: 'إستشاري' },
         { id: 2, nameEn: 'Senior Specialist', nameAr: 'أخصائي أول' },
@@ -415,10 +429,24 @@ module.exports = function init(site) {
         });
     });
 
+    site.post('/api/visitTypes', (req, res) => {
+        res.json({
+            done: true,
+            list: site.visitTypes,
+        });
+    });
+
     site.post('/api/doctorTypes', (req, res) => {
         res.json({
             done: true,
             list: site.doctorTypes,
+        });
+    });
+
+    site.post('/api/periods', (req, res) => {
+        res.json({
+            done: true,
+            list: site.periods,
         });
     });
 

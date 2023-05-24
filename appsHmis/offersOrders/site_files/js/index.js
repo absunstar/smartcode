@@ -267,6 +267,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
           insuranceClass: 1,
           expiryDate: 1,
           havisaNum: 1,
+          member:1,
         },
         search: $search,
       },

@@ -1,0 +1,133 @@
+<div class="full">
+  <div class="row">
+    <div class="col-6 border">
+      <p class="bold font-15 red center underline">To be completed & ID verified by the reception/nurse</p>
+      <div class="row">
+        <div class="col-4 font-11">
+          <p>Provider Name :</p>
+          <p>Insurance Co :</p>
+          <p>TPA Name :</p>
+        </div>
+        <div class="col-8 bold center font-11">
+          <p>##session.company.nameEn##</p>
+          <p>{{order.patient.insuranceCompany.nameEn}} ({{order.mainInsuranceCompany.nameEn}})</p>
+          <p>{{order.patient.fullNameEn}}</p>
+        </div>
+        <p>
+          <span class="col-4 font-11">Patient File Num :</span> <span class="col-3 bold center font-11">{{order.patient.code}}</span> <span class="col-2 center font-11">Dept :</span>
+          <span class="col-3 bold center font-11">{{order.service.hospitalResponsibility.nameEn}}</span>
+        </p>
+
+        <p>
+          <span class="col-4 font-11">Marital Status :</span> <span class="col-2 bold center font-11">{{order.patient.maritalStatus.nameEn}}</span> <span class="col-2 center font-11">Mobile :</span>
+          <span class="col-3 bold center font-11">{{order.patient.mobile}}</span>
+        </p>
+
+        <p>
+          <span class="col-4 font-11">Date of Visit :</span> <span class="col-4 bold center font-11">{{order.date |date:"dd / MM / yyyy"}}</span>
+          <span class="col-2 center font-11">Plan Type :</span>
+          <span class="col-2 bold center font-11">{{order.planType}}</span>
+        </p>
+
+        <p><span class="col-4 font-11">Visit Type :</span> <span class="col-4 bold center font-11">{{order.visitType.nameEn}}</span></p>
+      </div>
+    </div>
+
+    <div class="col-6 border">
+      <p class="bold font-15 red center underline">Print / Fill in Clear letters or Emboss Card</p>
+      <div class="row">
+        <p><span class="col-4 font-11">Policy Holder :</span> <span class="col-8 bold center font-11">##session.company.nameEn##</span></p>
+        <p><span class="col-4 font-11">Policy Num :</span> <span class="col-8 bold center font-11"></span></p>
+
+        <p><span class="col-4 font-11">Insurance Name :</span> <span class="col-8 bold center font-11">{{order.patient.insuranceCompany.nameEn}} ({{order.mainInsuranceCompany.nameEn}})</span></p>
+
+        <p><span class="col-4 font-11">P.N :</span> <span class="col-8 bold center font-11">{{order.patient.fullNameEn}}</span></p>
+
+        <p>
+          <span class="col-3 font-11">M.Ship :</span> <span class="col-3 bold center font-11">{{order.patient.member}}</span> <span class="col-3 font-11">Iqama ID :</span>
+          <span class="col-3 bold center font-11">{{order.patient.havisaNum}}</span>
+        </p>
+
+        <p>
+          <span class="col-3 font-11">Gender :</span> <span class="col-3 bold center font-11">{{order.patient.gender.nameEn}}</span> <span class="col-3 font-11">Age :</span>
+          <span class="col-3 bold center font-11">{{order.patient.age}}</span>
+        </p>
+        <div class="row">
+          <div class="col-4">
+            <p class="font-11">Expire Date</p>
+            <p class="bold center font-11">{{order.patient.expiryDate | date:"dd / MM / yyyy"}}</p>
+          </div>
+          <div class="col-4">
+            <p class="font-11">Class</p>
+            <p class="bold center font-11">{{order.patient.insuranceClass.nameEn}}</p>
+          </div>
+          <div class="col-4">
+            <p class="font-11">Approval</p>
+            <p class="bold green center font-11" ng-show="order.service.approval">Yes</p>
+            <p class="bold red center font-11" ng-show="!order.service.approval">No</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <p class="bold font-16 underline">To be completed by attending PHYSICIAN :</p>
+    <p>
+      <span class="font-14 col-2">Patient Visit :</span>
+      <span class="font-14 bold col-2" ng-show="order.type == 'out'">OutPatient</span>
+      <span class="font-14 bold col-2" ng-show="order.type == 'in'">InPatient</span>
+      <span class="font-14 col-2">Emergency Case ?</span>
+      <span class="font-14 green bold col-2" ng-show="order.erCase">Yes</span>
+      <span class="font-14 red bold col-2" ng-show="!order.erCase">No</span>
+    </p>
+    <div class="row">
+      <p class="font-11">
+        <span class="col-1">BP :</span>
+        <span class="col-1 bold underline">{{order.bloodPressureHigh}}/{{order.bloodPressureLow}}</span>
+
+        <span class="col-1">Pulse :</span>
+        <span class="col-1 bold underline">{{order.pulse}}</span>
+
+        <span class="col-1">Temp :</span>
+        <span class="col-1 bold underline">{{order.temperature}}</span>
+
+        <span class="col-2">RespiratoryRate :</span>
+        <span class="col-1 bold underline">{{order.respiratoryRate}}</span>
+
+        <span class="col-4">KG :</span>
+        <span class="col-1 bold underline">{{order.weight}}</span>
+
+        <span class="col-1">Height :</span>
+        <span class="col-1 bold underline">{{order.respiratoryRate}}</span>
+
+        <span class="col-2">Duration of Illness :</span>
+        <span class="col-2 bold underline">{{order.durationOfIllness||0}} {{order.illnessPeriod.nameEn}}</span>
+      </p>
+    </div>
+    <div class="row">
+      <p class="bold col-6 gray-bg">- Chief Complaint & Main Symptoms :</p>
+      <p class="font-12">
+        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'CC'}">{{s.nameEn}} , </span>
+      </p>
+      <br>
+      <hr>
+    </div>
+    <div class="row">
+      <p class="bold col-6 gray-bg">- Other Conditions :</p>
+      <p class="font-12">
+        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'OC'}">{{s.nameEn}} , </span>
+      </p>
+      <br>
+      <hr>
+    </div>
+
+    <div class="row">
+      <p class="bold col-6 gray-bg">- Diagnosis :</p>
+      <p class="font-12">
+        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'DIAG'}">{{s.nameEn}} , </span>
+      </p>
+      <br>
+      <hr>
+    </div>
+  </div>
+</div>

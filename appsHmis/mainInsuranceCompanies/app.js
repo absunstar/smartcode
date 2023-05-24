@@ -681,10 +681,20 @@ module.exports = function init(site) {
               }
               
               // let dDeskTop = doctorDeskTopCb.list.find((itm) => itm.serviceId == servicesList[0].id);
-
+              if(servicesList[0].serviceGroup.type.id == 2) {
+                
+                if(doctorDeskTopCb && doctorDeskTopCb.doctorDescTop.count < doctorDeskTopCb.freeRevistCount) {
+                  if(doctorDeskTopCb.doctorDescTop.doctor.scientificRank.id <= _data.doctor.scientificRank.id ) {
+                    servicesList[0].patientDeduct = 0;
+                    servicesList[0].totalPVat = 0;
+                    servicesList[0].totalComVat = 0;
+                    servicesList[0].comCash = 0;
+                    servicesList[0].patientCash = 0;
+                  }
+                }
+              }
             }
           });
-          console.log(servicesList);
           if (servicesList.length > 0) {
             response.done = true;
             response.servicesList = servicesList;

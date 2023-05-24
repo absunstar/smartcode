@@ -40,7 +40,20 @@
             <legend>##word.Treatment##</legend>
             <i-content ng-model="item.treatment"></i-content>
           </fieldset>
+          <fieldset>
+            <div class="row padding">
 
+              <i-control class="col2" type="number" ng-model="item.durationOfIllness" label="##word.Duration of Illness##"></i-control>
+              <i-list
+              label="##word.Illness period##"
+              class="col2"
+              ng-model="item.illnessPeriod"
+              display="name##session.lang##"
+              items="periodsList"
+              ng-search="item.$Illnessperiod"
+              ></i-list>
+            </div>
+            </fieldset>
           <div class="row padding">
             <div class="tabs">
               <div class="tabs-header full">
@@ -377,7 +390,7 @@
           <fieldset>
             <legend>##word.Vitals Notes##</legend>
             <div class="row">
-              <i-control type="text" label="##word.Height## / CM" ng-model="item.Height"></i-control>
+              <i-control type="text" label="##word.Height## / CM" ng-model="item.height"></i-control>
               <i-control type="text" label="##word.Weight## / KG" ng-model="item.weight"></i-control>
               <i-control type="text" label="##word.Temperature##" ng-model="item.temperature"></i-control>
               <i-control type="text" label="##word.Pulse##" ng-model="item.pulse"></i-control>
