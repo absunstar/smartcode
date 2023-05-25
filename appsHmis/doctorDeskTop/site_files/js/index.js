@@ -174,6 +174,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   $scope.showDoctorRecommendations = function (_item) {
     $scope.error = '';
     $scope.item = {};
+    $scope.mode = '';
     $scope.view(_item);
     site.showModal('#doctorRecommendationsModal');
     document.querySelector(`#doctorRecommendationsModal .tab-link`).click();
@@ -853,6 +854,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           order.unit = _item.$order.unitsList[0].unit;
           order.barcode = _item.$order.unitsList[0].barcode;
           order.price = _item.$order.unitsList[0].salesPrice;
+          order.cost = _item.$order.unitsList[0].averageCost;
           order.discount = _item.$order.unitsList[0].discount;
           order.discountType = _item.$order.unitsList[0].discountType;
           _item.ordersList.unshift(order);
@@ -898,6 +900,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
                   nameEn: order.nameEn,
                   type: order.type,
                   price: response.data.servicesList[0].price,
+                  cost: response.data.servicesList[0].cost,
                   discount: response.data.servicesList[0].discount,
                   total: response.data.servicesList[0].total,
                 });
@@ -1081,8 +1084,15 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#ucafDetails').removeClass('hidden');
     $scope.order = item;
-    document.getElementById('treatment').innerHTML = $scope.order.treatment;
+    if($scope.order.ordersList && $scope.order.ordersList.length > 0) {
 
+      $scope.order.$ordersListServices = $scope.order.ordersList.filter((g) => g.type =='CO' || g.type =='LA' || g.type =='X-R');
+      $scope.order.$ordersListMedicines = $scope.order.ordersList.filter((g) => g.type =='MD' || g.type =='ER');
+      $scope.order.$totalAmountServices = $scope.order.$ordersListServices.reduce((a, b) => a + b.total, 0);
+      $scope.order.$totalAmountMedicines = $scope.order.$ordersListMedicines.reduce((a, b) => a + b.total, 0);
+      }
+
+    document.getElementById('treatment').innerHTML = $scope.order.treatment;
     $scope.localPrint = function () {
       let printer = {};
       if ($scope.setting.printerProgram.a4Printer) {
@@ -1127,7 +1137,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
         let discount = (_item.price * _item.discount) / 100;
         afterPrice = _item.price - discount;
       }
-
+      _item.totalCost = _item.cost * _item.count;
       _item.total = afterPrice * _item.count;
       _item.total = site.toNumber(_item.total);
     }, 300);

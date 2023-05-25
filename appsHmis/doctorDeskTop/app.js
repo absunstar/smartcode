@@ -139,14 +139,14 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
-      site.get({ name: '/css', path: __dirname + '/site_files/css' });
+      // site.get({ name: '/css', path: __dirname + '/site_files/css' });
 
       site.get(
         {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getSystemSetting(req) }, { parser: 'html css', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }

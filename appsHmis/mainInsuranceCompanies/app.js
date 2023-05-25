@@ -379,6 +379,7 @@ module.exports = function init(site) {
                           needApproval: mainInsurance.servicesList[serviceIndex].needApproval,
                           approved: mainInsurance.servicesList[serviceIndex].needApproval ? false : true,
                           vat: serviceMemory.vat,
+                          cost: serviceMemory.cost,
                           serviceGroup: serviceMemory.serviceGroup,
                           pVat: 0,
                           comVat: 0,
@@ -437,6 +438,7 @@ module.exports = function init(site) {
                               needApproval: categoryInsurance.needApproval,
                               approved: categoryInsurance.needApproval ? false : true,
                               qty: 1,
+                              cost: serviceMemory.cost,
                               vat: serviceMemory.vat,
                               serviceGroup: serviceMemory.serviceGroup,
                               pVat: 0,
@@ -490,6 +492,7 @@ module.exports = function init(site) {
                             code: serviceMemory.code,
                             qty: 1,
                             price: 0,
+                            cost: serviceMemory.cost,
                             discount: 0,
                             total: 0,
                             vat: serviceMemory.vat,
@@ -517,7 +520,6 @@ module.exports = function init(site) {
                           // service.total = service.price - (service.price * service.discount) / 100;
                           servicesList.unshift(service);
                         }
-
                       } else if (!foundService && goupInsurance && goupInsurance.id) {
                         let goup = appServicesGroup.memoryList.find((_g) => _g.id === goupInsurance.id);
                         if (goup && goup.servicesCategoriesList && goup.servicesCategoriesList.length > 0) {
@@ -543,6 +545,7 @@ module.exports = function init(site) {
                                   nameAr: serviceMemory.nameAr,
                                   nameEn: serviceMemory.nameEn,
                                   code: serviceMemory.code,
+                                  cost: serviceMemory.cost,
                                   qty: 1,
                                   vat: serviceMemory.vat,
                                   pVat: 0,
@@ -581,12 +584,12 @@ module.exports = function init(site) {
                 }
               }
               if (!foundCoverage) {
-
                 let service = {
                   id: serviceMemory.id,
                   code: serviceMemory.code,
                   nameAr: serviceMemory.nameAr,
                   nameEn: serviceMemory.nameEn,
+                  cost: serviceMemory.cost,
                   serviceGroup: serviceMemory.serviceGroup,
                   approved: true,
                   discount: 0,
@@ -637,7 +640,8 @@ module.exports = function init(site) {
                 mainInsurance.id &&
                 _data.insuranceContract &&
                 new Date(_data.insuranceContract.startDate) <= new Date() &&
-                new Date(_data.insuranceContract.endDate) >= new Date() && foundCoverage
+                new Date(_data.insuranceContract.endDate) >= new Date() &&
+                foundCoverage
               ) {
                 if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
                   if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
@@ -679,12 +683,11 @@ module.exports = function init(site) {
               if (serviceMemory.normalRangeList && serviceMemory.normalRangeList.length > 0) {
                 servicesList[0].normalRangeList = serviceMemory.normalRangeList;
               }
-              
+
               // let dDeskTop = doctorDeskTopCb.list.find((itm) => itm.serviceId == servicesList[0].id);
-              if(servicesList[0].serviceGroup.type.id == 2) {
-                
-                if(doctorDeskTopCb && doctorDeskTopCb.doctorDescTop.count < doctorDeskTopCb.freeRevistCount) {
-                  if(doctorDeskTopCb.doctorDescTop.doctor.scientificRank.id <= _data.doctor.scientificRank.id ) {
+              if (servicesList[0].serviceGroup.type.id == 2) {
+                if (doctorDeskTopCb && doctorDeskTopCb.doctorDescTop.count < doctorDeskTopCb.freeRevistCount) {
+                  if (doctorDeskTopCb.doctorDescTop.doctor.scientificRank.id <= _data.doctor.scientificRank.id) {
                     servicesList[0].patientDeduct = 0;
                     servicesList[0].totalPVat = 0;
                     servicesList[0].totalComVat = 0;

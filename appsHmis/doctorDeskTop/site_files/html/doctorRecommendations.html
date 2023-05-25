@@ -30,6 +30,7 @@
           <fieldset>
             <legend>##word.Printers##</legend>
             <div class="row">
+              <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.UCAF##" ng-click="ucafPrint(item)"></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders##" ng-click="ordersPrint(item)"></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Attendance Notic##" ng-click="attendanceNoticPrint(item)"></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Medical Report##" ng-click="medicalReportPrint(item)"></i-button>
@@ -316,14 +317,14 @@
                           <div class="col3">
                             <p class="bold center">##word.Price##</p>
                             <p class="bold center">
-                              {{s.price || 0}}
+                              {{s.price | xmoney2}}
                               <span class="currency">##word.$##</span>
                             </p>
                           </div>
                           <div class="col3">
                             <p class="bold center">##word.Disc##</p>
                             <p class="bold center">
-                              {{s.discount || 0}}
+                              {{s.discount| xmoney2}}
                               <span class="currency" ng-show="s.discountType == 'value'">##word.$##</span>
                               <span class="currency" ng-show="s.discountType == 'percent' || !s.discountType">##word.%##</span>
                             </p>
@@ -331,7 +332,7 @@
                           <div class="col3">
                             <p class="bold center">##word.Total##</p>
                             <p class="bold center">
-                              {{s.total || 0}}
+                              {{s.total| xmoney2}}
                               <span class="currency">##word.$##</span>
                             </p>
                           </div>
