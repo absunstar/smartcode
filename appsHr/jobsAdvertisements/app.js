@@ -333,7 +333,7 @@ module.exports = function init(site) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || {};
                 let search = req.body.search || '';
-                let limit = req.body.limit || 10;
+                let limit = req.body.limit || 50;
                 let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, date: 1, status: 1, approved: 1, title: 1, acceptDate: 1, cancelDate: 1, rejectDate: 1 };
                 if (search) {
                     where.$or = [];

@@ -251,7 +251,7 @@ module.exports = function init(site) {
                 let where = req.body.where || {};
                 let search = req.body.search || '';
 
-                let limit = req.body.limit || 10;
+                let limit = req.body.limit || 50;
                 let select = req.body.select || {
                     id: 1,
                     code: 1,

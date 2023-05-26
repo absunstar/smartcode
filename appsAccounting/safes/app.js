@@ -287,7 +287,7 @@ module.exports = function init(site) {
             site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
                 let where = req.body.where || {};
                 let search = req.body.search || '';
-                let limit = req.body.limit || 10;
+                let limit = req.body.limit || 50;
                 where['company.id'] = site.getCompany(req).id;
 
                 let select = req.body.select || { id: 1, code: 1, type: 1, nameEn: 1, nameAr: 1, image: 1, active: 1, totalBalance: 1 };

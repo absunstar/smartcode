@@ -284,7 +284,7 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let search = req.body.search || '';
-        let limit = req.body.limit || 10;
+        let limit = req.body.limit || 50;
         let select = req.body.select || { id: 1, code: 1, date: 1, voucherType: 1, safe: 1, currency: 1, total: 1 };
         if (app.allowMemory) {
           if (!search) {

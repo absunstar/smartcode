@@ -156,6 +156,13 @@ module.exports = function init(site) {
                     done: false,
                 };
                 let _data = req.data;
+                if (_data.mobileList.length > 0) {
+                    _data.mobile = _data.mobileList[0].mobile;
+                } else {
+                    response.error = 'Must Add Mobile Number';
+                    res.json(response);
+                    return;
+                }
                 _data.company = site.getCompany(req);
                 _data.branch = site.getBranch(req);
                 _data.branchList = [
@@ -214,6 +221,14 @@ module.exports = function init(site) {
                 };
 
                 let _data = req.data;
+                if (_data.mobileList.length > 0) {
+                    _data.mobile = _data.mobileList[0].mobile;
+                } else {
+                    response.error = 'Must Add Mobile Number';
+                    res.json(response);
+                    return;
+                }
+
                 _data.editUserInfo = req.getUserFinger();
 
                 app.update(_data, (err, result) => {
@@ -271,7 +286,7 @@ module.exports = function init(site) {
                 let where = req.body.where || { 'type.id': 8 };
                 let search = req.body.search || undefined;
                 let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, gender: 1, consItem: 1 };
-                let limit = req.body.limit || 10;
+                let limit = req.body.limit || 100;
                 let list = [];
                 app.memoryList
                     .slice(-limit)

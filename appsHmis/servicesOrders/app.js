@@ -209,6 +209,9 @@ module.exports = function init(site) {
                   if (doc.doctorDeskTop && doc.doctorDeskTop.id) {
                     obj.doctorDeskTopId = doc.doctorDeskTop.id;
                     obj.doctorReccomendList = doc.doctorDeskTop.doctorReccomendList;
+                    if(_s.serviceGroup.type.id != 2) {
+                      obj.doctor = doc.doctorDeskTop.doctor;
+                    }
                   }
                   if (_s.serviceGroup.type.id == 2) {
                     site.addDoctorDeskTop(obj);

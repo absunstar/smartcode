@@ -103,7 +103,7 @@ module.exports = function init(site) {
   app.view = function (_item, callback) {
     if (callback) {
       if (app.allowMemory) {
-        if ((item = app.memoryList.find((itm) => itm.id == _item.id))) {
+        if ((item = app.memoryList.find((itm) => itm.id == _item.id || _item.insuranceCompanyId == itm.insuranceCompany.id))) {
           callback(null, item);
           return;
         }

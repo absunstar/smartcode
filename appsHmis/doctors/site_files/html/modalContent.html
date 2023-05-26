@@ -121,15 +121,32 @@
         <div id="contact" class="tab-content">
           <div class="row padding">
             <fieldset>
+             
               <div class="row">
-                <i-control type="text" class="col6" ng-model="item.mobile" label="##word.Mobile##"></i-control>
-                <i-control type="text" class="col6" ng-model="item.homeTel" label="##word.Home Tel##"></i-control>
-              </div>
-              <div class="row">
-                <i-control type="number" class="col6" ng-model="item.bleepNumber"
+                <i-control type="text" class="col4" ng-model="item.homeTel" label="##word.Home Tel##"></i-control>
+                <i-control type="number" class="col4" ng-model="item.bleepNumber"
                   label="##word.Bleep Number##"></i-control>
-                <i-control type="text" class="col6" ng-model="item.clinicExt" label="##word.Clinic Ext##"></i-control>
+                <i-control type="text" class="col4" ng-model="item.clinicExt" label="##word.Clinic Ext##"></i-control>
               </div>
+              <div class="row">
+                <fieldset class="col8 ">
+                    <legend>
+                        <i-button type="push" ng-click="item.mobileList.push({})"></i-button>
+                        ##word.Mobile##
+                    </legend>
+                    <div class="row" ng-repeat="m in item.mobileList">
+                        <div class="col10">
+
+                            <i-control v="r" label="##word.Code##" class="padding col3" ng-model="m.code"> </i-control>
+                            <i-control v="r" label="##word.Mobile##" class="padding col9" ng-model="m.mobile"> </i-control>
+                        </div>
+                        <div class="col2">
+                            <br>
+                            <i-button type="delete" ng-click="item.mobileList.length === 1 || item.mobileList.splice($index,1)"> </i-button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
             </fieldset>
           </div>
         </div>

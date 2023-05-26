@@ -153,10 +153,9 @@
           <i-list
             v="r"
             class="col6"
-            ng-disabled="item.bookingType.id != 1"
             label="##word.Doctor##"
             ng-model="item.doctor"
-            ng-change="item.servicesList = [];addServices(item.doctor.consItem,item.mainInsuranceCompany)"
+            ng-change="item.servicesList = [];item.doctorDeskTop.id && item.source.id == 2 ?selectDoctorDeskTop(item.doctorDeskTop,true) : addServices(item.doctor.consItem,item.mainInsuranceCompany)"
             display="name##session.lang##"
             items="doctorsList"
             ng-search="item.$doctor"
@@ -229,7 +228,7 @@
             <i-radio ng-model="item.payment" class="col4" ng-value="credit" label="##word.Credit##"> </i-radio>
           </div>
 
-          <div class="row margin"> 
+          <div class="row margin">
             <p class="bold col4">##word.Type##</p>
             <i-radio ng-model="item.type" class="col4" ng-value="out" label="##word.Out##"> </i-radio>
             <i-radio ng-model="item.type" class="col4" ng-value="in" label="##word.In##"></i-radio>

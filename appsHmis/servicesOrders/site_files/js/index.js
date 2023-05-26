@@ -13,7 +13,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     totalVat: 0,
     totalComVat: 0,
     patientBalance: 0,
-    totalAfterDisc : 0,
+    totalAfterDisc: 0,
     accBalance: 0,
     totalNet: 0,
     total: 0,
@@ -413,7 +413,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           insuranceClass: 1,
           expiryDate: 1,
           havisaNum: 1,
-          member:1,
+          member: 1,
         },
         search: $search,
       },
@@ -589,9 +589,11 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.selectDoctorDeskTop = function (doctorDeskTop) {
+  $scope.selectDoctorDeskTop = function (doctorDeskTop, change) {
     $scope.item.patient = doctorDeskTop.patient;
-    $scope.item.doctor = doctorDeskTop.doctor;
+    if (!change) {
+      $scope.item.doctor = doctorDeskTop.doctor;
+    }
     $scope.item.sourceId = doctorDeskTop.id;
     $scope.item.type = doctorDeskTop.type;
     $http({
@@ -604,6 +606,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         if (response.data.done && response.data.mainInsuranceCompany && response.data.servicesList) {
           $scope.item.servicesList = [];
           response.data.servicesList.forEach((_s) => {
+            
             $scope.item.servicesList.push(_s);
           });
           if ($scope.item.servicesList.some((s) => !s.approved)) {
@@ -708,14 +711,17 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getDoctorsList = function () {
+  $scope.getDoctorsList = function (where) {
     $scope.busy = true;
     $scope.doctorsList = [];
+    where = where || {};
+    where[active] = true;
+    where['type.id'] = 8;
     $http({
       method: 'POST',
       url: '/api/doctors/all',
       data: {
-        where: { active: true, 'type.id': 8 },
+        where,
         select: {
           id: 1,
           code: 1,
@@ -734,7 +740,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           freeRevistPeriod: 1,
           freeRevistCount: 1,
           scientificRank: 1,
-          onDuty : 1,
+          onDuty: 1,
         },
       },
     }).then(
@@ -791,7 +797,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   $scope.addServices = function (s, mainInsuranceCompany) {
     $scope.error = '';
     $scope.item.errMsgDoctor = '';
-    if(!$scope.item.doctor.onDuty) {
+    if (!$scope.item.doctor.onDuty) {
       $scope.item.errMsgDoctor = "The Doctor Isn't  On Duty";
       return;
     }
