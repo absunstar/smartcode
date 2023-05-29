@@ -187,7 +187,7 @@ app.controller('cities', function ($scope, $http, $timeout) {
         );
     };
 
-    $scope.getCountriesList = function ($search) {
+       $scope.getCountriesList = function ($search) {
         if ($search && $search.length < 1) {
             return;
         }
@@ -199,13 +199,7 @@ app.controller('cities', function ($scope, $http, $timeout) {
                 where: {
                     active: true,
                 },
-                select: {
-                    id: 1,
-                    code: 1,
-                    nameEn: 1,
-                    nameAr: 1,
-                    callingCode: 1,
-                },
+                select: { id: 1, code: 1, nameEn: 1, nameAr: 1, callingCode: 1 },
                 search: $search,
             },
         }).then(
