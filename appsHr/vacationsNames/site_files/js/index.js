@@ -6,7 +6,7 @@ app.controller('vacationsNames', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: {url : '/images/vacationsNames.png'},
+    image: { url: '/images/vacationsNames.png' },
     active: true,
   };
   $scope.item = {};
@@ -219,6 +219,12 @@ app.controller('vacationsNames', function ($scope, $http, $timeout) {
     $scope.getAll($scope.search);
     site.hideModal($scope.modalSearchID);
     $scope.search = {};
+  };
+
+  $scope.afterCompleteImport = function () {
+    $timeout(() => {
+      $scope.getAll();
+    }, 2000);
   };
 
   $scope.getAll();

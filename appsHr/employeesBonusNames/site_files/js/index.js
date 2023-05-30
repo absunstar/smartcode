@@ -220,6 +220,12 @@ app.controller('employeesBonusNames', function ($scope, $http, $timeout) {
     $scope.search = {};
   };
 
+  $scope.afterCompleteImport = function () {
+    $timeout(() => {
+      $scope.getAll();
+    }, 2000);
+  };
+
   $scope.getAll();
   $scope.getNumberingAuto();
 });

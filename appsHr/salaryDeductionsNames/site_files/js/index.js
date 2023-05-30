@@ -6,7 +6,7 @@ app.controller('salaryDeductionsNames', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { },
+    image: {},
     active: true,
   };
   $scope.item = {};
@@ -221,6 +221,12 @@ app.controller('salaryDeductionsNames', function ($scope, $http, $timeout) {
     $scope.search = {};
   };
 
+  $scope.afterCompleteImport = function () {
+    $timeout(() => {
+      $scope.getAll();
+    }, 2000);
+  };
+  
   $scope.getAll();
   $scope.getNumberingAuto();
 });

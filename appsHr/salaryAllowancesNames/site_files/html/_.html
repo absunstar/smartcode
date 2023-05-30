@@ -1,47 +1,46 @@
 <div ng-controller="salaryAllowancesNames" class="loaded">
-    <div class="row" x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage">
-        <div x-import="salaryAllowancesNames/modal.html"></div>
-        <div x-import="salaryAllowancesNames/modalSearch.html"></div>
+  <div class="row" x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage">
+    <div x-import="salaryAllowancesNames/modal.html"></div>
+    <div x-import="salaryAllowancesNames/modalSearch.html"></div>
 
-        <div class="top-actions">
-            <i-button type="add" x-permissions="salaryAllowancesNamesAdd || salaryAllowancesNamesManage" label="##word.New##" ng-click="showAdd()"></i-button>
-            <i-upload api="api/salaryAllowancesNames/import" label="Import" x-permissions="importSalaryAllowancesNames || salaryAllowancesNamesManage"></i-upload>
+    <div class="top-actions">
+      <i-button type="add" x-permissions="salaryAllowancesNamesAdd || salaryAllowancesNamesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+      <i-upload api="api/salaryAllowancesNames/import" on-uploaded="afterCompleteImport()" label="Import" x-permissions="importSalaryAllowancesNames || salaryAllowancesNamesManage"></i-upload>
 
-            <i-button type="search" x-permissions="salaryAllowancesNamesSearch || salaryAllowancesNamesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
-            <i-button type="search" x-permissions="salaryAllowancesNamesSearch || salaryAllowancesNamesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
-        </div>
-
-        <div class="row padding">
-            <i-control ng-model="$search" x-permissions="salaryAllowancesNamesSearch || salaryAllowancesNamesManage"></i-control>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table hover bold" id="salary-allowances-names">
-                <tr>
-                    <th>##word.Code##</th>
-                    <th>##word.Name##</th>
-
-                    <th>##word.Status##</th>
-                    <th class="not-print">##word.Actions##</th>
-                </tr>
-                <tr ng-repeat="item in list | filter:$search">
-                    <td class="center blue">{{item.code}}</td>
-                    <td class="center">{{item.name##session.lang##}}</td>
-                    <td class="center">
-                        <span class="text-success" ng-show="item.active">##word.Active##</span>
-                        <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
-                    </td>
-
-                    <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
-                        <i-button type="edit" x-permissions="salaryAllowancesNamesUpdate || salaryAllowancesNamesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
-                        <i-button type="delete" x-permissions="salaryAllowancesNamesDelete || salaryAllowancesNamesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <i-button x-permissions="salaryAllowancesNamesPrint || salaryAllowancesNamesManage" type="print" label="##word.Print##" onclick="site.print('#salary-allowances-names')"></i-button>
-        <i-button x-permissions="salaryAllowancesNamesExport || salaryAllowancesNamesManage" type="export" label="##word.Export to excel##" onclick="site.export('#salary-allowances-names' )">
-        </i-button>
+      <i-button type="search" x-permissions="salaryAllowancesNamesSearch || salaryAllowancesNamesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+      <i-button type="search" x-permissions="salaryAllowancesNamesSearch || salaryAllowancesNamesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
     </div>
+
+    <div class="row padding">
+      <i-control ng-model="$search" x-permissions="salaryAllowancesNamesSearch || salaryAllowancesNamesManage"></i-control>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table hover bold" id="salary-allowances-names">
+        <tr>
+          <th>##word.Code##</th>
+          <th>##word.Name##</th>
+
+          <th>##word.Status##</th>
+          <th class="not-print">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="item in list | filter:$search">
+          <td class="center blue">{{item.code}}</td>
+          <td class="center">{{item.name##session.lang##}}</td>
+          <td class="center">
+            <span class="text-success" ng-show="item.active">##word.Active##</span>
+            <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
+          </td>
+
+          <td class="center not-print">
+            <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+            <i-button type="edit" x-permissions="salaryAllowancesNamesUpdate || salaryAllowancesNamesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+            <i-button type="delete" x-permissions="salaryAllowancesNamesDelete || salaryAllowancesNamesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <i-button x-permissions="salaryAllowancesNamesPrint || salaryAllowancesNamesManage" type="print" label="##word.Print##" onclick="site.print('#salary-allowances-names')"></i-button>
+    <i-button x-permissions="salaryAllowancesNamesExport || salaryAllowancesNamesManage" type="export" label="##word.Export to excel##" onclick="site.export('#salary-allowances-names' )"> </i-button>
+  </div>
 </div>
