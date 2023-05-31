@@ -30,6 +30,9 @@ module.exports = function init(site) {
   $companies.findOne({}, (err, doc) => {
     if (!err && doc) {
       site.defaultCompany = doc;
+      if (!site.defaultCompany.branchList) {
+        site.defaultCompany.branchList = site.defaultCompany.branch_list;
+      }
     } else {
       $companies.add(site.defaultCompany, (err, doc) => {
         if (!err && doc) {
@@ -105,6 +108,7 @@ module.exports = function init(site) {
 
   site.getBranch = function (req) {
     let branch = req.session.branch;
+    console.log(site.defaultCompany);
     return branch || site.defaultCompany.branchList[0];
   };
 
