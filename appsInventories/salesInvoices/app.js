@@ -198,8 +198,6 @@ module.exports = function init(site) {
             }
           });
 
-        
-
           if (errBatchList.length > 0) {
             let error = errBatchList.map((m) => m).join('-');
             response.error = `The Batches Count is not correct in ( ${error} )`;
@@ -269,22 +267,7 @@ module.exports = function init(site) {
                 res.json(response);
                 return;
               }
-              let obj = {
-                date: new Date(),
-                customer: _data.customer,
-                patient: _data.patient,
-                voucherType: site.vouchersTypes[0],
-                invoiceId: _data.id,
-                invoiceCode: _data.code,
-                total: _data.amountPaid,
-                safe: _data.safe,
-                paymentType: _data.paymentType,
-                addUserInfo: _data.addUserInfo,
-                company: _data.company,
-                branch: _data.branch,
-              };
               _data.remainPaid = _data.totalNet - _data.amountPaid;
-              site.addReceiptVouchers(obj);
             } else {
               _data.remainPaid = _data.totalNet;
               if (_data.invoiceType.id == 2) {
@@ -303,6 +286,23 @@ module.exports = function init(site) {
             app.add(_data, (err, doc) => {
               if (!err) {
                 response.done = true;
+                if (doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+                  site.addReceiptVouchers({
+                    session: req.session,
+                    date: new Date(),
+                    customer: doc.customer,
+                    patient: doc.patient,
+                    voucherType: site.vouchersTypes[0],
+                    invoiceId: doc.id,
+                    invoiceCode: doc.code,
+                    total: doc.amountPaid,
+                    safe: doc.safe,
+                    paymentType: doc.paymentType,
+                    addUserInfo: doc.addUserInfo,
+                    company: doc.company,
+                    branch: doc.branch,
+                  });
+                }
                 let obj = {
                   code: doc.code,
                   image: doc.image,
@@ -338,19 +338,20 @@ module.exports = function init(site) {
 
                 if (doc.salesType.code == 'patient') {
                   obj.customer = doc.patient;
-                  // obj.appName = 'salesPatientsInvoices';
-                  site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id,items : doc.itemsList });
-                } if (doc.salesType.code == 'er') {
+                  site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
+                }
+                if (doc.salesType.code == 'er') {
                   obj.customer = doc.patient;
-                  // obj.appName = 'salesPatientsInvoices';
-                  site.hasErDoctorDeskTop({ id: doc.doctorDeskTop.id,items : doc.itemsList });
+                  site.hasErDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
                 } else if (doc.salesType.code == 'company') {
                   obj.customer = doc.customer;
-                  // obj.appName = 'salesCompaniesInvoices';
                 } else if (doc.salesType.code == 'customer') {
                   obj.customer = doc.customer;
                 }
-                // site.autoJournalEntrySalesInvoice(req.session, obj);
+                obj.nameAr = 'فاتورة مبيعات' + doc.code;
+                obj.nameEn = 'sales Invoice' + doc.code;
+                obj.session = req.session;
+                site.autoJournalEntry(obj);
                 response.doc = doc;
               } else {
                 response.error = err.message;

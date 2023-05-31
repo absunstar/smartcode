@@ -879,7 +879,7 @@
         </div>
 
         <div id="establishingAccountsSettings" class="tab-content">
-          <div class="row">
+          <!-- <div class="row">
             <fieldset class="col4">
               <i-list
                 ng-model="item.inventorySystem"
@@ -891,9 +891,9 @@
               >
               </i-list>
             </fieldset>
-          </div>
-          <fieldset ng-show="item.inventorySystem.id">
-            <legend>##word.Purchases##</legend>
+          </div> -->
+          <fieldset>
+            <!-- <legend></legend> -->
             <div class="table-responsive">
               <table class="table hover bold">
                 <tr>
@@ -901,7 +901,7 @@
                   <th>##word.Account Guide##</th>
                 </tr>
 
-                <tr ng-repeat="acc in item.establishingParchaseAccountsList" ng-hide="acc.$hide">
+                <tr ng-repeat="acc in item.establishingAccountsList" ng-hide="acc.$hide">
                   <td>
                     <p class="text-center">{{acc.nameAr}} - {{acc.nameEn}}</p>
                   </td>
@@ -914,27 +914,7 @@
             </div>
           </fieldset>
 
-          <fieldset ng-show="item.inventorySystem.id">
-            <legend>##word.Sales##</legend>
-            <div class="table-responsive">
-              <table class="table hover bold">
-                <tr>
-                  <th>##word.Name##</th>
-                  <th>##word.Account Guide##</th>
-                </tr>
-
-                <tr ng-repeat="acc in item.establishingSalesAccountsList" ng-hide="acc.$hide">
-                  <td>
-                    <p class="text-center">{{acc.nameAr}} - {{acc.nameEn}}</p>
-                  </td>
-
-                  <td class="center">
-                    <i-list items="accountsGuideList" ng-search="acc.$accountGuides" display="name##session.lang##" ng-model="acc.accountGuide"> </i-list>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </fieldset>
+       
         </div>
       </div>
     </div>

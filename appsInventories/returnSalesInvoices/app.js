@@ -226,7 +226,6 @@ module.exports = function init(site) {
         _data.addApprovedInfo = req.getUserFinger();
 
         if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-          
           if (!_data.paymentType || !_data.paymentType.id) {
             response.error = 'Must Select Payment Type';
             res.json(response);
@@ -236,22 +235,7 @@ module.exports = function init(site) {
             res.json(response);
             return;
           }
-          let obj = {
-            date: new Date(),
-            voucherType: site.vouchersTypes[3],
-            invoiceId: _data.id,
-            invoiceCode: _data.code,
-            total: _data.amountPaid,
-            safe: _data.safe,
-            customer: _data.customer,
-            patient: _data.patient,
-            paymentType: _data.paymentType,
-            addUserInfo: _data.approvedUserInfo,
-            company: _data.company,
-            branch: _data.branch,
-          };
           _data.remainPaid = _data.totalNet - _data.amountPaid;
-          site.addExpenseVouchers(obj);
         } else {
           _data.remainPaid = _data.totalNet;
         }
@@ -261,12 +245,15 @@ module.exports = function init(site) {
             response.done = true;
             const salesInvoicesApp = site.getApp('salesInvoices');
             salesInvoicesApp.$collection.update({ where: { id: _data.invoiceId, code: _data.invoiceCode }, set: { hasReturnTransaction: true } });
+  
             let objJournal = {
               code: result.doc.code,
-              image: result.doc.image,
               appName: app.name,
               totalNet: result.doc.totalNet,
-              userInfo: result.doc.addApprovedInfo,
+              totalDiscounts: result.doc.totalDiscounts,
+              totalVat: result.doc.totalVat,
+              totalAverageCost: 0,
+              userInfo: result.doc.addUserInfo,
             };
 
             result.doc.itemsList.forEach((_item) => {
@@ -282,7 +269,23 @@ module.exports = function init(site) {
               item.orderCode = result.doc.code;
               site.setItemCard(item, app.name);
             });
-
+            if (result.doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+              let objVoucher = {
+                date: new Date(),
+                voucherType: site.vouchersTypes[3],
+                invoiceId: result.doc.id,
+                invoiceCode: result.doc.code,
+                total: result.doc.amountPaid,
+                safe: result.doc.safe,
+                customer: result.doc.customer,
+                patient: result.doc.patient,
+                paymentType: result.doc.paymentType,
+                addUserInfo: result.doc.approvedUserInfo,
+                company: result.doc.company,
+                branch: result.doc.branch,
+              };
+              site.addExpenseVouchers(objVoucher);
+            }
             if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
               site.sendRasdData({
                 rasdUser: result.doc.store.rasdUser,
@@ -291,18 +294,22 @@ module.exports = function init(site) {
                 items: result.doc.itemsList,
               });
             }
-
             if (result.doc.salesType.code == 'patient') {
               objJournal.customer = result.doc.patient;
+              site.hasSalesDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
             }
-
-            // else if (result.doc.salesType.code == 'company') {
-            //     objJournal.customer = result.doc.customer;
-            // } else if (result.doc.salesType.code == 'customer') {
-            //     objJournal.customer = result.doc.customer;
-            // }
-
-            // site.autoJournalEntrySalesInvoice(req.session, objJournal);
+            if (result.doc.salesType.code == 'er') {
+              objJournal.customer = result.doc.patient;
+              site.hasErDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
+            } else if (result.doc.salesType.code == 'company') {
+              objJournal.customer = result.doc.customer;
+            } else if (result.doc.salesType.code == 'customer') {
+              objJournal.customer = result.doc.customer;
+            }
+            objJournal.nameAr = 'مرتجع مبيعات' + result.doc.code;
+            objJournal.nameEn = 'Return sales Invoice' + result.doc.code;
+            objJournal.session = req.session;
+            site.autoJournalEntry(objJournal);
             response.result = result;
           } else {
             response.error = err.message;

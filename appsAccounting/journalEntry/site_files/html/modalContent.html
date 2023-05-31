@@ -34,8 +34,8 @@
           ng-model="item.$accountGuide"
         >
         </i-list>
-        <i-control type="number" class="col2" label="##word.Debtor##" ng-change="item.$accountGuide.creditor = 0" ng-model="item.$accountGuide.debtor"></i-control>
-        <i-control type="number" class="col2" label="##word.Creditor##" ng-change="item.$accountGuide.debtor = 0" ng-model="item.$accountGuide.creditor"></i-control>
+        <i-control type="number" class="col2" label="##word.Debtor## / ##word.$##" ng-change="item.$accountGuide.creditor = 0" ng-model="item.$accountGuide.debtor"></i-control>
+        <i-control type="number" class="col2" label="##word.Creditor## / ##word.$##" ng-change="item.$accountGuide.debtor = 0" ng-model="item.$accountGuide.creditor"></i-control>
         <div class="col2">
           <br />
           <i-button type="push" ng-click="addAccountGuide()"></i-button>
@@ -47,8 +47,8 @@
         <tr>
           <th>##word.Code##</th>
           <th>##word.Account Name##</th>
-          <th>##word.Debtor##</th>
-          <th>##word.Creditor##</th>
+          <th>##word.Debtor##  / ##word.$##</th>
+          <th>##word.Creditor##  / ##word.$##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
         <tr ng-repeat="acc in item.accountsList">
@@ -68,11 +68,11 @@
   <br />
   <div class="row padding">
     <fieldset class="col4">
-      <p class="bold font-25 center">##word.Total Debtor## : {{item.totalDebtor}}</p>
+      <p class="bold font-25 center">##word.Total Debtor## : {{item.totalDebtor| xmoney2}} <span class="currency">##word.$##</span></p>
     </fieldset>
     <div class="col1"></div>
     <fieldset class="col4">
-      <p class="bold font-25 center">##word.Total Creditor## : {{item.totalCreditor}}</p>
+      <p class="bold font-25 center">##word.Total Creditor## : {{item.totalCreditor| xmoney2}} <span class="currency">##word.$##</span></p>
     </fieldset>
   </div>
 </div>

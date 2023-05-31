@@ -715,7 +715,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.doctorsList = [];
     where = where || {};
-    where[active] = true;
+    where['active'] = true;
     where['type.id'] = 8;
     $http({
       method: 'POST',

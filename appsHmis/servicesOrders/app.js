@@ -259,6 +259,7 @@ module.exports = function init(site) {
                 company: doc.company,
                 branch: doc.branch,
               };
+              objVoucher.session = req.session;
               site.addReceiptVouchers(objVoucher, (callback) => {
                 response.receiptVoucherDoc = callback;
                 res.json(response);
@@ -475,6 +476,7 @@ module.exports = function init(site) {
           branch: result.doc.branch,
         };
 
+        objVoucher.session = req.session;
         site.addReceiptVouchers(objVoucher, (callback) => {
           response.receiptVoucherDoc = callback;
           res.json(response);

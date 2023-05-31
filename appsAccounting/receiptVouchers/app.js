@@ -170,7 +170,7 @@ module.exports = function init(site) {
         if (!_data.date) {
           _data.date = new Date();
         }
-        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn'|| _data.voucherType.id == 'offersOrders') {
+        if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn' || _data.voucherType.id == 'offersOrders') {
           if (site.toNumber(_data.total) > site.toNumber(_data.$remainPaid)) {
             response.error = 'The amount paid is greater than the remaining invoice amount ';
             res.json(response);
@@ -208,11 +208,23 @@ module.exports = function init(site) {
               site.changeRemainPaidSalesInvoices(obj);
             } else if (doc.voucherType.id == 'purchaseReturn') {
               site.changeRemainPaidReturnPurchases(obj);
-            }else if (doc.voucherType.id == 'offersOrders') {
+            } else if (doc.voucherType.id == 'offersOrders') {
               site.changeRemainPaidOffersOrders(obj);
             }
 
             site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
+
+            let objJournal = {
+              code: doc.code,
+              appName: app.name,
+              totalNet: doc.total,
+              userInfo: doc.addUserInfo,
+            };
+            obj.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + doc.code;
+            obj.nameEn = 'Receipt Vouchers'  + ' ' + doc.voucherType.nameEn + doc.code;
+            obj.session = req.session;
+            obj.voucherType = doc.voucherType;
+            site.autoJournalEntryVoucher(objJournal);
           } else {
             response.error = err.mesage;
           }
@@ -322,6 +334,18 @@ module.exports = function init(site) {
     if (obj.code) {
       app.add(obj, (err, doc) => {
         if (!err) {
+          let objJournal = {
+            code: doc.code,
+            appName: app.name,
+            totalNet: doc.total,
+            userInfo: doc.addUserInfo,
+          };
+          obj.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + doc.code;
+          obj.nameEn = 'Receipt Vouchers'  + ' ' + doc.voucherType.nameEn + doc.code;
+          obj.session = req.session;
+          obj.voucherType = doc.voucherType;
+          site.autoJournalEntryVoucher(objJournal);
+
           site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });
           if (callback) {
             callback(doc);

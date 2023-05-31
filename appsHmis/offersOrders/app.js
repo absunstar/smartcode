@@ -212,6 +212,7 @@ module.exports = function init(site) {
                 company: doc.company,
                 branch: doc.branch,
               };
+              obj.session = req.session;
               site.addReceiptVouchers(obj);
             }
           } else {

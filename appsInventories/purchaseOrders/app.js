@@ -391,6 +391,16 @@ module.exports = function init(site) {
           app.update(_data, (err, result) => {
             if (!err) {
               response.done = true;
+              let objJournal = {
+                code: result.doc.code,
+                appName: app.name,
+                totalNet: result.doc.totalNet,
+                totalDiscounts: result.doc.totalDiscounts,
+                totalVat: result.doc.totalVat,
+                totalAverageCost: 0,
+                userInfo: result.doc.addUserInfo,
+              };
+
               result.doc.itemsList.forEach((_item) => {
                 let item = { ..._item };
                 item.store = { ...result.doc.store };
@@ -413,16 +423,10 @@ module.exports = function init(site) {
                 });
               }
 
-              let obj = {
-                vendor: result.doc.vendor,
-                code: result.doc.code,
-                image: result.doc.image,
-                appName: app.name,
-                totalNet: result.doc.totalNet,
-                userInfo: result.doc.approvedUserInfo,
-              };
-
-              // site.autoJournalEntry(req.session, obj);
+              objJournal.nameAr = 'أمر شراء' + result.doc.code;
+              objJournal.nameEn = 'Purchase Order' + result.doc.code;
+              objJournal.session = req.session;
+              site.autoJournalEntry(objJournal);
 
               response.result = result;
             } else {

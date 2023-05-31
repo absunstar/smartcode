@@ -258,6 +258,7 @@ module.exports = function init(site) {
             obj.total = result.doc.total - result.doc.safe.totalBalance;
 
             if (obj.total > 0) {
+              obj.session = req.session;
               site.addReceiptVouchers({ ...obj, safe: result.doc.safe });
             } else {
               site.addExpenseVouchers({ ...obj, safe: result.doc.safe });

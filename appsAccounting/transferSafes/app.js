@@ -268,6 +268,7 @@ module.exports = function init(site) {
               company: result.doc.company,
               branch: result.doc.branch,
             };
+            obj.session = req.session;
             site.addReceiptVouchers({ ...obj, safe: result.doc.toSafe });
             site.addExpenseVouchers({ ...obj, safe: result.doc.safe });
           } else {

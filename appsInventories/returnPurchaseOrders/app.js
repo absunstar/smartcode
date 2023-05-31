@@ -258,6 +258,7 @@ module.exports = function init(site) {
               branch: _data.branch,
             };
             _data.remainPaid = _data.totalNet - _data.amountPaid;
+            obj.session = req.session;
             site.addReceiptVouchers(obj);
           } else {
             _data.remainPaid = _data.totalNet;
@@ -270,6 +271,7 @@ module.exports = function init(site) {
               const purchaseOrdersApp = site.getApp('purchaseOrders');
               purchaseOrdersApp.$collection.update({ where: { id: _data.invoiceId, code: _data.invoiceCode }, set: { hasReturnTransaction: true } });
 
+              
               result.doc.itemsList.forEach((_item) => {
                 let item = { ..._item };
                 item.store = { ...result.doc.store };
@@ -291,16 +293,18 @@ module.exports = function init(site) {
                   items: result.doc.itemsList,
                 });
               }
-
-              let obj = {
-                vendor: result.doc.vendor,
+              let objJournal = {
                 code: result.doc.code,
-                image: result.doc.image,
                 appName: app.name,
                 totalNet: result.doc.totalNet,
-                userInfo: result.doc.addApprovedInfo,
+                totalDiscounts: result.doc.totalDiscounts,
+                totalVat: result.doc.totalVat,
+                userInfo: result.doc.addUserInfo,
               };
-              //   site.autoJournalEntry(req.session, obj);
+              objJournal.nameAr = 'مرتجع شراء' + result.doc.code;
+              objJournal.nameEn = 'Return Purchase' + result.doc.code;
+              objJournal.session = req.session;
+              site.autoJournalEntry(objJournal);
               response.result = result;
             } else {
               response.error = err.message;
