@@ -108,7 +108,6 @@ module.exports = function init(site) {
 
   site.getBranch = function (req) {
     let branch = req.session.branch;
-    console.log(site.defaultCompany);
     return branch || site.defaultCompany.branchList[0];
   };
 
