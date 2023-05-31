@@ -36,6 +36,7 @@ app.controller('reorderLimits', function ($scope, $http, $timeout) {
             }
         );
     };
+
     $scope.getStoresItems = function () {
         $scope.error = '';
 
@@ -149,6 +150,7 @@ app.controller('reorderLimits', function ($scope, $http, $timeout) {
             }
         );
     };
+    
     $scope.getStores();
     // $scope.getStoresItems();
 });

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "attendanceReportAdmin",
+        "En": "Attendance Report Admin",
+        "Ar": "تقرير الحضور والإنصراف",
+        "permissions": ["attendanceReportManage"]
+    }
+]
