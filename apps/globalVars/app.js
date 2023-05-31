@@ -346,7 +346,7 @@ module.exports = function init(site) {
   ];
 
   site.employeesEvaluationTypes = [
-    { id: 1, code: 'boolean', nameEn: 'Boolean', nameAr: 'نعم /لا' },
+    { id: 1, code: 'boolean', nameEn: 'Yes / No', nameAr: 'نعم / لا' },
     { id: 2, code: 'string', nameEn: 'String', nameAr: 'نص' },
     { id: 3, code: 'list', nameEn: 'List', nameAr: 'قائمة' },
     { id: 4, code: 'degree', nameEn: 'Degree', nameAr: 'درجة' },

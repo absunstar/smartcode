@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "evaluationItemsAdmin",
+        "En": "Evaluation Items Admin",
+        "Ar": "إدارة بنود تقييم الموظفين",
+        "permissions": ["evaluationItemsManage"]
+    }
+]

@@ -1,0 +1,12 @@
+[
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "evaluationItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "evaluationItems", "name": "importVvaluationItems", "En": "Import", "Ar": "إستيراد" }
+]

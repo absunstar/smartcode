@@ -124,7 +124,8 @@
       "safesAdjustingManage",
       "lowestSellingItemsManage",
       "packagesManage",
-      "attendanceReportAdmin"
+      "attendanceReportAdmin",
+      "evaluationItemsAdmin"
     ]
   }
 ]
