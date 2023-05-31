@@ -1,6 +1,6 @@
 module.exports = function init(site) {
   let app = {
-    name: 'evaluationItems',
+    name: 'evaluationTemplates',
     allowMemory: false,
     memoryList: [],
     allowCache: false,
@@ -144,7 +144,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Evaluation Items' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Evaluation Templates' }, { parser: 'html', compres: true });
         }
       );
     }
@@ -284,7 +284,6 @@ module.exports = function init(site) {
           if (!search) {
             search = 'id';
           }
-
           let list = app.memoryList
             .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
             .slice(0, limit);
@@ -348,7 +347,7 @@ module.exports = function init(site) {
                     code: systemCode,
                     nameAr,
                     nameEn,
-                    image: { url: '/images/evaluationItems.png' },
+                    image: { url: '/images/evaluationTemplates.png' },
                     active: true,
                   };
 

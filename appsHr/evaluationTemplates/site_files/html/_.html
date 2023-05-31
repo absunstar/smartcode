@@ -1,0 +1,49 @@
+<div ng-controller="evaluationTemplates" class="loaded">
+  <div class="row" x-permissions="evaluationTemplatesUi || evaluationTemplatesManage">
+    <div x-import="evaluationTemplates/modal.html"></div>
+    <div x-import="evaluationTemplates/modalSearch.html"></div>
+
+    <div class="top-actions">
+      <i-button type="add" x-permissions="evaluationTemplatesAdd || evaluationTemplatesManage" label="##word.New##" ng-click="showAdd()"></i-button>
+      <i-upload api="api/evaluationTemplates/import" on-uploaded="afterCompleteImport()" label="Import" x-permissions="importevaluationTemplates || evaluationTemplatesManage"></i-upload>
+
+      <i-button type="search" x-permissions="evaluationTemplatesSearch || evaluationTemplatesManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+      <i-button type="search" x-permissions="evaluationTemplatesSearch || evaluationTemplatesManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+    </div>
+    <div class="row padding">
+      <i-control ng-model="$search" x-permissions="evaluationTemplatesSearch || evaluationTemplatesManage"></i-control>
+    </div>
+    <div class="table-responsive">
+      <table class="table hover bold" id="vacations-names">
+        <tr>
+          <th class="w150">##word.Logo##</th>
+          <th>##word.Code##</th>
+          <th>##word.Name##</th>
+          <th>##word.Status##</th>
+          <th class="not-print">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="item in list | filter:$search">
+          <td>
+            <i-image view class="logo center" ng-model="item.image"></i-image>
+          </td>
+          <td class="center blue">{{item.code}}</td>
+          <td class="center">{{item.name##session.lang##}}</td>
+          <td class="center">
+            <span class="text-success" ng-show="item.active">##word.Active##</span>
+            <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
+          </td>
+
+          <td class="center not-print">
+            <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+
+            <i-button type="edit" x-permissions="evaluationTemplatesUpdate || evaluationTemplatesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+
+            <i-button type="delete" x-permissions="evaluationTemplatesDelete || evaluationTemplatesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <i-button x-permissions="evaluationTemplatesPrint || evaluationTemplatesManage" type="print" label="##word.Print##" onclick="site.print('#vacations-names')"></i-button>
+    <i-button x-permissions="evaluationTemplatesExport || evaluationTemplatesManage" type="export" label="##word.Export to excel##" onclick="site.export('#vacations-names')"> </i-button>
+  </div>
+</div>

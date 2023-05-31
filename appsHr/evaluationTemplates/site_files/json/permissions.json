@@ -1,0 +1,11 @@
+[
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "evaluationTemplates", "name": "evaluationTemplatesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

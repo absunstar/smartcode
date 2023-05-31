@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "hr",
+        "name": "evaluationTemplatesAdmin",
+        "En": "Evaluation Templates Admin",
+        "Ar": "إدارة قوالب تقييم الموظفين",
+        "permissions": ["evaluationTemplatesManage"]
+    }
+]

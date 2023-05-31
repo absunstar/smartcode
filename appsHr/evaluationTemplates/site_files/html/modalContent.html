@@ -8,11 +8,11 @@
         </div>
         <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-        <i-control type="text" v="r" ng-model="item.key" label="##word.ke['No Space - English Only']##"></i-control>
-        <i-list label="##word.Evaluation Type##" ng-model="item.evaluationType" display="name##session.lang##" items="employeesEvaluationTypesList" ng-search="item.$evaluationType"></i-list>
-
-        <i-control ng-show="item.evaluationType && item.evaluationType.id === 4" type="number" class="col6" ng-model="item.min" label="##word.Min Degree##"></i-control>
-        <i-control ng-show="item.evaluationType && item.evaluationType.id === 4" type="number" class="col6" ng-model="item.max" label="##word.Max Degree##"></i-control>
+        <i-list label="##word.Evaluation Item##" class="col9" ng-model="item.evaluationItem" display="name##session.lang##" items="evaluationItemsList" ng-search="item.$evaluationItem"></i-list>
+        <div class="col3">
+          <br />
+          <i-button type="push" ng-click="addControlToTemplate(item.evaluationItem)"></i-button>
+        </div>
       </div>
     </div>
     <div class="col3 center">

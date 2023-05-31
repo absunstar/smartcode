@@ -649,5 +649,11 @@
     "feature": "public",
     "id": "evaluationItems",
     "name": "evaluationItems"
+  },
+  {
+    "category": "hr",
+    "feature": "public",
+    "id": "evaluationTemplates",
+    "name": "evaluationTemplates"
   }
 ]
