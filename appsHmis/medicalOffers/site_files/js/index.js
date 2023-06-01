@@ -231,6 +231,7 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
                     code: 1,
                     cashPriceOut: 1,
                     vat: 1,
+                    cost: 1,
                 },
                 search: $search,
             },

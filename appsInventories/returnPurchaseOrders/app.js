@@ -253,7 +253,7 @@ module.exports = function init(site) {
               total: _data.amountPaid,
               safe: _data.safe,
               paymentType: _data.paymentType,
-              addUserInfo: _data.approvedUserInfo,
+              addUserInfo: _data.addApprovedInfo,
               company: _data.company,
               branch: _data.branch,
             };
@@ -299,7 +299,7 @@ module.exports = function init(site) {
                 totalNet: result.doc.totalNet,
                 totalDiscounts: result.doc.totalDiscounts,
                 totalVat: result.doc.totalVat,
-                userInfo: result.doc.addUserInfo,
+                userInfo: result.doc.addApprovedInfo,
               };
               objJournal.nameAr = 'مرتجع شراء' + result.doc.code;
               objJournal.nameEn = 'Return Purchase' + result.doc.code;

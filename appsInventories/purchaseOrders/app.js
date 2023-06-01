@@ -383,6 +383,7 @@ module.exports = function init(site) {
               branch: _data.branch,
             };
             _data.remainPaid = _data.totalNet - _data.amountPaid;
+            obj.session = req.session;
             site.addExpenseVouchers(obj);
           } else {
             _data.remainPaid = _data.totalNet;

@@ -217,13 +217,14 @@ module.exports = function init(site) {
             let objJournal = {
               code: doc.code,
               appName: app.name,
+              safe: doc.safe,
               totalNet: doc.total,
               userInfo: doc.addUserInfo,
             };
-            obj.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + doc.code;
-            obj.nameEn = 'Receipt Vouchers'  + ' ' + doc.voucherType.nameEn + doc.code;
-            obj.session = req.session;
-            obj.voucherType = doc.voucherType;
+            objJournal.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + doc.code;
+            objJournal.nameEn = 'Receipt Vouchers' + ' ' + doc.voucherType.nameEn + doc.code;
+            objJournal.session = req.session;
+            objJournal.voucherType = doc.voucherType;
             site.autoJournalEntryVoucher(objJournal);
           } else {
             response.error = err.mesage;
@@ -337,13 +338,14 @@ module.exports = function init(site) {
           let objJournal = {
             code: doc.code,
             appName: app.name,
+            safe: doc.safe,
             totalNet: doc.total,
             userInfo: doc.addUserInfo,
           };
-          obj.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + doc.code;
-          obj.nameEn = 'Receipt Vouchers'  + ' ' + doc.voucherType.nameEn + doc.code;
-          obj.session = req.session;
-          obj.voucherType = doc.voucherType;
+          objJournal.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + doc.code;
+          objJournal.nameEn = 'Receipt Vouchers' + ' ' + doc.voucherType.nameEn + doc.code;
+          objJournal.voucherType = doc.voucherType;
+          objJournal.session = { company: obj.company };
           site.autoJournalEntryVoucher(objJournal);
 
           site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });

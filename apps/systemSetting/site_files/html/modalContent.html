@@ -377,9 +377,9 @@
             <div class="row">
               <i-checkbox ng-model="item.storesSetting.workFifo" class="col3" label="##word.Sale By Fifo##"></i-checkbox>
             </div>
-            <div class="row">
+          <!--   <div class="row">
               <i-checkbox ng-model="item.storesSetting.taxesAppearingInInvoices" class="col3" label="##word.Taxes appearing in invoices##"></i-checkbox>
-            </div>
+            </div> -->
           </fieldset>
         </div>
 
@@ -879,9 +879,10 @@
         </div>
 
         <div id="establishingAccountsSettings" class="tab-content">
-          <!-- <div class="row">
+          <div class="row">
             <fieldset class="col4">
-              <i-list
+              <i-checkbox label="##word.Auto Journal Entry##" ng-model="item.autoJournal"> </i-checkbox>
+              <!--   <i-list
                 ng-model="item.inventorySystem"
                 ng-change="selectInventorySystem()"
                 items="inventorySystemList"
@@ -889,9 +890,9 @@
                 label="Inventory System نظام الجرد"
                 ng-search="item.$inventorySystem"
               >
-              </i-list>
+              </i-list> -->
             </fieldset>
-          </div> -->
+          </div>
           <fieldset>
             <!-- <legend></legend> -->
             <div class="table-responsive">
@@ -907,7 +908,7 @@
                   </td>
 
                   <td class="center">
-                    <i-list items="accountsGuideList" ng-search="acc.$accountGuides" display="name##session.lang##" ng-model="acc.accountGuide"> </i-list>
+                    <i-list items="acc.$accountsGuideList" ng-get="getAccountsGuideList($search,acc)" display="name##session.lang##" ng-model="acc.accountGuide"> </i-list>
                   </td>
                 </tr>
               </table>

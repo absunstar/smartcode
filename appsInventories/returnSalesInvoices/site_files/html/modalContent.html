@@ -149,7 +149,7 @@
     </fieldset>
   </div>
 
-  <fieldset ng-show="item.invoiceType.id == 1 && canApprove && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
+  <fieldset ng-show="item.invoiceType.id == 1 && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
     <div class="row">
       <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
       <i-control class="col2"  type="number" disabled label="##word.Amount Paid##" ng-model="item.amountPaid"> </i-control>

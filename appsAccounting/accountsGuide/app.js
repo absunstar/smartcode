@@ -384,6 +384,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
+        let search = req.body.search || '';
         let select = req.body.select || {
           id: 1,
           code: 1,
@@ -402,8 +403,11 @@ module.exports = function init(site) {
           generalLedgerList: 1,
         };
         let list = [];
+        if (!search) {
+          search = 'id';
+        }
         app.memoryList
-          .filter((g) => (!where['type'] || g.type == where['type']) && g.company && g.company.id == site.getCompany(req).id)
+          .filter((g) => (!where['type'] || g.type == where['type']) && g.company && g.company.id == site.getCompany(req).id && JSON.stringify(g).contains(search))
           .forEach((doc) => {
             let obj = { ...doc };
 

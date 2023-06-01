@@ -166,7 +166,18 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
+          $scope.getSafes(response.data.doc.paymentType);
           $scope.item = response.data.doc;
+          if ($scope.setting.accountsSetting.currency) {
+            site.strings['currency'] = {
+              Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+            };
+            site.strings['from100'] = {
+              Ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+            };
+          }
         } else {
           $scope.error = response.data.error;
         }

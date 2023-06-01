@@ -1,22 +1,17 @@
 <div class="row">
   <div class="row">
-    <div class="col10">
-      <div class="row">
-        <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
-        <i-date type="text" v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
-        <div class="col3">
-          <br />
-          <i-checkbox ng-model="item.active" class="row" label="##word.Active##"></i-checkbox>
-          <i-checkbox ng-model="item.openingBalance" class="row" label="##word.Opening Balance##"></i-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <i-control type="text" v="r" class="col6" ng-model="item.nameEn" label="##word.Name##"></i-control>
-        <i-control type="text" v="r" class="col6" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+    <div class="row">
+      <i-control ng-hide="disabledCode" class="col3" label="##word.Code##" ng-model="item.code"> </i-control>
+      <i-date type="text" v="r" class="col6" ng-model="item.date" label="##word.Date##"></i-date>
+      <div class="col3">
+        <br />
+        <i-checkbox ng-model="item.active" class="row" label="##word.Active##"></i-checkbox>
+        <i-checkbox ng-model="item.openingBalance" class="row" label="##word.Opening Balance##"></i-checkbox>
       </div>
     </div>
-    <div class="col2">
-      <i-image class="img128 center" ng-model="item.image"></i-image>
+    <div class="row">
+      <i-control type="text" v="r" class="col6" ng-model="item.nameEn" label="##word.Name##"></i-control>
+      <i-control type="text" v="r" class="col6" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
     </div>
   </div>
   <br />
@@ -29,7 +24,7 @@
           ng-change="item.$accountGuide.debtor = 0;item.$accountGuide.creditor = 0"
           class="col4"
           label="##word.Account Guide##"
-          ng-search="item.$accountGuides"
+          ng-get="getAccountsGuideList($search)"
           display="name##session.lang##"
           ng-model="item.$accountGuide"
         >
@@ -47,8 +42,8 @@
         <tr>
           <th>##word.Code##</th>
           <th>##word.Account Name##</th>
-          <th>##word.Debtor##  / ##word.$##</th>
-          <th>##word.Creditor##  / ##word.$##</th>
+          <th>##word.Debtor## / ##word.$##</th>
+          <th>##word.Creditor## / ##word.$##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
         <tr ng-repeat="acc in item.accountsList">

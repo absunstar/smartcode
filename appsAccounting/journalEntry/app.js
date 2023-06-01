@@ -307,7 +307,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1 };
+        let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, totalDebtor: 1, totalCreditor: 1 };
         let limit = req.body.limit || 50;
         let list = [];
         if (app.allowMemory) {
@@ -355,314 +355,392 @@ module.exports = function init(site) {
   }
 
   site.autoJournalEntry = function (obj) {
-    let establishingAccountsList = site.getSystemSetting({ session }).establishingAccountsList;
-    if (establishingAccountsList) {
-      let numObj = {
-        company: site.getCompany({ session: obj.session }),
-        screen: app.name,
-        date: new Date(),
-      };
+    let autoJournal = site.getSystemSetting({ session: obj.session }).autoJournal;
+    if (autoJournal) {
+      let establishingAccountsList = site.getSystemSetting({ session: obj.session }).establishingAccountsList;
+      if (establishingAccountsList) {
+        let numObj = {
+          company: site.getCompany({ session: obj.session }),
+          screen: app.name,
+          date: new Date(),
+        };
 
-      let journalEntry = {
-        date: new Date(),
-        active: true,
-        totalDebtor: 0,
-        totalCreditor: 0,
-        accountsList: [],
-        company: site.getCompany({ session }),
-        branch: site.getBranch({ session }),
-        addUserInfo: obj.userInfo,
-      };
+        let journalEntry = {
+          date: new Date(),
+          active: true,
+          totalDebtor: 0,
+          totalCreditor: 0,
+          accountsList: [],
+          nameAr: obj.nameAr,
+          nameEn: obj.nameEn,
+          company: site.getCompany({ session: obj.session }),
+          branch: site.getBranch({ session: obj.session }),
+          addUserInfo: obj.userInfo,
+        };
 
-      let cb = site.getNumbering(numObj);
-      if (!journalEntry.code && !cb.auto) {
-        response.error = 'Must Enter Code';
-        return;
-      } else if (cb.auto) {
-        journalEntry.code = cb.code;
+        let cb = site.getNumbering(numObj);
+        if (!journalEntry.code && !cb.auto) {
+          response.error = 'Must Enter Code';
+          return;
+        } else if (cb.auto) {
+          journalEntry.code = cb.code;
+        }
+
+        establishingAccountsList.forEach((_acc) => {
+          if (_acc.accountGuide && _acc.accountGuide.id) {
+            if (obj.appName === 'purchaseOrders' || obj.appName === 'returnPurchaseOrders') {
+              if (_acc.id == 'stores') {
+                let total = obj.totalNet + obj.totalDiscounts - (obj.totalVat || 0);
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'purchaseOrders' ? 'debtor' : 'creditor',
+                  debtor: obj.appName === 'purchaseOrders' ? total : 0,
+                  creditor: obj.appName === 'purchaseOrders' ? 0 : total,
+                };
+                if (obj.appName === 'purchaseOrders') {
+                  journalEntry.totalDebtor += total;
+                } else {
+                  journalEntry.totalCreditor += total;
+                }
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'purchaseTax' && obj.totalVat > 0) {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'purchaseOrders' ? 'debtor' : 'creditor',
+                  debtor: obj.appName === 'purchaseOrders' ? obj.totalVat : 0,
+                  creditor: obj.appName === 'purchaseOrders' ? 0 : obj.totalVat,
+                };
+                if (obj.appName === 'purchaseOrders') {
+                  journalEntry.totalDebtor += obj.totalVat;
+                } else {
+                  journalEntry.totalCreditor += obj.totalVat;
+                }
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'vendors') {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'purchaseOrders' ? 'creditor' : 'debtor',
+                  creditor: obj.appName === 'purchaseOrders' ? obj.totalNet : 0,
+                  debtor: obj.appName === 'purchaseOrders' ? 0 : obj.totalNet,
+                };
+                if (obj.appName === 'purchaseOrders') {
+                  journalEntry.totalCreditor += obj.totalNet;
+                } else {
+                  journalEntry.totalDebtor += obj.totalNet;
+                }
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'purshaseDiscount' && obj.totalDiscounts > 0) {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'purchaseOrders' ? 'creditor' : 'debtor',
+                  creditor: obj.appName === 'purchaseOrders' ? obj.totalDiscounts : 0,
+                  debtor: obj.appName === 'purchaseOrders' ? 0 : obj.totalDiscounts,
+                };
+                if (obj.appName === 'purchaseOrders') {
+                  journalEntry.totalCreditor += obj.totalDiscounts;
+                } else {
+                  journalEntry.totalDebtor += obj.totalDiscounts;
+                }
+                journalEntry.accountsList.push(acc);
+              }
+            } else if (obj.appName === 'salesInvoices' || obj.appName === 'returnSalesInvoices' || obj.appName === 'servicesOrders' || obj.appName === 'offersOrders') {
+              if (_acc.id == 'customers') {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'returnSalesInvoices' ? 'creditor' : 'debtor',
+                  debtor: obj.appName === 'returnSalesInvoices' ? 0 : obj.totalNet,
+                  creditor: obj.appName === 'returnSalesInvoices' ? obj.totalNet : 0,
+                };
+                if (obj.appName === 'returnSalesInvoices') {
+                  journalEntry.totalCreditor += obj.totalNet;
+                } else {
+                  journalEntry.totalDebtor += obj.totalNet;
+                }
+                journalEntry.accountsList.push(acc);
+              }
+              if (_acc.id == 'salesDiscount' && obj.totalDiscounts > 0) {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'returnSalesInvoices' ? 'creditor' : 'debtor',
+                  debtor: obj.appName === 'returnSalesInvoices' ? 0 : obj.totalDiscounts,
+                  creditor: obj.appName === 'returnSalesInvoices' ? obj.totalDiscounts : 0,
+                };
+                if (obj.appName === 'returnSalesInvoices') {
+                  journalEntry.totalCreditor += obj.totalDiscounts;
+                } else {
+                  journalEntry.totalDebtor += obj.totalDiscounts;
+                }
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'sales' && obj.appName === 'salesInvoices') {
+                let total = obj.totalNet + obj.totalDiscounts - (obj.totalVat || 0);
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: 'creditor',
+                  creditor: total,
+                  debtor: 0,
+                };
+                journalEntry.totalCreditor += total;
+
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'service' && (obj.appName === 'servicesOrders' || obj.appName === 'offersOrders')) {
+                let total = obj.totalNet + obj.totalDiscounts - (obj.totalVat || 0);
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: 'creditor',
+                  creditor: total,
+                  debtor: 0,
+                };
+                journalEntry.totalCreditor += total;
+
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'reSales' && obj.appName === 'returnSalesInvoices') {
+                let total = obj.totalNet + obj.totalDiscounts - (obj.totalVat || 0);
+
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: 'creditor',
+                  debtor: total,
+                  creditor: 0,
+                };
+                journalEntry.totalDebtor += total;
+
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'salesTax' && obj.totalVat > 0) {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'returnSalesInvoices' ? 'debtor' : 'creditor',
+                  creditor: obj.appName === 'returnSalesInvoices' ? 0 : obj.totalVat,
+                  debtor: obj.appName === 'returnSalesInvoices' ? obj.totalVat : 0,
+                };
+                if (obj.appName === 'returnSalesInvoices') {
+                  journalEntry.totalDebtor += obj.totalVat;
+                } else {
+                  journalEntry.totalCreditor += obj.totalVat;
+                }
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'inventorySalesCost') {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'returnSalesInvoices' ? 'creditor' : 'debtor',
+                  debtor: obj.appName === 'returnSalesInvoices' ? 0 : obj.totalAverageCost,
+                  creditor: obj.appName === 'returnSalesInvoices' ? obj.totalAverageCost : 0,
+                };
+                if (obj.appName === 'returnSalesInvoices') {
+                  journalEntry.totalCreditor += obj.totalAverageCost;
+                } else {
+                  journalEntry.totalDebtor += obj.totalAverageCost;
+                }
+                journalEntry.accountsList.push(acc);
+              } else if (_acc.id == 'stores') {
+                let acc = {
+                  id: _acc.accountGuide.id,
+                  code: _acc.accountGuide.code,
+                  nameAr: _acc.accountGuide.nameAr,
+                  nameEn: _acc.accountGuide.nameEn,
+                  side: obj.appName === 'returnSalesInvoices' ? 'creditor' : 'debtor',
+                  creditor: obj.appName === 'returnSalesInvoices' ? 0 : obj.totalAverageCost,
+                  debtor: obj.appName === 'returnSalesInvoices' ? obj.totalAverageCost : 0,
+                };
+                if (obj.appName === 'returnSalesInvoices') {
+                  journalEntry.totalDebtor += obj.totalAverageCost;
+                } else {
+                  journalEntry.totalCreditor += obj.totalAverageCost;
+                }
+                journalEntry.accountsList.push(acc);
+              }
+            }
+          }
+        });
+        app.add(journalEntry, (err, doc) => {});
       }
-
-      establishingAccountsList.forEach((_acc) => {
-        if (obj.appName === 'purchaseOrders' || obj.appName === 'returnPurchaseOrders') {
-          if (_acc.id == 2) {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: obj.appName === 'purchaseOrders' ? 'debtor' : 'creditor',
-              debtor: obj.appName === 'purchaseOrders' ? obj.totalNet - (obj.totalVat || 0) : 0,
-              creditor: obj.appName === 'purchaseOrders' ? 0 : obj.totalNet - (obj.totalVat || 0),
-            };
-            if (obj.appName === 'purchaseOrders') {
-              journalEntry.totalDebtor += obj.totalNet - (obj.totalVat || 0);
-            } else {
-              journalEntry.totalCreditor += obj.totalNet - (obj.totalVat || 0);
-            }
-            journalEntry.accountsList.push(acc);
-          } else if (_acc.id == 7 && obj.totalVat > 0) {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: obj.appName === 'purchaseOrders' ? 'debtor' : 'creditor',
-              debtor: obj.appName === 'purchaseOrders' ? obj.totalVat : 0,
-              creditor: obj.appName === 'purchaseOrders' ? 0 : obj.totalVat,
-            };
-            if (obj.appName === 'purchaseOrders') {
-              journalEntry.totalDebtor += obj.totalVat;
-            } else {
-              journalEntry.totalCreditor += obj.totalVat;
-            }
-            journalEntry.accountsList.push(acc);
-          }
-        }
-
-        if (obj.appName === 'salesInvoices' || obj.appName === 'returnSalesInvoices') {
-          if (_acc.id == 3) {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: obj.appName === 'salesInvoices' ? 'debtor' : 'creditor',
-              debtor: obj.appName === 'salesInvoices' ? obj.totalNet : 0,
-              creditor: obj.appName === 'salesInvoices' ? 0 : obj.totalNet,
-            };
-            if (obj.appName === 'salesInvoices') {
-              journalEntry.totalDebtor += obj.totalNet;
-            } else {
-              journalEntry.totalCreditor += obj.totalNet;
-            }
-            journalEntry.accountsList.push(acc);
-          } else if (_acc.id == 4 && obj.appName === 'salesInvoices') {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: 'creditor',
-              creditor: obj.totalNet - (obj.totalVat || 0),
-              debtor: 0,
-            };
-            journalEntry.totalCreditor += obj.totalVat || 0;
-
-            journalEntry.accountsList.push(acc);
-          } else if (_acc.id == 5 && obj.appName === 'returnSalesInvoices') {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: 'creditor',
-              debtor: obj.totalNet - (obj.totalVat || 0),
-              creditor: 0,
-            };
-            journalEntry.totalDebtor += obj.totalVat || 0;
-
-            journalEntry.accountsList.push(acc);
-          } else if (_acc.id == 6 && obj.totalVat > 0) {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: obj.appName === 'salesInvoices' ? 'creditor' : 'debtor',
-              creditor: obj.appName === 'salesInvoices' ? obj.totalVat : 0,
-              debtor: obj.appName === 'salesInvoices' ? 0 : obj.totalVat,
-            };
-            if (obj.appName === 'salesInvoices') {
-              journalEntry.totalCreditor += obj.totalVat;
-            } else {
-              journalEntry.totalDebtor += obj.totalVat;
-            }
-            journalEntry.accountsList.push(acc);
-          } else if (_acc.id == 8) {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: obj.appName === 'salesInvoices' ? 'debtor' : 'creditor',
-              debtor: obj.appName === 'salesInvoices' ? obj.totalAverageCost : 0,
-              creditor: obj.appName === 'salesInvoices' ? 0 : obj.totalAverageCost,
-            };
-            if (obj.appName === 'salesInvoices') {
-              journalEntry.totalDebtor += obj.totalAverageCost;
-            } else {
-              journalEntry.totalCreditor += obj.totalAverageCost;
-            }
-            journalEntry.accountsList.push(acc);
-          } else if (_acc.id == 2) {
-            let acc = {
-              id: _acc.accountGuide.id,
-              code: _acc.accountGuide.code,
-              nameAr: _acc.accountGuide.nameAr,
-              nameEn: _acc.accountGuide.nameEn,
-              side: obj.appName === 'salesInvoices' ? 'creditor' : 'debtor',
-              creditor: obj.appName === 'salesInvoices' ? obj.totalAverageCost - (obj.totalVat || 0) : 0,
-              debtor: obj.appName === 'salesInvoices' ? 0 : obj.totalAverageCost - (obj.totalVat || 0),
-            };
-            if (obj.appName === 'salesInvoices') {
-              journalEntry.totalCreditor += obj.totalAverageCost;
-            } else {
-              journalEntry.totalDebtor += obj.totalAverageCost;
-            }
-            journalEntry.accountsList.push(acc);
-          }
-        }
-      });
-      app.add(journalEntry, (err, doc) => {});
     }
   };
 
   site.autoJournalEntryVoucher = function (obj) {
-    let establishingAccountsList = site.getSystemSetting({ session }).establishingAccountsList;
-    if (establishingAccountsList) {
-      let numObj = {
-        company: site.getCompany({ session: obj.session }),
-        screen: app.name,
-        date: new Date(),
-      };
+    let autoJournal = site.getSystemSetting({ session: obj.session }).autoJournal;
+    if (autoJournal) {
+      let establishingAccountsList = site.getSystemSetting({ session: obj.session }).establishingAccountsList;
+      if (establishingAccountsList) {
+        let numObj = {
+          company: site.getCompany({ session: obj.session }),
+          screen: app.name,
+          date: new Date(),
+        };
 
-      let journalEntry = {
-        date: new Date(),
-        active: true,
-        totalDebtor: 0,
-        totalCreditor: 0,
-        accountsList: [],
-        company: site.getCompany({ session }),
-        branch: site.getBranch({ session }),
-        addUserInfo: obj.userInfo,
-      };
+        let journalEntry = {
+          date: new Date(),
+          active: true,
+          totalDebtor: 0,
+          totalCreditor: 0,
+          accountsList: [],
+          company: site.getCompany({ session: obj.session }),
+          branch: site.getBranch({ session: obj.session }),
+          nameAr: obj.nameAr,
+          nameEn: obj.nameEn,
+          addUserInfo: obj.userInfo,
+        };
 
-      let cb = site.getNumbering(numObj);
-      if (!journalEntry.code && !cb.auto) {
-        response.error = 'Must Enter Code';
-        return;
-      } else if (cb.auto) {
-        journalEntry.code = cb.code;
-      }
-
-      establishingAccountsList.forEach((_acc) => {
-        if (obj.voucherType.id === 'salesInvoice' || obj.voucherType.id === 'salesReturn') {
-          if (obj.safe && obj.safe.type) {
-            if (obj.safe.type.id == 1) {
-              if (_acc.id == 11) {
-                let ac = {
-                  id: _acc.accountGuide.id,
-                  code: _acc.accountGuide.code,
-                  nameAr: _acc.accountGuide.nameAr,
-                  nameEn: _acc.accountGuide.nameEn,
-                  side: obj.voucherType.id === 'salesInvoice' ? 'debtor' : 'creditor',
-                  debtor: obj.voucherType.id === 'salesInvoice' ? obj.totalNet : 0,
-                  creditor: obj.voucherType.id === 'salesInvoice' ? 0 : obj.totalNet,
-                };
-                if (obj.voucherType.id === 'salesInvoice') {
-                  journalEntry.totalDebtor += obj.totalNet;
-                } else {
-                  journalEntry.totalCreditor += obj.totalNet;
-                }
-                journalEntry.accountsList.push(ac);
-              }
-            } else if (obj.safe.type.id == 2) {
-              if (_acc.id == 12) {
-                let ac = {
-                  id: _acc.accountGuide.id,
-                  code: _acc.accountGuide.code,
-                  nameAr: _acc.accountGuide.nameAr,
-                  nameEn: _acc.accountGuide.nameEn,
-                  side: obj.voucherType.id === 'salesInvoice' ? 'debtor' : 'creditor',
-                  debtor: obj.voucherType.id === 'salesInvoice' ? obj.totalNet : 0,
-                  creditor: obj.voucherType.id === 'salesInvoice' ? 0 : obj.totalNet,
-                };
-                if (obj.voucherType.id === 'salesInvoice') {
-                  journalEntry.totalDebtor += obj.totalNet;
-                } else {
-                  journalEntry.totalCreditor += obj.totalNet;
-                }
-                journalEntry.accountsList.push(ac);
-              }
-            }
-            if (_acc.id == 3) {
-              let ac = {
-                id: _acc.accountGuide.id,
-                code: _acc.accountGuide.code,
-                nameAr: _acc.accountGuide.nameAr,
-                nameEn: _acc.accountGuide.nameEn,
-                side: obj.voucherType.id === 'salesInvoice' ? 'creditor' : 'debtor',
-                creditor: obj.voucherType.id === 'salesInvoice' ? obj.totalNet : 0,
-                debtor: obj.voucherType.id === 'salesInvoice' ? 0 : obj.totalNet,
-              };
-              if (obj.voucherType.id === 'salesInvoice') {
-                journalEntry.totalCreditor += obj.totalNet;
-              } else {
-                journalEntry.totalDebtor += obj.totalNet;
-              }
-              journalEntry.accountsList.push(ac);
-            }
-          }
-        } else if (obj.voucherType.id === 'purchaseInvoice' || obj.voucherType.id === 'purchaseReturn') {
-          if (obj.safe && obj.safe.type) {
-            if (obj.safe.type.id == 1) {
-              if (_acc.id == 11) {
-                let ac = {
-                  id: _acc.accountGuide.id,
-                  code: _acc.accountGuide.code,
-                  nameAr: _acc.accountGuide.nameAr,
-                  nameEn: _acc.accountGuide.nameEn,
-                  side: obj.voucherType.id === 'purchaseReturn' ? 'debtor' : 'creditor',
-                  debtor: obj.voucherType.id === 'purchaseReturn' ? obj.totalNet : 0,
-                  creditor: obj.voucherType.id === 'purchaseReturn' ? 0 : obj.totalNet,
-                };
-                if (obj.voucherType.id === 'purchaseReturn') {
-                  journalEntry.totalDebtor += obj.totalNet;
-                } else {
-                  journalEntry.totalCreditor += obj.totalNet;
-                }
-                journalEntry.accountsList.push(ac);
-              }
-            } else if (obj.safe.type.id == 2) {
-              if (_acc.id == 12) {
-                let ac = {
-                  id: _acc.accountGuide.id,
-                  code: _acc.accountGuide.code,
-                  nameAr: _acc.accountGuide.nameAr,
-                  nameEn: _acc.accountGuide.nameEn,
-                  side: obj.voucherType.id === 'purchaseReturn' ? 'debtor' : 'creditor',
-                  debtor: obj.voucherType.id === 'purchaseReturn' ? obj.totalNet : 0,
-                  creditor: obj.voucherType.id === 'purchaseReturn' ? 0 : obj.totalNet,
-                };
-                if (obj.voucherType.id === 'purchaseReturn') {
-                  journalEntry.totalDebtor += obj.totalNet;
-                } else {
-                  journalEntry.totalCreditor += obj.totalNet;
-                }
-                journalEntry.accountsList.push(ac);
-              }
-            }
-            if (_acc.id == 1) {
-              let ac = {
-                id: _acc.accountGuide.id,
-                code: _acc.accountGuide.code,
-                nameAr: _acc.accountGuide.nameAr,
-                nameEn: _acc.accountGuide.nameEn,
-                side: obj.voucherType.id === 'purchaseReturn' ? 'creditor' : 'debtor',
-                creditor: obj.voucherType.id === 'purchaseReturn' ? obj.totalNet : 0,
-                debtor: obj.voucherType.id === 'purchaseReturn' ? 0 : obj.totalNet,
-              };
-              if (obj.voucherType.id === 'purchaseReturn') {
-                journalEntry.totalCreditor += obj.totalNet;
-              } else {
-                journalEntry.totalDebtor += obj.totalNet;
-              }
-              journalEntry.accountsList.push(ac);
-            }
-          }
+        let cb = site.getNumbering(numObj);
+        if (!journalEntry.code && !cb.auto) {
+          response.error = 'Must Enter Code';
+          return;
+        } else if (cb.auto) {
+          journalEntry.code = cb.code;
         }
-      });
-      app.add(journalEntry, (err, doc) => {});
+        establishingAccountsList.forEach((_acc) => {
+          if (_acc.accountGuide && _acc.accountGuide.id) {
+            if (obj.voucherType.id === 'salesInvoice' || obj.voucherType.id === 'serviceOrder' || obj.voucherType.id === 'offersOrders' || obj.voucherType.id === 'salesReturn') {
+              if (obj.safe && obj.safe.type) {
+                if (obj.safe.type.id == 1) {
+                  if (_acc.id == 'box') {
+                    let ac = {
+                      id: _acc.accountGuide.id,
+                      code: _acc.accountGuide.code,
+                      nameAr: _acc.accountGuide.nameAr,
+                      nameEn: _acc.accountGuide.nameEn,
+                      side: obj.voucherType.id === 'salesReturn' ? 'creditor' : 'debtor',
+                      debtor: obj.voucherType.id === 'salesReturn' ? 0 : obj.totalNet,
+                      creditor: obj.voucherType.id === 'salesReturn' ? obj.totalNet : 0,
+                    };
+                    if (obj.voucherType.id === 'salesReturn') {
+                      journalEntry.totalCreditor += obj.totalNet;
+                    } else {
+                      journalEntry.totalDebtor += obj.totalNet;
+                    }
+                    journalEntry.accountsList.push(ac);
+                  }
+                } else if (obj.safe.type.id == 2) {
+                  if (_acc.id == 'bank') {
+                    let ac = {
+                      id: _acc.accountGuide.id,
+                      code: _acc.accountGuide.code,
+                      nameAr: _acc.accountGuide.nameAr,
+                      nameEn: _acc.accountGuide.nameEn,
+                      side: obj.voucherType.id === 'salesReturn' ? 'creditor' : 'debtor',
+                      debtor: obj.voucherType.id === 'salesReturn' ? 0 : obj.totalNet,
+                      creditor: obj.voucherType.id === 'salesReturn' ? obj.totalNet : 0,
+                    };
+                    if (obj.voucherType.id === 'salesReturn') {
+                      journalEntry.totalCreditor += obj.totalNet;
+                    } else {
+                      journalEntry.totalDebtor += obj.totalNet;
+                    }
+                    journalEntry.accountsList.push(ac);
+                  }
+                }
+                if (_acc.id == 'customers') {
+                  let ac = {
+                    id: _acc.accountGuide.id,
+                    code: _acc.accountGuide.code,
+                    nameAr: _acc.accountGuide.nameAr,
+                    nameEn: _acc.accountGuide.nameEn,
+                    side: obj.voucherType.id === 'salesReturn' ? 'debtor' : 'creditor',
+                    creditor: obj.voucherType.id === 'salesReturn' ? 0 : obj.totalNet,
+                    debtor: obj.voucherType.id === 'salesReturn' ? obj.totalNet : 0,
+                  };
+                  if (obj.voucherType.id === 'salesReturn') {
+                    journalEntry.totalDebtor += obj.totalNet;
+                  } else {
+                    journalEntry.totalCreditor += obj.totalNet;
+                  }
+                  journalEntry.accountsList.push(ac);
+                }
+              }
+            } else if (obj.voucherType.id === 'purchaseInvoice' || obj.voucherType.id === 'purchaseReturn') {
+              if (obj.safe && obj.safe.type) {
+                if (obj.safe.type.id == 1) {
+                  if (_acc.id == 'box') {
+                    let ac = {
+                      id: _acc.accountGuide.id,
+                      code: _acc.accountGuide.code,
+                      nameAr: _acc.accountGuide.nameAr,
+                      nameEn: _acc.accountGuide.nameEn,
+                      side: obj.voucherType.id === 'purchaseReturn' ? 'debtor' : 'creditor',
+                      debtor: obj.voucherType.id === 'purchaseReturn' ? obj.totalNet : 0,
+                      creditor: obj.voucherType.id === 'purchaseReturn' ? 0 : obj.totalNet,
+                    };
+                    if (obj.voucherType.id === 'purchaseReturn') {
+                      journalEntry.totalDebtor += obj.totalNet;
+                    } else {
+                      journalEntry.totalCreditor += obj.totalNet;
+                    }
+                    journalEntry.accountsList.push(ac);
+                  }
+                } else if (obj.safe.type.id == 2) {
+                  if (_acc.id == 'bank') {
+                    let ac = {
+                      id: _acc.accountGuide.id,
+                      code: _acc.accountGuide.code,
+                      nameAr: _acc.accountGuide.nameAr,
+                      nameEn: _acc.accountGuide.nameEn,
+                      side: obj.voucherType.id === 'purchaseReturn' ? 'debtor' : 'creditor',
+                      debtor: obj.voucherType.id === 'purchaseReturn' ? obj.totalNet : 0,
+                      creditor: obj.voucherType.id === 'purchaseReturn' ? 0 : obj.totalNet,
+                    };
+                    if (obj.voucherType.id === 'purchaseReturn') {
+                      journalEntry.totalDebtor += obj.totalNet;
+                    } else {
+                      journalEntry.totalCreditor += obj.totalNet;
+                    }
+                    journalEntry.accountsList.push(ac);
+                  }
+                }
+                if (_acc.id == 'vendors') {
+                  let ac = {
+                    id: _acc.accountGuide.id,
+                    code: _acc.accountGuide.code,
+                    nameAr: _acc.accountGuide.nameAr,
+                    nameEn: _acc.accountGuide.nameEn,
+                    side: obj.voucherType.id === 'purchaseReturn' ? 'creditor' : 'debtor',
+                    creditor: obj.voucherType.id === 'purchaseReturn' ? obj.totalNet : 0,
+                    debtor: obj.voucherType.id === 'purchaseReturn' ? 0 : obj.totalNet,
+                  };
+                  if (obj.voucherType.id === 'purchaseReturn') {
+                    journalEntry.totalCreditor += obj.totalNet;
+                  } else {
+                    journalEntry.totalDebtor += obj.totalNet;
+                  }
+                  journalEntry.accountsList.push(ac);
+                }
+              }
+            }
+          }
+        });
+        app.add(journalEntry, (err, doc) => {});
+      }
     }
   };
 

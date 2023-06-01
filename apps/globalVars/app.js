@@ -338,9 +338,9 @@ module.exports = function init(site) {
     { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
     { id: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
     { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
+    { id: 'serviceOrder', nameEn: 'Service Order', nameAr: 'طلب خدمة' },
     { id: 'offersOrders', nameEn: 'Offers Orders', nameAr: 'طلبات العروض' },
     { id: 'transferSafes', nameEn: 'Transfer Safes', nameAr: 'تحويل خزن' },
-    { id: 'serviceOrder', nameEn: 'Service Order', nameAr: 'طلب خدمة' },
     { id: 'openingBalance', nameEn: 'Opening Balance', nameAr: 'رصيد إفتتاحي' },
     { id: 'safesAdjusting', nameEn: 'Safes Adjusting', nameAr: 'تسوية خزينة' },
   ];

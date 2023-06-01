@@ -6,7 +6,6 @@ app.controller('journalEntry', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { url: '/images/journalEntry.png' },
     active: true,
     totalDebtor: 0,
     totalCreditor: 0,
@@ -212,8 +211,11 @@ app.controller('journalEntry', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getAccountsGuideList = function () {
+  $scope.getAccountsGuideList = function ($search) {
     $scope.error = '';
+    if ($search && !$search.length) {
+      return;
+    }
     $scope.accountsGuideList = [];
     $scope.busy = true;
     $http({
@@ -233,6 +235,7 @@ app.controller('journalEntry', function ($scope, $http, $timeout) {
           generalLedgerList: 1,
           costCentersList: 1,
         },
+        search: $search,
       },
     }).then(
       function (response) {

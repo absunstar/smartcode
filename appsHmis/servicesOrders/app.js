@@ -189,8 +189,20 @@ module.exports = function init(site) {
             response.done = true;
             response.doc = doc;
             if (doc.approved) {
+              let objJournal = {
+                code: doc.code,
+                appName: app.name,
+                totalNet: doc.total,
+                totalBeforeVat: doc.totalBeforeVat,
+                totalDiscounts: doc.totalDiscount,
+                totalVat: doc.totalVat,
+                totalAverageCost: 0,
+                userInfo: doc.addUserInfo,
+              };
+
               doc.servicesList.forEach((_s, i) => {
                 if (_s.serviceGroup && _s.serviceGroup.type && _s.serviceGroup.type.id) {
+                  objJournal.totalAverageCost += _s.cost;
                   let obj = {
                     orderId: doc.id,
                     patient: { ...doc.patient },
@@ -209,7 +221,7 @@ module.exports = function init(site) {
                   if (doc.doctorDeskTop && doc.doctorDeskTop.id) {
                     obj.doctorDeskTopId = doc.doctorDeskTop.id;
                     obj.doctorReccomendList = doc.doctorDeskTop.doctorReccomendList;
-                    if(_s.serviceGroup.type.id != 2) {
+                    if (_s.serviceGroup.type.id != 2) {
                       obj.doctor = doc.doctorDeskTop.doctor;
                     }
                   }
@@ -229,6 +241,11 @@ module.exports = function init(site) {
                   }
                 }
               });
+              objJournal.nameAr = 'طلب خدمة' + doc.code;
+              objJournal.nameEn = 'Service Order' + doc.code;
+              objJournal.session = req.session;
+              site.autoJournalEntry(objJournal);
+
               if (doc.source.id == 1 && doc.bookingType && doc.bookingType.id == 2 && doc.doctorAppointment && doc.doctorAppointment.id) {
                 site.hasTransactionDoctorAppointment({ id: doc.doctorAppointment.id });
               } else if (doc.source.id == 2 && doc.doctorDeskTop && doc.doctorDeskTop.id) {
@@ -408,8 +425,20 @@ module.exports = function init(site) {
       if (!err) {
         response.done = true;
         response.result = result;
+        let objJournal = {
+          code: result.doc.code,
+          appName: app.name,
+          totalNet: result.doc.total,
+          totalBeforeVat: result.doc.totalBeforeVat,
+          totalDiscounts: result.doc.totalDiscount,
+          totalVat: result.doc.totalVat,
+          totalAverageCost: 0,
+          userInfo: result.doc.addUserInfo,
+        };
+
         result.doc.servicesList.forEach((_s, i) => {
           if (_s.serviceGroup && _s.serviceGroup.type && _s.serviceGroup.type.id) {
+            objJournal.totalAverageCost += _s.cost;
             let obj = {
               orderId: result.doc.id,
               patient: { ...result.doc.patient },
@@ -444,6 +473,11 @@ module.exports = function init(site) {
             }
           }
         });
+
+        objJournal.nameAr = 'طلب خدمة' + result.doc.code;
+        objJournal.nameEn = 'Service Order' + result.doc.code;
+        objJournal.session = req.session;
+        site.autoJournalEntry(objJournal);
 
         if (result.doc.source.id == 1 && result.doc.bookingType && result.doc.bookingType.id == 2 && result.doc.doctorAppointment && result.doc.doctorAppointment.id) {
           site.hasTransactionDoctorAppointment({ id: result.doc.doctorAppointment.id });

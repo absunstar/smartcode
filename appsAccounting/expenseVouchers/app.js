@@ -208,6 +208,19 @@ module.exports = function init(site) {
               site.changeRemainPaidReturnSales(obj);
             }
             site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode:doc.invoiceCode, invoiceId:doc.invoiceId, voucherType: doc.voucherType, type: 'min' });
+            
+            let objJournal = {
+              code: doc.code,
+              appName: app.name,
+              totalNet: doc.total,
+              safe: doc.safe,
+              userInfo: doc.addUserInfo,
+            };
+            objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + doc.code;
+            objJournal.nameEn = 'Expense Vouchers' + ' ' + doc.voucherType.nameEn + doc.code;
+            objJournal.session = req.session;
+            objJournal.voucherType = doc.voucherType;
+            site.autoJournalEntryVoucher(objJournal);
           } else {
             response.error = err.mesage;
           }
@@ -316,6 +329,19 @@ module.exports = function init(site) {
     obj.code = cb.code;
     if (obj.code) {
       app.add(obj, (err, doc) => {
+        let objJournal = {
+          code: doc.code,
+          appName: app.name,
+          totalNet: doc.total,
+          safe: doc.safe,
+          userInfo: doc.addUserInfo,
+        };
+        objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + doc.code;
+        objJournal.nameEn = 'Expense Vouchers'  + ' ' + doc.voucherType.nameEn + doc.code;
+        objJournal.voucherType = doc.voucherType;
+        objJournal.session = {company : obj.company};
+        site.autoJournalEntryVoucher(objJournal);
+
         site.changeSafeBalance({company: doc.company, safe: doc.safe, voucherType: doc.voucherType, invoiceCode:doc.invoiceCode, invoiceId:doc.invoiceId, total: doc.total, type: 'min' });
       });
     }

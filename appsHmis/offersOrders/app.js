@@ -187,11 +187,27 @@ module.exports = function init(site) {
         } else if (cb.auto) {
           _data.code = cb.code;
         }
+        let objJournal = {
+          code: _data.code,
+          appName: app.name,
+          totalNet: _data.total,
+          totalDiscounts: _data.totalDiscount,
+          totalVat: _data.totalVat,
+          totalAverageCost: 0,
+          userInfo: _data.addUserInfo,
+        };
+
         _data.remainPaid = _data.totalNet - (_data.amountPaid || 0);
         _data.addUserInfo = req.getUserFinger();
         _data.medicalOffer.servicesList.forEach((_s) => {
+          objJournal.totalAverageCost += _s.cost;
           _s.qtyAvailable = _s.qty;
         });
+        objJournal.nameAr = 'طلب عرض' + _data.code;
+        objJournal.nameEn = 'Offer Order' + _data.code;
+        objJournal.session = req.session;
+        
+        site.autoJournalEntry(objJournal);
 
         _data.availableAttend = true;
         app.add(_data, (err, doc) => {

@@ -39,18 +39,19 @@ module.exports = function init(site) {
       // { id: 2, nameAr: 'المشتريات', nameEn: 'Purchases' },
       //  { id: 8, nameAr: 'مردودات سنوات سابقة', nameEn: 'Returns from previous years' },
       // { id: 7, nameAr: 'مردودات مشتريات', nameEn: 'Purchases returns' },
-      { id: 1, nameAr: 'الموردين', nameEn: 'Vendors' },
-      { id: 2, nameAr: 'المخازن', nameEn: 'Stores' },
-      { id: 3, nameAr: 'العملاء', nameEn: 'Customers' },
-      { id: 4, nameAr: 'المبيعات', nameEn: 'Sales' },
-      { id: 5, nameAr: 'مردودات مبيعات', nameEn: 'Sales returns' },
-      { id: 6, nameAr: 'ضريبة المبيعات', nameEn: 'Sales tax' },
-      { id: 7, nameAr: 'ضريبة المشتريات', nameEn: 'Purchase tax' },
-      { id: 8, nameAr: 'تكلفة مبيعات المخزون', nameEn: 'Inventory sales cost' },
-      { id: 9, nameAr: 'خصم مسموح به', nameEn: 'Discount permitted' },
-      { id: 10, nameAr: 'خصم مكتسب', nameEn: 'Earned discount' },
-      { id: 11, nameAr: 'الصندوق', nameEn: 'Box' },
-      { id: 12, nameAr: 'البنك', nameEn: 'Bank' },
+      { id: 'vendors', nameAr: 'الموردين', nameEn: 'Vendors' },
+      { id: 'stores', nameAr: 'المخازن', nameEn: 'Stores' },
+      { id: 'customers', nameAr: 'العملاء', nameEn: 'Customers' },
+      { id: 'sales', nameAr: 'المبيعات', nameEn: 'Sales' },
+      { id: 'reSales', nameAr: 'مردودات مبيعات', nameEn: 'Sales returns' },
+      { id: 'salesTax', nameAr: 'ضريبة المبيعات', nameEn: 'Sales tax' },
+      { id: 'purchaseTax', nameAr: 'ضريبة المشتريات', nameEn: 'Purchase tax' },
+      { id: 'inventorySalesCost', nameAr: 'تكلفة مبيعات المخزون', nameEn: 'Inventory sales cost' },
+      { id: 'salesDiscount', nameAr: 'خصم مبيعات', nameEn: 'Sales Discount' },
+      { id: 'purshaseDiscount', nameAr: 'خصم مشتريات', nameEn: 'Purshase Discount' },
+      { id: 'service', nameAr: 'الخدمة', nameEn: 'Service' },
+      { id: 'box', nameAr: 'الصندوق', nameEn: 'Box' },
+      { id: 'bank', nameAr: 'البنك', nameEn: 'Bank' },
     ],
   };
 
@@ -185,8 +186,8 @@ module.exports = function init(site) {
             app.$collection.add(_data, (err, doc) => {
               if (app.allowMemory && !err && doc) {
                 app.memoryList.push(doc);
+                site.word({ name: '$', Ar: doc.accountsSetting.currencySymbol, En: doc.accountsSetting.currencySymbol });
               }
-              site.word({ name: '$', Ar: doc.accountsSetting.currencySymbol, En: doc.accountsSetting.currencySymbol });
             });
           }
           res.json(response);

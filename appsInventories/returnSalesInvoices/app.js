@@ -253,7 +253,7 @@ module.exports = function init(site) {
               totalDiscounts: result.doc.totalDiscounts,
               totalVat: result.doc.totalVat,
               totalAverageCost: 0,
-              userInfo: result.doc.addUserInfo,
+              userInfo: result.doc.addApprovedInfo,
             };
 
             result.doc.itemsList.forEach((_item) => {
@@ -280,10 +280,11 @@ module.exports = function init(site) {
                 customer: result.doc.customer,
                 patient: result.doc.patient,
                 paymentType: result.doc.paymentType,
-                addUserInfo: result.doc.approvedUserInfo,
+                addUserInfo: result.doc.addApprovedInfo,
                 company: result.doc.company,
                 branch: result.doc.branch,
               };
+              objVoucher.session = req.session;
               site.addExpenseVouchers(objVoucher);
             }
             if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {

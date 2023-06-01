@@ -308,6 +308,7 @@ module.exports = function init(site) {
                   image: doc.image,
                   appName: app.name,
                   totalNet: doc.totalNet,
+                  totalBeforeVat: doc.totalBeforeVat,
                   totalDiscounts: doc.totalDiscounts,
                   totalVat: doc.totalVat,
                   totalAverageCost: 0,
@@ -349,7 +350,7 @@ module.exports = function init(site) {
                   obj.customer = doc.customer;
                 }
                 obj.nameAr = 'فاتورة مبيعات' + doc.code;
-                obj.nameEn = 'sales Invoice' + doc.code;
+                obj.nameEn = 'Sales Invoice' + doc.code;
                 obj.session = req.session;
                 site.autoJournalEntry(obj);
                 response.doc = doc;

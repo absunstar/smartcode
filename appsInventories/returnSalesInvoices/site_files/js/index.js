@@ -169,6 +169,8 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
+          $scope.getSafes(response.data.doc.paymentType);
+
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
               Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
