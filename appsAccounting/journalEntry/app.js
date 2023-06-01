@@ -307,7 +307,7 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, totalDebtor: 1, totalCreditor: 1 };
+        let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, totalDebtor: 1, totalCreditor: 1 , date: 1 };
         let limit = req.body.limit || 50;
         let list = [];
         if (app.allowMemory) {
@@ -489,7 +489,7 @@ module.exports = function init(site) {
                   journalEntry.totalDebtor += obj.totalDiscounts;
                 }
                 journalEntry.accountsList.push(acc);
-              } else if (_acc.id == 'sales' && obj.appName === 'salesInvoices') {
+              } else if (_acc.id == 'sales' && (obj.appName === 'salesInvoices' || obj.appName === 'servicesOrders' || obj.appName === 'offersOrders')) {
                 let total = obj.totalNet + obj.totalDiscounts - (obj.totalVat || 0);
                 let acc = {
                   id: _acc.accountGuide.id,
@@ -513,7 +513,7 @@ module.exports = function init(site) {
                   creditor: obj.totalAverageCost,
                   debtor: 0,
                 };
-                journalEntry.totalCreditor += total;
+                journalEntry.totalCreditor += obj.totalAverageCost;
 
                 journalEntry.accountsList.push(acc);
               } else if (_acc.id == 'reSales' && obj.appName === 'returnSalesInvoices') {

@@ -301,8 +301,8 @@ module.exports = function init(site) {
                 totalVat: result.doc.totalVat,
                 userInfo: result.doc.addApprovedInfo,
               };
-              objJournal.nameAr = 'مرتجع شراء' + ' ' + result.doc.code;
-              objJournal.nameEn = 'Return Purchase' +' ' + result.doc.code;
+              objJournal.nameAr = 'مرتجع شراء' + ' (' + result.doc.code + ' )';
+              objJournal.nameEn = 'Return Purchase'+ ' (' + result.doc.code + ' )';
               objJournal.session = req.session;
               site.autoJournalEntry(objJournal);
               response.result = result;

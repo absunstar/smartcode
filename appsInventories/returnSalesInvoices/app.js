@@ -307,8 +307,8 @@ module.exports = function init(site) {
             } else if (result.doc.salesType.code == 'customer') {
               objJournal.customer = result.doc.customer;
             }
-            objJournal.nameAr = 'مرتجع مبيعات' +' ' + result.doc.code;
-            objJournal.nameEn = 'Return sales Invoice' +' ' + result.doc.code;
+            objJournal.nameAr = 'مرتجع مبيعات' + ' (' + result.doc.code + ' )';
+            objJournal.nameEn = 'Return sales Invoice'+ ' (' + result.doc.code + ' )';
             objJournal.session = req.session;
             site.autoJournalEntry(objJournal);
             response.result = result;

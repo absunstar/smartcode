@@ -216,8 +216,8 @@ module.exports = function init(site) {
               safe: doc.safe,
               userInfo: doc.addUserInfo,
             };
-            objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' ' + doc.code;
-            objJournal.nameEn = 'Expense Vouchers' + ' ' + doc.voucherType.nameEn + ' ' + doc.code;
+            objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
+            objJournal.nameEn = 'Expense Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
             objJournal.session = req.session;
             objJournal.voucherType = doc.voucherType;
             site.autoJournalEntryVoucher(objJournal);
@@ -336,8 +336,8 @@ module.exports = function init(site) {
           safe: doc.safe,
           userInfo: doc.addUserInfo,
         };
-        objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr +' ' + doc.code;
-        objJournal.nameEn = 'Expense Vouchers'  + ' ' + doc.voucherType.nameEn +' ' + doc.code;
+        objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
+        objJournal.nameEn = 'Expense Vouchers'  + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
         objJournal.voucherType = doc.voucherType;
         objJournal.session = {company : obj.company};
         site.autoJournalEntryVoucher(objJournal);

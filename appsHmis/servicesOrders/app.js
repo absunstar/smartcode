@@ -241,8 +241,8 @@ module.exports = function init(site) {
                   }
                 }
               });
-              objJournal.nameAr = 'طلب خدمة' +' ' + doc.code;
-              objJournal.nameEn = 'Service Order' + ' ' +doc.code;
+              objJournal.nameAr = 'طلب خدمة' + ' (' + doc.code + ' )';
+              objJournal.nameEn = 'Service Order' + ' (' + doc.code + ' )';
               objJournal.session = req.session;
               site.autoJournalEntry(objJournal);
 
@@ -474,8 +474,8 @@ module.exports = function init(site) {
           }
         });
 
-        objJournal.nameAr = 'طلب خدمة' +' ' + result.doc.code;
-        objJournal.nameEn = 'Service Order' + ' ' + result.doc.code;
+        objJournal.nameAr = 'طلب خدمة' + ' (' + result.doc.code + ' )';
+        objJournal.nameEn = 'Service Order' + ' (' + result.doc.code + ' )';
         objJournal.session = req.session;
         site.autoJournalEntry(objJournal);
 

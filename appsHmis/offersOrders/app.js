@@ -203,8 +203,8 @@ module.exports = function init(site) {
           objJournal.totalAverageCost += _s.cost || 0;
           _s.qtyAvailable = _s.qty;
         });
-        objJournal.nameAr = 'طلب عرض' + ' ' + _data.code;
-        objJournal.nameEn = 'Offer Order' +' ' + _data.code;
+        objJournal.nameAr = 'طلب عرض' + ' (' + _data.code + ' )';
+        objJournal.nameEn = 'Offer Order' +' (' + _data.code + ' )';
         objJournal.session = req.session;
         site.autoJournalEntry(objJournal);
 
