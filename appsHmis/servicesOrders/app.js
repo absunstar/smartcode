@@ -202,7 +202,7 @@ module.exports = function init(site) {
 
               doc.servicesList.forEach((_s, i) => {
                 if (_s.serviceGroup && _s.serviceGroup.type && _s.serviceGroup.type.id) {
-                  objJournal.totalAverageCost += _s.cost;
+                  objJournal.totalAverageCost += _s.cost || 0;
                   let obj = {
                     orderId: doc.id,
                     patient: { ...doc.patient },
@@ -241,8 +241,8 @@ module.exports = function init(site) {
                   }
                 }
               });
-              objJournal.nameAr = 'طلب خدمة' + doc.code;
-              objJournal.nameEn = 'Service Order' + doc.code;
+              objJournal.nameAr = 'طلب خدمة' +' ' + doc.code;
+              objJournal.nameEn = 'Service Order' + ' ' +doc.code;
               objJournal.session = req.session;
               site.autoJournalEntry(objJournal);
 
@@ -438,7 +438,7 @@ module.exports = function init(site) {
 
         result.doc.servicesList.forEach((_s, i) => {
           if (_s.serviceGroup && _s.serviceGroup.type && _s.serviceGroup.type.id) {
-            objJournal.totalAverageCost += _s.cost;
+            objJournal.totalAverageCost += _s.cost || 0;
             let obj = {
               orderId: result.doc.id,
               patient: { ...result.doc.patient },
@@ -474,8 +474,8 @@ module.exports = function init(site) {
           }
         });
 
-        objJournal.nameAr = 'طلب خدمة' + result.doc.code;
-        objJournal.nameEn = 'Service Order' + result.doc.code;
+        objJournal.nameAr = 'طلب خدمة' +' ' + result.doc.code;
+        objJournal.nameEn = 'Service Order' + ' ' + result.doc.code;
         objJournal.session = req.session;
         site.autoJournalEntry(objJournal);
 

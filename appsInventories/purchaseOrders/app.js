@@ -424,8 +424,8 @@ module.exports = function init(site) {
                 });
               }
 
-              objJournal.nameAr = 'أمر شراء' + result.doc.code;
-              objJournal.nameEn = 'Purchase Order' + result.doc.code;
+              objJournal.nameAr = 'أمر شراء' + ' ' + result.doc.code;
+              objJournal.nameEn = 'Purchase Order' +' ' + result.doc.code;
               objJournal.session = req.session;
               site.autoJournalEntry(objJournal);
 

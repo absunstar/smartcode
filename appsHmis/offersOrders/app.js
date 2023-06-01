@@ -190,9 +190,9 @@ module.exports = function init(site) {
         let objJournal = {
           code: _data.code,
           appName: app.name,
-          totalNet: _data.total,
-          totalDiscounts: _data.totalDiscount,
-          totalVat: _data.totalVat,
+          totalNet: _data.totalNet,
+          totalDiscounts: _data.medicalOffer.totalDiscount,
+          totalVat: _data.medicalOffer.totalVat,
           totalAverageCost: 0,
           userInfo: _data.addUserInfo,
         };
@@ -200,13 +200,12 @@ module.exports = function init(site) {
         _data.remainPaid = _data.totalNet - (_data.amountPaid || 0);
         _data.addUserInfo = req.getUserFinger();
         _data.medicalOffer.servicesList.forEach((_s) => {
-          objJournal.totalAverageCost += _s.cost;
+          objJournal.totalAverageCost += _s.cost || 0;
           _s.qtyAvailable = _s.qty;
         });
-        objJournal.nameAr = 'طلب عرض' + _data.code;
-        objJournal.nameEn = 'Offer Order' + _data.code;
+        objJournal.nameAr = 'طلب عرض' + ' ' + _data.code;
+        objJournal.nameEn = 'Offer Order' +' ' + _data.code;
         objJournal.session = req.session;
-        
         site.autoJournalEntry(objJournal);
 
         _data.availableAttend = true;

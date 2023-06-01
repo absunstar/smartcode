@@ -315,7 +315,7 @@ module.exports = function init(site) {
                   userInfo: doc.addUserInfo,
                 };
                 doc.itemsList.forEach((_item) => {
-                  obj.totalAverageCost += _item.averageCost;
+                  obj.totalAverageCost += _item.averageCost || 0;
                   let item = { ..._item };
                   item.store = { ...doc.store };
                   site.editItemsBalance(item, app.name);
@@ -349,8 +349,8 @@ module.exports = function init(site) {
                 } else if (doc.salesType.code == 'customer') {
                   obj.customer = doc.customer;
                 }
-                obj.nameAr = 'فاتورة مبيعات' + doc.code;
-                obj.nameEn = 'Sales Invoice' + doc.code;
+                obj.nameAr = 'فاتورة مبيعات' +' ' + doc.code;
+                obj.nameEn = 'Sales Invoice' +' ' + doc.code;
                 obj.session = req.session;
                 site.autoJournalEntry(obj);
                 response.doc = doc;

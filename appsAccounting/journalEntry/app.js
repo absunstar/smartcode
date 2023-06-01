@@ -504,14 +504,13 @@ module.exports = function init(site) {
 
                 journalEntry.accountsList.push(acc);
               } else if (_acc.id == 'service' && (obj.appName === 'servicesOrders' || obj.appName === 'offersOrders')) {
-                let total = obj.totalNet + obj.totalDiscounts - (obj.totalVat || 0);
                 let acc = {
                   id: _acc.accountGuide.id,
                   code: _acc.accountGuide.code,
                   nameAr: _acc.accountGuide.nameAr,
                   nameEn: _acc.accountGuide.nameEn,
                   side: 'creditor',
-                  creditor: total,
+                  creditor: obj.totalAverageCost,
                   debtor: 0,
                 };
                 journalEntry.totalCreditor += total;
@@ -564,7 +563,7 @@ module.exports = function init(site) {
                   journalEntry.totalDebtor += obj.totalAverageCost;
                 }
                 journalEntry.accountsList.push(acc);
-              } else if (_acc.id == 'stores') {
+              } else if (_acc.id == 'stores' && (obj.appName === 'returnSalesInvoices' || obj.appName === 'salesInvoices')) {
                 let acc = {
                   id: _acc.accountGuide.id,
                   code: _acc.accountGuide.code,
