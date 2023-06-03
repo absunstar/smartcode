@@ -633,7 +633,7 @@ module.exports = function init(site) {
               servicesList[0].total = servicesList[0].total;
               servicesList[0].totalPVat = (servicesList[0].total * servicesList[0].pVat || 0) / 100;
               servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
-              let deduct = 0;
+              servicesList[0].deduct = 0;
 
               if (
                 mainInsurance &&
@@ -645,30 +645,30 @@ module.exports = function init(site) {
               ) {
                 if (serviceMemory.serviceGroup.type && serviceMemory.serviceGroup.type.id == 2) {
                   if (_data.insuranceContract && _data.insuranceContract.insuranceClass && _data.insuranceContract.insuranceClass.serviceType == 'percent') {
-                    deduct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
+                    servicesList[0].deduct = (servicesList[0].total * _data.insuranceContract.insuranceClass.serviceDeduct) / 100;
                   } else {
                     if (_data.insuranceContract && _data.insuranceContract.insuranceClass) {
-                      deduct = _data.insuranceContract.insuranceClass.serviceDeduct;
+                      servicesList[0].deduct = _data.insuranceContract.insuranceClass.serviceDeduct;
                     }
                   }
                 } else {
                   if (_data.insuranceContract && _data.insuranceContract.insuranceClass.consultationType == 'percent') {
-                    deduct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
+                    servicesList[0].deduct = (servicesList[0].total * _data.insuranceContract.insuranceClass.consultationDeduct) / 100;
                   } else {
-                    deduct = _data.insuranceContract.insuranceClass.consultationDeduct;
+                    servicesList[0].deduct = _data.insuranceContract.insuranceClass.consultationDeduct;
                   }
                 }
                 if (
                   _data.insuranceContract &&
                   _data.insuranceContract.insuranceClass &&
                   _data.insuranceContract.insuranceClass.maxDeductAmount &&
-                  _data.insuranceContract.insuranceClass.maxDeductAmount < deduct + servicesList[0].totalPVat
+                  _data.insuranceContract.insuranceClass.maxDeductAmount < servicesList[0].deduct + servicesList[0].totalPVat
                 ) {
                   servicesList[0].patientCash = _data.insuranceContract.insuranceClass.maxDeductAmount;
                   servicesList[0].comCash = servicesList[0].total - _data.insuranceContract.insuranceClass.maxDeductAmount;
                 } else {
-                  servicesList[0].patientCash = deduct + servicesList[0].totalPVat;
-                  servicesList[0].comCash = servicesList[0].total - deduct + servicesList[0].totalComVat;
+                  servicesList[0].patientCash = servicesList[0].deduct + servicesList[0].totalPVat;
+                  servicesList[0].comCash = servicesList[0].total - servicesList[0].deduct + servicesList[0].totalComVat;
                 }
               } else {
                 servicesList[0].patientCash = servicesList[0].total + servicesList[0].totalPVat;
@@ -676,7 +676,7 @@ module.exports = function init(site) {
                 servicesList[0].totalComVat = 0;
               }
 
-              servicesList[0].patientDeduct = deduct;
+              servicesList[0].patientDeduct = servicesList[0].deduct;
               if (_data.hospitalResponsibility && _data.hospitalResponsibility.id) {
                 servicesList[0].hospitalResponsibility = _data.hospitalResponsibility;
               }

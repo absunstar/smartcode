@@ -2,38 +2,127 @@
   <div class="row" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
     <div x-import="insuranceCompaniesClaims/modal.html"></div>
     <div x-import="servicesOrders/modal.html"></div>
+    <div class="row">
+      <i-list
+        class="col4"
+        label="##word.Main Insurance Company##"
+        ng-model="item.mainInsuranceCompany"
+        display="name##session.lang##"
+        items="mainInsuranceCompaniesList"
+        ng-search="item.$mainInsuranceCompanies"
+      ></i-list>
 
+      <i-list
+        class="col4"
+        label="##word.Insurance Company##"
+        ng-model="item.insuranceCompany"
+        display="name##session.lang##"
+        items="insuranceCompaniesList"
+        ng-search="item.$insuranceCompany"
+      ></i-list>
+    </div>
+
+    <div class="row">
+      <i-date ng-model="search.date" label="##word.Date From##" class="col4"></i-date>
+      <i-date ng-model="search.dateTo" label="##word.Date To##" class="col4"></i-date>
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.Search Date##" ng-click="getServicesOrders()"></i-button>
+      </div>
+    </div>
     <div class="table-responsive">
       <table class="table hover bold" id="t1">
         <tr>
-          <th>##word.Code##</th>
-          <th>##word.Patient##</th>
-          <th>##word.Doctor##</th>
-          <th>##word.Gross Amount##</th>
-          <th>##word.Company-Deduction##</th>
-
-          <th class="not-print">##word.Actions##</th>
+          <th>##word.Claim_Seq_No##</th>
+          <th>##word.Membership_No##</th>
+          <th>##word.Patient_File_No##</th>
+          <th class="w250">##word.Patient_Name##</th>
+          <th>##word.Patient_ID##</th>
+          <th>##word.Nationality##</th>
+          <th>##word.Invoice_No##</th>
+          <th>##word.Invoice_Date##</th>
+          <th>##word.DOCTOR_NAME##</th>
+          <th>##word.SPECIALTY##</th>
+          <th>##word.PREAUTH##</th>
+          <th>##word.ICD10_Code##</th>
+          <th>##word.ICD10_Code1##</th>
+          <th>##word.Claim_Type##</th>
+          <th>##word.Service_Code##</th>
+          <th class="w250">##word.Service_Description##</th>
+          <th>##word.Tooth_No##</th>
+          <th>##word.Service_date##</th>
+          <th>##word.QTY##</th>
+          <th>##word.Gross_Amount##</th>
+          <th>##word.Discount##</th>
+          <th>##word.Net_After_Discount##</th>
+          <th>##word.Deductible##</th>
+          <th>##word.Net_Payable_Amount##</th>
+          <th>##word.VatPercentage##</th>
+          <th>##word.PatientVatAmount##</th>
+          <th>##word.NetVatAmount##</th>
+          <th>##word.Temperature##</th>
+          <th>##word.Respiratory_rate##</th>
+          <th>##word.Blood_pressure##</th>
+          <th>##word.Height##</th>
+          <th>##word.Weight##</th>
+          <th>##word.Pulse##</th>
+          <th>##word.Policy_Name##</th>
+          <th>##word.MediCode##</th>
+          <th>##word.Notes##</th>
+          <th>##word.Policy##</th>
+          <th>##word.Refer_Ind##</th>
+          <th>##word.Emr_Ind##</th>
+          <th>##word.VIndicator##</th>
         </tr>
-        <tr ng-repeat="item in list | filter:$search">
-          <td class="center blue">{{item.code}}</td>
-          <td class="center">{{item.patient.fullName##session.lang##}}</td>
-          <td class="center">{{item.doctor.name##session.lang##}}</td>
-          <td class="center">{{item.grossAmount| xmoney2}} <span class="currency">##word.$##</span></td>
-          <td class="center">{{item.comCash| xmoney2}} <span class="currency">##word.$##</span></td>
+        <tr ng-repeat="item in list">
+          <td class="center blue">{{$index +1}}</td>
+          <td class="center">{{item.Membership_No}}</td>
+          <td class="center">{{item.Patient_File_No}}</td>
+          <td class="center">{{item.Patient_Name}}</td>
+          <td class="center">{{item.Patient_ID}}</td>
+          <td class="center">{{item.Nationality}}</td>
+          <td class="center">{{item.Invoice_No}}</td>
+          <td class="center">{{item.Invoice_Date | date:"dd / MM / yyyy"}}</td>
+          <td class="center">{{item.DOCTOR_NAME}}</td>
+          <td class="center">{{item.SPECIALTY}}</td>
+          <td class="center">{{item.PREAUTH}}</td>
+          <td class="center">{{item.ICD10_Code}}</td>
+          <td class="center">{{item.ICD10_Code1}}</td>
+          <td class="center">{{item.Claim_Type}}</td>
+          <td class="center">{{item.Service_Code}}</td>
+          <td class="center">{{item.Service_Description}}</td>
+          <td class="center">{{item.Tooth_No}}</td>
+          <td class="center">{{item.Service_date | date:"dd / MM / yyyy"}}</td>
+          <td class="center">{{item.QTY}}</td>
+          <td class="center">{{item.Gross_Amount |xmoney2}} <span class="currency">##word.$##</span></td>
+          <td class="center">{{item.Discount|xmoney2}}<span class="currency">##word.$##</span></td>
+          <td class="center">{{item.Net_After_Discount|xmoney2}}<span class="currency">##word.$##</span></td>
+          <td class="center">{{item.Deductible|xmoney2}}<span class="currency">##word.$##</span></td>
+          <td class="center">{{item.Net_Payable_Amount|xmoney2}}<span class="currency">##word.$##</span></td>
+          <td class="center">{{item.VatPercentage|xmoney2}}<span class="currency">##word.%##</span></td>
+          <td class="center">{{item.PatientVatAmount|xmoney2}}<span class="currency">##word.$##</span></td>
+          <td class="center">{{item.NetVatAmount|xmoney2}}<span class="currency">##word.$##</span></td>
+          <td class="center">{{item.Temperature}}</td>
+          <td class="center">{{item.Respiratory_rate}}</td>
+          <td class="center">{{item.Blood_pressure}}</td>
+          <td class="center">{{item.Height}}</td>
+          <td class="center">{{item.Weight}}</td>
+          <td class="center">{{item.Pulse}}</td>
+          <td class="center">{{item.Policy_Name}}</td>
+          <td class="center">{{item.MediCode}}</td>
+          <td class="center">{{item.Notes}}</td>
+          <td class="center">{{item.Policy}}</td>
+          <td class="center">{{item.Refer_Ind}}</td>
+          <td class="center">{{item.Emr_Ind}}</td>
+          <td class="center">{{item.VIndicator}}</td>
 
-          <td class="center not-print">
+          <!--  <td class="center not-print">
             <i-button x-permissions="insuranceCompaniesClaimsView || insuranceCompaniesClaimsManage" type="view" label="##word.Details##" ng-click="showView(item)"></i-button>
-          </td>
+          </td> -->
         </tr>
       </table>
     </div>
     <i-button x-permissions="insuranceCompaniesClaimsPrint || insuranceCompaniesClaimsManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
-    <i-button
-      x-permissions="insuranceCompaniesClaimsExport || insuranceCompaniesClaimsManage"
-      type="export"
-      label="##word.Export to excel##"
-      onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"
-    >
-    </i-button>
+    <i-button x-permissions="insuranceCompaniesClaimsExport || insuranceCompaniesClaimsManage" type="export" label="##word.Export to excel##" onclick="site.export('#t1')"> </i-button>
   </div>
 </div>

@@ -206,8 +206,9 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           fullNameAr: 1,
           patientType: 1,
           maritalStatus: 1,
-          dateOfBirth : 1,
+          dateOfBirth: 1,
           gender: 1,
+          policyNumber: 1,
           age: 1,
           motherNameEn: 1,
           motherNameAr: 1,
@@ -219,7 +220,7 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           insuranceClass: 1,
           expiryDate: 1,
           havisaNum: 1,
-          member:1,
+          member: 1,
         },
         search: $search,
       },
@@ -263,8 +264,8 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           gender: 1,
           freeRevistPeriod: 1,
           freeRevistCount: 1,
-          scientificRank : 1,
-          onDuty : 1,
+          scientificRank: 1,
+          onDuty: 1,
         },
         search: $search,
         /* limit: 1, */
@@ -322,8 +323,8 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           $scope.busy = false;
           if (response.data.done && response.data.list.length > 0) {
             $scope.datesDaysList = response.data.list;
-            $scope.item.doctorSchedule = time ;
-             site.showModal('#doctorsVisitsDays'); 
+            $scope.item.doctorSchedule = time;
+            site.showModal('#doctorsVisitsDays');
           }
         },
         function (err) {
@@ -343,8 +344,8 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
 
   $scope.selectDoctor = function () {
     $scope.error = '';
-    if(!$scope.item.doctor.onDuty) {
-    $scope.error = 'Doctor Isn`t On Duty';
+    if (!$scope.item.doctor.onDuty) {
+      $scope.error = 'Doctor Isn`t On Duty';
       return;
     }
   };
@@ -353,7 +354,6 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
     $scope.error = '';
     site.showModal($scope.modalSearchID);
   };
-
 
   $scope.searchAll = function () {
     $scope.getAll($scope.search);

@@ -15,7 +15,7 @@ app.controller('doctors', function ($scope, $http, $timeout) {
     $scope.showAdd = function (_item) {
         $scope.error = '';
         $scope.mode = 'add';
-        $scope.item = { ...$scope.structure, doctorScheduleList: [] };
+        $scope.item = { ...$scope.structure, doctorScheduleList: [],mobileList : [] };
         site.showModal($scope.modalID);
         document.querySelector(`${$scope.modalID} .tab-link`).click();
     };

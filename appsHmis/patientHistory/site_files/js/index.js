@@ -62,6 +62,7 @@ app.controller('patientHistory', function ($scope, $http, $timeout) {
           image: 1,
           fullNameEn: 1,
           fullNameAr: 1,
+          policyNumber: 1,
           patientType: 1,
           maritalStatus: 1,
           dateOfBirth: 1,

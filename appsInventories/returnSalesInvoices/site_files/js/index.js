@@ -347,6 +347,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
           fullNameEn: 1,
           fullNameAr: 1,
           patientType: 1,
+          policyNumber: 1,
           maritalStatus: 1,
           dateOfBirth: 1,
           gender: 1,

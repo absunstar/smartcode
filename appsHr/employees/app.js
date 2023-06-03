@@ -619,7 +619,7 @@ module.exports = function init(site) {
         ];
         _data.type = site.usersTypesList[3];
 
-        if (_data.mobileList.length > 0) {
+        if (_data.mobileList &&_data.mobileList.length > 0) {
           _data.mobile = _data.mobileList[0].mobile;
         } else {
           response.error = 'Must Add Mobile Number';
@@ -659,7 +659,7 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.editUserInfo = req.getUserFinger();
 
-        if (_data.mobileList.length > 0) {
+        if (_data.mobileList &&_data.mobileList.length > 0) {
           _data.mobile = _data.mobileList[0].mobile;
         } else {
           response.error = 'Must Add Mobile Number';

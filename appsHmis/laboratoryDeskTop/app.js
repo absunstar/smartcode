@@ -198,6 +198,22 @@ module.exports = function init(site) {
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
+            if(result.doc.status.id == 4) {
+              let obj = {
+                orderId : result.doc.orderId,
+                serviceId : result.doc.service.id,
+                height : result.doc.height,
+                weight : result.doc.weight,
+                temperature : result.doc.temperature,
+                pulse : result.doc.pulse,
+                bloodPressureHigh : result.doc.bloodPressureHigh,
+                bloodPressureLow : result.doc.bloodPressureLow,
+                respiratoryRate : result.doc.respiratoryRate,
+                notesAfter : result.doc.notesAfter,
+              }
+              site.changeServiceOrderByOrders(obj);
+
+            }
             let newDate = new Date();
             result.doc.$hours = parseInt((Math.abs(new Date(result.doc.date) - newDate) / (1000 * 60 * 60)) % 24);
             result.doc.$minutes = parseInt((Math.abs(new Date(result.doc.date).getTime() - newDate.getTime()) / (1000 * 60)) % 60);

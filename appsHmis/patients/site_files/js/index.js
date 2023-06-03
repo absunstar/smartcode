@@ -629,7 +629,7 @@ app.controller('patients', function ($scope, $http, $timeout) {
         if (response.data.done) {
           $scope.insuranceContract = response.data.doc;
           $scope.item.expiryDate = $scope.insuranceContract.endDate;
-          console.log($scope.item.insuranceCompany);
+          $scope.item.policyNumber = $scope.insuranceContract.policyNumber;
         }
       },
       function (err) {

@@ -113,8 +113,13 @@ module.exports = function init(site) {
           return;
         }
       }
-
-      app.$collection.find({ id: _item.id }, (err, doc) => {
+      let where = {};
+      if (_item.id) {
+          where = { id: _item.id };
+      } else if (_item.orderId) {
+          where = { orderId: _item.orderId };
+      }
+      app.$collection.find(where, (err, doc) => {
         callback(err, doc);
 
         if (!err && doc) {
@@ -402,10 +407,74 @@ module.exports = function init(site) {
           }
 
           app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
-            res.json({
-              done: true,
-              list: docs,
-            });
+            if (req.body.claims) {
+              let list = [];
+              docs.forEach((_doc) => {
+                if (_doc.servicesList && _doc.servicesList.length > 0) {
+                  _doc.servicesList.forEach((_s) => {
+                    if (_s.comCash > 0) {
+                      let obj = {
+                        Membership_No: _doc.patient.member,
+                        Patient_File_No: _doc.patient.code,
+                        Patient_Name: _doc.patient.fullNameEn,
+                        Patient_ID: _doc.patient.havisaNum,
+                        Nationality: _doc.patient.nationality.nameEn,
+                        Invoice_No: _doc.code,
+                        Invoice_Date: _doc.date,
+                        DOCTOR_NAME: _doc.doctor.nameEn,
+                        SPECIALTY: _doc.doctor.specialty.nameEn,
+                        PREAUTH: '',
+                        ICD10_Code: '',
+                        ICD10_Code1: '',
+                        Claim_Type: 'O',
+                        Service_Code: _s.code,
+                        Service_Description: _s.nameEn,
+                        Tooth_No: '',
+                        Service_date: _doc.date,
+                        QTY: 1,
+                        Gross_Amount: _s.price,
+                        Discount: _s.totalDisc,
+                        Net_After_Discount: _s.totalAfterDisc,
+                        Deductible: _s.deduct,
+                        Net_Payable_Amount: _s.comCash,
+                        VatPercentage: _s.comVat,
+                        PatientVatAmount: _s.totalPVat,
+                        NetVatAmount: _s.totalComVat,
+                        Temperature: _s.temperature,
+                        Respiratory_rate: _s.respiratoryRate,
+                        Blood_pressure: _s.bloodPressureHigh + '/' + _s.bloodPressureLow,
+                        Height: _s.height,
+                        Weight: _s.weight,
+                        Pulse: _s.pulse,
+                        Policy_Name: '',
+                        MediCode: '',
+                        Notes: _s.notesAfter,
+                        Policy: _doc.patient.policyNumber,
+                        Refer_Ind: '',
+                        Emr_Ind: '',
+                        VIndicator: 0,
+                      };
+                      if (_doc.source && _doc.source.id == 2 && _doc.doctorDeskTop && _doc.doctorDeskTop.id) {
+                        if (_s.serviceGroup.type && _s.serviceGroup.type.id != 2) {
+                          obj.DOCTOR_NAME = _doc.doctorDeskTop.doctor.nameEn;
+                          obj.SPECIALTY = _doc.doctorDeskTop.doctor.specialty.nameEn;
+                        }
+                      }
+                      list.push(obj);
+                    }
+                  });
+                }
+              });
+              res.json({
+                done: true,
+                list: list,
+              });
+            } else {
+              res.json({
+                done: true,
+                list: docs,
+              });
+            }
           });
         }
       });
@@ -589,6 +658,33 @@ module.exports = function init(site) {
     response.done = true;
     callback(response);
     return;
+  };
+
+  site.changeServiceOrderByOrders = function (obj) {
+    app.view({ id: obj.orderId }, (err, doc) => {
+      if (!err && doc) {
+        if (doc.servicesList && doc.servicesList.length > 0) {
+          doc.servicesList.forEach((_s) => {
+            if (_s.id == obj.serviceId) {
+              
+              _s.height = obj.height;
+              _s.weight = obj.weight;
+              _s.temperature = obj.temperature;
+              _s.pulse = obj.pulse;
+              _s.bloodPressureHigh = obj.bloodPressureHigh;
+              _s.bloodPressureLow = obj.bloodPressureLow;
+              _s.respiratoryRate = obj.respiratoryRate;
+              _s.notesAfter = obj.notesAfter;
+              _s.doctorReccomendList = obj.doctorReccomendList;
+              _s.patientReccomendList = obj.patientReccomendList;
+            }
+          });
+
+          app.update(doc, (err, result) => {
+          });
+        }
+      }
+    });
   };
 
   app.init();
