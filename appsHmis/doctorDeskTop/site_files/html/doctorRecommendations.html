@@ -138,10 +138,10 @@
                   </div>
 
                   <div class="row list" ng-repeat="s in item.doctorReccomendList">
-                    <div class="col1 code-list">
-                      <p>{{s.code}}</p>
+                    <div class="col2 code-list">
+                      <p>{{s.type}} - {{s.code}}</p>
                     </div>
-                    <div class="col10">
+                    <div class="col9">
                       <p class="bold">{{s.name##session.lang##}}</p>
                     </div>
 
@@ -254,10 +254,10 @@
                   </div>
 
                   <div class="row list" ng-repeat="s in item.patientReccomendList">
-                    <div class="col1 code-list">
-                      <p>{{s.code}}</p>
+                    <div class="col2 code-list">
+                      <p>{{s.type}} - {{s.code}}</p>
                     </div>
-                    <div class="col10">
+                    <div class="col9">
                       <p class="bold">{{s.name##session.lang##}}</p>
                     </div>
                     <div class="col1">

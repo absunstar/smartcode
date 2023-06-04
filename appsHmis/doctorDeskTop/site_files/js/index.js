@@ -275,6 +275,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -303,6 +304,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -331,6 +333,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -380,6 +383,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -429,6 +433,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -457,6 +462,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -485,6 +491,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -567,6 +574,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -595,6 +603,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -622,6 +631,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -649,6 +659,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           id: 1,
           nameEn: 1,
           nameAr: 1,
+          code: 1,
         },
       },
     }).then(
@@ -775,12 +786,13 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item.doctorReccomendList = $scope.item.doctorReccomendList || [];
     if ($scope.item[name] && $scope.item[name].id) {
-      if (!$scope.item.doctorReccomendList.some((s) => s.id === $scope.item[name].id && code == s.code)) {
+      if (!$scope.item.doctorReccomendList.some((s) => s.id === $scope.item[name].id && code == s.type)) {
         $scope.item.doctorReccomendList.push({
           id: $scope.item[name].id,
           nameAr: $scope.item[name].nameAr,
           nameEn: $scope.item[name].nameEn,
-          code: code,
+          type: code,
+          code: $scope.item[name].code,
         });
       }
       delete $scope.item[name];
@@ -793,12 +805,13 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item.patientReccomendList = $scope.item.patientReccomendList || [];
     if ($scope.item[name] && $scope.item[name].id) {
-      if (!$scope.item.patientReccomendList.some((s) => s.id === $scope.item[name].id && code == s.code)) {
+      if (!$scope.item.patientReccomendList.some((s) => s.id === $scope.item[name].id && code == s.type)) {
         $scope.item.patientReccomendList.unshift({
           id: $scope.item[name].id,
           nameEn: $scope.item[name].nameEn,
           nameAr: $scope.item[name].nameAr,
-          code: code,
+          type: code,
+          code: $scope.item[name].code,
         });
       }
       delete $scope.item[name];
@@ -934,9 +947,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#ordersDetails').removeClass('hidden');
     $scope.order = item;
-    document.getElementById('treatment').innerHTML = $scope.order.treatment;
 
     $scope.localPrint = function () {
+      document.getElementById('treatment').innerHTML = $scope.order.treatment;
       let printer = {};
       if ($scope.setting.printerProgram.a4Printer) {
         printer = $scope.setting.printerProgram.a4Printer;
@@ -1046,9 +1059,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#medicalReportDetails').removeClass('hidden');
     $scope.order = item;
-    document.getElementById('treatment').innerHTML = $scope.order.treatment;
 
     $scope.localPrint = function () {
+      document.getElementById('treatment').innerHTML = $scope.order.treatment;
       let printer = {};
       if ($scope.setting.printerProgram.a4Printer) {
         printer = $scope.setting.printerProgram.a4Printer;
@@ -1084,16 +1097,15 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#ucafDetails').removeClass('hidden');
     $scope.order = item;
-    if($scope.order.ordersList && $scope.order.ordersList.length > 0) {
-
-      $scope.order.$ordersListServices = $scope.order.ordersList.filter((g) => g.type =='CO' || g.type =='LA' || g.type =='X-R');
-      $scope.order.$ordersListMedicines = $scope.order.ordersList.filter((g) => g.type =='MD' || g.type =='ER');
+    if ($scope.order.ordersList && $scope.order.ordersList.length > 0) {
+      $scope.order.$ordersListServices = $scope.order.ordersList.filter((g) => g.type == 'CO' || g.type == 'LA' || g.type == 'X-R');
+      $scope.order.$ordersListMedicines = $scope.order.ordersList.filter((g) => g.type == 'MD' || g.type == 'ER');
       $scope.order.$totalAmountServices = $scope.order.$ordersListServices.reduce((a, b) => a + b.total, 0);
       $scope.order.$totalAmountMedicines = $scope.order.$ordersListMedicines.reduce((a, b) => a + b.total, 0);
-      }
+    }
 
-    document.getElementById('treatment').innerHTML = $scope.order.treatment;
     $scope.localPrint = function () {
+      document.getElementById('treatment').innerHTML = $scope.order.treatment;
       let printer = {};
       if ($scope.setting.printerProgram.a4Printer) {
         printer = $scope.setting.printerProgram.a4Printer;

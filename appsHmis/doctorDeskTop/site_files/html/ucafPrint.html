@@ -102,6 +102,7 @@
         <p class="col-5 font-12">BP :</p>
         <div class="col-7 center">
           <span class="font-12 bold">{{order.bloodPressureHigh}}/{{order.bloodPressureLow}}</span>
+          <br ng-hide="order.bloodPressureHigh || order.bloodPressureLow" />
           <hr class="line" />
         </div>
       </div>
@@ -109,16 +110,16 @@
       <div class="col-2">
         <p class="col-6 font-12">Pulse :</p>
         <div class="col-6 center">
-          <span class="font-12 bold"
-            >{{order.pulse}}
-            <hr class="line" />
-          </span>
+          <span class="font-12 bold">{{order.pulse}} </span>
+          <br ng-hide="order.pulse" />
+          <hr class="line" />
         </div>
       </div>
       <div class="col-2">
         <p class="col-6 font-12">Temp :</p>
         <div class="col-6 center">
           <span class="font-12 bold">{{order.temperature}}</span>
+          <br ng-hide="order.temperature" />
           <hr class="line" />
         </div>
       </div>
@@ -126,6 +127,7 @@
         <p class="col-6 font-12">RespiratoryRate :</p>
         <div class="col-6 center">
           <span class="font-12 bold">{{order.respiratoryRate}}</span>
+          <br ng-hide="order.respiratoryRate" />
           <hr class="line" />
         </div>
       </div>
@@ -133,6 +135,7 @@
         <p class="col-6 font-12">KG :</p>
         <div class="col-6 center">
           <span class="font-12 bold">{{order.weight}}</span>
+          <br ng-hide="order.weight" />
           <hr class="line" />
         </div>
       </div>
@@ -140,6 +143,7 @@
         <p class="col-7 font-12">Height :</p>
         <div class="col-5 center">
           <span class="font-12 bold">{{order.height}}</span>
+          <br ng-hide="order.height" />
           <hr class="line" />
         </div>
       </div>
@@ -147,6 +151,7 @@
         <p class="col-7 font-12">Duration of Illness :</p>
         <div class="col-5 center">
           <span class="font-12 bold">{{order.durationOfIllness||0}} {{order.illnessPeriod.nameEn}}</span>
+          <br ng-hide="order.durationOfIllness" />
           <hr class="line" />
         </div>
       </div>
@@ -154,7 +159,7 @@
     <div class="row">
       <p class="bold col-6 gray-bg">- Chief Complaint & Main Symptoms :</p>
       <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'CC'}">{{s.nameEn}} , </span>
+        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'CC'}">{{s.nameEn}} , </span>
       </p>
       <br />
       <hr />
@@ -162,7 +167,7 @@
     <div class="row">
       <p class="bold col-6 gray-bg">- Other Conditions :</p>
       <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'OC'}">{{s.nameEn}} , </span>
+        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'OC'}">{{s.nameEn}} , </span>
       </p>
       <br />
       <hr />
@@ -171,7 +176,7 @@
     <div class="row">
       <p class="bold col-6 gray-bg">- Diagnosis :</p>
       <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'DIAG'}">{{s.nameEn}} , </span>
+        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'DIAG'}">{{s.nameEn}} , </span>
       </p>
       <br />
       <hr />

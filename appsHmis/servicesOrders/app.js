@@ -115,9 +115,9 @@ module.exports = function init(site) {
       }
       let where = {};
       if (_item.id) {
-          where = { id: _item.id };
+        where = { id: _item.id };
       } else if (_item.orderId) {
-          where = { orderId: _item.orderId };
+        where = { orderId: _item.orderId };
       }
       app.$collection.find(where, (err, doc) => {
         callback(err, doc);
@@ -424,9 +424,8 @@ module.exports = function init(site) {
                         DOCTOR_NAME: _doc.doctor.nameEn,
                         SPECIALTY: _doc.doctor.specialty.nameEn,
                         PREAUTH: '',
-                        ICD10_Code: '',
                         ICD10_Code1: '',
-                        Claim_Type: 'O',
+                        Claim_Type: _doc.type == 'out' ? 'O' : 'I',
                         Service_Code: _s.code,
                         Service_Description: _s.nameEn,
                         Tooth_No: '',
@@ -446,14 +445,25 @@ module.exports = function init(site) {
                         Height: _s.height,
                         Weight: _s.weight,
                         Pulse: _s.pulse,
-                        Policy_Name: '',
+                        Policy_Name: _doc.patient.insuranceCompany && _doc.patient.insuranceCompany.id ? _doc.patient.insuranceCompany.nameEn : '',
                         MediCode: '',
                         Notes: _s.notesAfter,
                         Policy: _doc.patient.policyNumber,
                         Refer_Ind: '',
                         Emr_Ind: '',
-                        VIndicator: 0,
+                        VIndicator: _s.comVat ? 1 : 0,
                       };
+                      if (_doc.doctorReccomendList && _doc.doctorReccomendList.length > 0) {
+                        _doc.doctorReccomendList.forEach((_r) => {
+                          if (_r.type == 'DIAG') {
+                            if (!obj.ICD10_Code) {
+                              obj.ICD10_Code = _r.nameEn;
+                            } else {
+                              obj.ICD10_Code1 = obj.ICD10_Code1 + ' , ' + _r.nameEn;
+                            }
+                          }
+                        });
+                      }
                       if (_doc.source && _doc.source.id == 2 && _doc.doctorDeskTop && _doc.doctorDeskTop.id) {
                         if (_s.serviceGroup.type && _s.serviceGroup.type.id != 2) {
                           obj.DOCTOR_NAME = _doc.doctorDeskTop.doctor.nameEn;
@@ -666,7 +676,6 @@ module.exports = function init(site) {
         if (doc.servicesList && doc.servicesList.length > 0) {
           doc.servicesList.forEach((_s) => {
             if (_s.id == obj.serviceId) {
-              
               _s.height = obj.height;
               _s.weight = obj.weight;
               _s.temperature = obj.temperature;
@@ -680,8 +689,7 @@ module.exports = function init(site) {
             }
           });
 
-          app.update(doc, (err, result) => {
-          });
+          app.update(doc, (err, result) => {});
         }
       }
     });
