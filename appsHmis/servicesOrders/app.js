@@ -210,6 +210,7 @@ module.exports = function init(site) {
                   objJournal.totalAverageCost += _s.cost || 0;
                   let obj = {
                     orderId: doc.id,
+                    referNum: doc.referNum,
                     patient: { ...doc.patient },
                     type: doc.type,
                     company: doc.company,
@@ -367,6 +368,9 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let select = req.body.select || { id: 1, code: 1, patient: 1, approved: 1, approvedDate: 1 };
+        if (select == 'all') {
+          select = {};
+        }
         let list = [];
         if (app.allowMemory) {
           app.memoryList
@@ -405,9 +409,8 @@ module.exports = function init(site) {
               $lt: d2,
             };
           }
-
           app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
-            if (req.body.claims) {
+            if (req.body.claims && docs) {
               let list = [];
               docs.forEach((_doc) => {
                 if (_doc.servicesList && _doc.servicesList.length > 0) {
@@ -449,17 +452,17 @@ module.exports = function init(site) {
                         MediCode: '',
                         Notes: _s.notesAfter,
                         Policy: _doc.patient.policyNumber,
-                        Refer_Ind: '',
+                        Refer_Ind: _doc.referNum,
                         Emr_Ind: '',
-                        VIndicator: _s.comVat ? 1 : 0,
+                        VIndicator: _s.totalComVat ? 1 : 0,
                       };
                       if (_doc.doctorReccomendList && _doc.doctorReccomendList.length > 0) {
                         _doc.doctorReccomendList.forEach((_r) => {
                           if (_r.type == 'DIAG') {
                             if (!obj.ICD10_Code) {
-                              obj.ICD10_Code = _r.nameEn;
+                              obj.ICD10_Code = _r.code;
                             } else {
-                              obj.ICD10_Code1 = obj.ICD10_Code1 + ' , ' + _r.nameEn;
+                              obj.ICD10_Code1 = obj.ICD10_Code1 + ' , ' + _r.code;
                             }
                           }
                         });
@@ -475,6 +478,7 @@ module.exports = function init(site) {
                   });
                 }
               });
+
               res.json({
                 done: true,
                 list: list,
@@ -520,6 +524,7 @@ module.exports = function init(site) {
             objJournal.totalAverageCost += _s.cost || 0;
             let obj = {
               orderId: result.doc.id,
+              referNum: result.doc.referNum,
               patient: { ...result.doc.patient },
               type: result.doc.type,
               company: result.doc.company,

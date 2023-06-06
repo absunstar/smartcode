@@ -277,7 +277,9 @@ module.exports = function init(site) {
     if (contract && contract.id && contract.insuranceClass && contract.insuranceClass.id) {
       app.view({ id: contract.id }, (err, doc) => {
         if (!err && doc) {
-          let obj = doc.insuranceClassesList.find((itm) => itm.id == contract.insuranceClass.id);
+          let obj = doc;
+          obj.insuranceClass = doc.insuranceClassesList.find((itm) => itm.id == contract.insuranceClass.id);
+
           callBack(obj);
         } else {
           callBack(false);

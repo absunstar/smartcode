@@ -17,7 +17,7 @@
           <div class="col3">
             <a target="_blank" class="a-btn" href="/patientHistory/{{item.patient.id}}">##word.Patient History## <i class="fas fa-notes-medical"></i></a>
           </div>
-          <i-button class="col3" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" label="##word.Vacation Request##" onclick="site.showModal('#sickLeaveModal')"></i-button>
+          <i-button class="col3" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" label="##word.Vacation Request##" ng-click="showVacationRequest()"></i-button>
           <div class="cart">
             <div class="row">
               <div class="col9">

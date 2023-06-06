@@ -331,6 +331,7 @@ module.exports = function init(site) {
     { id: 1, nameEn: 'Consultant', nameAr: 'إستشاري' },
     { id: 2, nameEn: 'Senior Specialist', nameAr: 'أخصائي أول' },
     { id: 3, nameEn: 'Specialist', nameAr: 'أخصائي' },
+    { id: 4, nameEn: 'General Practitioner', nameAr: 'ممارس عام' },
   ];
 
   site.vouchersTypes = [

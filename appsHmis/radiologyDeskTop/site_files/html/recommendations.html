@@ -37,7 +37,7 @@
           <fieldset>
             <legend>##word.Diagnoses##</legend>
             <div class="col10">
-              <div class="row list" ng-repeat="s in item.doctorReccomendList | filter:{code :'DIAG'}">
+              <div class="row list" ng-repeat="s in item.doctorReccomendList | filter:{type :'DIAG'}">
                 <div class="col1 code-list">
                   <p>{{s.code}}</p>
                 </div>

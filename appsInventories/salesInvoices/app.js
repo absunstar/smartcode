@@ -430,7 +430,9 @@ module.exports = function init(site) {
         let select = req.body.select || {};
         let search = req.body.search || '';
         let limit = req.body.limit || 50;
-
+        if (select == 'all') {
+          select = {};
+        }
         if (where && where.fromDate && where.toDate) {
           let d1 = site.toDate(where.fromDate);
           let d2 = site.toDate(where.toDate);
@@ -455,7 +457,65 @@ module.exports = function init(site) {
           where['company.id'] = site.getCompany(req).id;
 
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
-            res.json({ done: true, list: docs });
+            console.log(docs,'zzzzzzzzzzzzz');
+            if (req.body.claims && docs) {
+              let list = [];
+              docs.forEach((_doc) => {
+                if (_doc.itemsList && _doc.itemsList.length > 0 && _doc.doctorDeskTop && _doc.doctorDeskTop.id) {
+                  _doc.itemsList.forEach((_s) => {
+                    console.log('kkkkkkkkkkk');
+                    let obj = {
+                      Membership_No: _doc.doctorDeskTop.patient.member,
+                      Patient_File_No: _doc.doctorDeskTop.patient.code,
+                      Patient_Name: _doc.doctorDeskTop.patient.fullNameEn,
+                      Patient_ID: _doc.doctorDeskTop.patient.havisaNum,
+                      Nationality: _doc.doctorDeskTop.patient.nationality.nameEn,
+                      Invoice_No: _doc.doctorDeskTop.code,
+                      Invoice_Date: _doc.date,
+                      DOCTOR_NAME: _doc.doctorDeskTop.doctor.nameEn,
+                      SPECIALTY: _doc.doctorDeskTop.doctor.specialty.nameEn,
+                      PREAUTH: '',
+                      ICD10_Code1: '',
+                      Claim_Type: _doc.doctorDeskTop.type == 'out' ? 'O' : 'I',
+                      Service_Code: _s.code,
+                      Service_Description: _s.nameEn,
+                      Tooth_No: '',
+                      Service_date: _doc.date,
+                      QTY: 1,
+                      Gross_Amount: _s.price,
+                      Discount: _s.totalDisc,
+                      Net_After_Discount: _s.totalAfterDisc,
+                      Deductible: _s.deduct,
+                      Net_Payable_Amount: _s.comCash,
+                      VatPercentage: _s.comVat,
+                      PatientVatAmount: _s.totalPVat,
+                      NetVatAmount: _s.totalComVat,
+                      Temperature: _doc.doctorDeskTop.temperature,
+                      Respiratory_rate: _doc.doctorDeskTop.respiratoryRate,
+                      Blood_pressure: _doc.doctorDeskTop.bloodPressureHigh + '/' + _doc.doctorDeskTop.bloodPressureLow,
+                      Height: _doc.doctorDeskTop.height,
+                      Weight: _doc.doctorDeskTop.weight,
+                      Pulse: _doc.doctorDeskTop.pulse,
+                      Policy_Name: _doc.doctorDeskTop.patient.insuranceCompany && _doc.doctorDeskTop.patient.insuranceCompany.id ? _doc.doctorDeskTop.patient.insuranceCompany.nameEn : '',
+                      MediCode: '',
+                      Notes: _s.notesAfter,
+                      Policy: _doc.doctorDeskTop.patient.policyNumber,
+                      Refer_Ind: _doc.doctorDeskTop.referNum,
+                      Emr_Ind: '',
+                      VIndicator: _s.comVat ? 1 : 0,
+                    };
+
+                    list.push(obj);
+                  });
+                }
+              });
+              res.json({
+                done: true,
+                list: list,
+              });
+            } else {
+              res.json({ done: true, list: docs });
+            }
           });
         }
       });

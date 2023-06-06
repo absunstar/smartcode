@@ -4,27 +4,37 @@
     <div x-import="servicesOrders/modal.html"></div>
     <div class="row">
       <i-list
-        class="col4"
+        class="col3"
         label="##word.Main Insurance Company##"
-        ng-model="item.mainInsuranceCompany"
+        ng-model="search.mainInsuranceCompany"
         display="name##session.lang##"
         items="mainInsuranceCompaniesList"
-        ng-search="item.$mainInsuranceCompanies"
+        ng-search="search.$mainInsuranceCompanies"
       ></i-list>
 
       <i-list
-        class="col4"
+        class="col3"
         label="##word.Insurance Company##"
-        ng-model="item.insuranceCompany"
+        ng-model="search.insuranceCompany"
         display="name##session.lang##"
         items="insuranceCompaniesList"
-        ng-search="item.$insuranceCompany"
+        ng-search="search.$insuranceCompany"
       ></i-list>
+      <i-list class="col3" label="##word.Patient##" ng-model="search.patient" display="fullName##session.lang##" items="patientsList" ng-get="getPatientsList($search)"></i-list>
+      <i-list class="col3" label="##word.Doctor##" ng-model="search.doctor" display="name##session.lang##" items="doctorsList" ng-search="item.$doctor"></i-list>
     </div>
 
     <div class="row">
-      <i-date ng-model="search.date" label="##word.Date From##" class="col4"></i-date>
-      <i-date ng-model="search.dateTo" label="##word.Date To##" class="col4"></i-date>
+      <i-date ng-model="search.date" label="##word.Date From##" class="col3"></i-date>
+      <i-date ng-model="search.dateTo" label="##word.Date To##" class="col3"></i-date>
+      <div class="col3">
+        <br />
+        <fieldset>
+          <p class="bold col4">##word.Type## :</p>
+          <i-radio ng-model="search.type" class="col4" ng-value="out" label="##word.Out##"> </i-radio>
+          <i-radio ng-model="search.type" class="col4" ng-value="in" label="##word.In##"></i-radio>
+        </fieldset>
+      </div>
       <div class="col2">
         <br />
         <i-button type="search" label="##word.Search Date##" ng-click="getServicesOrders()"></i-button>

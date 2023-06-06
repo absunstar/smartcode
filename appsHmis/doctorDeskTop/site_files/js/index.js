@@ -1155,6 +1155,21 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     }, 300);
   };
 
+  $scope.addDays = function () {
+    $timeout(() => {
+    let result = new Date($scope.item.leave.fromDate);
+    result.setTime(result.getTime() + $scope.item.leave.day * 24 * 60 * 60 * 1000);
+    $scope.item.leave.toDate = result;
+  }, 300);
+};
+
+  $scope.showVacationRequest = function () {
+    $scope.error = '';
+    $scope.item.leave = $scope.item.leave || {};
+    $scope.item.leave.fromDate = new Date();
+    site.showModal('#sickLeaveModal');
+  };
+
   $scope.showSearch = function () {
     $scope.error = '';
     site.showModal($scope.modalSearchID);

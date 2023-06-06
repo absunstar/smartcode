@@ -170,7 +170,7 @@
           <p class="font-14 userPrint">Diagnosis</p>
         </div>
         <div class="center col-6">
-          <span class="bold font-14 userPrint" ng-repeat="s in order.doctorReccomendList | filter:{code :'DIAG'}">{{s.name##session.lang##}} , </span>
+          <span class="bold font-14 userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'DIAG'}">{{s.name##session.lang##}} , </span>
         </div>
 
         <div class="center col-3">

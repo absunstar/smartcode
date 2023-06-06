@@ -607,7 +607,6 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         if (response.data.done && response.data.mainInsuranceCompany && response.data.servicesList) {
           $scope.item.servicesList = [];
           response.data.servicesList.forEach((_s) => {
-            
             $scope.item.servicesList.push(_s);
           });
           if ($scope.item.servicesList.some((s) => !s.approved)) {
@@ -834,6 +833,9 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           function (response) {
             $scope.busy = false;
             if (response.data.done && response.data.servicesList && response.data.servicesList.length > 0) {
+              if (response.data.insuranceContract && response.data.insuranceContract.id) {
+                $scope.item.insuranceContract = response.data.insuranceContract;
+              }
               service = { ...response.data.servicesList[0] };
               $scope.item.servicesList.push(service);
               $scope.calc($scope.item);
