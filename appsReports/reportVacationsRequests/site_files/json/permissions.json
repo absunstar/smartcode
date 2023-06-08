@@ -1,7 +1,7 @@
 [
-    { "moduleName": "report", "screenName": "attendanceReport", "name": "attendanceReportManage", "En": "Manage", "Ar": "إدارة" },
-    { "moduleName": "report", "screenName": "attendanceReport", "name": "attendanceReportView", "En": "View", "Ar": "عرض" },
-    { "moduleName": "report", "screenName": "attendanceReport", "name": "attendanceReportExport", "En": "Export", "Ar": "تصدير" },
-    { "moduleName": "report", "screenName": "attendanceReport", "name": "attendanceReportPrint", "En": "Print", "Ar": "طباعة" },
-    { "moduleName": "report", "screenName": "attendanceReport", "name": "attendanceReportUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+    { "moduleName": "report", "screenName": "reportVacationsRequests", "name": "reportVacationsRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportVacationsRequests", "name": "reportVacationsRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportVacationsRequests", "name": "reportVacationsRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportVacationsRequests", "name": "reportVacationsRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportVacationsRequests", "name": "reportVacationsRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
 ]

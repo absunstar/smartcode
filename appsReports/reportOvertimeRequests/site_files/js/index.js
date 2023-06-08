@@ -1,6 +1,6 @@
-app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
+app.controller('reportOvertimeRequests', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'reportWorkErrandRequests';
+  $scope.appName = 'reportOvertimeRequests';
   $scope.list = [];
   $scope.item = {};
   $scope._search = {};
@@ -9,8 +9,10 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
     $scope.mode = 'view';
     $scope.item = {};
     $scope.view(_item);
-    site.showModal('#workErrandRequestsManageModal');
+    site.showModal('#overtimeRequestsManageModal');
   };
+
+  
 
   $scope.getCurrentMonthDate = function () {
     const date = new Date();
@@ -28,7 +30,7 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     $http({
       method: 'POST',
-      url: `/api/workErrandRequests/view`,
+      url: `/api/overtimeRequests/view`,
       data: {
         id: _item.id,
       },
@@ -52,7 +54,6 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
   $scope.searchAll = function () {
     $scope.error = '';
     $scope.search = { ...$scope._search };
-
     $scope.getAll($scope.search);
   };
 
@@ -68,17 +69,19 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
 
     $http({
       method: 'POST',
-      url: `/api/workErrandRequests/all`,
+      url: `/api/overtimeRequests/all`,
       data: {
         where: where,
         select: {
           id: 1,
-          employee: 1,
-          delayDate: 1,
           date: 1,
-          fromTime: 1,
-          toTime: 1,
+          requestedBy: 1,
+          employee: 1,
+          department: 1,
+          section: 1,
           requestStatus: 1,
+          hours: 1,
+          minutes: 1,
         },
       },
     }).then(
@@ -133,6 +136,5 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
   };
 
   $scope.getEmployees();
-
   $scope.getCurrentMonthDate();
 });

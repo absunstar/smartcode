@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportEmployeesBonusesManage", "name": "reportEmployeesBonusesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportEmployeesBonusesManage", "name": "reportEmployeesBonusesManageView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportEmployeesBonusesManage", "name": "reportEmployeesBonusesManageExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportEmployeesBonusesManage", "name": "reportEmployeesBonusesManagePrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportEmployeesBonusesManage", "name": "reportEmployeesBonusesManageUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

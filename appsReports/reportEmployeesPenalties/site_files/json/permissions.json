@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportEmployeesPenalties", "name": "reportEmployeesPenaltiesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportEmployeesPenalties", "name": "reportEmployeesPenaltiesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportEmployeesPenalties", "name": "reportEmployeesPenaltiesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportEmployeesPenalties", "name": "reportEmployeesPenaltiesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportEmployeesPenalties", "name": "reportEmployeesPenaltiesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

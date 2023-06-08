@@ -392,6 +392,8 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+     
+
         app.view(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;

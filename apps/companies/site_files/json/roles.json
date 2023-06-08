@@ -128,7 +128,13 @@
       "evaluationItemsAdmin",
       "evaluationTemplatesAdmin",
       "reportVacationsRequestsManage",
-      "reportWorkErrandRequestsManage"
+      "reportWorkErrandRequestsManage",
+      "reportDelayRequestsManage",
+      "reportOvertimeRequestsManage",
+      "reportEmployeesBonusesManage",
+      "reportEmployeesPenaltiesManage",
+      "reportEmployeesBonusesManag",
+      "reportEmployeesAdvancesManage"
     ]
   }
 ]

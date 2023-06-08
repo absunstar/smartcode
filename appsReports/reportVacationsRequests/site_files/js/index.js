@@ -50,13 +50,18 @@ app.controller('reportVacationsRequests', function ($scope, $http, $timeout) {
   $scope.searchAll = function () {
     $scope.error = '';
     $scope.search = { ...$scope._search };
-
     $scope.getAll($scope.search);
   };
 
   $scope.getAll = function (where) {
     $scope.busy = true;
     $scope.list = [];
+
+    if (where.employee && where.employee.id) {
+      let employeeId = where.employee.id;
+      delete where.employee;
+      where['employee.id'] = employeeId;
+    }
 
     $http({
       method: 'POST',
@@ -90,6 +95,40 @@ app.controller('reportVacationsRequests', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getCurrentMonthDate();
+  $scope.getEmployees = function ($search) {
+    if ($search && $search.length < 1) {
+      return;
+    }
+    $scope.busy = true;
+    $scope.employeesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/employees/all',
+      data: {
+        where: { active: true, 'type.id': 4 },
+        select: {
+          id: 1,
+          code: 1,
+          fullNameEn: 1,
+          fullNameAr: 1,
+          image: 1,
+        },
+        search: $search,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.employeesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
 
+  $scope.getEmployees();
+  $scope.getCurrentMonthDate();
 });

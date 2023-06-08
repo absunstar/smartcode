@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportEmployeesAdvances", "name": "reportEmployeesAdvancesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportEmployeesAdvances", "name": "reportEmployeesAdvancesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportEmployeesAdvances", "name": "reportEmployeesAdvancesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportEmployeesAdvances", "name": "reportEmployeesAdvancesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportEmployeesAdvances", "name": "reportEmployeesAdvancesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

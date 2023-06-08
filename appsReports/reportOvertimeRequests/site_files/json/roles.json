@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportOvertimeRequestsAdmin",
+        "En": "Report Overtime Requests Admin",
+        "Ar": "تقرير طلبات الوقت الإضافي",
+        "permissions": ["reportOvertimeRequestsManage"]
+    }
+]

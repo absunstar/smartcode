@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportEmployeesAdvancesManageAdmin",
+        "En": "Report Employee Advances Admin",
+        "Ar": "تقرير سلف الموظفين",
+        "permissions": ["reportEmployeesAdvancesManage"]
+    }
+]

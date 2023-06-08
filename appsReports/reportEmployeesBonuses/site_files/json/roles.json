@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportEmployeesBonusesManageAdmin",
+        "En": "Report Employee Bonuses Admin",
+        "Ar": "تقرير مكافأت الموظفين",
+        "permissions": ["reportEmployeesBonusesManage"]
+    }
+]

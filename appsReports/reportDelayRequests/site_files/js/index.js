@@ -1,6 +1,6 @@
-app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
+app.controller('reportDelayRequests', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'reportWorkErrandRequests';
+  $scope.appName = 'reportDelayRequests';
   $scope.list = [];
   $scope.item = {};
   $scope._search = {};
@@ -9,7 +9,7 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
     $scope.mode = 'view';
     $scope.item = {};
     $scope.view(_item);
-    site.showModal('#workErrandRequestsManageModal');
+    site.showModal('#delayRequestsManageModal');
   };
 
   $scope.getCurrentMonthDate = function () {
@@ -28,7 +28,7 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     $http({
       method: 'POST',
-      url: `/api/workErrandRequests/view`,
+      url: `/api/delayRequests/view`,
       data: {
         id: _item.id,
       },
@@ -52,7 +52,6 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
   $scope.searchAll = function () {
     $scope.error = '';
     $scope.search = { ...$scope._search };
-
     $scope.getAll($scope.search);
   };
 
@@ -68,7 +67,7 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
 
     $http({
       method: 'POST',
-      url: `/api/workErrandRequests/all`,
+      url: `/api/delayRequests/all`,
       data: {
         where: where,
         select: {
@@ -133,6 +132,5 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
   };
 
   $scope.getEmployees();
-
   $scope.getCurrentMonthDate();
 });

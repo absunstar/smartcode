@@ -485,7 +485,7 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-    
+      
         app.view(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
@@ -575,7 +575,7 @@ module.exports = function init(site) {
         // else {
         //   where.finalApproval = false;
         // }
-
+     
         if (app.allowMemory) {
           if (!search) {
             search = 'id';

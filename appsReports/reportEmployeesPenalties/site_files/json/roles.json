@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportEmployeesPenaltiesManageAdmin",
+        "En": "Report Employee Penalties Admin",
+        "Ar": "تقرير جزاءات الموظفين",
+        "permissions": ["reportEmployeesPenaltiesManage"]
+    }
+]

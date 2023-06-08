@@ -1,8 +1,8 @@
-<div ng-controller="reportVacationsRequests" class="loaded">
-  <div class="row" x-permissions="reportVacationsRequestsUi || reportVacationsRequestsManage">
-    <div x-import="vacationsRequests/modal.html"></div>
+<div ng-controller="reportOvertimeRequests" class="loaded">
+  <div class="row" x-permissions="reportOvertimeRequestsUi || reportOvertimeRequestsManage">
+    <div x-import="overtimeRequests/modal.html"></div>
 
-    <div class="row" x-permissions="reportVacationsRequestsManage">
+    <div class="row" x-permissions="reportOvertimeRequestsManage">
       <i-list v="r" class="col3" display="fullName##session.lang##" ng-model="_search.employee" items="employeesList" label="##word.Employee##" ng-search="item.$employee"></i-list>
 
       <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
@@ -17,36 +17,36 @@
 
     <p class="error">{{ error}}</p>
     <div class="table-responsive">
-      <table class="table hover bold" id="reportVacationsRequests">
+      <table class="table hover bold" id="reportOvertimeRequests">
         <tr>
           <th>##word.Name##</th>
-          <th>##word.Vacation Type##</th>
+          <th>##word.Requestd By##</th>
+          <th>##word.Date##</th>
           <th>##word.Department##</th>
           <th>##word.Section##</th>
-          <th>##word.Date##</th>
+          <th>##word.Time##</th>
           <th>##word.Status##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
         <tr ng-repeat="item in list | filter:$search">
           <td class="center">{{item.employee.fullName##session.lang##}}</td>
-          <td class="center">{{item.vacationType.name##session.lang##}}</td>
+          <td class="center">{{item.requestedBy.fullName##session.lang##}}</td>
+          <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
           <td class="center">{{item.department.name##session.lang##}}</td>
           <td class="center">{{item.section.name##session.lang##}}</td>
-          <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+          <td class="center" > {{item.hours}} <span>##word.Hour/s##</span> -  {{item.minutes}} <span>##word.Minute/s##</span> </td>
 
           <td class="center">
             <span ng-show="item.requestStatus === 'accepted'" class="text-success"> {{item.requestStatus}} </span>
             <span ng-show="item.requestStatus !== 'accepted'" class="text-danger"> {{item.requestStatus}} </span>
           </td>
-
           <td class="center not-print">
             <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
           </td>
         </tr>
       </table>
     </div>
-    <i-button x-permissions="reportVacationsRequestsPrint || reportVacationsRequestsManage" type="print" label="##word.Print##" onclick="site.print('#reportVacationsRequests')"></i-button>
-    <i-button x-permissions="reportVacationsRequestsExport || reportVacationsRequestsManage" type="export" label="##word.Export to excel##" onclick="site.export('#reportVacationsRequests')">
-    </i-button>
+    <i-button x-permissions="reportOvertimeRequestsPrint || reportOvertimeRequestsManage" type="print" label="##word.Print##" onclick="site.print('#reportOvertimeRequests')"></i-button>
+    <i-button x-permissions="reportOvertimeRequestsExport || reportOvertimeRequestsManage" type="export" label="##word.Export to excel##" onclick="site.export('#reportOvertimeRequests')"> </i-button>
   </div>
 </div>

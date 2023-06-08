@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportOvertimeRequests", "name": "reportOvertimeRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportOvertimeRequests", "name": "reportOvertimeRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportOvertimeRequests", "name": "reportOvertimeRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportOvertimeRequests", "name": "reportOvertimeRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportOvertimeRequests", "name": "reportOvertimeRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

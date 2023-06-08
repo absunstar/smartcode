@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportDelayRequestsAdmin",
+        "En": "Report Delay Requests Admin",
+        "Ar": "تقرير طلبات أذون التأخير",
+        "permissions": ["reportDelayRequestsManage"]
+    }
+]

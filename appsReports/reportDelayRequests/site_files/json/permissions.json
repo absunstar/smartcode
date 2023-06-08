@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportDelayRequests", "name": "reportDelayRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportDelayRequests", "name": "reportDelayRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportDelayRequests", "name": "reportDelayRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportDelayRequests", "name": "reportDelayRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportDelayRequests", "name": "reportDelayRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

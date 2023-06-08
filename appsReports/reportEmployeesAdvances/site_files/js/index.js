@@ -1,6 +1,6 @@
-app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
+app.controller('reportEmployeesAdvances', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'reportWorkErrandRequests';
+  $scope.appName = 'reportEmployeesAdvances';
   $scope.list = [];
   $scope.item = {};
   $scope._search = {};
@@ -9,7 +9,7 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
     $scope.mode = 'view';
     $scope.item = {};
     $scope.view(_item);
-    site.showModal('#workErrandRequestsManageModal');
+    site.showModal('#employeesAdvancesManageModal');
   };
 
   $scope.getCurrentMonthDate = function () {
@@ -28,7 +28,7 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     $http({
       method: 'POST',
-      url: `/api/workErrandRequests/view`,
+      url: `/api/employeesAdvances/view`,
       data: {
         id: _item.id,
       },
@@ -52,7 +52,6 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
   $scope.searchAll = function () {
     $scope.error = '';
     $scope.search = { ...$scope._search };
-
     $scope.getAll($scope.search);
   };
 
@@ -68,17 +67,22 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
 
     $http({
       method: 'POST',
-      url: `/api/workErrandRequests/all`,
+      url: `/api/employeesAdvances/all`,
       data: {
         where: where,
         select: {
           id: 1,
-          employee: 1,
-          delayDate: 1,
           date: 1,
-          fromTime: 1,
-          toTime: 1,
+          employeesBonusName: 1,
+          category: 1,
+          type: 1,
+          requestedBy: 1,
+          employee: 1,
+          department: 1,
+          section: 1,
           requestStatus: 1,
+          hours: 1,
+          minutes: 1,
         },
       },
     }).then(
@@ -133,6 +137,5 @@ app.controller('reportWorkErrandRequests', function ($scope, $http, $timeout) {
   };
 
   $scope.getEmployees();
-
   $scope.getCurrentMonthDate();
 });
