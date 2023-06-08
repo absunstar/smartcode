@@ -126,7 +126,9 @@
       "packagesManage",
       "attendanceReportAdmin",
       "evaluationItemsAdmin",
-      "evaluationTemplatesAdmin"
+      "evaluationTemplatesAdmin",
+      "reportVacationsRequestsManage",
+      "reportWorkErrandRequestsManage"
     ]
   }
 ]

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportWorkErrandRequestsAdmin",
+        "En": "Report Work Errand Requests Admin",
+        "Ar": "تقرير طلبات الماموريات",
+        "permissions": ["reportWorkErrandRequestsManage"]
+    }
+]

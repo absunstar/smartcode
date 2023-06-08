@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportVacationsRequestsAdmin",
+        "En": "Report Vacations Requests Admin",
+        "Ar": "تقرير طلبات الأجازة",
+        "permissions": ["reportVacationsRequestsManage"]
+    }
+]

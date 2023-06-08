@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportWorkErrandRequests", "name": "reportWorkErrandRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportWorkErrandRequests", "name": "reportWorkErrandRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportWorkErrandRequests", "name": "reportWorkErrandRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportWorkErrandRequests", "name": "reportWorkErrandRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportWorkErrandRequests", "name": "reportWorkErrandRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]
