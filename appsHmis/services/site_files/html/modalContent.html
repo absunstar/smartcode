@@ -1,172 +1,173 @@
 <div class="form" id="services">
-    <div class="row padding margin">
-        <fieldset>
-            <legend>##word.Information##</legend>
+  <div class="row padding margin">
+    <fieldset>
+      <legend>##word.Information##</legend>
+      <div class="row">
+        <div class="col9">
+          <div class="row">
+            <i-control class="col6" ng-hide="disabledCode" label="##word.Code##" ng-model="item.code"> </i-control>
+            <i-checkbox class="col3" ng-model="item.active" label="##word.Active##"></i-checkbox>
+          </div>
+          <div class="row">
+            <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+            <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+            <i-list class="col6" v="r" label="##word.Service Group##" ng-model="item.serviceGroup" display="name##session.lang##" items="servicesGroupsList" ng-search="item.$serviceGroup"></i-list>
+            <i-list
+              class="col6"
+              label="##word.Service Specialty##"
+              ng-model="item.serviceSpecialty"
+              display="name##session.lang##"
+              items="serviceSpecialtiesList"
+              ng-hide="item.serviceGroup.type.id == 3 || item.serviceGroup.type.id == 4"
+              ng-search="item.$serviceSpecialty"
+            ></i-list>
+            <i-list class="col6" label="##word.ACHI##" ng-model="item.achi" display="name##session.lang##" items="achiCodesList" ng-search="item.$achi"></i-list>
+            <i-control type="text" class="col6" ng-model="item.sfdaCode" label="##word.SFDA Code##"></i-control>
+            <i-control class="col6" label="##word.CPT Code##" ng-model="item.cptCode" display="name##session.lang##"></i-control>
+          </div>
+        </div>
+        <div class="col3">
+          <i-image class="img256" ng-model="item.image"></i-image>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="tabs">
+    <div class="tabs-header full">
+      <a class="tab-link" onclick="site.showTabContent(event, '#financial')">
+        <span>##word.Financial Info##</span>
+      </a>
+
+      <a class="tab-link" onclick="site.showTabContent(event, '#servicesCategories')">
+        <span>##word.Services Categories##</span>
+      </a>
+    </div>
+
+    <div class="tabs-content">
+      <div id="financial" class="tab-content">
+        <div class="row padding">
+          <fieldset>
+            <legend>##word.Out Patient##</legend>
             <div class="row">
-                <div class="col9">
-                    <div class="row">
-                        <i-control class="col6" ng-hide="disabledCode" label="##word.Code##" ng-model="item.code"> </i-control>
-                        <i-checkbox class="col3" ng-model="item.active" label="##word.Active##"></i-checkbox>
-                    </div>
-                    <div class="row">
-                        <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
-                        <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-                        <i-list
-                            class="col6"
-                            v="r"
-                            label="##word.Service Group##"
-                            ng-model="item.serviceGroup"
-                            display="name##session.lang##"
-                            items="servicesGroupsList"
-                            ng-search="item.$serviceGroup"
-                        ></i-list>
-                        <i-list class="col6" label="##word.ACHI##" ng-model="item.achi" display="name##session.lang##" items="achiCodesList" ng-search="item.$achi"></i-list>
-                        <i-control type="text" class="col6" ng-model="item.sfdaCode" label="##word.SFDA Code##"></i-control>
-                        <i-control class="col6" label="##word.CPT Code##" ng-model="item.cptCode" display="name##session.lang##"></i-control>
-                    </div>
-                </div>
-                <div class="col3">
-                    <i-image class="img256" ng-model="item.image"></i-image>
-                </div>
+              <i-control v="r" class="col6" type="number" ng-model="item.cashPriceOut" label="##word.Cash Price##"></i-control>
+              <i-control v="r" class="col6" type="number" ng-model="item.creditPriceOut" label="##word.Credit Price##"></i-control>
             </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>##word.In Patient##</legend>
+            <div class="row">
+              <i-control v="r" class="col6" type="number" ng-model="item.cashPriceIn" label="##word.Cash Price##"></i-control>
+              <i-control v="r" class="col6" type="number" ng-model="item.creditPriceIn" label="##word.Credit Price##"></i-control>
+            </div>
+          </fieldset>
+
+          <div class="row">
+            <i-control v="r" class="col6" type="number" ng-model="item.packagePrice" label="##word.Package Price##"></i-control>
+            <i-control v="r" class="col6" type="number" ng-model="item.pharmacyPrice" label="##word.Pharmacy Price##"></i-control>
+          </div>
+
+          <div class="row">
+            <i-control type="number" v="r" class="col6" ng-model="item.vat" label="##word.VAT## %"></i-control>
+            <i-control type="number" v="r" class="col6" ng-model="item.cost" label="##word.Cost##"></i-control>
+          </div>
+
+          <div class="row" ng-show="item.serviceGroup.type.id == 3">
+            <fieldset>
+              <legend>##word.Laboratory Details## <i-button type="push" ng-click="addNormalRange()"></i-button></legend>
+              <div class="table-responsive">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Name##</th>
+                    <th>##word.Gender##</th>
+                    <th>##word.Unit##</th>
+                    <th>##word.From Days##</th>
+                    <th>##word.To Days##</th>
+                    <th>##word.From Value##</th>
+                    <th>##word.To Value##</th>
+                    <th class="not-print">##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="n in item.normalRangeList">
+                    <td class="center"><i-control v="r" ng-model="n.name"></i-control></td>
+                    <td class="center"><i-list ng-model="n.gender" display="name##session.lang##" items="gendersList" ng-search="n.$genders"></i-list></td>
+                    <td class="center"><i-control v="r" ng-model="n.unit"></i-control></td>
+                    <td class="center"><i-control type="number" v="r" ng-model="n.fromDays"></i-control></td>
+                    <td class="center"><i-control type="number" v="r" ng-model="n.toDays"></i-control></td>
+                    <td class="center"><i-control v="r" ng-model="n.fromValue"></i-control></td>
+                    <td class="center"><i-control v="r" ng-model="n.toValue"></i-control></td>
+                    <td class="center not-print">
+                      <i-button type="delete" ng-click="item.normalRangeList.splice($index,1)"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div id="servicesCategories" class="tab-content">
+        <fieldset>
+          <div class="row padding">
+            <div class="row">
+              <i-list
+                label="##word.Service Category##"
+                class="col8"
+                ng-model="item.$serviceCategory"
+                display="name##session.lang##"
+                items="servicesCategoriesList"
+                ng-get="getservicesCategoriesList($search)"
+              ></i-list>
+              <div class="col4">
+                <br />
+                <i-button type="push" ng-click="addServicesCategories(item)"></i-button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Code##</th>
+                    <th>##word.Name##</th>
+                    <th class="not-print">##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="s in item.servicesCategoriesList">
+                    <td class="center blue">{{s.code}}</td>
+                    <td class="center">{{s.name##session.lang##}}</td>
+
+                    <td class="center not-print">
+                      <i-button type="delete" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </fieldset>
+      </div>
     </div>
-    <div class="tabs">
-        <div class="tabs-header full">
-            <a class="tab-link" onclick="site.showTabContent(event, '#financial')">
-                <span>##word.Financial Info##</span>
-            </a>
-
-            <a class="tab-link" onclick="site.showTabContent(event, '#servicesCategories')">
-                <span>##word.Services Categories##</span>
-            </a>
-        </div>
-
-        <div class="tabs-content">
-            <div id="financial" class="tab-content">
-                <div class="row padding">
-                    <fieldset>
-                        <legend>##word.Out Patient##</legend>
-                        <div class="row">
-                            <i-control v="r" class="col6" type="number" ng-model="item.cashPriceOut" label="##word.Cash Price##"></i-control>
-                            <i-control v="r" class="col6" type="number" ng-model="item.creditPriceOut" label="##word.Credit Price##"></i-control>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>##word.In Patient##</legend>
-                        <div class="row">
-                            <i-control v="r" class="col6" type="number" ng-model="item.cashPriceIn" label="##word.Cash Price##"></i-control>
-                            <i-control v="r" class="col6" type="number" ng-model="item.creditPriceIn" label="##word.Credit Price##"></i-control>
-                        </div>
-                    </fieldset>
-
-                    <div class="row">
-                        <i-control v="r" class="col6" type="number" ng-model="item.packagePrice" label="##word.Package Price##"></i-control>
-                        <i-control v="r" class="col6" type="number" ng-model="item.pharmacyPrice" label="##word.Pharmacy Price##"></i-control>
-                    </div>
-
-                    <div class="row">
-                        <i-control type="number" v="r" class="col6" ng-model="item.vat" label="##word.VAT## %"></i-control>
-                        <i-control type="number" v="r" class="col6" ng-model="item.cost" label="##word.Cost##"></i-control>
-                    </div>
-
-                    <div class="row" ng-show="item.serviceGroup.type.id == 3">
-                        <fieldset>
-                            <legend>##word.Laboratory Details## <i-button type="push" ng-click="addNormalRange()"></i-button></legend>
-                            <div class="table-responsive">
-                                <table class="table hover bold">
-                                    <tr>
-                                        <th>##word.Name##</th>
-                                        <th>##word.Gender##</th>
-                                        <th>##word.Unit##</th>
-                                        <th>##word.From Days##</th>
-                                        <th>##word.To Days##</th>
-                                        <th>##word.From Value##</th>
-                                        <th>##word.To Value##</th>
-                                        <th class="not-print">##word.Actions##</th>
-                                    </tr>
-                                    <tr ng-repeat="n in item.normalRangeList">
-                                        <td class="center"><i-control v="r" ng-model="n.name"></i-control></td>
-                                        <td class="center"><i-list ng-model="n.gender" display="name##session.lang##" items="gendersList" ng-search="n.$genders"></i-list></td>
-                                        <td class="center"><i-control v="r" ng-model="n.unit"></i-control></td>
-                                        <td class="center"><i-control type="number" v="r" ng-model="n.fromDays"></i-control></td>
-                                        <td class="center"><i-control type="number" v="r" ng-model="n.toDays"></i-control></td>
-                                        <td class="center"><i-control v="r" ng-model="n.fromValue"></i-control></td>
-                                        <td class="center"><i-control v="r" ng-model="n.toValue"></i-control></td>
-                                        <td class="center not-print">
-                                            <i-button type="delete" ng-click="item.normalRangeList.splice($index,1)"> </i-button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-            </div>
-            <div id="servicesCategories" class="tab-content">
-                <fieldset>
-                    <div class="row padding">
-                        <div class="row">
-                            <i-list
-                                label="##word.Service Category##"
-                                class="col8"
-                                ng-model="item.$serviceCategory"
-                                display="name##session.lang##"
-                                items="servicesCategoriesList"
-                                ng-get="getservicesCategoriesList($search)"
-                            ></i-list>
-                            <div class="col4">
-                                <br />
-                                <i-button type="push" ng-click="addServicesCategories(item)"></i-button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table hover bold">
-                                    <tr>
-                                        <th>##word.Code##</th>
-                                        <th>##word.Name##</th>
-                                        <th class="not-print">##word.Actions##</th>
-                                    </tr>
-                                    <tr ng-repeat="s in item.servicesCategoriesList">
-                                        <td class="center blue">{{s.code}}</td>
-                                        <td class="center">{{s.name##session.lang##}}</td>
-
-                                        <td class="center not-print">
-                                            <i-button type="delete" ng-click="item.servicesCategoriesList.splice($index,1)"> </i-button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
 
 <div ng-show="mode !== 'add' " class="row">
-    <table class="table hover border">
-        <tr>
-            <th>##word.addUserInfo##</th>
-            <th>##word.editUserInfo##</th>
-        </tr>
-        <tr>
-            <td class="center">
-                <p class="blue">{{item.addUserInfo.name}}</p>
-                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
-                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
-                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
-            </td>
+  <table class="table hover border">
+    <tr>
+      <th>##word.addUserInfo##</th>
+      <th>##word.editUserInfo##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
 
-            <td class="center">
-                <p class="blue">{{item.editUserInfo.name}}</p>
-                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
-                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
-                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
-            </td>
-        </tr>
-    </table>
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
 </div>

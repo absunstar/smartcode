@@ -464,6 +464,7 @@ app.controller('mainInsuranceCompanies', function ($scope, $http, $timeout) {
           cashPriceIn: 1,
           creditPriceIn: 1,
           packagePrice: 1,
+          serviceSpecialty :1,
           vat: 1,
         },
         search: $search,

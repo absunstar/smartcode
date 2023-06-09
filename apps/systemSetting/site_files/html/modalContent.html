@@ -293,6 +293,15 @@
                 </table>
               </div>
             </fieldset>
+            <fieldset>
+              <legend>##word.Teeth List##</legend>
+              <div class="row">
+                <div class="col2" ng-repeat="t in item.hmisSetting.teethList track by $index">
+                    <p class="center font-18">##word.Tooth## {{t.name}}</p>
+                    <i-image class="img128 center" ng-model="t.image"></i-image>
+                </div>
+              </div>
+            </fieldset>
           </fieldset>
         </div>
         <div id="storesSettings" class="tab-content">
@@ -377,7 +386,7 @@
             <div class="row">
               <i-checkbox ng-model="item.storesSetting.workFifo" class="col3" label="##word.Sale By Fifo##"></i-checkbox>
             </div>
-          <!--   <div class="row">
+            <!--   <div class="row">
               <i-checkbox ng-model="item.storesSetting.taxesAppearingInInvoices" class="col3" label="##word.Taxes appearing in invoices##"></i-checkbox>
             </div> -->
           </fieldset>
@@ -914,8 +923,6 @@
               </table>
             </div>
           </fieldset>
-
-       
         </div>
       </div>
     </div>

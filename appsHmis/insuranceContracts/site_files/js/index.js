@@ -381,6 +381,7 @@ app.controller('insuranceContracts', function ($scope, $http, $timeout) {
           creditPriceIn: 1,
           packagePrice: 1,
           vat: 1,
+          serviceSpecialty :1,
         },
         search: $search,
       },

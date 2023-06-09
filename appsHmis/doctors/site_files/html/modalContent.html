@@ -37,63 +37,63 @@
           <div class="row padding">
             <div class="col9">
               <div class="row">
-                <i-list class="col6" v="r" label="##word.Specialty##" ng-model="item.specialty" items="specialtiesList"
-                  display="name##session.lang##" ng-get="getSpecialtiesList($search)"> </i-list>
-                <i-list class="col6" v="r" label="##word.Nationality##" ng-model="item.nationality"
-                  items="nationalitiesList" display="name##session.lang##" ng-search="item.$nationality"> </i-list>
+                <i-list class="col6" v="r" label="##word.Specialty##" ng-model="item.specialty" items="specialtiesList" display="name##session.lang##" ng-get="getSpecialtiesList($search)"> </i-list>
+                <i-list class="col6" v="r" label="##word.Nationality##" ng-model="item.nationality" items="nationalitiesList" display="name##session.lang##" ng-search="item.$nationality"> </i-list>
                 <!-- <i-list class="col6" label="##word.Nphies Specialty##" ng-model="item.nphiesSpecialty" items="specialtiesList" display="name##session.lang##" ng-search="item.$nphiesSpecialty">
                 </i-list> -->
               </div>
 
               <div class="row">
-                <i-list class="col6" v="r" label="##word.Hospital Responsibility##"
-                  ng-model="item.hospitalResponsibility" items="hospitalResponsibilitiesList"
-                  display="name##session.lang##" ng-get="getHospitalCenterList($search)">
+                <i-list
+                  class="col6"
+                  v="r"
+                  label="##word.Hospital Responsibility##"
+                  ng-model="item.hospitalResponsibility"
+                  items="hospitalResponsibilitiesList"
+                  display="name##session.lang##"
+                  ng-get="getHospitalCenterList($search)"
+                >
                 </i-list>
-                <i-list class="col6" v="r" label="##word.Doctor Type##" ng-model="item.doctorType"
-                  items="doctorTypesList" display="name##session.lang##" ng-search="item.$doctorType"> </i-list>
+                <i-list class="col6" v="r" label="##word.Doctor Type##" ng-model="item.doctorType" items="doctorTypesList" display="name##session.lang##" ng-search="item.$doctorType"> </i-list>
               </div>
 
               <div class="row">
-                <i-list class="col6" v="r" label="##word.Cons Item##" ng-model="item.consItem" items="servicesList"
-                  display="name##session.lang##" ng-get="getServicesList($search)"> </i-list>
-                <i-list class="col6" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##"
-                  items="gendersList" ng-search="item.$genders"></i-list>
+                <i-list class="col6" v="r" label="##word.Cons Item##" ng-model="item.consItem" items="servicesList" display="name##session.lang##" ng-get="getServicesList($search)"> </i-list>
+                <i-list class="col6" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##" items="gendersList" ng-search="item.$genders"></i-list>
               </div>
 
               <div class="row">
-                <i-list class="col6" v="r" label="##word.Scientific Ranks##" ng-model="item.scientificRank" display="name##session.lang##"
-                  items="scientificRanksList" ng-search="item.$scientificRanks"></i-list>
+                <i-list
+                  class="col6"
+                  v="r"
+                  label="##word.Scientific Ranks##"
+                  ng-model="item.scientificRank"
+                  display="name##session.lang##"
+                  items="scientificRanksList"
+                  ng-search="item.$scientificRanks"
+                ></i-list>
               </div>
 
               <fieldset>
                 <div class="row">
-                  <i-control type="number" class="col6" ng-model="item.freeRevistPeriod"
-                  label="##word.Free Revist Period## / ##word.Day##"></i-control>
-               
-                <i-control type="number" class="col6" ng-model="item.freeRevistCount"
-                  label="##word.Free Revist Count##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.freeRevistPeriod" label="##word.Free Revist Period## / ##word.Day##"></i-control>
+
+                  <i-control type="number" class="col6" ng-model="item.freeRevistCount" label="##word.Free Revist Count##"></i-control>
                 </div>
 
                 <div class="row">
-                  <i-control type="number" class="col6" ng-model="item.roundPerShift"
-                    label="##word.Round Per Shift##"></i-control>
-                  <i-control type="number" class="col6" ng-model="item.walkInApts"
-                    label="##word.Walk-In Apts##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.roundPerShift" label="##word.Round Per Shift##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.walkInApts" label="##word.Walk-In Apts##"></i-control>
                 </div>
 
                 <div class="row">
-                  <i-control type="number" class="col6" ng-model="item.maxReviewPeriod"
-                    label="##word.Max Review Period##"></i-control>
-                  <i-control type="number" class="col6" ng-model="item.overlapApptCount"
-                    label="##word.Overlap Appt Count##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.maxReviewPeriod" label="##word.Max Review Period##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.overlapApptCount" label="##word.Overlap Appt Count##"></i-control>
                 </div>
 
                 <div class="row">
-                  <i-control type="number" class="col6" ng-model="item.consDuration"
-                    label="##word.Cons Duration## / ##word.Minutes##"></i-control>
-                  <i-control type="number" class="col6" ng-model="item.lisenceNumber"
-                    label="##word.Lisence Number##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.consDuration" label="##word.Cons Duration## / ##word.Minutes##"></i-control>
+                  <i-control type="number" class="col6" ng-model="item.lisenceNumber" label="##word.Lisence Number##"></i-control>
                 </div>
 
                 <div class="row">
@@ -109,44 +109,44 @@
               </fieldset>
             </div>
             <div class="col3">
+              <div class="row">
+                <p class="center font-18">##word.Signature Image##</p>
+                <i-image class="img128 center" ng-model="item.signatureImage"></i-image>
+              </div>
               <i-checkbox ng-model="item.isDoctorAffiliated" label="##word.Is Doctor Affiliated##"></i-checkbox>
               <!-- <i-checkbox ng-model="item.nonConsultant" label="##word.Non Consultant##"></i-checkbox> -->
               <i-checkbox ng-model="item.onDuty" label="##word.On Duty##"></i-checkbox>
               <i-checkbox ng-model="item.appointmentNotRequired" label="##word.Appointment Not Required##"></i-checkbox>
-              <i-checkbox ng-model="item.checkInOpenMedicalDetails"
-                label="##word.check-In Open Medical Details##"></i-checkbox>
+              <i-checkbox ng-model="item.checkInOpenMedicalDetails" label="##word.check-In Open Medical Details##"></i-checkbox>
             </div>
           </div>
         </div>
         <div id="contact" class="tab-content">
           <div class="row padding">
             <fieldset>
-             
               <div class="row">
                 <i-control type="text" class="col4" ng-model="item.homeTel" label="##word.Home Tel##"></i-control>
-                <i-control type="number" class="col4" ng-model="item.bleepNumber"
-                  label="##word.Bleep Number##"></i-control>
+                <i-control type="number" class="col4" ng-model="item.bleepNumber" label="##word.Bleep Number##"></i-control>
                 <i-control type="text" class="col4" ng-model="item.clinicExt" label="##word.Clinic Ext##"></i-control>
               </div>
               <div class="row">
-                <fieldset class="col8 ">
-                    <legend>
-                        <i-button type="push" ng-click="item.mobileList.push({})"></i-button>
-                        ##word.Mobile##
-                    </legend>
-                    <div class="row" ng-repeat="m in item.mobileList">
-                        <div class="col10">
-
-                            <i-control v="r" label="##word.Code##" class="padding col3" ng-model="m.code"> </i-control>
-                            <i-control v="r" label="##word.Mobile##" class="padding col9" ng-model="m.mobile"> </i-control>
-                        </div>
-                        <div class="col2">
-                            <br>
-                            <i-button type="delete" ng-click="item.mobileList.length === 1 || item.mobileList.splice($index,1)"> </i-button>
-                        </div>
+                <fieldset class="col8">
+                  <legend>
+                    <i-button type="push" ng-click="item.mobileList.push({})"></i-button>
+                    ##word.Mobile##
+                  </legend>
+                  <div class="row" ng-repeat="m in item.mobileList">
+                    <div class="col10">
+                      <i-control v="r" label="##word.Code##" class="padding col3" ng-model="m.code"> </i-control>
+                      <i-control v="r" label="##word.Mobile##" class="padding col9" ng-model="m.mobile"> </i-control>
                     </div>
+                    <div class="col2">
+                      <br />
+                      <i-button type="delete" ng-click="item.mobileList.length === 1 || item.mobileList.splice($index,1)"> </i-button>
+                    </div>
+                  </div>
                 </fieldset>
-            </div>
+              </div>
             </fieldset>
           </div>
         </div>
@@ -155,8 +155,7 @@
             <fieldset>
               <legend><i-button type="push" ng-click="item.doctorScheduleList.push({})"> </i-button></legend>
               <div class="row" ng-repeat="s in item.doctorScheduleList">
-                <i-list label="##word.Day##" class="col3" ng-model="s.day" display="name##session.lang##"
-                  items="weekDaysList" ng-search="s.$day"></i-list>
+                <i-list label="##word.Day##" class="col3" ng-model="s.day" display="name##session.lang##" items="weekDaysList" ng-search="s.$day"></i-list>
                 <i-control type="time" class="col2" ng-model="s.start" label="##word.Start##"></i-control>
                 <i-control type="time" class="col2" ng-model="s.end" label="##word.End##"></i-control>
                 <div class="col2">
@@ -167,59 +166,19 @@
             </fieldset>
           </div>
         </div>
-        
+
         <div id="printersData" class="tab-content">
           <fieldset>
             <div class="row">
-              <i-list
-                ng-search="item.$printerPath" 
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.thermalPrinter"
-                label="##word.Thermal printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$printerPath" class="col4" display="name##session.lang##" ng-model="item.thermalPrinter" label="##word.Thermal printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$a4Printer"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.a4Printer"
-                label="##word.A4 printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$a4Printer" class="col4" display="name##session.lang##" ng-model="item.a4Printer" label="##word.A4 printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$pdfPrinter"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.pdfPrinter"
-                label="##word.PDF printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$pdfPrinter" class="col4" display="name##session.lang##" ng-model="item.pdfPrinter" label="##word.PDF printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$barcodePrinter"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.barcodePrinter"
-                label="##word.Barcode printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$barcodePrinter" class="col4" display="name##session.lang##" ng-model="item.barcodePrinter" label="##word.Barcode printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$labelPrinter"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.labelPrinter"
-                label="##word.Label printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$labelPrinter" class="col4" display="name##session.lang##" ng-model="item.labelPrinter" label="##word.Label printer##" items="printersPathsList"> </i-list>
             </div>
 
             <div class="row">

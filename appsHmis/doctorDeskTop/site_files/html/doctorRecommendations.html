@@ -45,9 +45,14 @@
             <div class="row padding">
               <i-control class="col2" type="number" ng-model="item.durationOfIllness" label="##word.Duration of Illness##"></i-control>
               <i-list label="##word.Illness period##" class="col2" ng-model="item.illnessPeriod" display="name##session.lang##" items="periodsList" ng-search="item.$Illnessperiod"></i-list>
+              <i-button class="col3" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" label="##word.Vacation Request##" ng-click="showVacationRequest()"></i-button>
             </div>
-            <i-button class="col3" x-permissions="doctorDeskTopUpdate || doctorDeskTopManage" label="##word.Vacation Request##" ng-click="showVacationRequest()"></i-button>
           </fieldset>
+
+          <fieldset>
+            <legend>##word.To Be Com</legend>
+          </fieldset>
+
           <div class="row padding">
             <div class="tabs">
               <div class="tabs-header full">

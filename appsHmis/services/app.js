@@ -600,6 +600,7 @@ module.exports = function init(site) {
             servicesCategoriesList: 1,
             normalRangeList: 1,
             vat: 1,
+            serviceSpecialty : 1,
             cost: 1,
             serviceGroup: 1,
             cashPriceOut: 1,

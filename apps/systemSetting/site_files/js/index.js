@@ -571,7 +571,6 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
   $scope.workflowScreens = function () {
     $scope.busy = true;
     $scope.workflowScreensList = [];
-    // console.log('1111', $scope.item.workflowAssignmentSettings.workflowScreensList);
 
     $http({
       method: 'POST',
@@ -817,8 +816,9 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     }).then(
       function (response) {
         $scope.busy = false;
+        $scope.item = response.data.doc || {};
         console.log(response.data.doc);
-        $scope.item = response.data.doc;
+        $scope.$applyAsync();
       },
       function (err) {
         console.log(err);
@@ -845,6 +845,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
           gender: 1,
           scientificRank: 1,
           onDuty: 1,
+          signatureImage:1,
         },
         search: $search,
         /* limit: 1, */

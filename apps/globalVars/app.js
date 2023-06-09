@@ -142,6 +142,12 @@ module.exports = function init(site) {
     { id: 7, code: 'U', nameEn: 'Unknown', nameAr: 'مجهول' },
   ];
 
+  site.serviceSpecialties = [
+    { id: 1, nameEn: 'Eye', nameAr: 'عيون' },
+    { id: 2, nameEn: 'Teeth', nameAr: 'أسنان' },
+    { id: 3, nameEn: 'Others', nameAr: 'أخرى' },
+  ];
+
   site.genders = [
     { id: 1, nameEn: 'Male', nameAr: 'ذكر' },
     { id: 2, nameEn: 'Female', nameAr: 'أنثى' },
@@ -213,18 +219,6 @@ module.exports = function init(site) {
     { id: 4, nameEn: 'Put results', nameAr: 'وضع النتائج' },
     { id: 5, nameEn: 'Delivered', nameAr: 'تم التسليم' },
     { id: 6, nameEn: 'Cancel reservation', nameAr: 'إلغاء الحجز' },
-  ];
-
-  site.servicesTypeGroups = [
-    { id: 1, code: 'S', nameEn: 'Service', nameAr: 'خدمة' },
-    { id: 2, code: 'C', nameEn: 'Consultation', nameAr: 'إستشارة' },
-    { id: 3, code: 'L', nameEn: 'Laboratory', nameAr: 'معمل' },
-    { id: 4, code: 'X', nameEn: 'X-Ray', nameAr: 'أشعة' },
-    { id: 5, code: 'M', nameEn: 'Medicine', nameAr: 'دواء' },
-    { id: 6, code: 'T', nameEn: 'Therapy', nameAr: 'علاج' },
-    { id: 8, code: 'E', nameEn: 'Emergency', nameAr: 'طوارئ' },
-    { id: 9, code: 'K', nameEn: 'Kitchen', nameAr: 'مطبخ' },
-    { id: 7, code: 'U', nameEn: 'Unknown', nameAr: 'مجهول' },
   ];
 
   site.itemsTypes = [
@@ -540,6 +534,13 @@ module.exports = function init(site) {
       list: site.servicesTypeGroups,
     });
   });
+  site.post('/api/serviceSpecialties', (req, res) => {
+    res.json({
+      done: true,
+      list: site.serviceSpecialties,
+    });
+  });
+  
 
   site.post('/api/servicesOrdersSources', (req, res) => {
     res.json({

@@ -12,6 +12,13 @@ module.exports = function init(site) {
     allowRouteGetSetting: true,
   };
 
+  let teethList = [];
+
+  for (let i = 0; i < 32; i++) {
+    teethList.push({ name: i + 1, id: i + 1 });
+  }
+
+
   site.setting = {
     printerProgram: { invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
     storesSetting: {
@@ -27,7 +34,13 @@ module.exports = function init(site) {
     accountsSetting: { paymentType: {}, currencySymbol: 'SR' },
     generalSystemSetting: {},
     workflowAssignmentSettings: site.workflowScreensList,
+    hmisSetting : {
+      pVat : 0,
+      comVat : 0,
+      teethList: teethList,
+    },
     hrSettings: {
+    
       absenceDays: 1,
       forgetFingerprint: 0.5,
       nathionalitiesVacationsList: [],
@@ -84,7 +97,6 @@ module.exports = function init(site) {
     let branch = site.getBranch(req);
 
     site.setting = app.memoryList.find((s) => s.company.id == company.id) || site.setting;
-
     return site.setting;
   };
 

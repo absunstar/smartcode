@@ -741,6 +741,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           freeRevistCount: 1,
           scientificRank: 1,
           onDuty: 1,
+          signatureImage:1,
         },
       },
     }).then(
@@ -776,6 +777,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           cashPriceOut: 1,
           cashPriceIn: 1,
           creditPriceIn: 1,
+          serviceSpecialty :1,
           packagePrice: 1,
           vat: 1,
         },

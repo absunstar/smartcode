@@ -266,6 +266,7 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
           freeRevistCount: 1,
           scientificRank: 1,
           onDuty: 1,
+          signatureImage:1,
         },
         search: $search,
         /* limit: 1, */

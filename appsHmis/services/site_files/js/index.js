@@ -340,6 +340,26 @@ app.controller('services', function ($scope, $http, $timeout) {
             }
         );
     };
+    $scope.getServiceSpecialtiesList = function () {
+        $scope.busy = true;
+        $scope.serviceSpecialtiesList = [];
+        $http({
+            method: 'POST',
+            url: '/api/serviceSpecialties',
+            data: {},
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.serviceSpecialtiesList = response.data.list;
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = err;
+            }
+        );
+    };
 
     $scope.addNormalRange = function () {
         $scope.error = '';
@@ -368,4 +388,5 @@ app.controller('services', function ($scope, $http, $timeout) {
     $scope.getServicesGroupsList();
     $scope.getservicesCategoriesList();
     $scope.getGendersList();
+    $scope.getServiceSpecialtiesList();
 });
