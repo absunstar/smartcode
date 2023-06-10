@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportMedicalItemsAdmin",
+        "En": "Report Medical Items Admin",
+        "Ar": "تقرير الأصناف الطبية",
+        "permissions": ["reportMedicalItemsManage"]
+    }
+]

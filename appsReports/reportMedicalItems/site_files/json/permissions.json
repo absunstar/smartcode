@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportMedicalItems", "name": "reportMedicalItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportMedicalItems", "name": "reportMedicalItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportMedicalItems", "name": "reportMedicalItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportMedicalItems", "name": "reportMedicalItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportMedicalItems", "name": "reportMedicalItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

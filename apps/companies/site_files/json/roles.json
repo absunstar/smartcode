@@ -134,7 +134,9 @@
       "reportEmployeesBonusesManage",
       "reportEmployeesPenaltiesManage",
       "reportEmployeesBonusesManag",
-      "reportEmployeesAdvancesManage"
+      "reportEmployeesAdvancesManage",
+      "reportMedicalItemsManage",
+      "reportCollectedItemsManage"
     ]
   }
 ]

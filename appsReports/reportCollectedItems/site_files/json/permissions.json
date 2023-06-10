@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportCollectedItems", "name": "reportCollectedItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportCollectedItems", "name": "reportCollectedItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportCollectedItems", "name": "reportCollectedItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportCollectedItems", "name": "reportCollectedItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportCollectedItems", "name": "reportCollectedItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

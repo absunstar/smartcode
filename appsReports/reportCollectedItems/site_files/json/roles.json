@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportCollectedItemsAdmin",
+        "En": "Report Collected Items Admin",
+        "Ar": "تقرير الأصناف المجمعة",
+        "permissions": ["reportCollectedItemsManage"]
+    }
+]
