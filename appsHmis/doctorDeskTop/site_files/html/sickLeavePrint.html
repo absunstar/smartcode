@@ -240,7 +240,7 @@
 
         <div class="row">
           <p class="font-14">
-            <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'DIAG'}">{{s.name##session.lang##}} , </span>
+            <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'DIAG'}">{{s.name##session.lang##}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
           </p>
         </div>
       </div>

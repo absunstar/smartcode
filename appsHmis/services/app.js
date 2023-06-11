@@ -607,6 +607,7 @@ module.exports = function init(site) {
             creditPriceOut: 1,
             cashPriceIn: 1,
             creditPriceIn: 1,
+            sfdaCodeList: 1,
         };
         app.all({ where, select }, (err, docs) => {
             if (!err) {

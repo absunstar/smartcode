@@ -18,19 +18,37 @@
               <i-checkbox class="col2" ng-model="item.conginital" label="##word.Conginital##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.rta" label="##word.RTA##"></i-checkbox>
               <i-checkbox class="col3" ng-model="item.workRelated" label="##word.Work Related##"></i-checkbox>
+              <i-checkbox class="col3" ng-model="item.sportRelated" label="##word.Sports Related##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.vaccination" label="##word.Vaccination##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.checkup" label="##word.Checkup##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.psychiatric" label="##word.Psychiatric##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.infertility" label="##word.Infertility##"></i-checkbox>
               <i-checkbox class="col2" ng-hide="item.patient.gender.id == 1" ng-model="item.pregnancy" label="##word.Pregnancy##"></i-checkbox>
-              <i-checkbox class="col2" ng-hide="item.patient.gender.id == 2" ng-model="item.lactation" label="##word.Lactation##"></i-checkbox>
+              <i-checkbox class="col2" ng-hide="item.patient.gender.id == 1" ng-model="item.lactation" label="##word.Lactation##"></i-checkbox>
               <i-checkbox class="col2" ng-model="item.acute" label="##word.Acute##"></i-checkbox>
+              <i-checkbox class="col2" ng-show="item.service.serviceSpecialty.id == 2" ng-model="item.orthodontics" label="##word.Orthodontics##"></i-checkbox>
+              <i-checkbox class="col2" ng-show="item.service.serviceSpecialty.id == 2" ng-model="item.cleaning" label="##word.Cleaning##"></i-checkbox>
+              <i-checkbox class="col2" ng-show="item.service.serviceSpecialty.id == 2" ng-model="item.congenital" label="##word.Congenital##"></i-checkbox>
             </div>
           </fieldset>
           <fieldset>
             <legend>##word.Printers##</legend>
             <div class="row">
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.UCAF##" ng-click="ucafPrint(item)"></i-button>
+              <i-button
+                type="print"
+                ng-show="item.service.serviceSpecialty.id == 1"
+                x-permissions="doctorDeskTopPrint || doctorDeskTopManage"
+                label="##word.OCAF##"
+                ng-click="ocafPrint(item)"
+              ></i-button>
+              <i-button
+                type="print"
+                ng-show="item.service.serviceSpecialty.id == 2"
+                x-permissions="doctorDeskTopPrint || doctorDeskTopManage"
+                label="##word.DCAF##"
+                ng-click="dcafPrint(item)"
+              ></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders##" ng-click="ordersPrint(item)"></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Attendance Notic##" ng-click="attendanceNoticPrint(item)"></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Medical Report##" ng-click="medicalReportPrint(item)"></i-button>
@@ -49,9 +67,94 @@
             </div>
           </fieldset>
 
-          <fieldset>
-            <legend>##word.To Be Com</legend>
+          <fieldset ng-show="item.service.serviceSpecialty.id == 1">
+            <legend>##word.Spectacles Prescription##</legend>
+            <table class="table center hover bold" id="t1">
+              <tr>
+                <th></th>
+                <th>##word.Sphere##</th>
+                <th>##word.Cylinder##</th>
+                <th>##word.Axis##</th>
+                <th>##word.Prism##</th>
+                <th>##word.Near Add##</th>
+              </tr>
+              <tr>
+                <td>##word.Right (OD)##</td>
+                <td><i-control ng-model="item.spectaclesRight.sphere"></i-control></td>
+                <td><i-control ng-model="item.spectaclesRight.cylinder"></i-control></td>
+                <td><i-control ng-model="item.spectaclesRight.axis"></i-control></td>
+                <td><i-control ng-model="item.spectaclesRight.prism"></i-control></td>
+                <td><i-control ng-model="item.spectaclesRight.nearAdd"></i-control></td>
+              </tr>
+              <tr>
+                <td>##word.Left (OS)##</td>
+                <td><i-control ng-model="item.spectaclesLeft.sphere"></i-control></td>
+                <td><i-control ng-model="item.spectaclesLeft.cylinder"></i-control></td>
+                <td><i-control ng-model="item.spectaclesLeft.axis"></i-control></td>
+                <td><i-control ng-model="item.spectaclesLeft.prism"></i-control></td>
+                <td><i-control ng-model="item.spectaclesLeft.nearAdd"></i-control></td>
+              </tr>
+            </table>
           </fieldset>
+
+          <fieldset ng-show="item.service.serviceSpecialty.id == 1">
+            <legend>##word.Contact Lens Prescription##</legend>
+            <table class="table center hover bold" id="t1">
+              <tr>
+                <th></th>
+                <th>##word.Sphere##</th>
+                <th>##word.Cylinder##</th>
+                <th>##word.Axis##</th>
+                <th>##word.BC##</th>
+                <th>##word.DIA##</th>
+                <th>##word.Near Add##</th>
+              </tr>
+              <tr>
+                <td>##word.Right (OD)##</td>
+                <td><i-control ng-model="item.contactLensRight.sphere"></i-control></td>
+                <td><i-control ng-model="item.contactLensRight.cylinder"></i-control></td>
+                <td><i-control ng-model="item.contactLensRight.axis"></i-control></td>
+                <td><i-control ng-model="item.contactLensRight.bc"></i-control></td>
+                <td><i-control ng-model="item.contactLensRight.dia"></i-control></td>
+                <td><i-control ng-model="item.contactLensRight.nearAdd"></i-control></td>
+              </tr>
+              <tr>
+                <td>##word.Left (OS)##</td>
+                <td><i-control ng-model="item.contactLensLeft.sphere"></i-control></td>
+                <td><i-control ng-model="item.contactLensLeft.cylinder"></i-control></td>
+                <td><i-control ng-model="item.contactLensLeft.axis"></i-control></td>
+                <td><i-control ng-model="item.contactLensLeft.bc"></i-control></td>
+                <td><i-control ng-model="item.contactLensLeft.dia"></i-control></td>
+                <td><i-control ng-model="item.contactLensLeft.nearAdd"></i-control></td>
+              </tr>
+            </table>
+            <table class="table center hover bold" id="t1">
+              <tr>
+                <th>
+                  <br />
+                  ##word.Right (OD)##
+                </th>
+                <td><i-checkbox ng-model="item.right.isSoft" label="##word.Is Soft##"></i-checkbox></td>
+                <td><i-checkbox ng-model="item.right.isHard" label="##word.Is Hard##"></i-checkbox></td>
+                <td><i-checkbox ng-model="item.right.isSoftPerm" label="##word.Is Soft Perm##"></i-checkbox></td>
+                <td><i-checkbox ng-model="item.right.isTonc" label="##word.Is Tonc##"></i-checkbox></td>
+              </tr>
+              <tr>
+                <th>
+                  <br />
+                  ##word.Left (OS)##
+                </th>
+                <td><i-checkbox ng-model="item.left.isSoft" label="##word.Is Soft##"></i-checkbox></td>
+                <td><i-checkbox ng-model="item.left.isHard" label="##word.Is Hard##"></i-checkbox></td>
+                <td><i-checkbox ng-model="item.left.isSoftPerm" label="##word.Is Soft Perm##"></i-checkbox></td>
+                <td><i-checkbox ng-model="item.left.isTonc" label="##word.Is Tonc##"></i-checkbox></td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- <fieldset>
+            <legend>##word.To Be Com##</legend>
+          </fieldset> -->
 
           <div class="row padding">
             <div class="tabs">
@@ -267,6 +370,7 @@
                       label="##word.Orders Print##"
                       ng-click="ordersPrint(item)"
                     ></i-button>
+                    <i title="##word.Teeth##" ng-show="item.service.serviceSpecialty.id == 2" class="fas fa-teeth icon" ng-click="showToothModal()"></i>
                   </div>
                   <div class="row">
                     <i-list label="##word.Order##" class="col6" ng-model="item.$order" display="name##session.lang##" items="ordersList" ng-get="getOrdersList($search)"></i-list>
@@ -275,7 +379,14 @@
                       <div class="row">
                         <i-button type="push" ng-click="addOrders(item)"></i-button>
                         <i title="##word.Consultation##" class="fas fa-user-md icon" id="CO" ng-click="item.$groupTypeId = 2 ; item.$orderType = 'CO' ;getOrdersList('')"></i>
-                        <i title="##word.Laboratory##" class="fas fa-vial icon" id="LA" ng-click="item.$groupTypeId = 3 ;item.$orderType = 'LA' ;getOrdersList('')"></i>
+                        <i
+                          title="##word.Tooth##"
+                          ng-show="item.service.serviceSpecialty.id == 2"
+                          class="fas fa-tooth icon"
+                          id="TE"
+                          ng-click="item.$groupTypeId = 1 ; item.$orderType = 'TE' ;getOrdersList('')"
+                        ></i>
+                        <i title="##word.Laboratory##" class="fas fa-prescription-bottle icon" id="LA" ng-click="item.$groupTypeId = 3 ;item.$orderType = 'LA' ;getOrdersList('')"></i>
                         <i title="##word.Radiology##" class="fas fa-x-ray icon" id="X-R" ng-click="item.$groupTypeId = 4 ;item.$orderType = 'X-R' ;getOrdersList('')"></i>
                         <i title="##word.Medicine##" class="fas fa-capsules icon" id="MD" ng-click="item.$orderType = 'MD' ;getOrdersList('')"></i>
                         <i title="##word.ER##" class="fas fa-first-aid icon" id="ER" ng-click="item.$orderType = 'ER' ;getOrdersList('')"></i>
@@ -291,7 +402,8 @@
                         <br />
                         <p class="code-list">
                           <i class="fas fa-user-md" ng-show="s.type== 'CO'"></i>
-                          <i class="fas fa-vial" ng-show="s.type== 'LA'"></i>
+                          <i class="fas fa-user-md" ng-show="s.type== 'TE'"></i>
+                          <i class="fas fa-prescription-bottle" ng-show="s.type== 'LA'"></i>
                           <i class="fas fa-x-ray" ng-show="s.type== 'X-R'"></i>
                           <i class="fas fa-capsules" ng-show="s.type== 'MD'"></i>
                           <i class="fas fa-capsules" ng-show="s.type== 'ER'"></i>
@@ -304,7 +416,7 @@
                       </div>
                       <div class="col6">
                         <div class="row">
-                          <i-control type="number" ng-change="calc(s)" ng-show="s.type == 'MD' || s.type == 'ER'" class="col3" label="##word.QTY.##" ng-model="s.count"></i-control>
+                          <i-control type="number" ng-change="calc(s)" ng-show="s.type == 'MD' || s.type == 'ER' || s.type == 'TE'" class="col3" label="##word.QTY.##" ng-model="s.count"></i-control>
                           <div class="col3">
                             <p class="bold center">##word.Price##</p>
                             <p class="bold center">
@@ -330,6 +442,7 @@
                         </div>
                       </div>
                     </div>
+
                     <div class="row" ng-show="s.type == 'MD' || s.type == 'ER'">
                       <i-list
                         label="##word.Duration##"
@@ -349,6 +462,22 @@
                       ></i-list>
 
                       <i-list label="##word.Route##" class="col3" ng-model="s.medicineRoute" display="name##session.lang##" items="medicineRoutesList" ng-search="s.$medicineRoute"></i-list>
+                    </div>
+                    <div class="row" ng-show="s.type== 'TE'">
+                      <div class="col4">
+                        <p>
+                          ##word.Tooth No.## :
+                          <span class="userPrint bold" ng-repeat="t in s.teethNumbersList">{{t.name}} <span ng-hide="$index +1 == s.teethNumbersList.length">,</span></span>
+                        </p>
+                      </div>
+                      <div class="col7">
+                        <p>
+                          ##word.Diagnosis## :
+                          <span class="userPrint bold" ng-repeat="s in item.doctorReccomendList | filter:{type :'DIAG'}"
+                            >{{s.name##session.lang##}} <span ng-hide="$index +1 ==item.doctorReccomendList.length">,</span>
+                          </span>
+                        </p>
+                      </div>
                     </div>
                     <div class="row">
                       <i-control class="col10" ng-model="s.notes" label="##word.Notes##"></i-control>

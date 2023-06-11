@@ -5,7 +5,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
   $('#attendanceNoticDetails').addClass('hidden');
   $('#sickLeaveDetails').addClass('hidden');
   $('#medicalReportDetails').addClass('hidden');
-  $('#ucafDetails').addClass('hidden');
+  $('#cafDetails').addClass('hidden');
   $scope.appName = 'doctorDeskTop';
   $scope.modalID = '#doctorDeskTopManageModal';
   $scope.modalSearchID = '#doctorDeskTopSearchModal';
@@ -515,6 +515,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     }
     document.getElementById('CO').classList.remove('icon-select');
     document.getElementById('LA').classList.remove('icon-select');
+    document.getElementById('TE').classList.remove('icon-select');
     document.getElementById('X-R').classList.remove('icon-select');
     document.getElementById('MD').classList.remove('icon-select');
     document.getElementById('ER').classList.remove('icon-select');
@@ -530,6 +531,9 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     let url = '/api/services/all';
     if ($scope.item.$groupTypeId && $scope.item.$orderType != 'MD' && $scope.item.$orderType != 'ER') {
       where['serviceGroup.type.id'] = $scope.item.$groupTypeId;
+      if ($scope.item.$orderType == 'TE') {
+        where['serviceSpecialty.id'] = 2;
+      }
     } else {
       url = '/api/storesItems/all';
       where = {
@@ -726,7 +730,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
           freeRevistCount: 1,
           scientificRank: 1,
           onDuty: 1,
-          signatureImage:1,
+          signatureImage: 1,
         },
       },
     }).then(
@@ -907,7 +911,8 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
             function (response) {
               $scope.busy = false;
               if (response.data.done && response.data.servicesList && response.data.servicesList.length > 0) {
-                _item.ordersList.unshift({
+                $scope.item.teethNumbersList;
+                let obj = {
                   id: order.id,
                   code: order.code,
                   nameAr: order.nameAr,
@@ -917,7 +922,12 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
                   cost: response.data.servicesList[0].cost,
                   discount: response.data.servicesList[0].discount,
                   total: response.data.servicesList[0].total,
-                });
+                  count: 1,
+                };
+                if (order.type == 'TE' && $scope.item.teethList) {
+                  obj.teethNumbersList = $scope.item.teethList.filter((g) => g.select == true);
+                }
+                _item.ordersList.unshift(obj);
                 $scope.addOrder = 'addOrder added successfully';
                 $timeout(() => {
                   $scope.addOrder = '';
@@ -1092,17 +1102,109 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
     }, 8000);
   };
 
+  $scope.dcafPrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#cafDetails').removeClass('hidden');
+    $scope.order = item;
+    $scope.order.$caf = 'd';
+
+    if ($scope.order.ordersList && $scope.order.ordersList.length > 0) {
+      $scope.order.$ordersListServices = $scope.order.ordersList.filter((g) => g.type == 'CO' || g.type == 'LA' || g.type == 'X-R');
+      $scope.order.$ordersListMedicines = $scope.order.ordersList.filter((g) => g.type == 'MD' || g.type == 'ER');
+      $scope.order.$totalAmountServices = $scope.order.$ordersListServices.reduce((a, b) => a + b.cost || 0, 0);
+      $scope.order.$totalAmountMedicines = $scope.order.$ordersListMedicines.reduce((a, b) => a + b.cost || 0, 0);
+    }
+    $scope.localPrint = function () {
+      document.getElementById('treatment').innerHTML = $scope.order.treatment;
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#cafDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+      $('#cafDetails').addClass('hidden');
+    }, 8000);
+  };
+
+  $scope.ocafPrint = function (item) {
+    $scope.error = '';
+    if ($scope.busy) return;
+    $scope.busy = true;
+    $('#cafDetails').removeClass('hidden');
+    $scope.order = item;
+    $scope.order.$caf = 'o';
+    /*     if ($scope.order.ordersList && $scope.order.ordersList.length > 0) {
+      $scope.order.$ordersListServices = $scope.order.ordersList.filter((g) => g.type == 'CO' || g.type == 'LA' || g.type == 'X-R');
+      $scope.order.$ordersListMedicines = $scope.order.ordersList.filter((g) => g.type == 'MD' || g.type == 'ER');
+      $scope.order.$totalAmountMedicines = $scope.order.$ordersListMedicines.reduce((a, b) => a + b.total, 0);
+    } */
+    if ($scope.order.ordersList && $scope.order.ordersList.length > 0) {
+      $scope.order.$totalAmountServices = $scope.order.ordersList.reduce((a, b) => a + b.cost || 0, 0);
+    }
+    $scope.localPrint = function () {
+      document.getElementById('treatment').innerHTML = $scope.order.treatment;
+      let printer = {};
+      if ($scope.setting.printerProgram.a4Printer) {
+        printer = $scope.setting.printerProgram.a4Printer;
+      } else {
+        $scope.error = '##word.A4 printer must select##';
+        return;
+      }
+      if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
+        printer = JSON.parse('##user.a4Printer##');
+      }
+      $timeout(() => {
+        site.print({
+          selector: '#cafDetails',
+          ip: printer.ipDevice,
+          port: printer.portDevice,
+          pageSize: 'A4',
+          printer: printer.ip.name.trim(),
+        });
+      }, 500);
+    };
+
+    $scope.localPrint();
+
+    $scope.busy = false;
+    $timeout(() => {
+      $('#cafDetails').addClass('hidden');
+    }, 8000);
+  };
+
   $scope.ucafPrint = function (item) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
-    $('#ucafDetails').removeClass('hidden');
+    $('#cafDetails').removeClass('hidden');
     $scope.order = item;
+    $scope.order.$caf = 'u';
     if ($scope.order.ordersList && $scope.order.ordersList.length > 0) {
       $scope.order.$ordersListServices = $scope.order.ordersList.filter((g) => g.type == 'CO' || g.type == 'LA' || g.type == 'X-R');
       $scope.order.$ordersListMedicines = $scope.order.ordersList.filter((g) => g.type == 'MD' || g.type == 'ER');
-      $scope.order.$totalAmountServices = $scope.order.$ordersListServices.reduce((a, b) => a + b.total, 0);
-      $scope.order.$totalAmountMedicines = $scope.order.$ordersListMedicines.reduce((a, b) => a + b.total, 0);
+      $scope.order.$totalAmountServices = $scope.order.$ordersListServices.reduce((a, b) => a + b.cost || 0, 0);
+      $scope.order.$totalAmountMedicines = $scope.order.$ordersListMedicines.reduce((a, b) => a + b.cost || 0, 0);
     }
 
     $scope.localPrint = function () {
@@ -1119,7 +1221,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
       }
       $timeout(() => {
         site.print({
-          selector: '#ucafDetails',
+          selector: '#cafDetails',
           ip: printer.ipDevice,
           port: printer.portDevice,
           pageSize: 'A4',
@@ -1132,7 +1234,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
 
     $scope.busy = false;
     $timeout(() => {
-      $('#ucafDetails').addClass('hidden');
+      $('#cafDetails').addClass('hidden');
     }, 8000);
   };
 
@@ -1158,17 +1260,32 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
 
   $scope.addDays = function () {
     $timeout(() => {
-    let result = new Date($scope.item.leave.fromDate);
-    result.setTime(result.getTime() + $scope.item.leave.day * 24 * 60 * 60 * 1000);
-    $scope.item.leave.toDate = result;
-  }, 300);
-};
+      let result = new Date($scope.item.leave.fromDate);
+      result.setTime(result.getTime() + $scope.item.leave.day * 24 * 60 * 60 * 1000);
+      $scope.item.leave.toDate = result;
+    }, 300);
+  };
 
   $scope.showVacationRequest = function () {
     $scope.error = '';
     $scope.item.leave = $scope.item.leave || {};
     $scope.item.leave.fromDate = new Date();
     site.showModal('#sickLeaveModal');
+  };
+
+  $scope.showToothModal = function () {
+    $scope.error = '';
+    $scope.item.teethList = $scope.item.teethList || $scope.setting.hmisSetting.teethList;
+    site.showModal('#selectToothModal');
+  };
+
+  $scope.selectTooth = function () {
+    $scope.error = '';
+    $scope.item.ordersList.forEach((_item) => {
+      if (_item.type == 'TE') {
+        _item.teethNumbersList = $scope.item.teethList.filter((g) => g.select == true);
+      }
+    });
   };
 
   $scope.showSearch = function () {

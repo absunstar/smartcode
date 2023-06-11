@@ -22,8 +22,31 @@
               ng-search="item.$serviceSpecialty"
             ></i-list>
             <i-list class="col6" label="##word.ACHI##" ng-model="item.achi" display="name##session.lang##" items="achiCodesList" ng-search="item.$achi"></i-list>
-            <i-control type="text" class="col6" ng-model="item.sfdaCode" label="##word.SFDA Code##"></i-control>
             <i-control class="col6" label="##word.CPT Code##" ng-model="item.cptCode" display="name##session.lang##"></i-control>
+          </div>
+          <div class="row">
+            <fieldset class="col9">
+              <legend>
+                <i-button type="push" ng-click="item.sfdaCodeList = item.sfdaCodeList || []; item.sfdaCodeList.unshift({})"></i-button>
+                ##word.SFDA Codes List##
+              </legend>
+              <table class="table hover bold">
+                <tr>
+                  <th>##word.S##</th>
+                  <th>##word.SFDA Code##</th>
+                  <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="s in item.sfdaCodeList">
+                  <td class="center">{{$index+1}}</td>
+                  <td class="center">
+                    <i-control type="text" v="r" ng-model="s.sfdaCode"></i-control>
+                  </td>
+                  <td class="center">
+                    <i-button type="delete" ng-click="item.sfdaCodeList.splice($index,1)"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
           </div>
         </div>
         <div class="col3">

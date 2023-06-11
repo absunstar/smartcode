@@ -702,6 +702,9 @@ module.exports = function init(site) {
                   }
                 }
               }
+              if (serviceMemory.sfdaCodeList && serviceMemory.sfdaCodeList.length > 0) {
+                servicesList[0].sfdaCode = serviceMemory.sfdaCodeList[0].sfdaCode;
+              }
             }
           });
           if (servicesList.length > 0) {

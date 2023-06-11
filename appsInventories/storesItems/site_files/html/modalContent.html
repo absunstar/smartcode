@@ -51,10 +51,10 @@
                   <th>##word.SFDA Code##</th>
                   <th class="not-print">##word.Actions##</th>
                 </tr>
-                <tr ng-repeat="s in item.sfdaCodeList | filter:$search">
+                <tr ng-repeat="s in item.sfdaCodeList">
                   <td class="center">{{$index+1}}</td>
                   <td class="center">
-                    <i-control type="text" ng-model="s.sfdaCode"></i-control>
+                    <i-control type="text" v="r" ng-model="s.sfdaCode"></i-control>
                   </td>
                   <td class="center">
                     <i-button type="delete" ng-click="item.sfdaCodeList.splice($index,1)"> </i-button>

@@ -1,0 +1,25 @@
+<div id="selectToothModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">
+        ##word.Tooth Chart##
+        <i class="fa fa-file"></i>
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <div class="row">
+        <div class="col1" ng-repeat="t in item.teethList track by $index">
+          <i-image view class="logo center" ng-model="t.image"></i-image>
+          <i-checkbox ng-model="t.select" ng-change="selectTooth()" label="{{t.name}}"></i-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#selectToothModal')"></i-button>
+    </div>
+  </div>
+</div>
