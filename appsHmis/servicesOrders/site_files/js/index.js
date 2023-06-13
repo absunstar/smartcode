@@ -644,7 +644,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     where['status.id'] = 3;
     where['hasOrder'] = false;
     where['toOrder'] = true;
-    where.$or = [{ 'ordersList.type': 'CO' }, { 'ordersList.type': 'LA' }, { 'ordersList.type': 'X-R' }];
+    where.$or = [{ 'ordersList.type': 'CO' }, { 'ordersList.type': 'LA' }, { 'ordersList.type': 'X-R' } , { 'ordersList.type': 'TE' }];
     $http({
       method: 'POST',
       url: '/api/doctorDeskTop/all',
@@ -851,7 +851,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       } else {
         $scope.item.servicesList.forEach((_s) => {
           if (_s.id === service.id) {
-            _s.qty += 1;
+            _s.count += 1;
           }
         });
         $scope.calc($scope.item);

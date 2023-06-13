@@ -85,537 +85,628 @@
     </div>
   </div>
   <br />
+  <div class="row" ng-show="order.$caf== 'u'">
+    <p class="bold font-15 col-6 underline">To be completed by attending PHYSICIAN :</p>
+    <p class="border-1 col-3">
+      <span class="font-13">Visit Type :</span>
+      <span class="font-13 bold" ng-show="order.type == 'out'">OutPatient</span>
+      <span class="font-13 bold" ng-show="order.type == 'in'">InPatient</span>
+    </p>
+    <p class="border-1 col-3">
+      <span class="font-13">Emergency Case ?</span>
+      <span class="font-13 green bold" ng-show="order.erCase">Yes</span>
+      <span class="font-13 red bold" ng-show="!order.erCase">No</span>
+    </p>
+  </div>
+  <br />
   <div class="row">
-    <div class="row" ng-show="order.$caf== 'u'">
-      <p class="bold font-15 col-6 underline">To be completed by attending PHYSICIAN :</p>
-      <p class="border-1 col-3">
-        <span class="font-13">Visit Type :</span>
-        <span class="font-13 bold" ng-show="order.type == 'out'">OutPatient</span>
-        <span class="font-13 bold" ng-show="order.type == 'in'">InPatient</span>
-      </p>
-      <p class="border-1 col-3">
-        <span class="font-13">Emergency Case ?</span>
-        <span class="font-13 green bold" ng-show="order.erCase">Yes</span>
-        <span class="font-13 red bold" ng-show="!order.erCase">No</span>
-      </p>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-3" ng-show="order.$caf== 'u' || order.$caf== 'o'">
-        <p class="col-5 font-12">BP :</p>
-        <div class="col-7 center">
-          <span class="font-12 bold">{{order.bloodPressureHigh}}/{{order.bloodPressureLow}}</span>
-          <br ng-hide="order.bloodPressureHigh || order.bloodPressureLow" />
-          <hr class="line" />
-        </div>
+    <div class="col-2" ng-show="order.$caf== 'u' || order.$caf== 'o'">
+      <p class="col-4 font-12">BP :</p>
+      <div class="col-8 center">
+        <span class="font-10 bold">{{order.bloodPressureHigh}}/{{order.bloodPressureLow}}</span>
+        <br ng-hide="order.bloodPressureHigh || order.bloodPressureLow" />
+        <hr class="line" />
       </div>
-
-      <div class="col-2" ng-show="order.$caf== 'u' || order.$caf== 'o'">
-        <p class="col-6 font-12">Pulse :</p>
-        <div class="col-6 center">
-          <span class="font-12 bold">{{order.pulse}} </span>
-          <br ng-hide="order.pulse" />
-          <hr class="line" />
-        </div>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'u' || order.$caf== 'o'">
-        <p class="col-6 font-12">Temp :</p>
-        <div class="col-6 center">
-          <span class="font-12 bold">{{order.temperature}}</span>
-          <br ng-hide="order.temperature" />
-          <hr class="line" />
-        </div>
-      </div>
-      <div class="col-4" ng-show="order.$caf== 'u' || order.$caf== 'o'">
-        <p class="col-6 font-12">RespiratoryRate :</p>
-        <div class="col-6 center">
-          <span class="font-12 bold">{{order.respiratoryRate}}</span>
-          <br ng-hide="order.respiratoryRate" />
-          <hr class="line" />
-        </div>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'u'">
-        <p class="col-6 font-12">KG :</p>
-        <div class="col-6 center">
-          <span class="font-12 bold">{{order.weight}}</span>
-          <br ng-hide="order.weight" />
-          <hr class="line" />
-        </div>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'u'">
-        <p class="col-7 font-12">Height :</p>
-        <div class="col-5 center">
-          <span class="font-12 bold">{{order.height}}</span>
-          <br ng-hide="order.height" />
-          <hr class="line" />
-        </div>
-      </div>
-      <div class="col-4">
-        <p class="col-7 font-12">Duration of Illness :</p>
-        <div class="col-5 center">
-          <span class="font-12 bold">{{order.durationOfIllness||0}} {{order.illnessPeriod.nameEn}}</span>
-          <br ng-hide="order.durationOfIllness" />
-          <hr class="line" />
-        </div>
-      </div>
-    </div>
-    <div class="row" ng-show="order.$caf== 'o'">
-      <div class="col-6">
-        <p class="bold center font-20">Right Eye</p>
-        <table class="table bold">
-          <tr>
-            <th></th>
-            <th>Sphere</th>
-            <th>Cylinder</th>
-            <th>Axis</th>
-            <th>Prism</th>
-            <th>V/A</th>
-          </tr>
-          <tr>
-            <td class="center">Distance</td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-          </tr>
-          <tr>
-            <td class="center">Near</td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-          </tr>
-        </table>
-      </div>
-      <div class="col-6">
-        <p class="bold center font-20">Left Eye</p>
-        <table class="table bold">
-          <tr>
-            <th>Sphere</th>
-            <th>Cylinder</th>
-            <th>Axis</th>
-            <th>Prism</th>
-            <th>V/A</th>
-            <th>PD</th>
-          </tr>
-          <tr>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-          </tr>
-          <tr>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-            <td class="center"></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <p class="bold col-6 gray-bg" ng-show="order.$caf== 'u' || order.$caf== 'd'">- Chief Complaint & Main Symptoms :</p>
-      <p class="bold col-6 gray-bg" ng-show="order.$caf== 'o'">- Chief Complaint :</p>
-      <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'CC'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
-      </p>
-      <hr />
-    </div>
-    <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
-      <p class="bold col-6 gray-bg">- Other Conditions :</p>
-      <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'OC'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
-      </p>
-      <hr />
     </div>
 
-    <div class="row">
-      <p class="bold col-6 gray-bg">- Diagnosis :</p>
-      <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'DIAG'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
-      </p>
-      <hr />
-    </div>
-
-    <div class="row" ng-hide="order.$caf== 'd'">
-      <p class="bold col-6 gray-bg">- Significant Signs :</p>
-      <p class="font-12">
-        <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'SS'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
-      </p>
-      <hr />
-    </div>
-
-    <div class="row full" ng-show="order.$caf== 'u' || order.$caf== 'd'">
-      <div class="col-3">
-        <p class="col-6 font-11 red">Principal Code :</p>
-        <div class="col-6">
-          <br />
-          <hr class="line" />
-        </div>
-      </div>
-
-      <div class="col-3">
-        <p class="col-6 font-11 red">2nd Code :</p>
-        <div class="col-6">
-          <br />
-          <hr class="line" />
-        </div>
-      </div>
-
-      <div class="col-3">
-        <p class="col-6 font-11 red">3nd Code :</p>
-        <div class="col-6">
-          <br />
-          <hr class="line" />
-        </div>
-      </div>
-
-      <div class="col-3">
-        <p class="col-6 font-11 red">4nd Code :</p>
-        <div class="col-6">
-          <br />
-          <hr class="line" />
-        </div>
+    <div class="col-2" ng-show="order.$caf== 'u' || order.$caf== 'o'">
+      <p class="col-6 font-12">Pulse :</p>
+      <div class="col-6 center">
+        <span class="font-10 bold">{{order.pulse}} </span>
+        <br ng-hide="order.pulse" />
+        <hr class="line" />
       </div>
     </div>
-    <div class="row" ng-show="order.$caf== 'd'">
-      <div class="row">
-        <div class="col-2">Primary</div>
-        <div class="col-10">
-          <hr class="line" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2">Secondary</div>
-        <div class="col-10">
-          <hr class="line" />
-        </div>
+    <div class="col-2" ng-show="order.$caf== 'u' || order.$caf== 'o'">
+      <p class="col-6 font-12">Temp :</p>
+      <div class="col-6 center">
+        <span class="font-10 bold">{{order.temperature}}</span>
+        <br ng-hide="order.temperature" />
+        <hr class="line" />
       </div>
     </div>
-    <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
-      <div class="col-2" ng-show="order.$caf== 'u'">
-        <span ng-show="order.conginital" class="style-box col-4">&#254;</span>
-        <span ng-show="!order.conginital" class="style-box col-4">&#168;</span>
-        <span class="font-15 col-8" > Conginital</span>
+    <div class="col-3" ng-show="order.$caf== 'u' || order.$caf== 'o'">
+      <p class="col-7 font-12">RespiratoryRate :</p>
+      <div class="col-5 center">
+        <span class="font-10 bold">{{order.respiratoryRate}}</span>
+        <br ng-hide="order.respiratoryRate" />
+        <hr class="line" />
       </div>
-      <div class="col-2">
-        <span ng-show="order.rta" class="style-box col-4">&#254;</span>
-        <span ng-show="!order.rta" class="style-box col-4">&#168;</span>
-        <span class="font-15 col-8"> RTA</span>
+    </div>
+    <div class="col-2" ng-show="order.$caf== 'u'">
+      <p class="col-6 font-12">KG :</p>
+      <div class="col-6 center">
+        <span class="font-10 bold">{{order.weight}}</span>
+        <br ng-hide="order.weight" />
+        <hr class="line" />
       </div>
+    </div>
+    <div class="col-2" ng-show="order.$caf== 'u'">
+      <p class="col-7 font-12">Height :</p>
+      <div class="col-5 center">
+        <span class="font-10 bold">{{order.height}}</span>
+        <br ng-hide="order.height" />
+        <hr class="line" />
+      </div>
+    </div>
+    <div class="col-3">
+      <p class="col-7 font-12">Duration of Illness :</p>
+      <div class="col-5 center">
+        <span class="font-10 bold">{{order.durationOfIllness||0}} {{order.illnessPeriod.nameEn}}</span>
+        <br ng-hide="order.durationOfIllness" />
+        <hr class="line" />
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="order.$caf== 'o'">
+    <p class="underline blod font-20">To Be Completed By The Optician</p>
 
-      <div class="col-2" ng-show="order.$caf== 'u'">
-        <span ng-show="order.vaccination" class="style-box col-4">&#254;</span>
-        <span ng-show="!order.vaccination" class="style-box col-4">&#168;</span>
-        <span class="font-15 col-8"> Vaccination</span>
-      </div>
-      <div class="col-3">
-        <span ng-show="order.checkup" class="style-box col-2">&#254;</span>
-        <span ng-show="!order.checkup" class="style-box col-2">&#168;</span>
-        <span class="font-15 col-10"> Check-up</span>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'u'">
-        <span ng-show="order.psychiatric" class="style-box col-4">&#254;</span>
-        <span ng-show="!order.psychiatric" class="style-box col-4">&#168;</span>
-        <span class="font-15 col-8"> Psychiatric</span>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'u'">
-        <span ng-show="order.infertility" class="style-box col-4">&#254;</span>
-        <span ng-show="!order.infertility" class="style-box col-4">&#168;</span>
-        <span class="font-15 col-8"> Infertility</span>
-      </div>
-      <div class="col-4" ng-hide="order.patient.gender.id == 1 || order.$caf== 'd'">
-        <span ng-show="order.pregnancy" class="style-box col-2">&#254;</span>
-        <span ng-show="!order.pregnancy" class="style-box col-2">&#168;</span>
-        <span class="font-15 col-10"> Pregnancy \ Indicate LMP</span>
-      </div>
-
-      <div class="col-4">
-        <span ng-show="order.workRelated" class="style-box col-2">&#254;</span>
-        <span ng-show="!order.workRelated" class="style-box col-2">&#168;</span>
-        <span class="font-15 col-10"> Work Related Accident</span>
-      </div>
-      <div class="col-3" ng-show="order.$caf== 'd'">
-        <span ng-show="order.sportRelated" class="style-box col-3">&#254;</span>
-        <span ng-show="!order.sportRelated" class="style-box col-3">&#168;</span>
-        <span class="font-15 col-9"> Sport Related</span>
-      </div>
-      <div class="col-5" ng-show="order.$caf== 'd'">
-        <span ng-show="order.congenital" class="style-box col-2">&#254;</span>
-        <span ng-show="!order.congenital" class="style-box col-2">&#168;</span>
-        <span class="font-15 col-10"> Congenital \ Developmental</span>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'd'">
-        <span ng-show="order.orthodontics" class="style-box col-3">&#254;</span>
-        <span ng-show="!order.orthodontics" class="style-box col-3">&#168;</span>
-        <span class="font-15 col-9"> Orthodontics</span>
-      </div>
-      <div class="col-2" ng-show="order.$caf== 'd'">
-        <span ng-show="order.cleaning" class="style-box col-3">&#254;</span>
-        <span ng-show="!order.cleaning" class="style-box col-3">&#168;</span>
-        <span class="font-15 col-9"> Cleaning</span>
-      </div>
-    </div>
-    <br ng-show="order.$caf== 'u'" />
-    <hr ng-show="order.$caf== 'u'" />
-    <div class="row" ng-show="order.$caf== 'u'">
-      <p class="font-13">Suggestive line(s) of management kindly , Enumerate the recommended investigations &nbsp; &nbsp; &nbsp; &nbsp; <span class="underline">out Patient approvals only :</span></p>
-    </div>
-    <br ng-show="order.$caf== 'u' || order.$caf== 'd'" />
-    <p class="center" ng-show="order.$caf== 'd'">Specify the recommended investigations and / or procedures using the tooth number as shown on the Teeth Map Above</p>
-    <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <div class="col-6">
+      <p class="bold center font-20">Right Eye</p>
       <table class="table bold">
         <tr>
-          <th class="width-15-mm">No.</th>
-          <th class="width-25-mm">Code</th>
-          <th ng-show="order.$caf== 'u'">Description/Service</th>
-          <th ng-show="order.$caf== 'd'">Dental/Service</th>
-          <th class="width-15-mm">Quantity</th>
-          <th class="width-25-mm">Type</th>
-          <th class="width-20-mm">Cost</th>
+          <th></th>
+          <th>Sphere</th>
+          <th>Cylinder</th>
+          <th>Axis</th>
+          <th>Prism</th>
+          <th>V/A</th>
         </tr>
-        <tr ng-repeat="s in order.$ordersListServices">
-          <td class="center width-15-mm">
-            <p class="center">{{$index + 1}}</p>
-          </td>
-          <td class="center width-25-mm">
-            <p class="center">{{s.code}}</p>
-          </td>
-          <td class="center">
-            <p class="center">{{s.name##session.lang##}}</p>
-          </td>
-          <td class="center width-15-mm">
-            <p class="center">{{s.count || 1}}</p>
-          </td>
-          <td class="center width-25-mm">
-            <p class="center" ng-show="s.type== 'CO'">Consultation</p>
-            <p class="center" ng-show="s.type== 'LA'">Laboratory</p>
-            <p class="center" ng-show="s.type== 'X-R'">Radiology</p>
-            <p class="center" ng-show="s.type== 'ER'">Emergency</p>
-            <p class="center" ng-show="s.type== 'MD'">Medicine</p>
-          </td>
-          <td class="center width-20-mm">
-            <p class="center">{{s.cost | xmoney2}} <span class="currency">##word.$##</span></p>
-          </td>
+        <tr>
+          <td class="center"><p class="font-10">Distance</p></td>
+          <td class="center">{{order.spectaclesRight.sphere}}</td>
+          <td class="center">{{order.spectaclesRight.cylinder}}</td>
+          <td class="center">{{order.spectaclesRight.axis}}</td>
+          <td class="center">{{order.spectaclesRight.prism}}</td>
+          <td class="center">{{order.spectaclesRight.nearAdd}}</td>
+        </tr>
+        <tr>
+          <td class="center"><p class="font-10">Near</p></td>
+          <td class="center">{{item.contactLensRight.sphere}}</td>
+          <td class="center">{{item.contactLensRight.cylinder}}</td>
+          <td class="center">{{item.contactLensRight.axis}}</td>
+          <td class="center">{{item.contactLensRight.bc}}</td>
+          <td class="center">{{item.contactLensRight.nearAdd}}</td>
         </tr>
       </table>
     </div>
-    <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
-      <p class="border-1 col-6">
-        <span class="col-6 font-14">TOTAL Service Amount : </span>
-        <span class="col-6 bold font-14">{{order.$totalAmountServices | xmoney2 }} <span class="currency">##word.$##</span></span>
-      </p>
-    </div>
-    <hr ng-show="order.$caf== 'u' || order.$caf== 'd'" />
-    <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
-      <table class="table bold">
-        <tr class="gray-bg">
-          <th class="width-15-mm">No.</th>
-          <th class="width-25-mm">Code</th>
-          <th>Medications ( Generic Name )</th>
-          <th class="width-15-mm">Quantity</th>
-          <th class="width-25-mm">Type</th>
-          <th class="width-20-mm">Cost</th>
-        </tr>
-        <tr ng-repeat="s in order.$ordersListMedicines">
-          <td class="center width-15-mm">
-            <p class="center">{{$index + 1}}</p>
-          </td>
-          <td class="center width-25-mm">
-            <p class="center">{{s.code}}</p>
-          </td>
-          <td class="center">
-            <p class="center">{{s.name##session.lang##}}</p>
-          </td>
-          <td class="center width-15-mm">
-            <p class="center">{{s.count || 1}}</p>
-          </td>
-          <td class="center width-25-mm">
-            <p class="center" ng-show="s.type== 'ER'">Emergency</p>
-            <p class="center" ng-show="s.type== 'MD'">Medicine</p>
-          </td>
-          <td class="center width-20-mm">
-            <p class="center">{{s.totalCost | xmoney2 }} <span class="currency">##word.$##</span></p>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
-      <p class="border-1 col-6">
-        <span class="col-6 font-14">TOTAL Med Amount : </span>
-        <span class="col-6 bold font-14">{{order.$totalAmountMedicines | xmoney2 }} <span class="currency">##word.$##</span></span>
-      </p>
-    </div>
-    <div class="row" ng-show="order.$caf== 'o'">
+    <div class="col-6">
+      <p class="bold center font-20">Left Eye</p>
       <table class="table bold">
         <tr>
-          <th class="width-15-mm">No.</th>
-          <th class="width-25-mm">Code</th>
-          <th>Description/Service</th>
-          <th class="width-15-mm">Quantity</th>
-          <th class="width-25-mm">Type</th>
-          <th class="width-20-mm">Cost</th>
+          <th>Sphere</th>
+          <th>Cylinder</th>
+          <th>Axis</th>
+          <th>Prism</th>
+          <th>V/A</th>
+          <th>PD</th>
         </tr>
-        <tr ng-repeat="s in order.ordersList">
-          <td class="center width-15-mm">
-            <p class="center">{{$index + 1}}</p>
-          </td>
-          <td class="center width-25-mm">
-            <p class="center">{{s.code}}</p>
-          </td>
-          <td class="center">
-            <p class="center">{{s.name##session.lang##}}</p>
-          </td>
-          <td class="center width-15-mm">
-            <p class="center">{{s.count || 1}}</p>
-          </td>
-          <td class="center width-25-mm">
-            <p class="center" ng-show="s.type== 'CO'">Consultation</p>
-            <p class="center" ng-show="s.type== 'LA'">Laboratory</p>
-            <p class="center" ng-show="s.type== 'X-R'">Radiology</p>
-          </td>
-          <td class="center width-20-mm">
-            <p class="center">{{s.cost | xmoney2}} <span class="currency">##word.$##</span></p>
-          </td>
+        <tr>
+          <td class="center">{{order.spectaclesLeft.sphere}}</td>
+          <td class="center">{{order.spectaclesLeft.cylinder}}</td>
+          <td class="center">{{order.spectaclesLeft.axis}}</td>
+          <td class="center">{{order.spectaclesLeft.prism}}</td>
+          <td class="center">{{order.spectaclesLeft.nearAdd}}</td>
+          <td class="center"></td>
+        </tr>
+        <tr>
+          <td class="center">{{item.contactLensLeft.sphere}}</td>
+          <td class="center">{{item.contactLensLeft.cylinder}}</td>
+          <td class="center">{{item.contactLensLeft.axis}}</td>
+          <td class="center">{{item.contactLensLeft.bc}}</td>
+          <td class="center">{{item.contactLensLeft.nearAdd}}</td>
+          <td class="center"></td>
         </tr>
       </table>
     </div>
-    <div class="row" ng-show="order.$caf== 'o'">
-      <p class="border-1 col-5">
-        <span class="col-5 font-14">TOTAL : </span>
-        <span class="col-7 bold font-14">{{order.$totalAmountServices | xmoney2 }} <span class="currency">##word.$##</span></span>
-      </p>
-    </div>
-    
-    <hr />
     <div class="row">
-      <p class="col-5 font-12">Incase management form (cmfl0) Included :</p>
-      <div class="col-2">
-        <span class="style-box col-5">&#168;</span>
-        <span class="font-12 col-7"> Yes</span>
+      <div class="col-3 margin border">
+        <div class="col-4 border-right">
+          <p class="font-12">Bifocal</p>
+        </div>
+        <div class="col-8">
+          <p class="t-right font-12">Add</p>
+        </div>
       </div>
       <div class="col-1"></div>
-      <div class="col-2">
-        <span class="style-box col-5">&#168;</span>
-        <span class="font-12 col-7"> No</span>
+      <div class="col-3 margin border">
+        <div class="col-4 border-right">
+          <p class="font-12">Vertex</p>
+        </div>
+        <div class="col-8">
+          <p class="t-right font-12">Add</p>
+        </div>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-3 margin border">
+        <div class="col-4 border-right">
+          <p class="font-12">Bifocal</p>
+        </div>
+        <div class="col-8">
+          <p class="t-right font-12">Add</p>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <p class="col-6 font-11">Please specify possible line of management <span class="red">when applicable:</span></p>
-      <p class="dotted font-11 col-6"></p>
+  </div>
+  <!-- <div class="row" ng-show="order.$caf== 'o'">
+    <p class="underline blod font-20">To Be Completed By The Optician</p>
+    <div class="col-6">
+      <table class="table center hover bold" id="t1">
+        <tr>
+          <th></th>
+          <th>##word.Sphere##</th>
+          <th>##word.Cylinder##</th>
+          <th>##word.Axis##</th>
+          <th>##word.Prism##</th>
+          <th>##word.Near Add##</th>
+        </tr>
+        <tr>
+          <td>##word.Right (OD)##</td>
+          <td><p>{{order.spectaclesRight.sphere}}</p></td>
+          <td><p>{{order.spectaclesRight.cylinder}}</p></td>
+          <td><p>{{order.spectaclesRight.axis}}</p></td>
+          <td><p>{{order.spectaclesRight.prism}}</p></td>
+          <td><p>{{order.spectaclesRight.nearAdd}}</p></td>
+        </tr>
+        <tr>
+          <td>##word.Left (OS)##</td>
+          <td><p>{{order.spectaclesLeft.sphere}}</p></td>
+          <td><p>{{order.spectaclesLeft.cylinder}}</p></td>
+          <td><p>{{order.spectaclesLeft.axis}}</p></td>
+          <td><p>{{order.spectaclesLeft.prism}}</p></td>
+          <td><p>{{order.spectaclesLeft.nearAdd}}</p></td>
+        </tr>
+      </table>
     </div>
-    <br />
+    <div class="col-6">
+      <table class="table center hover bold" id="t1">
+        <tr>
+          <th></th>
+          <th>##word.Sphere##</th>
+          <th>##word.Cylinder##</th>
+          <th>##word.Axis##</th>
+          <th>##word.BC##</th>
+          <th>##word.DIA##</th>
+          <th>##word.Near Add##</th>
+        </tr>
+        <tr>
+          <td>##word.Right (OD)##</td>
+          <td><p>{{item.contactLensRight.sphere}}</p></td>
+          <td><p>{{item.contactLensRight.cylinder}}</p></td>
+          <td><p>{{item.contactLensRight.axis}}</p></td>
+          <td><p>{{item.contactLensRight.bc}}</p></td>
+          <td><p>{{item.contactLensRight.dia}}</p></td>
+          <td><p>{{item.contactLensRight.nearAdd}}</p></td>
+        </tr>
+        <tr>
+          <td>##word.Left (OS)##</td>
+          <td><p>{{item.contactLensLeft.sphere}}</p></td>
+          <td><p>{{item.contactLensLeft.cylinder}}</p></td>
+          <td><p>{{item.contactLensLeft.axis}}</p></td>
+          <td><p>{{item.contactLensLeft.bc}}</p></td>
+          <td><p>{{item.contactLensLeft.dia}}</p></td>
+          <td><p>{{item.contactLensLeft.nearAdd}}</p></td>
+        </tr>
+      </table>
+    </div>
+  </div> -->
+  <br>
+  <div class="row">
+    <p class="bold col-6 gray-bg" ng-show="order.$caf== 'u' || order.$caf== 'd'">- Chief Complaint & Main Symptoms :</p>
+    <p class="bold col-6 gray-bg" ng-show="order.$caf== 'o'">- Chief Complaint :</p>
+    <p class="font-12">
+      <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'CC'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
+    </p>
     <hr />
+  </div>
+  <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <p class="bold col-6 gray-bg">- Other Conditions :</p>
+    <p class="font-12">
+      <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'OC'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
+    </p>
+    <hr />
+  </div>
+
+  <div class="row">
+    <p class="bold col-6 gray-bg">- Diagnosis :</p>
+    <p class="font-12">
+      <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'DIAG'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
+    </p>
+    <hr />
+  </div>
+
+  <div class="row" ng-hide="order.$caf== 'd'">
+    <p class="bold col-6 gray-bg">- Significant Signs :</p>
+    <p class="font-12">
+      <span class="userPrint" ng-repeat="s in order.doctorReccomendList | filter:{type :'SS'}">{{s.nameEn}} <span ng-hide="$index +1 ==order.doctorReccomendList.length">,</span> </span>
+    </p>
+    <hr />
+  </div>
+
+  <div class="row full" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <div class="col-3">
+      <p class="col-6 font-11 red">Principal Code :</p>
+      <div class="col-6">
+        <br />
+        <hr class="line" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <p class="col-6 font-11 red">2nd Code :</p>
+      <div class="col-6">
+        <br />
+        <hr class="line" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <p class="col-6 font-11 red">3nd Code :</p>
+      <div class="col-6">
+        <br />
+        <hr class="line" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <p class="col-6 font-11 red">4nd Code :</p>
+      <div class="col-6">
+        <br />
+        <hr class="line" />
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="order.$caf== 'd'">
     <div class="row">
-      <div class="col-6 border">
-        <div class="row">
-          <p class="col-6 font-11">Estimated length of stay:</p>
-          <p class="dotted font-11 col-5"></p>
-          <p class="col-1 font-11">days</p>
-        </div>
-        <br />
-        <div class="row">
-          <p class="center font-11 bold">
-            I hereby certify that ALL information mentioned are correct & that the medical services shown on this form were medically indicated & necessary for the management of this case.
-          </p>
-        </div>
-        <br />
-        <div class="row">
-          <p class="col-6 font-10">Physician signature & stamp</p>
-          <div class="col-6 center">
-            <span class="font-11 bold"
-              >{{order.doctor.nameEn}}
-              <hr class="line" />
-            </span>
-          </div>
-        </div>
-        <div class="row">
-          <p class="col-4 font-11">Date :</p>
-          <div class="col-8 center">
-            <span class="font-11 bold"
-              >{{order.date| date:"dd \ MM \ yyyy"}}
-              <hr class="line" />
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 border">
-        <div class="row">
-          <p class="bold font-5 font-12">I hereby certify that all statement & information provided concerning patient identification & the present illness or injury are TRUE</p>
-          <p class="bold font-5 t-right font-12">أقر بأن جميع المعلومات المذكورة أعلاه و المتعلقة بهوية المريض و المعلومات المتعلقة بالمرض أو الإصابة الحالية صحيحة</p>
-        </div>
-        <br />
-        <div class="row">
-          <div class="col-5">
-            <p class="bold font-5 font-12">Name & Relationship (If guardian)</p>
-            <hr class="line" />
-          </div>
-          <div class="col-4">
-            <p class="bold font-5 font-12">Signature</p>
-            <hr class="line" />
-          </div>
-          <div class="col-3">
-            <p class="bold font-12">Date : &nbsp; &nbsp; \ &nbsp; &nbsp; \ &nbsp; &nbsp;</p>
-          </div>
-        </div>
+      <div class="col-2">Primary</div>
+      <div class="col-10">
+        <hr class="line" />
       </div>
     </div>
-    <br />
-    <div class="row border">
-      <p class="bold font-5 font-12">provider's approval \ coding stuff must review \ code the recommended service (s) & albacate cost and complete the following :</p>
+    <div class="row">
+      <div class="col-2">Secondary</div>
+      <div class="col-10">
+        <hr class="line" />
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <div class="col-2" ng-show="order.$caf== 'u'">
+      <span ng-show="order.conginital" class="style-box col-4">&#254;</span>
+      <span ng-show="!order.conginital" class="style-box col-4">&#168;</span>
+      <span class="font-15 col-8"> Conginital</span>
+    </div>
+    <div class="col-2">
+      <span ng-show="order.rta" class="style-box col-4">&#254;</span>
+      <span ng-show="!order.rta" class="style-box col-4">&#168;</span>
+      <span class="font-15 col-8"> RTA</span>
+    </div>
+
+    <div class="col-2" ng-show="order.$caf== 'u'">
+      <span ng-show="order.vaccination" class="style-box col-4">&#254;</span>
+      <span ng-show="!order.vaccination" class="style-box col-4">&#168;</span>
+      <span class="font-15 col-8"> Vaccination</span>
+    </div>
+    <div class="col-3">
+      <span ng-show="order.checkup" class="style-box col-2">&#254;</span>
+      <span ng-show="!order.checkup" class="style-box col-2">&#168;</span>
+      <span class="font-15 col-10"> Check-up</span>
+    </div>
+    <div class="col-2" ng-show="order.$caf== 'u'">
+      <span ng-show="order.psychiatric" class="style-box col-4">&#254;</span>
+      <span ng-show="!order.psychiatric" class="style-box col-4">&#168;</span>
+      <span class="font-15 col-8"> Psychiatric</span>
+    </div>
+    <div class="col-2" ng-show="order.$caf== 'u'">
+      <span ng-show="order.infertility" class="style-box col-4">&#254;</span>
+      <span ng-show="!order.infertility" class="style-box col-4">&#168;</span>
+      <span class="font-15 col-8"> Infertility</span>
+    </div>
+    <div class="col-4" ng-hide="order.patient.gender.id == 1 || order.$caf== 'd'">
+      <span ng-show="order.pregnancy" class="style-box col-2">&#254;</span>
+      <span ng-show="!order.pregnancy" class="style-box col-2">&#168;</span>
+      <span class="font-15 col-10"> Pregnancy \ Indicate LMP</span>
+    </div>
+
+    <div class="col-4">
+      <span ng-show="order.workRelated" class="style-box col-2">&#254;</span>
+      <span ng-show="!order.workRelated" class="style-box col-2">&#168;</span>
+      <span class="font-15 col-10"> Work Related Accident</span>
+    </div>
+    <div class="col-3" ng-show="order.$caf== 'd'">
+      <span ng-show="order.sportRelated" class="style-box col-3">&#254;</span>
+      <span ng-show="!order.sportRelated" class="style-box col-3">&#168;</span>
+      <span class="font-15 col-9"> Sport Related</span>
+    </div>
+    <div class="col-5" ng-show="order.$caf== 'd'">
+      <span ng-show="order.congenital" class="style-box col-2">&#254;</span>
+      <span ng-show="!order.congenital" class="style-box col-2">&#168;</span>
+      <span class="font-15 col-10"> Congenital \ Developmental</span>
+    </div>
+    <div class="col-2" ng-show="order.$caf== 'd'">
+      <span ng-show="order.orthodontics" class="style-box col-3">&#254;</span>
+      <span ng-show="!order.orthodontics" class="style-box col-3">&#168;</span>
+      <span class="font-15 col-9"> Orthodontics</span>
+    </div>
+    <div class="col-2" ng-show="order.$caf== 'd'">
+      <span ng-show="order.cleaning" class="style-box col-3">&#254;</span>
+      <span ng-show="!order.cleaning" class="style-box col-3">&#168;</span>
+      <span class="font-15 col-9"> Cleaning</span>
+    </div>
+  </div>
+  <br ng-show="order.$caf== 'u'" />
+  <hr ng-show="order.$caf== 'u'" />
+  <div class="row" ng-show="order.$caf== 'u'">
+    <p class="font-13">Suggestive line(s) of management kindly , Enumerate the recommended investigations &nbsp; &nbsp; &nbsp; &nbsp; <span class="underline">out Patient approvals only :</span></p>
+  </div>
+  <br ng-show="order.$caf== 'u' || order.$caf== 'd'" />
+  <p class="center" ng-show="order.$caf== 'd'">Specify the recommended investigations and / or procedures using the tooth number as shown on the Teeth Map Above</p>
+  <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <table class="table bold">
+      <tr>
+        <th class="width-15-mm">No.</th>
+        <th class="width-25-mm">Code</th>
+        <th ng-show="order.$caf== 'u'">Description/Service</th>
+        <th ng-show="order.$caf== 'd'">Dental/Service</th>
+        <th class="width-15-mm">Quantity</th>
+        <th class="width-25-mm">Type</th>
+        <th class="width-20-mm">Cost</th>
+      </tr>
+      <tr ng-repeat="s in order.$ordersListServices">
+        <td class="center width-15-mm">
+          <p class="center">{{$index + 1}}</p>
+        </td>
+        <td class="center width-25-mm">
+          <p class="center">{{s.code}}</p>
+        </td>
+        <td class="center">
+          <p class="center">{{s.name##session.lang##}}</p>
+        </td>
+        <td class="center width-15-mm">
+          <p class="center">{{s.count || 1}}</p>
+        </td>
+        <td class="center width-25-mm">
+          <p class="center" ng-show="s.type== 'CO'">Consultation</p>
+          <p class="center" ng-show="s.type== 'LA'">Laboratory</p>
+          <p class="center" ng-show="s.type== 'X-R'">Radiology</p>
+          <p class="center" ng-show="s.type== 'ER'">Emergency</p>
+          <p class="center" ng-show="s.type== 'MD'">Medicine</p>
+        </td>
+        <td class="center width-20-mm">
+          <p class="center">{{s.cost | xmoney2}} <span class="currency">##word.$##</span></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <p class="border-1 col-6">
+      <span class="col-6 font-14">TOTAL Service Amount : </span>
+      <span class="col-6 bold font-14">{{order.$totalAmountServices | xmoney2 }} <span class="currency">##word.$##</span></span>
+    </p>
+  </div>
+  <hr ng-show="order.$caf== 'u' || order.$caf== 'd'" />
+  <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <table class="table bold">
+      <tr class="gray-bg">
+        <th class="width-15-mm">No.</th>
+        <th class="width-25-mm">Code</th>
+        <th>Medications ( Generic Name )</th>
+        <th class="width-15-mm">Quantity</th>
+        <th class="width-25-mm">Type</th>
+        <th class="width-20-mm">Cost</th>
+      </tr>
+      <tr ng-repeat="s in order.$ordersListMedicines">
+        <td class="center width-15-mm">
+          <p class="center">{{$index + 1}}</p>
+        </td>
+        <td class="center width-25-mm">
+          <p class="center">{{s.code}}</p>
+        </td>
+        <td class="center">
+          <p class="center">{{s.name##session.lang##}}</p>
+        </td>
+        <td class="center width-15-mm">
+          <p class="center">{{s.count || 1}}</p>
+        </td>
+        <td class="center width-25-mm">
+          <p class="center" ng-show="s.type== 'ER'">Emergency</p>
+          <p class="center" ng-show="s.type== 'MD'">Medicine</p>
+        </td>
+        <td class="center width-20-mm">
+          <p class="center">{{s.totalCost | xmoney2 }} <span class="currency">##word.$##</span></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row" ng-show="order.$caf== 'u' || order.$caf== 'd'">
+    <p class="border-1 col-6">
+      <span class="col-6 font-14">TOTAL Med Amount : </span>
+      <span class="col-6 bold font-14">{{order.$totalAmountMedicines | xmoney2 }} <span class="currency">##word.$##</span></span>
+    </p>
+  </div>
+  <div class="row" ng-show="order.$caf== 'o'">
+    <table class="table bold">
+      <tr>
+        <th class="width-15-mm">No.</th>
+        <th class="width-25-mm">Code</th>
+        <th>Description/Service</th>
+        <th class="width-15-mm">Quantity</th>
+        <th class="width-25-mm">Type</th>
+        <th class="width-20-mm">Cost</th>
+      </tr>
+      <tr ng-repeat="s in order.ordersList">
+        <td class="center width-15-mm">
+          <p class="center">{{$index + 1}}</p>
+        </td>
+        <td class="center width-25-mm">
+          <p class="center">{{s.code}}</p>
+        </td>
+        <td class="center">
+          <p class="center">{{s.name##session.lang##}}</p>
+        </td>
+        <td class="center width-15-mm">
+          <p class="center">{{s.count || 1}}</p>
+        </td>
+        <td class="center width-25-mm">
+          <p class="center" ng-show="s.type== 'CO'">Consultation</p>
+          <p class="center" ng-show="s.type== 'LA'">Laboratory</p>
+          <p class="center" ng-show="s.type== 'X-R'">Radiology</p>
+        </td>
+        <td class="center width-20-mm">
+          <p class="center">{{s.cost | xmoney2}} <span class="currency">##word.$##</span></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row" ng-show="order.$caf== 'o'">
+    <p class="border-1 col-5">
+      <span class="col-5 font-14">TOTAL : </span>
+      <span class="col-7 bold font-14">{{order.$totalAmountServices | xmoney2 }} <span class="currency">##word.$##</span></span>
+    </p>
+  </div>
+
+  <hr />
+  <div class="row">
+    <p class="col-5 font-12">Incase management form (cmfl0) Included :</p>
+    <div class="col-2">
+      <span class="style-box col-5">&#168;</span>
+      <span class="font-12 col-7"> Yes</span>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-2">
+      <span class="style-box col-5">&#168;</span>
+      <span class="font-12 col-7"> No</span>
+    </div>
+  </div>
+  <div class="row">
+    <p class="col-6 font-11">Please specify possible line of management <span class="red">when applicable:</span></p>
+    <p class="dotted font-11 col-6"></p>
+  </div>
+  <br />
+  <hr />
+  <div class="row">
+    <div class="col-6 border">
       <div class="row">
-        <p class="bold col-3 font-5 font-12">Total Cost &nbsp; ##word.$##</p>
+        <p class="col-6 font-11">Estimated length of stay:</p>
         <p class="dotted font-11 col-5"></p>
-        <p class="bold col-4 font-5 font-12">As estimated \ Package Deal</p>
+        <p class="col-1 font-11">days</p>
+      </div>
+      <br />
+      <div class="row">
+        <p class="center font-11 bold">
+          I hereby certify that ALL information mentioned are correct & that the medical services shown on this form were medically indicated & necessary for the management of this case.
+        </p>
+      </div>
+      <br />
+      <div class="row">
+        <p class="col-6 font-10">Physician signature & stamp</p>
+        <div class="col-6 center">
+          <span class="font-11 bold"
+            >{{order.doctor.nameEn}}
+            <hr class="line" />
+          </span>
+        </div>
       </div>
       <div class="row">
-        <p class="bold col-3 font-5 font-11">Completed \ Coded By signature</p>
-        <p class="dotted font-11 col-3"></p>
-        <p class="bold col-2 font-5 font-11">Signature</p>
-        <p class="dotted font-11 col-2"></p>
-        <p class="bold col-2 font-5 font-11">Date : &nbsp; &nbsp; \ &nbsp; &nbsp; \ &nbsp; &nbsp;</p>
+        <p class="col-4 font-11">Date :</p>
+        <div class="col-8 center">
+          <span class="font-11 bold"
+            >{{order.date| date:"dd \ MM \ yyyy"}}
+            <hr class="line" />
+          </span>
+        </div>
       </div>
     </div>
-    <br />
-    <div class="row border-dashed">
+    <div class="col-6 border">
       <div class="row">
-        <p class="col-3 bold font-13 font-5 underline blue-dark">For Insurance Company Use Only</p>
-        <div class="col-2">
-          <span class="style-box col-6">&#168;</span>
-          <span class="font-13 bold col-6"> Approved</span>
+        <p class="bold font-5 font-12">I hereby certify that all statement & information provided concerning patient identification & the present illness or injury are TRUE</p>
+        <p class="bold font-5 t-right font-12">أقر بأن جميع المعلومات المذكورة أعلاه و المتعلقة بهوية المريض و المعلومات المتعلقة بالمرض أو الإصابة الحالية صحيحة</p>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-5">
+          <p class="bold font-5 font-12">Name & Relationship (If guardian)</p>
+          <hr class="line" />
+        </div>
+        <div class="col-4">
+          <p class="bold font-5 font-12">Signature</p>
+          <hr class="line" />
         </div>
         <div class="col-3">
-          <span class="style-box col-4">&#168;</span>
-          <span class="font-13 bold col-8">Not Approved</span>
+          <p class="bold font-12">Date : &nbsp; &nbsp; \ &nbsp; &nbsp; \ &nbsp; &nbsp;</p>
         </div>
-        <p class="col-2 bold font-13 font-5 blue-dark">Approval No.</p>
-        <p class="dotted font-11 col-2"></p>
       </div>
-      <div class="row">
-        <p class="col-8 font-13 font-5"><span class="bold"> Comments :</span> <span>(include approved days/services , if diffrent from the requested)</span></p>
-        <p class="col-2 bold font-13 font-5 blue-dark">Approval Validity</p>
-        <p class="dotted font-11 col-2"></p>
+    </div>
+  </div>
+  <br />
+  <div class="row border">
+    <p class="bold font-5 font-12">provider's approval \ coding stuff must review \ code the recommended service (s) & albacate cost and complete the following :</p>
+    <div class="row">
+      <p class="bold col-3 font-5 font-12">Total Cost &nbsp; ##word.$##</p>
+      <p class="dotted font-11 col-5"></p>
+      <p class="bold col-4 font-5 font-12">As estimated \ Package Deal</p>
+    </div>
+    <div class="row">
+      <p class="bold col-3 font-5 font-11">Completed \ Coded By signature</p>
+      <p class="dotted font-11 col-3"></p>
+      <p class="bold col-2 font-5 font-11">Signature</p>
+      <p class="dotted font-11 col-2"></p>
+      <p class="bold col-2 font-5 font-11">Date : &nbsp; &nbsp; \ &nbsp; &nbsp; \ &nbsp; &nbsp;</p>
+    </div>
+  </div>
+  <br />
+  <div class="row border-dashed">
+    <div class="row">
+      <p class="col-3 bold font-13 font-5 underline blue-dark">For Insurance Company Use Only</p>
+      <div class="col-2">
+        <span class="style-box col-6">&#168;</span>
+        <span class="font-13 bold col-6"> Approved</span>
       </div>
-      <br />
-      <div class="row">
-        <p class="dotted font-11"></p>
-        <p class="dotted font-11"></p>
+      <div class="col-3">
+        <span class="style-box col-4">&#168;</span>
+        <span class="font-13 bold col-8">Not Approved</span>
       </div>
-      <br />
+      <p class="col-2 bold font-13 font-5 blue-dark">Approval No.</p>
+      <p class="dotted font-11 col-2"></p>
+    </div>
+    <div class="row">
+      <p class="col-8 font-13 font-5"><span class="bold"> Comments :</span> <span>(include approved days/services , if diffrent from the requested)</span></p>
+      <p class="col-2 bold font-13 font-5 blue-dark">Approval Validity</p>
+      <p class="dotted font-11 col-2"></p>
+    </div>
+    <br />
+    <div class="row">
+      <p class="dotted font-11"></p>
+      <p class="dotted font-11"></p>
+    </div>
+    <br />
 
-      <div class="row">
-        <p class="col-2 font-13 font-5">Insurance Officer</p>
-        <p class="dotted font-11 col-3"></p>
-        <p class="col-2 font-13 font-5">Signature</p>
-        <p class="dotted font-11 col-3"></p>
-        <p class="bold col-2 font-5 font-11">Date : &nbsp; &nbsp; \ &nbsp; &nbsp; \ &nbsp; &nbsp;</p>
-      </div>
+    <div class="row">
+      <p class="col-2 font-13 font-5">Insurance Officer</p>
+      <p class="dotted font-11 col-3"></p>
+      <p class="col-2 font-13 font-5">Signature</p>
+      <p class="dotted font-11 col-3"></p>
+      <p class="bold col-2 font-5 font-11">Date : &nbsp; &nbsp; \ &nbsp; &nbsp; \ &nbsp; &nbsp;</p>
     </div>
   </div>
 </div>

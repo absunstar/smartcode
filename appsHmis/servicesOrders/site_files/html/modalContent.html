@@ -251,6 +251,7 @@
         <table class="table hover center bold">
           <tr>
             <th>##word.Code## - ##word.Name##</th>
+            <th>##word.Qty##</th>
             <th>##word.Price##</th>
             <th>##word.Discount##</th>
             <!-- <th>##word.H-Center##</th> -->
@@ -272,6 +273,9 @@
               <i-button x-permissions="servicesOrdersApprove || servicesOrdersManage" label="##word.Approve##" ng-show="!s.approved" type="approve" ng-click="approveService(s)"> </i-button>
             </td>
             <td class="center">
+              <p class="center">{{s.count}}</p>
+            </td>
+            <td class="center">
               <p class="center">{{s.price | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center">
@@ -282,7 +286,7 @@
               <p class="center">{{s.hospitalResponsibility.name##session.lang##}}</p>
             </td> -->
             <td class="center">
-              <p class="center">{{s.vat}} <span class="currency">##word.%##</span></p>
+              <p class="center">{{s.vat | xmoney2}} <span class="currency">##word.%##</span></p>
               <p class="center">{{s.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
             </td>
             <td class="center">

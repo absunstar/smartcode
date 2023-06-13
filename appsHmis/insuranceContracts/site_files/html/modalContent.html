@@ -128,6 +128,10 @@
                 <a class="tab-link" onclick="site.showTabContent(event, '#service')">
                   <span> ##word.Services##</span>
                 </a>
+
+                <a class="tab-link" onclick="site.showTabContent(event, '#Medicine')">
+                  <span> ##word.Medicines##</span>
+                </a>
               </div>
 
               <div class="tabs-content">
@@ -266,6 +270,37 @@
                           <i-checkbox label="##word.Coverage##" ng-model="s.coverage"></i-checkbox>
                           <i-checkbox ng-show="s.coverage" label="##word.NeedApproval##" ng-model="s.needApproval"></i-checkbox>
                           <i-button type="delete" ng-click="c.servicesList.splice($index,1)"> </i-button>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div id="Medicine" class="tab-content">
+                  <div class="row">
+                    <table class="table hover center bold">
+                      <tr>
+                        <th>##word.Generic##</th>
+                        <th>##word.Brand##</th>
+                        <th>##word.Medical Device##</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="row">
+                            <i-radio class="col6" group="{{$index}}appliesGeneric" label="##word.Applies##" ng-value="yes" ng-model="c.appliesGeneric"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesGeneric" label="##word.Don`t Applies##" ng-value="no" ng-model="c.appliesGeneric"> </i-radio>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <i-radio class="col6" group="{{$index}}appliesBrand" label="##word.Applies##" ng-value="yes" ng-model="c.appliesBrand"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesBrand" label="##word.Don`t Applies##" ng-value="no" ng-model="c.appliesBrand"> </i-radio>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <i-radio class="col6" group="{{$index}}appliesMedicalDevice" label="##word.Applies##" ng-value="yes" ng-model="c.appliesMedicalDevice"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesMedicalDevice" label="##word.Don`t Applies##" ng-value="no" ng-model="c.appliesMedicalDevice"> </i-radio>
+                          </div>
                         </td>
                       </tr>
                     </table>

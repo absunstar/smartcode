@@ -55,9 +55,17 @@ hr.line {
   border-radius: 5px;
 }
 .border {
-  border: 2px black solid;
+  border: 2px  solid black !important;
  /*  margin: 2px !important; */
+ border-radius: unset;
 }
+
+.border-right {
+  border-right: 2px solid black;
+ border-radius: unset;
+}
+
+
 .border-dashed {
   border: 2px black dashed;
  /*  margin: 2px !important; */

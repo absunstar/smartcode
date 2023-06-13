@@ -1189,7 +1189,7 @@ app.controller('doctorDeskTop', function ($scope, $http, $timeout) {
 
     $scope.busy = false;
     $timeout(() => {
-      $('#cafDetails').addClass('hidden');
+   /*    $('#cafDetails').addClass('hidden'); */
     }, 8000);
   };
 

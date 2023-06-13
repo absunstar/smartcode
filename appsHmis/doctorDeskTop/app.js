@@ -404,7 +404,7 @@ module.exports = function init(site) {
     let servicesList = [];
 
     _data.ordersList.forEach((_s) => {
-      if (_s.type == 'LA' || _s.type == 'X-R' || _s.type == 'CO') {
+      if (_s.type == 'LA' || _s.type == 'X-R' || _s.type == 'CO' || _s.type == 'TE') {
         servicesList.push(_s);
       }
     });

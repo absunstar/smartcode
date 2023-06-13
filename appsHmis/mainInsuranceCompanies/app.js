@@ -375,7 +375,6 @@ module.exports = function init(site) {
                           nameAr: mainInsurance.servicesList[serviceIndex].coName || serviceMemory.nameAr,
                           nameEn: mainInsurance.servicesList[serviceIndex].coName || serviceMemory.nameEn,
                           code: mainInsurance.servicesList[serviceIndex].coCode || serviceMemory.code,
-                          qty: 1,
                           needApproval: mainInsurance.servicesList[serviceIndex].needApproval,
                           approved: mainInsurance.servicesList[serviceIndex].needApproval ? false : true,
                           vat: serviceMemory.vat,
@@ -385,6 +384,7 @@ module.exports = function init(site) {
                           pVat: 0,
                           comVat: 0,
                         };
+                        service.count = _service.count || 1;
                         if (_data.type == 'out') {
                           if (_data.payment == 'cash') {
                             service.price = mainInsurance.servicesList[serviceIndex].cashOut;
@@ -439,7 +439,6 @@ module.exports = function init(site) {
                               serviceSpecialty: serviceMemory.serviceSpecialty,
                               needApproval: categoryInsurance.needApproval,
                               approved: categoryInsurance.needApproval ? false : true,
-                              qty: 1,
                               cost: serviceMemory.cost,
                               vat: serviceMemory.vat,
                               serviceGroup: serviceMemory.serviceGroup,
@@ -447,6 +446,7 @@ module.exports = function init(site) {
                               comVat: 0,
                             };
 
+                            service.count = _service.count || 1;
                             if (_data.type == 'out') {
                               if (_data.payment == 'cash') {
                                 service.price = serviceMemory.cashPriceOut;
@@ -493,7 +493,6 @@ module.exports = function init(site) {
                             needApproval: goupInsurance.needApproval,
                             approved: goupInsurance.needApproval ? false : true,
                             code: serviceMemory.code,
-                            qty: 1,
                             price: 0,
                             cost: serviceMemory.cost,
                             discount: 0,
@@ -503,6 +502,8 @@ module.exports = function init(site) {
                             serviceGroup: serviceMemory.serviceGroup,
                             comVat: 0,
                           };
+                          service.count = _service.count || 1;
+
                           if (_data.type == 'out') {
                             if (_data.payment == 'cash') {
                               service.price = serviceMemory.cashPriceOut;
@@ -550,7 +551,6 @@ module.exports = function init(site) {
                                   code: serviceMemory.code,
                                   serviceSpecialty: serviceMemory.serviceSpecialty,
                                   cost: serviceMemory.cost,
-                                  qty: 1,
                                   vat: serviceMemory.vat,
                                   pVat: 0,
                                   serviceGroup: serviceMemory.serviceGroup,
@@ -558,7 +558,7 @@ module.exports = function init(site) {
                                   needApproval: goupInsurance.needApproval,
                                   approved: goupInsurance.needApproval ? false : true,
                                 };
-
+                                service.count = _service.count || 1;
                                 if (_data.type == 'out') {
                                   if (_data.payment == 'cash') {
                                     service.price = serviceMemory.cashPriceOut;
@@ -601,8 +601,8 @@ module.exports = function init(site) {
                   comVat: 0,
                   pVat: 0,
                   vat: serviceMemory.vat,
-                  qty: 1,
                 };
+                service.count = _service.count || 1;
                 if (_data.type == 'out') {
                   if (_data.payment == 'cash') {
                     service.price = serviceMemory.creditPriceOut;
@@ -623,8 +623,8 @@ module.exports = function init(site) {
               }
               hmisSetting.vatList = hmisSetting.vatList || [];
               let vatIndex = hmisSetting.vatList.findIndex((itm) => itm.id === _data.nationalityId);
-              servicesList[0].totalDisc = (servicesList[0].price * servicesList[0].discount) / 100;
-              servicesList[0].totalAfterDisc = servicesList[0].price - servicesList[0].totalDisc;
+              servicesList[0].totalDisc = (servicesList[0].price * servicesList[0].count * servicesList[0].discount) / 100;
+              servicesList[0].totalAfterDisc = servicesList[0].price * servicesList[0].count - servicesList[0].totalDisc;
 
               if (vatIndex !== -1) {
                 servicesList[0].pVat = hmisSetting.vatList[vatIndex].pVat;
@@ -635,8 +635,6 @@ module.exports = function init(site) {
               }
               servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
               servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat;
-              servicesList[0].total = servicesList[0].total;
-              servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
               servicesList[0].deduct = 0;
 
               if (
@@ -663,6 +661,7 @@ module.exports = function init(site) {
                   }
                 }
                 servicesList[0].totalPVat = ((servicesList[0].deduct || servicesList[0].total) * (servicesList[0].pVat || 0)) / 100;
+                servicesList[0].totalComVat = ((servicesList[0].total - servicesList[0].deduct) * servicesList[0].comVat || 0) / 100;
 
                 if (
                   insuranceContractCb &&

@@ -391,6 +391,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }
 
     let item = {
+      sfdaCode: orderItem.item.sfdaCodeList[0],
       id: orderItem.item.id,
       code: orderItem.item.code,
       nameAr: orderItem.item.nameAr,
@@ -652,6 +653,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           workBySerial: 1,
           workByQrCode: 1,
           gtinList: 1,
+          itemsMedicalTypes: 1,
+          sfdaCodeList: 1,
           validityDays: 1,
           unitsList: 1,
           itemGroup: 1,
@@ -730,6 +733,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           workBySerial: 1,
           workByQrCode: 1,
           gtinList: 1,
+          itemsMedicalTypes: 1,
+          sfdaCodeList: 1,
           validityDays: 1,
           unitsList: 1,
           itemGroup: 1,

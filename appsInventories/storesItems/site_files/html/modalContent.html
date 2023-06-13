@@ -66,7 +66,15 @@
           <div class="row">
             <i-list class="col4" v="r" label="##word.Item Type##" ng-model="item.itemType" items="itemsTypesList" display="name##session.lang##" ng-search="item.$itemType"> </i-list>
             <i-list class="col4" v="r" label="##word.Item Group##" ng-model="item.itemGroup" items="itemsgroupsList" display="name##session.lang##" ng-search="item.$group"> </i-list>
-
+            <i-list
+              class="col4"
+              label="##word.Medical Type##"
+              ng-model="item.itemsMedicalTypes"
+              display="name##session.lang##"
+              items="itemsMedicalTypesList"
+              ng-if="item.hasMedicalData"
+              ng-search="item.$itemsMedicalTypes"
+            ></i-list>
             <div class="row">
               <fieldset>
                 <legend>##word.Work By##</legend>

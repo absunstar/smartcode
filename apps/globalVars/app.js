@@ -147,6 +147,12 @@ module.exports = function init(site) {
     { id: 2, nameEn: 'Teeth', nameAr: 'أسنان' },
     { id: 3, nameEn: 'Others', nameAr: 'أخرى' },
   ];
+  
+  site.itemsMedicalTypes = [
+    { id: 1, nameEn: 'Generic', nameAr: 'نوعي' },
+    { id: 2, nameEn: 'Brand', nameAr: 'ماركة' },
+    { id: 3, nameEn: 'Medical Device', nameAr: 'جهاز طبي' },
+  ];
 
   site.genders = [
     { id: 1, nameEn: 'Male', nameAr: 'ذكر' },
@@ -540,7 +546,12 @@ module.exports = function init(site) {
       list: site.serviceSpecialties,
     });
   });
-  
+  site.post('/api/itemsMedicalTypes', (req, res) => {
+    res.json({
+      done: true,
+      list: site.itemsMedicalTypes,
+    });
+  });
 
   site.post('/api/servicesOrdersSources', (req, res) => {
     res.json({
