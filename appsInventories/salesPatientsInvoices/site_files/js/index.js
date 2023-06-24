@@ -487,6 +487,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
           weight: 1,
           pulse: 1,
           referNum: 1,
+          genericAmount: 1,
+          brandAmount: 1,
+          medicalDeviceAmount: 1,
         },
       },
     }).then(
@@ -592,11 +595,21 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     $http({
       method: 'POST',
       url: '/api/storesItems/handelItemsData',
-      data: { items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'MD' && g.hasOrder == false), storeId: $scope.item.store.id },
+      data: {
+        items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'MD' && g.hasOrder == false),
+        storeId: $scope.item.store.id,
+        insuranceContractId: $scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.id ? $scope.item.doctorDeskTop.insuranceContract.id : undefined,
+        insuranceClassId:
+          $scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.insuranceClass ? $scope.item.doctorDeskTop.insuranceContract.insuranceClass.id : undefined,
+      },
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
+          console.log(response.data.insuranceContract);
+          if (response.data.insuranceContract) {
+            $scope.item.doctorDeskTop.insuranceContract = { ...$scope.item.doctorDeskTop.insuranceContract, ...response.data.insuranceContract };
+          }
           for (const elem of response.data.list) {
             let obj = {
               id: elem.id,
@@ -615,6 +628,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
               hasMedicalData: elem.hasMedicalData,
               medicineDuration: elem.medicineDuration,
               medicineFrequency: elem.medicineFrequency,
+              itemsMedicalTypes: elem.itemsMedicalTypes,
               medicineRoute: elem.medicineRoute,
               barcode: elem.barcode,
               batchesList: [],
@@ -732,6 +746,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       obj.totalMainDiscounts = 0;
       obj.totalExtraDiscounts = 0;
       obj.totalItemsDiscounts = 0;
+      obj.companyCash = 0;
       obj.itemsList.forEach((_item) => {
         let mainDiscountValue = 0;
 
@@ -762,9 +777,24 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         _item.vat = site.toNumber(_item.vat);
         _item.totalVat = site.toNumber(_item.totalVat);
         _item.total = _item.totalAfterDiscounts + _item.totalVat;
+        if ($scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.id) {
+          if (_item.itemsMedicalTypes && $scope.item.doctorDeskTop.insuranceContract) {
+            console.log($scope.item.doctorDeskTop.insuranceContract);
+            (_item.itemsMedicalTypes.id == 2 && $scope.item.doctorDeskTop.insuranceContract.appliesBrand == 'yes') ||
+              (_item.itemsMedicalTypes.id == 3 && $scope.item.doctorDeskTop.insuranceContract.appliesMedicalDevice == 'yes');
+            if (_item.itemsMedicalTypes.id == 1 && $scope.item.doctorDeskTop.insuranceContract.appliesGeneric == 'yes') {
+              let detuct = (_item.total * $scope.item.doctorDeskTop.insuranceContract.deductGeneric || 0) / 100;
+              _item.companyCash = _item.total - detuct;
+              _item.total = detuct;
+            }
+          } else {
+            _item.companyCash = 0;
+          }
+        }
         _item.total = site.toNumber(_item.total);
         obj.totalBeforeVat += _item.totalAfterDiscounts;
         obj.totalVat += _item.totalVat;
+        obj.companyCash += _item.companyCash;
         obj.totalAfterVat += _item.total;
       });
 

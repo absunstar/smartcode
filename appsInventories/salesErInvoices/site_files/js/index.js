@@ -462,7 +462,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
   $scope.getDoctorDeskTopList = function () {
     $scope.busy = true;
     $scope.doctorDeskTopList = [];
-    let where = { 'status.id': 3, toOrder : true, ordersList :{ $elemMatch: { type: 'ER', hasOrder: false } } };
+    let where = { 'status.id': 3, toOrder: true, ordersList: { $elemMatch: { type: 'ER', hasOrder: false } } };
 
     $http({
       method: 'POST',
@@ -481,14 +481,14 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
           type: 1,
           orderId: 1,
           orderCode: 1,
-          temperature :1,
-          respiratoryRate :1,
-          bloodPressureHigh :1,
-          bloodPressureLow :1,
-          height :1,
-          weight :1,
-          pulse :1,
-          referNum :1,
+          temperature: 1,
+          respiratoryRate: 1,
+          bloodPressureHigh: 1,
+          bloodPressureLow: 1,
+          height: 1,
+          weight: 1,
+          pulse: 1,
+          referNum: 1,
         },
       },
     }).then(
@@ -593,7 +593,11 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
     $http({
       method: 'POST',
       url: '/api/storesItems/handelItemsData',
-      data: { items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'ER' && g.hasOrder == false), storeId: $scope.item.store.id },
+      data: {
+        items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'ER' && g.hasOrder == false),
+        storeId: $scope.item.store.id,
+        insuranceContractId: $scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.id ? $scope.item.doctorDeskTop.insuranceContract.id : undefined,
+      },
     }).then(
       function (response) {
         $scope.busy = false;
@@ -616,6 +620,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
               hasMedicalData: elem.hasMedicalData,
               medicineDuration: elem.medicineDuration,
               medicineFrequency: elem.medicineFrequency,
+              itemsMedicalTypes: elem.itemsMedicalTypes,
               medicineRoute: elem.medicineRoute,
               barcode: elem.barcode,
               batchesList: [],

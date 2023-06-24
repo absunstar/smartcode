@@ -457,13 +457,11 @@ module.exports = function init(site) {
           where['company.id'] = site.getCompany(req).id;
 
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
-            console.log(docs,'zzzzzzzzzzzzz');
             if (req.body.claims && docs) {
               let list = [];
               docs.forEach((_doc) => {
                 if (_doc.itemsList && _doc.itemsList.length > 0 && _doc.doctorDeskTop && _doc.doctorDeskTop.id) {
                   _doc.itemsList.forEach((_s) => {
-                    console.log('kkkkkkkkkkk');
                     let obj = {
                       Membership_No: _doc.doctorDeskTop.patient.member,
                       Patient_File_No: _doc.doctorDeskTop.patient.code,

@@ -1264,6 +1264,10 @@ module.exports = function init(site) {
     let storeId = req.body.storeId;
     let itemIds = items.map((_item) => _item.id);
     app.all({ where: { id: { $in: itemIds } } }, (err, docs) => {
+      let appInsuranceContract = site.getApp('insuranceContracts');
+
+      let insuranceContract = appInsuranceContract.memoryList.find((_c) => _c.id == req.body.insuranceCompanyId);
+
       for (let item of items) {
         item.storesList = [];
         let itemDoc = docs.find((_item) => {
@@ -1302,12 +1306,65 @@ module.exports = function init(site) {
             }
           }
           item.hasMedicalData = itemDoc.hasMedicalData;
+          item.itemsMedicalTypes = itemDoc.itemsMedicalTypes;
+          // if (insuranceContract) {
+          //   if (item.itemsMedicalTypes && item.itemsMedicalTypes.id == 1) {
+          //     if (insuranceContract.appliesGeneric == 'yes') {
+          //       item.insurance = true;
+          //       item.serviceDeduct = insuranceContract.serviceDeduct;
+          //       item.serviceType = insuranceContract.serviceType;
+          //       item.maxDeductAmount = insuranceContract.maxDeductAmount;
+          //     } else {
+          //       item.insurance = false;
+          //     }
+          //   } else if (item.itemsMedicalTypes && item.itemsMedicalTypes.id == 2) {
+          //     if (insuranceContract.appliesBrand == 'yes') {
+          //       item.insurance = true;
+          //       item.serviceDeduct = insuranceContract.serviceDeduct;
+          //       item.serviceType = insuranceContract.serviceType;
+          //       item.maxDeductAmount = insuranceContract.maxDeductAmount;
+          //     } else {
+          //       item.insurance = false;
+          //     }
+          //   } else if (item.itemsMedicalTypes && item.itemsMedicalTypes.id == 3) {
+          //     if (insuranceContract.appliesMedicalDevice == 'yes') {
+          //       item.insurance = true;
+          //       item.serviceDeduct = insuranceContract.serviceDeduct;
+          //       item.serviceType = insuranceContract.serviceType;
+          //       item.maxDeductAmount = insuranceContract.maxDeductAmount;
+          //     } else {
+          //       item.insurance = false;
+          //     }
+          //   }
+          // }
         }
       }
-      res.json({
+      let obj = {
         done: true,
         list: items,
-      });
+      };
+
+      if (insuranceContract && new Date(insuranceContract.startDate) <= new Date() && new Date(insuranceContract.endDate) >= new Date()) {
+        let insuranceClass = insuranceContract.insuranceClassesList.find((_c) => _c.id == _data.insuranceClassId);
+        if (insuranceClass) {
+          obj.insuranceContract = {
+            serviceDeduct: insuranceClass.serviceDeduct,
+            serviceType: insuranceClass.serviceType,
+            maxDeductAmount: insuranceClass.maxDeductAmount,
+            appliesMedicalDevice: insuranceClass.appliesMedicalDevice,
+            deductMedicalDevice: insuranceClass.deductMedicalDevice,
+            maxAmountMedicalDevice: insuranceClass.maxAmountMedicalDevice,
+            appliesBrand: insuranceClass.appliesBrand,
+            deductBrand: insuranceClass.deductBrand,
+            maxAmountBrand: insuranceClass.maxAmountBrand,
+            appliesGeneric: insuranceClass.appliesGeneric,
+            deductGeneric: insuranceClass.deductGeneric,
+            maxAmountGeneric: insuranceClass.maxAmountGeneric,
+            
+          };
+        }
+      }
+      res.json(obj);
     });
   });
 

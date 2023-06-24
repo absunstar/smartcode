@@ -35,7 +35,7 @@
     </div>
 
     <div class="row center" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">
-      <p class="center black font-14 bold" >Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
+      <p class="center black font-14 bold">Simplified VAT Invoice فاتورة ضريبية مبسطة</p>
     </div>
 
     <div class="row center" ng-show="setting.printerProgram.printSimplifiedInvoiceSentence">
@@ -93,7 +93,7 @@
             <p class="black font-13 bold" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Patient## : {{thermal.doctorDeskTop.patient.fullName##session.lang##}}</p>
         </div> -->
 
-    <div class="row" ng-show="thermal.salesType.code == 'patient' thermal.salesType.code == 'er'">
+    <div class="row" ng-show="thermal.salesType.code == 'patient' || thermal.salesType.code == 'er'">
       <div class="center col-12 border-1">
         <span class="black font-13 bold" ng-show="setting.printerProgram.thermalLang.id == 1">المريض : {{thermal.doctorDeskTop.patient.fullNameAr}}</span>
         <span class="black font-13 bold" ng-show="setting.printerProgram.thermalLang.id == 2">Patient : {{thermal.doctorDeskTop.patient.fullNameEn}}</span>

@@ -279,27 +279,63 @@
                   <div class="row">
                     <table class="table hover center bold">
                       <tr>
-                        <th>##word.Generic##</th>
-                        <th>##word.Brand##</th>
-                        <th>##word.Medical Device##</th>
+                        <td>##word.S/N##</td>
+                        <th>##word.Deduct## %</th>
+                        <th>##word.Max Deduct Amount##</th>
+                        <th>##word.Applies##</th>
                       </tr>
                       <tr>
+                        <th>##word.Generic##</th>
+                        <td class="center">
+                          <i-control type="number" ng-model="c.deductGeneric"> </i-control>
+                        </td>
                         <td>
                           <div class="row">
-                            <i-radio class="col6" group="{{$index}}appliesGeneric" label="##word.Applies##" ng-value="yes" ng-model="c.appliesGeneric"> </i-radio>
-                            <i-radio class="col6" group="{{$index}}appliesGeneric" label="##word.Don`t Applies##" ng-value="no" ng-model="c.appliesGeneric"> </i-radio>
+                            <i-control class="col9" type="number" ng-model="c.maxAmountGeneric"> </i-control>
+                            <span class="currency col3">##word.$##</span>
                           </div>
                         </td>
                         <td>
                           <div class="row">
-                            <i-radio class="col6" group="{{$index}}appliesBrand" label="##word.Applies##" ng-value="yes" ng-model="c.appliesBrand"> </i-radio>
-                            <i-radio class="col6" group="{{$index}}appliesBrand" label="##word.Don`t Applies##" ng-value="no" ng-model="c.appliesBrand"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesGeneric" label="##word.Yes##" ng-value="yes" ng-model="c.appliesGeneric"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesGeneric" label="##word.No##" ng-value="no" ng-model="c.appliesGeneric"> </i-radio>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>##word.Brand##</th>
+                        <td class="center">
+                          <i-control type="number" ng-model="c.deductBrand"> </i-control>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <i-control class="col9" type="number" ng-model="c.maxAmountBrand"> </i-control>
+                            <span class="currency col3">##word.$##</span>
                           </div>
                         </td>
                         <td>
                           <div class="row">
-                            <i-radio class="col6" group="{{$index}}appliesMedicalDevice" label="##word.Applies##" ng-value="yes" ng-model="c.appliesMedicalDevice"> </i-radio>
-                            <i-radio class="col6" group="{{$index}}appliesMedicalDevice" label="##word.Don`t Applies##" ng-value="no" ng-model="c.appliesMedicalDevice"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesBrand" label="##word.Yes##" ng-value="yes" ng-model="c.appliesBrand"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesBrand" label="##word.No##" ng-value="no" ng-model="c.appliesBrand"> </i-radio>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th>##word.MedicalDevice##</th>
+                        <td class="center">
+                          <i-control type="number" ng-model="c.deductMedicalDevice"> </i-control>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <i-control class="col9" type="number" ng-model="c.maxAmountMedicalDevice"> </i-control>
+                            <span class="currency col3">##word.$##</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <i-radio class="col6" group="{{$index}}appliesMedicalDevice" label="##word.Yes##" ng-value="yes" ng-model="c.appliesMedicalDevice"> </i-radio>
+                            <i-radio class="col6" group="{{$index}}appliesMedicalDevice" label="##word.No##" ng-value="no" ng-model="c.appliesMedicalDevice"> </i-radio>
                           </div>
                         </td>
                       </tr>

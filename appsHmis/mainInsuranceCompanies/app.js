@@ -362,10 +362,10 @@ module.exports = function init(site) {
                     if (serviceIndex != -1) {
                       foundService = true;
                       if (insuranceContractCb && insuranceContractCb.servicesList && insuranceContractCb.servicesList.length > 0) {
-                        let serviceIncurance = insuranceContractCb.servicesList.find((itm) => itm.id == serviceMemory.id);
-                        if (serviceIncurance && serviceIncurance.id) {
-                          mainInsurance.servicesList[serviceIndex].coverage = serviceIncurance.coverage;
-                          mainInsurance.servicesList[serviceIndex].needApproval = serviceIncurance.needApproval;
+                        let serviceInsurance = insuranceContractCb.servicesList.find((itm) => itm.id == serviceMemory.id);
+                        if (serviceInsurance && serviceInsurance.id) {
+                          mainInsurance.servicesList[serviceIndex].coverage = serviceInsurance.coverage;
+                          mainInsurance.servicesList[serviceIndex].needApproval = serviceInsurance.needApproval;
                         }
                       }
                       if (mainInsurance.servicesList[serviceIndex].coverage && insuranceContractCb && insuranceContractCb.insuranceClass.id == _data.patientClass.id) {
@@ -423,10 +423,10 @@ module.exports = function init(site) {
                         if (!foundService && categoryInsurance && categoryInsurance.id) {
                           foundService = true;
                           if (insuranceContractCb && insuranceContractCb.servicesCategoriesList && insuranceContractCb.servicesCategoriesList.length > 0) {
-                            let serviceIncurance = insuranceContractCb.servicesCategoriesList.find((itm) => itm.id == categoryInsurance.id);
-                            if (serviceIncurance && serviceIncurance.id) {
-                              categoryInsurance.coverage = serviceIncurance.coverage;
-                              categoryInsurance.needApproval = serviceIncurance.needApproval;
+                            let serviceInsurance = insuranceContractCb.servicesCategoriesList.find((itm) => itm.id == categoryInsurance.id);
+                            if (serviceInsurance && serviceInsurance.id) {
+                              categoryInsurance.coverage = serviceInsurance.coverage;
+                              categoryInsurance.needApproval = serviceInsurance.needApproval;
                             }
                           }
                           if (categoryInsurance.coverage && insuranceContractCb && insuranceContractCb.insuranceClass.id == _data.patientClass.id) {
@@ -477,10 +477,10 @@ module.exports = function init(site) {
                       if (!foundService && goupInsurance && goupInsurance.id) {
                         foundService = true;
                         if (insuranceContractCb && insuranceContractCb.servicesGroupsList && insuranceContractCb.servicesGroupsList.length > 0) {
-                          let serviceIncurance = insuranceContractCb.servicesGroupsList.find((itm) => itm.id == goupInsurance.id);
-                          if (serviceIncurance && serviceIncurance.id) {
-                            goupInsurance.coverage = serviceIncurance.coverage;
-                            goupInsurance.needApproval = serviceIncurance.needApproval;
+                          let serviceInsurance = insuranceContractCb.servicesGroupsList.find((itm) => itm.id == goupInsurance.id);
+                          if (serviceInsurance && serviceInsurance.id) {
+                            goupInsurance.coverage = serviceInsurance.coverage;
+                            goupInsurance.needApproval = serviceInsurance.needApproval;
                           }
                         }
                         if (goupInsurance.coverage && insuranceContractCb && insuranceContractCb.insuranceClass.id == _data.patientClass.id) {
@@ -534,10 +534,10 @@ module.exports = function init(site) {
                               foundService = true;
 
                               if (insuranceContractCb && insuranceContractCb.servicesGroupsList && insuranceContractCb.servicesGroupsList.length > 0) {
-                                let serviceIncurance = insuranceContractCb.servicesGroupsList.find((itm) => itm.id == goupInsurance.id);
-                                if (serviceIncurance && serviceIncurance.id) {
-                                  goupInsurance.coverage = serviceIncurance.coverage;
-                                  goupInsurance.needApproval = serviceIncurance.needApproval;
+                                let serviceInsurance = insuranceContractCb.servicesGroupsList.find((itm) => itm.id == goupInsurance.id);
+                                if (serviceInsurance && serviceInsurance.id) {
+                                  goupInsurance.coverage = serviceInsurance.coverage;
+                                  goupInsurance.needApproval = serviceInsurance.needApproval;
                                 }
                               }
 
@@ -709,7 +709,15 @@ module.exports = function init(site) {
           if (servicesList.length > 0) {
             response.done = true;
             response.servicesList = servicesList;
-            response.insuranceContract = insuranceContractCb;
+            response.insuranceContract = {
+              id: insuranceContractCb.id,
+              code: insuranceContractCb.code,
+              insuranceClass: {
+                id: insuranceContractCb.insuranceClass.id,
+                nameAr: insuranceContractCb.insuranceClass.nameAr,
+                nameEn: insuranceContractCb.insuranceClass.nameEn,
+              },
+            };
             callback(response);
             return;
           } else {

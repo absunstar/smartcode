@@ -456,7 +456,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
             } else {
               $scope.item.nphis = 'nElig';
               $scope.item.payment = 'cash';
-              $scope.item.errMsg = 'There is no incurance class for the patient';
+              $scope.item.errMsg = 'There is no insurance class for the patient';
             }
           } else {
             $scope.item.mainInsuranceCompany = {};
@@ -476,7 +476,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       $scope.item.insuranceContract = {};
       $scope.item.nphis = 'nElig';
       $scope.item.payment = 'cash';
-      $scope.item.errMsg = 'There is no incurance company for the patient';
+      $scope.item.errMsg = 'There is no insurance company for the patient';
     }
   };
 
@@ -565,7 +565,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           if (!$scope.item.patient.insuranceClass || !$scope.item.patient.insuranceClass.id) {
             $scope.item.nphis = 'nElig';
             $scope.item.payment = 'cash';
-            $scope.item.errMsg = 'There is no incurance class for the patient';
+            $scope.item.errMsg = 'There is no insurance class for the patient';
           }
           $scope.item.servicesList = response.data.servicesList;
           if ($scope.item.servicesList.some((s) => !s.approved)) {
