@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportSalesInvoicesForCustomers", "name": "reportSalesInvoicesForCustomersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportSalesInvoicesForCustomers", "name": "reportSalesInvoicesForCustomersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportSalesInvoicesForCustomers", "name": "reportSalesInvoicesForCustomersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportSalesInvoicesForCustomers", "name": "reportSalesInvoicesForCustomersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportSalesInvoicesForCustomers", "name": "reportSalesInvoicesForCustomersUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

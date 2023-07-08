@@ -136,7 +136,9 @@
       "reportEmployeesBonusesManag",
       "reportEmployeesAdvancesManage",
       "reportMedicalItemsManage",
-      "reportCollectedItemsManage"
+      "reportCollectedItemsManage",
+      "reportSalesInvoicesForCustomerManage",
+      "reportSalesInvoicesForCustomersManage"
     ]
   }
 ]
