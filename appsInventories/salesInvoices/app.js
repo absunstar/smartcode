@@ -540,7 +540,7 @@ module.exports = function init(site) {
           delete where.fromDate;
           delete where.toDate;
         }
-        console.log('where',where);
+        // console.log('salesInvoices',where);
         
         where['company.id'] = site.getCompany(req).id;
 

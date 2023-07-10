@@ -13,6 +13,7 @@ module.exports = function init(site) {
     allowRouteDelete: true,
     allowRouteView: true,
     allowRouteAll: true,
+    allowRouteReport: true,
   };
 
   app.$collection = site.connectCollection(app.name);
@@ -245,7 +246,7 @@ module.exports = function init(site) {
             response.done = true;
             const salesInvoicesApp = site.getApp('salesInvoices');
             salesInvoicesApp.$collection.update({ where: { id: _data.invoiceId, code: _data.invoiceCode }, set: { hasReturnTransaction: true } });
-  
+
             let objJournal = {
               code: result.doc.code,
               appName: app.name,
@@ -308,7 +309,7 @@ module.exports = function init(site) {
               objJournal.customer = result.doc.customer;
             }
             objJournal.nameAr = 'مرتجع مبيعات' + ' (' + result.doc.code + ' )';
-            objJournal.nameEn = 'Return sales Invoice'+ ' (' + result.doc.code + ' )';
+            objJournal.nameEn = 'Return sales Invoice' + ' (' + result.doc.code + ' )';
             objJournal.session = req.session;
             site.autoJournalEntry(objJournal);
             response.result = result;
@@ -393,6 +394,34 @@ module.exports = function init(site) {
             res.json({ done: true, list: docs });
           });
         }
+      });
+    }
+
+    if (app.allowRouteReport) {
+      site.post({ name: `/api/${app.name}/report`, public: true }, (req, res) => {
+        let where = req.body.where || {};
+        let search = req.body.search || '';
+        let limit = req.body.limit || 50;
+        let select = req.body.select || { id: 1, code: 1, invoiceCode: 1, invoiceId: 1, date: 1, customer: 1, paymentType: 1, store: 1, active: 1, approved: 1, remainPaid: 1, invoiceType: 1 };
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+
+        // console.log('returnSalesInvoices', where);
+        where['company.id'] = site.getCompany(req).id;
+
+        app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+          res.json({ done: true, list: docs });
+        });
       });
     }
   }

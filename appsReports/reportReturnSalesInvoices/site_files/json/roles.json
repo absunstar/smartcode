@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportReturnSalesInvoicesAdmin",
+        "En": "Report Return Sales Invoices For Company Admin",
+        "Ar": "تقرير مرتجعات  فواتير مبيعات ",
+        "permissions": ["reportReturnSalesInvoicesManage"]
+    }
+]

@@ -334,6 +334,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           nameEn: 1,
           nameAr: 1,
           taxIdentificationNumber: 1,
+          commercialCustomer: 1,
           mobile: 1,
         },
         search: $search,

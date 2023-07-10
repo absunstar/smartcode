@@ -1,0 +1,51 @@
+<div ng-controller="reportReturnSalesInvoicesForCustomer" class="loaded">
+  <div class="row" x-permissions="reportReturnSalesInvoicesForCustomerUi || reportReturnSalesInvoicesForCustomerManage">
+    <div x-import="returnSalesInvoices/modal.html"></div>
+
+    <div class="row" x-permissions="reportReturnSalesInvoicesForCustomerManage">
+      <i-list v="r" class="col3" display="name##session.lang##" ng-model="_search.customer" items="customersList" label="##word.Customer##" ng-search="item.$customer"></i-list>
+      <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+      <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.search##" ng-click="searchAll()"></i-button>
+      </div>
+    </div>
+
+    <p class="error">{{ error}}</p>
+    <div class="table-responsive">
+      <table class="table hover bold" id="reportReturnSalesInvoicesForCustomer">
+        <tr>
+          <th>##word.S##</th>
+          <th>##word.Name##</th>
+          <th>##word.Date##</th>
+          <th class="not-print">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="item in list | filter:$search">
+          <td class="center">{{$index+1}}</td>
+          <td class="center">{{item.customer.name##session.lang##}}</td>
+          <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+
+          <td class="center not-print">
+            <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <i-button
+      x-permissions="reportReturnSalesInvoicesForCustomerPrint || reportReturnSalesInvoicesForCustomerManage"
+      type="print"
+      label="##word.Print##"
+      onclick="site.print('#reportReturnSalesInvoicesForCustomer')"
+    ></i-button>
+    <i-button
+      x-permissions="reportReturnSalesInvoicesForCustomerExport || reportReturnSalesInvoicesForCustomerManage"
+      type="export"
+      label="##word.Export to excel##"
+      onclick="site.export('#reportReturnSalesInvoicesForCustomer')"
+    >
+    </i-button>
+  </div>
+</div>

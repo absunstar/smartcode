@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportSalesInvoicesForCompaniesAdmin",
+        "En": "Report Sales Invoices For Customers Admin",
+        "Ar": "تقرير فواتير مبيعات الشركات",
+        "permissions": ["reportSalesInvoicesForCompaniesManage"]
+    }
+]

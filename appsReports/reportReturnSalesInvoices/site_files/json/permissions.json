@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportReturnSalesInvoices", "name": "reportReturnSalesInvoicesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportReturnSalesInvoices", "name": "reportReturnSalesInvoicesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportReturnSalesInvoices", "name": "reportReturnSalesInvoicesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportReturnSalesInvoices", "name": "reportReturnSalesInvoicesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportReturnSalesInvoices", "name": "reportReturnSalesInvoicesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]
