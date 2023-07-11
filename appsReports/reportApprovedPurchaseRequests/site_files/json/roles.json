@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportApprovedPurchaseRequestsAdmin",
+        "En": "Report Approved Purchase Requests Admin",
+        "Ar": "تقرير طلبات الشراء المعتمدة ",
+        "permissions": ["reportApprovedPurchaseRequestsManage"]
+    }
+]

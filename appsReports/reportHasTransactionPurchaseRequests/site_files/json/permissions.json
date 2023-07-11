@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportHasTransactionPurchaseRequests", "name": "reportHasTransactionPurchaseRequestsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportHasTransactionPurchaseRequests", "name": "reportHasTransactionPurchaseRequestsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportHasTransactionPurchaseRequests", "name": "reportHasTransactionPurchaseRequestsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportHasTransactionPurchaseRequests", "name": "reportHasTransactionPurchaseRequestsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportHasTransactionPurchaseRequests", "name": "reportHasTransactionPurchaseRequestsUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

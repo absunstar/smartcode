@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportNotApprovedPurchaseRequestsAdmin",
+        "En": "Report NotApproved Purchase Requests Admin",
+        "Ar": "تقرير طلبات الشراء الغير معتمدة ",
+        "permissions": ["reportNotApprovedPurchaseRequestsManage"]
+    }
+]

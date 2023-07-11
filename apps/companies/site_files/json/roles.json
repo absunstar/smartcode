@@ -143,7 +143,11 @@
       "reportSalesInvoicesForCompaniesManage",
       "reportReturnSalesInvoicesForCustomerManage",
       "reportReturnSalesInvoicesToStoreManage",
-      "reportReturnSalesInvoicesManage"
+      "reportReturnSalesInvoicesManage",
+      "reportPurchaseRequestsManage",
+      "reportApprovedPurchaseRequestsManage",
+      "reportNotApprovedPurchaseRequestsManage",
+      "reportHasTransactionPurchaseRequestsManage"
     ]
   }
 ]
