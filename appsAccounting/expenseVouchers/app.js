@@ -207,8 +207,8 @@ module.exports = function init(site) {
             } else if (doc.voucherType.id == 'salesReturn') {
               site.changeRemainPaidReturnSales(obj);
             }
-            site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode:doc.invoiceCode, invoiceId:doc.invoiceId, voucherType: doc.voucherType, type: 'min' });
-            
+            site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'min' });
+
             let objJournal = {
               code: doc.code,
               appName: app.name,
@@ -216,6 +216,13 @@ module.exports = function init(site) {
               safe: doc.safe,
               userInfo: doc.addUserInfo,
             };
+            if (doc.customer && doc.customer.id) {
+              objJournal.user = doc.customer;
+            } else if (doc.patient && doc.patient.id) {
+              objJournal.user = doc.patient;
+            }else if (doc.vendor && doc.vendor.id) {
+              objJournal.user = doc.vendor;
+            }
             objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
             objJournal.nameEn = 'Expense Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
             objJournal.session = req.session;
@@ -337,12 +344,20 @@ module.exports = function init(site) {
           userInfo: doc.addUserInfo,
         };
         objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
-        objJournal.nameEn = 'Expense Vouchers'  + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
+        objJournal.nameEn = 'Expense Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
         objJournal.voucherType = doc.voucherType;
-        objJournal.session = {company : obj.company};
+        objJournal.session = req.session;
+        if (doc.patient && doc.patient.id) {
+          objJournal.user = doc.patient;
+        } else if (doc.customer && doc.customer.id) {
+          objJournal.user = doc.customer;
+        } else if (doc.vendor && doc.vendor.id) {
+          objJournal.user = doc.vendor;
+        }
+        objJournal.session = { company: obj.company };
         site.autoJournalEntryVoucher(objJournal);
 
-        site.changeSafeBalance({company: doc.company, safe: doc.safe, voucherType: doc.voucherType, invoiceCode:doc.invoiceCode, invoiceId:doc.invoiceId, total: doc.total, type: 'min' });
+        site.changeSafeBalance({ company: doc.company, safe: doc.safe, voucherType: doc.voucherType, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, total: doc.total, type: 'min' });
       });
     }
   };

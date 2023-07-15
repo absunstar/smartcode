@@ -225,6 +225,13 @@ module.exports = function init(site) {
             objJournal.nameEn = 'Receipt Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
             objJournal.session = req.session;
             objJournal.voucherType = doc.voucherType;
+            if (doc.customer && doc.customer.id) {
+              objJournal.user = doc.customer;
+            } else if (doc.patient && doc.patient.id) {
+              objJournal.user = doc.patient;
+            }else if (doc.vendor && doc.vendor.id) {
+              objJournal.user = doc.vendor;
+            }
             site.autoJournalEntryVoucher(objJournal);
           } else {
             response.error = err.mesage;
@@ -346,6 +353,14 @@ module.exports = function init(site) {
           objJournal.nameEn = 'Receipt Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
           objJournal.voucherType = doc.voucherType;
           objJournal.session = { company: obj.company };
+          objJournal.user = doc.user;
+          if (doc.patient && doc.patient.id) {
+            objJournal.user = doc.patient;
+          } else if (doc.customer && doc.customer.id) {
+            objJournal.user = doc.customer;
+          } else if (doc.vendor && doc.vendor.id) {
+            objJournal.user = doc.vendor;
+          }
           site.autoJournalEntryVoucher(objJournal);
 
           site.changeSafeBalance({ company: doc.company, safe: doc.safe, total: doc.total, invoiceCode: doc.invoiceCode, invoiceId: doc.invoiceId, voucherType: doc.voucherType, type: 'sum' });

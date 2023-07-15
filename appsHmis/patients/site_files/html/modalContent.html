@@ -127,6 +127,20 @@
                         </div>
                     </div>
                     <fieldset>
+                        <legend>##word.Accounting##</legend>
+                        <div class="row padding">
+                            <i-list
+                                class="col3"
+                                ng-model="item.linkBy"
+                                label="##word.Link By##"
+                                ng-change="getAccountingList(item.linkBy)"
+                                items="accountingLinkList"
+                                display="name##session.lang##"
+                            ></i-list>
+                            <i-list class="col3" ng-model="item.account" label="##word.Account##" items="accountingList" display="name##session.lang##"></i-list>
+                        </div>
+                    </fieldset>
+                    <fieldset>
                         <div class="row">
                             <i-control class="col6" label="##word.Email##" ng-model="item.email"> </i-control>
                             <i-control class="col6" label="##word.Password##" ng-model="item.password"> </i-control>

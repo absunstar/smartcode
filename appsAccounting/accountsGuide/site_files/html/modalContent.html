@@ -123,14 +123,14 @@
 
       <fieldset ng-show="item.type== 'detailed'">
         <div class="row">
-          <i-list items="generalLedgerList" class="col4" label="##word.General Ledger##" ng-search="item.$generalLedger" display="name##session.lang##" ng-model="item.$generalLedger"> </i-list>
+          <i-list items="generalLedgerList" class="col4" label="##word.General Ledger##" ng-search="item.$generalLedgers" display="name##session.lang##" ng-model="item.$generalLedger"> </i-list>
           <div class="col2">
             <br />
             <i-button type="add" label="##word.Add##" ng-click="addGeneralLedger()"></i-button>
           </div>
         </div>
         <div class="row" ng-show="item.generalLedgerList.length > 0">
-          <table class="table loaded center bold" id="t1">
+          <table class="table hover loaded center bold" id="t1">
             <tr>
               <th>##word.Code##</th>
               <th>##word.Name##</th>

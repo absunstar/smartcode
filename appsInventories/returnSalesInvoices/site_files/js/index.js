@@ -414,7 +414,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
 
       totalPrice: invoice.totalPrice,
     };
-    if ($scope.item.salesType.code == 'patient') {
+    if ($scope.item.salesType.code == 'patient' || $scope.item.salesType.code == 'er') {
       $scope.item.patient = invoice.patient;
     } else {
       $scope.item.customer = invoice.customer;

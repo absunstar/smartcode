@@ -250,12 +250,21 @@ module.exports = function init(site) {
             let objJournal = {
               code: result.doc.code,
               appName: app.name,
+              store: result.doc.store,
+              customer: result.doc.customer,
+              patient: result.doc.patient,
               totalNet: result.doc.totalNet,
               totalDiscounts: result.doc.totalDiscounts,
               totalVat: result.doc.totalVat,
               totalAverageCost: 0,
               userInfo: result.doc.addApprovedInfo,
             };
+
+            if (result.doc.salesType.code == 'patient' || result.doc.salesType.code == 'er') {
+              objJournal.user = result.doc.patient;
+            } else {
+              objJournal.user = result.doc.customer;
+            }
 
             result.doc.itemsList.forEach((_item) => {
               objJournal.totalAverageCost += _item.averageCost || 0;
@@ -266,6 +275,7 @@ module.exports = function init(site) {
               item.company = result.doc.company;
               item.date = result.doc.date;
               item.customer = result.doc.customer;
+              item.patient = result.doc.patient;
               item.countType = 'in';
               item.orderCode = result.doc.code;
               site.setItemCard(item, app.name);
@@ -275,17 +285,17 @@ module.exports = function init(site) {
                 date: new Date(),
                 voucherType: site.vouchersTypes[3],
                 invoiceId: result.doc.id,
+                customer: result.doc.customer,
+                patient: result.doc.patient,
                 invoiceCode: result.doc.code,
                 total: result.doc.amountPaid,
                 safe: result.doc.safe,
-                customer: result.doc.customer,
-                patient: result.doc.patient,
                 paymentType: result.doc.paymentType,
                 addUserInfo: result.doc.addApprovedInfo,
                 company: result.doc.company,
                 branch: result.doc.branch,
               };
-              objVoucher.session = req.session;
+             
               site.addExpenseVouchers(objVoucher);
             }
             if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
@@ -297,16 +307,10 @@ module.exports = function init(site) {
               });
             }
             if (result.doc.salesType.code == 'patient') {
-              objJournal.customer = result.doc.patient;
               site.hasSalesDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
             }
             if (result.doc.salesType.code == 'er') {
-              objJournal.customer = result.doc.patient;
               site.hasErDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
-            } else if (result.doc.salesType.code == 'company') {
-              objJournal.customer = result.doc.customer;
-            } else if (result.doc.salesType.code == 'customer') {
-              objJournal.customer = result.doc.customer;
             }
             objJournal.nameAr = 'مرتجع مبيعات' + ' (' + result.doc.code + ' )';
             objJournal.nameEn = 'Return sales Invoice' + ' (' + result.doc.code + ' )';

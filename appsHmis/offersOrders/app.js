@@ -190,11 +190,13 @@ module.exports = function init(site) {
         let objJournal = {
           code: _data.code,
           appName: app.name,
+          patient: _data.patient,
           totalNet: _data.totalNet,
           totalDiscounts: _data.medicalOffer.totalDiscount,
           totalVat: _data.medicalOffer.totalVat,
           totalAverageCost: 0,
           userInfo: _data.addUserInfo,
+          user :_data.patient,
         };
 
         _data.remainPaid = _data.totalNet - (_data.amountPaid || 0);

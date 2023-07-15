@@ -639,6 +639,67 @@ app.controller('patients', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getAccountingLinkList = function () {
+    $scope.busy = true;
+    $scope.accountingLinkList = [];
+    $http({
+        method: 'POST',
+        url: '/api/accountingLinkList',
+        data: {},
+    }).then(
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.accountingLinkList = response.data.list;
+            }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+        }
+    );
+};
+
+$scope.getAccountingList = function (linkBy) {
+    $scope.busy = true;
+    $scope.accountingList = [];
+    let url = '/api/accountsGuide/all';
+    let where = {};
+    let select = { id: 1, code: 1, nameAr: 1, nameEn: 1 };
+
+    if (linkBy.id == 1) {
+        url = '/api/accountsGuide/all';
+        where = {
+            status: 'active',
+            type: 'detailed',
+        };
+    } else {
+        url = '/api/assistantGeneralLedger/all';
+        where = {
+            active: true,
+        };
+    }
+    $http({
+        method: 'POST',
+        url: url,
+        data: {
+            where,
+            select,
+        },
+    }).then(
+        function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+                $scope.accountingList = response.data.list;
+            }
+        },
+        function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+        }
+    );
+};
+
   $scope.showSearch = function () {
     $scope.error = '';
     site.showModal($scope.modalSearchID);
@@ -660,4 +721,5 @@ app.controller('patients', function ($scope, $http, $timeout) {
   $scope.getCountriesList();
   $scope.getinsuranceClassesList();
   $scope.getInsuranceCompaniesList();
+  $scope.getAccountingLinkList();
 });

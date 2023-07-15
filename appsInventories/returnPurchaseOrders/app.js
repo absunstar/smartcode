@@ -296,6 +296,9 @@ module.exports = function init(site) {
               let objJournal = {
                 code: result.doc.code,
                 appName: app.name,
+                store: result.doc.store,
+                vendor: result.doc.vendor,
+                user: result.doc.vendor,
                 totalNet: result.doc.totalNet,
                 totalDiscounts: result.doc.totalDiscounts,
                 totalVat: result.doc.totalVat,

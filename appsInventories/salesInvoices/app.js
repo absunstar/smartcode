@@ -308,6 +308,10 @@ module.exports = function init(site) {
                   code: doc.code,
                   image: doc.image,
                   appName: app.name,
+                  store: doc.store,
+                  customer: doc.customer,
+                  user: doc.customer,
+                  patient: doc.patient,
                   totalNet: doc.totalNet,
                   totalBeforeVat: doc.totalBeforeVat,
                   totalDiscounts: doc.totalDiscounts,
@@ -315,6 +319,7 @@ module.exports = function init(site) {
                   totalAverageCost: 0,
                   userInfo: doc.addUserInfo,
                 };
+
                 doc.itemsList.forEach((_item) => {
                   obj.totalAverageCost += _item.averageCost || 0;
                   let item = { ..._item };
@@ -339,16 +344,12 @@ module.exports = function init(site) {
                 }
 
                 if (doc.salesType.code == 'patient') {
-                  obj.customer = doc.patient;
+                  obj.user = result.doc.patient;
                   site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
                 }
                 if (doc.salesType.code == 'er') {
-                  obj.customer = doc.patient;
+                  obj.user = result.doc.patient;
                   site.hasErDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
-                } else if (doc.salesType.code == 'company') {
-                  obj.customer = doc.customer;
-                } else if (doc.salesType.code == 'customer') {
-                  obj.customer = doc.customer;
                 }
                 obj.nameAr = 'فاتورة مبيعات' + ' (' + doc.code + ' )';
                 obj.nameEn = 'Sales Invoice' + ' (' + doc.code + ' )';
@@ -541,14 +542,14 @@ module.exports = function init(site) {
           delete where.toDate;
         }
         // console.log('salesInvoices',where);
-        
+
         where['company.id'] = site.getCompany(req).id;
 
         app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
           if (req.body.claims && docs) {
             let list = [];
             docs.forEach((_doc) => {
-              if (_doc.itemsList && _doc.itemsList.length  && _doc.doctorDeskTop && _doc.doctorDeskTop.id) {
+              if (_doc.itemsList && _doc.itemsList.length && _doc.doctorDeskTop && _doc.doctorDeskTop.id) {
                 _doc.itemsList.forEach((_s) => {
                   let obj = {
                     Membership_No: _doc.doctorDeskTop.patient.member,
@@ -599,8 +600,7 @@ module.exports = function init(site) {
               done: true,
               list: list,
             });
-          } 
-          else {
+          } else {
             res.json({ done: true, list: docs });
           }
         });

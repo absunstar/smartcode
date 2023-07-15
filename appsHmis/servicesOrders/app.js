@@ -197,12 +197,14 @@ module.exports = function init(site) {
               let objJournal = {
                 code: doc.code,
                 appName: app.name,
+                patient: doc.patient,
                 totalNet: doc.total,
                 totalBeforeVat: doc.totalBeforeVat,
                 totalDiscounts: doc.totalDiscount,
                 totalVat: doc.totalVat,
                 totalAverageCost: 0,
                 userInfo: doc.addUserInfo,
+                user :doc.patient,
               };
 
               doc.servicesList.forEach((_s, i) => {
@@ -511,6 +513,8 @@ module.exports = function init(site) {
         let objJournal = {
           code: result.doc.code,
           appName: app.name,
+          patient: { ...result.doc.patient },
+          user :result.doc.patient,
           totalNet: result.doc.total,
           totalBeforeVat: result.doc.totalBeforeVat,
           totalDiscounts: result.doc.totalDiscount,
