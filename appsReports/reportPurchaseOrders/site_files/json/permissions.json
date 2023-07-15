@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportPurchaseOrders", "name": "reportPurchaseOrdersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportPurchaseOrders", "name": "reportPurchaseOrdersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportPurchaseOrders", "name": "reportPurchaseOrdersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportPurchaseOrders", "name": "reportPurchaseOrdersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportPurchaseOrders", "name": "reportPurchaseOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

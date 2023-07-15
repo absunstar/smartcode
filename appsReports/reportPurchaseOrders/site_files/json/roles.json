@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportPurchaseOrdersAdmin",
+        "En": "Report Purchase Requests Admin",
+        "Ar": "تقرير أوامر الشراء ",
+        "permissions": ["reportPurchaseOrdersManage"]
+    }
+]

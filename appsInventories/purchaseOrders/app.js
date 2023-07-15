@@ -13,6 +13,7 @@ module.exports = function init(site) {
     allowRouteDelete: true,
     allowRouteView: true,
     allowRouteAll: true,
+    allowRouteReport: true,
   };
 
   app.$collection = site.connectCollection(app.name);
@@ -546,6 +547,37 @@ module.exports = function init(site) {
             });
           });
         }
+      });
+    }
+
+    if (app.allowRouteReport) {
+      site.post({ name: `/api/${app.name}/report`, public: true }, (req, res) => {
+        let where = req.body.where || {};
+        let select = req.body.select || {};
+        let search = req.body.search || '';
+        let limit = req.body.limit || 50;
+        let list = [];
+
+        where['company.id'] = site.getCompany(req).id;
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+
+        app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+          res.json({
+            done: true,
+            list: docs,
+          });
+        });
       });
     }
   }

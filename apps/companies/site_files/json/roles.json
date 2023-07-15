@@ -147,7 +147,9 @@
       "reportPurchaseRequestsManage",
       "reportApprovedPurchaseRequestsManage",
       "reportNotApprovedPurchaseRequestsManage",
-      "reportHasTransactionPurchaseRequestsManage"
+      "reportHasTransactionPurchaseRequestsManage",
+      "reportPurchaseOrdersManage",
+      "reportVendorPurchaseOrdersManage"
     ]
   }
 ]

@@ -1,0 +1,49 @@
+<div ng-controller="reportPurchaseOrders" class="loaded">
+  <div class="row" x-permissions="reportPurchaseOrdersUi || reportPurchaseOrdersManage">
+    <div x-import="purchaseOrders/modal.html"></div>
+
+    <div class="row" x-permissions="reportPurchaseOrdersManage">
+      <!-- <i-list v="r" class="col3" display="name##session.lang##" ng-model="_search.customer" items="customersList" label="##word.Customer##" ng-search="item.$customer"></i-list> -->
+      <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+      <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.search##" ng-click="searchAll()"></i-button>
+      </div>
+    </div>
+
+    <p class="error">{{ error}}</p>
+    <div class="table-responsive">
+      <table class="table hover bold" id="reportPurchaseOrders">
+        <tr>
+          <th>##word.S##</th>
+          <th>##word.Vendor##</th>
+          <th>##word.Source##</th>
+          <th>##word.Date##</th>
+          <th>##word.Approved##</th>
+
+          <th class="not-print">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="item in list | filter:$search">
+          <td class="center">{{$index+1}}</td>
+          <td class="center">{{item.vendor.name##session.lang##}}</td>
+          <td class="center">{{item.sourceType.name##session.lang##}}</td>
+          <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+          <td class="center">
+            <span ng-show="item.approved"> <span class="text-success">( ##word.Yes## )</span> {{item.approvedDate |date:'dd/MM/yyyy' }} - {{item.approvedDate |date:'hh:mm:ss a' }} </span>
+
+            <span class="text-danger" ng-show="!item.approved">##word.No##</span>
+          </td>
+ 
+          <td class="center not-print">
+            <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <i-button x-permissions="reportPurchaseOrdersPrint || reportPurchaseOrdersManage" type="print" label="##word.Print##" onclick="site.print('#reportPurchaseOrders')"></i-button>
+    <i-button x-permissions="reportPurchaseOrdersExport || reportPurchaseOrdersManage" type="export" label="##word.Export to excel##" onclick="site.export('#reportPurchaseOrders')"> </i-button>
+  </div>
+</div>
