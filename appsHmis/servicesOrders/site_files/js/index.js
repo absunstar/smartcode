@@ -582,6 +582,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           $scope.item.insuranceContract = {};
           $scope.item.errMsg = response.data.error;
         }
+        $scope.item.maxDeductAmount = response.data.maxDeductAmount;
       },
       function (err) {
         $scope.busy = false;
@@ -605,6 +606,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.mainInsuranceCompany && response.data.servicesList) {
+          $scope.item.maxDeductAmount = response.data.maxDeductAmount;
           $scope.item.servicesList = [];
           response.data.servicesList.forEach((_s) => {
             $scope.item.servicesList.push(_s);
@@ -644,7 +646,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     where['status.id'] = 3;
     where['hasOrder'] = false;
     where['toOrder'] = true;
-    where.$or = [{ 'ordersList.type': 'CO' }, { 'ordersList.type': 'LA' }, { 'ordersList.type': 'X-R' } , { 'ordersList.type': 'TE' }];
+    where.$or = [{ 'ordersList.type': 'CO' }, { 'ordersList.type': 'LA' }, { 'ordersList.type': 'X-R' }, { 'ordersList.type': 'TE' }];
     $http({
       method: 'POST',
       url: '/api/doctorDeskTop/all',
@@ -660,6 +662,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           ordersList: 1,
           diagnosis: 1,
           doctorReccomendList: 1,
+          maxDeductAmount : 1,
           type: 1,
         },
       },
@@ -741,7 +744,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           freeRevistCount: 1,
           scientificRank: 1,
           onDuty: 1,
-          signatureImage:1,
+          signatureImage: 1,
         },
       },
     }).then(
@@ -777,7 +780,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           cashPriceOut: 1,
           cashPriceIn: 1,
           creditPriceIn: 1,
-          serviceSpecialty :1,
+          serviceSpecialty: 1,
           packagePrice: 1,
           vat: 1,
         },
@@ -835,6 +838,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           function (response) {
             $scope.busy = false;
             if (response.data.done && response.data.servicesList && response.data.servicesList.length > 0) {
+              $scope.item.maxDeductAmount = response.data.maxDeductAmount;
               if (response.data.insuranceContract && response.data.insuranceContract.id) {
                 $scope.item.insuranceContract = response.data.insuranceContract;
               }

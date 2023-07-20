@@ -234,6 +234,7 @@ module.exports = function init(site) {
                     }
                   }
                   if (_s.serviceGroup.type.id == 2) {
+                    obj.maxDeductAmount = doc.maxDeductAmount;
                     site.addDoctorDeskTop(obj);
                   } else if (_s.serviceGroup.type.id == 3) {
                     let ageDay = obj.patient.age * 365;
@@ -549,6 +550,7 @@ module.exports = function init(site) {
             }
 
             if (_s.serviceGroup.type.id == 2) {
+              obj.maxDeductAmount = result.doc.maxDeductAmount;
               site.addDoctorDeskTop(obj);
             } else if (_s.serviceGroup.type.id == 3) {
               let ageDay = obj.patient.age * 365;
