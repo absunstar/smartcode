@@ -349,6 +349,8 @@ module.exports = function init(site) {
           };
         }
         site.getDoctorDeskTopToPeriod(whereDoctorDeskTopToPeriod, (doctorDeskTopCb) => {
+          response.maxDeductAmount = _data.maxDeductAmount || false;
+          let total = 0;
           _data.servicesList.forEach((_service) => {
             let foundService = false;
             let foundCoverage = false;
@@ -662,15 +664,30 @@ module.exports = function init(site) {
                 }
                 servicesList[0].totalPVat = ((servicesList[0].deduct || servicesList[0].total) * (servicesList[0].pVat || 0)) / 100;
                 servicesList[0].totalComVat = ((servicesList[0].total - servicesList[0].deduct) * servicesList[0].comVat || 0) / 100;
-
-                if (
-                  insuranceContractCb &&
-                  insuranceContractCb.insuranceClass &&
-                  insuranceContractCb.insuranceClass.maxDeductAmount &&
-                  insuranceContractCb.insuranceClass.maxDeductAmount < servicesList[0].deduct + servicesList[0].totalPVat
-                ) {
-                  servicesList[0].patientCash = insuranceContractCb.insuranceClass.maxDeductAmount;
-                  servicesList[0].comCash = servicesList[0].total - insuranceContractCb.insuranceClass.maxDeductAmount;
+                total += servicesList[0].deduct + servicesList[0].totalPVat;
+                if (insuranceContractCb && insuranceContractCb.insuranceClass && insuranceContractCb.insuranceClass.maxDeductAmount) {
+                  if (insuranceContractCb.insuranceClass.maxDeductAmount < total) {
+                    if (total - (servicesList[0].deduct + servicesList[0].totalPVat) <= insuranceContractCb.insuranceClass.maxDeductAmount || !response.maxDeductAmount) {
+                      response.maxDeductAmount = true;
+                      let currentTotal = total - (servicesList[0].deduct + servicesList[0].totalPVat);
+                      let remain = insuranceContractCb.insuranceClass.maxDeductAmount - currentTotal;
+                      let totalCom = currentTotal - remain;
+                      servicesList[0].deduct = remain;
+                      servicesList[0].totalPVat = (servicesList[0].deduct * (servicesList[0].pVat || 0)) / 100;
+                      servicesList[0].patientCash = servicesList[0].deduct + servicesList[0].totalPVat;
+                      servicesList[0].totalComVat = ((servicesList[0].total - totalCom) * servicesList[0].comVat || 0) / 100;
+                      servicesList[0].comCash = servicesList[0].total - totalCom + servicesList[0].totalComVat;
+                    } else {
+                      response.maxDeductAmount = true;
+                      servicesList[0].totalPVat = 0;
+                      servicesList[0].patientCash = 0;
+                      servicesList[0].comCash = servicesList[0].total;
+                      servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
+                    }
+                  } else {
+                    servicesList[0].patientCash = insuranceContractCb.insuranceClass.maxDeductAmount;
+                    servicesList[0].comCash = servicesList[0].total - insuranceContractCb.insuranceClass.maxDeductAmount;
+                  }
                 } else {
                   servicesList[0].patientCash = servicesList[0].deduct + servicesList[0].totalPVat;
                   servicesList[0].comCash = servicesList[0].total - servicesList[0].deduct + servicesList[0].totalComVat;
@@ -716,6 +733,7 @@ module.exports = function init(site) {
                 id: insuranceContractCb.insuranceClass.id,
                 nameAr: insuranceContractCb.insuranceClass.nameAr,
                 nameEn: insuranceContractCb.insuranceClass.nameEn,
+                maxDeductAmount: insuranceContractCb.insuranceClass.maxDeductAmount,
               },
             };
             callback(response);
