@@ -1,0 +1,281 @@
+.mainscreen .searchAndNew{
+    width: 855px;
+    margin-left: 21px !important;
+    margin-right: 21px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainscreen .topSection{
+    width: 95% !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    width: inherit;
+}
+
+.mainscreen .printAndExport{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.mainscreen .create,.mainscreen .print,.exportToExcel{
+    display: block;
+    width: fit-content;
+}
+.mainscreen .create a p{
+    width: fit-content;
+    padding: 6px 12px !important;
+    background-color: var(--button-backgroundColor-1);
+    color: var(--button-fontColor-1);
+   font-size: var(--font-size-lg);
+    border: 1px solid var(--button-border-color-1);
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+
+.mainscreen .create a p:hover{
+    background-color: var(--hover-button-backgroundColor-1);
+    color: var(--hover-button-fontColor-1);
+}
+
+.mainscreen .print a{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 6px 12px !important;
+    color: var(--button-fontColor-2);
+   font-size: var(--font-size-lg);
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+
+.mainscreen .print a:hover{
+    color: var(--hover-button-fontColor-2);
+    background-color: var(--hover-button-backgroundColor-2);
+}
+
+.mainscreen .exportToExcel a p{
+    width: fit-content;
+    padding: 6px 12px !important;
+    background-color: var(--button-backgroundColor-1);
+    color: var(--button-fontColor-1);
+    font-size: var(--font-size-lg);
+    border: 1px solid var(--button-border-color-1);
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+
+.mainscreen .exportToExcel a p:hover{
+    background-color: var(--hover-button-backgroundColor-1);
+    color: var(--hover-button-fontColor-1);
+}
+
+.mainscreen .bottomSection{
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #F2F2F2;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+    padding: 8px 16px !important;
+}
+
+.mainscreen .inputSearch{
+    width: 50%;
+    border: unset;
+    border-radius: unset;
+    margin-top: unset;
+    padding: unset;
+}
+
+.mainscreen .searchFaild{
+    width: 100%;
+    height: 45px !important;
+    border: unset;
+    background-color: unset;
+    outline: none;
+}
+
+.mainscreen .dataSearch{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainscreen .startDateSearch{
+    color:var(--button-fontColor-2);
+    cursor: pointer;
+    padding: 6px !important;
+}
+
+.mainscreen .startDateSearch:hover{
+    background-color: var(--hover-button-backgroundColor-2);
+    color:var(--hover-button-fontColor-2);
+    border-radius: 8px !important;
+}
+
+.mainscreen .endDateSearch{
+    color:var(--button-fontColor-2);
+    cursor: pointer;
+    padding: 6px !important;
+}
+
+.mainscreen .endDateSearch:hover{
+    background-color: var(--hover-button-backgroundColor-2);
+    color:var(--hover-button-fontColor-2);
+    border-radius: 8px !important;
+}
+
+.mainscreen .startDateSearch p{
+   
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    line-height: 24px;
+    text-transform: capitalize;
+}
+
+.mainscreen .startDateSearch .startDate p{
+   
+    font-style: normal;
+    font-weight: 600;
+   font-size: var(--font-size-sm);
+    line-height: 24px;
+    text-transform: capitalize;
+}
+
+.mainscreen .endDateSearch p{
+   
+    font-style: normal;
+    font-weight: 600;
+   font-size: var(--font-size-sm);
+    line-height: 24px;
+    text-transform: capitalize;
+}
+
+.mainscreen .endDateSearch .endDate p{
+   
+    font-style: normal;
+    font-weight: 600;
+   font-size: var(--font-size-sm);
+    line-height: 24px;
+    text-transform: capitalize;
+}
+
+.mainscreen .FilterOfStatusButton .btn{
+    color:var(--button-fontColor-2);
+    background-color: unset;
+    border: unset;
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    line-height: 24px;
+    text-transform: capitalize;
+    padding: 6px !important;
+}
+
+.mainscreen .FilterOfStatusButton .btn:hover{
+    background-color: var(--hover-button-backgroundColor-2);
+    color:var(--hover-button-fontColor-2);
+}
+
+.mainscreen .dropdown-menu.show {
+    display: flex;
+    padding: 8px !important;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mainscreen .dropdown-menu li{
+    padding: 4px !important;
+}
+
+.mainscreen .dropdown-menu li:hover{
+background-color: var(--main-color3);
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+    .mainscreen .searchAndNew {
+        width: 776px;
+    }
+    .mainscreen .topSection{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items:end;
+    }
+    .mainscreen .printAndExport{
+        flex-direction: column;
+    }
+    .mainscreen .create a p{
+       font-size: var(--font-size-sm);
+    }
+    
+    .mainscreen .print a{
+       font-size: var(--font-size-sm);
+    }
+    
+    .mainscreen .exportToExcel a p{
+       font-size: var(--font-size-sm);
+    }
+ 
+
+}
+
+@media screen and (max-width: 425px) {    
+    .mainscreen .bottomSection{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+        background: unset;
+        box-shadow: unset;
+        border-radius: unset;
+        margin-top: unset !important;
+        padding: unset !important;
+    }
+
+    .mainscreen .inputSearch{
+        width: 100%;
+        border: 1px solid var(--main-color2);
+        border-radius: 8px;
+        margin-top: 8px !important;
+        padding: 6px !important;
+    }
+    .mainscreen .dataSearch {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-self: flex-start;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+}
+
+@media screen and (max-width: 320px) {
+
+}

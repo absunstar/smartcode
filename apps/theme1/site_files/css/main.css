@@ -1,0 +1,415 @@
+main{
+    margin-left: 486px !important;
+    padding-top: 39px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topWedgit {
+    gap: 60px;
+}
+
+.topWedgit .dashboardWedgit{
+    width: 406px;
+    background: var(--background-color2);
+    border: 1px solid var(--border-color2);
+    box-shadow: 0px 0px 24px rgba(36, 90, 64, 0.25);
+    border-radius: 16px;
+    padding: 47px 0px !important;
+    gap: 10px;
+}
+
+.topWedgit .dashboardWedgit p {
+    font-style: normal;
+    font-weight: 700;
+   font-size: var(--font-size-lg);
+    line-height: 29px;
+    color: var(--sub-color-font2);
+    text-transform: capitalize;
+}
+
+.topWedgit .dashboardWedgit strong {
+    font-style: normal;
+    font-weight: 700;
+   font-size: var(--font-size-xl);
+    line-height: 29px;
+    color: var(--main-color-font2);
+}
+
+.topWedgit .headWedgit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 114px;
+    height: 73px;
+    background: var(--background-color1);
+    border: 1px solid var(--border-color1);
+    border-radius: 16px 0px;
+    margin-left: -28px !important;
+}
+
+.topWedgit .headWedgit p{
+    font-style: normal;
+    font-weight: 700;
+   font-size: var(--font-size-xxl);
+    line-height: 38px;
+    color: var(--main-color-font1);
+}
+
+
+.topWedgit .wedgitButton a p{
+    width: 130px;
+    height: 38px;
+    background: var(--button-backgroundColor-3);
+    border: 1px solid var(--button-border-color-3);
+    border-radius: 16px 0px;
+    position: relative;
+    top: 98px;
+    left: 23px;
+    padding: 0 19px !important;
+    font-style: normal;
+    font-weight: 600;
+   font-size: var(--font-size-sm);
+    color: var(--button-fontColor-3);
+    line-height: 38px;
+    text-align: center;
+}
+
+
+.topWedgit .wedgitButton a p:hover{
+    background: var(--hover-button-backgroundColor-3);
+    color: var(--hover-button-fontColor-3);
+}
+.availabelDoctor{
+    height: 287.93px !important;
+}
+
+
+.middalWedgit{
+    margin-top: 60px !important;
+    gap: 60px;
+}
+
+.middalWedgit .dashboardWedgit{
+    width: 415px;
+    height: fit-content;
+    justify-content: space-evenly;
+    background: var(--background-color2);
+    border: 1px solid var(--border-color2);
+    box-shadow: 0px 0px 24px rgba(36, 90, 64, 0.25);
+    border-radius: 16px;
+    gap: 10px;
+}
+
+.middalWedgit .dashboardWedgit p {
+   
+    font-style: normal;
+    font-weight: 700;
+   font-size: var(--font-size-xl);
+    line-height: 29px;
+    color: var(--sub-color-font2);
+    text-transform: capitalize;
+}
+
+.middalWedgit .dashboardWedgit strong {
+   
+    font-style: normal;
+    font-weight: 700;
+   font-size: var(--font-size-lg);
+    line-height: 29px;
+    color: var(--main-color-font2);
+}
+
+.middalWedgit .headAndTitle {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.middalWedgit .headWedgit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 114px;
+    height: 73px;
+    background: var(--background-color1);
+    border: 1px solid var(--border-color1);
+    border: 1px solid #BFB411;
+    border-radius: 16px 0px;
+    margin-top: -39px !important;
+    margin-left: -28px !important;
+}
+
+.middalWedgit .headWedgit img{
+   
+    font-style: normal;
+    font-weight: 700;
+   font-size: var(--font-size-xxl);
+    line-height: 38px;
+    color: var(--color1);
+}
+
+div#availabelDoctorCurosel {
+    height: 155px;
+    display: flex;
+}
+.carousel-item {
+    margin-left: 25px !important;
+}
+.carousel-indicators{
+    margin-bottom: -26px !important;
+    gap: 10px;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 15px;
+    height: 15px;
+    border-radius: 50% !important;
+    background-color: var(--background2) !important;
+}
+
+
+.middalWedgit .wedgitContent {
+    width: 403px;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.middalWedgit .wedgitContent .imageProfileAndGradiant {
+    width: 104px;
+    height: 104px;
+}
+
+.wedgitContent .profileSection .userData {
+     margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.wedgitContent .doctorName p{
+   
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    line-height: 20px;
+    color:var(--main-color2);
+}
+.wedgitContent .doctorTime p{
+   
+    font-style: normal;
+    font-weight: 400;
+   font-size: var(--font-size-sm);
+    line-height: 20px;
+    color:var(--color5);
+}
+.middalWedgit .wedgitContent .profileSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100px;
+
+}
+.middalWedgit .wedgitButton a p{
+    width: fit-content;
+    background: var(--button-backgroundColor-3);
+    border: 1px solid var(--button-border-color-3);;
+    border-radius: 16px 0px;
+    position: relative;
+    top: 25px;
+    left: 296px;
+    padding: 0 24px !important;
+    color: var(--button-fontColor-3);
+    font-style: normal;
+    font-weight: 600;
+   font-size: var(--font-size-sm);
+    line-height: 38px;
+}
+.wedgitButton a p:hover{
+    background: var(--hover-button-backgroundColor-3);
+    color: var(--hover-button-fontColor-3);
+    
+}
+.allWedgitContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 161px;
+    padding: 10px 95px !important;
+    justify-content: space-between;
+}
+.wedgitDetail{
+    display: flex;
+    flex-direction: column;
+}
+.wedgitDetail  .wedgitDetailNumber p{
+   
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    text-transform: capitalize;
+    color: var(--main-color-font5);
+}
+.wedgitDetail .wedgitDetailText p{
+   
+    font-style: normal;
+    font-weight: 500;
+    font-size: var(--font-size-md);
+    text-transform: capitalize;
+    color: var(--sub-color-font5);
+
+}
+
+.wedgitContent.calender {
+    display: flex;
+    margin-top: 25px !important;
+    flex-direction: column;
+    margin-right: -3px !important;
+}
+
+#appointmentCalenderButton, #todayappointmentButton, #appointmentDetailsButton {
+    margin-bottom: 17px !important;
+}
+
+.mainscreen .table {
+    border: none !important;
+    position: relative;
+    left: 5px;
+    margin-top: 25px !important;
+}
+.mainscreen .table tr {
+    border-bottom: none !important;
+}
+.mainscreen .table th {
+    text-align: left !important;
+    color: var(--main-color-font2) !important;
+    background-color: var(--background-color2) !important;
+    border: none !important;
+}
+.mainscreen .table td {
+    border: var(--table-border);
+    padding: 5px;
+    vertical-align: baseline;
+    min-width: 100px;
+    word-break:keep-all;
+}
+.mainscreen .table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-accent-bg: var(--table-row-odd-backgrount-color);
+    color: var(--table-row-odd-font-color);
+    border: none !important;
+}
+.mainscreen .table-striped>tbody>tr:nth-of-type(even)>* {
+    --bs-table-accent-bg: var(--table-row-even-backgrount-color);
+    color: var(--table-row-even-font-color);
+    font-weight: 700;
+    border: none !important;
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+    main{
+        width: 100vw;
+        margin-left: 0px !important;
+        padding-top: 39px !important;
+    }
+
+    .topWedgit .dashboardWedgit {
+        width: 378px;
+    }
+
+    .topWedgit .headWedgit {
+        margin-left: 0px !important;
+        margin-top: -47px !important;
+    }
+
+    .topWedgit .wedgitButton a p {
+        top: 101px;
+        left: 0px;
+        padding: 0 8px !important;
+    }
+
+    .middalWedgit .dashboardWedgit {
+        width: 378px;
+        height: fit-content;
+    }
+    
+    .middalWedgit .headWedgit {
+        margin-top: -21px !important;
+        margin-left: -1px !important;
+    }
+
+    .wedgitContent.calender {
+        display: flex;
+        margin-top: 0px !important;
+        flex-direction: column;
+        margin-left: -3px !important;
+    }
+
+    /* .middalWedgit .wedgitContent {
+        margin-left: -14px !important;
+    } */
+
+    .wedgitContent .doctorName p {
+       font-size: var(--font-size-md);
+    }
+
+    .middalWedgit .wedgitButton a p {
+        top: 1px;
+        left: 248px;
+        padding: 0 20px !important;
+    }
+    .allWedgitContent{
+        padding: 10px 72px !important;
+    }
+
+    #appointmentCalenderButton p {
+        margin-bottom: -6px !important;
+    }
+
+    #todayappointmentButton p {
+        margin-bottom: -6px !important;
+    }
+
+    #appointmentDetailsButton p {
+        margin-bottom: -6px !important;
+    }
+
+    .mainscreen .table {
+        height: 178px;
+        width: 306px;
+        border: none !important;
+        position: relative;
+        left: 0px;
+        overflow-y: scroll;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+}
+
+@media screen and (max-width: 375px) {
+
+    .topWedgit .wedgitButton {
+        width: 147px;
+    }
+
+    .middalWedgit .wedgitButton a p {
+        left: 244px;
+    }
+ 
+}
+
+@media screen and (max-width: 320px) {
+    .wedgitContent .doctorName p {
+       font-size: var(--font-size-md);
+    }
+    .middalWedgit .wedgitButton a p {
+        left: 189px;
+    }
+
+
+}

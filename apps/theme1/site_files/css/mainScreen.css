@@ -1,0 +1,27 @@
+.mainSection {
+  margin-right: 120px !important;
+  margin-top: 42px !important;
+  margin-bottom: 42px !important;
+}
+
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 768px) {
+  .mainSection {
+    margin-right: 0px !important;
+  }
+  #main-layout {
+    margin-left: 0px !important;
+    max-width: 100vw !important;
+  }
+}
+
+@media screen and (max-width: 425px) {
+}
+
+@media screen and (max-width: 375px) {
+}
+
+@media screen and (max-width: 320px) {
+}

@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>We Care Dashboard</title>
+</head>
+
+<body>
+    <header>
+        <div class="menutoggle">
+            <i class="d-block d-lg-none fas fa-bars"></i>
+        </div>
+        <div class="headerbody">
+            <!-- logo -->
+            <div class="mainlogo">
+                <a href="/">
+                    <img src=".././theme1/images/we care logo.svg" alt="" srcset="" href="/index.html">
+                </a>
+            </div>
+            <!-- profile section -->
+            <div class="profileSection d-flex flex-row gap-3">
+                <!-- imageprofile -->
+                <div class="imageProfileAndGradiant">
+                    <div class="imageProfile">
+                    </div>
+                    <div class="gradiantProfile">
+                    </div>
+                </div>
+
+                <div class="userData">
+                    <!-- username -->
+                    <div class="userName d-flex flex-row gap-1">
+                        <div class="firstName">Mahmoud</div>
+                        <div class="lastname">Ahmed Salah</div>
+                    </div>
+                    <!-- idnumber -->
+                    <div class="idNumber d-flex flex-row gap-1">
+                        <p>ID - </p>
+                        <p>63846868</p>
+                    </div>
+                    <div class="settingAndLog d-flex flex-row gap-2">
+                        <!-- setting -->
+                        <div class="accountSetting">
+                            <a href="#">
+                                <p>Account Setting</p>
+                            </a>
+                        </div>
+                        <div class="saperator"></div>
+                        <!-- logout -->
+                        <div class="logout">
+                            <a href="#">
+                                <p>Logout</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- branch link -->
+            <div class="branchLink d-flex flex-column">
+                <p id="currantCatogry" style="font-size: 16px; font-weight: 600;">/</p>
+                <div class="currentScreen d-flex flex-row gap-1">
+                    <p id="currantPage" style="font-weight: 700;">Main Dashboard</p>
+                    <!-- <p style="font-weight: 600;">Screen</p> -->
+                </div>
+            </div>
+            <!-- nav bar -->
+            <div class="navbar">
+                <ul class="nav d-flex flex-column">
+                    <li id="Accountant" class="navlink" onclick="showAndHide('Accountant')">
+                        <a class="d-flex flex-row gap-2" href="#">
+                            <div class="linkicon">
+                                <i class="faicon fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="linktext">Accountant</div>
+                        </a>
+                        <div class="submenu hideSection">
+                            <ul>
+                                <li id="safe">
+                                    <img src="./theme1/images/icon/accounting/safe.png" width="32" height="32">
+                                    <a href="html/Safe.html">
+                                        <p> Safe </p>
+                                    </a>
+                                </li>
+                                <li id="banks">
+                                    <img src="./theme1/images/icon/accounting/banks.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Banks </p>
+                                    </a>
+                                </li>
+                                <li id="voucherNames">
+                                    <img src="./theme1/images/icon/accounting/Voucher.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Voucher Names </p>
+                                    </a>
+                                </li>
+                                <li id="currencies">
+                                    <img src="./theme1/images/icon/accounting/currencies.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Currencies </p>
+                                    </a>
+                                </li>
+                                <li id="transferSafes">
+                                    <img src="./theme1/images/icon/accounting/transfer safes.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Transfer Safes </p>
+                                    </a>
+                                </li>
+                                <li id="accountsGuide">
+                                    <img src="./theme1/images/icon/accounting/accounts guide.png" width="32" height="32">
+                                    <a href="html/accountsGuide.html">
+                                        <p> Accounts Guide </p>
+                                    </a>
+                                </li>
+                                <li id="costCenters">
+                                    <img src="./theme1/images/icon/accounting/cost Centers.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Cost Centers </p>
+                                    </a>
+                                </li>
+                                <li id="generalLedger">
+                                    <img src="./theme1/images/icon/accounting/General Ledger.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> General Ledger </p>
+                                    </a>
+                                </li>
+                                <li id="assistantGeneralLedger">
+                                    <img src="./theme1/images/icon/accounting/Assistant General Ledger.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Assistant General Ledger </p>
+                                    </a>
+                                </li>
+                                <li id="journalEntry">
+                                    <img src="./theme1/images/icon/accounting/Journal Entry.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Journal Entry </p>
+                                    </a>
+                                </li>
+                                <li id="budgetClassifications">
+                                    <img src="./theme1/images/icon/accounting/Budget Classifications.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Budget Classifications </p>
+                                    </a>
+                                </li>
+                                <li id="incomeLists">
+                                    <img src="./theme1/images/icon/accounting/Income List.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Income Lists </p>
+                                    </a>
+                                </li>
+                                <li id="discountTypes">
+                                    <img src="./theme1/images/icon/accounting/Discount Types.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Discount Types </p>
+                                    </a>
+                                </li>
+                                <li id="taxesTypes">
+                                    <img src="./theme1/images/icon/accounting/Taxes Types.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Taxes Types </p>
+                                    </a>
+                                </li>
+                                <li id="receiptVouchers">
+                                    <img src="./theme1/images/icon/accounting/Receipt Vouchers.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Receipt Vouchers </p>
+                                    </a>
+                                </li>
+                                <li id="expenseVouchers">
+                                    <img src="./theme1/images/icon/accounting/Expense Vouchers.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Expense Vouchers </p>
+                                    </a>
+                                </li>
+                                <li id="safesAdjusting">
+                                    <img src="./theme1/images/icon/accounting/Safes Adjusting.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Safes Adjusting </p>
+                                    </a>
+                                </li>
+                                <li id="safesTransactions">
+                                    <img src="./theme1/images/icon/accounting/Safes Transactions.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Safes Transactions </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="Inventory" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Inventory')">
+                        <a class="d-flex flex-row gap-2" href="#">
+                            <div class="linkicon">
+                                <i class="faicon fas fa-boxes"></i>
+                            </div>
+                            <div class="linktext">Inventory</div>
+                        </a>
+                        <div class="submenu hideSection">
+                            <ul>
+                                <li id="SalesInvoicseForCustomers">
+                                    <img src="./theme1/images/icon/inventory/sales Invoices.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Sales Invoicse For Customers  </p>
+                                    </a>
+                                </li>
+                                <li id="SalesInvoicseForCompanies">
+                                    <img src="./theme1/images/icon/inventory/sales Companies Invoices.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Sales Invoicse For Companies </p>
+                                    </a>
+                                </li>
+                                <li id="SalesInvoicseForPatients">
+                                    <img src="./theme1/images/icon/inventory/sales Patients Invoices.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Sales Invoicse For Patients </p>
+                                    </a>
+                                </li>
+                                <li id="SalesInvoicseForER">
+                                    <img src="./theme1/images/icon/inventory/sales Er Invoices.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Sales Invoicse For ER </p>
+                                    </a>
+                                </li>
+                                <li id="ReturnSalesInvoices">
+                                    <img src="./theme1/images/icon/inventory/Return Sales Invoices.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Return Sales Invoices </p>
+                                    </a>
+                                </li>
+                                <li id="PurchaseRequests">
+                                    <img src="./theme1/images/icon/inventory/Purchase Requests.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Purchase Requests </p>
+                                    </a>
+                                </li>
+                                <li id="PurchaseOrder">
+                                    <img src="./theme1/images/icon/inventory/Purchase Orders.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Purchase Order </p>
+                                    </a>
+                                </li>
+                                <li id="ReturnPurchaseOrders">
+                                    <img src="./theme1/images/icon/inventory/Return Purchase Orders.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Return Purchase Orders </p>
+                                    </a>
+                                </li>
+                                <li id="StoresItems">
+                                    <img src="./theme1/images/icon/inventory/Stores Items.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Stores Items </p>
+                                    </a>
+                                </li>
+                                <li id="Vendors">
+                                    <img src="./theme1/images/icon/inventory/Vendors.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Vendors </p>
+                                    </a>
+                                </li>
+                                <li id="TransferItemsRequests">
+                                    <img src="./theme1/images/icon/inventory/Transfer Items Requests.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Transfer Items Requests </p>
+                                    </a>
+                                </li>
+                                <li id="TransferItemsOrders">
+                                    <img src="./theme1/images/icon/inventory/Transfer Items Orders.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Transfer Items Orders </p>
+                                    </a>
+                                </li>
+                                <li id="DamageItems">
+                                    <img src="./theme1/images/icon/inventory/Damage Items.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Damage Items </p>
+                                    </a>
+                                </li>
+                                <li id="Stocktaking">
+                                    <img src="./theme1/images/icon/inventory/Stock taking.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Stocktaking </p>
+                                    </a>
+                                </li>
+                                <li id="StoresItemsCard">
+                                    <img src="./theme1/images/icon/inventory/Stores Items Card.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Stores Items Card </p>
+                                    </a>
+                                </li>
+                                <li id="StoresOpeningBalances">
+                                    <img src="./theme1/images/icon/inventory/Stores Opening Balances.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Stores Opening Balances </p>
+                                    </a>
+                                </li>                                
+                                <li id="ActiveSubstances">
+                                    <img src="./theme1/images/icon/inventory/Active Substances.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Active Substances </p>
+                                    </a>
+                                </li>                                
+                                <li id="StoresUnits">
+                                    <img src="./theme1/images/icon/inventory/Stores Units.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Stores Units </p>
+                                    </a>
+                                </li>                                
+                                <li id="ItemsGroups">
+                                    <img src="./theme1/images/icon/inventory/Items Groups.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Items Groups </p>
+                                    </a>
+                                </li>                                
+                                <li id="Stores">
+                                    <img src="./theme1/images/icon/inventory/Stores.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Stores </p>
+                                    </a>
+                                </li>                                
+                                <li id="ReasonsDestroyingItems">
+                                    <img src="./theme1/images/icon/inventory/Reasons Destroying Items.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Reasons Destroying Items </p>
+                                    </a>
+                                </li>                                
+                                <li id="VendorsGroups">
+                                    <img src="./theme1/images/icon/inventory/Vendors Groups.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Vendors Groups </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="HR" class="navlink d-flex flex-row gap-2" onclick="showAndHide('HR')">
+                        <a class="d-flex flex-row gap-2" href="#">
+                            <div class="linkicon">
+                                <i class="faicon fas fa-users"></i>
+                            </div>
+                            <div class="linktext">HR</div>
+                        </a>
+                        <div class="submenu hideSection">
+                            <ul>
+                                <li id="Attendance">
+                                    <img src="./theme1/images/icon/hr/Attendance.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Attendance </p>
+                                    </a>
+                                </li>
+                                <li id="VacationsRequests">
+                                    <img src="./theme1/images/icon/hr/Vacations Requests.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Vacations Requests </p>
+                                    </a>
+                                </li>
+                                <li id="DelayRequests">
+                                    <img src="./theme1/images/icon/hr/Delay Requests.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Delay Requests </p>
+                                    </a>
+                                </li>
+                                <li id="WorkErrandRequests">
+                                    <img src="./theme1/images/icon/hr/Work Errand Requests.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Work Errand Requests </p>
+                                    </a>
+                                </li>
+                                <li id="OvertimeRequests">
+                                    <img src="./theme1/images/icon/hr/Overtime Requests.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Overtime Requests </p>
+                                    </a>
+                                </li>
+                                <li id="EmployeesBonuses">
+                                    <img src="./theme1/images/icon/hr/Employees Bonuses.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees Bonuses </p>
+                                    </a>
+                                </li>
+                                <li id="EmployeesPenalties">
+                                    <img src="./theme1/images/icon/hr/Employees Penalties.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees Penalties </p>
+                                    </a>
+                                </li>
+                                <li id="EmployeesAdvances">
+                                    <img src="./theme1/images/icon/hr/Employees Advances.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees Advances </p>
+                                    </a>
+                                </li>
+                                <li id="Payslips">
+                                    <img src="./theme1/images/icon/hr/Payslips.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Payslips </p>
+                                    </a>
+                                </li>
+                                <li id="Employees">
+                                    <img src="./theme1/images/icon/hr/Employees.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees </p>
+                                    </a>
+                                </li>
+                                <li id="CreateVacations">
+                                    <img src="./theme1/images/icon/hr/Create Vacations.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Create Vacations </p>
+                                    </a>
+                                </li>
+                                <li id="Departments">
+                                    <img src="./theme1/images/icon/hr/Departments.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Departments </p>
+                                    </a>
+                                </li>
+                                <li id="Sections">
+                                    <img src="./theme1/images/icon/hr/Sections.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Sections </p>
+                                    </a>
+                                </li>
+                                <li id="Jobs">
+                                    <img src="./theme1/images/icon/hr/Jobs.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Jobs </p>
+                                    </a>
+                                </li>
+                                <li id="JobsShifts">
+                                    <img src="./theme1/images/icon/hr/Jobs Shifts.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Jobs Shifts </p>
+                                    </a>
+                                </li>
+                                <li id="SalaryAllowancesNames">
+                                    <img src="./theme1/images/icon/hr/Salary Allowances Names.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Salary Allowances Names </p>
+                                    </a>
+                                </li>
+                                <li id="SalaryDeductionsNames">
+                                    <img src="./theme1/images/icon/hr/Salary Deductions Names.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Salary Deductions Names </p>
+                                    </a>
+                                </li>
+                                <li id="EmployeesBonusNames">
+                                    <img src="./theme1/images/icon/hr/Employees Bonus Names.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees Bonus Names </p>
+                                    </a>
+                                </li>
+                                <li id="EmployeesPenaltiesNames">
+                                    <img src="./theme1/images/icon/hr/Employees Penalties Names.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees Penalties Names </p>
+                                    </a>
+                                </li>
+                                <li id="JobsTools">
+                                    <img src="./theme1/images/icon/hr/Jobs Tools.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Jobs Tools </p>
+                                    </a>
+                                </li>
+                                <li id="VacationsNames">
+                                    <img src="./theme1/images/icon/hr/Vacations Names.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Vacations Names </p>
+                                    </a>
+                                </li>
+                                <li id="JobsAdvertisements">
+                                    <img src="./theme1/images/icon/hr/Jobs Advertisements.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Jobs Advertisements </p>
+                                    </a>
+                                </li>
+                                <li id="JobsApplicants">
+                                    <img src="./theme1/images/icon/hr/Jobs Applicants.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Jobs Applicants </p>
+                                    </a>
+                                </li>
+                                <li id="EmployeesContracts">
+                                    <img src="./theme1/images/icon/hr/Employees Contracts.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Employees Contracts </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="Hospital" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Hospital')">
+                        <a class="d-flex flex-row gap-2" href="#">
+                            <div class="linkicon">
+                                <i class="faicon fas fa-stethoscope"></i>
+                            </div>
+                            <div class="linktext">Hospital</div>
+                        </a>
+                        <div class="submenu hideSection">
+                            <ul>
+                                <li id="Patients">
+                                    <img src="./theme1/images/icon/hospital/Patients.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Patients </p>
+                                    </a>
+                                </li>
+                                <li id="Doctors">
+                                    <img src="./theme1/images/icon/hospital/Doctors.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Doctors </p>
+                                    </a>
+                                </li>
+                                <li id="ServicesOrders">
+                                    <img src="./theme1/images/icon/hospital/Services Orders.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Services Orders </p>
+                                    </a>
+                                </li>
+                                <li id="DoctorDeskTop">
+                                    <img src="./theme1/images/icon/hospital/Doctor DeskTop.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Doctor DeskTop </p>
+                                    </a>
+                                </li>
+                                <li id="DoctorAppointments">
+                                    <img src="./theme1/images/icon/hospital/Doctor Appointments.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Doctor Appointments </p>
+                                    </a>
+                                </li>
+                                <li id="PatientHistory">
+                                    <img src="./theme1/images/icon/hospital/Patient History.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Patient History </p>
+                                    </a>
+                                </li>
+                                <li id="LaboratoryDeskTop">
+                                    <img src="./theme1/images/icon/hospital/Laboratory DeskTop.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Laboratory DeskTop </p>
+                                    </a>
+                                </li>
+                                <li id="RadiologyDeskTop">
+                                    <img src="./theme1/images/icon/hospital/Radiology DeskTop.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Radiology DeskTop </p>
+                                    </a>
+                                </li>
+                                <li id="PatientsApproval">
+                                    <img src="./theme1/images/icon/hospital/Patients Approval.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Patients Approval </p>
+                                    </a>
+                                </li>
+                                <li id="MedicalOffers">
+                                    <img src="./theme1/images/icon/hospital/Medical Offers.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Medical Offers </p>
+                                    </a>
+                                </li>
+                                <li id="OffersOrders">
+                                    <img src="./theme1/images/icon/hospital/Offers Orders.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Offers Orders </p>
+                                    </a>
+                                </li>
+                                <li id="Services">
+                                    <img src="./theme1/images/icon/hospital/Services.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Services </p>
+                                    </a>
+                                </li>
+                                <li id="ServicesCategories">
+                                    <img src="./theme1/images/icon/hospital/Services Categories.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Services Categories </p>
+                                    </a>
+                                </li>
+                                <li id="ServicesGroups">
+                                    <img src="./theme1/images/icon/hospital/Services Groups.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Services Groups </p>
+                                    </a>
+                                </li>
+                                <li id="MainInsuranceCompanies">
+                                    <img src="./theme1/images/icon/hospital/Main Insurance Companies.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Main Insurance Companies </p>
+                                    </a>
+                                </li>
+                                <li id="InsuranceCompanies">
+                                    <img src="./theme1/images/icon/hospital/Insurance Companies.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Insurance Companies </p>
+                                    </a>
+                                </li>
+                                <li id="InsuranceClasses">
+                                    <img src="./theme1/images/icon/hospital/Insurance Classes.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Insurance Classes </p>
+                                    </a>
+                                </li>
+                                <li id="InsuranceContracts">
+                                    <img src="./theme1/images/icon/hospital/Insurance Contracts.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Insurance Contracts </p>
+                                    </a>
+                                </li>
+                                <li id="ACHICodes">
+                                    <img src="./theme1/images/icon/hospital/ACHI Codes.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> ACHI Codes </p>
+                                    </a>
+                                </li>
+                                <li id="MedicineDurations">
+                                    <img src="./theme1/images/icon/hospital/Medicine Durations.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Medicine Durations </p>
+                                    </a>
+                                </li>
+                                <li id="MedicineRoutes">
+                                    <img src="./theme1/images/icon/hospital/Medicine Routes.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Medicine Routes </p>
+                                    </a>
+                                </li>
+                                <li id="MedicineFrequencies">
+                                    <img src="./theme1/images/icon/hospital/Medicine Frequencies.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Medicine Frequencies </p>
+                                    </a>
+                                </li>
+                                <li id="ChiefComplaints">
+                                    <img src="./theme1/images/icon/hospital/Chief Complaints.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Chief Complaints </p>
+                                    </a>
+                                </li>
+                                <li id="SignificantSigns">
+                                    <img src="./theme1/images/icon/hospital/Significant Signs.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Significant Signs </p>
+                                    </a>
+                                </li>
+                                <li id="Diagnoses">
+                                    <img src="./theme1/images/icon/hospital/Diagnoses.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Diagnoses </p>
+                                    </a>
+                                </li>
+                                <li id="PatientRecommend">
+                                    <img src="./theme1/images/icon/hospital/patient Recommendations.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Patient Recommend </p>
+                                    </a>
+                                </li>
+                                <li id="PatientEducations">
+                                    <img src="./theme1/images/icon/hospital/Patient Educations.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Patient Educations </p>
+                                    </a>
+                                </li>
+                                <li id="OtherConditions">
+                                    <img src="./theme1/images/icon/hospital/Other Conditions.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Other Conditions </p>
+                                    </a>
+                                </li>
+                                <li id="Specialties">
+                                    <img src="./theme1/images/icon/hospital/Specialties.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Specialties </p>
+                                    </a>
+                                </li>
+                                <li id="HospitalResponsibilities">
+                                    <img src="./theme1/images/icon/hospital/Hospital Responsibilities.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Hospital Responsibilities </p>
+                                    </a>
+                                </li>
+                                <li id="Drinks">
+                                    <img src="./theme1/images/icon/hospital/Drinks.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Drinks </p>
+                                    </a>
+                                </li>
+                                <li id="Foods">
+                                    <img src="./theme1/images/icon/hospital/Foods.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Foods </p>
+                                    </a>
+                                </li>
+                                <li id="Packages">
+                                    <img src="./theme1/images/icon/hospital/Packages.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Packages </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="Reports" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Reports')">
+                        <a class="d-flex flex-row gap-2" href="#">
+                            <div class="linkicon">
+                                <i class="faicon fas fa-paste"></i>
+                            </div>
+                            <div class="linktext">Reports</div>
+                        </a>
+                        <div class="submenu hideSection">
+                            <ul>
+                                <li id="InsuranceCompaniesClaims">
+                                    <img src="./theme1/images/icon/Report/Insurance Companies Claims.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Insurance Companies Claims </p>
+                                    </a>
+                                </li>
+                                <li id="ReportReorderLimit">
+                                    <img src="./theme1/images/icon/Report/Report Reorder Limits.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Report Reorder Limit </p>
+                                    </a>
+                                </li>
+                                <li id="MostSellingItems">
+                                    <img src="./theme1/images/icon/Report/Most Selling Items.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Most Selling Items </p>
+                                    </a>
+                                </li>
+                                <li id="LowestSellingItems">
+                                    <img src="./theme1/images/icon/Report/Lowest Selling Items.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Lowest Selling Items </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="Setting" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Setting')">
+                        <a class="d-flex flex-row gap-2" href="#">
+                            <div class="linkicon">
+                                <i class="faicon fas fa-cogs"></i>
+                            </div>
+                            <div class="linktext">Setting</div>
+                        </a>
+                        <div class="submenu hideSection">
+                            <ul>
+                                <li id="Customers">
+                                    <img src="./theme1/images/icon/setting/Customers.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Customers </p>
+                                    </a>
+                                </li>
+                                <li id="CustomersGroups">
+                                    <img src="./theme1/images/icon/setting/Customers Groups.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Customers Groups </p>
+                                    </a>
+                                </li>
+                                <li id="Nationalities">
+                                    <img src="./theme1/images/icon/setting/Nationalities.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Nationalities </p>
+                                    </a>
+                                </li>
+                                <li id="Countries">
+                                    <img src="./theme1/images/icon/setting/Countries.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Countries </p>
+                                    </a>
+                                </li>
+                                <li id="Governorates">
+                                    <img src="./theme1/images/icon/setting/governortes.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Governorates </p>
+                                    </a>
+                                </li>
+                                <li id="Cities">
+                                    <img src="./theme1/images/icon/setting/Cities.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Cities </p>
+                                    </a>
+                                </li>
+                                <li id="Areas">
+                                    <img src="./theme1/images/icon/setting/Areas.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Areas </p>
+                                    </a>
+                                </li>
+                                <li id="PrintersPaths">
+                                    <img src="./theme1/images/icon/setting/Printers Paths.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Printers Paths </p>
+                                    </a>
+                                </li>
+                                <li id="NamesConversions">
+                                    <img src="./theme1/images/icon/setting/Names Conversions.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Names Conversions </p>
+                                    </a>
+                                </li>
+                                <li id="NumberingSetting">
+                                    <img src="./theme1/images/icon/setting/Numbering.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Numbering Setting </p>
+                                    </a>
+                                </li>
+                                <li id="Security">
+                                    <img src="./theme1/images/icon/setting/Security.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> Security </p>
+                                    </a>
+                                </li>
+                                <li id="System Setting">
+                                    <img src="./theme1/images/icon/setting/System Setting.png" width="32" height="32">
+                                    <a href="#">
+                                        <p> System Setting </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <footer>
+                <!-- copyRIght -->
+                <div class="copyright">
+                    <p> All Rights Reserved &copy;
+                        <script>document.write(new Date().getFullYear())</script> WE CARE MEDICAL COMPLEX
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </header>
+    <main>
+        <div class="searchAndNew">
+            <div class="topSection">
+                <div class="create">
+                    <a href="#">
+                        <p>create new</p>
+                    </a>
+                </div>
+                <div class="printAndExport">
+                    <div class="print">
+                        <a href="#">
+                            <p>print</p>
+                            <i class="fas fa-print"></i>
+                        </a>
+                    </div>
+                    <div class="exportToExcel">
+                        <a href="#">
+                            <p>export to excel</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="bottomSection">
+                <div class="inputSearch">
+                    <input type="text" class="searchFaild" placeholder="Type Here For Search .....">
+                </div>
+                <div class="dataSearch">
+                    <div class="startDateSearch">
+                        <p>from date</p>
+                        <p class="startDate">1/1/2023</p>
+                    </div>
+                    <div class="endDateSearch">
+                        <p>to date</p>
+                        <p class="endDate">4/1/2023</p>
+                    </div>
+                    <div class="FilterOfStatus">
+                        <div class="dropdown FilterOfStatusButton">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Filter Of Status
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        New
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Accepted
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Rejected
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Canceled
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Approved
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        NotApproved
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainSection d-flex flex-row align-items-start justify-content-center flex-wrap gap-3">
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="Approves">
+                    <div class="status">
+                        <div class="approveStatus">Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                        <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="notApproved ">
+                    <div class="status">
+                        <div class="approveStatus">Not Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                    
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="Approves">
+                    <div class="status">
+                        <div class="approveStatus">Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                        <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="notApproved ">
+                    <div class="status">
+                        <div class="approveStatus">Not Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                    
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="Approves">
+                    <div class="status">
+                        <div class="approveStatus">Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                        <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="notApproved ">
+                    <div class="status">
+                        <div class="approveStatus">Not Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                    
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="Approves">
+                    <div class="status">
+                        <div class="approveStatus">Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                        <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoCard">
+                <div class="topcard">
+                    <div class="cardNumber">
+                        <p>code</p>
+                        <p class="codeNumber">123456897</p>
+                    </div>
+                    <div class="cardName">
+                        <div class="cardNameTitle">title</div>
+                        <div class="cardNametext">transfer safe name</div>
+                    </div>
+                </div>
+                <div class="dateCards">
+                    <div class="dateCard">
+                        <p class="dateText">date</p>
+                        <p class="date">13/1/2023</p>
+                    </div>
+                    <div class="dateCardDivider"></div>
+                </div>
+                <div class="bodyCard">
+                    <div class="cardDetails">
+                        <div class="detail">
+                            <div class="detailHead">from safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">to safe</div>
+                            <div class="detailText">save name</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">status</div>
+                            <div class="detailText">transfer save status</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detailHead">actions</div>
+                            <div class="detailText">transfer save action</div>
+                        </div> 
+                    </div>
+                    <div class="cardProfileImage">
+                        <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                    </div>
+                </div>
+                <div class="notApproved ">
+                    <div class="status">
+                        <div class="approveStatus">Not Approved</div>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                    </div>
+                    
+                </div>
+                <div class="action">
+                    <div class="viewAction">
+                        <a href="#">
+                            <p>View</p>
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="editAction">
+                        <a href="#">
+                            <p>Edit</p>
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="deleteAction">
+                        <a href="#">
+                            <p>Delete</p>
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                    <div class="otherAction">
+                        <a href="#">
+                            <p>Other Action</p>
+                            <i class="fas fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="popupOverlay">
+        <div id="AppointmentCalenderPopup " class="popupWindow AppointmentCalenderPopup">
+            <div class="close closeAction">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="popupWindowHead">
+                <p class="popupWindowTitle">Appointment Calender</p>
+            </div>
+            <div class="infocardgroup mb-3 w-100 d-flex flex-row flex-wrap align-items-center justify-content-center gap-3 mt-3">
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="Approves">
+                        <div class="status">
+                            <div class="approveStatus">Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="notApproved ">
+                        <div class="status">
+                            <div class="approveStatus">Not Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                                <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                        
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="Approves">
+                        <div class="status">
+                            <div class="approveStatus">Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="notApproved ">
+                        <div class="status">
+                            <div class="approveStatus">Not Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                                <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                        
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="Approves">
+                        <div class="status">
+                            <div class="approveStatus">Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="notApproved ">
+                        <div class="status">
+                            <div class="approveStatus">Not Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                                <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                        
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="Approves">
+                        <div class="status">
+                            <div class="approveStatus">Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                            <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoCard">
+                    <div class="topcard">
+                        <div class="cardNumber">
+                            <p>code</p>
+                            <p class="codeNumber">123456897</p>
+                        </div>
+                        <div class="cardName">
+                            <div class="cardNameTitle">title</div>
+                            <div class="cardNametext">transfer safe name</div>
+                        </div>
+                    </div>
+                    <div class="dateCards">
+                        <div class="dateCard">
+                            <p class="dateText">date</p>
+                            <p class="date">13/1/2023</p>
+                        </div>
+                        <div class="dateCardDivider"></div>
+                    </div>
+                    <div class="bodyCard">
+                        <div class="cardDetails">
+                            <div class="detail">
+                                <div class="detailHead">from safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">to safe</div>
+                                <div class="detailText">save name</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">status</div>
+                                <div class="detailText">transfer save status</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detailHead">actions</div>
+                                <div class="detailText">transfer save action</div>
+                            </div> 
+                        </div>
+                        <div class="cardProfileImage">
+                            <img src="/theme1/images/113634857-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="notApproved ">
+                        <div class="status">
+                            <div class="approveStatus">Not Approved</div>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="dateAndTimeOfApproves">
+                                <p>27/3/2023 10:02:45 pm</p>
+                        </div>
+                        
+                    </div>
+                    <div class="action">
+                        <div class="viewAction">
+                            <a href="#">
+                                <p>View</p>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="editAction">
+                            <a href="#">
+                                <p>Edit</p>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="deleteAction">
+                            <a href="#">
+                                <p>Delete</p>
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        <div class="otherAction">
+                            <a href="#">
+                                <p>Other Action</p>
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="action">
+                <div class="closeAction">
+                    <a>
+                        <p>Close</p>
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popupOverlay">
+        <div id="addNew" class="popupWindow">
+            <div class="close closeAction">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="popupWindowHead">
+                <p class="popupWindowTitle">Add New</p>
+            </div>
+            <div class="mb-3 w-100 d-flex flex-column">
+                <label class="form-label">Example textarea</label>
+                <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+            </div>
+            <div class="mb-3 w-100 d-flex flex-column">
+                <label class="form-label">Example textarea</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Default checkbox
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3 w-100 d-flex flex-column">
+                <label class="form-label">Example textarea</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Default radio
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3 w-100 mb-3 d-flex flex-column">
+                <label for="inputState" class="form-label">State</label>
+                <select id="inputState" class="form-select">
+                  <option>select from option</option>
+                  <option>Choose...</option>
+                  <option>Choose...1</option>
+                  <option>Choose...2</option>
+                  <option>Choose...3</option>
+                  <option>Choose...4</option>
+                  <option>Choose...5</option>
+                  <option>Choose...6</option>
+                  <option>Choose...7</option>
+                  <option>Choose...8</option>
+                  <option>Choose...9</option>
+                  <option>Choose...10</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                </div>
+            </div>
+            <div class="tab w-100">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="mb-3 w-100 d-flex flex-column">
+                            <label class="form-label">Example textarea</label>
+                            <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+                        </div>
+                        <div class="mb-3 w-100 d-flex flex-column">
+                            <label class="form-label">Example textarea</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  Default checkbox
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 w-100 d-flex flex-column">
+                            <label class="form-label">Example textarea</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Default radio
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 w-100 mb-3 d-flex flex-column">
+                            <label for="inputState" class="form-label">State</label>
+                            <select id="inputState" class="form-select">
+                              <option>select from option</option>
+                              <option>Choose...</option>
+                              <option>Choose...1</option>
+                              <option>Choose...2</option>
+                              <option>Choose...3</option>
+                              <option>Choose...4</option>
+                              <option>Choose...5</option>
+                              <option>Choose...6</option>
+                              <option>Choose...7</option>
+                              <option>Choose...8</option>
+                              <option>Choose...9</option>
+                              <option>Choose...10</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                </div>
+            </div>
+            <div class="action">
+                <div class="saveAction">
+                    <a href="#">
+                        <p>Save</p>
+                        <i class="fas fa-save"></i>
+                    </a>
+                </div>
+                <div class="closeAction">
+                    <a href="#">
+                        <p>Close</p>
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bootstrap & font-awesome js -->
+    <script src="../../js/script.js"></script>
+    <script src="../../js/calender.js"></script>
+    <script src="../../js/createNew.js"></script>
+    <script src="../../js/closePopup.js"></script>
+    <script src="../../js/bootstrap.bundle.min.js"> </script>
+    <script src="../../js/all.min.js"> </script>
+</body>
+
+</html>

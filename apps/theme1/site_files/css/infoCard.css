@@ -1,0 +1,307 @@
+.infoCard{
+    width: 310px;
+    height: fit-content;
+    background: var(--main-color3);
+    box-shadow: 0px 0px 24px rgba(36, 90, 64, 0.25);
+    border-radius: 16px;
+    padding-bottom: 16px !important;
+}
+
+.topcard{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.cardNumber{
+    width: fit-content;
+    height: fit-content;
+    padding: 8px 17px !important;
+    background: var(--background-color3);
+    border-radius: 16px 0px;
+}
+
+.cardNumber p{
+   
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color:var(--color-font3);
+}
+
+.cardNumber .codeNumber{
+   
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    color:var(--color-font3);
+}
+
+.cardName{
+    margin-top: 16px !important;
+}
+
+.cardName .cardNameTitle{
+
+   
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    line-height: 1px;
+    color:var(--main-color-font2);
+    padding-bottom: 8px !important;
+
+}
+
+.cardName .cardNametext{
+   
+    font-style: normal;
+    font-weight: 300;
+   font-size: var(--font-size-md);
+    line-height: 12px;
+    color:var(--main-color-font2);
+}
+
+.dateCards, .bodyCard, .statusOfApproves{
+    margin-left: 14px !important;
+    text-transform: capitalize;
+}
+
+.dateCards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 11px !important;
+}
+
+.dateCard{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin-top: 8px !important;
+}
+
+.dateCard .dateText{
+   
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 12px;
+    color:var(--main-color-font1);
+}
+
+.dateCard .date{
+   
+    font-style: normal;
+    font-weight: 300;
+   font-size: var(--font-size-xs);
+    line-height: 12px;
+    color:var(--main-color-font1);
+}
+
+.dateCardDivider{
+    content: "";
+    width: 135px;
+    height: 3px;
+    background-color: var(--background-color1);
+    border-radius: 50px;
+}
+
+.bodyCard{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+.cardProfileImage img {
+    width: 100px;
+    border-radius: 8px !important;
+}
+.bodyCard .cardDetails .detail{
+    padding-bottom: 11px !important;
+}
+
+.bodyCard .cardDetails .detail .detailHead{
+   
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 12px;
+    color:var(--main-color-font2);
+    text-transform: capitalize;
+}
+
+.bodyCard .cardDetails .detail .detailText{
+   
+    font-style: normal;
+    font-weight: 300;
+   font-size: var(--font-size-md);
+    line-height: 18px;
+    color:var(--main-color-font2);
+    text-transform: capitalize;
+}
+
+
+.Approves{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 16px !important;
+    gap: 8px;
+}
+
+.Approves .status{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;    
+    width: fit-content;
+    height: 36px;
+    padding: 7px 15px !important;
+    margin-top: 25px !important;
+    color: var(--color-font3);
+    background-color: var(--background-color3);
+    border-radius: 50px;
+}
+.Approves .dateAndTimeOfApproves{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;    
+    width: fit-content;
+}
+
+.notApproved{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 16px !important;
+    gap: 8px;
+}
+
+.notApproved .status{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;  
+    align-items: center;  
+    width: fit-content;
+    height: 36px;
+    padding: 7px 15px !important;
+    margin-top: 25px !important;
+    color: var(--color-font4);
+    background-color: var(--background-color4);
+    border-radius: 50px;
+}
+
+.action{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-left: 14px !important;
+    margin-top: 16px !important;
+}
+
+.action div a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 10px 15px !important;
+    color: var(--main-color-font2);
+}
+
+.viewAction, .editAction, .deleteAction .otherAction{
+    border-radius: 50px;
+}
+
+.viewAction a{
+    background-color: var(--button-backgroundColor-5) ;
+    color: var(--button-fontColor-5) !important;
+    border: 1px solid var(--button-border-color-5);
+    border-radius: 50px;
+}
+
+.viewAction a:hover{
+    background-color: var(--background3) ;
+    color: var(--hover-button-fontColor-5) !important;
+    border-radius: 50px;
+}
+
+.editAction a{
+    background-color: var(--button-backgroundColor-4) ;
+    border: 1px solid var(--button-border-color-4);
+    color: var(--button-fontColor-4) !important;
+    border-radius: 50px;
+
+}
+
+.editAction a:hover{
+    color: var(--hover-button-fontColor-4) !important;
+    background-color: var(--hover-button-backgroundColor-4) ;
+    border-radius: 50px;
+}
+
+.deleteAction a{
+    font-weight: 700;
+    color: var(--hover-button-fontColor-6) !important;
+    border: 1px solid var(--hover-button-border-color-6);
+    border-radius: 50px;
+}
+
+.deleteAction a:hover{
+    font-weight: 500;
+    background-color: var(--button-backgroundColor-6) ;
+    color: var(--button-fontColor-6) !important;
+    border-radius: 50px;
+}
+
+.otherAction a{
+    color: var(--hover-button-fontColor-5) !important;
+    border: 1px solid var(--hover-button-border-color-5);
+    border-radius: 50px;
+}
+
+.otherAction a:hover{
+    background-color: var(--button-backgroundColor-5) ;
+    color: var(--button-fontColor-5) !important;
+    border-radius: 50px;
+}
+
+.action div a p {
+    line-height: 0;
+}
+
+
+
+
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 425px) {
+
+}
+
+@media screen and (max-width: 375px) {
+
+ 
+}
+
+@media screen and (max-width: 320px) {
+
+
+
+}

@@ -1,0 +1,104 @@
+.mainscreen .popupWindow{
+    display: none;
+    width: 50%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    background: var(--main-color3);
+    box-shadow: 0px 0px 24px rgba(36, 90, 64, 0.25);
+    border-radius: 16px;
+    padding: 0 16px 16px 16px !important;
+    z-index: 1000000;
+    transform: translate(50%, 2vh);
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mainscreen .showElement{
+    display: flex !important;
+}
+
+.mainscreen .close{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--hover-button-fontColor-6);
+    border: 2px solid var(--button-border-color-6);
+    border-radius: 50px;
+    margin: 16px !important;
+    cursor: pointer;
+}
+
+.mainscreen .close:hover{
+    background-color: var(--button-backgroundColor-6);
+    color: var(--button-fontColor-6);
+}
+
+
+.mainscreen .popupWindowHead{
+    width: 40%;
+    height: fit-content;
+    padding: 8px 0 8px 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-Color-3);
+    color: var(--font-Color-3);
+    border-radius: 0 0 16px 16px;
+}
+
+.mainscreen .popupWindowTitle{
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    text-align: center;
+}
+
+.mainscreen .infocardgroup{
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 8px 0 !important;
+}
+
+.mainscreen .closeAction a{
+    font-weight: 700;
+    color: var(--hover-button-fontColor-6) !important;
+    border: 2px solid var(--button-border-color-6);
+    border-radius: 50px;
+}
+
+.mainscreen .closeAction a:hover{
+    font-weight: 500;
+    background-color: var(--button-backgroundColor-6);
+    color: var(--button-fontColor-6) !important;
+    border-radius: 50px;
+}
+
+.mainscreen .saveAction a{
+    background-color: var(--button-backgroundColor-5) ;
+    color: var(--button-fontColor-5) !important;
+    border: 1px solid var(--button-border-color-5);
+    border-radius: 50px;
+}
+
+.mainscreen .saveAction a:hover{
+    background-color: var(--hover-button-backgroundColor-5) ;
+    color: var(--hover-button-fontColor-5) !important;
+    border-radius: 50px;
+}
+
+@media screen and (max-width: 768px){
+
+    .mainscreen .popupWindow {
+        width: 90%;
+        transform: translate(5%, 1%);
+    }
+    
+}

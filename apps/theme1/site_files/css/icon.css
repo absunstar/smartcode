@@ -1,0 +1,17 @@
+.headerbody .navbar .submenu ul li svg{
+    width: 32px;
+    height: 32px;
+}
+
+.headerbody .navbar .submenu ul li svg path{
+    fill: var(--main-color1) !important;
+}
+
+
+.headerbody .navbar .submenu ul li svg rect{
+    fill: var(--main-color1) !important;
+}
+
+.headerbody .navbar .submenu ul li svg circle{
+    fill: var(--main-color1) !important;
+}

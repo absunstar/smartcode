@@ -1,0 +1,95 @@
+#main-layout{
+  margin-left: 400px !important;
+  max-width: calc(100vw - 400px) !important;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 50px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 187px !important;
+  background-color: var(--main-color2) !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: unset !important;
+}
+
+html,
+body {
+  background-color: var(--main-color3);
+  font-family: Arabic;
+  height: 100% !important;
+}
+
+.my-body-noscroll-class {
+  overflow: hidden;
+}
+
+a {
+  text-decoration-line: none;
+  cursor: pointer !important;
+}
+
+ul {
+  list-style: none;
+}
+
+.hideSection {
+  animation: hideMenu 0.5s;
+  visibility: hidden;
+}
+.showSection {
+  animation: showMenu 1s;
+}
+
+.showOverlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.733);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000000;
+}
+
+@keyframes showMenu {
+  from {
+    top: 100vh;
+  }
+
+  to {
+    top: 10vh;
+  }
+}
+
+@keyframes hideMenu {
+  from {
+    top: 10vh;
+  }
+
+  to {
+    top: 100vh;
+  }
+}
+
+@keyframes showHeader {
+  from {
+    left: -300px;
+  }
+
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes hideHeader {
+  from {
+    left: 0px;
+  }
+
+  to {
+    left: -300px;
+  }
+}

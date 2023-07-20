@@ -1,0 +1,100 @@
+.calendar{
+  padding: 20px;
+}
+
+.appointmentCalender .icons{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.appointmentCalender .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.appointmentCalender .icons span:last-child{
+  margin-right: -10px;
+}
+.appointmentCalender .icons span:hover{
+  background: #f2f2f2;
+}
+.appointmentCalender .icons .current-date{
+  color: #245A40;
+  font-size: var(--font-size-md) !important;
+  font-weight: 700 !important;
+  line-height: 38px;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.appointmentCalender .calendar ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+
+.appointmentCalender .calendar li{
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+
+.appointmentCalender .calendar .days{
+  margin-bottom: 20px;
+}
+
+.appointmentCalender .calendar .weeks li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--sub-color-font1) !important;
+    font-weight: 500;
+    cursor: default;
+}
+.appointmentCalender .calendar .days li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-color-font1);
+   font-size: var(--font-size-sm);
+    font-weight: 700;
+    line-height: 38px;
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    margin-top: 30px;
+}
+.appointmentCalender .days li.inactive{
+  color: #aaa;
+  font-weight: 600;
+  opacity: 0.5;
+}
+.appointmentCalender .days li.active{
+    color: var(--main-color-font1);
+}
+.appointmentCalender .days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.appointmentCalender .days li.active::before{
+  background: var(--background-color1);
+}
+.appointmentCalender .days li:not(.active):hover::before{
+  background: var(--background-color1);
+}

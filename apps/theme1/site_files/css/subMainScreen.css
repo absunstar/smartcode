@@ -1,0 +1,148 @@
+.subMainScreen{
+    flex-direction: row;
+}
+.subSectionCard {
+    margin-right: 25px !important;
+}
+.subSectionCard .infoCard{
+    width: 510px;
+    height: fit-content;
+    background: var(--main-color3);
+    box-shadow: 0px 0px 24px rgba(36, 90, 64, 0.25);
+    border-radius: 16px;
+    padding-bottom: 16px !important;
+}
+
+.subSectionCard .topcard{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.subSectionCard .cardNumber{
+    width: fit-content;
+    height: fit-content;
+    padding: 8px 17px !important;
+    background: var(--background-color3);
+    color:var(--color-font3);
+    border-radius: 16px 0px;
+}
+
+.subSectionCard .cardNumber p{
+   
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.subSectionCard .cardNumber .codeNumber{
+   
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.subSectionCard .cardName{
+    margin-top: 16px !important;
+}
+
+.subSectionCard .cardName .cardNameTitle{
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    line-height: 12px;
+    color:var(--main-color-font5);
+
+}
+
+.subSectionCard .bodyCard{
+    margin-top: 11px !important;
+    flex-direction: column;
+}
+
+.subSectionCard .bodyCard .detail{
+    padding-bottom: 11px !important;
+}
+
+.subSectionCard .bodyCard .detail .detailHead{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 12px;
+    color:var(--main-color-font5);
+    text-transform: capitalize;
+}
+
+.subSectionCard .bodyCard .detail .detailText{
+    font-style: normal;
+    font-weight: 300;
+   font-size: var(--font-size-md);
+    line-height: 18px;
+    color:var(--color1);
+    text-transform: capitalize;
+}
+
+.subSectionCard .action{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-left: 14px !important;
+    margin-top: 16px !important;
+}
+
+.subSectionCard .action div a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 10px 15px !important;
+}
+
+.subSectionCard .printAction a{
+    background-color: var(--button-backgroundColor-5) ;
+    color: var(--button-fontColor-5) !important;
+    border: 1px solid var(--button-border-color-5);
+    border-radius: 50px;
+}
+
+.subSectionCard .printAction a:hover{
+    background-color: var(--hover-button-backgroundColor-5) ;
+    color: var(--hover-button-fontColor-5) !important;
+    border-radius: 50px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .subMainScreen{
+        margin-top: 25px !important;
+        margin-left: 25px !important;
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .subMainScreen{
+        margin-left: 25px !important;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 425px) {
+}
+
+@media screen and (max-width: 375px) {
+}
+
+@media screen and (max-width: 320px) {
+
+
+
+}
