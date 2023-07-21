@@ -1,0 +1,128 @@
+<div ng-controller="dailyCashByDates" class="loaded">
+  <div class="row" x-permissions="dailyCashByDatesUi || dailyCashByDatesManage">
+    <div x-import="dailyCashByDates/modalSearch.html"></div>
+    <div class="row">
+      <i-button ng-click="showSearch()" type="search" label="##word.Search All##"></i-button>
+    </div>
+    <div class="row" id="t1">
+      <div class="row">
+        <div class="col4">
+          <fieldset>
+            <p class="bold font-22">##word.FromDate## : {{item.fromDate|date:"dd/MM/yyyy"}}</p>
+          </fieldset>
+        </div>
+
+        <div class="col4">
+          <fieldset>
+            <p class="bold font-22">##word.UserCode## : {{item.userCode}}</p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset>
+            <p class="bold font-22">##word.Saudi ?## : {{item.saudi}}</p>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col4">
+          <fieldset>
+            <p class="bold font-22">##word.ToDate## : {{item.toDate|date:"dd/MM/yyyy"}}</p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset>
+            <p class="bold font-22">##word.UserGroup## : {{item.userGroup}}</p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset>
+            <p class="bold font-22">##word.PaymentForm## : {{item.paymentForm}}</p>
+          </fieldset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.S/N##</th>
+              <th>##word.Week Day##</th>
+              <th>##word.TransDate##</th>
+              <th>##word.Cash##</th>
+              <th>##word.Span##</th>
+              <th>##word.Credit Card##</th>
+              <th>##word.Cheque##</th>
+              <th>##word.BankDeposit##</th>
+              <th>##word.Letter##</th>
+              <th>##word.Total##</th>
+              <th>##word.Nationality##</th>
+              <th>##word.VAT##</th>
+            </tr>
+            <tr ng-repeat="c in list | filter:$search">
+              <td class="center">{{$index + 1}}</td>
+              <td class="center">{{c.day}}</td>
+              <td class="center">{{c.date |date:"dd/MM/yyyy"}}</td>
+              <td class="center">{{c.cash | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.span | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.creditCard | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.cheque | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.bankDeposit | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.letter | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.total | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.nationality.name##session.lang##}}</td>
+              <td class="center">{{c.vat | xmoney2}} <span class="currency">##word.$##</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <fieldset>
+          <legend>##word.Total##</legend>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Cash## : {{item.cash | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Span## : {{item.span | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.CreditCard## : {{item.creditCard | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Cheque## : {{item.cheque | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.BankDeposit## : {{item.bankDeposit | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Letter## : {{item.letter | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total## : {{item.total | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Vat## : {{item.vat | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <i-button x-permissions="dailyCashByDatesPrint || dailyCashByDatesManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="dailyCashByDatesExport || dailyCashByDatesManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'dailyCashByDates.xlsx')"> </i-button>
+  </div>
+</div>

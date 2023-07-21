@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "dailyCashByPaymentNumber", "name": "dailyCashByPaymentNumberManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "dailyCashByPaymentNumber", "name": "dailyCashByPaymentNumberView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "dailyCashByPaymentNumber", "name": "dailyCashByPaymentNumberExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "dailyCashByPaymentNumber", "name": "dailyCashByPaymentNumberPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "dailyCashByPaymentNumber", "name": "dailyCashByPaymentNumberUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

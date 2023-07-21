@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "dailyCashByUsersAdmin",
+        "En": "Daily Cash By Dates Report",
+        "Ar": "تقرير الدفع اليومي للمستخدمين",
+        "permissions": ["dailyCashByUsersManage"]
+    }
+]

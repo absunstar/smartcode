@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "dailyCashByPaymentNumberAdmin",
+        "En": "Daily Cash By Payment Number",
+        "Ar": "الدفع اليومي برقم الدفع",
+        "permissions": ["dailyCashByPaymentNumberManage"]
+    }
+]

@@ -1,0 +1,136 @@
+<div ng-controller="dailyCashByUser" class="loaded">
+  <div class="row" x-permissions="dailyCashByUserUi || dailyCashByUserManage">
+    <div x-import="dailyCashByUser/modalSearch.html"></div>
+    <div class="row">
+      <i-button ng-click="showSearch()" type="search" label="##word.Search All##"></i-button>
+    </div>
+    <div class="row" id="t1">
+      <div class="row">
+        <div class="col5">
+          <fieldset>
+            <p class="bold font-22">##word.FromDate## : {{item.fromDate|date:"dd/MM/yyyy"}}</p>
+          </fieldset>
+        </div>
+        <div class="col1"></div>
+        <div class="col5">
+          <fieldset>
+            <p class="bold font-22">##word.ToDate## : {{item.toDate|date:"dd/MM/yyyy"}}</p>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row" ng-repeat="user in list | filter:$search">
+        <div class="table-responsive">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.UserCode##</th>
+              <th>##word.UserName##</th>
+              <th>##word.CashOut##</th>
+              <th>##word.VATCashOut##</th>
+              <th>##word.CashIn##</th>
+              <th>##word.VATCashIn##</th>
+              <th>##word.SpanOut##</th>
+              <th>##word.VATSpanOut##</th>
+              <th>##word.SpanIn##</th>
+              <th>##word.VATSpanIn##</th>
+              <th>##word.CCOut##</th>
+              <th>##word.CCIn##</th>
+              <th>##word.ChequeOut##</th>
+              <th>##word.ChequeIn##</th>
+            </tr>
+            <tr ng-repeat="c in user.list | filter:$search">
+              <td class="center">{{c.user.code}}</td>
+              <td class="center">{{c.user.name##session.lang##}}</td>
+              <td class="center">{{c.cashOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.vatCashOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.cashIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.vatCashIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.spanOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.vatSpanOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.spanIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.vatSpanIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.ccOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.ccIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.chequeOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.chequeIn | xmoney2}} <span class="currency">##word.$##</span></td>
+            </tr>
+            <tr>
+              <td class="gray-bg"></td>
+              <td class="gray-bg">##word.Total##</td>
+              <td class="center gray-bg">{{user.cashOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.vatCashOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.cashIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.vatCashIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.spanOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.vatSpanOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.spanIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.vatSpanIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.ccOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.ccIn | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.chequeOut | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center gray-bg">{{user.chequeIn | xmoney2}} <span class="currency">##word.$##</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <fieldset>
+          <legend>##word.Total##</legend>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.CashOut## : {{item.cashOut | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.VatCashOut## : {{item.vatCashOut | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.CashIn## : {{item.cashIn | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.VatCashIn## : {{item.vatCashIn | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.SpanOut## : {{item.spanOut | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.VatSpanIn## : {{item.vatSpanIn | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.CCOut## : {{item.ccOut | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.CCIn## : {{item.ccIn | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.ChequeOut## : {{item.chequeOut | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.ChequeIn## : {{item.chequeIn | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <i-button x-permissions="dailyCashByUserPrint || dailyCashByUserManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="dailyCashByUserExport || dailyCashByUserManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'dailyCashByUser.xlsx')"> </i-button>
+  </div>
+</div>

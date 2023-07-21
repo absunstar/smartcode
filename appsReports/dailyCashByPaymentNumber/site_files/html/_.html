@@ -1,0 +1,85 @@
+<div ng-controller="dailyCashByPaymentNumber" class="loaded">
+  <div class="row" x-permissions="dailyCashByPaymentNumberUi || dailyCashByPaymentNumberManage">
+    <div x-import="dailyCashByPaymentNumber/modalSearch.html"></div>
+    <div class="row">
+      <i-button ng-click="showSearch()" type="search" label="##word.Search All##"></i-button>
+    </div>
+    <div class="row" id="t1">
+      <div class="row">
+        <div class="col5">
+          <fieldset>
+            <p class="bold font-22">##word.FromDate## : {{item.fromDate|date:"dd/MM/yyyy"}}</p>
+          </fieldset>
+        </div>
+        <div class="col1"></div>
+        <div class="col5">
+          <fieldset>
+            <p class="bold font-22">##word.ToDate## : {{item.toDate|date:"dd/MM/yyyy"}}</p>
+          </fieldset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.S/N##</th>
+              <th>##word.Payment##</th>
+              <th>##word.Desc##</th>
+              <th>##word.Date##</th>
+              <th>##word.From##</th>
+              <th>##word.Type##</th>
+              <th>##word.User##</th>
+              <th>##word.MRN##</th>
+              <th>##word.PatientName##</th>
+              <th>##word.Account##</th>
+              <th>##word.Trans##</th>
+              <th>##word.Doctor##</th>
+              <th>##word.Resp##</th>
+              <th>##word.Amount##</th>
+              <th>##word.Can Amount##</th>
+              <th>##word.Reg Date##</th>
+            
+            </tr>
+            <tr ng-repeat="c in list | filter:$search">
+              <td class="center">{{$index + 1}}</td>
+              <td class="center">{{c.payment}}</td>
+              <td class="center">{{c.desc}}</td>
+              <td class="center">{{c.date |date:"dd/MM/yyyy"}}</td>
+              <td class="center">{{c.from}}</td>
+              <td class="center">{{c.type}}</td>
+              <td class="center">{{c.user.code}}</td>
+              <td class="center">{{c.patient.code}}</td>
+              <td class="center">{{c.patient.fullName##session.lang##}}</td>
+              <td class="center">{{c.account}}</td>
+              <td class="center">{{c.trans}}</td>
+              <td class="center">{{c.doctor.code}}</td>
+              <td class="center">{{c.doctor.respCenter.name##session.lang##}}</td>
+              <td class="center">{{c.amount | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.canAmount | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.regDate |date:"dd/MM/yyyy"}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <fieldset>
+          <legend>##word.Total##</legend>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Amount## : {{item.amount | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Can Amount## : {{item.canAmount | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+         
+        </fieldset>
+      </div>
+    </div>
+
+    <i-button x-permissions="dailyCashByPaymentNumberPrint || dailyCashByPaymentNumberManage" type="print" label="##word.Print##" onclick="site.print('#t1')"></i-button>
+    <i-button x-permissions="dailyCashByPaymentNumberExport || dailyCashByPaymentNumberManage" type="export" label="##word.Export to excel##" onclick="export_to_xlsx('t1' , 'dailyCashByPaymentNumber.xlsx')"> </i-button>
+  </div>
+</div>
