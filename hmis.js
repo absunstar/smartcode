@@ -1,7 +1,7 @@
 const site = require('../isite')({
   port: [12345],
   lang: 'En',
-  version: Date.now(),
+  version: '_' + new Date().getTime(),
   name: 'HMIS',
   require: {
     features: [],
@@ -24,15 +24,6 @@ site.get({
   name: '/',
   path: site.dir + '/',
 });
-
-site.get(
-  {
-    name: '/',
-  },
-  (req, res) => {
-    res.render('index.html', { title: req.word('Site Title'), appName: 'Home Page' }, { parser: 'html', compres: true });
-  }
-);
 
 site.get({
   name: ['/css/sa.css'],

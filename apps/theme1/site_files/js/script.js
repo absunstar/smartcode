@@ -35,20 +35,3 @@ menutoggle.addEventListener('click', () => {
   }
 });
 
-var urlPage = window.location.pathname;
-var pageName = urlPage.split('/').pop();
-var categoryName = urlPage.split('/')[2];
-var PureName = pageName.split('.html')[0];
-var pageSpaceName = PureName.replace(/([a-z])([A-Z])/g, '$1 $2');
-
-console.log(urlPage);
-console.log(pageName);
-console.log(PureName);
-console.log(categoryName);
-if (urlPage === '/') {
-  var categoryPage = (document.querySelector('.branchLink #currantCatogry').innerText = '/');
-  var currantPage = (document.querySelector('.branchLink #currantPage').innerText = 'Main Dashboard');
-} else {
-  var categoryPage = (document.querySelector('.branchLink #currantCatogry').innerText = categoryName);
-  var currantPage = (document.querySelector('.branchLink #currantPage').innerText = pageSpaceName);
-}

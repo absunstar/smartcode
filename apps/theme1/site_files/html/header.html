@@ -1,4 +1,4 @@
-<header>
+<header ng-controller="headerController">
   <div class="menutoggle">
     <i class="d-block d-lg-none fas fa-bars"></i>
   </div>
@@ -10,48 +10,44 @@
       </a>
     </div>
     <!-- profile section -->
-    <div class="profileSection d-flex flex-row gap-3">
+    <div x-permission="login" class="profileSection d-flex flex-row gap-3">
       <!-- imageprofile -->
       <div class="imageProfileAndGradiant">
-        <div class="imageProfile"></div>
-        <div class="gradiantProfile"></div>
+        <img src="##user.image.url##" onerror="this.src='/images/user.png'" />
       </div>
 
       <div class="userData">
         <!-- username -->
-        <div class="userName d-flex flex-row gap-1">
-          <div class="firstName">Mahmoud</div>
-          <div class="lastname">Ahmed Salah</div>
+        <div class="d-flex flex-row gap-1">
+          <div class="userName">##user.email##</div>
         </div>
         <!-- idnumber -->
         <div class="idNumber d-flex flex-row gap-1">
-          <p>ID -</p>
-          <p>63846868</p>
+          <p>##user.id##</p>
         </div>
         <div class="settingAndLog d-flex flex-row gap-2">
           <!-- setting -->
           <div class="accountSetting">
-            <a href="#">
+            <a href="/manageUser">
               <p>Account Setting</p>
             </a>
           </div>
           <div class="saperator"></div>
           <!-- logout -->
           <div class="logout">
-            <a href="#">
+            <a ng-click="logout()">
               <p>Logout</p>
             </a>
           </div>
         </div>
       </div>
     </div>
+    <div x-permission="!login" class="center padding margin bg-gray">
+      <i-button type="login" label="##word.Login##" ng-click="showLogin()"></i-button>
+    </div>
     <!-- branch link -->
-    <div class="branchLink d-flex flex-column">
-      <p id="currantCatogry" style="font-size: 16px; font-weight: 600">/</p>
-      <div class="currentScreen d-flex flex-row gap-1">
-        <p id="currantPage" style="font-weight: 700">Main Dashboard</p>
-        <!-- <p style="font-weight: 600;">Screen</p> -->
-      </div>
+    <div class="branchLink">
+      <p id="currantPage" class="text-center bold black"> [ ##data.appName## ]</p>
     </div>
     <!-- nav bar -->
     <div class="navbar">
@@ -808,17 +804,5 @@
         </li>
       </ul>
     </div>
-    <footer>
-      <!-- copyRIght -->
-      <div class="copyright">
-        <p>
-          All Rights Reserved &copy;
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          WE CARE MEDICAL COMPLEX
-        </p>
-      </div>
-    </footer>
   </div>
 </header>

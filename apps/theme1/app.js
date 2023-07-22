@@ -54,7 +54,12 @@ module.exports = function init(site) {
     ],
   });
 
-  site.get({ name: '/hmis' }, (req, res) => {
-    res.render('theme1/index.html');
-  });
+  site.get(
+    {
+      name: '/',
+    },
+    (req, res) => {
+      res.render('theme1/index.html', { title: req.word('HMIS'), appName: 'Home Page', doctorCount: 37 }, { parser: 'html', compres: true });
+    }
+  );
 };

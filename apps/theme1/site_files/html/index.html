@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
   <head x-import="theme1/head.html"> </head>
 
-  <body>
+  <body >
     <div x-import="theme1/header.html"></div>
     <main>
-
       <div class="mainscreen">
-
         <div class="topWedgit d-flex flex-row flex-wrap">
           <div class="dashboardWedgit d-flex flex-row">
             <div class="headWedgit">
-              <p>15</p>
+              <p>##data.doctorCount##</p>
             </div>
             <div class="wedgitTitle">
               <p><strong>Doctors</strong><br />today available</p>
@@ -423,11 +421,12 @@
         <div x-import="theme1/popup.html"></div>
       </div>
     </main>
-  
+
     <div x-import="theme1/footer.html"></div>
-   
+
     <script src="/theme1/js/calender.js"></script>
-<script src="/theme1/js/createNew.js"></script>
-<script src="/theme1/js/closePopup.js"></script>
+    <script src="/theme1/js/createNew.js"></script>
+    <script src="/theme1/js/closePopup.js"></script>
+ 
   </body>
 </html>
