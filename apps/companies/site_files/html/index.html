@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="En" data-ng-app="myApp">
-    <head x-import="head.html"> </head>
+    <head x-import="theme1/head.html"> </head>
 
     <body class="##session.lang## loaded">
-        <div x-import="site-top/index.html"></div>
-        <div x-import="site-bottom/index.html"></div>
+         <div x-import="theme1/header.html"></div>
+         
         <div id="main-layout" class="container" x-permissions="developer">
             <div class="row">
                 <div class="row" ng-controller="companies">
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div x-import="scripts.html"></div>
+        <div x-import="theme1/footer.html"></div>
         <script x-permissions="developer" x-import="companies/index.js"></script>
     </body>
 </html>

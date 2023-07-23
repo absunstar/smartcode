@@ -15,7 +15,10 @@
 ::-webkit-scrollbar-track {
   background-color: unset !important;
 }
-
+.img-logo {
+  height: 28px;
+  vertical-align: top;
+}
 html,
 body {
   background-color: var(--main-color3);

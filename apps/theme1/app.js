@@ -59,7 +59,56 @@ module.exports = function init(site) {
       name: '/',
     },
     (req, res) => {
-      res.render('theme1/index.html', { title: req.word('HMIS'), appName: 'Home Page', doctorCount: 37 }, { parser: 'html', compres: true });
+      let newDate = new Date();
+      let appsUsers = site.getApp('doctors');
+      let appsAppointments = site.getApp('doctorAppointments');
+      let selectDoctors = {
+        id: 1,
+        code: 1,
+        nameEn: 1,
+        nameAr: 1,
+        fullNameEn: 1,
+        fullNameAr: 1,
+        image: 1,
+        onDuty: 1,
+      };
+      let whereUsers = {
+        $or: [{ 'type.id': 8 }, { 'type.id': 9 }],
+        active: true,
+      };
+      let d1 = site.toDate(newDate);
+      let d2 = site.toDate(newDate);
+      d2.setDate(d2.getDate() + 1);
+
+      let whereAppointments = {
+        hasTransaction: false,
+        bookingDate: {
+          $gte: d1,
+          $lt: d2,
+        },
+      };
+      let selectAppointments = {
+        id: 1,
+        code: 1,
+        bookingDate: 1,
+        bookingNumber : 1,
+        doctor: 1,
+        patient: 1,
+      };
+      appsUsers.all({ where: whereUsers, select: selectDoctors }, (errUsers, usersDocs) => {
+        appsAppointments.all({ where: whereAppointments, select: selectAppointments }, (errAppointments, appointmentsDocs) => {
+
+          let doctors = [];
+          let doctorsAvailablesList = [];
+          if (!errUsers && usersDocs) {
+            doctors = usersDocs.filter((u) => u.type && u.type.id == 8);
+            doctorsAvailablesList = doctors.filter((u) => u.onDuty).slice(0, 5);
+          }
+          if (!errAppointments && appointmentsDocs) {
+          }
+          res.render('theme1/index.html', { title: req.word('HMIS'), appName: 'Home Page', doctorCount: doctors.length, doctorsAvailablesList }, { parser: 'html', compres: true });
+        });
+      });
     }
   );
 };

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="En" data-ng-app="myApp">
-    <head x-import="head.html"> </head>
+    <head x-import="theme1/head.html"> </head>
 
     <body class="##session.lang##">
-        <div x-import="site-top/index.html"></div>
-        <div x-import="site-bottom/index.html"></div>
+         <div x-import="theme1/header.html"></div>
+         
 
         <div id="main-layout" class="container" ng-controller="numbering" x-permissions="login">
             <div x-import="numbering/yearMonth.html"></div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div x-import="scripts.html"></div>
+        <div x-import="theme1/footer.html"></div>
         <script x-import="numbering/index.js"></script>
     </body>
 </html>

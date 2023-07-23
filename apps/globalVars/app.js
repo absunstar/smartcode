@@ -27,6 +27,7 @@ module.exports = function init(site) {
     { id: 6, nameEn: 'Customer', nameAr: 'عميل', name: 'customers' },
     { id: 7, nameEn: 'Vendor', nameAr: 'مورد', name: 'vendors' },
     { id: 8, nameEn: 'Doctor', nameAr: 'طبيب', name: 'doctors' },
+    { id: 9, nameEn: 'Nurse', nameAr: 'تمريض', name: 'Nurses' },
   ];
 
   site.qualificationsDegrees = [
