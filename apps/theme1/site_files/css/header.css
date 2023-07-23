@@ -132,7 +132,7 @@ header::before {
   transition: 0.2s ease-in;
 }
 
-.headerbody .navbar .navlink:hover {
+.headerbody .navbar .navlink .linktext:hover {
   font-weight: 700;
   background-color: var(--background-color1);
 }
