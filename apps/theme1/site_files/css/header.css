@@ -135,6 +135,8 @@ header::before {
 .headerbody .navbar .navlink .linktext:hover {
   font-weight: 700;
   background-color: var(--background-color1);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .headerbody .navbar .linkicon {
