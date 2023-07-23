@@ -1,3 +1,6 @@
+:root{
+  --tabs-header-link-radius : 5px;
+}
 #main-layout{
   margin-left: 400px !important;
   max-width: calc(100vw - 400px) !important;
