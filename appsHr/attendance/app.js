@@ -448,11 +448,13 @@ module.exports = function init(site) {
 
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
+        
         let where = req.body.where || {};
         let select = req.body.select || {};
         let search = req.body.search || {};
         let limit = req.body.limit || 50;
-
+        
+        console.log('app', where);
         if (search && search.employee) {
           where.$or = [];
 

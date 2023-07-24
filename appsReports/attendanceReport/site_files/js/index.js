@@ -89,13 +89,17 @@ app.controller('attendanceReport', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
 
+    if (where.employee && where.employee.id) {
+      let employeeId = where.employee.id;
+      delete where.employee;
+      where['employee.id'] = employeeId;
+    }
+
     $http({
       method: 'POST',
       url: `/api/attendance/all`,
       data: {
-        where: {
-          'employee.id': where.employee.id,
-        },
+        where: where,
         seletct: {
           date: 1,
           absent: 1,
