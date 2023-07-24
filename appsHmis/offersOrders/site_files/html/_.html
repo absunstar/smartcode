@@ -34,12 +34,12 @@
                     <td class="center">{{item.patient.fullName##session.lang##}}</td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button type="edit" x-permissions="offersOrdersUpdate || offersOrdersManage" label="##word.Attend Service##"
                             ng-click="showAttend(item)"></i-button>
                             <i-button type="add" ng-show="item.remainPaid > 0" label="##word.Add Receipt Voucher##" ng-click="showAddVoucher(item)"> </i-button>
-                        <!-- <i-button type="delete" x-permissions="offersOrdersDelete || offersOrdersManage" label="##word.Delete##"
+                        <!-- <i-button type="delete" x-permissions="offersOrdersDelete || offersOrdersManage" title="##word.Delete##"
                             ng-click="showDelete(item)"></i-button> -->
                     </td>
                 </tr>

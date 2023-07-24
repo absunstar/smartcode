@@ -292,6 +292,7 @@ module.exports = function init(site) {
                     session: req.session,
                     date: new Date(),
                     customer: doc.customer,
+                    doctorDeskTop: doc.doctorDeskTop,
                     patient: doc.patient,
                     voucherType: site.vouchersTypes[0],
                     invoiceId: doc.id,

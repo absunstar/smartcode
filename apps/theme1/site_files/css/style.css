@@ -1,5 +1,6 @@
 :root{
   --tabs-header-link-radius : 5px;
+  --table-hover-background-color: #ddd;
 }
 #main-layout{
   margin-left: 400px !important;

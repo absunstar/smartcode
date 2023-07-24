@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --theme-color: #009688;
   --border: 2px solid #9e9e9e;
   --color: #607d8b;
@@ -11,7 +11,7 @@
   --tabs-header-link-font-weight: bold;
   --modal-header-background-color: var(--theme-color);
   --modal-background: #ffffffc4;
-}
+} */
 .bg-theme {
   background: #c8ffca !important;
 }
@@ -234,7 +234,7 @@ i-image[view] img {
 .modal {
   --bs-modal-bg: #ffffff;
 }
-.modal-header p {
+/* .modal-header p {
   font-weight: bold;
   text-shadow: 0 0 8px black;
   font-size: 20px;
@@ -242,12 +242,12 @@ i-image[view] img {
 .modal-footer {
   background: #dadadaf5;
   border-top: 1px solid #000000;
-}
-body {
+} */
+/* body {
   margin-bottom: 100px;
   padding-top: 100px;
-}
-.tabs:has(.tabs-header.full) {
+} */
+/* .tabs:has(.tabs-header.full) {
   padding: 0px;
   width: 100%;
   border: 5px solid var(--tabs-background-color);
@@ -257,7 +257,7 @@ body {
   padding: 10px;
   border-radius: 0px 0px 15px 15px;
   min-height: 45px;
-}
+} */
 /* .tabs .tabs-header .tab-link.active {
 } */
 
@@ -267,12 +267,12 @@ body {
 .no-line {
   text-decoration-line: unset;
 }
-.table th {
+/* .table th {
   background-color: #03a9f4 !important;
-}
-.tabs .tabs-content {
+} */
+/* .tabs .tabs-content {
   width: 100% !important;
-}
+} */
 
 .cart:hover {
   background: #69def6;

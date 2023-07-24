@@ -51,9 +51,10 @@ module.exports = function init(site) {
       __dirname + '/site_files/css/calender.css',
       __dirname + '/site_files/css/formElement.css',
       __dirname + '/site_files/css/icon.css',
+      site.dir + '/css/style.css',
     ],
   });
-
+  console.log(site.dir);
   site.get(
     {
       name: '/',

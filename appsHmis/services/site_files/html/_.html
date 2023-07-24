@@ -41,12 +41,12 @@
                     <td class="center">{{item.vat}} ##word.%##</td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="servicesUpdate || servicesManage" label="##word.Edit##"
+                        <i-button type="edit" x-permissions="servicesUpdate || servicesManage" title="##word.Edit##"
                             ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="servicesDelete || servicesManage" label="##word.Delete##"
+                        <i-button type="delete" x-permissions="servicesDelete || servicesManage" title="##word.Delete##"
                             ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>

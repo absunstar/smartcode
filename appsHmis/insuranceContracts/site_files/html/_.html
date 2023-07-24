@@ -28,11 +28,11 @@
                     <td class="center">{{item.insuranceCompany.name##session.lang##}}</td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="insuranceContractsUpdate || insuranceContractsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="insuranceContractsUpdate || insuranceContractsManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="insuranceContractsDelete || insuranceContractsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="insuranceContractsDelete || insuranceContractsManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>

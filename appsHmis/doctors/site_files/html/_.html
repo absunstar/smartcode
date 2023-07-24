@@ -32,12 +32,12 @@
                     <td class="center">{{item.consItem.name##session.lang##}}</td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="doctorsUpdate || doctorsManage" label="##word.Edit##"
+                        <i-button type="edit" x-permissions="doctorsUpdate || doctorsManage" title="##word.Edit##"
                             ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="doctorsDelete || doctorsManage" label="##word.Delete##"
+                        <i-button type="delete" x-permissions="doctorsDelete || doctorsManage" title="##word.Delete##"
                             ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>

@@ -52,13 +52,13 @@
                     </td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button
                             type="edit"
                             ng-show="!item.hasTransaction"
                             x-permissions="transferItemsRequestsUpdate || transferItemsRequestsManage"
-                            label="##word.Edit##"
+                            title="##word.Edit##"
                             ng-click="showUpdate(item)"
                         ></i-button>
 
@@ -66,7 +66,7 @@
                             type="delete"
                             ng-show="!item.hasTransaction"
                             x-permissions="transferItemsRequestsDelete || transferItemsRequestsManage"
-                            label="##word.Delete##"
+                            title="##word.Delete##"
                             ng-click="showDelete(item)"
                         ></i-button>
                     </td>

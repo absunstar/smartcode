@@ -27,11 +27,11 @@
           <td class="center"><span class="text-success">{{item.total| xmoney2}}</span> <span class="currency">##word.$##</span></td>
 
           <td class="center not-print">
-            <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+            <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-            <!-- <i-button type="edit" x-permissions="receiptVouchersUpdate || receiptVouchersManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->
+            <!-- <i-button type="edit" x-permissions="receiptVouchersUpdate || receiptVouchersManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->
 
-<!--             <i-button type="delete" x-permissions="receiptVouchersDelete || receiptVouchersManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+<!--             <i-button type="delete" x-permissions="receiptVouchersDelete || receiptVouchersManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button>
  -->          </td>
         </tr>
       </table>

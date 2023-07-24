@@ -81,6 +81,12 @@
   {
     "category": "hmis",
     "feature": "public",
+    "id": "nurses",
+    "name": "Nurses"
+  },
+  {
+    "category": "hmis",
+    "feature": "public",
     "id": "hospitalResponsibilities",
     "name": "Hospital Responsibilities"
   },

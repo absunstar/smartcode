@@ -46,7 +46,7 @@
                     </td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button
                             type="cancel"
@@ -56,13 +56,13 @@
                             ng-click="cancel(item)"
                         ></i-button>
 
-                        <i-button type="edit" ng-if="!item.approved" x-permissions="employeesBonusesUpdate || employeesPenaltiesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" ng-if="!item.approved" x-permissions="employeesBonusesUpdate || employeesPenaltiesManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
                         <i-button
                             type="delete"
                             ng-if="!item.approved"
                             x-permissions="employeesBonusesDelete || employeesPenaltiesManage"
-                            label="##word.Delete##"
+                            title="##word.Delete##"
                             ng-click="showDelete(item)"
                         ></i-button>
                     </td>

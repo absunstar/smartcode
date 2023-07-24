@@ -27,7 +27,7 @@
         <div class="modal-footer center">
             <i-button ng-show="mode == 'add' " type="add" label="##word.Add##" ng-click="add(item)"></i-button>
             <i-button ng-show="mode == 'edit' && !item.approved" type="edit" label="##word.Save##" ng-click="update(item)"></i-button>
-            <!-- <i-button ng-show="mode == 'delete' && !item.approved" type="delete" label="##word.Delete##" ng-click="delete(item)"> </i-button> -->
+            <!-- <i-button ng-show="mode == 'delete' && !item.approved" type="delete" title="##word.Delete##" ng-click="delete(item)"> </i-button> -->
             <i-button ng-show="mode == 'edit' && !item.approved" x-permissions="acceptEmployeeContract|| employeesContractsManage" type="approve" label="##word.Accept##" ng-click="accept(item)">
             </i-button>
             <i-button ng-show="mode == 'edit' && !item.approved " x-permissions="rejectEmployeeContract|| employeesContractsManage" type="reject" label="##word.Reject##" ng-click="reject(item)">

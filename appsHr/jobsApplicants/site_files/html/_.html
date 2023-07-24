@@ -68,9 +68,9 @@
                         <p ng-show="item.status == 'canceled'">{{item.cancelDate | date:'dd/MM/yyyy'}} - {{item.cancelDate | date:'hh:mm:ss a'}}</p>
                     </td>
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="jobsApplicantsUpdate || jobsApplicantsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="jobsApplicantsUpdate || jobsApplicantsManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
                         <i-button
                             type="cancel"
@@ -80,7 +80,7 @@
                             ng-click="cancel(item)"
                         ></i-button>
 
-                        <i-button type="delete" ng-show="!item.approved" x-permissions="jobsApplicantsDelete || jobsApplicantsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" ng-show="!item.approved" x-permissions="jobsApplicantsDelete || jobsApplicantsManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>

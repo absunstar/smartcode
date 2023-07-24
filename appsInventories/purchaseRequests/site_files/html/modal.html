@@ -36,7 +36,7 @@
                 ng-click="unapprove(item)"
                 x-permissions="approvePurchaseRequests||purchaseRequestsManage"
             ></i-button>
-            <i-button ng-show="mode == 'delete' " type="delete" label="##word.Delete##" ng-click="delete(item)"> </i-button>
+            <i-button ng-show="mode == 'delete' " type="delete" title="##word.Delete##" ng-click="delete(item)"> </i-button>
             <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#purchaseRequestsManageModal')"></i-button>
         </div>
     </div>

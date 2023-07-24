@@ -41,11 +41,11 @@
 
                     <td class="center not-print">
                         <i-button type="add" label="##word.Add Vouchers##" x-permissions="voucherSalesErInvoices || salesErInvoicesManage" ng-show="item.remainPaid >= 1" ng-click="showAddVoucher(item)"></i-button>
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <!-- <i-button type="edit" x-permissions="salesErInvoicesUpdate || salesErInvoicesManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->
+                        <!-- <i-button type="edit" x-permissions="salesErInvoicesUpdate || salesErInvoicesManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button> -->
 
-                        <!-- <i-button type="delete" x-permissions="salesErInvoicesDelete || salesErInvoicesManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button> -->
+                        <!-- <i-button type="delete" x-permissions="salesErInvoicesDelete || salesErInvoicesManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button> -->
                     </td>
                 </tr>
             </table>

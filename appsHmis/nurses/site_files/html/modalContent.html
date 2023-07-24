@@ -1,0 +1,151 @@
+<div class="form" id="nurses">
+  <div class="row">
+    <div class="col9">
+      <div class="row">
+        <i-control ng-hide="disabledCode" class="col6" label="##word.Code##" ng-model="item.code"> </i-control>
+        <i-checkbox ng-model="item.active" class="col3" label="##word.Active##"></i-checkbox>
+      </div>
+      <div class="row">
+        <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
+        <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+      </div>
+    </div>
+    <div class="col3">
+      <i-image class="img128" ng-model="item.image"></i-image>
+    </div>
+  </div>
+  <fieldset>
+    <div class="tabs">
+      <div class="tabs-header full">
+        <a class="tab-link" onclick="site.showTabContent(event, '#general')">
+          <span> ##word.General##</span>
+        </a>
+
+        <a class="tab-link" onclick="site.showTabContent(event, '#contact')">
+          <span> ##word.Contact## +</span>
+        </a>
+   
+        <a class="tab-link" onclick="site.showTabContent(event, '#printersData')">
+          <span> ##word.Printers Data## </span>
+        </a>
+      </div>
+
+      <div class="tabs-content">
+        <div id="general" class="tab-content">
+          <div class="row padding">
+            <div class="col9">
+              <div class="row">
+                <i-list class="col6" v="r" label="##word.Specialty##" ng-model="item.specialty" items="specialtiesList" display="name##session.lang##" ng-get="getSpecialtiesList($search)"> </i-list>
+                <i-list class="col6" v="r" label="##word.Nationality##" ng-model="item.nationality" items="nationalitiesList" display="name##session.lang##" ng-search="item.$nationality"> </i-list>
+                <!-- <i-list class="col6" label="##word.Nphies Specialty##" ng-model="item.nphiesSpecialty" items="specialtiesList" display="name##session.lang##" ng-search="item.$nphiesSpecialty">
+                </i-list> -->
+              </div>
+
+           
+
+              <div class="row">
+                <i-list class="col6" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##" items="gendersList" ng-search="item.$genders"></i-list>
+              </div>
+
+              <fieldset>
+               
+                <div class="row">
+                  <i-textarea ng-model="item.otherDetails" rows="3" label="##word.Other Details##"></i-textarea>
+                </div>
+
+                <fieldset>
+                  <div class="row">
+                    <i-control class="col6" label="##word.Email##" ng-model="item.email"> </i-control>
+                    <i-control class="col6" label="##word.Password##" ng-model="item.password"> </i-control>
+                  </div>
+                </fieldset>
+              </fieldset>
+            </div>
+            <div class="col3">
+              <div class="row">
+                <p class="center font-18">##word.Signature Image##</p>
+                <i-image class="img128 center" ng-model="item.signatureImage"></i-image>
+              </div>
+              <!-- <i-checkbox ng-model="item.nonConsultant" label="##word.Non Consultant##"></i-checkbox> -->
+            </div>
+          </div>
+        </div>
+        <div id="contact" class="tab-content">
+          <div class="row padding">
+            <fieldset>
+              <div class="row">
+                <i-control type="text" class="col4" ng-model="item.homeTel" label="##word.Home Tel##"></i-control>
+                <i-control type="number" class="col4" ng-model="item.bleepNumber" label="##word.Bleep Number##"></i-control>
+                <i-control type="text" class="col4" ng-model="item.clinicExt" label="##word.Clinic Ext##"></i-control>
+              </div>
+              <div class="row">
+                <fieldset class="col8">
+                  <legend>
+                    <i-button type="push" ng-click="item.mobileList.push({})"></i-button>
+                    ##word.Mobile##
+                  </legend>
+                  <div class="row" ng-repeat="m in item.mobileList">
+                    <div class="col10">
+                      <i-control v="r" label="##word.Code##" class="padding col3" ng-model="m.code"> </i-control>
+                      <i-control v="r" label="##word.Mobile##" class="padding col9" ng-model="m.mobile"> </i-control>
+                    </div>
+                    <div class="col2">
+                      <br />
+                      <i-button type="delete" ng-click="item.mobileList.length === 1 || item.mobileList.splice($index,1)"> </i-button>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+     
+        <div id="printersData" class="tab-content">
+          <fieldset>
+            <div class="row">
+              <i-list ng-search="item.$printerPath" class="col4" display="name##session.lang##" ng-model="item.thermalPrinter" label="##word.Thermal printer##" items="printersPathsList"> </i-list>
+
+              <i-list ng-search="item.$a4Printer" class="col4" display="name##session.lang##" ng-model="item.a4Printer" label="##word.A4 printer##" items="printersPathsList"> </i-list>
+
+              <i-list ng-search="item.$pdfPrinter" class="col4" display="name##session.lang##" ng-model="item.pdfPrinter" label="##word.PDF printer##" items="printersPathsList"> </i-list>
+
+              <i-list ng-search="item.$barcodePrinter" class="col4" display="name##session.lang##" ng-model="item.barcodePrinter" label="##word.Barcode printer##" items="printersPathsList"> </i-list>
+
+              <i-list ng-search="item.$labelPrinter" class="col4" display="name##session.lang##" ng-model="item.labelPrinter" label="##word.Label printer##" items="printersPathsList"> </i-list>
+            </div>
+
+            <div class="row">
+              <i-checkbox class="col4" label="##word.Auto thermal print order screen##" ng-model="item.autoThermalPrintOrderScreen"> </i-checkbox>
+              <i-checkbox class="col4" label="##word.Auto thermal print sales invoice##" ng-model="item.autoThermalPrintSalesInvo"> </i-checkbox>
+              <i-checkbox class="col4" label="##word.Auto thermal print Vouchers##" ng-model="item.autoThermalPrintVoucher"> </i-checkbox>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.addUserInfo##</th>
+      <th>##word.editUserInfo##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

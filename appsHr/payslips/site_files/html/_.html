@@ -50,13 +50,13 @@
                     </td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
-                        <i-button type="view" x-permissions="payslipsManage" label="##word.View Payslip##" ng-click="showPrintPayslipModal(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" x-permissions="payslipsManage" title="##word.View Payslip##" ng-click="showPrintPayslipModal(item)"></i-button>
 
-                        <i-button type="edit" ng-show="!item.approved" x-permissions="payslipsUpdate || payslipsManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" ng-show="!item.approved" x-permissions="payslipsUpdate || payslipsManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
                         <i-button type="print" x-permissions="payslipsManage" label="##word.Print##" ng-click="paySlipPrint(item)"></i-button>
 
-                        <i-button type="delete" ng-show="!item.approved" x-permissions="payslipsDelete || payslipsManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" ng-show="!item.approved" x-permissions="payslipsDelete || payslipsManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>

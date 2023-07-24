@@ -31,15 +31,15 @@
                     <td class="center">{{item.name##session.lang##}}</td>
 
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
                         <i-button type="edit"
                             x-permissions="hospitalResponsibilitiesUpdate || hospitalResponsibilitiesManage"
-                            label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                            title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
                         <i-button type="delete"
                             x-permissions="hospitalResponsibilitiesDelete || hospitalResponsibilitiesManage"
-                            label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                            title="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>

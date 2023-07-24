@@ -28,7 +28,7 @@
             <p class="error">{{error}}</p>
             <i-button ng-show="mode == 'add' " type="add" label="##word.Add##" ng-click="add(item)"></i-button>
             <i-button ng-show="mode == 'edit' " type="edit" label="##word.Save##" ng-click="update(item)"></i-button>
-            <i-button ng-show="mode == 'delete' " type="delete" label="##word.Delete##" ng-click="delete(item)"> </i-button>
+            <i-button ng-show="mode == 'delete' " type="delete" title="##word.Delete##" ng-click="delete(item)"> </i-button>
             <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#citiesManageModal')"></i-button>
         </div>
     </div>

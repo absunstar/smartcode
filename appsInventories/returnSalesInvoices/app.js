@@ -285,6 +285,7 @@ module.exports = function init(site) {
                 date: new Date(),
                 voucherType: site.vouchersTypes[3],
                 invoiceId: result.doc.id,
+                doctorDeskTop: result.doc.doctorDeskTop,
                 customer: result.doc.customer,
                 patient: result.doc.patient,
                 invoiceCode: result.doc.code,
@@ -295,7 +296,7 @@ module.exports = function init(site) {
                 company: result.doc.company,
                 branch: result.doc.branch,
               };
-             
+
               site.addExpenseVouchers(objVoucher);
             }
             if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {

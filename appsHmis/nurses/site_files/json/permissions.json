@@ -1,0 +1,12 @@
+[
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "nursesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hmis", "screenName": "nurses", "name": "importNurses", "En": "Import", "Ar": "إستيراد" }
+]

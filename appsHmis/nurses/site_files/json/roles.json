@@ -1,0 +1,14 @@
+[{
+    "moduleName" : "hmis" ,
+    "name": "nursesAdmin",
+    "En": "Nurses Admin",
+    "Ar": "إدارة التمريض",
+    "permissions": ["nursesManage"]
+},
+{
+  "moduleName": "hmis",
+  "name": "nursePermissions",
+  "En": "Nurse Permissions",
+  "Ar": "صلاحيات التمريض",
+  "permissions": ["doctorDeskTopManage"]
+}]

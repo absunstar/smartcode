@@ -38,11 +38,11 @@
                         <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
                     </td>
                     <td class="center not-print">
-                        <i-button type="view" label="##word.View##" ng-click="showView(item)"></i-button>
+                        <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="areasUpdate || areasManage" label="##word.Edit##" ng-click="showUpdate(item)"></i-button>
+                        <i-button type="edit" x-permissions="areasUpdate || areasManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="areasDelete || areasManage" label="##word.Delete##" ng-click="showDelete(item)"></i-button>
+                        <i-button type="delete" x-permissions="areasDelete || areasManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>

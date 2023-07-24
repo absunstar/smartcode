@@ -396,6 +396,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       ...$scope.item,
       invoiceCode: invoice.code,
       invoiceId: invoice.id,
+      doctorDeskTop: invoice.doctorDeskTop,
       salesType: invoice.salesType,
       store: invoice.store,
       sourceType: invoice.sourceType,
