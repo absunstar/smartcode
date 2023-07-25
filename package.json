@@ -12,6 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "isite": "*"
+    "isite": "^2023.1.10"
   }
 }
