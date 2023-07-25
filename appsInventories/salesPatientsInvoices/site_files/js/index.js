@@ -596,6 +596,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       method: 'POST',
       url: '/api/storesItems/handelItemsData',
       data: {
+        doctorDeskTopId: $scope.item.doctorDeskTop.id,
         items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'MD' && g.hasOrder == false),
         storeId: $scope.item.store.id,
         insuranceContractId: $scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.id ? $scope.item.doctorDeskTop.insuranceContract.id : undefined,
@@ -633,6 +634,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
               barcode: elem.barcode,
               batchesList: [],
               price: elem.price,
+              companyCash: elem.companyCash,
+              deduct: elem.deduct,
+              maxDeduct: elem.maxDeduct,
               averageCost: elem.averageCost,
               discount: elem.discount,
               discountType: elem.discountType,
@@ -746,6 +750,49 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       obj.totalMainDiscounts = 0;
       obj.totalExtraDiscounts = 0;
       obj.totalItemsDiscounts = 0;
+      obj.totalCompanyCash = 0;
+      obj.itemsList.forEach((_item) => {
+        obj.totalPrice += _item.totalPrice;
+        obj.totalMainDiscounts += _item.totalDiscounts;
+        obj.totalExtraDiscounts += _item.totalExtraDiscounts;
+        obj.totalItemsDiscounts += _item.totalDiscounts;
+
+        obj.totalBeforeVat += _item.totalAfterDiscounts;
+        obj.totalVat += _item.totalVat;
+        obj.totalAfterVat += _item.total;
+        obj.totalCompanyCash += _item.companyCash;
+      });
+
+      obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
+      obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
+      obj.totalVat = site.toNumber(obj.totalVat);
+      obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
+      obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
+      obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
+      obj.totalCompanyCash = site.toNumber(obj.totalCompanyCash);
+      obj.totalNet = site.toNumber(obj.totalNet);
+      obj.amountPaid = obj.totalNet;
+      obj.$paidByCustomer = obj.totalNet;
+      obj.$remainForCustomer = 0;
+    }, 300);
+
+    $scope.itemsError = '';
+  };
+
+  /* $scope.calculate = function (obj) {
+    $timeout(() => {
+      $scope.itemsError = '';
+      obj.totalDiscounts = 0;
+      obj.totalCashDiscounts = 0;
+      obj.totalCashTaxes = 0;
+      obj.totalNet = 0;
+      obj.totalPrice = 0;
+      obj.totalVat = 0;
+      obj.totalAfterVat = 0;
+      obj.totalBeforeVat = 0;
+      obj.totalMainDiscounts = 0;
+      obj.totalExtraDiscounts = 0;
+      obj.totalItemsDiscounts = 0;
       obj.companyCash = 0;
       obj.itemsList.forEach((_item) => {
         let mainDiscountValue = 0;
@@ -768,7 +815,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
 
         if (!_item.noVat) {
           _item.vat = $scope.setting.storesSetting.vat;
-          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100) * _item.count;
+          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100);
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {
           _item.vat = 0;
@@ -822,7 +869,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     }, 300);
 
     $scope.itemsError = '';
-  };
+  }; */
 
   $scope.calculateCustomerPaid = function (obj) {
     $timeout(() => {

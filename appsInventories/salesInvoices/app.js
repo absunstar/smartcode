@@ -625,6 +625,36 @@ module.exports = function init(site) {
     });
   };
 
+  site.getSalesInvoice = function (where, callback) {
+    let select = {
+      id: 1,
+      itemsList: 1,
+    };
+
+    app.all({ where, select, sort: { id: -1 } }, (err, docs) => {
+      if (!err && docs) {
+        let totalBrand = 0;
+        let totalGeneric = 0;
+        let totalMedicalDevice = 0;
+        docs.forEach((_doc) => {
+          for (let i = 0; i < _doc.itemsList.length; i++) {}
+          if (_doc.itemsList[i].itemsMedicalTypes) {
+            if (_doc.itemsList[i].itemsMedicalTypes.id == 1) {
+              totalBrand += _doc.itemsList[i].total;
+            } else if (_doc.itemsList[i].itemsMedicalTypes.id == 2) {
+              totalGeneric += _doc.itemsList[i].total;
+            } else if (_doc.itemsList[i].itemsMedicalTypes.id == 3) {
+              totalMedicalDevice += _doc.itemsList[i].total;
+            }
+          }
+        });
+        callback({ docs, totalBrand, totalGeneric, totalMedicalDevice });
+      } else {
+        callback(null);
+      }
+    });
+  };
+
   app.init();
   site.addApp(app);
 };

@@ -148,7 +148,7 @@ module.exports = function init(site) {
     { id: 2, nameEn: 'Teeth', nameAr: 'أسنان' },
     { id: 3, nameEn: 'Others', nameAr: 'أخرى' },
   ];
-  
+
   site.itemsMedicalTypes = [
     { id: 1, nameEn: 'Generic', nameAr: 'نوعي' },
     { id: 2, nameEn: 'Brand', nameAr: 'ماركة' },

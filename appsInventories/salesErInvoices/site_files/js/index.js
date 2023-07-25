@@ -594,6 +594,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
       method: 'POST',
       url: '/api/storesItems/handelItemsData',
       data: {
+        doctorDeskTopId: $scope.item.doctorDeskTop.id,
         items: $scope.item.doctorDeskTop.ordersList.filter((g) => g.type == 'ER' && g.hasOrder == false),
         storeId: $scope.item.store.id,
         insuranceContractId: $scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.id ? $scope.item.doctorDeskTop.insuranceContract.id : undefined,
@@ -625,6 +626,9 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
               barcode: elem.barcode,
               batchesList: [],
               price: elem.price,
+              companyCash: elem.companyCash,
+              deduct: elem.deduct,
+              maxDeduct: elem.maxDeduct,
               averageCost: elem.averageCost,
               discount: elem.discount,
               discountType: elem.discountType,
@@ -738,59 +742,27 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
       obj.totalMainDiscounts = 0;
       obj.totalExtraDiscounts = 0;
       obj.totalItemsDiscounts = 0;
+      obj.totalCompanyCash = 0;
       obj.itemsList.forEach((_item) => {
-        let mainDiscountValue = 0;
-
-        _item.totalVat = 0;
-        _item.totalPrice = _item.price * _item.count;
-        mainDiscountValue = _item.discountType === 'value' ? _item.discount : (_item.price * _item.discount) / 100;
-        _item.totalMainDiscounts = mainDiscountValue * _item.count;
-        _item.totalExtraDiscounts = (_item.totalPrice * _item.extraDiscount) / 100;
-        _item.totalDiscounts = _item.totalMainDiscounts + _item.totalExtraDiscounts;
-        _item.totalMainDiscounts = site.toNumber(_item.totalMainDiscounts);
-        _item.totalExtraDiscounts = site.toNumber(_item.totalExtraDiscounts);
-        _item.totalDiscounts = site.toNumber(_item.totalDiscounts);
-        _item.totalAfterDiscounts = _item.totalPrice - _item.totalDiscounts;
 
         obj.totalPrice += _item.totalPrice;
-        obj.totalMainDiscounts += _item.totalMainDiscounts;
+        obj.totalMainDiscounts += _item.totalDiscounts;
         obj.totalExtraDiscounts += _item.totalExtraDiscounts;
         obj.totalItemsDiscounts += _item.totalDiscounts;
 
-        if (!_item.noVat) {
-          _item.vat = $scope.setting.storesSetting.vat;
-          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100) * _item.count;
-          _item.totalVat = site.toNumber(_item.totalVat);
-        } else {
-          _item.vat = 0;
-        }
-
-        _item.vat = site.toNumber(_item.vat);
-        _item.totalVat = site.toNumber(_item.totalVat);
-        _item.total = _item.totalAfterDiscounts + _item.totalVat;
-        _item.total = site.toNumber(_item.total);
         obj.totalBeforeVat += _item.totalAfterDiscounts;
         obj.totalVat += _item.totalVat;
         obj.totalAfterVat += _item.total;
+        obj.totalCompanyCash += _item.companyCash;
       });
 
-      obj.discountsList.forEach((d) => {
-        if (d.type == 'value') {
-          obj.totalCashDiscounts += d.value;
-        } else if (d.type == 'percent') {
-          obj.totalCashDiscounts += (obj.totalPrice * d.value) / 100;
-        }
-      });
-
-      obj.taxesList.forEach((t) => {
-        obj.totalCashTaxes += (obj.totalPrice * t.value) / 100;
-      });
       obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
       obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
       obj.totalVat = site.toNumber(obj.totalVat);
       obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
       obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
       obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
+      obj.totalCompanyCash = site.toNumber(obj.totalCompanyCash);
       obj.totalNet = site.toNumber(obj.totalNet);
       obj.amountPaid = obj.totalNet;
       obj.$paidByCustomer = obj.totalNet;

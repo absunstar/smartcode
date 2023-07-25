@@ -2,15 +2,14 @@
 <html lang="en" ng-app="myApp">
   <head x-import="theme1/head.html"> </head>
 
-  <body >
+  <body>
     <div x-import="theme1/header.html"></div>
     <main>
-      <div class="mainscreen">
+      <div ng-controller="mainHmis" class="mainscreen container loaded" id="main-layout">
         <div class="topWedgit d-flex flex-row flex-wrap">
           <div class="dashboardWedgit d-flex flex-row">
             <div class="headWedgit">
-              <p>##data.doctorCount##</p>
-              
+              <p>##data.doctorsCount##</p>
             </div>
             <div class="wedgitTitle">
               <p><strong>##word.Doctors##</strong><br />##word.today available##</p>
@@ -23,7 +22,7 @@
           </div>
           <div class="dashboardWedgit d-flex flex-row">
             <div class="headWedgit">
-              <p>35</p>
+              <p>##data.nursesCount##</p>
             </div>
             <div class="wedgitTitle">
               <p><strong>##word.Nurses##</strong><br />##word.today available##</p>
@@ -424,10 +423,10 @@
     </main>
 
     <div x-import="theme1/footer.html"></div>
+    <script x-import="theme1/index.js"></script>
 
     <script src="/theme1/js/calender.js"></script>
     <script src="/theme1/js/createNew.js"></script>
     <script src="/theme1/js/closePopup.js"></script>
- 
   </body>
 </html>

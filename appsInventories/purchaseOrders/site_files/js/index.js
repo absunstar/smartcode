@@ -1047,7 +1047,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
 
         if (!_item.noVat) {
           _item.vat = $scope.setting.storesSetting.vat;
-          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100) * _item.count;
+          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100) ;
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {
           _item.vat = 0;

@@ -139,9 +139,11 @@
         <th>##word.Unit##</th>
         <th>##word.Count##</th>
         <th>##word.Total Price##</th>
-        <th>##word.Discount 1## ##word.%##</th>
-        <th>##word.Discount 2##</th>
+        <!-- <th>##word.Discount 1## ##word.%##</th>-->
+        <th>##word.Discount##</th>
         <th>##word.Total VAT##</th>
+        <th>##word.Deduct##</th>
+        <th>##word.Company##</th>
         <th>##word.Total##</th>
         <th class="not-print">##word.Actions##</th>
       </tr>
@@ -157,9 +159,9 @@
           <p class="text-center">{{elem.totalPrice}} <span class="currency">##word.$##</span></p>
           <p class="text-center blue" ng-if="elem.count > 1">( {{elem.price}} <span class="currency">##word.$##</span> )</p>
         </td>
-        <td class="center">
+        <!--     <td class="center">
           <i-control min="0" type="number" ng-change="calculate(item)" ng-model="elem.extraDiscount"></i-control>
-        </td>
+        </td> -->
         <td class="center">
           <p>{{elem.totalMainDiscounts}} ##word.$##</p>
 
@@ -174,6 +176,13 @@
           <p>{{elem.totalVat}} ##word.$##</p>
         </td>
         <td class="center">
+          <small class="text-center">{{elem.maxDeduct}} <span class="currency">##word.$##</span></small>
+          <p class="text-center">{{elem.deduct}} <span class="currency">##word.$##</span></p>
+        </td>
+        <td class="center">
+          <p class="text-center">{{elem.companyCash|| 0}} <span class="currency">##word.$##</span></p>
+        </td>
+        <td class="center">
           <p class="text-center">{{elem.total}} <span class="currency">##word.$##</span></p>
         </td>
 
@@ -185,7 +194,7 @@
     </table>
   </fieldset>
 
- <!--  <div class="row">
+  <!--  <div class="row">
     <div class="col6">
       <fieldset>
         <legend>##word.Discounts Information##</legend>
@@ -303,7 +312,7 @@
         </div>
         <div class="col4">
           <fieldset class="gray-bg">
-            <p class="bold font-22">##word.Company Cash## : {{item.companyCash}} <span class="currency">##word.$##</span></p>
+            <p class="bold font-22">##word.Total After VAT## : {{item.totalCompanyCash}} <span class="currency">##word.$##</span></p>
           </fieldset>
         </div>
         <div class="col4">

@@ -18,8 +18,10 @@ module.exports = function init(site) {
 
   app.init = function () {
     if (app.allowMemory) {
-      app.$collection.findMany({}, (err, docs) => {
+      app.$collection.findMany({where: { 'type.id': 9 }}, (err, docs) => {
         if (!err) {
+          site.nursesCount = 0;
+
           if (docs.length == 0) {
             app.cacheList.forEach((_item, i) => {
               app.$collection.add(_item, (err, doc) => {
@@ -30,6 +32,9 @@ module.exports = function init(site) {
             });
           } else {
             docs.forEach((doc) => {
+              if (doc.active && doc.onDuty) {
+                site.nursesCount += 1;
+              }
               app.memoryList.push(doc);
             });
           }
@@ -205,6 +210,9 @@ module.exports = function init(site) {
         }
         app.add(_data, (err, doc) => {
           if (!err && doc) {
+            if (doc.onDuty && doc.active) {
+              site.nursesCount += 1;
+            }
             response.done = true;
             response.doc = doc;
           } else {
@@ -234,6 +242,11 @@ module.exports = function init(site) {
 
         app.update(_data, (err, result) => {
           if (!err) {
+            if (result.doc.onDuty && result.doc.active && (!result.old_doc.active || !result.old_doc.onDuty)) {
+              site.nursesCount += 1;
+            } else if (result.old_doc.onDuty && result.old_doc.active && (!result.doc.active || !result.doc.onDuty)) {
+              site.nursesCount -= 1;
+            }
             response.done = true;
             response.result = result;
           } else {
@@ -253,6 +266,9 @@ module.exports = function init(site) {
 
         app.delete(_data, (err, result) => {
           if (!err && result.count === 1) {
+            if (result.doc.onDuty && result.doc.active) {
+              site.nursesCount -= 1;
+            }
             response.done = true;
             response.result = result;
           } else {
