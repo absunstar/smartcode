@@ -402,10 +402,10 @@ module.exports = function init(site) {
     let doctorId = req.body.doctorId || 0;
 
     let nD = new Date();
-    if (day.code > nD.getDay()) {
-      nD.setTime(nD.getTime() + (day.code - nD.getDay()) * 24 * 60 * 60 * 1000);
-    } else if (day.code < nD.getDay()) {
-      nD.setTime(nD.getTime() + (7 - nD.getDay() + day.code) * 24 * 60 * 60 * 1000);
+    if (day.index > nD.getDay()) {
+      nD.setTime(nD.getTime() + (day.index - nD.getDay()) * 24 * 60 * 60 * 1000);
+    } else if (day.index < nD.getDay()) {
+      nD.setTime(nD.getTime() + (7 - nD.getDay() + day.index) * 24 * 60 * 60 * 1000);
     }
 
     let fD = new Date(nD);
@@ -428,6 +428,7 @@ module.exports = function init(site) {
     where['doctor.id'] = doctorId;
     let select = { id: 1, bookingDate: 1 };
     app.all({ where, select }, (err, docs) => {
+      console.log(datesList);
       if (docs) {
         docs.forEach((_doc) => {
           let index = datesList.findIndex(

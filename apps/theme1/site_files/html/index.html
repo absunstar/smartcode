@@ -28,7 +28,7 @@
               <p><strong>##word.Nurses##</strong><br />##word.today available##</p>
             </div>
             <div class="wedgitButton">
-              <a href="#">
+              <a href="/nurses">
                 <p>##word.More details##</p>
               </a>
             </div>
@@ -261,7 +261,7 @@
             <div class="wedgitContent calender">
               <div class="icons">
                 <span id="prev" class="material-symbols-rounded"><i class="fas fa-chevron-left"></i></span>
-                <p class="current-date"></p>
+                <p class="current-date" ></p>
                 <span id="next"><i class="fas fa-chevron-right"></i></span>
               </div>
 
@@ -299,11 +299,16 @@
                   <tr>
                     <th scope="col">P.Name</th>
                     <th scope="col">D.Name</th>
-                    <th scope="col">##word.Time##</th>
+                    <th scope="col">##word.Number##</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr ng-repeat="a in doctorAppointmentsList">
+                    <td>{{a.patient.name##session.lang##}}</td>
+                    <td>{{a.doctor.name##session.lang##}}</td>
+                    <td>{{a.bookingNumber}}</td>
+                  </tr>
+                 <!--  <tr>
                     <td>Mahmoud Ahmed</td>
                     <td>salah yousef</td>
                     <td>7:00 pm</td>
@@ -352,7 +357,7 @@
                     <td>salah mohmmed</td>
                     <td>Mahmoud Ahmed</td>
                     <td>7:00 pm</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
