@@ -387,7 +387,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
       return;
     }
     let item = {
-      sfdaCode: orderItem.item.sfdaCodeList[0],
+      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
       id: orderItem.item.id,
       code: orderItem.item.code,
       nameAr: orderItem.item.nameAr,

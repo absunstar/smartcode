@@ -787,7 +787,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
 
     delete orderItem.unit.storesList;
     let item = {
-      sfdaCode: orderItem.item.sfdaCodeList[0],
+      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
       id: orderItem.item.id,
       code: orderItem.item.code,
       nameAr: orderItem.item.nameAr,

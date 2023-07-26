@@ -510,7 +510,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     delete elem.unit.storesList;
 
     $scope.item.itemsList.unshift({
-      sfdaCode: elem.item.sfdaCodeList[0],
+      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
       id: elem.item.id,
       code: elem.item.code,
       nameAr: elem.item.nameAr,

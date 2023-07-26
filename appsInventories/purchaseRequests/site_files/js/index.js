@@ -412,7 +412,7 @@ app.controller('purchaseRequests', function ($scope, $http, $timeout) {
     });
 
     $scope.item.itemsList.unshift({
-      sfdaCode: orderItem.item.sfdaCodeList[0],
+      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
       id: orderItem.item.id,
       code: orderItem.item.code,
       nameAr: orderItem.item.nameAr,

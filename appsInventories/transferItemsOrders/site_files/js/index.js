@@ -727,7 +727,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
     });
 
     let item = {
-      sfdaCode: elem.item.sfdaCodeList[0],
+      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
       id: elem.item.id,
       code: elem.item.code,
       nameAr: elem.item.nameAr,

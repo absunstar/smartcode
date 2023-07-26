@@ -584,7 +584,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
       return;
     }
     let item = {
-      sfdaCode: elem.item.sfdaCodeList[0],
+      sfdaCode: elem.,
       id: elem.item.id,
       code: elem.item.code,
       nameAr: elem.item.nameAr,
