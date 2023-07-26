@@ -5,7 +5,7 @@
     <div x-import="doctorAppointments/modalSearch.html"></div>
 
     <div class="top-actions">
-      <i-button type="add" x-permissions="doctorAppointmentsAdd || doctorAppointmentsManage" label="##word.New##" ng-click="showAdd()"></i-button>
+      <i-button type="add" x-permissions="doctorAppointmentsAdd || doctorAppointmentsManage" label="##word.New##" ng-click="showAddAppointment()"></i-button>
     </div>
 
     <div class="row padding">
@@ -38,9 +38,9 @@
           </td>
 
           <td class="center not-print">
-            <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
-            <i-button type="edit" x-permissions="doctorAppointmentsUpdate || doctorAppointmentsManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
-            <i-button type="delete" x-permissions="doctorAppointmentsDelete || doctorAppointmentsManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button>
+            <i-button type="view" title="##word.View##" ng-click="showViewAppointment(item)"></i-button>
+            <i-button type="edit" x-permissions="doctorAppointmentsUpdate || doctorAppointmentsManage" title="##word.Edit##" ng-click="showUpdateAppointment(item)"></i-button>
+            <i-button type="delete" x-permissions="doctorAppointmentsDelete || doctorAppointmentsManage" title="##word.Delete##" ng-click="showDeleteAppointment(item)"></i-button>
           </td>
         </tr>
       </table>

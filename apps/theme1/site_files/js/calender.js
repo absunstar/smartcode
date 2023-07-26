@@ -26,7 +26,7 @@ const renderCalendar = () => {
     // creating li of all days of current month
     // adding active class to li if the current day, month, and year matched
     let isToday = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? ' active' : '';
-    liTag += `<li class="day${isToday}">${i}</li>`;
+    liTag += `<li class="day${isToday}"  month="${currMonth}" year="${currYear}" day="${i}">${i}</li>`;
   }
 
   for (let i = lastDayofMonth; i < 6; i++) {
@@ -37,8 +37,15 @@ const renderCalendar = () => {
   daysTag.innerHTML = liTag;
 
   const daysButtons = document.querySelectorAll('.day');
+
   daysButtons.forEach((daysButton) => {
-    daysButton.addEventListener('click', () => {
+    daysButton.addEventListener('click', (e) => {
+      let $scope = angular.element(document.querySelector('#main-layout')).scope();
+      let day = e.target.getAttribute('day');
+      let month = e.target.getAttribute('month');
+      let year = e.target.getAttribute('year');
+
+      $scope.getDoctorAppointmentsViewList({ day: day, month: month, year: year });
       const AppointmentCalenderPopup = document.querySelector('.AppointmentCalenderPopup');
       AppointmentCalenderPopup.classList.add('showElement');
       const body = document.querySelector('body');
@@ -53,7 +60,6 @@ const renderCalendar = () => {
     let calenderDayNumber = calenderDay.innerText;
     calenderDay.addEventListener('click', () => {
       selectedDate = `${calenderDayNumber}-${months[currMonth]}-${currYear}`;
-      console.log(selectedDate);
     });
   });
 };

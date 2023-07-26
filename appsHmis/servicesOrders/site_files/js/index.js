@@ -918,6 +918,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
       _item.totalAfterDisc = 0;
       _item.patientDeduct = 0;
       _item.servicesList.forEach((_service) => {
+        console.log(_service.totalPVat);
         _item.grossAmount += _service.price;
         _item.totalAfterDisc += _service.totalAfterDisc;
         _item.totalDiscount += _service.totalDisc;

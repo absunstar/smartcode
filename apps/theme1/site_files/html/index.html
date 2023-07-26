@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-  <head x-import="theme1/head.html"> </head>
+  <head x-import="theme1/head.html">
+    <style>
+      main {
+        margin-left: 120px !important;
+        flex-direction: inherit;
+      }
+    </style>
+  </head>
 
   <body>
     <div x-import="theme1/header.html"></div>
     <main>
       <div ng-controller="mainHmis" class="mainscreen container loaded" id="main-layout">
+        <div x-import="doctorAppointments/modal.html"></div>
+        <div x-import="doctorAppointments/daysModal.html"></div>
         <div class="topWedgit d-flex flex-row flex-wrap">
           <div class="dashboardWedgit d-flex flex-row">
             <div class="headWedgit">
@@ -64,67 +73,22 @@
                 <button type="button" data-bs-target="#availabelDoctorCurosel" data-bs-slide-to="2" aria-label="Slide 3"></button>
               </div>
               <div class="carousel-inner d-flex flex-row align-items-center">
-                <div class="carousel-item active">
+                <div class="carousel-item" ng-class="{active : $index == 0}" ng-repeat="doctor in doctorsList">
                   <div class="wedgitContent">
                     <div class="profileSection gap-3">
                       <!-- imageprofile -->
                       <div class="imageProfileAndGradiant">
-                        <div class="imageProfile"></div>
-                        <div class="gradiantProfile"></div>
+                        <img ng-src="{{doctor.image.url}}" alt="" />
                       </div>
                       <div class="userData">
                         <!-- username -->
                         <div class="doctorName d-flex flex-row gap-1">
-                          <p><strong>DR.</strong>Mahmoud Ahmed Salah</p>
+                          <p><strong>DR.</strong>{{doctor.name##session.lang##}}</p>
                         </div>
                         <!-- idnumber -->
                         <div class="doctorTime d-flex flex-row gap-1">
                           <p>ID -</p>
-                          <p>63846868</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="wedgitContent">
-                    <div class="profileSection gap-3">
-                      <!-- imageprofile -->
-                      <div class="imageProfileAndGradiant">
-                        <div class="imageProfile"></div>
-                        <div class="gradiantProfile"></div>
-                      </div>
-                      <div class="userData">
-                        <!-- username -->
-                        <div class="doctorName d-flex flex-row gap-1">
-                          <p><strong>DR.</strong>Mahmoud Ahmed Salah</p>
-                        </div>
-                        <!-- idnumber -->
-                        <div class="doctorTime d-flex flex-row gap-1">
-                          <p>ID -</p>
-                          <p>63846868</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="wedgitContent">
-                    <div class="profileSection gap-3">
-                      <!-- imageprofile -->
-                      <div class="imageProfileAndGradiant">
-                        <div class="imageProfile"></div>
-                        <div class="gradiantProfile"></div>
-                      </div>
-                      <div class="userData">
-                        <!-- username -->
-                        <div class="doctorName d-flex flex-row gap-1">
-                          <p><strong>DR.</strong>Mahmoud Ahmed Salah</p>
-                        </div>
-                        <!-- idnumber -->
-                        <div class="doctorTime d-flex flex-row gap-1">
-                          <p>ID -</p>
-                          <p>63846868</p>
+                          <p>{{doctor.code}}</p>
                         </div>
                       </div>
                     </div>
@@ -174,7 +138,7 @@
                       <p>50</p>
                     </div>
                     <div class="wedgitDetailText">
-                      <p>##word.This weak##</p>
+                      <p>##word.This week##</p>
                     </div>
                   </div>
                   <div class="col-6 wedgitDetail">
@@ -229,7 +193,7 @@
                       <p>50</p>
                     </div>
                     <div class="wedgitDetailText">
-                      <p>##word.This weak##</p>
+                      <p>##word.This week##</p>
                     </div>
                   </div>
                   <div class="col-6 wedgitDetail">
@@ -261,7 +225,7 @@
             <div class="wedgitContent calender">
               <div class="icons">
                 <span id="prev" class="material-symbols-rounded"><i class="fas fa-chevron-left"></i></span>
-                <p class="current-date" ></p>
+                <p class="current-date"></p>
                 <span id="next"><i class="fas fa-chevron-right"></i></span>
               </div>
 
@@ -308,7 +272,7 @@
                     <td>{{a.doctor.name##session.lang##}}</td>
                     <td>{{a.bookingNumber}}</td>
                   </tr>
-                 <!--  <tr>
+                  <!--  <tr>
                     <td>Mahmoud Ahmed</td>
                     <td>salah yousef</td>
                     <td>7:00 pm</td>
@@ -402,7 +366,7 @@
                       <p>50</p>
                     </div>
                     <div class="wedgitDetailText">
-                      <p>##word.This weak##</p>
+                      <p>##word.This week##</p>
                     </div>
                   </div>
                   <div class="col-6 wedgitDetail">

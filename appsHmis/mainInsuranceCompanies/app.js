@@ -629,8 +629,8 @@ module.exports = function init(site) {
               servicesList[0].totalAfterDisc = servicesList[0].price * servicesList[0].count - servicesList[0].totalDisc;
 
               if (vatIndex !== -1) {
-                servicesList[0].pVat = hmisSetting.vatList[vatIndex].pVat;
-                servicesList[0].comVat = hmisSetting.vatList[vatIndex].comVat;
+                servicesList[0].pVat = hmisSetting.vatList[vatIndex].pVat || 0;
+                servicesList[0].comVat = hmisSetting.vatList[vatIndex].comVat || 0;
               } else {
                 servicesList[0].pVat = hmisSetting.pVat || 0;
                 servicesList[0].comVat = hmisSetting.comVat || 0;
@@ -638,7 +638,6 @@ module.exports = function init(site) {
               servicesList[0].totalVat = (servicesList[0].totalAfterDisc * servicesList[0].vat || 0) / 100;
               servicesList[0].total = servicesList[0].totalAfterDisc + servicesList[0].totalVat;
               servicesList[0].deduct = 0;
-
               if (
                 mainInsurance &&
                 mainInsurance.id &&
@@ -664,6 +663,7 @@ module.exports = function init(site) {
                 }
                 servicesList[0].totalPVat = ((servicesList[0].deduct || servicesList[0].total) * (servicesList[0].pVat || 0)) / 100;
                 servicesList[0].totalComVat = ((servicesList[0].total - servicesList[0].deduct) * servicesList[0].comVat || 0) / 100;
+              
                 total += servicesList[0].deduct + servicesList[0].totalPVat;
                 if (insuranceContractCb && insuranceContractCb.insuranceClass && insuranceContractCb.insuranceClass.maxDeductAmount) {
                   if (insuranceContractCb.insuranceClass.maxDeductAmount < total) {
@@ -684,6 +684,7 @@ module.exports = function init(site) {
                       servicesList[0].comCash = servicesList[0].total;
                       servicesList[0].totalComVat = (servicesList[0].total * servicesList[0].comVat || 0) / 100;
                     }
+
                   } else {
                     servicesList[0].patientCash = insuranceContractCb.insuranceClass.maxDeductAmount;
                     servicesList[0].comCash = servicesList[0].total - insuranceContractCb.insuranceClass.maxDeductAmount;
@@ -693,9 +694,10 @@ module.exports = function init(site) {
                   servicesList[0].comCash = servicesList[0].total - servicesList[0].deduct + servicesList[0].totalComVat;
                 }
               } else {
-                servicesList[0].patientCash = servicesList[0].total + servicesList[0].totalPVat;
                 servicesList[0].comCash = 0;
+                servicesList[0].totalPVat = 0;
                 servicesList[0].totalComVat = 0;
+                servicesList[0].patientCash = servicesList[0].total + servicesList[0].totalPVat;
               }
 
               servicesList[0].patientDeduct = servicesList[0].deduct;
@@ -723,19 +725,22 @@ module.exports = function init(site) {
               }
             }
           });
+
           if (servicesList.length > 0) {
             response.done = true;
             response.servicesList = servicesList;
-            response.insuranceContract = {
-              id: insuranceContractCb.id,
-              code: insuranceContractCb.code,
-              insuranceClass: {
-                id: insuranceContractCb.insuranceClass.id,
-                nameAr: insuranceContractCb.insuranceClass.nameAr,
-                nameEn: insuranceContractCb.insuranceClass.nameEn,
-                maxDeductAmount: insuranceContractCb.insuranceClass.maxDeductAmount,
-              },
-            };
+            if (insuranceContractCb.insuranceClass && insuranceContractCb.insuranceClass.id) {
+              response.insuranceContract = {
+                id: insuranceContractCb.id,
+                code: insuranceContractCb.code,
+                insuranceClass: {
+                  id: insuranceContractCb.insuranceClass.id,
+                  nameAr: insuranceContractCb.insuranceClass.nameAr,
+                  nameEn: insuranceContractCb.insuranceClass.nameEn,
+                  maxDeductAmount: insuranceContractCb.insuranceClass.maxDeductAmount,
+                },
+              };
+            }
             callback(response);
             return;
           } else {

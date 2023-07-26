@@ -12,14 +12,14 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
   $scope.item = {};
   $scope.list = [];
 
-  $scope.showAdd = function (_item) {
+  $scope.showAddAppointment = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
     $scope.item = { ...$scope.structure, date: new Date() };
     site.showModal($scope.modalID);
   };
 
-  $scope.add = function (_item) {
+  $scope.addAppointment = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
@@ -52,15 +52,15 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.showUpdate = function (_item) {
+  $scope.showUpdateAppointment = function (_item) {
     $scope.error = '';
     $scope.mode = 'edit';
-    $scope.view(_item);
+    $scope.viewAppointment(_item);
     $scope.item = {};
     site.showModal($scope.modalID);
   };
 
-  $scope.update = function (_item) {
+  $scope.updateAppointment = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
@@ -92,15 +92,15 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.showView = function (_item) {
+  $scope.showViewAppointment = function (_item) {
     $scope.error = '';
     $scope.mode = 'view';
     $scope.item = {};
-    $scope.view(_item);
+    $scope.viewAppointment(_item);
     site.showModal($scope.modalID);
   };
 
-  $scope.view = function (_item) {
+  $scope.viewAppointment = function (_item) {
     $scope.busy = true;
     $scope.error = '';
     $http({
@@ -124,15 +124,15 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.showDelete = function (_item) {
+  $scope.showDeleteAppointment = function (_item) {
     $scope.error = '';
     $scope.mode = 'delete';
     $scope.item = {};
-    $scope.view(_item);
+    $scope.viewAppointment(_item);
     site.showModal($scope.modalID);
   };
 
-  $scope.delete = function (_item) {
+  $scope.deleteAppointment = function (_item) {
     $scope.busy = true;
     $scope.error = '';
 
