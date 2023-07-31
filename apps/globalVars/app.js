@@ -30,6 +30,11 @@ module.exports = function init(site) {
     { id: 9, nameEn: 'Nurse', nameAr: 'تمريض', name: 'Nurses' },
   ];
 
+  site.employeesTypesList = [
+    { id: 1, nameEn: 'Delegate', nameAr: 'مندوب', name: 'delegates' },
+    { id: 2, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'delivery' },
+  ];
+
   site.qualificationsDegrees = [
     { id: 1, nameEn: 'PHD', nameAr: 'دكتوراه' },
     { id: 2, nameEn: "Master's", nameAr: 'ماجيستير' },
@@ -504,6 +509,13 @@ module.exports = function init(site) {
     res.json({
       done: true,
       list: site.radiologyDeskTopTypes,
+    });
+  });
+
+  site.post('/api/employeesTypesList', (req, res) => {
+    res.json({
+      done: true,
+      list: site.employeesTypesList,
     });
   });
 

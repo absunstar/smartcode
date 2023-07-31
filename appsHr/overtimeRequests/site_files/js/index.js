@@ -303,6 +303,8 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
                 select: {
                     id: 1,
                     code: 1,
+                    nameEn: 1,
+                    nameAr: 1,
                     fullNameEn: 1,
                     fullNameAr: 1,
                     image: 1,

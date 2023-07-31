@@ -564,6 +564,27 @@ app.controller('employees', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getEmployeesTypes = function () {
+        $scope.busy = true;
+        $scope.employeesTypesList = [];
+        $http({
+            method: 'POST',
+            url: '/api/employeesTypesList',
+            data: {},
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done && response.data.list.length > 0) {
+                    $scope.employeesTypesList = response.data.list;
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = err;
+            }
+        );
+    };
+
     $scope.getGenders = function () {
         $scope.busy = true;
         $scope.gendersList = [];
@@ -1213,6 +1234,7 @@ app.controller('employees', function ($scope, $http, $timeout) {
     $scope.getQualificationsDegrees();
     $scope.getMaritalStatus();
     $scope.getGenders();
+    $scope.getEmployeesTypes();
     // $scope.getEmployeeStatusList();
     $scope.getDepartments();
     $scope.getBanks();

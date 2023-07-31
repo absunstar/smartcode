@@ -58,7 +58,7 @@ app.controller('attendanceReport', function ($scope, $http, $timeout) {
           active: true,
           'type.id': 4,
         },
-        seletct: { id: 1, code: 1, fullNameEn: 1, fullNameAr: 1 },
+        seletct: { id: 1, code: 1, fullNameEn: 1, fullNameAr: 1, nameEn: 1, nameAr: 1 },
       },
     }).then(
       function (response) {

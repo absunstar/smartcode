@@ -819,7 +819,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
         if (!_item.noVat) {
           _item.vat = $scope.setting.storesSetting.vat;
-          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100);
+          _item.totalVat = (_item.totalAfterDiscounts * _item.vat) / 100;
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {
           _item.vat = 0;
@@ -1413,6 +1413,37 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getDelegates = function () {
+    $scope.busy = true;
+    $scope.delegatesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/employees/all',
+      data: {
+        where: { active: true, 'employeeType.id': 1 },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+          fullNameEn: 1,
+          fullNameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.delegatesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getSafes = function (paymentType) {
     $scope.busy = true;
     $scope.safesList = [];
@@ -1511,6 +1542,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.getDiscountTypes();
   $scope.getTaxTypes();
   $scope.getStores();
+  $scope.getDelegates();
   $scope.getCustomers();
   $scope.getStoresItems();
   $scope.getNumberingAuto();

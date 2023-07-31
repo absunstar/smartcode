@@ -50,6 +50,10 @@ ul {
 .showSection {
   animation: showMenu 1s;
 }
+.menuTag{
+  display: contents;
+  font-size: larger;
+}
 
 .showOverlay {
   width: 100%;

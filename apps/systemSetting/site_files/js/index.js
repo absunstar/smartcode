@@ -518,6 +518,8 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
         select: {
           id: 1,
           code: 1,
+          nameEn: 1,
+          nameAr: 1,
           fullNameEn: 1,
           fullNameAr: 1,
         },
@@ -732,7 +734,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getAccountsGuideList = function ($search,acc) {
+  $scope.getAccountsGuideList = function ($search, acc) {
     $scope.error = '';
     if ($search && !$search.length) {
       return;
@@ -845,7 +847,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
           gender: 1,
           scientificRank: 1,
           onDuty: 1,
-          signatureImage:1,
+          signatureImage: 1,
         },
         search: $search,
         /* limit: 1, */

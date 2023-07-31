@@ -6,13 +6,13 @@
         <div class="row">
           <i-control ng-hide="disabledCode" label="##word.Code##" ng-model="item.code"> </i-control>
 
-          <i-control label="##word.Full Name##" class="col10" ng-keydown="changeName('fullNameEn',$event)" ng-model="item.fullNameEn"> </i-control>
-          <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+          <i-control label="##word.Full Name##" ng-keydown="changeName('fullNameEn',$event)" ng-model="item.fullNameEn"> </i-control>
           <i-control label="الإسم بالكامل" ng-keydown="changeName('fullNameAr',$event)" ng-model="item.fullNameAr"> </i-control>
         </div>
         <div class="row">
           <i-control class="col4" label="##word.Fingerprint code##" ng-model="item.fingerprintCode"> </i-control>
           <i-list
+            v="r"
             class="col4"
             label="##word.Nationality##"
             ng-model="item.nationality"
@@ -24,8 +24,13 @@
           </i-list>
           <i-list class="col4" v="r" label="##word.Gender##" ng-model="item.gender" display="name##session.lang##" items="gendersList" ng-search="item.$genders"></i-list>
         </div>
+        <div class="row">
+          <i-list class="col4" v="r" label="##word.Employee Type##" ng-model="item.employeeType" display="name##session.lang##" items="employeesTypesList" ng-search="item.$employeeType"></i-list>
+          <i-list class="col4" v="r" label="##word.Marital Status##" ng-model="item.maritalStatus" display="name##session.lang##" items="maritalStatusList" ng-search="item.$maritalStatus"></i-list>
+        </div>
       </div>
       <div class="col3">
+        <i-checkbox ng-model="item.active" label="##word.Active##"></i-checkbox>
         <i-image class="img128" ng-model="item.image"></i-image>
       </div>
     </div>
@@ -98,19 +103,8 @@
             <fieldset>
               <legend>##word.Additional Informations##</legend>
               <div class="row">
-                <i-date class="col4" label="##word.Date Of Birth ##" ng-model="item.dateOfBirth"> </i-date>
-
-                <i-list
-                  class="col3"
-                  v="r"
-                  label="##word.Marital Status##"
-                  ng-model="item.maritalStatus"
-                  display="name##session.lang##"
-                  items="maritalStatusList"
-                  ng-search="item.$maritalStatus"
-                ></i-list>
-
-                <i-control class="col5" label="##word.Email##" ng-model="item.email"> </i-control>
+                <i-date class="col6" label="##word.Date Of Birth ##" ng-model="item.dateOfBirth"> </i-date>
+                <i-control class="col6" label="##word.Email##" ng-model="item.email"> </i-control>
               </div>
             </fieldset>
 
@@ -760,55 +754,15 @@
         <div id="printersData" class="tab-content">
           <fieldset>
             <div class="row">
-              <i-list
-                ng-search="item.$printerPath"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.thermalPrinter"
-                label="##word.Thermal printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$printerPath" class="col4" display="name##session.lang##" ng-model="item.thermalPrinter" label="##word.Thermal printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$a4Printer"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.a4Printer"
-                label="##word.A4 printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$a4Printer" class="col4" display="name##session.lang##" ng-model="item.a4Printer" label="##word.A4 printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$pdfPrinter"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.pdfPrinter"
-                label="##word.PDF printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$pdfPrinter" class="col4" display="name##session.lang##" ng-model="item.pdfPrinter" label="##word.PDF printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$barcodePrinter"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.barcodePrinter"
-                label="##word.Barcode printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$barcodePrinter" class="col4" display="name##session.lang##" ng-model="item.barcodePrinter" label="##word.Barcode printer##" items="printersPathsList"> </i-list>
 
-              <i-list
-                ng-search="item.$labelPrinter"
-                class="col4"
-                display="name##session.lang##"
-                ng-model="item.labelPrinter"
-                label="##word.Label printer##"
-                items="printersPathsList"
-              >
-              </i-list>
+              <i-list ng-search="item.$labelPrinter" class="col4" display="name##session.lang##" ng-model="item.labelPrinter" label="##word.Label printer##" items="printersPathsList"> </i-list>
             </div>
 
             <div class="row">

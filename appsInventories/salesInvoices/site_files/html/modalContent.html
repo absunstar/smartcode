@@ -36,6 +36,7 @@
             <i-button type="add" ng-show="item.invoiceType.id == 2" label="##word.Set Installment##" ng-click="showInstallmentsModal(item)">> </i-button>
           </div>
 
+          <i-list type="text" class="col4" ng-model="item.delegate" label="##word.Delegate##" ng-search="item.$delegate" items="delegatesList" display="fullName##session.lang##"></i-list>
           <i-list type="text" v="r" class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
         </div>
       </div>

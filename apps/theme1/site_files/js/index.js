@@ -80,7 +80,6 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
 
   $scope.getDoctorAppointmentsDetails = function () {
     $scope.busy = true;
-    $scope.doctorAppointmentsList = [];
 
     let where = { date: new Date(), active: true };
 
@@ -98,8 +97,68 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
     }).then(
       function (response) {
         $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.doctorAppointmentsList = response.data.list;
+        if (response.data.done && response.data.doc) {
+          $scope.doctorAppointmentsDetails = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getSalesInvoicesDetails = function () {
+    $scope.busy = true;
+
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/salesInvoices/details',
+      data: {
+        where: where,
+        limit: 10,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.salesInvoicesDetails = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getDoctorDeskTopDetails = function () {
+    $scope.busy = true;
+
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/doctorDeskTop/details',
+      data: {
+        where: where,
+        limit: 10,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.doctorDeskTopDetails = response.data.doc;
         }
       },
       function (err) {
@@ -258,4 +317,7 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
 
   $scope.getDoctorAppointmentsList();
   $scope.getDoctorsList();
+  $scope.getDoctorAppointmentsDetails();
+  $scope.getSalesInvoicesDetails();
+  $scope.getDoctorDeskTopDetails();
 });

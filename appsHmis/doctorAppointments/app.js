@@ -15,7 +15,13 @@ module.exports = function init(site) {
   };
 
   app.$collection = site.connectCollection(app.name);
-
+  site.weekDate = function () {
+    let obj = {};
+    let curr = new Date();
+    obj.firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
+    obj.lastday = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6));
+    return obj;
+  };
   app.init = function () {
     if (app.allowMemory) {
       app.$collection.findMany({}, (err, docs) => {
@@ -157,7 +163,7 @@ module.exports = function init(site) {
 
         let _data = req.data;
 
-        if(!_data.doctor.onDuty) {
+        if (!_data.doctor.onDuty) {
           response.error = "The Doctor Isn't  On Duty";
           res.json(response);
           return;
@@ -202,7 +208,7 @@ module.exports = function init(site) {
 
         let _data = req.data;
 
-        if(!_data.doctor.onDuty) {
+        if (!_data.doctor.onDuty) {
           response.error = "The Doctor Isn't  On Duty";
           res.json(response);
           return;
@@ -336,6 +342,53 @@ module.exports = function init(site) {
     }
   }
 
+  site.post({ name: `/api/${app.name}/details`, public: true }, (req, res) => {
+    let where = {};
+    let date = new Date();
+    let d1 = site.toDate(date);
+    let d2 = site.toDate(date);
+    d2.setMonth(d2.getMonth() + 1);
+    d2.setDate(1);
+    d1.setDate(1);
+    where.date = {
+      $gte: d1,
+      $lt: d2,
+    };
+
+    let select = { id: 1, code: 1, date: 1 };
+
+    app.all({ where, select }, (err, docs) => {
+      let obj = {
+        today: 0,
+        yesterday: 0,
+        week: 0,
+        month: 0,
+      };
+
+      if (!err && docs) {
+        let weekDate = site.weekDate();
+        obj.month = docs.length;
+        for (let i = 0; i < docs.length; i++) {
+          docs[i].date = new Date(docs[i].date);
+
+          if (docs[i].date.getDate() == new Date().getDate()) {
+            obj.today += 1;
+          }
+          if (docs[i].date.getDate() == new Date().getDate() - 1) {
+            obj.yesterday += 1;
+          }
+          if (weekDate.firstday.getDate() <= docs[i].date.getDate() && weekDate.lastday.getDate() >= docs[i].date.getDate()) {
+            obj.week += 1;
+          }
+        }
+      }
+      res.json({
+        done: true,
+        doc: obj,
+      });
+    });
+  });
+
   site.post({ name: `/api/selectDoctorAppointment`, require: { permissions: ['login'] } }, (req, res) => {
     let _data = req.body;
 
@@ -372,10 +425,10 @@ module.exports = function init(site) {
             patient: _data.patient,
             servicesList: [_data.doctor.consItem],
             payment: payment,
-            doctor : _data.doctor,
+            doctor: _data.doctor,
             hospitalResponsibility: _data.doctor.hospitalResponsibility,
             type: 'out',
-            session: req.session
+            session: req.session,
           },
           (serviceCallback) => {
             serviceCallback.elig = nphisCallback.elig;
@@ -428,7 +481,6 @@ module.exports = function init(site) {
     where['doctor.id'] = doctorId;
     let select = { id: 1, bookingDate: 1 };
     app.all({ where, select }, (err, docs) => {
-      console.log(datesList);
       if (docs) {
         docs.forEach((_doc) => {
           let index = datesList.findIndex(
