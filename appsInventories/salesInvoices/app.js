@@ -157,7 +157,9 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-
+        if (_data.salesCategory && _data.salesCategory.id == 2) {
+          _data.deliveryStatus = site.deliveryStatus[0];
+        }
         _data['approved'] = true;
         _data.company = site.getCompany(req);
         const storesSetting = site.getSystemSetting(req).storesSetting;
@@ -291,7 +293,7 @@ module.exports = function init(site) {
                   site.addReceiptVouchers({
                     session: req.session,
                     date: new Date(),
-                    delegate: doc.delegate,
+                    delivery: doc.delivery,
                     customer: doc.customer,
                     patient: doc.patient,
                     company: doc.company,
@@ -312,7 +314,7 @@ module.exports = function init(site) {
                   image: doc.image,
                   appName: app.name,
                   store: doc.store,
-                  delegate: doc.delegate,
+                  delivery: doc.delivery,
                   customer: doc.customer,
                   company: doc.company,
                   user: doc.customer,
@@ -333,7 +335,7 @@ module.exports = function init(site) {
                   item.invoiceId = doc.id;
                   item.company = doc.company;
                   item.date = doc.date;
-                  item.delegate = doc.delegate;
+                  item.delivery = doc.delivery;
                   item.customer = doc.customer;
                   item.patient = doc.patient;
                   item.countType = 'out';
@@ -351,13 +353,13 @@ module.exports = function init(site) {
                 }
 
                 if (doc.salesType.code == 'patient') {
-                  obj.user = doc.patient
+                  obj.user = doc.patient;
                   site.hasSalesDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
                 } else if (doc.salesType.code == 'er') {
-                  obj.user = doc.patient
+                  obj.user = doc.patient;
                   site.hasErDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
                 } else if (doc.salesType.code == 'company') {
-                  obj.user = doc.company
+                  obj.user = doc.company;
                 }
                 obj.nameAr = 'فاتورة مبيعات' + ' (' + doc.code + ' )';
                 obj.nameEn = 'Sales Invoice' + ' (' + doc.code + ' )';

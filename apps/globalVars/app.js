@@ -6,6 +6,17 @@ module.exports = function init(site) {
     { id: 4, nameAr: 'مبيعات للطوارئ', nameEn: 'Sales For ER', code: 'er' },
   ];
 
+  site.salesCategories = [
+    { id: 1, nameEn: 'Direct', nameAr: 'مباشرة', name: 'direct' },
+    { id: 2, nameEn: 'Delivery', nameAr: 'توصيل', name: 'delivery' },
+  ];
+
+  site.deliveryStatus = [
+    { id: 1, nameEn: 'New', nameAr: 'جديد', name: 'new' },
+    { id: 2, nameEn: 'Delivered', nameAr: 'تم التوصيل', name: 'delivered' },
+    { id: 3, nameEn: 'Canceled', nameAr: 'ملغي', name: 'canceled' },
+  ];
+
   site.patientTypes = [
     { id: 1, code: 'N', nameEn: 'Normal', nameAr: 'عادي' },
     { id: 2, code: 'V', nameEn: 'VIP PATIENT', nameAr: 'مميز' },
@@ -28,11 +39,7 @@ module.exports = function init(site) {
     { id: 7, nameEn: 'Vendor', nameAr: 'مورد', name: 'vendors' },
     { id: 8, nameEn: 'Doctor', nameAr: 'طبيب', name: 'doctors' },
     { id: 9, nameEn: 'Nurse', nameAr: 'تمريض', name: 'Nurses' },
-  ];
-
-  site.employeesTypesList = [
-    { id: 1, nameEn: 'Delegate', nameAr: 'مندوب', name: 'delegates' },
-    { id: 2, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'delivery' },
+    { id: 10, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'delivery' },
   ];
 
   site.qualificationsDegrees = [
@@ -435,6 +442,18 @@ module.exports = function init(site) {
       list: site.salesTypesList,
     });
   });
+  site.post('/api/deliveryStatus', (req, res) => {
+    res.json({
+      done: true,
+      list: site.deliveryStatus,
+    });
+  });
+  site.post('/api/salesCategories', (req, res) => {
+    res.json({
+      done: true,
+      list: site.salesCategories,
+    });
+  });
   site.post('/api/patientTypes', (req, res) => {
     res.json({
       done: true,
@@ -509,13 +528,6 @@ module.exports = function init(site) {
     res.json({
       done: true,
       list: site.radiologyDeskTopTypes,
-    });
-  });
-
-  site.post('/api/employeesTypesList', (req, res) => {
-    res.json({
-      done: true,
-      list: site.employeesTypesList,
     });
   });
 

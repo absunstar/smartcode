@@ -1,13 +1,13 @@
-app.controller('employees', function ($scope, $http, $timeout) {
+app.controller('delivery', function ($scope, $http, $timeout) {
   $scope.setting = site.showObject(`##data.#setting##`);
   $scope.baseURL = '';
-  $scope.appName = 'employees';
-  $scope.modalID = '#employeesManageModal';
-  $scope.modalSearchID = '#employeesSearchModal';
+  $scope.appName = 'delivery';
+  $scope.modalID = '#deliveryManageModal';
+  $scope.modalSearchID = '#deliverySearchModal';
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { url: '/images/employees.png' },
+    image: { url: '/images/delivery.png' },
     active: true,
   };
   $scope.item = {};

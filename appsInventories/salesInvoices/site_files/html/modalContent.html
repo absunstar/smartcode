@@ -20,6 +20,19 @@
           <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
         </div>
         <div class="row">
+          <i-list v="r" class="col4" ng-model="item.salesCategory" ng-change="selectSalesCategory()" display="name##session.lang##" items="salesCategoriesList" label="##word.Sales Category##" ng-search="item.$salesCategory"></i-list>
+          <i-list
+            class="col4"
+            ng-show="item.salesCategory.id == 2"
+            ng-model="item.delivery"
+            label="##word.Delivery##"
+            ng-search="item.$delivery"
+            items="deliveryList"
+            display="fullName##session.lang##"
+          ></i-list>
+          <i-list v="r" class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
+        </div>
+        <div class="row">
           <i-list class="col4" v="r" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
           <i-list
             class="col4"
@@ -32,13 +45,11 @@
             ng-search="item.$paymentType"
           ></i-list>
           <div class="col3">
-            <br>
+            <br />
             <i-button type="add" ng-show="item.invoiceType.id == 2" label="##word.Set Installment##" ng-click="showInstallmentsModal(item)">> </i-button>
           </div>
-
-          <i-list type="text" class="col4" ng-model="item.delegate" label="##word.Delegate##" ng-search="item.$delegate" items="delegatesList" display="fullName##session.lang##"></i-list>
-          <i-list type="text" v="r" class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
         </div>
+       
       </div>
       <div class="col3 center">
         <i-image class="img128 center" ng-model="item.image"></i-image>
@@ -138,7 +149,7 @@
     </table>
   </fieldset>
 
- <!--  <div class="row">
+  <!--  <div class="row">
     <div class="col6">
       <fieldset>
         <legend>##word.Discounts Information##</legend>

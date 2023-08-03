@@ -47,29 +47,29 @@
     </div>
     <!-- branch link -->
     <div class="branchLink">
-      <p id="currantPage" class="text-center bold screenNameStyle"> ##data.appName## </p>
+      <p id="currantPage" class="text-center bold screenNameStyle">##data.appName##</p>
     </div>
     <!-- nav bar -->
     <div class="navbar">
-      <ul class="nav d-flex flex-column"  x-permissions="login">
-        <li id="Accountant" class="navlink" onmouseover="showAndHide('Accountant')">
+      <ul class="nav d-flex flex-column" x-permissions="login">
+        <li id="Accountant" class="navlink" onmouseover="showAndHide('Accountant')" x-setting="showAccountant">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-hand-holding-usd"></i>
             </div>
-            <div class="linktext">Accountant</div>
+            <div class="linktext">##word.Accountant##</div>
           </a>
           <div class="submenu hideSection">
             <ul>
               <li id="safe" x-permissions="safesUi || safesManage">
                 <a class="menuTag" href="/safes">
-                <img src="/theme1/images/accounting/safe.png" width="45" height="45" />
-                <p>##word.Safe##</p>
+                  <img src="/theme1/images/accounting/safe.png" width="45" height="45" />
+                  <p>##word.Safe##</p>
                 </a>
               </li>
               <li id="banks" x-permissions="banksUi || banksManage">
                 <a class="menuTag" href="/banks">
-                <img src="/theme1/images/accounting/banks.png" width="45" height="45" />
+                  <img src="/theme1/images/accounting/banks.png" width="45" height="45" />
                   <p>##word.Banks##</p>
                 </a>
               </li>
@@ -87,7 +87,7 @@
               </li>
               <li id="transferSafes" x-permissions="transferSafesUi || transferSafesManage">
                 <a class="menuTag" href="/transferSafes">
-                <img src="/theme1/images/accounting/transfer safes.png" width="45" height="45" />
+                  <img src="/theme1/images/accounting/transfer safes.png" width="45" height="45" />
                   <p>##word.Transfer Safes##</p>
                 </a>
               </li>
@@ -159,7 +159,7 @@
               </li>
               <li id="safesAdjusting" x-permissions="safesAdjustingUi || safesAdjustingManage">
                 <a class="menuTag" href="/safesAdjusting">
-                <img src="/theme1/images/accounting/Safes Adjusting.png" width="45" height="45" />
+                  <img src="/theme1/images/accounting/Safes Adjusting.png" width="45" height="45" />
                   <p>##word.Safes Adjusting##</p>
                 </a>
               </li>
@@ -172,7 +172,7 @@
             </ul>
           </div>
         </li>
-        <li id="Inventory" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Inventory')">
+        <li id="Inventory" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Inventory')" x-setting="showInventory">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-boxes"></i>
@@ -183,7 +183,7 @@
             <ul>
               <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
                 <a class="menuTag" href="/salesInvoices">
-                <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
                   <p>##word.Sales Invoicse For Customers##</p>
                 </a>
               </li>
@@ -322,7 +322,7 @@
             </ul>
           </div>
         </li>
-        <li id="HR" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('HR')">
+        <li id="HR" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('HR')" x-setting="showHr">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-users"></i>
@@ -333,13 +333,13 @@
             <ul>
               <li id="Attendance" x-permissions="attendanceUi || attendanceManage">
                 <a class="menuTag" href="/attendance">
-                <img src="/theme1/images/hr/Attendance.png" width="45" height="45" />
+                  <img src="/theme1/images/hr/Attendance.png" width="45" height="45" />
                   <p>##word.Attendance##</p>
                 </a>
               </li>
               <li id="VacationsRequests" x-permissions="vacationsRequestsUi || vacationsRequestsManage">
                 <a class="menuTag" href="/vacationsRequests">
-                <img src="/theme1/images/hr/Vacations Requests.png" width="45" height="45" />
+                  <img src="/theme1/images/hr/Vacations Requests.png" width="45" height="45" />
                   <p>##word.Vacations Requests##</p>
                 </a>
               </li>
@@ -351,7 +351,7 @@
               </li>
               <li id="WorkErrandRequests" x-permissions="workErrandRequestsUi || workErrandRequestsManage">
                 <a class="menuTag" href="/workErrandRequests">
-                <img src="/theme1/images/hr/Work Errand Requests.png" width="45" height="45" />
+                  <img src="/theme1/images/hr/Work Errand Requests.png" width="45" height="45" />
                   <p>##word.Work Errand Requests##</p>
                 </a>
               </li>
@@ -369,7 +369,7 @@
               </li>
               <li id="EmployeesPenalties" x-permissions="employeesPenaltiesUi || employeesPenaltiesManage">
                 <a class="menuTag" href="/employeesPenalties">
-                <img src="/theme1/images/hr/Employees Penalties.png" width="45" height="45" />
+                  <img src="/theme1/images/hr/Employees Penalties.png" width="45" height="45" />
                   <p>##word.Employees Penalties##</p>
                 </a>
               </li>
@@ -389,6 +389,12 @@
                 <a class="menuTag" href="/employees">
                   <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
                   <p>##word.Employees##</p>
+                </a>
+              </li>
+              <li id="Delivery" x-permissions="deliveryUi || deliveryManage">
+                <a class="menuTag" href="/delivery">
+                  <img src="/theme1/images/hr/Delivery.png" width="45" height="45" />
+                  <p>##word.Delivery##</p>
                 </a>
               </li>
               <li id="CreateVacations" x-permissions="createVacationsUi || createVacationsManage">
@@ -490,7 +496,7 @@
             </ul>
           </div>
         </li>
-        <li id="Hospital" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Hospital')">
+        <li id="Hospital" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Hospital')" x-setting="showHospital">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-stethoscope"></i>
@@ -706,7 +712,7 @@
             </ul>
           </div>
         </li>
-        <li id="Reports" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Reports')">
+        <li id="Reports" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Reports')" x-setting="showReports">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-paste"></i>
@@ -905,7 +911,7 @@
             </ul>
           </div>
         </li>
-        <li id="Setting" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Setting')">
+        <li id="Setting" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Setting')" x-setting="showSetting">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-cogs"></i>

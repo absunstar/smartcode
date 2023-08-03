@@ -175,7 +175,6 @@ module.exports = function init(site) {
       //   res.json(response)
       //   return;
       // }
-
       if (companiesDoc.username.includes('@') && !companiesDoc.username.includes('.')) {
         response.error = 'Username must be typed correctly';
         res.json(response);
@@ -186,10 +185,12 @@ module.exports = function init(site) {
         return;
       }
 
-      if (!companiesDoc.host.includes('.')) {
+      if (!companiesDoc.host.includes('.') || companiesDoc.host.includes('@')) {
         response.error = 'Host must be typed correctly';
         res.json(response);
         return;
+      } else if(companiesDoc.host.includes('.')){
+
       }
 
       let existDomain = companiesDoc.username.includes('@');
@@ -260,6 +261,7 @@ module.exports = function init(site) {
             companiesDoc.type = site.usersTypesList[1];
             $companies.add(companiesDoc, (err, doc) => {
               if (!err) {
+                site.addCompanySetting(doc);
                 response.done = true;
                 response.doc = doc;
                 let user = {
@@ -425,6 +427,8 @@ module.exports = function init(site) {
           },
           (err, result) => {
             if (!err) {
+              site.editCompanySetting(result.doc);
+
               response.done = true;
               response.doc = result.doc;
 

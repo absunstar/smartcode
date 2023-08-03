@@ -756,6 +756,34 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getSalesCategories = function () {
+    $scope.busy = true;
+    $scope.salesCategoriesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/salesCategories',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.salesCategoriesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getPaymentTypes = function () {
     $scope.busy = true;
     $scope.paymentTypesList = [];
@@ -1412,15 +1440,20 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       }
     );
   };
+  $scope.selectSalesCategory = function () {
+    if ($scope.item.salesCategory && $scope.item.salesCategory.id) {
+      $scope.item.invoiceType = $scope.invoiceTypesList[1];
+    }
+  };
 
-  $scope.getDelegates = function () {
+  $scope.getDelivery = function () {
     $scope.busy = true;
-    $scope.delegatesList = [];
+    $scope.deliveryList = [];
     $http({
       method: 'POST',
-      url: '/api/employees/all',
+      url: '/api/delivery/all',
       data: {
-        where: { active: true, 'employeeType.id': 1 },
+        where: { active: true },
         select: {
           id: 1,
           code: 1,
@@ -1434,7 +1467,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.delegatesList = response.data.list;
+          $scope.deliveryList = response.data.list;
         }
       },
       function (err) {
@@ -1542,7 +1575,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.getDiscountTypes();
   $scope.getTaxTypes();
   $scope.getStores();
-  $scope.getDelegates();
+  $scope.getDelivery();
+  $scope.getSalesCategories();
   $scope.getCustomers();
   $scope.getStoresItems();
   $scope.getNumberingAuto();

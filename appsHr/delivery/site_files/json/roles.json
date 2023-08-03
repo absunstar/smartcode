@@ -1,0 +1,16 @@
+[
+  {
+    "moduleName": "hr",
+    "name": "deliveryAdmin",
+    "En": "Delivery Admin",
+    "Ar": "إدارة موظفين التوصيل",
+    "permissions": ["deliveryManage"]
+  },
+  {
+    "moduleName": "hr",
+    "name": "deliveryPermissions",
+    "En": "Delivery Permissions",
+    "Ar": "صلاحيات موظف التوصيل",
+    "permissions": [""]
+  }
+]

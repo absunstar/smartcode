@@ -50,6 +50,7 @@
       "laboratoryDeskTopManage",
       "radiologyDeskTopManage",
       "employeesManage",
+      "deliveryManage",
       "employeesBonusesManage",
       "employeesPenaltiesManage",
       "salaryDeductionsNamesManage",

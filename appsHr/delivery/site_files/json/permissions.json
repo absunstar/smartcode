@@ -1,0 +1,17 @@
+[
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliverySearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "deliveryUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "addEmployeeAllowance", "En": "Add Employee Allowance", "Ar": "إضافة بدل لراتب موظف" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "changeEmployeeAllowance", "En": "Change Employee Allowance", "Ar": "تعديل بدل لراتب موظف" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "removeEmployeeAllowance", "En": "Remove Employee Allowance", "Ar": "حذف بدل لراتب موظف" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "addEmployeeDeduction", "En": "Add Employee Deduction", "Ar": "إضافة خصم لراتب موظف" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "changeEmployeeDeduction", "En": "Change Employee Deduction", "Ar": "تعديل خصم لراتب موظف" },
+    { "moduleName": "hr", "screenName": "delivery", "name": "removeEmployeeDeduction", "En": "Remove Employee Deduction", "Ar": "حذف خصم لراتب موظف" }
+]

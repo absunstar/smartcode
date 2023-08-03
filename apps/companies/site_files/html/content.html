@@ -3,7 +3,7 @@
     <div class="tabs-header full">
       <a class="tab-link" onclick="site.showTabContent(event, '#basicInformation')"> ##word.Company Basic Information## </a>
       <a class="tab-link" onclick="site.showTabContent(event, '#companiesBranches')"> ##word.Companies Branches Informations## </a>
-
+      <a class="tab-link" onclick="site.showTabContent(event,'#modules')"> ##word.Modules## </a>
       <a class="tab-link" onclick="site.showTabContent(event,'#loginInformation')"> ##word.Login Information## </a>
     </div>
 
@@ -144,7 +144,21 @@
           </div>
         </fieldset>
       </div> -->
-
+      <div id="modules" class="tab-content">
+        <fieldset>
+          <legend>##word.Modules##</legend>
+          <div class="row">
+            <i-checkbox label="##word.Show Accountant##" ng-model="company.showAccountant"></i-checkbox>
+            <i-checkbox label="##word.Show Inventory##" ng-model="company.showInventory"></i-checkbox>
+            <i-checkbox label="##word.Show HR##" ng-model="company.showHr"></i-checkbox>
+            <i-checkbox label="##word.Show Hospital##" ng-model="company.showHospital"></i-checkbox>
+            <i-checkbox label="##word.Show Reports##" ng-model="company.showReports"></i-checkbox>
+            <i-checkbox label="##word.Show Setting##" ng-model="company.showSetting"></i-checkbox>
+         
+          </div>
+        
+        </fieldset>
+      </div>
       <div id="loginInformation" class="tab-content">
         <fieldset>
           <legend>##word.login_information##</legend>

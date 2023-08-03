@@ -18,10 +18,15 @@ module.exports = function init(site) {
     teethList.push({ name: i + 1, id: i + 1 });
   }
 
-
   site.setting = {
     printerProgram: { invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
     storesSetting: {
+      showAccountant: true,
+      showInventory: true,
+      showHr: true,
+      showHospital: true,
+      showReports: true,
+      showSetting: true,
       hasDefaultVendor: false,
       cannotExceedMaximumDiscount: false,
       allowOverdraft: false,
@@ -34,13 +39,12 @@ module.exports = function init(site) {
     accountsSetting: { paymentType: {}, currencySymbol: 'SR' },
     generalSystemSetting: {},
     workflowAssignmentSettings: site.workflowScreensList,
-    hmisSetting : {
-      pVat : 0,
-      comVat : 0,
+    hmisSetting: {
+      pVat: 0,
+      comVat: 0,
       teethList: teethList,
     },
     hrSettings: {
-    
       absenceDays: 1,
       forgetFingerprint: 0.5,
       nathionalitiesVacationsList: [],
@@ -66,6 +70,59 @@ module.exports = function init(site) {
       { id: 'box', nameAr: 'الصندوق', nameEn: 'Box' },
       { id: 'bank', nameAr: 'البنك', nameEn: 'Bank' },
     ],
+  };
+
+  site.addCompanySetting = function (_data) {
+    let setting = { ...site.setting };
+    setting.company = { id: _data.id, nameAr: _data.nameAr, nameEn: _data.nameEn };
+    setting.showAccountant = _data.showAccountant;
+    setting.showInventory = _data.showInventory;
+    setting.showHr = _data.showHr;
+    setting.showHospital = _data.showHospital;
+    setting.showReports = _data.showReports;
+    setting.showSetting = _data.showSetting;
+    app.$collection.add(setting, (err, doc) => {
+      if (app.allowMemory && !err && doc) {
+        app.memoryList.push(doc);
+        site.word({ name: '$', Ar: doc.accountsSetting.currencySymbol, En: doc.accountsSetting.currencySymbol });
+      }
+    });
+  };
+
+  site.editCompanySetting = function (_data) {
+    app.$collection.find({ where: { 'company.id': _data.id } }, (err, doc) => {
+      doc.showAccountant = _data.showAccountant;
+      doc.showInventory = _data.showInventory;
+      doc.showHr = _data.showHr;
+      doc.showHospital = _data.showHospital;
+      doc.showReports = _data.showReports;
+      doc.showSetting = _data.showSetting;
+
+      app.$collection.edit(doc, (err, result) => {
+        if (callback) {
+          callback(err, result);
+        }
+        if (result && result.doc) {
+          site.word({ name: '$', Ar: result.doc.accountsSetting.currencySymbol, En: result.doc.accountsSetting.currencySymbol });
+        }
+
+        if (app.allowMemory && !err && result) {
+          let index = app.memoryList.findIndex((itm) => itm.id === result.doc.id);
+          if (index !== -1) {
+            app.memoryList[index] = result.doc;
+          } else {
+            app.memoryList.push(result.doc);
+          }
+        } else if (app.allowCache && !err && result) {
+          let index = app.allowMemory.findIndex((itm) => itm.id === result.doc.id);
+          if (index !== -1) {
+            app.allowMemory[index] = result.doc;
+          } else {
+            app.allowMemory.push(result.doc);
+          }
+        }
+      });
+    });
   };
 
   app.$collection = site.connectCollection(app.name);
@@ -115,9 +172,9 @@ module.exports = function init(site) {
             app.memoryList.splice(index, 1);
           }
         } else if (app.allowCache && !err && result.count === 1) {
-          let index = app.cacheList.findIndex((a) => a.id === _item.id);
+          let index = app.allowMemory.findIndex((a) => a.id === _item.id);
           if (index !== -1) {
-            app.cacheList.splice(index, 1);
+            app.allowMemory.splice(index, 1);
           }
         }
       }
@@ -154,11 +211,11 @@ module.exports = function init(site) {
               app.memoryList.push(result.doc);
             }
           } else if (app.allowCache && !err && result) {
-            let index = app.cacheList.findIndex((itm) => itm.id === result.doc.id);
+            let index = app.allowMemory.findIndex((itm) => itm.id === result.doc.id);
             if (index !== -1) {
-              app.cacheList[index] = result.doc;
+              app.allowMemory[index] = result.doc;
             } else {
-              app.cacheList.push(result.doc);
+              app.allowMemory.push(result.doc);
             }
           }
         });

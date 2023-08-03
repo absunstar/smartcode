@@ -141,9 +141,10 @@ header::before {
 
 .screenNameStyle {
   border-radius: 16px 0px;
-  border: 2px #919304 solid;
+  font-family: auto;
+  border: 1px #919304 solid;
   padding: 5px;
-  background: #bec011;
+ /*  background: #bec011; */
   color: var(--main-color-font1);
 }
 
