@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "public",
+        "name": "coreSettingAdmin",
+        "En": "Core Setting Admin",
+        "Ar": "إدارة الإعدادات الأساسية",
+        "permissions": ["coreSettingManage"]
+    }
+]

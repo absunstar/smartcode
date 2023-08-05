@@ -1,0 +1,25 @@
+<div id="changeDeliveryModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+
+      <p class="center">
+        ##word.Change Delivery##
+        <i class="fa fa-file"></i>
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <div class="row">
+        <i-list v="r" ng-model="item.delivery" label="##word.Delivery##" ng-search="item.$delivery" items="deliveryList" display="fullName##session.lang##"></i-list>
+      </div>
+    </div>
+
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+      <i-button type="save" label="##word.Save##" ng-click="update(item,'changeDeliveryModal')"></i-button>
+
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#changeDeliveryModal')"></i-button>
+    </div>
+  </div>
+</div>

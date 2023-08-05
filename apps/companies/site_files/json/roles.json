@@ -12,6 +12,7 @@
       "dailyCashByUsersManage",
       "dailyCashByUserManage",
       "systemSettingManage",
+      "coreSettingManage",
       "printersPathsManage",
       "offersOrdersManage",
       "attendanceLeavingManage",

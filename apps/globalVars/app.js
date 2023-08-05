@@ -13,8 +13,9 @@ module.exports = function init(site) {
 
   site.deliveryStatus = [
     { id: 1, nameEn: 'New', nameAr: 'جديد', name: 'new' },
-    { id: 2, nameEn: 'Delivered', nameAr: 'تم التوصيل', name: 'delivered' },
-    { id: 3, nameEn: 'Canceled', nameAr: 'ملغي', name: 'canceled' },
+    { id: 2, nameEn: 'Approved', nameAr: 'معتمد', name: 'approved' },
+    { id: 3, nameEn: 'Delivered', nameAr: 'تم التوصيل', name: 'delivered' },
+    { id: 4, nameEn: 'Canceled', nameAr: 'ملغي', name: 'canceled' },
   ];
 
   site.patientTypes = [

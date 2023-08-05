@@ -135,7 +135,55 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     site.showModal($scope.modalID);
   };
 
-  $scope.update = function (_item) {
+  $scope.update = function (_item, modalID, type) {
+    $scope.error = '';
+    if (modalID) {
+      const v = site.validated(modalID);
+      if (!v.ok) {
+        $scope.error = v.messages[0].ar;
+        return;
+      }
+      let dataValid = $scope.validateData(_item);
+      if (!dataValid.success) {
+        return;
+      }
+    }
+    if (type == 'delivered') {
+      _item.deliveryStatus = $scope.deliveryStatusList[2];
+    } else if (type == 'canceled') {
+      _item.deliveryStatus = $scope.deliveryStatusList[3];
+    }
+    console.log(type);
+    console.log($scope.deliveryStatusList);
+    console.log(_item.deliveryStatus);
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/update`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          if (modalID) {
+            site.hideModal(modalID);
+            site.resetValidated(modalID);
+          }
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.result.doc;
+          }
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.approve = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
@@ -149,7 +197,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $http({
       method: 'POST',
-      url: `${$scope.baseURL}/api/${$scope.appName}/update`,
+      url: `${$scope.baseURL}/api/${$scope.appName}/approve`,
       data: _item,
     }).then(
       function (response) {
@@ -157,9 +205,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.doc.id);
           if (index !== -1) {
-            $scope.list[index] = response.data.result.doc;
+            $scope.list[index] = response.data.doc;
           }
         } else {
           $scope.error = response.data.error;
@@ -803,6 +851,27 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.paymentTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.geDeliveryStatus = function () {
+    $scope.busy = true;
+    $scope.deliveryStatusList = [];
+    $http({
+      method: 'POST',
+      url: '/api/deliveryStatus',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.deliveryStatusList = response.data.list;
         }
       },
       function (err) {
@@ -1572,6 +1641,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.getCurrentMonthDate();
   $scope.getAll();
   $scope.getPaymentTypes();
+  $scope.geDeliveryStatus();
   $scope.getDiscountTypes();
   $scope.getTaxTypes();
   $scope.getStores();

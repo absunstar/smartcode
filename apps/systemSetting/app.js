@@ -18,7 +18,7 @@ module.exports = function init(site) {
     teethList.push({ name: i + 1, id: i + 1 });
   }
 
-  site.setting = {
+  site.systemSetting = {
     printerProgram: { invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
     storesSetting: {
       showAccountant: true,
@@ -73,7 +73,7 @@ module.exports = function init(site) {
   };
 
   site.addCompanySetting = function (_data) {
-    let setting = { ...site.setting };
+    let setting = { ...site.systemSetting };
     setting.company = { id: _data.id, nameAr: _data.nameAr, nameEn: _data.nameEn };
     setting.showAccountant = _data.showAccountant;
     setting.showInventory = _data.showInventory;
@@ -99,9 +99,7 @@ module.exports = function init(site) {
       doc.showSetting = _data.showSetting;
 
       app.$collection.edit(doc, (err, result) => {
-        if (callback) {
-          callback(err, result);
-        }
+    
         if (result && result.doc) {
           site.word({ name: '$', Ar: result.doc.accountsSetting.currencySymbol, En: result.doc.accountsSetting.currencySymbol });
         }
@@ -146,15 +144,15 @@ module.exports = function init(site) {
         }
       });
     }
-    site.word({ name: '$', Ar: site.setting.accountsSetting.currencySymbol, En: site.setting.accountsSetting.currencySymbol });
+    site.word({ name: '$', Ar: site.systemSetting.accountsSetting.currencySymbol, En: site.systemSetting.accountsSetting.currencySymbol });
   };
 
   site.getSystemSetting = function (req) {
     let company = site.getCompany(req);
     let branch = site.getBranch(req);
 
-    site.setting = app.memoryList.find((s) => s.company.id == company.id) || site.setting;
-    return site.setting;
+    let systemSetting = app.memoryList.find((s) => s.company.id == company.id) || site.systemSetting;
+    return systemSetting;
   };
 
   app.delete = function (_item, callback) {
@@ -276,7 +274,7 @@ module.exports = function init(site) {
           if (!err && result.count === 1) {
             response.done = true;
             app.memoryList = app.memoryList.filter((n) => n.company.id != company.id);
-            response.doc = site.setting;
+            response.doc = {...site.systemSetting};
           } else {
             response.error = err?.message || 'Deleted Not Exists';
           }
@@ -287,10 +285,10 @@ module.exports = function init(site) {
 
     if (app.allowRouteGetSetting) {
       site.post({ name: `/api/${app.name}/get`, public: true }, (req, res) => {
-        site.setting = site.getSystemSetting(req);
+        let systemSetting = site.getSystemSetting(req) || site.systemSetting;
         res.json({
           done: true,
-          doc: site.setting,
+          doc: systemSetting,
         });
       });
     }

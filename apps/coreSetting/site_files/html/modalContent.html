@@ -1,0 +1,105 @@
+<div class="row" id="coreSettingManageModal">
+  <fieldset>
+    <div class="tabs full">
+      <div class="tabs-header">
+        <a class="tab-link" onclick="site.showTabContent(event, '#generalSetting')"> ##word.General Setting## </a>
+
+      </div>
+
+      <div class="tabs-content">
+        <div id="generalSetting" class="tab-content">
+          <fieldset>
+            <legend>##word.General Setting##</legend>
+            <div class="row">
+              <div class="row">
+                <div class="col3">
+                  <i-image class="img256" ng-model="item.siteLogo"></i-image>
+                  <i-image class="img64" ng-model="item.topNewsLogo"></i-image>
+                </div>
+                <div class="col9">
+                  <div class="row padding margin border">
+                    <i-control v="r" class="col3" type="color" ng-model="item.siteBackground1" label="##word.Background## 1"></i-control>
+                    <i-control class="col3" type="color" ng-model="item.siteBackground2" label="##word.Background## 2"></i-control>
+                    <i-control class="col3" type="color" ng-model="item.siteBackground3" label="##word.Background## 3"></i-control>
+                    <i-control class="col3" type="color" ng-model="item.siteBackground4" label="##word.Background## 4"></i-control>
+                  </div>
+                  <div class="row padding margin border">
+                    <i-control class="col3" type="color" ng-model="item.siteColor1" label="##word.Color## 1"></i-control>
+                    <i-control class="col3" type="color" ng-model="item.siteColor2" label="##word.Color## 2"></i-control>
+                    <i-control class="col3" type="color" ng-model="item.siteColor3" label="##word.Color## 3"></i-control>
+                    <i-control class="col3" type="color" ng-model="item.siteColor4" label="##word.Color## 4"></i-control>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <i-control label="##word.Site Name##" class="col6" ng-model="item.siteName"> </i-control>
+                <i-control label="##word.Title Separator##" class="col6" ng-model="item.titleSeparator"> </i-control>
+              </div>
+              <div class="row">
+                <i-control label="##word.Site Slogan##" ng-model="item.siteSlogan"> </i-control>
+              </div>
+              <div class="row">
+                <i-textarea ng-model="item.description" label="##word.Site Description##"> </i-textarea>
+              </div>
+              
+    
+              <div class="row padding border margin">
+                <div class="row">
+                  <i-control class="col6" label="##word.CeoManager##" ng-model="item.ceoManager"> </i-control>
+                </div>
+              </div>
+    
+              <div class="row">
+                <i-control class="col6" label="##word.Email##" ng-model="item.email"> </i-control>
+                <i-control class="col6" label="##word.Sales Email##" ng-model="item.salesEmail"> </i-control>
+              </div>
+    
+              <div class="row">
+                <i-control class="col6" label="##word.Support Email##" ng-model="item.supportEmail"> </i-control>
+                <i-control class="col6" label="##word.Phone##" ng-model="item.phone"> </i-control>
+              </div>
+    
+              <div class="row">
+                <i-control class="col6" label="##word.Link## ##word.Google Store##" ng-model="item.googleStore"> </i-control>
+                <i-control class="col6" label="##word.Link## ##word.Apple Store##" ng-model="item.appleStore"> </i-control>
+              </div>
+
+              <div class="col6">
+                <i-checkbox class="" label="##word.Hide Commercial Registration##" ng-model="item.hideCommercialRegistration"> </i-checkbox>
+                <i-control label="##word.Commercial Registration Number##" ng-model="item.commercialRegistrationNumber"> </i-control>
+              </div>
+            </div>
+            <fieldset>
+              <legend>##word.Social Media Accounts##</legend>
+              <div class="row">
+                <i-control class="col6" label="##word.Facebook Account##" ng-model="item.facebookAccount"> </i-control>
+                <i-control class="col6" label="##word.Instagram Accouunt##" ng-model="item.instagramAccouunt"> </i-control>
+              </div>
+  
+              <div class="row">
+                <i-control class="col6" label="##word.Youtube Accouunt##" ng-model="item.youTubeAccouunt"> </i-control>
+                <i-control class="col6" label="##word.Twitter Accouunt##" ng-model="item.twitterAccouunt"> </i-control>
+              </div>
+  
+              <div class="row">
+                <i-control class="col6" label="Snapchat" ng-model="item.snapAccouunt"> </i-control>
+                <i-control class="col6" label="Linkedin" ng-model="item.linkedinAccouunt"> </i-control>
+              </div>
+  
+              <div class="row">
+                <i-control class="col6" label="Telegram" ng-model="item.telegramAccouunt"> </i-control>
+                <i-control class="col6" label="Skype" ng-model="item.skypeAccouunt"> </i-control>
+              </div>
+            </fieldset>
+
+          
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <h3 class="error">{{error}}</h3>
+    <i-button type="save" label="##word.Save##" ng-click="save(item)"></i-button>
+    <i-button type="reset" label="##word.Reset##" ng-click="reset(item)"></i-button>
+  </fieldset>
+</div>

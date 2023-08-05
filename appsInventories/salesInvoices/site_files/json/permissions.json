@@ -2,6 +2,7 @@
     { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesManage", "En": "Manage", "Ar": "إدارة" },
     { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesAdd", "En": "Add", "Ar": "إضافة" },
     { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesDelivery", "En": "Edit Delivery", "Ar": "تعديل التوصيل" },
     { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesDelete", "En": "Delete", "Ar": "حذف" },
     { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesView", "En": "View", "Ar": "عرض" },
     { "moduleName": "inventory", "screenName": "salesInvoices", "name": "salesInvoicesSearch", "En": "Search", "Ar": "بحث" },
