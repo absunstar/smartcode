@@ -49,6 +49,9 @@
     <div class="branchLink">
       <p id="currantPage" class="text-center bold screenNameStyle">##data.appName##</p>
     </div>
+    <div class="branchLink">
+      <p id="currantPage" class="text-center bold screenNameStyle">{{setting.showAccountant}}</p>
+    </div>
     <!-- nav bar -->
     <div class="navbar">
       <ul class="nav d-flex flex-column" x-permissions="login">
@@ -911,7 +914,7 @@
             </ul>
           </div>
         </li>
-        <li id="Setting" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Setting')" x-setting="showSetting">
+        <li id="SettingModule" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('SettingModule')" x-setting="showSetting">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-cogs"></i>

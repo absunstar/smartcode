@@ -2,21 +2,15 @@
 <html lang="En" data-ng-app="myApp">
     <head x-import="theme1/head.html"> </head>
 
-    <body class="##session.lang## loaded">
+    <body class="##session.lang## loaded" x-permissions="developer">
          <div x-import="theme1/header.html"></div>
          
         <div id="main-layout" class="container" >
             <div class="row">
                 <div class="row" ng-controller="companies">
-                    <div x-import="companies/add_modal.html"></div>
-                    <div x-import="companies/update_modal.html"></div>
-                    <div x-import="companies/delete_modal.html"></div>
-                    <div x-import="companies/view_modal.html"></div>
+                    <div x-import="companies/modal.html"></div>
+                 
                     <div x-import="companies/search_all_modal.html"></div>
-
-                    <div class="row">
-                        <h1 class="bold text-center">##word.companies##</h1>
-                    </div>
 
                     <div class="top-actions">
                         <i-button type="add" label="##word.Company New##" ng-click="displayAddCompany()"></i-button>
@@ -41,7 +35,7 @@
                             </tr>
                             <tr ng-repeat="c in list | orderBy:'-id'">
                                 <td class="not-print">
-                                    <i-image view class="logo" ng-model="c.image"></i-image>
+                                    <i-image view class="logo center" ng-model="c.image"></i-image>
                                 </td>
                                 <td class="blue">{{c.code}}</td>
 

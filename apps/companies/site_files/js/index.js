@@ -2,9 +2,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope._search = {};
 
     $scope.company = {};
+    $scope.mode = 'add';
 
     $scope.displayAddCompany = function () {
         $scope.error = '';
+        $scope.mode = 'add';
         $scope.company = {
             image: '/images/company.png',
             calenderType: 'gegorian',
@@ -19,8 +21,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
             ],
             bank_list: [{}],
         };
-        site.showModal('#companyAddModal');
-        document.querySelector('#companyAddModal .tab-link').click();
+        site.showModal('#companyManageModal');
+        document.querySelector('#companyManageModal .tab-link').click();
     };
 
     $scope.addCompany = function () {
@@ -29,7 +31,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
         }
 
         $scope.error = '';
-        const v = site.validated('#companyAddModal');
+        const v = site.validated('#companyManageModal');
         if (!v.ok) {
             $scope.error = v.messages[0].ar;
             return;
@@ -43,7 +45,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
             function (response) {
                 $scope.busy = false;
                 if (response.data.done) {
-                    site.hideModal('#companyAddModal');
+                    site.hideModal('#companyManageModal');
                     $scope.list.unshift(response.data.doc);
                     $scope.count += 1;
                     $scope.busy = true;
@@ -67,10 +69,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
 
     $scope.displayUpdateCompany = function (company) {
         $scope.error = '';
+        $scope.mode = 'edit';
         $scope.detailsCompany(company);
         $scope.company = {};
-        site.showModal('#companyUpdateModal');
-        document.querySelector('#companyUpdateModal .tab-link').click();
+        site.showModal('#companyManageModal');
+        document.querySelector('#companyManageModal .tab-link').click();
     };
 
     $scope.updateCompany = function () {
@@ -79,7 +82,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
         }
 
         $scope.error = '';
-        const v = site.validated('#companyUpdateModal');
+        const v = site.validated('#companyManageModal');
         if (!v.ok) {
             $scope.error = v.messages[0].ar;
             return;
@@ -95,7 +98,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
             function (response) {
                 $scope.busy = false;
                 if (response.data.done) {
-                    site.hideModal('#companyUpdateModal');
+                    site.hideModal('#companyManageModal');
                     $scope.list.forEach((b, i) => {
                         if (b.id == response.data.doc.id) {
                             $scope.list[i] = response.data.doc;
@@ -113,10 +116,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
 
     $scope.displayDetailsCompany = function (company) {
         $scope.error = '';
+        $scope.mode = 'view';
         $scope.detailsCompany(company);
         $scope.company = {};
-        site.showModal('#companyDetailsModal');
-        document.querySelector('#companyDetailsModal .tab-link').click();
+        site.showModal('#companyManageModal');
+        document.querySelector('#companyManageModal .tab-link').click();
     };
 
     $scope.detailsCompany = function (company) {
@@ -145,10 +149,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
 
     $scope.displayDeleteCompany = function (company) {
         $scope.error = '';
+        $scope.mode = 'delete';
         $scope.detailsCompany(company);
         $scope.company = {};
-        site.showModal('#companyDeleteModal');
-        document.querySelector('#companyDeleteModal .tab-link').click();
+        site.showModal('#companyManageModal');
+        document.querySelector('#companyManageModal .tab-link').click();
     };
 
     $scope.deleteCompany = function () {
@@ -169,7 +174,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
             function (response) {
                 $scope.busy = false;
                 if (response.data.done) {
-                    site.hideModal('#companyDeleteModal');
+                    site.hideModal('#companyManageModal');
                     $scope.list.forEach((b, i) => {
                         if (b.id == response.data.doc.id) {
                             $scope.list.splice(i, 1);

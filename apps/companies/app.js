@@ -122,12 +122,22 @@ module.exports = function init(site) {
     public: true,
   });
 
-  site.get({
-    name: 'companies',
-    path: __dirname + '/site_files/html/index.html',
-    parser: 'html',
-    compress: true,
-  });
+  // site.get({
+  //   name: 'companies',
+  //   path: __dirname + '/site_files/html/index.html',
+  //   parser: 'html',
+  //   compress: true,
+  // });
+
+  site.get(
+    {
+        name: 'companies',
+    },
+    (req, res) => {
+        res.render('companies' + '/index.html', { title: 'companies', appName: 'Companies' }, { parser: 'html', compres: true });
+    }
+);
+
   site.get({
     name: 'qrcode',
     path: __dirname + '/site_files/html/qrcode.html',
@@ -162,6 +172,9 @@ module.exports = function init(site) {
     companiesDoc.company = site.getCompany(req);
     companiesDoc.branch = site.getBranch(req);
 
+   
+
+
     if (!companiesDoc.code) companiesDoc.code = companiesDoc.nameEn + '-' + '1';
 
     let userExist = {
@@ -193,10 +206,10 @@ module.exports = function init(site) {
 
       }
 
-      let existDomain = companiesDoc.username.includes('@');
-      if (!existDomain) {
-        companiesDoc.username = companiesDoc.username + '@' + companiesDoc.host;
-      }
+      // let existDomain = companiesDoc.username.includes('@');
+      // if (!existDomain) {
+      //   companiesDoc.username = companiesDoc.username + '@' + companiesDoc.host;
+      // }
 
       if (!site.validateEmail(companiesDoc.username)) {
         response.error = 'Username must be typed correctly';
@@ -387,10 +400,10 @@ module.exports = function init(site) {
           return;
         }
 
-        let existDomain = companiesDoc.username.includes('@');
-        if (!existDomain) {
-          companiesDoc.username = companiesDoc.username + '@' + companiesDoc.host;
-        }
+        // let existDomain = companiesDoc.username.includes('@');
+        // if (!existDomain) {
+        //   companiesDoc.username = companiesDoc.username + '@' + companiesDoc.host;
+        // }
 
         if (companiesDoc.username)
           userExist = {
@@ -615,13 +628,13 @@ module.exports = function init(site) {
     };
 
     let where = req.body.where || {};
-    // if (req.session.user && req.session.user.isAdmin) {
-    // } else if (req.session.user && req.session.user.isCompany) {
-    //   where['id'] = req.session.user.companyId;
-    // } else if (site.getCompany(req) && site.getCompany(req).id) {
-    //   where['company.id'] = site.getCompany(req).id;
-    //   where['branch.code'] = site.getBranch(req).code;
-    // }
+    if (req.session.user && req.session.user.is_admin) {
+    } else if (req.session.user && req.session.user.isCompany) {
+      where['id'] = req.session.user.companyId;
+    } else if (site.getCompany(req) && site.getCompany(req).id) {
+      where['company.id'] = site.getCompany(req).id;
+      // where['branch.code'] = site.getBranch(req).code;
+    }
     $companies.findMany(
       {
         select: req.body.select || {},
