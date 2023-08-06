@@ -6,7 +6,7 @@
     <!-- logo -->
     <div class="mainlogo">
       <a class="menuTag" href="/">
-        <img src="/theme1/images/we care logo.svg" alt="" srcset="" href="/index.html" />
+        <img src="##setting.siteLogo.url##" href="/" />
       </a>
     </div>
     <!-- profile section -->
@@ -49,13 +49,10 @@
     <div class="branchLink">
       <p id="currantPage" class="text-center bold screenNameStyle">##data.appName##</p>
     </div>
-    <div class="branchLink">
-      <p id="currantPage" class="text-center bold screenNameStyle">{{setting.showAccountant}}</p>
-    </div>
     <!-- nav bar -->
     <div class="navbar">
       <ul class="nav d-flex flex-column" x-permissions="login">
-        <li id="Accountant" class="navlink" onmouseover="showAndHide('Accountant')" x-setting="showAccountant">
+        <li id="Accountant" class="navlink" onmouseover="showAndHide('Accountant')" x-data="setting.showAccountant">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-hand-holding-usd"></i>
@@ -175,7 +172,7 @@
             </ul>
           </div>
         </li>
-        <li id="Inventory" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Inventory')" x-setting="showInventory">
+        <li id="Inventory" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Inventory')" x-data="setting.showInventory">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-boxes"></i>
@@ -325,7 +322,7 @@
             </ul>
           </div>
         </li>
-        <li id="HR" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('HR')" x-setting="showHr">
+        <li id="HR" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('HR')" x-data="setting.showHr">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-users"></i>
@@ -499,7 +496,7 @@
             </ul>
           </div>
         </li>
-        <li id="Hospital" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Hospital')" x-setting="showHospital">
+        <li id="Hospital" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Hospital')" x-data="setting.showHospital">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-stethoscope"></i>
@@ -715,7 +712,7 @@
             </ul>
           </div>
         </li>
-        <li id="Reports" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Reports')" x-setting="showReports">
+        <li id="Reports" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('Reports')" x-data="setting.showReports">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-paste"></i>
@@ -914,7 +911,7 @@
             </ul>
           </div>
         </li>
-        <li id="SettingModule" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('SettingModule')" x-setting="showSetting">
+        <li id="SettingModule" class="navlink d-flex flex-row gap-2" onmouseover="showAndHide('SettingModule')" x-data="setting.showSetting">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-cogs"></i>

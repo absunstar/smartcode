@@ -143,7 +143,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Main Insurance Companies' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Main Insurance Companies', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }

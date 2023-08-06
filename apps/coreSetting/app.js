@@ -12,7 +12,7 @@ module.exports = function init(site) {
     allowRouteGetSetting: true,
   };
 
-  site.coreSetting = {core : true};
+  site.setting = {core : true};
 
   app.$collection = site.connectCollection('systemSetting');
   app.init = function () {
@@ -22,7 +22,7 @@ module.exports = function init(site) {
           if (doc && doc.id) {
             app.memoryList.push(doc);
           } else {
-            app.$collection.add(site.coreSetting, (err, doc) => {
+            app.$collection.add(site.setting, (err, doc) => {
               if (!err && doc) {
                 app.memoryList.push(doc);
               }
@@ -34,8 +34,8 @@ module.exports = function init(site) {
   };
 
   site.getCoreSetting = function (req) {
-    site.coreSetting = app.memoryList.find((s) => s.core) || site.coreSetting;
-    return site.coreSetting;
+    site.setting = app.memoryList.find((s) => s.core) || site.setting;
+    return site.setting;
   };
 
   app.delete = function (_item, callback) {
@@ -109,7 +109,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Core Settings' }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Core Settings', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -126,14 +126,14 @@ module.exports = function init(site) {
           if (!err && result && result.doc) {
             response.done = true;
             response.result = result;
-            site.coreSetting = result.doc;
+            site.setting = result.doc;
           } else if (err) {
             response.error = err?.message || 'Error In Core Setting';
           } else {
             app.$collection.add(_data, (err, doc) => {
               if (app.allowMemory && !err && doc) {
                 app.memoryList.push(doc);
-                site.coreSetting = doc;
+                site.setting = doc;
               }
             });
           }
@@ -153,7 +153,7 @@ module.exports = function init(site) {
           if (!err && result.count === 1) {
             response.done = true;
             app.memoryList = app.memoryList.filter((n) => n.core);
-            response.doc = site.coreSetting;
+            response.doc = site.setting;
           } else {
             response.error = err?.message || 'Deleted Not Exists';
           }
@@ -164,10 +164,10 @@ module.exports = function init(site) {
 
     if (app.allowRouteGetSetting) {
       site.post({ name: `/api/${app.name}/get`, public: true }, (req, res) => {
-        site.coreSetting = site.getCoreSetting(req);
+        site.setting = site.getCoreSetting(req);
         res.json({
           done: true,
-          doc: site.coreSetting,
+          doc: site.setting,
         });
       });
     }

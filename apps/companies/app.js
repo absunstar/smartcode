@@ -134,7 +134,7 @@ module.exports = function init(site) {
         name: 'companies',
     },
     (req, res) => {
-        res.render('companies' + '/index.html', { title: 'companies', appName: 'Companies' }, { parser: 'html', compres: true });
+        res.render('companies' + '/index.html', { title: 'companies', appName: 'Companies', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
     }
 );
 

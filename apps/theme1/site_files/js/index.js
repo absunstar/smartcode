@@ -1,7 +1,6 @@
 app.controller('mainHmis', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
   $scope.setting = site.showObject(`##data.#setting##`);
-  console.log($scope.setting);
   $scope.getDoctorAppointmentsViewList = function (obj) {
     $scope.busy = true;
     $scope.doctorAppointmentsViewList = [];

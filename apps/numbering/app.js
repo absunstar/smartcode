@@ -14,7 +14,7 @@ module.exports = function init(site) {
       name: 'numbering',
     },
     (req, res) => {
-      res.render('numbering' + '/index.html', { title: 'Numbering', appName: 'Numbering' }, { parser: 'html', compres: true });
+      res.render('numbering' + '/index.html', { title: 'Numbering', appName: 'Numbering', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
     }
   );
 
