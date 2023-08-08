@@ -1,9 +1,0 @@
-[
-    {
-        "moduleName": "public",
-        "name": "systemSettingAdmin",
-        "En": "System Setting Admin",
-        "Ar": "إدارة إعدادات النظام",
-        "permissions": ["systemSettingManage"]
-    }
-]

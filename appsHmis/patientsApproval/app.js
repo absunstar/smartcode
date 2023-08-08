@@ -145,7 +145,7 @@ module.exports = function init(site) {
           name: [app.name,`${app.name}/:id`],
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name,appName : 'Patients Approval', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name,appName : 'Patients Approval', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }

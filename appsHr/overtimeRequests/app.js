@@ -171,7 +171,7 @@ module.exports = function init(site) {
                     name: app.name,
                 },
                 (req, res) => {
-                    res.render(app.name + '/index.html', { title: app.name, appName: 'Overtime Requests', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+                    res.render(app.name + '/index.html', { title: app.name, appName: 'Overtime Requests', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
                 }
             );
         }
@@ -213,7 +213,7 @@ module.exports = function init(site) {
                         return;
                     }
 
-                    const systemSetting = site.getSystemSetting(req);
+                    const systemSetting = site.getCompanySetting(req);
                     const exisitScreen = systemSetting.workflowAssignmentSettings.find((elm) => elm.code === app.name);
 
                     _data.hasWorkFlow = false;

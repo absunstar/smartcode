@@ -32,7 +32,7 @@ app.controller('coreSetting', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSystemSetting = function () {
+  $scope.getCompanySetting = function () {
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -75,5 +75,5 @@ app.controller('coreSetting', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSystemSetting();
+  $scope.getCompanySetting();
 });

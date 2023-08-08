@@ -11,7 +11,7 @@
       "dailyCashByPaymentNumberManage",
       "dailyCashByUsersManage",
       "dailyCashByUserManage",
-      "systemSettingManage",
+      "companySettingManage",
       "coreSettingManage",
       "printersPathsManage",
       "offersOrdersManage",

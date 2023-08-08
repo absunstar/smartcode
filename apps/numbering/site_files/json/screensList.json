@@ -411,8 +411,8 @@
   {
     "category": "main",
     "feature": "public",
-    "id": "systemSetting",
-    "name": "System Setting"
+    "id": "companySetting",
+    "name": "Company Setting"
   },
   {
     "category": "hr",

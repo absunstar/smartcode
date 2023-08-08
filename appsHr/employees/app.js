@@ -580,7 +580,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Employees', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Employees', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -768,7 +768,7 @@ module.exports = function init(site) {
 
         app.$collection.find({ id: _data.employee.id, active: true }, (err, doc) => {
           if (doc) {
-            const systemSetting = site.getSystemSetting(req).hrSettings;
+            const systemSetting = site.getCompanySetting(req).hrSettings;
             const jobShiftApp = site.getApp('jobsShifts');
             jobShiftApp.$collection.find({ where: { id: doc.shift.id } }, (err, shiftDoc) => {
               if (!shiftDoc.approved) {

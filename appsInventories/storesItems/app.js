@@ -298,7 +298,7 @@ module.exports = function init(site) {
   };
 
   site.checkOverDraft = function (req, obj, callback) {
-    const systemSetting = site.getSystemSetting(req);
+    const systemSetting = site.getCompanySetting(req);
 
     if (!systemSetting.storesSetting.allowOverdraft) {
       let itemIds = obj.items.map((_item) => _item.id);
@@ -597,7 +597,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Stores Items', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Stores Items', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -1263,7 +1263,7 @@ module.exports = function init(site) {
     let items = req.body.items;
     let storeId = req.body.storeId;
     let itemIds = items.map((_item) => _item.id);
-    const storesSetting = site.getSystemSetting(req).storesSetting;
+    const storesSetting = site.getCompanySetting(req).storesSetting;
 
     app.all({ where: { id: { $in: itemIds } } }, (err, docs) => {
       site.getSalesInvoice({ 'doctorDeskTop.id': req.body.doctorDeskTopId }, (salesInvoicesData) => {

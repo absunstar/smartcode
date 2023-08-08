@@ -1,9 +1,9 @@
-<div class="row" id="systemSettingManageModal">
+<div class="row" id="companySettingManageModal">
   <fieldset>
     <div class="tabs full">
       <div class="tabs-header">
         <a class="tab-link" onclick="site.showTabContent(event, '#printerProgram')"> ##word.Printers Program## </a>
-        <a class="tab-link" x-feature="m-hmis" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
+        <a class="tab-link" x-date="##setting.showHospital##" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
         <a class="tab-link" onclick="site.showTabContent(event, '#storesSettings')"> <span>##word.Stores Settings## </span></a>
         <a class="tab-link" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
         <a class="tab-link" onclick="site.showTabContent(event, '#hrSettings')"> <span>##word.HR Settings## </span></a>
@@ -222,7 +222,7 @@
             </fieldset>
           </fieldset>
         </div>
-        <div id="hmisSettings" x-feature="m-hmis" class="tab-content">
+        <div id="hmisSettings" x-date="##setting.showHospital##" class="tab-content">
           <fieldset>
             <legend>##word.Workflow##</legend>
             <div class="row">
@@ -327,7 +327,7 @@
               >
               </i-list>
               <i-list
-                x-feature="m-hmis"
+                x-date="##setting.showHospital##"
                 class="col4"
                 ng-model="item.storesSetting.erStore"
                 items="customersStoresList"

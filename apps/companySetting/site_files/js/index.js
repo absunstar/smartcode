@@ -1,7 +1,7 @@
-app.controller('systemSetting', function ($scope, $http, $timeout) {
+app.controller('companySetting', function ($scope, $http, $timeout) {
   $scope.baseURL = '';
-  $scope.appName = 'systemSetting';
-  $scope.modalID = '#systemSettingManageModal';
+  $scope.appName = 'companySetting';
+  $scope.modalID = '#companySettingManageModal';
   $scope.mode = 'add';
   $scope.nathionalityVacations = { nationality: {}, annualVacation: 0, casualVacation: 0, regularVacation: 0 };
   $scope.nathionalityInsurance = { totalSubscriptions: 21.5, employeePercentage: 9.75, companyPercentage: 11.75 };
@@ -165,16 +165,18 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     if (!_item.storesSetting.hasDefaultVendor) {
       delete _item.storesSetting.defaultVendor;
     }
+    console.log(_item.printerProgram,"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     $scope.busy = true;
     $http({
       method: 'POST',
-      url: `${$scope.baseURL}/api/${$scope.appName}/save`,
+      url: `${$scope.baseURL}/api/companies/update`,
       data: _item,
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.item = response.data.result.doc;
+          console.log(response.data.doc.printerProgram,"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+          $scope.item = response.data.doc;
           site.showModal('#alert');
           $timeout(() => {
             site.hideModal('#alert');
@@ -190,16 +192,16 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSystemSetting = function () {
+  $scope.getCompanySetting = function () {
     $scope.busy = true;
     $http({
       method: 'POST',
-      url: `${$scope.baseURL}/api/${$scope.appName}/get`,
+      url: `${$scope.baseURL}/api/companies/view`,
       data: {},
     }).then(
       function (response) {
         $scope.busy = false;
-        $scope.item = response.data.doc;
+        $scope.item = response.data.doc || {};
         $scope.item.hrSettings = $scope.item.hrSettings || {};
         $scope.item.hmisSetting = $scope.item.hmisSetting || {};
         $scope.selectInventorySystem();
@@ -819,7 +821,6 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         $scope.item = response.data.doc || {};
-        console.log(response.data.doc);
         $scope.$applyAsync();
       },
       function (err) {
@@ -908,7 +909,7 @@ app.controller('systemSetting', function ($scope, $http, $timeout) {
   $scope.getEmployees();
   $scope.workflowPositions();
   $scope.workflowScreens();
-  $scope.getSystemSetting();
+  $scope.getCompanySetting();
   $scope.getCurrencies();
   $scope.getDoctorsList();
 });

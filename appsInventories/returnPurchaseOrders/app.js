@@ -145,7 +145,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Return Purchase Orders', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Return Purchase Orders', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -216,7 +216,7 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        const accountsSetting = site.getSystemSetting(req).accountsSetting;
+        const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         let overDraftObj = {
           store: _data.store,

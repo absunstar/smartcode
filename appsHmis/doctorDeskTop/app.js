@@ -146,7 +146,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Doctor DeskTop', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -316,7 +316,7 @@ module.exports = function init(site) {
             };
           }
           if (where.toOrder) {
-            const hmisSetting = site.getSystemSetting(req).hmisSetting;
+            const hmisSetting = site.getCompanySetting(req).hmisSetting;
 
             let newDate = new Date();
             let d1 = site.toDate(newDate);

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "public",
+        "name": "companySettingAdmin",
+        "En": "Company Setting Admin",
+        "Ar": "إدارة إعدادات الشركة",
+        "permissions": ["companySettingManage"]
+    }
+]

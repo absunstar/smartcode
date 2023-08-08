@@ -37,6 +37,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
             return;
         }
         $scope.busy = true;
+
         $http({
             method: 'POST',
             url: '/api/companies/add',
@@ -45,11 +46,13 @@ app.controller('companies', function ($scope, $http, $timeout) {
             function (response) {
                 $scope.busy = false;
                 if (response.data.done) {
+
                     site.hideModal('#companyManageModal');
                     $scope.list.unshift(response.data.doc);
                     $scope.count += 1;
                     $scope.busy = true;
                 } else {
+
                     $scope.error = response.data.error;
                     $scope.busy = false;
                     /* if (response.data.error) {

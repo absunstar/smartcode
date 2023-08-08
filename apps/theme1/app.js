@@ -114,7 +114,7 @@ module.exports = function init(site) {
     let appNurses = site.getApp('nurses');
     let nursesCount = appNurses.memoryList.filter((_d) => _d.active &&_d.onDuty).length || 0;
  */
-      res.render('theme1/index.html', { title: req.word('HMIS'), appName: 'Home Page', nursesCount: site.nursesCount || '0', doctorsCount: site.doctorsCount|| '0' , setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+      res.render('theme1/index.html', { title: req.word('HMIS'), appName: 'Home Page', nursesCount: site.nursesCount || '0', doctorsCount: site.doctorsCount|| '0' , setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
     }
   );
 };

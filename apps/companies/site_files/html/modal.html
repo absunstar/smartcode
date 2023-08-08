@@ -26,7 +26,7 @@
 
         <div class="modal-footer center">
             <p class="error">{{error}}</p>
-            <i-button ng-show="mode == 'add' " type="add" label="##word.Add##" ng-click="deleteCompany(company)"></i-button>
+            <i-button ng-show="mode == 'add' " type="add" label="##word.Add##" ng-click="addCompany(company)"></i-button>
             <i-button ng-show="mode == 'edit' " type="edit" label="##word.Save##" ng-click="updateCompany(company)"></i-button>
             <i-button ng-show="mode == 'delete' " type="delete" title="##word.Delete##" ng-click="deleteCompany(company)"> </i-button>
             <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#companyManageModal')"></i-button>

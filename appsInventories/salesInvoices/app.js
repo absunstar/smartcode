@@ -145,7 +145,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Sales Invoices For Customers', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Sales Invoices For Customers', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -164,10 +164,10 @@ module.exports = function init(site) {
           _data['approved'] = true;
         }
         _data.company = site.getCompany(req);
-        const storesSetting = site.getSystemSetting(req).storesSetting;
+        const storesSetting = site.getCompanySetting(req).storesSetting;
         let errBatchList = [];
         let medicationDosesList = [];
-        const accountsSetting = site.getSystemSetting(req).accountsSetting;
+        const accountsSetting = site.getCompanySetting(req).accountsSetting;
         site.getBatchesToSalesAuto({ store: _data.store, items: _data.itemsList }, (callbackItems) => {
           _data.itemsList.forEach((_item) => {
             if (_item.hasMedicalData && _data.salesType.code != 'company') {
@@ -633,10 +633,10 @@ module.exports = function init(site) {
     }
 
     _data['approved'] = true;
-    const storesSetting = site.getSystemSetting(req).storesSetting;
+    const storesSetting = site.getCompanySetting(req).storesSetting;
     let errBatchList = [];
     let medicationDosesList = [];
-    const accountsSetting = site.getSystemSetting(req).accountsSetting;
+    const accountsSetting = site.getCompanySetting(req).accountsSetting;
     site.getBatchesToSalesAuto({ store: _data.store, items: _data.itemsList }, (callbackItems) => {
       _data.itemsList.forEach((_item) => {
         if (_item.hasMedicalData && _data.salesType.code != 'company') {

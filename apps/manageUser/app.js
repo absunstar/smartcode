@@ -9,7 +9,7 @@ module.exports = function init(site) {
       name: 'manageUser',
     },
     (req, res) => {
-      res.render('manageUser' + '/index.html', { title: 'manageUser', appName: 'Manage User', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+      res.render('manageUser' + '/index.html', { title: 'manageUser', appName: 'Manage User', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
     }
   );
 

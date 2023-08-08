@@ -143,7 +143,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Main Insurance Companies', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Main Insurance Companies', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -332,7 +332,7 @@ module.exports = function init(site) {
 
   site.serviceMainInsurance = function (_data, callback) {
     let response = { done: false };
-    const hmisSetting = site.getSystemSetting({ session: _data.session }).hmisSetting;
+    const hmisSetting = site.getCompanySetting({ session: _data.session }).hmisSetting;
     let appServicesGroup = site.getApp('servicesGroups');
     let mainInsurance = app.memoryList.find((_c) => _data.mainInsuranceCompany && _c.id == _data.mainInsuranceCompany.id);
     response.done = true;

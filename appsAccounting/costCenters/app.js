@@ -149,7 +149,7 @@ module.exports = function init(site) {
                     name: app.name,
                 },
                 (req, res) => {
-                    res.render(app.name + '/index.html', { title: app.name, appName: 'Cost Centers', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+                    res.render(app.name + '/index.html', { title: app.name, appName: 'Cost Centers', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
                 }
             );
         }
@@ -171,7 +171,7 @@ module.exports = function init(site) {
                 let exit = false;
                 let code = 0;
                 let l = 0;
-                const accountingSetting = site.getSystemSetting(req).accountsSetting;
+                const accountingSetting = site.getCompanySetting(req).accountsSetting;
 
                 if (accountingSetting) {
                     l = _data.lengthLevel || 0;

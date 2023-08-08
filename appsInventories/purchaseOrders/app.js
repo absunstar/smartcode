@@ -211,7 +211,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Purchase Orders', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Purchase Orders', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -336,7 +336,7 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
         let response = { done: false };
         let _data = req.data;
-        const accountsSetting = site.getSystemSetting(req).accountsSetting;
+        const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
           if (callbackErrorBatches.errBatchList.length > 0) {

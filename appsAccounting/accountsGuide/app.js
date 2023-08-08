@@ -149,7 +149,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Accounts Guide', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Accounts Guide', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -164,7 +164,7 @@ module.exports = function init(site) {
         _data.company = site.getCompany(req);
 
         _data.addUserInfo = req.getUserFinger();
-        const accountsSetting = site.getSystemSetting(req).accountsSetting;
+        const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         // if (_data.costCenterType == 'mandatory') {
         //     if (!_data.costCentersList || _data.costCentersList.length < 1) {
@@ -200,7 +200,7 @@ module.exports = function init(site) {
         let exit = false;
         let code = 0;
         let l = 0;
-        const accountingSetting = site.getSystemSetting(req).accountsSetting;
+        const accountingSetting = site.getCompanySetting(req).accountsSetting;
 
         if (accountingSetting) {
           l = _data.lengthLevel || 0;
@@ -296,7 +296,7 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.editUserInfo = req.getUserFinger();
-        const accountsSetting = site.getSystemSetting(req).accountsSetting;
+        const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         // if (_data.costCenterType == 'mandatory') {
         //     if (!_data.costCentersList || _data.costCentersList.length < 1) {
@@ -442,7 +442,7 @@ module.exports = function init(site) {
       } else {
         docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
       }
-      const accountsSetting = site.getSystemSetting(req).accountsSetting;
+      const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
       if (Array.isArray(docs)) {
         console.log(`Importing ${app.name} : ${docs.length}`);

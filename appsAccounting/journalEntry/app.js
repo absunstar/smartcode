@@ -144,7 +144,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Journal Entry', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Journal Entry', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -355,14 +355,14 @@ module.exports = function init(site) {
   }
 
   site.autoJournalEntry = function (obj) {
-    let autoJournal = site.getSystemSetting({ session: obj.session }).autoJournal;
+    let autoJournal = site.getCompanySetting({ session: obj.session }).autoJournal;
     if (autoJournal) {
       site.security.getUser(
         {
           id: obj.user ? obj.user.id : null,
         },
         (err, user) => {
-          let establishingAccountsList = site.getSystemSetting({ session: obj.session }).establishingAccountsList;
+          let establishingAccountsList = site.getCompanySetting({ session: obj.session }).establishingAccountsList;
           if (establishingAccountsList) {
             let numObj = {
               company: site.getCompany({ session: obj.session }),
@@ -642,14 +642,14 @@ module.exports = function init(site) {
   };
 
   site.autoJournalEntryVoucher = function (obj) {
-    let autoJournal = site.getSystemSetting({ session: obj.session }).autoJournal;
+    let autoJournal = site.getCompanySetting({ session: obj.session }).autoJournal;
     if (autoJournal) {
       site.security.getUser(
         {
           id: obj.user ? obj.user.id : null,
         },
         (err, user) => {
-          let establishingAccountsList = site.getSystemSetting({ session: obj.session }).establishingAccountsList;
+          let establishingAccountsList = site.getCompanySetting({ session: obj.session }).establishingAccountsList;
           if (establishingAccountsList) {
             let numObj = {
               company: site.getCompany({ session: obj.session }),

@@ -14,7 +14,7 @@ module.exports = function init(site) {
 
   site.setting = {core : true};
 
-  app.$collection = site.connectCollection('systemSetting');
+  app.$collection = site.connectCollection('coreSetting');
   app.init = function () {
     if (app.allowMemory) {
       app.$collection.findOne({ core: true }, (err, doc) => {
@@ -109,7 +109,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Core Settings', setting: site.getSystemSetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Core Settings', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
