@@ -34,6 +34,67 @@ module.exports = function init(site) {
     ],
   };
 
+  
+  let teethList = [];
+
+  for (let i = 0; i < 32; i++) {
+    teethList.push({ name: i + 1, id: i + 1 });
+  }
+
+  site.defaultCompanySetting = {
+    printerProgram: { itemsCountA4: 4, invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
+    storesSetting: {
+      showAccountant: true,
+      showInventory: true,
+      showHr: true,
+      showHospital: true,
+      showReports: true,
+      showSetting: true,
+      hasDefaultVendor: false,
+      cannotExceedMaximumDiscount: false,
+      allowOverdraft: false,
+      defaultStore: {},
+      idefaultItemType: {},
+      idefaultItemGroup: {},
+      defaultItemUnit: {},
+      defaultVendor: {},
+    },
+    accountsSetting: { paymentType: {}, currencySymbol: 'SR' },
+    generalSystemSetting: {},
+    workflowAssignmentSettings: site.workflowScreensList,
+    hmisSetting: {
+      pVat: 0,
+      comVat: 0,
+      teethList: teethList,
+    },
+    hrSettings: {
+      absenceDays: 1,
+      forgetFingerprint: 0.5,
+      nathionalitiesVacationsList: [],
+      publicVacations: { annualVacation: 0, casualVacation: 0, regularVacation: 0 },
+      nathionalitiesInsuranceList: [],
+      publicInsurance: { totalSubscriptions: 21.5, employeePercentage: 9.75, companyPercentage: 11.75 },
+    },
+    establishingAccountsList: [
+      // { id: 2, nameAr: 'المشتريات', nameEn: 'Purchases' },
+      //  { id: 8, nameAr: 'مردودات سنوات سابقة', nameEn: 'Returns from previous years' },
+      // { id: 7, nameAr: 'مردودات مشتريات', nameEn: 'Purchases returns' },
+      { id: 'vendors', nameAr: 'الموردين', nameEn: 'Vendors' },
+      { id: 'stores', nameAr: 'المخازن', nameEn: 'Stores' },
+      { id: 'customers', nameAr: 'العملاء', nameEn: 'Customers' },
+      { id: 'sales', nameAr: 'المبيعات', nameEn: 'Sales' },
+      { id: 'reSales', nameAr: 'مردودات مبيعات', nameEn: 'Sales returns' },
+      { id: 'salesTax', nameAr: 'ضريبة المبيعات', nameEn: 'Sales tax' },
+      { id: 'purchaseTax', nameAr: 'ضريبة المشتريات', nameEn: 'Purchase tax' },
+      { id: 'inventorySalesCost', nameAr: 'تكلفة مبيعات المخزون', nameEn: 'Inventory sales cost' },
+      { id: 'salesDiscount', nameAr: 'خصم مبيعات', nameEn: 'Sales Discount' },
+      { id: 'purshaseDiscount', nameAr: 'خصم مشتريات', nameEn: 'Purshase Discount' },
+      { id: 'service', nameAr: 'الخدمة', nameEn: 'Service' },
+      { id: 'box', nameAr: 'الصندوق', nameEn: 'Box' },
+      { id: 'bank', nameAr: 'البنك', nameEn: 'Bank' },
+    ],
+  };
+
   // site.onGET('/api/languages/ar-sa', (req, res) => {
   //   site.words.addList(site.dir + '/site_files/json/words-sa.json', true);
 
@@ -85,6 +146,24 @@ module.exports = function init(site) {
     parser: 'html',
     compress: true,
   });
+
+  site.addZero = function (code, number) {
+    let c = number - code.toString().length;
+    for (let i = 0; i < c; i++) {
+      code = '0' + code.toString();
+    }
+    return code;
+  };
+
+
+  site.getCompanySetting = function (req) {
+    let company = site.getCompany(req);
+    let branch = site.getBranch(req);
+
+    let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
+    return companySetting;
+  };
+
 
   site.validateEmail = function (email) {
     let re = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -267,6 +346,15 @@ module.exports = function init(site) {
         },
         (req, res) => {
           res.render(app.name + '/index.html', { title: app.name, appName: 'Companies', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+        }
+      );
+
+      site.get(
+        {
+          name: 'companySetting',
+        },
+        (req, res) => {
+          res.render(app.name + '/companySetting.html', { title: app.name, appName: 'Company Settings', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -678,6 +766,39 @@ module.exports = function init(site) {
       });
     });
   }
+
+  site.post({ name: `/api/companySetting/reset`, require: { permissions: ['login'] } }, (req, res) => {
+    let response = {
+      done: false,
+    };
+    let _data = req.data;
+    _data.editUserInfo = req.getUserFinger();
+    _data.printerProgram = {};
+    _data.hmisSetting = {};
+    _data.storesSetting = {};
+    _data.accountsSetting = {};
+    _data.hrSettings = {};
+    _data.administrativeStructure = {};
+    _data.workflowAssignmentSettings = {};
+    _data.autoJournal = true;
+    _data.establishingAccountsList = {};
+    app.save(_data, (err, result) => {
+      if (!err && result && result.doc) {
+        response.done = true;
+        response.result = result;
+        site.word({ name: '$', Ar: result.doc.accountsSetting.currencySymbol, En: result.doc.accountsSetting.currencySymbol });
+      }
+      res.json(response);
+    });
+  });
+
+  site.post({ name: `/api/companySetting/get`, public: true }, (req, res) => {
+    let companySetting = site.getCompanySetting(req) || site.defaultCompanySetting;
+    res.json({
+      done: true,
+      doc: companySetting,
+    });
+  });
 
   app.init();
   site.addApp(app);

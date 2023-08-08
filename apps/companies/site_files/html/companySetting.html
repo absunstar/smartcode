@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="En" data-ng-app="myApp">
+  <head x-import="theme1/head.html"> </head>
+
+  <body class="##session.lang##">
+    <div x-import="theme1/header.html"></div>
+    <div ng-controller="companySetting" id="main-layout" class="container loaded" x-permissions="companySettingManage">
+      <div class="row">
+        <div class="row" id="companySettingManageModal">
+          <fieldset>
+            <div class="tabs full">
+              <div class="tabs-header">
+                <a class="tab-link" onclick="site.showTabContent(event, '#printerProgram')"> ##word.Printers Program## </a>
+                <a class="tab-link" x-date="##setting.showHospital##" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
+                <a class="tab-link" x-date="##setting.showInventory##" onclick="site.showTabContent(event, '#storesSettings')"> <span>##word.Stores Settings## </span></a>
+                <a class="tab-link" x-date="##setting.showAccountant##" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
+                <a class="tab-link" x-date="##setting.showHr##" onclick="site.showTabContent(event, '#hrSettings')"> <span>##word.HR Settings## </span></a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#administrativeStructureSettings')"> <span>##word.Administrative Structure## </span></a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#workflowAssignmentSettings')"> <span>##word.Workflow Assignment## </span></a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#establishingAccountsSettings')"> <span>##word.Establishing accounts## </span></a>
+              </div>
+
+              <div class="tabs-content">
+                <div id="printerProgram" class="tab-content">
+                  <fieldset>
+                    <legend>##word.Printer Program##</legend>
+                    <div class="row">
+                      <div class="col10">
+                        <div class="row">
+                          <i-list
+                            ng-search="item.printerProgram.$printerPath"
+                            class="col3"
+                            display="name##session.lang##"
+                            ng-model="item.printerProgram.thermalPrinter"
+                            label="##word.Thermal printer##"
+                            items="printersPathsList"
+                          >
+                          </i-list>
+
+                          <i-list
+                            ng-search="item.printerProgram.$a4Printer"
+                            class="col3"
+                            display="name##session.lang##"
+                            ng-model="item.printerProgram.a4Printer"
+                            label="##word.A4 printer##"
+                            items="printersPathsList"
+                          >
+                          </i-list>
+
+                          <i-list
+                            ng-search="item.printerProgram.$pdfPrinter"
+                            class="col3"
+                            display="name##session.lang##"
+                            ng-model="item.printerProgram.pdfPrinter"
+                            label="##word.PDF printer##"
+                            items="printersPathsList"
+                          >
+                          </i-list>
+
+                          <i-list
+                            ng-search="item.printerProgram.$barcodePrinter"
+                            class="col3"
+                            display="name##session.lang##"
+                            ng-model="item.printerProgram.barcodePrinter"
+                            label="##word.Barcode printer##"
+                            items="printersPathsList"
+                          >
+                          </i-list>
+                        </div>
+
+                        <div class="row">
+                          <!--      <i-control
+                                        help-id="invoice_top_title"
+                                        class="col6"
+                                        label="##word.invoice_top_title##"
+                                        ng-model="item.printerProgram.invoice_top_title"
+                                      ></i-control> -->
+                          <i-list
+                            ng-search="item.printerProgram.$labelPrinter"
+                            class="col3"
+                            display="name##session.lang##"
+                            ng-model="item.printerProgram.labelPrinter"
+                            label="##word.Label printer##"
+                            items="printersPathsList"
+                          >
+                          </i-list>
+                          <i-list
+                            class="col3"
+                            ng-model="item.printerProgram.countryQr"
+                            items="countryQRList"
+                            display="name##session.lang##"
+                            ng-search="item.printerProgram.$countryQr"
+                            label="##word.QR Country##"
+                          ></i-list>
+                          <i-list
+                            class="col3"
+                            ng-model="item.printerProgram.placeQr"
+                            items="placeQRList"
+                            display="name##session.lang##"
+                            ng-search="item.printerProgram.$placeQr"
+                            label="##word.QR Place##"
+                          ></i-list>
+                          <i-list
+                            class="col3"
+                            ng-model="item.printerProgram.thermalLang"
+                            items="thermalLangList"
+                            display="name##session.lang##"
+                            ng-search="item.printerProgram.$thermalLang"
+                            label="##word.Thermal printing language##"
+                          ></i-list>
+                        </div>
+                        <div class="row">
+                          <i-checkbox label="##word.User appears in invoice##" ng-model="item.printerProgram.userAppearsInvoice"> </i-checkbox>
+                          <i-checkbox label="##word.Auto thermal print order screen##" ng-model="item.printerProgram.autoThermalPrintOrderScreen"> </i-checkbox>
+                          <i-checkbox label="##word.Auto thermal print sales invoice##" ng-model="item.printerProgram.autoThermalPrintSalesInvo"> </i-checkbox>
+                          <i-checkbox label="##word.Auto thermal print Vouchers##" ng-model="item.printerProgram.autoThermalPrintVoucher"> </i-checkbox>
+                          <i-checkbox label="##word.Print simplified tax invoice sentence##" ng-model="item.printerProgram.printSimplifiedTaxInvoiceSentence"> </i-checkbox>
+                          <i-checkbox label="##word.Print simplified invoice sentence##" ng-model="item.printerProgram.printSimplifiedInvoiceSentence"> </i-checkbox>
+                          <i-checkbox label="##word.Print written amount##" ng-model="item.printerProgram.printWrittenAmount"> </i-checkbox>
+                        </div>
+                      </div>
+                      <div class="col2">
+                        <i-image class="img128" ng-model="item.printerProgram.invoiceLogo"></i-image>
+                        <i-button type="delete" label="##word.Remove Logo##" ng-click="item.printerProgram.invoiceLogo = {}"></i-button>
+                      </div>
+                    </div>
+
+                    <br />
+                    <hr />
+                    <br />
+
+                    <fieldset>
+                      <legend>##word.Invoice A4##</legend>
+                      <br />
+                      <br />
+                      <div class="row">
+                        <i-control class="col3" type="number" label="##word.Items Count##" ng-model="item.printerProgram.itemsCountA4"></i-control>
+                      </div>
+
+                      <div class="row">
+                        <fieldset>
+                          <legend class="black">
+                            ##word.Invoice Header Right##
+                            <i-button type="push" ng-click="item.printerProgram.invoiceHeader.unshift({})"> </i-button>
+                          </legend>
+
+                          <div ng-repeat="h in item.printerProgram.invoiceHeader track by $index" class="row">
+                            <i-control class="col8" ng-model="h.name"></i-control>
+
+                            <i-button class="col1" type="up" ng-click="upDownList(item.printerProgram.invoiceHeader, 'up',$index)" ng-hide="$index == 0"> </i-button>
+                            <i-button
+                              class="col1"
+                              type="down"
+                              ng-click="upDownList(item.printerProgram.invoiceHeader, 'down',$index)"
+                              ng-hide="$index == (item.printerProgram.invoiceHeader.length - 1) "
+                            >
+                            </i-button>
+                            <i-button class="col1" type="delete" ng-click="item.printerProgram.invoiceHeader.length ==1 || item.printerProgram.invoiceHeader.splice($index,1)"> </i-button>
+                          </div>
+                        </fieldset>
+
+                        <div class="row">
+                          <fieldset>
+                            <legend class="black">
+                              ##word.Invoice Header Left##
+                              <i-button type="push" ng-click="item.printerProgram.invoiceHeader2.unshift({})"> </i-button>
+                            </legend>
+
+                            <div ng-repeat="f in item.printerProgram.invoiceHeader2 track by $index" class="row">
+                              <i-control class="col8" ng-model="f.name"></i-control>
+                              <i-button class="col1" type="up" ng-click="upDownList(item.printerProgram.invoiceHeader2, 'up',$index)" ng-hide="$index == 0"> </i-button>
+                              <i-button
+                                class="col1"
+                                type="down"
+                                ng-click="upDownList(item.printerProgram.invoiceHeader2, 'down',$index)"
+                                ng-hide="$index == (item.printerProgram.invoiceHeader2.length - 1) "
+                              >
+                              </i-button>
+                              <i-button class="col1" type="delete" ng-click="item.printerProgram.invoiceHeader2.length ==1 || item.printerProgram.invoiceHeader2.splice($index,1)"> </i-button>
+                            </div>
+                          </fieldset>
+                        </div>
+
+                        <div class="row">
+                          <fieldset>
+                            <legend class="black">
+                              ##word.Invoice Footer##
+                              <i-button type="push" ng-click="item.printerProgram.invoiceFooter.unshift({})"> </i-button>
+                            </legend>
+
+                            <div ng-repeat="f in item.printerProgram.invoiceFooter track by $index" class="row">
+                              <i-control class="col8" ng-model="f.name"></i-control>
+                              <i-button class="col1" type="up" ng-click="upDownList(item.printerProgram.invoiceFooter, 'up',$index)" ng-hide="$index == 0"> </i-button>
+                              <i-button
+                                class="col1"
+                                type="down"
+                                ng-click="upDownList(item.printerProgram.invoiceFooter, 'down',$index)"
+                                ng-hide="$index == (item.printerProgram.invoiceFooter.length - 1) "
+                              >
+                              </i-button>
+                              <i-button class="col1" type="delete" ng-click="item.printerProgram.invoiceFooter.length ==1 || item.printerProgram.invoiceFooter.splice($index,1)"> </i-button>
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+                    </fieldset>
+
+                    <br />
+
+                    <fieldset>
+                      <legend>##word.Invoice thermal##</legend>
+                      <br />
+                      <br />
+                      <div class="row">
+                        <fieldset>
+                          <legend class="black">
+                            ##word.Invoice Header##
+                            <i-button type="push" ng-click="item.printerProgram.thermalHeader.unshift({})"> </i-button>
+                          </legend>
+
+                          <div ng-repeat="h in item.printerProgram.thermalHeader track by $index" class="row">
+                            <i-control class="col8" ng-model="h.name"></i-control>
+                            <i-button class="col1" type="up" ng-click="upDownList(item.printerProgram.thermalHeader, 'up',$index)" ng-hide="$index == 0"> </i-button>
+                            <i-button
+                              class="col1"
+                              type="down"
+                              ng-click="upDownList(item.printerProgram.thermalHeader, 'down',$index)"
+                              ng-hide="$index == (item.printerProgram.thermalHeader.length - 1) "
+                            >
+                            </i-button>
+                            <i-button class="col1" type="delete" ng-click="item.printerProgram.thermalHeader.length ==1 || item.printerProgram.thermalHeader.splice($index,1)"> </i-button>
+                          </div>
+                        </fieldset>
+
+                        <fieldset>
+                          <legend class="black">
+                            ##word.Invoice Footer##
+                            <i-button type="push" ng-click="item.printerProgram.thermalFooter.unshift({})"> </i-button>
+                          </legend>
+
+                          <div ng-repeat="f in item.printerProgram.thermalFooter track by $index" class="row">
+                            <i-control class="col8" ng-model="f.name"></i-control>
+                            <i-button class="col1" type="up" ng-click="upDownList(item.printerProgram.thermalHeader, 'up',$index)" ng-hide="$index == 0"> </i-button>
+                            <i-button
+                              class="col1"
+                              type="down"
+                              ng-click="upDownList(item.printerProgram.thermalHeader, 'down',$index)"
+                              ng-hide="$index == (item.printerProgram.thermalHeader.length - 1) "
+                            >
+                            </i-button>
+                            <i-button class="col1" type="delete" ng-click="item.printerProgram.thermalFooter.length ==1 || item.printerProgram.thermalFooter.splice($index,1)"> </i-button>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </fieldset>
+                  </fieldset>
+                </div>
+                <div id="hmisSettings" x-date="##setting.showHospital##" class="tab-content">
+                  <fieldset>
+                    <legend>##word.Workflow##</legend>
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        label="##word.Medical Director##"
+                        ng-model="item.hmisSetting.medicalDirector"
+                        display="name##session.lang##"
+                        items="doctorsList"
+                        ng-get="getDoctorsList($search)"
+                      ></i-list>
+                      <i-control class="col3" type="number" label="##word.Validity period of doctor's orders##" ng-model="item.hmisSetting.medicalDirector"></i-control>
+                      <div class="col1">
+                        <br />
+                        <span>##word.Day##</span>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>##word.VAT List##</legend>
+
+                    <fieldset>
+                      <legend>##word.Public VAT##</legend>
+                      <div class="row">
+                        <i-control class="col3" type="number" label="##word.Patient VAT## ##word.%##" ng-model="item.hmisSetting.pVat"></i-control>
+                        <i-control class="col3" type="number" label="##word.Company VAT## ##word.%##" ng-model="item.hmisSetting.comVat"></i-control>
+                      </div>
+                    </fieldset>
+
+                    <fieldset>
+                      <legend>##word.Nationalities VAT##</legend>
+                      <div class="row">
+                        <i-list class="col3" display="name##session.lang##" ng-model="item.$nationalityVat.nationality" label="##word.Nathionality##" items="nationalitiesList"> </i-list>
+                        <i-control class="col3" type="number" label="##word.Patient VAT## ##word.%##" ng-model="item.$nationalityVat.pVat"></i-control>
+                        <i-control class="col3" type="number" label="##word.Company VAT## ##word.%##" ng-model="item.$nationalityVat.comVat"></i-control>
+                        <div class="col2">
+                          <br />
+                          <i-button type="push" ng-click="addVatList()"> </i-button>
+                        </div>
+                      </div>
+
+                      <div class="table-responsive">
+                        <table class="table hover bold">
+                          <tr>
+                            <th>##word.Nationality##</th>
+                            <th>##word.Patient VAT## ##word.%##</th>
+                            <th>##word.Company VAT## ##word.%##</th>
+                            <th>##word.Actions##</th>
+                          </tr>
+
+                          <tr ng-repeat="vat in item.hmisSetting.vatList">
+                            <td>
+                              <p class="text-center">{{vat.name##session.lang##}}</p>
+                            </td>
+
+                            <td class="center">
+                              <p class="text-center">{{vat.pVat}} <span class="currency">##word.%##</span></p>
+                            </td>
+
+                            <td class="center">
+                              <p class="text-center">{{vat.comVat}} <span class="currency">##word.%##</span></p>
+                            </td>
+
+                            <td class="center">
+                              <i-button type="delete" ng-click="item.hmisSetting.vatList.splice($index,1)"></i-button>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend>##word.Teeth List##</legend>
+                      <div class="row">
+                        <div class="col2" ng-repeat="t in item.hmisSetting.teethList track by $index">
+                          <p class="center font-18">##word.Tooth## {{t.name}}</p>
+                          <i-image class="img128 center" ng-model="t.image"></i-image>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </fieldset>
+                </div>
+                <div id="storesSettings" x-date="##setting.showInventory##" class="tab-content">
+                  <fieldset>
+                    <legend>##word.Stores Setting##</legend>
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        ng-model="item.storesSetting.store"
+                        items="storesList"
+                        display="name##session.lang##"
+                        label="##word.Sales For Business Store##"
+                        ng-search="item.storesSetting.$store"
+                      >
+                      </i-list>
+                      <i-list
+                        class="col4"
+                        ng-model="item.storesSetting.customersStore"
+                        items="customersStoresList"
+                        display="name##session.lang##"
+                        label="##word.Sales For Customers Store##"
+                        ng-search="item.storesSetting.$customersStore"
+                      >
+                      </i-list>
+                      <i-list
+                        x-date="##setting.showHospital##"
+                        class="col4"
+                        ng-model="item.storesSetting.erStore"
+                        items="customersStoresList"
+                        display="name##session.lang##"
+                        label="##word.Sales For ER Store##"
+                        ng-search="item.storesSetting.$erStore"
+                      >
+                      </i-list>
+                    </div>
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        ng-model="item.storesSetting.itemType"
+                        items="itemsTypesList"
+                        display="name##session.lang##"
+                        label="##word.Item Type##"
+                        ng-search="item.storesSetting.$itemType"
+                      >
+                      </i-list>
+                      <i-list
+                        class="col4"
+                        ng-model="item.storesSetting.itemGroup"
+                        items="itemsGroupsList"
+                        display="name##session.lang##"
+                        label="##word.Item Group##"
+                        ng-search="item.storesSetting.$itemGroup"
+                      >
+                      </i-list>
+                    </div>
+
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        ng-model="item.storesSetting.purchaseSourceType"
+                        display="name##session.lang##"
+                        items="purchaseOrdersSourcesList"
+                        label="##word.Purchase Source Type##"
+                        ng-search="item.$purchaseSourceType"
+                      ></i-list>
+
+                      <i-list
+                        class="col4"
+                        ng-model="item.storesSetting.itemUnit"
+                        items="storesUnitsList"
+                        display="name##session.lang##"
+                        label="##word.Item Unit##"
+                        ng-search="item.storesSetting.$itemUnit"
+                      >
+                      </i-list>
+                    </div>
+
+                    <div class="row">
+                      <i-list class="col4" ng-model="item.storesSetting.customer" items="customersList" display="name##session.lang##" label="##word.Customer##" ng-get="getCustomers($search)">
+                      </i-list>
+                      <i-control class="col4" type="number" ng-model="item.storesSetting.vat" label="##word.VAT##"></i-control>
+                    </div>
+
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.hasVendor" class="col2" label="##word.Vendor##"></i-checkbox>
+
+                      <i-list
+                        class="col4"
+                        ng-if="item.storesSetting.hasVendor"
+                        ng-model="item.storesSetting.vendor"
+                        items="vendorsList"
+                        display="name##session.lang##"
+                        label="##word.Vendor##"
+                        ng-search="unt.$vendor"
+                      >
+                      </i-list>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.cannotExceedMaximumDiscount" class="col4" label="##word.Can`t Exceed Maximum Discount##"></i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.allowOverdraft" class="col3" label="##word.Allow Overdraft##"></i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.workFifo" class="col3" label="##word.Sale By Fifo##"></i-checkbox>
+                    </div>
+                    <!--   <div class="row">
+                                <i-checkbox ng-model="item.storesSetting.taxesAppearingInInvoices" class="col3" label="##word.Taxes appearing in invoices##"></i-checkbox>
+                              </div> -->
+                  </fieldset>
+                </div>
+
+                <div id="accountsSettings" x-date="##setting.showAccountant##" class="tab-content">
+                  <fieldset>
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        ng-model="item.accountsSetting.currency"
+                        items="currenciesList"
+                        display="name##session.lang##"
+                        label="##word.Currency##"
+                        ng-search="item.accountsSetting.$currency"
+                      >
+                      </i-list>
+                      <i-control class="col4" ng-model="item.accountsSetting.currencySymbol" label="##word.Currency symbol##"></i-control>
+                    </div>
+
+                    <div class="row">
+                      <i-control class="col4" label="##word.End number to string Arabic##" ng-model="item.accountsSetting.endNumStrAr"></i-control>
+                      <i-control class="col4" label="##word.End number to string English##" ng-model="item.accountsSetting.endNumStrEn"></i-control>
+                    </div>
+
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        ng-model="item.accountsSetting.safeCash"
+                        items="safesCashList"
+                        display="name##session.lang##"
+                        ng-search="item.accountsSetting.$_safeCash"
+                        label="##word.Safe Cash##"
+                      ></i-list>
+                      <i-list
+                        class="col4"
+                        ng-model="item.accountsSetting.safeBank"
+                        items="safesBankList"
+                        display="name##session.lang##"
+                        ng-search="item.accountsSetting.$_safeBank"
+                        label="##word.Safe Bank##"
+                      ></i-list>
+                    </div>
+                    <div class="row">
+                      <i-list
+                        class="col4"
+                        ng-model="item.accountsSetting.paymentType"
+                        display="name##session.lang##"
+                        items="paymentTypesList"
+                        label="##word.Payment Type##"
+                        ng-search="item.$paymentType"
+                      ></i-list>
+                    </div>
+
+                    <div class="row">
+                      <i-checkbox class="col4" label="##word.Auto Generate Account Guide & Cost Center Code##" ng-model="item.accountsSetting.autoGenerateAccountsGuideAndCostCenterCode"> </i-checkbox>
+                      <i-control
+                        ng-show="item.accountsSetting.autoGenerateAccountsGuideAndCostCenterCode"
+                        class="col2"
+                        label="##word.Length Level##"
+                        type="number"
+                        ng-model="item.accountsSetting.lengthLevel"
+                      >
+                      </i-control>
+                    </div>
+
+                    <div class="row">
+                      <i-checkbox label="##word.Link Gl-Accounts With Income Statement And Budget##" class="col4" ng-model="item.accountsSetting.linkGlWithIncomeStatementAndBudget"> </i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox label="##word.Link accounts to stores##" class="col4" ng-model="item.accountsSetting.linkAccountsToStores"> </i-checkbox>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div id="hrSettings" x-date="##setting.showHr##" class="tab-content">
+                  <fieldset ng-model="item.hrSettings">
+                    <legend class="black bold">##word.HR Penalities##</legend>
+                    <h3 class="error">{{hrSettingsError}}</h3>
+                    <div class="row">
+                      <div class="col4">
+                        <div class="row">
+                          <div class="col9">
+                            <i-control type="number" min="0" ng-model="item.hrSettings.absenceDays" label="##word.Absence Days Value##"> </i-control>
+                          </div>
+                          <div class="col3 padding">
+                            <br />
+                            <span class="bold"> ##word.Day/s##</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col4">
+                        <div class="row">
+                          <div class="col9">
+                            <i-control type="number" min="0" ng-model="item.hrSettings.forgetFingerprint" label="##word.Forget Fingerprint##"> </i-control>
+                          </div>
+                          <div class="col3 padding">
+                            <br />
+                            <span class="bold"> ##word.Day/s##</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend class="black bold">##word.Employees Social Insurance##</legend>
+                    <fieldset>
+                      <h3 class="error">{{hrInsuranceSettingsError}}</h3>
+                      <legend class="blue bold">##word.Public Social Insurance##</legend>
+                      <div class="row">
+                        <div class="col4">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Total##" ng-model="item.hrSettings.publicInsurance.totalSubscriptions"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col4">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Employee##" ng-model="item.hrSettings.publicInsurance.employeePercentage"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col4">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Company##" ng-model="item.hrSettings.publicInsurance.companyPercentage"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend class="blue bold">##word.Nationalities Social Insurance##</legend>
+
+                      <div class="row">
+                        <i-list
+                          class="col2"
+                          display="name##session.lang##"
+                          ng-model="nathionalityInsurance.nationality"
+                          label="##word.Nathionality##"
+                          items="nationalitiesList"
+                          ng-get="getNationalitiesList($search)"
+                        >
+                        </i-list>
+                        <div class="col3">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Total##" ng-model="nathionalityInsurance.totalSubscriptions"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.%##</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col3">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Employee##" ng-model="nathionalityInsurance.employeePercentage"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.%##</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col3">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Company##" ng-model="nathionalityInsurance.companyPercentage"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.%##</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col1">
+                          <br />
+                          <i-button type="push" ng-click="addToNathionalitiesInsurance(nathionalityInsurance)"></i-button>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table hover bold">
+                          <tr>
+                            <th>##word.S##</th>
+                            <th>##word.Nationality##</th>
+                            <th>##word.Total##</th>
+                            <th>##word.Employee##</th>
+                            <th>##word.Company##</th>
+                            <th>##word.Actions##</th>
+                          </tr>
+
+                          <tr ng-repeat="insurance in item.hrSettings.nathionalitiesInsuranceList">
+                            <td class="center">
+                              <p>{{$index+1}}</p>
+                            </td>
+                            <td class="center">
+                              <p>{{insurance.nationality.name##session.lang##}}</p>
+                            </td>
+                            <td class="center">
+                              <div class="row">
+                                <div class="col9">
+                                  <i-control type="number" ng-model="insurance.totalSubscriptions"> </i-control>
+                                </div>
+                                <div class="col3 padding">
+                                  <span class="bold"> ##word.%##</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="center">
+                              <div class="row">
+                                <div class="col9">
+                                  <i-control type="number" ng-model="insurance.employeePercentage"> </i-control>
+                                </div>
+                                <div class="col3 padding">
+                                  <span class="bold"> ##word.%##</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="center">
+                              <div class="row">
+                                <div class="col9">
+                                  <i-control type="number" ng-model="insurance.companyPercentage"> </i-control>
+                                </div>
+                                <div class="col3 padding">
+                                  <span class="bold"> ##word.%##</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="center">
+                              <i-button type="delete" ng-click="item.hrSettings.nathionalitiesInsuranceList.splice($index,1)"></i-button>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </fieldset>
+                  </fieldset>
+                  <fieldset>
+                    <legend class="black bold">##word.Employees Vacations##</legend>
+                    <h3 class="error">{{hrVacationsSettingsError}}</h3>
+                    <fieldset>
+                      <legend class="blue bold">##word.Public Vacations Balance##</legend>
+                      <div class="row">
+                        <div class="col4">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Annual##" ng-model="item.hrSettings.publicVacations.annualVacation"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col4">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Regular##" ng-model="item.hrSettings.publicVacations.regularVacation"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col4">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Casual##" ng-model="item.hrSettings.publicVacations.casualVacation"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend class="blue bold">##word.Nationalities Vacations Balance##</legend>
+
+                      <div class="row">
+                        <i-list
+                          class="col2"
+                          display="name##session.lang##"
+                          ng-model="nathionalityVacations.nationality"
+                          label="##word.Nathionality##"
+                          items="nationalitiesList"
+                          ng-get="getNationalitiesList($search)"
+                        >
+                        </i-list>
+
+                        <div class="col3">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Annual##" ng-model="nathionalityVacations.annualVacation"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col3">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Regular##" ng-model="nathionalityVacations.regularVacation"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col3">
+                          <div class="row">
+                            <div class="col9">
+                              <i-control type="number" label="##word.Casual##" ng-model="nathionalityVacations.casualVacation"> </i-control>
+                            </div>
+                            <div class="col3 padding">
+                              <br />
+                              <span class="bold"> ##word.Day/s##</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col1">
+                          <br />
+                          <i-button type="push" ng-click="addToNathionalitiesVacations(nathionalityVacations)"></i-button>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table hover bold">
+                          <tr>
+                            <th>##word.S##</th>
+                            <th>##word.Nationality##</th>
+                            <th>##word.Annual##</th>
+                            <th>##word.Regular##</th>
+                            <th>##word.Casual##</th>
+                            <th>##word.Actions##</th>
+                          </tr>
+
+                          <tr ng-repeat="nathion in item.hrSettings.nathionalitiesVacationsList">
+                            <td class="center">
+                              <p>{{$index+1}}</p>
+                            </td>
+                            <td class="center">
+                              <p>{{nathion.nationality.name##session.lang##}}</p>
+                            </td>
+                            <td class="center">
+                              <div class="row">
+                                <div class="col9">
+                                  <i-control type="number" ng-model="nathion.annualVacation"> </i-control>
+                                </div>
+                                <div class="col3 padding">
+                                  <span class="bold"> ##word.Day/s##</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="center">
+                              <div class="row">
+                                <div class="col9">
+                                  <i-control type="number" ng-model="nathion.regularVacation"> </i-control>
+                                </div>
+                                <div class="col3 padding">
+                                  <span class="bold"> ##word.Day/s##</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="center">
+                              <div class="row">
+                                <div class="col9">
+                                  <i-control type="number" ng-model="nathion.casualVacation"> </i-control>
+                                </div>
+                                <div class="col3 padding">
+                                  <span class="bold"> ##word.Day/s##</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="center">
+                              <i-button type="delete" ng-click="item.hrSettings.nathionalitiesVacationsList.splice($index,1)"></i-button>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </fieldset>
+                  </fieldset>
+                </div>
+
+                <div id="administrativeStructureSettings" class="tab-content">
+                  <fieldset ng-model="item.administrativeStructure">
+                    <legend>##word.Administrative Structure##</legend>
+                    <div class="row">
+                      <div class="col6">
+                        <fieldset>
+                          <legend>##word.CEO##</legend>
+                          <div class="row">
+                            <i-list class="col6" ng-model="item.administrativeStructure.ceo" items="employeesList" display="fullName##session.lang##" label="##word.CEO##" ng-search="ceo.$itemType">
+                            </i-list>
+                            <i-list
+                              class="col6"
+                              ng-model="item.administrativeStructure.ceoDeputy"
+                              items="employeesList"
+                              display="fullName##session.lang##"
+                              label="##word.Deputy##"
+                              ng-search="ceo.$ceoDeputy"
+                            >
+                            </i-list>
+                          </div>
+                        </fieldset>
+                      </div>
+
+                      <div class="col6">
+                        <fieldset>
+                          <legend>##word.Financial Manager##</legend>
+                          <div class="row">
+                            <i-list
+                              class="col6"
+                              ng-model="item.administrativeStructure.financialManager"
+                              items="employeesList"
+                              display="fullName##session.lang##"
+                              label="##word.Manager##"
+                              ng-search="fm.$manager"
+                            >
+                            </i-list>
+                            <i-list
+                              class="col6"
+                              ng-model="item.administrativeStructure.financialManagerDeputy"
+                              items="employeesList"
+                              display="fullName##session.lang##"
+                              label="##word.Deputy##"
+                              ng-search="fm.$hrDeputy"
+                            >
+                            </i-list>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="col6">
+                        <fieldset>
+                          <legend>##word.HR##</legend>
+                          <div class="row">
+                            <i-list
+                              class="col6"
+                              ng-model="item.administrativeStructure.hrManager"
+                              items="employeesList"
+                              display="fullName##session.lang##"
+                              label="##word.Manager##"
+                              ng-search="hr.$manager"
+                            >
+                            </i-list>
+                            <i-list
+                              class="col6"
+                              ng-model="item.administrativeStructure.hrManagerDeputy"
+                              items="employeesList"
+                              display="fullName##session.lang##"
+                              label="##word.Deputy##"
+                              ng-search="hr.$hrDeputy"
+                            >
+                            </i-list>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div id="workflowAssignmentSettings" class="tab-content">
+                  <h3 class="bold error">{{workflowAssignmentSettingsError}}</h3>
+
+                  <fieldset ng-repeat="screen in item.workflowAssignmentSettings">
+                    <legend>{{screen.name##session.lang##}}</legend>
+                    <div class="row">
+                      <i-checkbox class="col3" label="##word.Has WorkFlow##" ng-model="screen.hasWorkFlow"> </i-checkbox>
+
+                      <i-list
+                        ng-show="screen.hasWorkFlow"
+                        class="col4"
+                        ng-model="screen.$position"
+                        items="workflowPositionsList"
+                        display="name##session.lang##"
+                        label="##word.Position##"
+                        ng-search="ceo.$position"
+                      >
+                      </i-list>
+
+                      <div class="col2" ng-show="screen.hasWorkFlow">
+                        <br />
+                        <i-button type="add" label="##word.Add##" ng-click="addToApprovalList(screen)"></i-button>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive" ng-show="screen.hasWorkFlow">
+                      <table class="table hover bold">
+                        <tr>
+                          <th>##word.S##</th>
+                          <th>##word.Employee##</th>
+                          <th class="not-print">##word.Actions##</th>
+                        </tr>
+
+                        <tr ng-repeat="emp in screen.approvalList">
+                          <td class="center">{{$index+1}}</td>
+                          <td class="center">{{emp.name##session.lang##}}</td>
+                          <td class="center"><i-button type="delete" ng-click="screen.approvalList.splice($index,1)"></i-button></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div id="establishingAccountsSettings" class="tab-content">
+                  <div class="row">
+                    <fieldset class="col4">
+                      <i-checkbox label="##word.Auto Journal Entry##" ng-model="item.autoJournal"> </i-checkbox>
+                      <!--   <i-list
+                                  ng-model="item.inventorySystem"
+                                  ng-change="selectInventorySystem()"
+                                  items="inventorySystemList"
+                                  display="name##session.lang##"
+                                  label="Inventory System نظام الجرد"
+                                  ng-search="item.$inventorySystem"
+                                >
+                                </i-list> -->
+                    </fieldset>
+                  </div>
+                  <fieldset>
+                    <!-- <legend></legend> -->
+                    <div class="table-responsive">
+                      <table class="table hover bold">
+                        <tr>
+                          <th>##word.Name##</th>
+                          <th>##word.Account Guide##</th>
+                        </tr>
+
+                        <tr ng-repeat="acc in item.establishingAccountsList" ng-hide="acc.$hide">
+                          <td>
+                            <p class="text-center">{{acc.nameAr}} - {{acc.nameEn}}</p>
+                          </td>
+
+                          <td class="center">
+                            <i-list items="acc.$accountsGuideList" ng-get="getAccountsGuideList($search,acc)" display="name##session.lang##" ng-model="acc.accountGuide"> </i-list>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <h3 class="error">{{error}}</h3>
+            <i-button type="save" label="##word.Save##" ng-click="save(item)"></i-button>
+            <i-button type="reset" label="##word.Reset##" ng-click="reset(item)"></i-button>
+          </fieldset>
+        </div>
+
+        <div id="alert" class="modal alert small">
+          <div class="modal-content height-auto">
+            <div class="modal-body">
+              <h1 class="blue center">##word.Saved successfully##</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div x-import="theme1/footer.html"></div>
+    <script x-import="companies/companySetting.js"></script>
+  </body>
+</html>
