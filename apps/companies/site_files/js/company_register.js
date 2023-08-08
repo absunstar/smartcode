@@ -58,10 +58,7 @@ app.controller('company_register', function ($scope, $http) {
                 id: response.data.doc.id,
                 nameAr: company.nameAr,
                 nameEn: company.nameEn,
-                host: company.host,
-                taxNumber: company.taxNumber,
-                mobile: company.mobile,
-                phone: company.phone,
+                
               }),
               branch: site.to123({
                 code: company.branchList[0].code,

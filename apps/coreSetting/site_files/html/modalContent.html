@@ -12,43 +12,31 @@
             <legend>##word.General Setting##</legend>
             <div class="row">
               <div class="row">
-                <div class="col3">
+                <div class="col4">
                   <i-image class="img256" ng-model="item.siteLogo"></i-image>
-                  <i-image class="img64" ng-model="item.topNewsLogo"></i-image>
                 </div>
-                <div class="col9">
+                <div class="col8">
                   <div class="row padding margin border">
-                    <i-control v="r" class="col3" type="color" ng-model="item.siteBackground1" label="##word.Background## 1"></i-control>
-                    <i-control class="col3" type="color" ng-model="item.siteBackground2" label="##word.Background## 2"></i-control>
-                    <i-control class="col3" type="color" ng-model="item.siteBackground3" label="##word.Background## 3"></i-control>
-                    <i-control class="col3" type="color" ng-model="item.siteBackground4" label="##word.Background## 4"></i-control>
-                  </div>
-                  <div class="row padding margin border">
-                    <i-control class="col3" type="color" ng-model="item.siteColor1" label="##word.Color## 1"></i-control>
-                    <i-control class="col3" type="color" ng-model="item.siteColor2" label="##word.Color## 2"></i-control>
-                    <i-control class="col3" type="color" ng-model="item.siteColor3" label="##word.Color## 3"></i-control>
-                    <i-control class="col3" type="color" ng-model="item.siteColor4" label="##word.Color## 4"></i-control>
+                    <i-control class="col4" type="color" ng-model="item.siteColor1" label="##word.Color## 1"></i-control>
+                    <i-control class="col4" type="color" ng-model="item.siteColor2" label="##word.Color## 2"></i-control>
+                    <i-control class="col4" type="color" ng-model="item.siteColor3" label="##word.Color## 3"></i-control>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <i-control label="##word.Site Name##" class="col6" ng-model="item.siteName"> </i-control>
-                <i-control label="##word.Title Separator##" class="col6" ng-model="item.titleSeparator"> </i-control>
+                <i-control label="##word.Site Separator##" class="col6" ng-model="item.siteSeparator"> </i-control>
               </div>
               <div class="row">
                 <i-control label="##word.Site Slogan##" ng-model="item.siteSlogan"> </i-control>
               </div>
               <div class="row">
-                <i-textarea ng-model="item.description" label="##word.Site Description##"> </i-textarea>
+                <i-textarea ng-model="item.siteDescription" label="##word.Site Description##"> </i-textarea>
               </div>
               
     
-              <div class="row padding border margin">
-                <div class="row">
-                  <i-control class="col6" label="##word.CeoManager##" ng-model="item.ceoManager"> </i-control>
-                </div>
-              </div>
+             
     
               <div class="row">
                 <i-control class="col6" label="##word.Email##" ng-model="item.email"> </i-control>
@@ -65,10 +53,7 @@
                 <i-control class="col6" label="##word.Link## ##word.Apple Store##" ng-model="item.appleStore"> </i-control>
               </div>
 
-              <div class="col6">
-                <i-checkbox class="" label="##word.Hide Commercial Registration##" ng-model="item.hideCommercialRegistration"> </i-checkbox>
-                <i-control label="##word.Commercial Registration Number##" ng-model="item.commercialRegistrationNumber"> </i-control>
-              </div>
+        
             </div>
             <fieldset>
               <legend>##word.Social Media Accounts##</legend>

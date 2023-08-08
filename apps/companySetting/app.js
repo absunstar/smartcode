@@ -19,7 +19,7 @@ module.exports = function init(site) {
     teethList.push({ name: i + 1, id: i + 1 });
   }
 
-  site.companySetting = {
+  site.defaultCompanySetting = {
     printerProgram: { itemsCountA4: 4, invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
     storesSetting: {
       showAccountant: true,
@@ -94,7 +94,7 @@ module.exports = function init(site) {
         }
       });
     }
-    site.word({ name: '$', Ar: site.companySetting.accountsSetting.currencySymbol, En: site.companySetting.accountsSetting.currencySymbol });
+    site.word({ name: '$', Ar: site.defaultCompanySetting.accountsSetting.currencySymbol, En: site.defaultCompanySetting.accountsSetting.currencySymbol });
   };
 
   app.view = function (_item, callback) {
@@ -129,7 +129,7 @@ module.exports = function init(site) {
     let company = site.getCompany(req);
     let branch = site.getBranch(req);
 
-    let companySetting = app.memoryList.find((s) => s.id == company.id) || site.companySetting;
+    let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
     return companySetting;
   };
 
@@ -172,7 +172,7 @@ module.exports = function init(site) {
 
     if (app.allowRouteGetSetting) {
       site.post({ name: `/api/${app.name}/get`, public: true }, (req, res) => {
-        let companySetting = site.getCompanySetting(req) || site.companySetting;
+        let companySetting = site.getCompanySetting(req) || site.defaultCompanySetting;
         res.json({
           done: true,
           doc: companySetting,

@@ -7,12 +7,20 @@ module.exports = function init(site) {
     cacheList: [],
     allowRoute: true,
     allowRouteGet: true,
-    allowRouteDelete: true,
     allowRouteSave: true,
     allowRouteGetSetting: true,
   };
 
-  site.setting = {core : true};
+  site.setting = {
+    siteLogo: { url: '/images/logo.png' },
+    siteName: 'Smart Code',
+    siteSeparator: '-',
+    siteSlogan: 'SoftWare Solutions',
+    core: true,
+    siteColor1: '#bec011',
+    siteColor2: '#245a40',
+    siteColor3: '#f5f5f5',
+  };
 
   app.$collection = site.connectCollection('coreSetting');
   app.init = function () {
@@ -21,45 +29,18 @@ module.exports = function init(site) {
         if (!err) {
           if (doc && doc.id) {
             app.memoryList.push(doc);
+            site.setting = doc;
           } else {
             app.$collection.add(site.setting, (err, doc) => {
               if (!err && doc) {
                 app.memoryList.push(doc);
+                site.setting = doc;
               }
             });
           }
         }
       });
     }
-  };
-
-  site.getCoreSetting = function (req) {
-    site.setting = app.memoryList.find((s) => s.core) || site.setting;
-    return site.setting;
-  };
-
-  app.delete = function (_item, callback) {
-    app.$collection.delete(
-      {
-        id: _item.id,
-      },
-      (err, result) => {
-        if (callback) {
-          callback(err, result);
-        }
-        if (app.allowMemory && !err && result.count === 1) {
-          let index = app.memoryList.findIndex((a) => a.id === _item.id);
-          if (index !== -1) {
-            app.memoryList.splice(index, 1);
-          }
-        } else if (app.allowCache && !err && result.count === 1) {
-          let index = app.allowMemory.findIndex((a) => a.id === _item.id);
-          if (index !== -1) {
-            app.allowMemory.splice(index, 1);
-          }
-        }
-      }
-    );
   };
 
   app.save = function (_item, callback) {
@@ -142,29 +123,8 @@ module.exports = function init(site) {
       });
     }
 
-    if (app.allowRouteDelete) {
-      site.post({ name: `/api/${app.name}/delete`, require: { permissions: ['login'] } }, (req, res) => {
-        let response = {
-          done: false,
-        };
-        let _data = req.data;
-
-        app.delete(_data, (err, result) => {
-          if (!err && result.count === 1) {
-            response.done = true;
-            app.memoryList = app.memoryList.filter((n) => n.core);
-            response.doc = site.setting;
-          } else {
-            response.error = err?.message || 'Deleted Not Exists';
-          }
-          res.json(response);
-        });
-      });
-    }
-
     if (app.allowRouteGetSetting) {
       site.post({ name: `/api/${app.name}/get`, public: true }, (req, res) => {
-        site.setting = site.getCoreSetting(req);
         res.json({
           done: true,
           doc: site.setting,

@@ -15,11 +15,11 @@
           <div class="row">
             <div class="col9">
               <div class="row">
-                <i-control id="cmd" class="col2" label="##word.Code##" ng-model="company.code"> </i-control>
+                <i-control id="cmd" class="col2" v="r" label="##word.Code##" ng-model="company.code"> </i-control>
 
-                <i-control class="col4" label="##word.Name Arabic##" ng-model="company.nameAr"> </i-control>
+                <i-control class="col4" v="r" label="##word.Name Arabic##" ng-model="company.nameAr"> </i-control>
 
-                <i-control class="col4" label="##word.Name English##" ng-model="company.nameEn"> </i-control>
+                <i-control class="col4" v="r" label="##word.Name English##" ng-model="company.nameEn"> </i-control>
 
                 <i-checkbox class="col2" label="##word.Active##" ng-model="company.active"></i-checkbox>
               </div>
@@ -164,7 +164,7 @@
         <fieldset>
           <legend>##word.login_information##</legend>
           <div class="row">
-            <i-control help-id="" v="r" class="col4" label="##word.User Name##" ng-model="company.username"> </i-control>
+            <i-control help-id="" v="r e" class="col4" label="##word.User Name##" ng-model="company.username"> </i-control>
             <i-control help-id="" v="r" class="col4" label="##word.password##" ng-model="company.password"> </i-control>
           </div>
           <!-- <div class="row">
