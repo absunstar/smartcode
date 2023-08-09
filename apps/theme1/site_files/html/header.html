@@ -193,13 +193,13 @@
                   <p>##word.Sales Invoicse For Companies##</p>
                 </a>
               </li>
-              <li id="SalesInvoicseForPatients" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage">
+              <li id="SalesInvoicseForPatients" x-data="setting.showHospital" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage">
                 <a class="menuTag" href="/salesPatientsInvoices">
                   <img src="/theme1/images/inventory/sales Patients Invoices.png" width="45" height="45" />
                   <p>##word.Sales Invoicse For Patients##</p>
                 </a>
               </li>
-              <li id="SalesInvoicseForER" x-permissions="salesErInvoicesUi || salesErInvoicesManage">
+              <li id="SalesInvoicseForER" x-data="setting.showHospital" x-permissions="salesErInvoicesUi || salesErInvoicesManage">
                 <a class="menuTag" href="/salesErInvoices">
                   <img src="/theme1/images/inventory/sales Er Invoices.png" width="45" height="45" />
                   <p>##word.Sales Invoicse For ER##</p>

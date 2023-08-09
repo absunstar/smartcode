@@ -57,7 +57,7 @@
 
             <a class="tab-link" onclick="site.showTabContent(event, '#securityPublicPermissions')"> ##word.Public Permissions## </a>
 
-            <a class="tab-link" x-date="##setting.showHospital##" onclick="site.showTabContent(event, '#securityHmisPermissions')"> ##word.HMIS Permissions## </a>
+            <a class="tab-link" x-data="##setting.showHospital##" onclick="site.showTabContent(event, '#securityHmisPermissions')"> ##word.HMIS Permissions## </a>
 
             <a class="tab-link" onclick="site.showTabContent(event, '#securityAccountingPermissions')"> ##word.Accounting Permissions## </a>
 
@@ -222,7 +222,7 @@
                 </fieldset>
               </div>
 
-              <div class="row padding" x-date="##setting.showHospital##">
+              <div class="row padding" x-data="##setting.showHospital##">
                 <fieldset>
                   <legend>##word.HMIS Roles##</legend>
                   <div class="row">
@@ -296,7 +296,7 @@
               </div>
             </div>
 
-            <div x-date="##setting.showHospital##" id="securityHmisPermissions" class="tab-content">
+            <div x-data="##setting.showHospital##" id="securityHmisPermissions" class="tab-content">
               <div class="row">
                 <div class="row padding">
                   <fieldset ng-repeat="screen in hmisScreens">

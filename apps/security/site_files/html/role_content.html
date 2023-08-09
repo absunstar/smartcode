@@ -3,7 +3,7 @@
     <div class="tabs-header full">
       <a class="tab-link" onclick="site.showTabContent(event, '#basicInformation')"> ##word.Basic Informations## </a>
       <a class="tab-link" onclick="site.showTabContent(event, '#securityPublicPermissions')"> ##word.Public Permissions## </a>
-      <a class="tab-link" x-date="##setting.showHospital##" onclick="site.showTabContent(event, '#securityHmisPermissions')"> ##word.HMIS Permissions## </a>
+      <a class="tab-link" x-data="##setting.showHospital##" onclick="site.showTabContent(event, '#securityHmisPermissions')"> ##word.HMIS Permissions## </a>
       <a class="tab-link" onclick="site.showTabContent(event, '#securityAccountingPermissions')"> ##word.Accounting Permissions## </a>
       <a class="tab-link" onclick="site.showTabContent(event, '#securityInventoryPermissions')"> ##word.Inventory Permissions## </a>
       <a class="tab-link" onclick="site.showTabContent(event, '#securityHrPermissions')"> ##word.HR Permissions## </a>
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div x-date="##setting.showHospital##" id="securityHmisPermissions" class="tab-content">
+      <div x-data="##setting.showHospital##" id="securityHmisPermissions" class="tab-content">
         <div class="row">
           <div class="row padding">
             <fieldset ng-repeat="screen in hmisScreens">
