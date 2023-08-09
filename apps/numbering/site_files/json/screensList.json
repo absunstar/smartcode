@@ -453,12 +453,6 @@
   {
     "category": "hr",
     "feature": "public",
-    "id": "delivery",
-    "name": "Delivery"
-  },
-  {
-    "category": "hr",
-    "feature": "public",
     "id": "departments",
     "name": "Departments"
   },

@@ -18,6 +18,13 @@ module.exports = function init(site) {
     { id: 4, nameEn: 'Canceled', nameAr: 'ملغي', name: 'canceled' },
   ];
 
+  site.employeesJobsTypesList = [
+    { id: 1, nameEn: 'Doctor', nameAr: 'طبيب', name: 'doctors' },
+    { id: 2, nameEn: 'Nurse', nameAr: 'تمريض', name: 'nurses' },
+    { id: 3, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'deliverers' },
+    { id: 4, nameEn: 'Casher', nameAr: 'كاشير / صراف', name: 'casher' },
+  ];
+
   site.patientTypes = [
     { id: 1, code: 'N', nameEn: 'Normal', nameAr: 'عادي' },
     { id: 2, code: 'V', nameEn: 'VIP PATIENT', nameAr: 'مميز' },
@@ -38,9 +45,9 @@ module.exports = function init(site) {
     { id: 5, nameEn: 'Patient', nameAr: 'مريض', name: 'patients' },
     { id: 6, nameEn: 'Customer', nameAr: 'عميل', name: 'customers' },
     { id: 7, nameEn: 'Vendor', nameAr: 'مورد', name: 'vendors' },
-    { id: 8, nameEn: 'Doctor', nameAr: 'طبيب', name: 'doctors' },
-    { id: 9, nameEn: 'Nurse', nameAr: 'تمريض', name: 'Nurses' },
-    { id: 10, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'delivery' },
+    // { id: 8, nameEn: 'Doctor', nameAr: 'طبيب', name: 'doctors' },
+    // { id: 9, nameEn: 'Nurse', nameAr: 'تمريض', name: 'Nurses' },
+    // { id: 10, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'delivery' },
   ];
 
   site.qualificationsDegrees = [
@@ -378,6 +385,13 @@ module.exports = function init(site) {
     res.json({
       done: true,
       list: site.scientificRanks,
+    });
+  });
+
+  site.post('/api/employeesJobsTypesList', (req, res) => {
+    res.json({
+      done: true,
+      list: site.employeesJobsTypesList,
     });
   });
 

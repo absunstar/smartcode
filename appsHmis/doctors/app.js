@@ -17,7 +17,7 @@ module.exports = function init(site) {
   app.$collection = site.connectCollection('users_info');
   app.init = function () {
     if (app.allowMemory) {
-      app.$collection.findMany({ where: { 'type.id': 8 } }, (err, docs) => {
+      app.$collection.findMany({ where: { $and: [{ 'type.id': 4 }, { 'jobType.id': 1 }] } }, (err, docs) => {
         if (!err) {
           site.doctorsCount = 0;
           if (docs.length == 0) {
@@ -199,7 +199,8 @@ module.exports = function init(site) {
         }
 
         _data.addUserInfo = req.getUserFinger();
-        _data.type = site.usersTypesList[7];
+        _data.type = site.usersTypesList[3];
+        _data.jobType = site.employeesJobsTypesList[0];
 
         if (!_data.email) {
           const splitName = _data.nameEn.split(' ');
@@ -307,7 +308,6 @@ module.exports = function init(site) {
           .filter(
             (g) =>
               (!search || JSON.stringify(g).contains(search)) &&
-              (!where['type.id'] || (g.type && g.type.id == where['type.id'])) &&
               (!where['doctorType.id'] || (g.doctorType && g.doctorType.id == where['doctorType.id'])) &&
               g.company &&
               g.company.id == site.getCompany(req).id
@@ -425,7 +425,8 @@ module.exports = function init(site) {
                         Ar: 'صلاحيات الطبيب',
                       },
                     ],
-                    type: site.usersTypesList[7],
+                    jobType: site.employeesJobsTypesList[0],
+                    type: site.usersTypesList[3],
                     image: { url: '/images/doctors.png' },
                     active: true,
                   };

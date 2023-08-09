@@ -61,7 +61,11 @@ app.controller('employees', function ($scope, $http, $timeout) {
       $scope.error = v.messages[0].ar;
       return;
     }
-
+    if (window.location.href.contains('deliverers')) {
+      $scope.item.$deliverers = true;
+    } else if (window.location.href.contains('cashers')) {
+      $scope.item.$cashers = true;
+    }
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -235,7 +239,14 @@ app.controller('employees', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     where = where || {};
-    // where['type.id'] = 3;
+    if (window.location.href.contains('deliverers')) {
+      where['jobType.id'] = 3;
+    } else if (window.location.href.contains('cashers')) {
+      where['jobType.id'] = 4;
+    } else {
+      where['jobType.id'] = null;
+    }
+
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
@@ -1147,7 +1158,7 @@ app.controller('employees', function ($scope, $http, $timeout) {
         $scope.item.annualVacation = nationalityExisit.annualVacation;
         $scope.item.regularVacation = nationalityExisit.regularVacation;
         $scope.item.casualVacation = nationalityExisit.casualVacation;
-      } else {
+      } else if ($scope.setting.hrSettings && $scope.setting.hrSettings.publicVacations) {
         $scope.item.annualVacation = $scope.setting.hrSettings.publicVacations.annualVacation;
         $scope.item.regularVacation = $scope.setting.hrSettings.publicVacations.regularVacation;
         $scope.item.casualVacation = $scope.setting.hrSettings.publicVacations.casualVacation;
@@ -1163,7 +1174,7 @@ app.controller('employees', function ($scope, $http, $timeout) {
         $scope.item.totalSubscriptions = nationalityExisit.totalSubscriptions;
         $scope.item.employeePercentage = nationalityExisit.employeePercentage;
         $scope.item.companyPercentage = nationalityExisit.companyPercentage;
-      } else {
+      } else if ($scope.setting.hrSettings && $scope.setting.hrSettings.publicInsurance) {
         $scope.item.totalSubscriptions = $scope.setting.hrSettings.publicInsurance.totalSubscriptions;
         $scope.item.employeePercentage = $scope.setting.hrSettings.publicInsurance.employeePercentage;
         $scope.item.companyPercentage = $scope.setting.hrSettings.publicInsurance.companyPercentage;

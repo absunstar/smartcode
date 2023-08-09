@@ -161,6 +161,10 @@ module.exports = function init(site) {
     let branch = site.getBranch(req);
 
     let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
+    if(!companySetting.printerProgram || !companySetting.storesSetting){
+      companySetting = { ...site.defaultCompanySetting, ...companySetting };
+
+    }
     return companySetting;
   };
 

@@ -152,10 +152,7 @@ module.exports = function init(site) {
       autoOverTimeList: [],
     };
     paySlip = { ...paySlip, ...data };
-    // console.log('hour', paySlip.hourSalary);
-    // console.log('day', paySlip.daySalary);
-    // console.log('minute', paySlip.minuteSalary);
-
+   
     site.getEmployeeBounus(paySlip, (paySlip2) => {
       site.getEmployeePenalties(req, paySlip2, (paySlip3) => {
         site.getEmployeeOvertime(req, paySlip3, (paySlip4) => {
@@ -165,7 +162,6 @@ module.exports = function init(site) {
                 site.getEmployeeWorkErrandRequests(paySlip7, (paySlip8) => {
                   site.getAttendance(paySlip8, (paySlip9) => {
                     site.getEmployeeAdvances(paySlip9, (paySlip10) => {
-                      // console.log('employeeAdvancesList', paySlip10.employeeAdvancesList.length);
                       app.calculateEmployeePaySlipItems(paySlip10, (finalPaySlip) => {
                         callback(finalPaySlip);
                       });
@@ -575,14 +571,15 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
-      site.get(
-        {
-          name: app.name,
-        },
-        (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Employees', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      site.get([{ name: app.name }, { name: 'deliverers' }, { name: 'cashers' }], (req, res) => {
+        let appName = 'Employees';
+        if (req.url === '/Deliverers') {
+          appName = 'Deliverers';
+        } else if (req.url === '/cashers') {
+          appName = 'Cashers';
         }
-      );
+        res.render(app.name + '/index.html', { title: app.name, appName, setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      });
     }
 
     if (app.allowRouteAdd) {
@@ -619,7 +616,7 @@ module.exports = function init(site) {
         ];
         _data.type = site.usersTypesList[3];
 
-        if (_data.mobileList &&_data.mobileList.length > 0) {
+        if (_data.mobileList && _data.mobileList.length > 0) {
           _data.mobile = _data.mobileList[0].mobile;
         } else {
           response.error = 'Must Add Mobile Number';
@@ -635,9 +632,13 @@ module.exports = function init(site) {
         } else if (cb.auto) {
           _data.code = cb.code;
         }
-
         _data.addUserInfo = req.getUserFinger();
-
+        if (_data.$deliverers) {
+          _data.jobType = site.employeesJobsTypesList[2];
+        } else if (_data.$cashers) {
+          _data.jobType = site.employeesJobsTypesList[3];
+        }
+     
         app.add(_data, (err, doc) => {
           if (!err && doc) {
             response.done = true;
@@ -659,7 +660,7 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.editUserInfo = req.getUserFinger();
 
-        if (_data.mobileList &&_data.mobileList.length > 0) {
+        if (_data.mobileList && _data.mobileList.length > 0) {
           _data.mobile = _data.mobileList[0].mobile;
         } else {
           response.error = 'Must Add Mobile Number';
@@ -1109,7 +1110,6 @@ module.exports = function init(site) {
         } else {
           where['company.id'] = site.getCompany(req).id;
           where['type.id'] = 4;
-
           app.all({ where, select, limit }, (err, docs) => {
             res.json({
               done: true,

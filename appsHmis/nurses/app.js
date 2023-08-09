@@ -18,7 +18,7 @@ module.exports = function init(site) {
 
   app.init = function () {
     if (app.allowMemory) {
-      app.$collection.findMany({where: { 'type.id': 9 }}, (err, docs) => {
+      app.$collection.findMany({ where: { $and: [{ 'type.id': 4 }, { 'jobType.id': 2 }] } }, (err, docs) => {
         if (!err) {
           site.nursesCount = 0;
 
@@ -202,7 +202,8 @@ module.exports = function init(site) {
         }
 
         _data.addUserInfo = req.getUserFinger();
-        _data.type = site.usersTypesList[7];
+        _data.type = site.usersTypesList[3];
+        _data.jobType = site.employeesJobsTypesList[1];
 
         if (!_data.email) {
           const splitName = _data.nameEn.split(' ');
@@ -300,20 +301,14 @@ module.exports = function init(site) {
 
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
-        let where = req.body.where || { 'type.id': 9 };
+        let where = req.body.where || {};
         let search = req.body.search || undefined;
         let select = req.body.select || { id: 1, code: 1, nameEn: 1, nameAr: 1, image: 1, gender: 1 };
         let limit = req.body.limit || 100;
         let list = [];
         app.memoryList
           .slice(-limit)
-          .filter(
-            (g) =>
-              (!search || JSON.stringify(g).contains(search)) &&
-              (!where['type.id'] || (g.type && g.type.id == where['type.id'])) &&
-              g.company &&
-              g.company.id == site.getCompany(req).id
-          )
+          .filter((g) => (!search || JSON.stringify(g).contains(search)) && g.company && g.company.id == site.getCompany(req).id)
           .forEach((doc) => {
             let obj = { ...doc };
             for (const p in obj) {
@@ -428,7 +423,8 @@ module.exports = function init(site) {
                         permissions: ['doctorDeskTopManage'],
                       },
                     ],
-                    type: site.usersTypesList[7],
+                    type: site.usersTypesList[3],
+                    jobType: site.employeesJobsTypesList[1],
                     image: { url: '/images/nurses.png' },
                     active: true,
                   };
