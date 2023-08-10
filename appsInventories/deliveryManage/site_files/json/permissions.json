@@ -1,0 +1,13 @@
+[
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageDelivery", "En": "Edit Delivery", "Ar": "تعديل التوصيل" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManagePrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "deliveryManageUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "deliveryManage", "name": "voucherSalesInvoices", "En": "Add Voucher", "Ar": "إضافة سند" }
+]

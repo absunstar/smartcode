@@ -11,11 +11,9 @@ module.exports = function init(site) {
     { id: 2, nameEn: 'Delivery', nameAr: 'توصيل', name: 'delivery' },
   ];
 
-  site.deliveryStatus = [
-    { id: 1, nameEn: 'New', nameAr: 'جديد', name: 'new' },
-    { id: 2, nameEn: 'Approved', nameAr: 'معتمد', name: 'approved' },
-    { id: 3, nameEn: 'Delivered', nameAr: 'تم التوصيل', name: 'delivered' },
-    { id: 4, nameEn: 'Canceled', nameAr: 'ملغي', name: 'canceled' },
+  site.deliveryOrderStatus = [
+    { id: 1, nameEn: 'Under Process', nameAr: 'قيد التجهيز', name: 'underProcess' },
+    { id: 2, nameEn: 'On The Way', nameAr: 'في الطريق', name: 'onTheWay' },
   ];
 
   site.employeesJobsTypesList = [
@@ -23,6 +21,11 @@ module.exports = function init(site) {
     { id: 2, nameEn: 'Nurse', nameAr: 'تمريض', name: 'nurses' },
     { id: 3, nameEn: 'Delivery', nameAr: 'موصل طلبات', name: 'deliverers' },
     { id: 4, nameEn: 'Casher', nameAr: 'كاشير / صراف', name: 'casher' },
+  ];
+
+  site.deliveryStatus = [
+    { id: 1, code: 'N', nameEn: 'Normal', nameAr: 'عادي' },
+    { id: 2, code: 'V', nameEn: 'VIP PATIENT', nameAr: 'مميز' },
   ];
 
   site.patientTypes = [
@@ -380,6 +383,14 @@ module.exports = function init(site) {
       list: site.usersTypesList,
     });
   });
+
+  site.post('/api/deliveryOrderStatus', (req, res) => {
+    res.json({
+      done: true,
+      list: site.deliveryOrderStatus,
+    });
+  });
+
 
   site.post('/api/scientificRanks', (req, res) => {
     res.json({

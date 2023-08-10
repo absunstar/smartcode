@@ -157,6 +157,7 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        console.log(_data.salesCategory.id);
         if (_data.salesCategory && _data.salesCategory.id == 2) {
           _data.deliveryStatus = site.deliveryStatus[0];
           _data['approved'] = false;
@@ -368,8 +369,8 @@ module.exports = function init(site) {
                   obj.nameEn = 'Sales Invoice' + ' (' + doc.code + ' )';
                   obj.session = req.session;
                   site.autoJournalEntry(obj);
-                  response.doc = doc;
                 }
+                response.doc = doc;
               } else {
                 response.error = err.message;
               }

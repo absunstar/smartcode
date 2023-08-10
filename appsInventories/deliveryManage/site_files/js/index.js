@@ -1,4 +1,4 @@
-app.controller('salesInvoices', function ($scope, $http, $timeout) {
+app.controller('deliveryManage', function ($scope, $http, $timeout) {
   $scope.setting = site.showObject(`##data.#setting##`);
   $scope.baseURL = '';
   $scope.appName = 'salesInvoices';
@@ -6,18 +6,6 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.modalSearchID = '#salesInvoicesSearchModal';
   $scope.mode = 'add';
   $scope._search = { fromDate: new Date(), toDate: new Date() };
-  $scope.structure = {
-    image: { url: '/images/salesInvoices.png' },
-    totalPrice: 0,
-    totalItemsDiscounts: 0,
-    totalDiscounts: 0,
-    totalTaxes: 0,
-    totalBeforeVat: 0,
-    totalVat: 0,
-    totalAfterVat: 0,
-    totalNet: 0,
-    active: true,
-  };
   $scope.item = {};
   $scope.orderItem = {};
   $scope.list = [];
@@ -44,85 +32,6 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       discountType: '',
       total: 0,
     };
-  };
-  $scope.showAdd = function (_item) {
-    $scope.error = '';
-    $scope.mainError = '';
-
-    if (!$scope.setting || !$scope.setting.id) {
-      $scope.mainError = '##word.Please Contact System Administrator to Set System Setting Or Reload Page##';
-      return;
-    }
-
-    $scope.itemsError = '';
-    $scope.mode = 'add';
-    $scope.resetOrderItem();
-    $scope.item = {
-      ...$scope.structure,
-      salesType: { id: 1, nameAr: 'مبيعات للعملاء', nameEn: 'Sales For Customers', code: 'customer' },
-      date: new Date(),
-      itemsList: [],
-      discountsList: [],
-      taxesList: [],
-    };
-    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
-      $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
-        return _t.id == $scope.setting.accountsSetting.paymentType.id;
-      });
-      $scope.getSafes($scope.item.paymentType);
-    }
-
-    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
-      $scope.item.store = $scope.storesList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.customersStore.id;
-      });
-    }
-
-    /*   if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
-      $scope.item.customer = $scope.customersList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.customer.id;
-      });
-    } */
-    site.showModal($scope.modalID);
-  };
-
-  $scope.add = function (_item) {
-    $scope.error = '';
-    const v = site.validated($scope.modalID);
-    if (!v.ok) {
-      $scope.error = v.messages[0].ar;
-      return;
-    }
-    let dataValid = $scope.validateData(_item);
-    if (!dataValid.success) {
-      return;
-    }
-    $scope.busy = true;
-    $http({
-      method: 'POST',
-      url: `${$scope.baseURL}/api/${$scope.appName}/add`,
-      data: $scope.item,
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done) {
-          site.hideModal($scope.modalID);
-          site.resetValidated($scope.modalID);
-          $scope.list.unshift(response.data.doc);
-          if ($scope.setting.printerProgram.autoThermalPrintSalesInvo) {
-            $scope.thermalPrint(response.data.doc);
-          }
-        } else {
-          $scope.error = response.data.error;
-          if (response.data.error && response.data.error.like('*Must Enter Code*')) {
-            $scope.error = '##word.Must Enter Code##';
-          }
-        }
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
   };
 
   $scope.showUpdate = function (_item) {
@@ -164,7 +73,6 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           if (modalID) {
-            console.log(modalID);
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }
@@ -300,8 +208,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.getAll = function (where) {
     $scope.busy = true;
     $scope.list = [];
-    where = where || { approved: false };
-    where['salesType.code'] = 'customer';
+    where = where || {};
+
+    where['salesCategory.id'] = 2;
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
@@ -1598,20 +1507,44 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getDeliveryOrderStatus = function () {
+    $scope.busy = true;
+    $scope.deliveryOrderStatusList = [];
+    $http({
+      method: 'POST',
+      url: '/api/deliveryOrderStatus',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.deliveryOrderStatusList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
       item.$remainAmount = item.$remainPaid - item.total;
     }, 300);
   };
 
+  $scope.addDeliveryOrderStatus = function (id) {
+    $scope.item.deliveryOrderStatusList = $scope.item.deliveryOrderStatusList || [];
+    let status = $scope.deliveryOrderStatusList.find((_u) => {
+      return _u.id == id;
+    });
+    $scope.item.deliveryOrderStatusList.unshift({ status, date: new Date(),user :{id:'##user.id##',nameAr:'##user.nameAr##',nameEn:'##user.nameEn##'} });
+  };
+
   $scope.showInstallmentsModal = function (item) {
     item.$firstDueDate = new Date();
     site.showModal('#installmentsModal');
-  };
-
-  $scope.showChangeDeliveryModal = function (item) {
-    $scope.item = item;
-    site.showModal('#changeDeliveryModal');
   };
 
   $scope.setInstallments = function (_item) {
@@ -1641,6 +1574,15 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }, 300);
   };
 
+  $scope.showChangeStatusModal = function (item) {
+    $scope.item = item;
+    site.showModal('#changeDeliveryOrderStatusModal');
+  };
+  $scope.showChangeDeliveryModal = function (item) {
+    $scope.item = item;
+    site.showModal('#changeDeliveryModal');
+  };
+
   $scope.getInvoiceTypes();
   $scope.getCurrentMonthDate();
   $scope.getAll();
@@ -1657,4 +1599,5 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.getMedicineDurationsList();
   $scope.getMedicineFrequenciesList();
   $scope.getMedicineRoutesList();
+  $scope.getDeliveryOrderStatus();
 });

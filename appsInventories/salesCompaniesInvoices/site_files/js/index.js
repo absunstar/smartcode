@@ -1374,9 +1374,9 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $scope.deliveryList = [];
     $http({
       method: 'POST',
-      url: '/api/delivery/all',
+      url: '/api/employees/all',
       data: {
-        where: { active: true },
+        where: { active: true,'jobType.id' : 3 },
         select: {
           id: 1,
           code: 1,

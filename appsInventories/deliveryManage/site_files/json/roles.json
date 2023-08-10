@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "deliveryManageAdmin",
+        "En": "Delivery Manage Admin",
+        "Ar": "إدارة طلبات التوصيل",
+        "permissions": ["deliveryManageManage"]
+    }
+]
