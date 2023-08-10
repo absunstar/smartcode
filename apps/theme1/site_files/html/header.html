@@ -52,6 +52,108 @@
     <!-- nav bar -->
     <div class="navbar">
       <ul class="nav d-flex flex-column" x-permissions="login">
+        <li id="Pos" class="navlink" onmouseover="showAndHide('Pos')" x-data="setting.showPos">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="linktext">##word.POS##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="deliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
+                <a class="menuTag" href="/deliveryManage">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Delivery Manage##</p>
+                </a>
+              </li>
+              <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
+                <a class="menuTag" href="/salesInvoices">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Customers##</p>
+                </a>
+              </li>
+              <li id="SalesInvoicseForCompanies" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage">
+                <a class="menuTag" href="/salesCompaniesInvoices">
+                  <img src="/theme1/images/inventory/sales Companies Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Companies##</p>
+                </a>
+              </li>
+              <li id="receiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
+                <a class="menuTag" href="/receiptVouchers">
+                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
+                  <p>##word.Receipt Vouchers##</p>
+                </a>
+              </li>
+              <li id="expenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
+                <a class="menuTag" href="/expenseVouchers">
+                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
+                  <p>##word.Expense Vouchers##</p>
+                </a>
+              </li>
+              <li id="ReturnSalesInvoices" x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage">
+                <a class="menuTag" href="/returnSalesInvoices">
+                  <img src="/theme1/images/inventory/Return Sales Invoices.png" width="45" height="45" />
+                  <p>##word.Return Sales Invoices##</p>
+                </a>
+              </li>
+              <li id="PurchaseRequests" x-permissions="purchaseRequestsUi || purchaseRequestsManage">
+                <a class="menuTag" href="/purchaseRequests">
+                  <img src="/theme1/images/inventory/Purchase Requests.png" width="45" height="45" />
+                  <p>##word.Purchase Requests##</p>
+                </a>
+              </li>
+              <li id="PurchaseOrder" x-permissions="purchaseOrdersUi || purchaseOrdersManage">
+                <a class="menuTag" href="/purchaseOrders">
+                  <img src="/theme1/images/inventory/Purchase Orders.png" width="45" height="45" />
+                  <p>##word.Purchase Order##</p>
+                </a>
+              </li>
+              <li id="ReturnPurchaseOrders" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage">
+                <a class="menuTag" href="/returnPurchaseOrders">
+                  <img src="/theme1/images/inventory/Return Purchase Orders.png" width="45" height="45" />
+                  <p>##word.Return Purchase Orders##</p>
+                </a>
+              </li>
+              <li id="StoresItems" x-permissions="storesItemsUi || storesItemsManage">
+                <a class="menuTag" href="/storesItems">
+                  <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
+                  <p>##word.Stores Items##</p>
+                </a>
+              </li>
+              <li id="Employees" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/employees">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Employees##</p>
+                </a>
+              </li>
+              <li id="Delivery" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/deliverers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Deliverers##</p>
+                </a>
+              </li>
+              <li id="Cashers" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/cashers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Cashers##</p>
+                </a>
+              </li>
+              <li id="Customers" x-permissions="customersUi || customersManage">
+                <a class="menuTag" href="/customers">
+                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
+                  <p>##word.Customers##</p>
+                </a>
+              </li>
+              <li id="Vendors" x-permissions="vendorsUi || vendorsManage">
+                <a class="menuTag" href="/vendors">
+                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
+                  <p>##word.Vendors##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
         <li id="Accountant" class="navlink" onmouseover="showAndHide('Accountant')" x-data="setting.showAccountant">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -757,7 +859,7 @@
                   <p>##word.Daily Cash By User##</p>
                 </a>
               </li>
-              <li id="insuranceCompaniesClaims" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
+              <li id="insuranceCompaniesClaims"  x-data="setting.showHospital" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
                 <a class="menuTag" href="/insuranceCompaniesClaims">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Insurance Companies Claims##</p>
