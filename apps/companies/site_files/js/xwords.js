@@ -30,6 +30,12 @@ app.controller('xwords', function ($scope, $http, $timeout) {
       url: '/x-api/words',
     }).then(function (response) {
       if (response.data.done) {
+        for (let i = 0; i < response.data.words.length; i++) {
+          if(!response.data.words[i].En) {
+            response.data.words[i].En = response.data.words[i].name
+          }
+          
+        }
         $scope.words = response.data.words;
       }
     });
@@ -46,6 +52,10 @@ app.controller('xwords', function ($scope, $http, $timeout) {
       data: $scope.words,
     }).then(function (response) {
       if (response.data.done) {
+        $scope.success = 'Save Is Done'
+        $timeout(() => {
+        $scope.success = ''
+        }, 1500);
         if (ID) {
           site.hideModal(ID);
         }

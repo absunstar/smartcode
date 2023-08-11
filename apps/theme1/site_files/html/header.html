@@ -41,9 +41,13 @@
           </div>
         </div>
       </div>
+      <i-button x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
+      <i-button x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
     </div>
     <div x-permission="!login" class="center padding margin bg-gray">
       <i-button type="login" label="##word.Login##" ng-click="showLogin()"></i-button>
+      <i-button x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
+      <i-button x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
     </div>
     <!-- branch link -->
     <div class="branchLink">
@@ -859,7 +863,7 @@
                   <p>##word.Daily Cash By User##</p>
                 </a>
               </li>
-              <li id="insuranceCompaniesClaims"  x-data="setting.showHospital" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
+              <li id="insuranceCompaniesClaims" x-data="setting.showHospital" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
                 <a class="menuTag" href="/insuranceCompaniesClaims">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Insurance Companies Claims##</p>

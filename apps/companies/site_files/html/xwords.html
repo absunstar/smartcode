@@ -6,7 +6,7 @@
     <div x-import="theme1/header.html"></div>
     <div ng-controller="xwords" id="main-layout" class="container loaded" x-permissions="xwordsManage">
       <div class="row">
-        <h1 class="center">##word.counts## : {{words.length}}</h1>
+        <h1 class="center">##word.Counts## : {{words.length}}</h1>
         <div class="row padding margin border">
           <div class="col9">
             <i-control ng-model="nameSearch" label="Search Words"></i-control>
@@ -16,7 +16,9 @@
             <i-button type="save" ng-click="saveWords()" label="Save All Words"></i-button>
           </div>
         </div>
-
+        <div class="row">
+          <h2 class="green bold center">{{success}}</h2>
+        </div>
         <table class="table bold hover center">
           <tr>
             <th>S/N</th>
