@@ -44,6 +44,7 @@ module.exports = function init(site) {
   site.defaultCompanySetting = {
     printerProgram: { itemsCountA4: 4, invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
     storesSetting: {
+      showPos: true,
       showAccountant: true,
       showInventory: true,
       showHr: true,
