@@ -63,5 +63,6 @@
     "En": "UI",
     "Ar": "الواجهة الرسومية"
   },
-  { "moduleName": "public", "screenName": "companySetting", "name": "companySettingManage", "En": "Manage", "Ar": "إدارة" }
+  { "moduleName": "public", "screenName": "companySetting", "name": "companySettingManage", "En": "Company Setting Manage", "Ar": "إدارة إعدادات الشركة" },
+  { "moduleName": "public", "screenName": "xwords", "name": "xwordsManage", "En": "Words Manage", "Ar": "إدارة الكلمات" }
 ]

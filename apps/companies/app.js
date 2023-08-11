@@ -34,7 +34,6 @@ module.exports = function init(site) {
     ],
   };
 
-  
   let teethList = [];
 
   for (let i = 0; i < 32; i++) {
@@ -156,19 +155,17 @@ module.exports = function init(site) {
     return code;
   };
 
-
   site.getCompanySetting = function (req) {
     let company = site.getCompany(req);
     let branch = site.getBranch(req);
 
     let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
-    if(!companySetting.printerProgram || !companySetting.storesSetting){
-      companySetting = { ...site.defaultCompanySetting, ...companySetting };
-
+    if (!companySetting.printerProgram || !companySetting.storesSetting) {
+      companySetting = { ...companySetting, ...site.defaultCompanySetting };
     }
+
     return companySetting;
   };
-
 
   site.validateEmail = function (email) {
     let re = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -360,6 +357,15 @@ module.exports = function init(site) {
         },
         (req, res) => {
           res.render(app.name + '/companySetting.html', { title: app.name, appName: 'Company Settings', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+        }
+      );
+
+      site.get(
+        {
+          name: 'xwords',
+        },
+        (req, res) => {
+          res.render(app.name + '/xwords.html', { title: app.name, appName: 'Words Manager', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }

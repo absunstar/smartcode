@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="En" data-ng-app="myApp">
+  <head x-import="theme1/head.html"> </head>
+
+  <body class="##session.lang##">
+    <div x-import="theme1/header.html"></div>
+    <div ng-controller="xwords" id="main-layout" class="container loaded" x-permissions="xwordsManage">
+      <div class="row">
+        <h1 class="center">##word.counts## : {{words.length}}</h1>
+        <div class="row padding margin border">
+          <div class="col9">
+            <i-control ng-model="nameSearch" label="Search Words"></i-control>
+          </div>
+          <div class="col3">
+            <br />
+            <i-button type="save" ng-click="saveWords()" label="Save All Words"></i-button>
+          </div>
+        </div>
+
+        <table class="table bold hover center">
+          <tr>
+            <th>S/N</th>
+            <th>##word.Name##</th>
+            <th>##word.English##</th>
+            <th>##word.Arabic##</th>
+            <th>##word.Actions##</th>
+          </tr>
+          <tr ng-repeat="word in words | filter:nameSearch">
+            <td>{{$index+1}}</td>
+            <td class="userPrint">{{word.name}}</td>
+            <td>
+              <i-control ng-model="word.En"></i-control>
+            </td>
+            <td><i-control ng-model="word.Ar"></i-control></td>
+            <td>
+              <i-button type="edit" ng-click="showWordManage(word)" label="##word.Manage##"></i-button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="xwordsManageModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+
+            <p class="center">
+              ##word.Word Manage##
+              <i class="fa fa-file"></i>
+            </p>
+          </div>
+          <div class="modal-body">
+            <form class="form">
+              <div class="row">
+                <h2>{{word.En}} - {{word.Ar}}</h2>
+              </div>
+              <div class="row">
+                <i-control class="col3" v="r" label="##word.Host##" ng-model="$word.name"></i-control>
+                <i-control class="col3" v="r" label="##word.English##" ng-model="$word.En"></i-control>
+                <i-control class="col3" v="r" label="##word.Arabic##" ng-model="$word.Ar"></i-control>
+                <i-button type="push" class="col3" ng-click="addToHostList($word)" label="##word.Add To List##"></i-button>
+              </div>
+              <table class="table hover bold center">
+                <tr>
+                  <th>S/N</th>
+                  <th>##word.Host##</th>
+                  <th>##word.English##</th>
+                  <th>##word.Arabic##</th>
+                  <th>##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="host in word.hostList">
+                  <td>{{$index+1}}</td>
+                  <td>{{host.name}}</td>
+                  <td>
+                    <i-control ng-model="host.En"></i-control>
+                  </td>
+                  <td><i-control ng-model="host.Ar"></i-control></td>
+                  <td>
+                    <i-button type="delete" title="##word.Delete##" ng-click="word.hostList.splice($index,1)"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div class="modal-footer center">
+            <p class="error">{{error}}</p>
+            <i-button type="save" label="##word.Save##" ng-click="saveWords('#xwordsManageModal')"></i-button>
+            <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#xwordsManageModal')"></i-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div x-import="theme1/footer.html"></div>
+    <script x-import="companies/xwords.js"></script>
+  </body>
+</html>
