@@ -1,0 +1,41 @@
+<div id="deliveryStatusModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+
+      <p class="center" ng-show="item.$deliveredType == 'canceled'">
+        ##word.Canceled Delivery##
+        <i class="fa fa-file"></i>
+      </p>
+      <p class="center" ng-show="item.$deliveredType == 'delivered'">
+        ##word.Delivered##
+        <i class="fa fa-file"></i>
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <div class="row" ng-show="item.$deliveredType == 'canceled'">
+        <p class="font-25 center red bold">##word.Confirm the cancellation of the delivery order##</p>
+        <div class="row">
+          <i-list
+            ng-model="item.reasonCancelingDelivery"
+            label="##word.Reason Canceling Delivery##"
+            ng-search="item.$reasonsCancelingDelivery"
+            items="reasonsCancelingDeliveryList"
+            display="name##session.lang##"
+          ></i-list>
+        </div>
+        <div class="row">
+          <i-textarea ng-model="item.detailsCancelingDelivery" label="##word.Delivery order cancellation details##"> </i-textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+
+      <i-button type="save" label="##word.Save##" ng-click="update(item,'#deliveryStatusModal')"></i-button>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#deliveryStatusModal')"></i-button>
+    </div>
+  </div>
+</div>

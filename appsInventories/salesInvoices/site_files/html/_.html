@@ -6,6 +6,7 @@
     <div x-import="salesInvoices/modalSearch.html"></div>
     <div x-import="salesInvoices/installmentsModal.html"></div>
     <div x-import="salesInvoices/changeDelivery.html"></div>
+    <div x-import="salesInvoices/deliveryStatus.html"></div>
     <div x-import="purchaseOrders/expenseVouchersModal.html"></div>
 
     <div class="top-actions">
@@ -60,14 +61,14 @@
               ng-show="item.deliveryStatus.id == 2"
               x-permissions="salesInvoicesDelivery || salesInvoicesManage"
               label="##word.Delivered##"
-              ng-click="update(item,null,'delivered')"
+              ng-click="showDeliveryStatusModal(item,'delivered')"
             ></i-button>
             <i-button
               type="edit"
               ng-show="item.deliveryStatus.id == 2"
               x-permissions="salesInvoicesDelivery || salesInvoicesManage"
               label="##word.Canceled##"
-              ng-click="update(item,null,'canceled')"
+              ng-click="showDeliveryStatusModal(item,'canceled')"
             ></i-button>
             <i-button type="edit" ng-show="!item.approved" x-permissions="salesInvoicesUpdate || salesInvoicesManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
             <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
