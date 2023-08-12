@@ -1,17 +1,22 @@
 :root {
   /*start main color*/
 
-  --main-color1: #bec011;
-  --main-color2: #245a40;
-  --main-color3: #f5f5f5;
+  --color1: #245a40;
+  --color2: #bec011;
+  --color3: #f5f5f5;
+  --color4: #f5f5f5;
 
-  --theme-color: var(--main-color2);
+  --backcolor1 :  #f5f5f5;
+  --backcolor2 :  #f5f5f5;
+  --backcolor3 :  #f5f5f5;
+  --backcolor4 :  #f5f5f5;
+
+  --theme-color: var(--color1);
   /*end main color*/
 
   /*start background and font color*/
   /*style 1*/
-  --background-color1: #bec011;
-  --border-color1: #bec011;
+  --backcolor2: #bec011;
   --main-color-font1: #245a40;
   --sub-color-font1: #648c75;
   /*style 2*/
@@ -63,7 +68,6 @@
   /*button style 3*/
   --button-backgroundColor-3: #bec011;
   --button-border-color-3: #bec011;
-  --button-fontColor-3: #245a40;
   --hover-button-backgroundColor-3: #245a40;
   --hover-button-border-color-3: #245a40;
   --hover-button-fontColor-3: #bec011;

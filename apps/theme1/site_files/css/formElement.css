@@ -7,7 +7,7 @@
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    background-color: var(--main-color3);
+    background-color: var(--backcolor1);
     background-clip: padding-box;
     border: unset !important;
     border-bottom: 1px solid #ced4da !important;
@@ -20,15 +20,15 @@
 
 .mainscreen .form-control:focus {
     color: #212529;
-    background-color: var(--main-color3);
-    border-bottom: 1px solid var(--main-color2) !important;
+    background-color: var(--backcolor1);
+    border-bottom: 1px solid var(--color1) !important;
     outline: 0;
     box-shadow: unset !important;
 
 }
 
 .mainscreen .form-label{
-    color: var(--main-color2);
+    color: var(--color1);
     font-size: var(--font-size-md);
     font-weight: 600;
     text-transform: capitalize;
@@ -51,7 +51,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border: 1px solid var(--main-color2);
+    border: 1px solid var(--color1);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -61,21 +61,21 @@
 }
 
 .mainscreen .form-check-input:focus {
-    border-color: var(--main-color2);
+    border-color: var(--color1);
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(36,90,64,.25);
 }
 
 .mainscreen .form-check-input:checked {
-    background-color: var(--main-color2);
-    border-color: var(--main-color2);
+    background-color: var(--color1);
+    border-color: var(--color1);
 }
 
 .mainscreen .form-select {
     display: block;
     width: 100%;
     height: fit-content;
-    background-color: var(--main-color3);
+    background-color: var(--backcolor1);
     background-clip: padding-box;
     border: unset !important;
     border-bottom: 1px solid #ced4da !important;
@@ -83,7 +83,7 @@
 }
 
 .mainscreen .form-select:focus {
-    border-color: var(--main-color2);
+    border-color: var(--color1);
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(36,90,64,.25);
 }

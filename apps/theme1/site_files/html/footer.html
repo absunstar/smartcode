@@ -1,11 +1,10 @@
-<script src="/theme1/js/script.js"></script>
-
 <script src="/x-js/sa.js?v=##site.options.version##"></script>
 <script>
   site.features = '##req.features##';
   site.feature = (f) => site.features.indexOf(f) !== -1;
 </script>
 
+<script x-import="theme1/script.js"></script>
 <script x-import="sitebar.js"></script>
 <script x-import="sitebottom.js"></script>
 <script x-import="ui-print/index.js"></script>
@@ -66,7 +65,7 @@
   }
 </script>
 <script>
-  app.connectScope({name : 'headerController'}, ($scope, $http, $timeout) => {
+  app.connectScope({ name: 'headerController' }, ($scope, $http, $timeout) => {
     $scope.showLogin = function () {
       site.showModal('#loginModal');
     };

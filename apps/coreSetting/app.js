@@ -20,6 +20,12 @@ module.exports = function init(site) {
     siteColor1: '#bec011',
     siteColor2: '#245a40',
     siteColor3: '#f5f5f5',
+    siteColor4: '#f5f5f5',
+
+    siteBackColor1: '#f5f5f5',
+    siteBackColor2: '#f5f5f5',
+    siteBackColor3: '#f5f5f5',
+    siteBackColor4: '#f5f5f5',
   };
 
   app.$collection = site.connectCollection('coreSetting');

@@ -1,7 +1,7 @@
 .infoCard{
     width: 310px;
     height: fit-content;
-    background: var(--main-color3);
+    background: var(--backcolor1);
     box-shadow: 0px 0px 24px rgba(36, 90, 64, 0.25);
     border-radius: 16px;
     padding-bottom: 16px !important;
@@ -107,7 +107,7 @@
     content: "";
     width: 135px;
     height: 3px;
-    background-color: var(--background-color1);
+    background-color: var(--backcolor2);
     border-radius: 50px;
 }
 

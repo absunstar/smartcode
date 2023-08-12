@@ -4,14 +4,14 @@
 }
 
 .headerbody .navbar .submenu ul li svg path{
-    fill: var(--main-color1) !important;
+    fill: var(--color2) !important;
 }
 
 
 .headerbody .navbar .submenu ul li svg rect{
-    fill: var(--main-color1) !important;
+    fill: var(--color2) !important;
 }
 
 .headerbody .navbar .submenu ul li svg circle{
-    fill: var(--main-color1) !important;
+    fill: var(--color2) !important;
 }

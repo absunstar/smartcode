@@ -13,7 +13,7 @@
 
 ::-webkit-scrollbar-thumb {
   height: 187px !important;
-  background-color: var(--main-color2) !important;
+  background-color: var(--color1) !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,7 +25,7 @@
 }
 html,
 body {
-  background-color: var(--main-color3);
+  background-color: var(--backcolor1);
   font-family: Arabic;
   height: 100% !important;
 }

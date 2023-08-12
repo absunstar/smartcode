@@ -205,7 +205,7 @@
 }
 
 .mainscreen .dropdown-menu li:hover{
-background-color: var(--main-color3);
+background-color: var(--backcolor1);
 }
 
 @media screen and (max-width: 1024px) {
@@ -256,7 +256,7 @@ background-color: var(--main-color3);
 
     .mainscreen .inputSearch{
         width: 100%;
-        border: 1px solid var(--main-color2);
+        border: 1px solid var(--color1);
         border-radius: 8px;
         margin-top: 8px !important;
         padding: 6px !important;

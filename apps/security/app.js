@@ -227,78 +227,62 @@ module.exports = function init(site) {
       done: false,
     };
     if (req.data && req.data.where) {
-      if (req.data.where.email === '0e849095ad8db45384a9cdd28d7d0e20') {
-        req.data.where.email = 'developer';
-      }
-
-      site.security.getUser(
-        {
-          email: req.data.where.email,
-        },
-        (err, doc) => {
-          if (!err && doc) {
-            if (doc.isAdmin) {
-              response.list = doc.branchList;
-              response.done = true;
-              res.json(response);
-            } else {
-              $companies.findMany({}, (err, companiesDoc) => {
-                if (doc.key) {
-                  let branchList = [];
-                  companiesDoc.forEach((_com) => {
-                    if (doc.branchList && doc.branchList.length > 0) {
-                      doc.branchList.forEach((_b) => {
-                        _com.branchList.forEach((_br) => {
-                          branchList.push({
-                            company: _com,
-                            branch: _br,
-                          });
-                        });
+      site.security.getUser(req.data.where, (err, user) => {
+        if (!err && user) {
+          response.done = true;
+          let branchList = [];
+          site.getApp('companies').memoryList.forEach((co) => {
+            if (user.isAdmin) {
+              co.branchList = co.branchList || [];
+              co.branchList.forEach((br) => {
+                branchList.push({
+                  company: {
+                    id: co.id,
+                    code: co.code,
+                    nameAr: co.nameAr,
+                    nameEn: co.nameEn,
+                  },
+                  branch: {
+                    code: br.code,
+                    nameAr: br.nameAr,
+                    nameEn: br.nameEn,
+                  },
+                });
+              });
+            } else if (user.branchList && user.branchList.length > 0) {
+              user.branchList.forEach((b) => {
+                if (co.id === b.company.id) {
+                  co.branchList = co.branchList || [];
+                  co.branchList.forEach((br) => {
+                    if (b.branch.code == br.code) {
+                      branchList.push({
+                        company: {
+                          id: co.id,
+                          code: co.code,
+                          nameAr: co.nameAr,
+                          nameEn: co.nameEn,
+                        },
+                        branch: {
+                          code: br.code,
+                          nameAr: br.nameAr,
+                          nameEn: br.nameEn,
+                        },
                       });
                     }
                   });
-
-                  if (branchList.length === 0) {
-                    branchList.push({
-                      company: { id: 1, nameAr: 'الشركة الرئيسية', nameEn: 'Main Company' },
-                      branch: { code: 1, nameAr: 'الفرع الرئيسى', nameEn: 'Main Branch' },
-                    });
-                  }
-
-                  response.list = branchList;
-                } else {
-                  let branchList = [];
-                  companiesDoc.forEach((_com) => {
-                    if (doc.branchList && doc.branchList.length > 0) {
-                      doc.branchList.forEach((_b) => {
-                        if (_com.id === _b.company.id) {
-                          _com.branchList.forEach((_br) => {
-                            if (_br.code == _b.branch.code) {
-                              branchList.push({
-                                company: _com,
-                                branch: _br,
-                              });
-                            }
-                          });
-                        }
-                      });
-                    }
-                  });
-                  response.list = branchList || [];
                 }
-                response.done = true;
-                res.json(response);
               });
             }
-          } else {
-            response.error = err ? err.message : 'No User Exists : ' + req.data.where.email;
-            res.json(response);
-          }
+          });
+          response.list = branchList;
+          res.json(response);
+        } else {
+          response.error = err ? err.message : 'No User Exists : ' + req.data.where.email;
+          res.json(response);
         }
-      );
+      });
     } else {
       response.error = 'no email';
-
       res.json(response);
     }
   });
@@ -475,13 +459,6 @@ module.exports = function init(site) {
         req.session.company = req.body.company;
         req.session.branch = req.body.branch;
         site.saveSession(req.session);
-
-        // console.log(req.session)
-        //   site.call('[session][update]', {
-        //       accessToken: req.session.accessToken,
-        //       company: req.body.company,
-        //       branch: req.body.branch,
-        //   });
 
         response.user = {
           id: user.id,

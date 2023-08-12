@@ -7,7 +7,7 @@ header {
   position: fixed;
   gap: 36.8px;
   justify-content: space-between;
-  background-color: var(--main-color3);
+  background-color: var(--backcolor1);
   z-index: 999;
 }
 header::before {
@@ -52,7 +52,7 @@ header::before {
 .headerbody .profileSection {
   height: 150px;
   margin-left: 2px !important;
-  color: var(--main-color2);
+  color: var(--color1);
   align-items: flex-start;
 }
 .imageProfileAndGradiant {
@@ -87,17 +87,17 @@ header::before {
 }
 
 .profileSection .settingAndLog a {
-  color: var(--main-color2);
+  color: var(--color1);
 }
 
 .profileSection .saperator {
-  border-right: 1px solid var(--main-color2);
+  border-right: 1px solid var(--color1);
   display: inline-block;
 }
 
 .headerbody .branchLink {
   font-style: normal;
-  color: var(--main-color1);
+  color: var(--color2);
   font-size: var(--font-size-xl);
   line-height: 20px;
   align-items: flex-start;
@@ -127,17 +127,17 @@ header::before {
 
 .headerbody .navbar .linktext {
   font-style: normal;
-  color: var(--main-color2);
+  color: var(--color1);
   font-weight: 500;
   font-size: var(--font-size-lg);
   line-height: 38px;
-  border-bottom: 4px solid var(--border-color1);
+  border-bottom: 4px solid var(--color2);
   transition: 0.2s ease-in;
 }
 
 .headerbody .navbar .navlink:hover .linktext {
   font-weight: 700;
-  background-color: var(--background-color1);
+  background-color: var(--backcolor2);
   padding: 5px;
   border-radius: 10px;
 }
@@ -156,14 +156,14 @@ header::before {
 
 .headerbody .navbar .linkicon .faicon {
   font-size: var(--font-size-xl);
-  color: var(--main-color1);
+  color: var(--color2);
 }
 
 .headerbody .navbar .submenu {
   display: block;
   width: 430px;
   height: 90vh;
-  background-color: var(--main-color3);
+  background-color: var(--backcolor1);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 36px;
   text-transform: capitalize;
@@ -184,17 +184,17 @@ header::before {
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  color: var(--main-color2) !important;
+  color: var(--color1) !important;
   margin: 8px 0 !important;
 }
 
 .headerbody .navbar .submenu ul li a {
-  color: var(--main-color2) !important;
+  color: var(--color1) !important;
 }
 
 .headerbody .navbar .submenu ul li a:hover {
   font-weight: 700;
-  color: var(--main-color2) !important;
+  color: var(--color1) !important;
 }
 
 footer .copyright p {
@@ -247,10 +247,10 @@ footer .copyright p {
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: var(--main-color3);
+    background-color: var(--backcolor1);
     position: absolute;
     font-size: var(--font-size-lg);
-    border-right: 2px solid var(--main-color1);
+    border-right: 2px solid var(--color2);
     border-radius: 0 16px 16px 0;
     position: absolute;
     top: 0;

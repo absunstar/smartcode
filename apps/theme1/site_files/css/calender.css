@@ -93,8 +93,8 @@
   transform: translate(-50%, -50%);
 }
 .appointmentCalender .days li.active::before{
-  background: var(--background-color1);
+  background: var(--backcolor2);
 }
 .appointmentCalender .days li:not(.active):hover::before{
-  background: var(--background-color1);
+  background: var(--backcolor2);
 }

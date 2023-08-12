@@ -4,7 +4,7 @@ app.controller('login', function ($scope, $http) {
 
   $scope.tryLogin = function (ev) {
     if (ev.which == 13) {
-      $scope.login();
+      $scope.loadUserBranches();
     }
   };
 
@@ -68,46 +68,7 @@ app.controller('login', function ($scope, $http) {
       }
     );
   };
-  //     $scope.busy = true;
-  //     $http({
-  //         method: 'POST',
-  //         url: '/api/user/login',
-  //         data: {
-  //             $encript: '123',
-  //             email: site.to123($scope.user.email),
-  //             password: site.to123($scope.user.password),
-  //             company: site.to123({
-  //                 id: $scope.user.company.id,
-  //                 nameAr: $scope.user.company.nameAr,
-  //                 nameEn: $scope.user.company.nameEn,
-  //                 host: $scope.user.company.host,
-  //                 taxNumber: $scope.user.company.taxNumber,
-  //                 mobile: $scope.user.company.mobile,
-  //                 phone: $scope.user.company.phone,
-  //             }),
-  //             branch: site.to123({
-  //                 code: $scope.user.branch.code,
-  //                 nameAr: $scope.user.branch.nameAr,
-  //                 nameEn: $scope.user.branch.nameEn,
-  //             }),
-  //         },
-  //     }).then(
-  //         function (response) {
-  //             if (response.data.error) {
-  //                 $scope.error = response.data.error;
-  //                 $scope.busy = false;
-  //             }
-  //             if (response.data.done) {
-  //                 window.location.reload(true);
-  //             }
-  //         },
-  //         function (err) {
-  //             $scope.busy = false;
-  //             $scope.error = err;
-  //         }
-  //     );
-  // };
-
+  
   $scope.loadUserBranches = function (ev) {
     $scope.companyList = [];
     if (ev && ev.which !== 13) {
@@ -124,7 +85,6 @@ app.controller('login', function ($scope, $http) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          console.log(response.data.list);
           $scope.branchList = response.data.list;
           $scope.companyList = [];
           $scope.branchList.forEach((b) => {
@@ -142,9 +102,7 @@ app.controller('login', function ($scope, $http) {
             }
           });
 
-          if (ev && ev.which === 13 && $scope.branchList.length > 0 && $scope.user.email && $scope.user.password) {
-            $scope.login($scope.branchList[0]);
-          } else if ($scope.branchList.length === 1 && $scope.user.email && $scope.user.password) {
+          if ($scope.branchList.length === 1 && $scope.user.email && $scope.user.password) {
             $scope.login($scope.branchList[0]);
           }
 

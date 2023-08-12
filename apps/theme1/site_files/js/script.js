@@ -1,7 +1,12 @@
 const navButtons = document.querySelectorAll('.navlink');
 const submenuLists = document.querySelectorAll('.navlink .submenu');
 
+var menuBusy = false;
 function showAndHide(param) {
+  if (menuBusy) {
+    return;
+  }
+  menuBusy = true;
   document.querySelectorAll('.submenu').forEach((submenu) => {
     submenu.classList.remove('showSection');
     submenu.classList.add('hideSection');
@@ -16,6 +21,9 @@ function showAndHide(param) {
       submenuList.classList.remove('showSection');
     }
   }
+  setTimeout(() => {
+    menuBusy = false;
+  }, 250);
 }
 
 document.addEventListener('click', () => {
@@ -34,4 +42,3 @@ menutoggle.addEventListener('click', () => {
     header.classList.remove('hideheader');
   }
 });
-

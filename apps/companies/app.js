@@ -14,6 +14,11 @@ module.exports = function init(site) {
     allowRouteAll: true,
   };
 
+  let teethList = [];
+  for (let i = 0; i < 32; i++) {
+    teethList.push({ name: i + 1, id: i + 1 });
+  }
+
   app.$collection = site.connectCollection(app.name);
 
   site.defaultCompany = {
@@ -33,11 +38,6 @@ module.exports = function init(site) {
       },
     ],
   };
-  let teethList = [];
-
-  for (let i = 0; i < 32; i++) {
-    teethList.push({ name: i + 1, id: i + 1 });
-  }
 
   site.defaultCompanySetting = {
     printerProgram: { itemsCountA4: 4, invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
@@ -108,7 +108,10 @@ module.exports = function init(site) {
     }
     return code;
   };
-
+  site.getCompany = function (req) {
+    let company = req.session.company;
+    return company || site.defaultCompany;
+  };
   site.getCompanySetting = function (req) {
     let company = site.getCompany(req);
     let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
@@ -127,11 +130,6 @@ module.exports = function init(site) {
     return re.test(password);
   };
 
-  site.getCompany = function (req) {
-    let company = req.session.company;
-    return company || site.defaultCompany;
-  };
-
   site.getBranch = function (req) {
     let branch = req.session.branch;
     return branch || site.defaultCompany.branchList[0];
@@ -147,6 +145,11 @@ module.exports = function init(site) {
       app.$collection.findMany({}, (err, docs) => {
         if (!err) {
           if (docs.length == 0) {
+            app.$collection.add({ ...site.defaultCompany, ...site.defaultCompanySetting }, (err, doc) => {
+              if (!err && doc) {
+                app.memoryList.push(doc);
+              }
+            });
             app.cacheList.forEach((_item, i) => {
               app.$collection.add(_item, (err, doc) => {
                 if (!err && doc) {

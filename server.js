@@ -75,8 +75,3 @@ site.addFeature('m-hr');
 site.addFeature('m-reports');
 
 site.run();
-
-// console.log(site.security.users);
-// site.security.users.forEach(user => {
-//   user.branch_list[0].company = {showAccountant : true,...user.branch_list[0].company}
-// });
