@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliverySearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "reasonsCancelingDeliveryUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "reasonsCancelingDelivery", "name": "importNationalities", "En": "Import", "Ar": "إستيراد" }
+]

@@ -11,7 +11,7 @@
       <div class="row center">
         <i-image ng-show="viewText === 'logo'" ng-model="manageUser.image"> </i-image>
 
-        <i-control ng-show="viewText === 'nameAr'" label="##word.name Arabic##" ng-model="manageUser.nameAr"> </i-control>
+        <i-control ng-show="viewText === 'nameAr'" label="##word.Name Arabic##" ng-model="manageUser.nameAr"> </i-control>
 
         <i-control ng-show="viewText === 'nameAr'" label="##word.Name English##" ng-model="manageUser.nameEn"> </i-control>
 
@@ -21,7 +21,7 @@
 
         <i-control ng-show="viewText === 'email'" label="##word.New Email##" ng-model="manageUser.newEmail"> </i-control>
 
-        <i-control v="r" ng-show="viewText === 'password'" type="password" label="##word.currentPassword##" ng-model="manageUser.currentPassword"> </i-control>
+        <i-control v="r" ng-show="viewText === 'password'" type="password" label="##word.Current Password##" ng-model="manageUser.currentPassword"> </i-control>
       </div>
 
       <div class="row">
@@ -44,7 +44,7 @@
             <table x-permissions="login" class="table bold hover loaded">
               <tr>
                 <th>##word.Mobile##</th>
-                <th class="not-print">##word.actions##</th>
+                <th class="not-print">##word.Actions##</th>
               </tr>
               <tr ng-repeat="c in manageUser.mobileList">
                 <td class="center title">
@@ -62,21 +62,21 @@
       </div>
 
       <div class="row center" ng-show="viewText === 'password'">
-        <i-control v="r" class="col6" type="password" label="##word.newPassword##" ng-model="manageUser.newPassword"> </i-control>
+        <i-control v="r" class="col6" type="password" label="##word.New Password##" ng-model="manageUser.newPassword"> </i-control>
         <i-control v="r" class="col6" type="password" label="##word.Return Password##" ng-model="manageUser.rePassword"> </i-control>
       </div>
     </div>
 
     <div class="modal-footer center">
       <p class="error">{{error}}</p>
-      <i-button type="save" ng-show="viewText === 'password'" label="##word.save##" ng-click="editPersonalInfoUser('password')"></i-button>
-      <i-button type="save" ng-show="viewText === 'logo'" label="##word.save##" ng-click="editPersonalInfoUser('logo')"></i-button>
-      <i-button type="save" ng-show="viewText === 'name'" label="##word.save##" ng-click="editPersonalInfoUser('name')"></i-button>
-      <i-button type="save" ng-show="viewText === 'birthDate'" label="##word.save##" ng-click="editPersonalInfoUser('birthDate')"></i-button>
-      <i-button type="save" ng-show="viewText === 'gender'" label="##word.save##" ng-click="editPersonalInfoUser('gender')"></i-button>
-      <i-button type="save" ng-show="viewText === 'email'" label="##word.save##" ng-click="editPersonalInfoUser('email')"></i-button>
-      <i-button type="save" ng-show="viewText === 'mobile'" label="##word.save##" ng-click="editPersonalInfoUser('mobile')"></i-button>
-      <i-button type="close" label="##word.close##" onclick="site.hideModal( '#viewManageUserModal')"> </i-button>
+      <i-button type="save" ng-show="viewText === 'password'" label="##word.Save##" ng-click="editPersonalInfoUser('password')"></i-button>
+      <i-button type="save" ng-show="viewText === 'logo'" label="##word.Save##" ng-click="editPersonalInfoUser('logo')"></i-button>
+      <i-button type="save" ng-show="viewText === 'name'" label="##word.Save##" ng-click="editPersonalInfoUser('name')"></i-button>
+      <i-button type="save" ng-show="viewText === 'birthDate'" label="##word.Save##" ng-click="editPersonalInfoUser('birthDate')"></i-button>
+      <i-button type="save" ng-show="viewText === 'gender'" label="##word.Save##" ng-click="editPersonalInfoUser('gender')"></i-button>
+      <i-button type="save" ng-show="viewText === 'email'" label="##word.Save##" ng-click="editPersonalInfoUser('email')"></i-button>
+      <i-button type="save" ng-show="viewText === 'mobile'" label="##word.Save##" ng-click="editPersonalInfoUser('mobile')"></i-button>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#viewManageUserModal')"> </i-button>
     </div>
   </div>
 </div>

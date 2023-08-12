@@ -7,6 +7,9 @@
     <div ng-controller="xwords" id="main-layout" class="container loaded" x-permissions="xwordsManage">
       <div class="row">
         <h1 class="center">##word.Counts## : {{words.length}}</h1>
+        <div class="row">
+          <h2 class="green bold center">{{success}}</h2>
+        </div>
         <div class="row padding margin border">
           <div class="col9">
             <i-control ng-model="nameSearch" label="Search Words"></i-control>
@@ -16,9 +19,7 @@
             <i-button type="save" ng-click="saveWords()" label="Save All Words"></i-button>
           </div>
         </div>
-        <div class="row">
-          <h2 class="green bold center">{{success}}</h2>
-        </div>
+      
         <table class="table bold hover center">
           <tr>
             <th>S/N</th>
@@ -35,7 +36,8 @@
             </td>
             <td><i-control ng-model="word.Ar"></i-control></td>
             <td>
-              <i-button type="edit" ng-click="showWordManage(word)" label="##word.Manage##"></i-button>
+              <i-button type="edit" title="##word.Edit##" ng-click="showWordManage(word)"></i-button>
+              <i-button type="delete" title="##word.Delete##" ng-click="words.splice($index,1)"> </i-button>
             </td>
           </tr>
         </table>
@@ -56,32 +58,38 @@
               <div class="row">
                 <h2>{{word.En}} - {{word.Ar}}</h2>
               </div>
-              <div class="row">
-                <i-control class="col3" v="r" label="##word.Host##" ng-model="$word.name"></i-control>
-                <i-control class="col3" v="r" label="##word.English##" ng-model="$word.En"></i-control>
-                <i-control class="col3" v="r" label="##word.Arabic##" ng-model="$word.Ar"></i-control>
-                <i-button type="push" class="col3" ng-click="addToHostList($word)" label="##word.Add To List##"></i-button>
-              </div>
-              <table class="table hover bold center">
-                <tr>
-                  <th>S/N</th>
-                  <th>##word.Host##</th>
-                  <th>##word.English##</th>
-                  <th>##word.Arabic##</th>
-                  <th>##word.Actions##</th>
-                </tr>
-                <tr ng-repeat="host in word.hostList">
-                  <td>{{$index+1}}</td>
-                  <td>{{host.name}}</td>
-                  <td>
-                    <i-control ng-model="host.En"></i-control>
-                  </td>
-                  <td><i-control ng-model="host.Ar"></i-control></td>
-                  <td>
-                    <i-button type="delete" title="##word.Delete##" ng-click="word.hostList.splice($index,1)"> </i-button>
-                  </td>
-                </tr>
-              </table>
+              <fieldset>
+                <legend>##word.Host List##</legend>
+                <div class="row">
+                  <i-control class="col3" v="r" label="##word.Host##" ng-model="$word.name"></i-control>
+                  <i-control class="col3" v="r" label="##word.English##" ng-model="$word.En"></i-control>
+                  <i-control class="col3" v="r" label="##word.Arabic##" ng-model="$word.Ar"></i-control>
+                  <div class="col3">
+                    <br>
+                    <i-button type="push" ng-click="addToHostList($word)" label="##word.Add To List##"></i-button>
+                  </div>
+                </div>
+                <table class="table hover bold center">
+                  <tr>
+                    <th>S/N</th>
+                    <th>##word.Host##</th>
+                    <th>##word.English##</th>
+                    <th>##word.Arabic##</th>
+                    <th>##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="host in word.hostList">
+                    <td>{{$index+1}}</td>
+                    <td>{{host.name}}</td>
+                    <td>
+                      <i-control ng-model="host.En"></i-control>
+                    </td>
+                    <td><i-control ng-model="host.Ar"></i-control></td>
+                    <td>
+                      <i-button type="delete" title="##word.Delete##" ng-click="word.hostList.splice($index,1)"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
             </form>
           </div>
           <div class="modal-footer center">

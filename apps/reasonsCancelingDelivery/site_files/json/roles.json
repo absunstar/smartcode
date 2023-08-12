@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "public" ,
+    "name": "reasonsCancelingDeliveryAdmin",
+    "En": "Reasons Canceling Delivery Admin",
+    "Ar": "إدارة أسباب إلغاء التوصيل",
+    "permissions": ["reasonsCancelingDeliveryManage"]
+}]

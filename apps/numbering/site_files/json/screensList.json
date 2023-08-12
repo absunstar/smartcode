@@ -8,6 +8,14 @@
     "nameAr": "مسار الطابعات"
   },
   {
+    "category": "main",
+    "feature": "public",
+    "id": "reasonsCancelingDelivery",
+    "name": "Reasons Canceling Delivery",
+    "nameEn": "Reasons Canceling Delivery",
+    "nameAr": "أسباب إلغاء التوصيل"
+  },
+  {
     "category": "hmis",
     "feature": "public",
     "id": "offersOrders",
