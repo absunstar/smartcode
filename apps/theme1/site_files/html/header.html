@@ -27,28 +27,35 @@
         </div>
         <div class="settingAndLog d-flex flex-row gap-2">
           <!-- setting -->
-          <div class="accountSetting">
-            <a class="menuTag" href="/manageUser">
-              <p>##word.Account Setting##</p>
+          <div>
+            <a href="/manageUser">
+              <p>##word.Profile##</p>
             </a>
           </div>
           <div class="saperator"></div>
-          <!-- logout -->
-          <div class="logout">
+          <div>
             <a ng-click="logout()">
               <p>##word.Logout##</p>
             </a>
           </div>
+          <div class="saperator"></div>
+          <div>
+            <a x-lang="Ar" ng-click="changeLang('En')">
+              <p>##word.English##</p>
+            </a>
+            <a x-lang="En" ng-click="changeLang('Ar')">
+              <p>##word.Arabic##</p>
+            </a>
+          </div>
         </div>
       </div>
-      <i-button x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
-      <i-button x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
     </div>
     <div x-permission="!login" class="center padding margin bg-gray">
       <i-button type="login" label="##word.Login##" ng-click="showLogin()"></i-button>
-      <i-button x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
-      <i-button x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
+      <i-button class2="btn-light" x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
+      <i-button class2="btn-light" x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
     </div>
+   
     <!-- branch link -->
     <div class="branchLink">
       <p id="currantPage" class="text-center bold screenNameStyle">##data.appName##</p>

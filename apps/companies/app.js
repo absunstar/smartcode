@@ -33,7 +33,6 @@ module.exports = function init(site) {
       },
     ],
   };
-
   let teethList = [];
 
   for (let i = 0; i < 32; i++) {
@@ -95,51 +94,6 @@ module.exports = function init(site) {
     ],
   };
 
-  // site.onGET('/api/languages/ar-sa', (req, res) => {
-  //   site.words.addList(site.dir + '/site_files/json/words-sa.json', true);
-
-  //   res.json({
-  //     done: true,
-  //   });
-  // });
-
-  // app.view({}, (err, doc) => {
-  //   if (!err && doc) {
-  //     site.defaultCompany = doc;
-  //     if (!site.defaultCompany.branchList) {
-  //       site.defaultCompany.branchList = site.defaultCompany.branch_list;
-  //     }
-  //   } else {
-  //     app.add(site.defaultCompany, (err, doc) => {
-  //       if (!err && doc) {
-  //         site.defaultCompany = doc;
-  //         site.call('[company][created]', doc);
-
-  //         site.call('please add user', {
-  //           isCompany: true,
-  //           companyId: doc.id,
-  //           email: doc.username,
-  //           password: doc.password,
-  //           roles: [
-  //             {
-  //               name: 'companiesAdmin',
-  //             },
-  //           ],
-  //           branchList: [
-  //             {
-  //               company: doc,
-  //               branch: doc.branchList[0],
-  //             },
-  //           ],
-  //           nameAr: doc.nameAr,
-  //           nameEn: doc.nameEn,
-  //           image: doc.image,
-  //         });
-  //       }
-  //     });
-  //   }
-  // });
-
   site.get({
     name: 'qrcode',
     path: __dirname + '/site_files/html/qrcode.html',
@@ -157,13 +111,9 @@ module.exports = function init(site) {
 
   site.getCompanySetting = function (req) {
     let company = site.getCompany(req);
-    let branch = site.getBranch(req);
-
     let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
-    if (!companySetting.printerProgram || !companySetting.storesSetting) {
-      companySetting = { ...companySetting, ...site.defaultCompanySetting };
-    }
-
+    companySetting.printerProgram = companySetting.printerProgram || site.defaultCompanySetting.printerProgram;
+    companySetting.printerProgram = companySetting.storesSetting || site.defaultCompanySetting.storesSetting;
     return companySetting;
   };
 
@@ -191,32 +141,6 @@ module.exports = function init(site) {
     name: '/api/posting/all',
     path: __dirname + '/site_files/json/posting.json',
   });
-
-  site.defaultCompany = {
-    nameAr: 'الشركة الرئيسية',
-    nameEn: 'Main Company',
-    host: 'company.com',
-    username: 'admin@company.com',
-    password: 'admin',
-    image: '/imags/company.png',
-    active: true,
-    branchList: [
-      {
-        code: 1,
-        nameAr: 'الفرع الرئيسى',
-        nameEn: 'Main Branch',
-        charge: [{}],
-      },
-    ],
-  };
-
-  // site.onGET('/api/languages/ar-sa', (req, res) => {
-  //   site.words.addList(site.dir + '/site_files/json/words-sa.json', true);
-
-  //   res.json({
-  //     done: true,
-  //   });
-  // });
 
   app.init = function () {
     if (app.allowMemory) {

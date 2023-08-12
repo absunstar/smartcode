@@ -19,8 +19,8 @@ header::before {
   background-image: var(--linear-gradient1);
 }
 .modal-content {
-    height: auto !important;
-  }
+  height: auto !important;
+}
 .menutoggle {
   height: 0px;
 }
@@ -91,10 +91,8 @@ header::before {
 }
 
 .profileSection .saperator {
-  content: '';
-  width: 2px;
-  height: 25px;
-  background-color: var(--main-color2);
+  border-right: 1px solid var(--main-color2);
+  display: inline-block;
 }
 
 .headerbody .branchLink {
@@ -145,12 +143,10 @@ header::before {
 }
 
 .screenNameStyle {
-  border-radius: 16px 0px;
-  font-family: auto;
-  border: 1px #919304 solid;
-  padding: 5px;
- /*  background: #bec011; */
-  color: var(--main-color-font1);
+      font-family: auto;
+      border-top: 1px solid var(--theme-color);
+      padding: 5px;
+      color: var(--theme-color);
 }
 
 .headerbody .navbar .linkicon {
@@ -244,7 +240,6 @@ footer .copyright p {
     margin-top: -20px !important;
     gap: 10px !important;
   }
-
 
   .menutoggle {
     display: flex;
