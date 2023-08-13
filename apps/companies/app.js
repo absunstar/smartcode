@@ -115,10 +115,9 @@ module.exports = function init(site) {
   site.getCompanySetting = function (req) {
     let company = site.getCompany(req);
     let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
-    if (!companySetting.printerProgram || companySetting.storesSetting || companySetting.hrSettings) {
+    if (!companySetting.printerProgram || !companySetting.storesSetting || !companySetting.hrSettings) {
       companySetting = { ...companySetting, ...site.defaultCompanySetting };
     }
-
     return companySetting;
   };
 
