@@ -6,19 +6,19 @@
                 <span> ##word.Main##</span>
             </a>
 
-            <a x-data="##setting.showHospital##" class="tab-link" onclick="site.showTabContent(event, '#hmisTabs')">
+            <a x-data="setting.showHospital" class="tab-link" onclick="site.showTabContent(event, '#hmisTabs')">
                 <span>##word.HMIS##</span>
             </a>
 
-            <a class="tab-link" onclick="site.showTabContent(event, '#hrTabs')">
+            <a class="tab-link" x-data="setting.showHr"  onclick="site.showTabContent(event, '#hrTabs')">
                 <span>##word.HR##</span>
             </a>
 
-            <a class="tab-link" onclick="site.showTabContent(event, '#inventoryTabs')">
+            <a class="tab-link" x-data="setting.showInventory"  onclick="site.showTabContent(event, '#inventoryTabs')">
                 <span>##word.Inventory##</span>
             </a>
 
-            <a class="tab-link" onclick="site.showTabContent(event, '#accountingTabs')">
+            <a class="tab-link" x-data="setting.showAccountant" onclick="site.showTabContent(event, '#accountingTabs')">
                 <span>##word.Accounting## </span>
             </a>
         </div>
