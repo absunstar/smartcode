@@ -9,7 +9,7 @@ const site = require('../isite')({
   },
   theme: 'theme_paper',
   mongodb: {
-    db: 'HMIS2',
+    db: 'HMIS',
     limit: 1000,
     identity: {
       enabled: !0,
