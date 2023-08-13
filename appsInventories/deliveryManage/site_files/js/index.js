@@ -44,7 +44,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     site.showModal($scope.modalID);
   };
 
-  $scope.update = function (_item, modalID, type) {
+  $scope.update = function (_item, modalID) {
     $scope.error = '';
     if (modalID) {
       const v = site.validated(modalID);
@@ -57,10 +57,16 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
         return;
       }
     }
-    if (type == 'delivered') {
-      _item.deliveryStatus = $scope.deliveryStatusList[2];
-    } else if (type == 'canceled') {
-      _item.deliveryStatus = $scope.deliveryStatusList[3];
+    if (_item.$deliveredType == 'delivered') {
+      _item.deliveryStatus = { ...$scope.deliveryStatusList[2], date: new Date() };
+      _item.deliveryStatusList.push(_item.deliveryStatus);
+    } else if (_item.$deliveredType == 'canceled') {
+      if (!_item.reasonCancelingDelivery || !_item.reasonCancelingDelivery.id) {
+        $scope.error = '##word.You must choose the reason for canceling the delivery order##';
+        return;
+      }
+      _item.deliveryStatus = { ...$scope.deliveryStatusList[3], date: new Date() };
+      _item.deliveryStatusList.push(_item.deliveryStatus);
     }
 
     $scope.busy = true;
@@ -73,6 +79,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           if (modalID) {
+            console.log(modalID);
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }
@@ -1507,6 +1514,48 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.showDeliveryStatusModal = function (_item, type) {
+    $scope.error = '';
+    $scope.itemsError = '';
+    $scope.item = _item;
+    if (type == 'canceled') {
+      $scope.item.$deliveredType = 'canceled';
+    } else if (type == 'delivered') {
+      $scope.item.$deliveredType = 'delivered';
+    }
+    site.showModal('#deliveryStatusModal');
+  };
+
+  $scope.getReasonsCancelingDelivery = function () {
+    $scope.busy = true;
+    $scope.reasonsCancelingDeliveryList = [];
+    $http({
+      method: 'POST',
+      url: '/api/reasonsCancelingDelivery/all',
+      data: {
+        where: { active: true },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.reasonsCancelingDeliveryList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+
   $scope.getDeliveryOrderStatus = function () {
     $scope.busy = true;
     $scope.deliveryOrderStatusList = [];
@@ -1600,4 +1649,5 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
   $scope.getMedicineFrequenciesList();
   $scope.getMedicineRoutesList();
   $scope.getDeliveryOrderStatus();
+  $scope.getReasonsCancelingDelivery();
 });

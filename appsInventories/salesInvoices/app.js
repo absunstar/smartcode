@@ -157,10 +157,9 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        console.log(_data.salesCategory.id);
         if (_data.salesCategory && _data.salesCategory.id == 2) {
           _data.deliveryStatus = { ...site.deliveryStatus[0], date: new Date() };
-          _data.deliveryStatusList[_data.deliveryStatus];
+          _data.deliveryStatusList = [_data.deliveryStatus];
 
           _data['approved'] = false;
         } else {

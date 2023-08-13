@@ -115,8 +115,10 @@ module.exports = function init(site) {
   site.getCompanySetting = function (req) {
     let company = site.getCompany(req);
     let companySetting = app.memoryList.find((s) => s.id == company.id) || site.defaultCompanySetting;
-    companySetting.printerProgram = companySetting.printerProgram || site.defaultCompanySetting.printerProgram;
-    companySetting.printerProgram = companySetting.storesSetting || site.defaultCompanySetting.storesSetting;
+    if (!companySetting.printerProgram || companySetting.storesSetting || companySetting.hrSettings) {
+      companySetting = { ...companySetting, ...site.defaultCompanySetting };
+    }
+
     return companySetting;
   };
 
@@ -731,7 +733,7 @@ module.exports = function init(site) {
   });
 
   site.post({ name: `/api/companySetting/get`, public: true }, (req, res) => {
-    let companySetting = site.getCompanySetting(req) || site.defaultCompanySetting;
+    let companySetting = site.getCompanySetting(req);
     res.json({
       done: true,
       doc: companySetting,

@@ -11,10 +11,10 @@
             <div class="tabs full">
               <div class="tabs-header">
                 <a class="tab-link" onclick="site.showTabContent(event, '#printerProgram')"> ##word.Printers Program## </a>
-                <a class="tab-link" x-data="##setting.showHospital##" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
-                <a class="tab-link" x-data="##setting.showInventory##" onclick="site.showTabContent(event, '#storesSettings')"> <span>##word.Stores Settings## </span></a>
-                <a class="tab-link" x-data="##setting.showAccountant##" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
-                <a class="tab-link" x-data="##setting.showHr##" onclick="site.showTabContent(event, '#hrSettings')"> <span>##word.HR Settings## </span></a>
+                <a class="tab-link" ng-if="item.showHospital" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
+                <a class="tab-link" ng-if="item.showInventory" onclick="site.showTabContent(event, '#storesSettings')"> <span>##word.Stores Settings## </span></a>
+                <a class="tab-link" ng-if="item.showAccountant" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
+                <a class="tab-link" ng-if="item.showHr" onclick="site.showTabContent(event, '#hrSettings')"> <span>##word.HR Settings## </span></a>
                 <a class="tab-link" onclick="site.showTabContent(event, '#administrativeStructureSettings')"> <span>##word.Administrative Structure## </span></a>
                 <a class="tab-link" onclick="site.showTabContent(event, '#workflowAssignmentSettings')"> <span>##word.Workflow Assignment## </span></a>
                 <a class="tab-link" onclick="site.showTabContent(event, '#establishingAccountsSettings')"> <span>##word.Establishing accounts## </span></a>
@@ -255,7 +255,7 @@
                     </fieldset>
                   </fieldset>
                 </div>
-                <div id="hmisSettings" x-data="##setting.showHospital##" class="tab-content">
+                <div id="hmisSettings" ng-if="item.showHospital" class="tab-content">
                   <fieldset>
                     <legend>##word.Workflow##</legend>
                     <div class="row">
@@ -337,7 +337,7 @@
                     </fieldset>
                   </fieldset>
                 </div>
-                <div id="storesSettings" x-data="##setting.showInventory##" class="tab-content">
+                <div id="storesSettings" ng-if="item.showInventory" class="tab-content">
                   <fieldset>
                     <legend>##word.Stores Setting##</legend>
                     <div class="row">
@@ -360,7 +360,7 @@
                       >
                       </i-list>
                       <i-list
-                        x-data="##setting.showHospital##"
+                        ng-if="item.showHospital"
                         class="col4"
                         ng-model="item.storesSetting.erStore"
                         items="customersStoresList"
@@ -447,7 +447,7 @@
                   </fieldset>
                 </div>
 
-                <div id="accountsSettings" x-data="##setting.showAccountant##" class="tab-content">
+                <div id="accountsSettings" ng-if="item.showAccountant" class="tab-content">
                   <fieldset>
                     <div class="row">
                       <i-list
@@ -517,7 +517,7 @@
                   </fieldset>
                 </div>
 
-                <div id="hrSettings" x-data="##setting.showHr##" class="tab-content">
+                <div id="hrSettings" ng-if="item.showHr" class="tab-content">
                   <fieldset ng-model="item.hrSettings">
                     <legend class="black bold">##word.HR Penalities##</legend>
                     <h3 class="error">{{hrSettingsError}}</h3>

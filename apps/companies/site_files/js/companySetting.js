@@ -165,7 +165,6 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
     if (!_item.storesSetting.hasDefaultVendor) {
       delete _item.storesSetting.defaultVendor;
     }
-    console.log(_item.printerProgram,"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -175,7 +174,6 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          console.log(response.data.doc.printerProgram,"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
           $scope.item = response.data.doc;
           site.showModal('#alert');
           $timeout(() => {
@@ -196,7 +194,7 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $http({
       method: 'POST',
-      url: `${$scope.baseURL}/api/companies/view`,
+      url: `${$scope.baseURL}/api/companySetting/get`,
       data: {},
     }).then(
       function (response) {

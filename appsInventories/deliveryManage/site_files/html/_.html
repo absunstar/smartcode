@@ -7,6 +7,7 @@
     <div x-import="salesInvoices/modalSearch.html"></div>
     <div x-import="salesInvoices/installmentsModal.html"></div>
     <div x-import="salesInvoices/changeDelivery.html"></div>
+    <div x-import="salesInvoices/deliveryStatus.html"></div>
     <div x-import="purchaseOrders/expenseVouchersModal.html"></div>
 
     <div class="top-actions">
@@ -27,7 +28,7 @@
           <th>##word.Code##</th>
           <th>##word.Date##</th>
           <th>##word.Name##</th>
-          <th>##word.Invoice Type##</th>
+          <th>##word.Delivery##</th>
           <th>##word.Status##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
@@ -35,7 +36,7 @@
           <td class="center blue">{{item.code}}</td>
           <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
           <td class="center">{{item.customer.name##session.lang##}}</td>
-          <td class="center">{{item.invoiceType.name##session.lang##}}</td>
+          <td class="center">{{item.delivery.name##session.lang##}}</td>
           <td class="center">
             <span class="text-success" ng-show="item.active">##word.Active##</span>
             <span class="text-danger" ng-show="!item.active">##word.Not Active##</span>
@@ -43,7 +44,7 @@
 
           <td class="center not-print">
             <i-button
-            x-permissions="deliveryManageDelivery || deliveryManageManage"
+              x-permissions="deliveryManageDelivery || deliveryManageManage"
               label="##word.Change Delivery##"
               ng-show="item.salesCategory.id == 2 && (item.deliveryStatus.id == 1 || item.deliveryStatus.id == 2)"
               ng-click="showChangeDeliveryModal(item)"
@@ -55,10 +56,27 @@
               ng-show="(item.remainPaid >= 1 && item.salesCategory.id ==1) || (item.deliveryStatus.id == 3 && item.remainPaid >= 1  && item.salesCategory.id == 2)"
               ng-click="showAddVoucher(item)"
             ></i-button>
-            <i-button type="edit" ng-show="item.deliveryStatus.id == 2" x-permissions="deliveryManageDelivery || deliveryManageManage" label="##word.Delivered##" ng-click="update(item,null,'delivered')"></i-button>
-            <i-button type="edit" ng-show="item.deliveryStatus.id == 2" x-permissions="deliveryManageDelivery || deliveryManageManage" label="##word.Canceled##" ng-click="update(item,null,'canceled')"></i-button>
+            <i-button
+              type="edit"
+              ng-show="item.deliveryStatus.id == 2"
+              x-permissions="deliveryManageDelivery || deliveryManageManage"
+              label="##word.Delivered##"
+              ng-click="showDeliveryStatusModal(item,'delivered')"
+            ></i-button>
+            <i-button
+              type="edit"
+              ng-show="item.deliveryStatus.id == 2"
+              x-permissions="deliveryManageDelivery || deliveryManageManage"
+              label="##word.Canceled##"
+              ng-click="showDeliveryStatusModal(item,'canceled')"
+            ></i-button>
             <i-button type="edit" ng-show="!item.approved" x-permissions="deliveryManageUpdate || deliveryManageManage" title="##word.Edit##" ng-click="showUpdate(item)"></i-button>
-            <i-button ng-show="item.approved" x-permissions="deliveryManageUpdate || deliveryManageManage" label="##word.Status##" ng-click="showChangeStatusModal(item)" ></i-button>
+            <i-button
+              ng-show="item.approved && (item.deliveryStatus.id == 1 || item.deliveryStatus.id == 2)"
+              x-permissions="deliveryManageUpdate || deliveryManageManage"
+              label="##word.Status##"
+              ng-click="showChangeStatusModal(item)"
+            ></i-button>
             <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
             <!-- <i-button type="delete" x-permissions="deliveryManageDelete || deliveryManageManage" title="##word.Delete##" ng-click="showDelete(item)"></i-button> -->
           </td>
