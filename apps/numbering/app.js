@@ -57,7 +57,6 @@ module.exports = function init(site) {
       });
       return;
     }
-
     if (Numbering.some((n) => n.company.id == [company.id]) && !req.body.reset) {
       response.done = true;
       response.source = 'memory';
@@ -103,6 +102,36 @@ module.exports = function init(site) {
               }
             }
           );
+        }
+      );
+    } else {
+      Numbering = [];
+      moduleListCore.forEach((_ml) => {
+        _ml.typeNumbering = {
+          id: 3,
+          name: 'Connected',
+        };
+    
+        _ml.firstValue = 1;
+        _ml.lastValue = 0;
+      });
+
+      $numbering.add(
+        {
+          screensList: moduleListCore,
+          company: company,
+        },
+        (err, doc) => {
+          if (!err && doc) {
+            Numbering.push(doc);
+            response.done = true;
+            response.source = 'db';
+            response.doc = doc;
+            res.json(response);
+          } else {
+            response.error = err.message;
+            res.json(response);
+          }
         }
       );
     }
