@@ -17,15 +17,15 @@
       </div>
 
       <div class="userData">
-         <!-- idnumber -->
-         <div class="idNumber d-flex flex-row gap-1">
+        <!-- idnumber -->
+        <div class="idNumber d-flex flex-row gap-1">
           <p>ID : ##user.id##</p>
         </div>
         <!-- username -->
         <div class="d-flex flex-row gap-1">
           <div class="userName">##user.email##</div>
         </div>
-       
+
         <div class="settingAndLog d-flex flex-row gap-2">
           <!-- setting -->
           <div>
@@ -56,7 +56,7 @@
       <i-button class2="btn-light" x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
       <i-button class2="btn-light" x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
     </div>
-   
+
     <!-- branch link -->
     <div class="branchLink">
       <p id="currantPage" class="text-center bold screenNameStyle">##data.appName##</p>
@@ -73,10 +73,16 @@
           </a>
           <div class="submenu hideSection">
             <ul>
-              <li id="deliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
-                <a class="menuTag" href="/deliveryManage">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Delivery Manage##</p>
+              <li id="Customers" x-permissions="customersUi || customersManage">
+                <a class="menuTag" href="/customers">
+                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
+                  <p>##word.Customers##</p>
+                </a>
+              </li>
+              <li id="Vendors" x-permissions="vendorsUi || vendorsManage">
+                <a class="menuTag" href="/vendors">
+                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
+                  <p>##word.Vendors##</p>
                 </a>
               </li>
               <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
@@ -127,6 +133,7 @@
                   <p>##word.Return Purchase Orders##</p>
                 </a>
               </li>
+
               <li id="StoresItems" x-permissions="storesItemsUi || storesItemsManage">
                 <a class="menuTag" href="/storesItems">
                   <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
@@ -151,16 +158,11 @@
                   <p>##word.Cashers##</p>
                 </a>
               </li>
-              <li id="Customers" x-permissions="customersUi || customersManage">
-                <a class="menuTag" href="/customers">
-                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
-                  <p>##word.Customers##</p>
-                </a>
-              </li>
-              <li id="Vendors" x-permissions="vendorsUi || vendorsManage">
-                <a class="menuTag" href="/vendors">
-                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
-                  <p>##word.Vendors##</p>
+
+              <li id="deliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
+                <a class="menuTag" href="/deliveryManage">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Delivery Manage##</p>
                 </a>
               </li>
             </ul>
@@ -175,6 +177,40 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+
+              <li id="incomeLists" x-permissions="incomeListUi || incomeListManage">
+                <a class="menuTag" href="/incomeList">
+                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
+                  <p>##word.Income Lists##</p>
+                </a>
+              </li>
+              <li id="discountTypes" x-permissions="discountTypesUi || discountTypesManage">
+                <a class="menuTag" href="/discountTypes">
+                  <img src="/theme1/images/accounting/Discount Types.png" width="45" height="45" />
+                  <p>##word.Discount Types##</p>
+                </a>
+              </li>
+
+              <li id="voucherNames" x-permissions="voucherNamesUi || voucherNamesManage">
+                <a class="menuTag" href="/voucherNames">
+                  <img src="/theme1/images/accounting/Voucher.png" width="45" height="45" />
+                  <p>##word.Voucher Names##</p>
+                </a>
+              </li>
+
+              <li id="receiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
+                <a class="menuTag" href="/receiptVouchers">
+                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
+                  <p>##word.Receipt Vouchers##</p>
+                </a>
+              </li>
+              <li id="expenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
+                <a class="menuTag" href="/expenseVouchers">
+                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
+                  <p>##word.Expense Vouchers##</p>
+                </a>
+              </li>
+
               <li id="safe" x-permissions="safesUi || safesManage">
                 <a class="menuTag" href="/safes">
                   <img src="/theme1/images/accounting/safe.png" width="45" height="45" />
@@ -187,12 +223,7 @@
                   <p>##word.Banks##</p>
                 </a>
               </li>
-              <li id="voucherNames" x-permissions="voucherNamesUi || voucherNamesManage">
-                <a class="menuTag" href="/voucherNames">
-                  <img src="/theme1/images/accounting/Voucher.png" width="45" height="45" />
-                  <p>##word.Voucher Names##</p>
-                </a>
-              </li>
+       
               <li id="currencies" x-permissions="currenciesUi || currenciesManage">
                 <a class="menuTag" href="/currencies">
                   <img src="/theme1/images/accounting/currencies.png" width="45" height="45" />
@@ -241,36 +272,14 @@
                   <p>##word.Budget Classifications##</p>
                 </a>
               </li>
-              <li id="incomeLists" x-permissions="incomeListUi || incomeListManage">
-                <a class="menuTag" href="/incomeList">
-                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
-                  <p>##word.Income Lists##</p>
-                </a>
-              </li>
-              <li id="discountTypes" x-permissions="discountTypesUi || discountTypesManage">
-                <a class="menuTag" href="/discountTypes">
-                  <img src="/theme1/images/accounting/Discount Types.png" width="45" height="45" />
-                  <p>##word.Discount Types##</p>
-                </a>
-              </li>
+    
               <li id="taxesTypes" x-permissions="taxesTypesUi || taxesTypesManage">
                 <a class="menuTag" href="/taxesTypes">
                   <img src="/theme1/images/accounting/Taxes Types.png" width="45" height="45" />
                   <p>##word.Taxes Types##</p>
                 </a>
               </li>
-              <li id="receiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
-                <a class="menuTag" href="/receiptVouchers">
-                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
-                  <p>##word.Receipt Vouchers##</p>
-                </a>
-              </li>
-              <li id="expenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
-                <a class="menuTag" href="/expenseVouchers">
-                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
-                  <p>##word.Expense Vouchers##</p>
-                </a>
-              </li>
+   
               <li id="safesAdjusting" x-permissions="safesAdjustingUi || safesAdjustingManage">
                 <a class="menuTag" href="/safesAdjusting">
                   <img src="/theme1/images/accounting/Safes Adjusting.png" width="45" height="45" />
@@ -286,6 +295,7 @@
             </ul>
           </div>
         </li>
+
         <li id="Inventory" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Inventory')" x-data="setting.showInventory">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -295,12 +305,7 @@
           </a>
           <div class="submenu hideSection">
             <ul>
-              <li id="deliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
-                <a class="menuTag" href="/deliveryManage">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Delivery Manage##</p>
-                </a>
-              </li>
+      
               <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
                 <a class="menuTag" href="/salesInvoices">
                   <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
@@ -439,6 +444,14 @@
                   <p>##word.Vendors Groups##</p>
                 </a>
               </li>
+
+              <li id="deliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
+                <a class="menuTag" href="/deliveryManage">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Delivery Manage##</p>
+                </a>
+              </li>
+              
             </ul>
           </div>
         </li>
@@ -1046,30 +1059,34 @@
           </a>
           <div class="submenu hideSection">
             <ul>
-              <li id="printersPaths" x-permissions="printersPathsUi || printersPathsManage">
-                <a class="menuTag" href="/printersPaths">
-                  <img src="/theme1/images/setting/printers Paths.png" width="45" height="45" />
-                  <p>##word.printers Paths##</p>
-                </a>
-              </li>
               <li id="Customers" x-permissions="customersUi || customersManage">
                 <a class="menuTag" href="/customers">
                   <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
                   <p>##word.Customers##</p>
                 </a>
               </li>
+
               <li id="CustomersGroups" x-permissions="customersGroupsUi || customersGroupsManage">
                 <a class="menuTag" href="/customersGroups">
                   <img src="/theme1/images/setting/Customers Groups.png" width="45" height="45" />
                   <p>##word.Customers Groups##</p>
                 </a>
               </li>
+
+              <li id="Security" x-permissions="securityManage">
+                <a class="menuTag" href="/security">
+                  <img src="/theme1/images/setting/Security.png" width="45" height="45" />
+                  <p>##word.Security##</p>
+                </a>
+              </li>
+
               <li id="Nationalities" x-permissions="nationalitiesUi || nationalitiesManage">
                 <a class="menuTag" href="/nationalities">
                   <img src="/theme1/images/setting/Nationalities.png" width="45" height="45" />
                   <p>##word.Nationalities##</p>
                 </a>
               </li>
+
               <li id="Countries" x-permissions="countriesUi || countriesManage">
                 <a class="menuTag" href="/countries">
                   <img src="/theme1/images/setting/Countries.png" width="45" height="45" />
@@ -1094,12 +1111,7 @@
                   <p>##word.Areas##</p>
                 </a>
               </li>
-              <li id="Areas" x-permissions="areasUi || areasManage">
-                <a class="menuTag" href="/areas">
-                  <img src="/theme1/images/setting/Areas.png" width="45" height="45" />
-                  <p>##word.Areas##</p>
-                </a>
-              </li>
+
               <li id="reasonsCancelingDelivery" x-permissions="reasonsCancelingDeliveryUi || reasonsCancelingDeliveryManage">
                 <a class="menuTag" href="/reasonsCancelingDelivery">
                   <img src="/theme1/images/setting/Printers Paths.png" width="45" height="45" />
@@ -1118,18 +1130,21 @@
                   <p>##word.Numbering Setting##</p>
                 </a>
               </li>
-              <li id="Security" x-permissions="securityManage">
-                <a class="menuTag" href="/security">
-                  <img src="/theme1/images/setting/Security.png" width="45" height="45" />
-                  <p>##word.Security##</p>
-                </a>
-              </li>
+
               <li id="words Manage" x-permissions="xwordsManage">
                 <a class="menuTag" href="/xwords">
                   <img src="/theme1/images/setting/Company Setting.png" width="45" height="45" />
                   <p>##word.Words Manage##</p>
                 </a>
               </li>
+
+              <li id="printersPaths" x-permissions="printersPathsUi || printersPathsManage">
+                <a class="menuTag" href="/printersPaths">
+                  <img src="/theme1/images/setting/printers Paths.png" width="45" height="45" />
+                  <p>##word.printers Paths##</p>
+                </a>
+              </li>
+
               <li id="Company Setting" x-permissions="companySettingManage">
                 <a class="menuTag" href="/companySetting">
                   <img src="/theme1/images/setting/Company Setting.png" width="45" height="45" />
