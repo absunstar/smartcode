@@ -27,7 +27,7 @@ module.exports = function init(site) {
     host: 'company.com',
     username: 'admin@company.com',
     password: 'admin',
-    image: '/imags/company.png',
+    siteLogo: { url: '/imags/company.png' },
     active: true,
     branchList: [
       {

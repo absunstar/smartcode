@@ -15,7 +15,6 @@ module.exports = function init(site) {
     siteLogo: { url: '/images/logo.png' },
     siteName: 'Smart Code',
     siteSeparator: '-',
-    siteSlogan: 'SoftWare Solutions',
     core: true,
     siteColor1: '#bec011',
     siteColor2: '#245a40',
