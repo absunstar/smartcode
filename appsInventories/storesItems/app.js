@@ -841,6 +841,7 @@ module.exports = function init(site) {
           itemGroup: 1,
           reorderLimit: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -848,7 +849,6 @@ module.exports = function init(site) {
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
-          hasMedicalData: 1,
         };
 
         if (search) {
@@ -1334,11 +1334,12 @@ module.exports = function init(site) {
             item.noVat = itemDoc.noVat;
             item.totalPrice = unitDoc.price * item.count;
             item.hasMedicalData = itemDoc.hasMedicalData;
+            item.hasColorsData = itemDoc.hasColorsData;
             item.itemsMedicalTypes = itemDoc.itemsMedicalTypes;
             item.totalDiscounts = item.discountType === 'value' ? item.discount : (item.totalPrice * item.discount) / 100;
             item.totalAfterDiscounts = item.totalPrice - item.totalDiscounts;
             if (!item.noVat) {
-              item.vat = storesSetting.storesSetting.vat;
+              item.vat = storesSetting.storesSetting && storesSetting.storesSetting.vat ? storesSetting.storesSetting.vat : 0;
               item.totalVat = (item.totalAfterDiscounts * item.vat) / 100;
               item.totalVat = site.toNumber(item.totalVat);
             } else {

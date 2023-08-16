@@ -403,7 +403,8 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || itm.sn == response.data.doc.sn);
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || (itm.sn && itm.sn == response.data.doc.sn));
+          console.log(index);
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -467,6 +468,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -533,6 +535,8 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
             code: elem.code,
             nameAr: elem.nameAr,
             nameEn: elem.nameEn,
+            hasColorsData: elem.hasColorsData,
+            hasMedicalData: elem.hasMedicalData,
             itemGroup: elem.itemGroup,
             unit: elem.unit,
             count: elem.count,
@@ -623,6 +627,7 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -727,11 +732,13 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
     });
 
     let item = {
-      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
+      sfdaCode: elem.item.sfdaCodeList ? elem.item.sfdaCodeList[0] : '',
       id: elem.item.id,
       code: elem.item.code,
       nameAr: elem.item.nameAr,
       nameEn: elem.item.nameEn,
+      hasMedicalData: elem.item.hasMedicalData,
+      hasColorsData: elem.item.hasColorsData,
       itemGroup: elem.item.itemGroup,
       barcode: elem.unit.barcode,
       unit: { id: elem.unit.id, code: elem.unit.code, nameAr: elem.unit.nameAr, nameEn: elem.unit.nameEn },
@@ -774,11 +781,10 @@ app.controller('transferItemsOrders', function ($scope, $http, $timeout) {
   $scope.selectBatch = function (item, batch) {
     $scope.addBatch = '';
     $scope.errorBatch = '';
-    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sm && itm.sn == batch.sn));
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
     if (index === -1) {
       batch.currentCount = batch.count;
-      batch.count = 1;
-      item.batchesList.unshift(batch);
+      item.batchesList.unshift({ ...batch, count: 1 });
       item.$batchCount += 1;
       $scope.addBatch = 'Added successfully';
       $timeout(() => {

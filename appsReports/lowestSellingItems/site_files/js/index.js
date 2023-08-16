@@ -55,6 +55,7 @@ app.controller('lowestSellingItems', function ($scope, $http, $timeout) {
                     nameAr: 1,
                     noVat: 1,
                     hasMedicalData: 1,
+                    hasColorsData: 1,
                     workByBatch: 1,
                     workBySerial: 1,
                     workByQrCode: 1,

@@ -43,13 +43,17 @@
                         <table class="table loaded center bold hover details">
                             <tr>
                                 <th>##word.S##</th>
-                                <th ng-hide="(batch.approved || batch.$view) && batch.workByQrCode">##word.Code##</th>
-                                <th ng-hide="batch.workByQrCode">##word.Production Date##</th>
+                                <th ng-hide="(batch.approved || batch.$view) && batch.workByQrCode">
+                                    
+                                    <p ng-show="!batch.hasColorsData">##word.Code##</p>
+                                    <p ng-show="batch.hasColorsData">##word.Color##</p>
+                                </th>
+                                <th ng-hide="batch.workByQrCode  || batch.hasColorsData">##word.Production Date##</th>
                                 <th ng-show="batch.workByQrCode">##word.GTIN##</th>
                                 <th ng-show="batch.workByQrCode">##word.BATCH##</th>
                                 <th ng-show="batch.workByQrCode">##word.SERIAL NO.##</th>
-                                <th ng-show="batch.workByBatch || batch.workByQrCode">##word.Expiry Date##</th>
-                                <th ng-show="batch.workByBatch">##word.validit Days##</th>
+                                <th ng-show="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData">##word.Expiry Date##</th>
+                                <th ng-show="batch.workByBatch  && !batch.hasColorsData">##word.validit Days##</th>
                                 <th ng-show="batch.workByBatch">##word.Quantity##</th>
                                 <th ng-hide="batch.approved || batch.$view">##word.Actions##</th>
                             </tr>
@@ -77,17 +81,17 @@
                                     <p ng-show="batch.approved || batch.$view">{{c.sn}}</p>
                                 </td>
 
-                                <td class="center" ng-hide="batch.workByQrCode">
+                                <td class="center" ng-hide="batch.workByQrCode || batch.hasColorsData">
                                     <i-date ng-click="changeDate(c,'pro')" ng-hide="batch.approved || batch.$view" ng-model="c.productionDate"></i-date>
                                     <p ng-show="batch.approved || batch.$view">{{c.productionDate|date:'dd/MM/yyyy'}}</p>
                                 </td>
 
-                                <td class="center " ng-show="batch.workByBatch || batch.workByQrCode">
+                                <td class="center " ng-show="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData">
                                     <i-date ng-click="changeDate(c,'exp')" ng-model="c.expiryDate" ng-hide="batch.approved || batch.$view"></i-date>
                                     <p class="text-danger" ng-show="batch.approved || batch.$view">{{c.expiryDate|date:'dd/MM/yyyy'}}</p>
                                 </td>
 
-                                <td class="center" ng-show="batch.workByBatch">
+                                <td class="center" ng-show="batch.workByBatch && !batch.hasColorsData">
                                     <i-control ng-change="changeDate(c,'pro')" type="number" ng-hide="batch.approved || batch.$view" ng-model="c.validityDays"></i-control>
                                     <p ng-show="batch.approved || batch.$view">{{c.validityDays}}</p>
                                 </td>

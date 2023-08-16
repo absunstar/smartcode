@@ -369,6 +369,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       noVat: orderItem.item.noVat,
       extraDiscount: orderItem.extraDiscount || 0,
       hasMedicalData: orderItem.item.hasMedicalData,
+      hasColorsData: orderItem.item.hasColorsData,
       discount: orderItem.unit.discount,
       maxDiscount: orderItem.unit.maxDiscount,
       discountType: orderItem.unit.discountType,
@@ -613,6 +614,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -693,6 +695,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -1271,7 +1274,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || itm.sn == response.data.doc.sn);
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || (itm.sn && itm.sn == response.data.doc.sn));
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -1301,11 +1304,10 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
   $scope.selectBatch = function (item, batch) {
     $scope.addBatch = '';
     $scope.errorBatch = '';
-    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sm && itm.sn == batch.sn));
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
     if (index === -1) {
       batch.currentCount = batch.count;
-      batch.count = 1;
-      item.batchesList.unshift(batch);
+      item.batchesList.unshift({ ...batch, count: 1 });
       item.$batchCount += 1;
       $scope.addBatch = 'Added successfully';
       $timeout(() => {
@@ -1426,7 +1428,11 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
   };
   $scope.selectSalesCategory = function () {
     if ($scope.item.salesCategory && $scope.item.salesCategory.id) {
-      $scope.item.invoiceType = $scope.invoiceTypesList[1];
+      if ($scope.item.salesCategory.id == 1) {
+        $scope.item.invoiceType = $scope.invoiceTypesList[0];
+      } else if ($scope.item.salesCategory.id == 1) {
+        $scope.item.invoiceType = $scope.invoiceTypesList[1];
+      }
     }
   };
 
@@ -1555,7 +1561,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     );
   };
 
-
   $scope.getDeliveryOrderStatus = function () {
     $scope.busy = true;
     $scope.deliveryOrderStatusList = [];
@@ -1588,7 +1593,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     let status = $scope.deliveryOrderStatusList.find((_u) => {
       return _u.id == id;
     });
-    $scope.item.deliveryOrderStatusList.unshift({ status, date: new Date(),user :{id:'##user.id##',nameAr:'##user.nameAr##',nameEn:'##user.nameEn##'} });
+    $scope.item.deliveryOrderStatusList.unshift({ status, date: new Date(), user: { id: '##user.id##', nameAr: '##user.nameAr##', nameEn: '##user.nameEn##' } });
   };
 
   $scope.showInstallmentsModal = function (item) {

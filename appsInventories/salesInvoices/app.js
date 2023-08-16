@@ -923,14 +923,15 @@ module.exports = function init(site) {
         let totalGeneric = 0;
         let totalMedicalDevice = 0;
         docs.forEach((_doc) => {
-          for (let i = 0; i < _doc.itemsList.length; i++) {}
-          if (_doc.itemsList[i].itemsMedicalTypes) {
-            if (_doc.itemsList[i].itemsMedicalTypes.id == 1) {
-              totalBrand += _doc.itemsList[i].total;
-            } else if (_doc.itemsList[i].itemsMedicalTypes.id == 2) {
-              totalGeneric += _doc.itemsList[i].total;
-            } else if (_doc.itemsList[i].itemsMedicalTypes.id == 3) {
-              totalMedicalDevice += _doc.itemsList[i].total;
+          for (let i = 0; i < _doc.itemsList.length; i++) {
+            if (_doc.itemsList[i].itemsMedicalTypes) {
+              if (_doc.itemsList[i].itemsMedicalTypes.id == 1) {
+                totalBrand += _doc.itemsList[i].total;
+              } else if (_doc.itemsList[i].itemsMedicalTypes.id == 2) {
+                totalGeneric += _doc.itemsList[i].total;
+              } else if (_doc.itemsList[i].itemsMedicalTypes.id == 3) {
+                totalMedicalDevice += _doc.itemsList[i].total;
+              }
             }
           }
         });

@@ -340,6 +340,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
           validityDays: 1,
           collectedItemsList: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           collectionItem: 1,
           workByQrCode: 1,
         },
@@ -821,7 +822,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
       return success;
     }
 
-    if (_item.workByBatch && _item.validityDays < 1) {
+    if (_item.workByBatch && _item.validityDays < 1 && !_item.hasColorsData) {
       $scope.error = '##word.Please Enter Validity Days##';
       return success;
     }

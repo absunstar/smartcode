@@ -28,7 +28,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
     $scope.orderItem = {
       count: 1,
       approved: false,
-      currentBalance: 0,
+      currentCount: 0,
     };
   };
   $scope.showAdd = function (_item) {
@@ -110,6 +110,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
             itemGroup: elem.itemGroup,
             currentCount: elem.storeBalance,
             hasMedicalData: elem.hasMedicalData,
+            hasColorsData: elem.hasColorsData,
             unit: elem.unit,
             count: 0,
             price: elem.price,
@@ -451,6 +452,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -526,6 +528,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -565,7 +568,16 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
         purchasePrice: elem.purchasePrice,
       });
       $scope.orderItem.unit = $scope.unitsList[0];
+      $scope.changeItemUnits();
     }
+  };
+  $scope.changeItemUnits = function () {
+    let unitIndex = $scope.orderItem.item.unitsList.findIndex((_s) => _s.unit.id === $scope.orderItem.unit.id);
+    let storeIndex = $scope.orderItem.item.unitsList[unitIndex].storesList.findIndex((_s) => _s.store.id === $scope.item.store.id);
+    $scope.orderItem.currentCount =
+      $scope.orderItem.item.unitsList[unitIndex].storesList[storeIndex] && $scope.orderItem.item.unitsList[unitIndex].storesList[storeIndex].currentCount
+        ? $scope.orderItem.item.unitsList[unitIndex].storesList[storeIndex].currentCount
+        : 0;
   };
 
   $scope.addToItemsList = function (elem) {
@@ -584,16 +596,18 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
       return;
     }
     let item = {
-      sfdaCode: elem.,
+      sfdaCode: elem.item.sfdaCodeList ? elem.item.sfdaCodeList[0] : '',
       id: elem.item.id,
       code: elem.item.code,
       nameAr: elem.item.nameAr,
       nameEn: elem.item.nameEn,
       itemGroup: elem.item.itemGroup,
+      hasColorsData: elem.item.hasColorsData,
+      hasMedicalData: elem.item.hasMedicalData,
       barcode: elem.unit.barcode,
       unit: { id: elem.unit.id, code: elem.unit.code, nameAr: elem.unit.nameAr, nameEn: elem.unit.nameEn },
       count: 0,
-      currentCount: elem.count,
+      currentCount: elem.currentCount,
       price: elem.unit.purchasePrice,
       approved: false,
     };
@@ -837,6 +851,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,

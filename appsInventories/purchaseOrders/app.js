@@ -173,7 +173,7 @@ module.exports = function init(site) {
               }
 
               if (_item.workByBatch) {
-                if (!_b.code || !_b.expiryDate || !_b.validityDays) {
+                if ((!_b.code || !_b.expiryDate || !_b.validitayDys) &&!_item.hasColorsData ) {
                   notCode = true;
                 }
               } else if (_item.workBySerial) {

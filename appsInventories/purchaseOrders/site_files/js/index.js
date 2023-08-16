@@ -659,6 +659,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -793,6 +794,8 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       nameAr: orderItem.item.nameAr,
       nameEn: orderItem.item.nameEn,
       itemGroup: orderItem.item.itemGroup,
+      hasMedicalData: orderItem.item.hasMedicalData,
+      hasColorsData: orderItem.item.hasColorsData,
       barcode: orderItem.unit.barcode,
       unit: orderItem.unit,
       count: orderItem.count,
@@ -886,6 +889,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
               gtinList: elem.gtinList,
               storeBalance: elem.storeBalance,
               hasMedicalData: elem.hasMedicalData,
+              hasColorsData: elem.hasColorsData,
               salesPrice: elem.salesPrice,
               bonusCount: 0,
               bonusPrice: 0,
@@ -942,6 +946,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           nameAr: 1,
           noVat: 1,
           hasMedicalData: 1,
+          hasColorsData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -1047,7 +1052,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
 
         if (!_item.noVat) {
           _item.vat = $scope.setting.storesSetting.vat;
-          _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100) ;
+          _item.totalVat = (_item.totalAfterDiscounts * _item.vat) / 100;
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {
           _item.vat = 0;
@@ -1148,12 +1153,18 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.errorBatch = '';
     let obj = {};
     if (item.workByBatch) {
-      obj = {
-        productionDate: new Date(),
-        expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
-        validityDays: item.validityDays || 0,
-        count: 0,
-      };
+      if (item.hasColorsData) {
+        obj = {
+          count: 0,
+        };
+      } else {
+        obj = {
+          productionDate: new Date(),
+          expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
+          validityDays: item.validityDays || 0,
+          count: 0,
+        };
+      }
     } else if (item.workBySerial) {
       obj = {
         productionDate: new Date(),
@@ -1211,12 +1222,18 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     } else {
       if (item.workByBatch) {
         let obj = {};
-        obj = {
-          productionDate: new Date(),
-          expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
-          validityDays: item.validityDays || 0,
-          count: count,
-        };
+        if (item.hasColorsData) {
+          obj = {
+            count: count,
+          };
+        } else {
+          obj = {
+            productionDate: new Date(),
+            expiryDate: new Date($scope.addDays(new Date(), item.validityDays || 0)),
+            validityDays: item.validityDays || 0,
+            count: count,
+          };
+        }
         item.batchesList = [obj];
       } else {
         for (let i = 0; i < count; i++) {
