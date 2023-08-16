@@ -89,9 +89,10 @@
                 <div class="row padding">
                   <i-checkbox ng-if="!item.workBySerial && !item.workByQrCode" ng-model="item.workByBatch" class="col2" label="##word.Work By Batch##"></i-checkbox>
                   <i-checkbox ng-if="item.workByBatch" ng-model="item.hasColorsData" class="col2" label="##word.Has Colors Data##"></i-checkbox>
+                  <i-checkbox ng-if="item.workByBatch" ng-model="item.hasSizesData" class="col2" label="##word.Has Sizes Data##"></i-checkbox>
                   <i-checkbox ng-if="!item.workByBatch && !item.workByQrCode" ng-model="item.workBySerial" class="col2" label="##word.Work By Serial##"></i-checkbox>
                   <i-checkbox ng-if="!item.workByBatch && !item.workBySerial" ng-change="item.gtinList = [{}]" ng-model="item.workByQrCode" class="col2" label="##word.Work By Qr Code##"></i-checkbox>
-                  <i-control class="col3" ng-if="item.workByBatch && !item.hasColorsData" min="1" type="number" ng-model="item.validityDays" label="##word.Validity Days##"></i-control>
+                  <i-control class="col3" ng-if="item.workByBatch && !item.hasColorsData  && !item.hasSizesData" min="1" type="number" ng-model="item.validityDays" label="##word.Validity Days##"></i-control>
                   <!--  <i-control class="col6" ng-if="item.workByQrCode" ng-model="item.$code" label="##word.QrCode##" ng-change="readQR(item)"></i-control>
                   <i-control class="col3" ng-if="item.workByQrCode" type="text"  ng-model="item.gtin" label="##word.GTIN##"></i-control> -->
                   <div class="col7" ng-if="item.workByQrCode">

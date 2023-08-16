@@ -660,6 +660,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           noVat: 1,
           hasMedicalData: 1,
           hasColorsData: 1,
+          hasSizesData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -796,6 +797,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       itemGroup: orderItem.item.itemGroup,
       hasMedicalData: orderItem.item.hasMedicalData,
       hasColorsData: orderItem.item.hasColorsData,
+      hasSizesData: orderItem.item.hasSizesData,
       barcode: orderItem.unit.barcode,
       unit: orderItem.unit,
       count: orderItem.count,
@@ -890,6 +892,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
               storeBalance: elem.storeBalance,
               hasMedicalData: elem.hasMedicalData,
               hasColorsData: elem.hasColorsData,
+              hasSizesData: elem.hasSizesData,
               salesPrice: elem.salesPrice,
               bonusCount: 0,
               bonusPrice: 0,
@@ -947,6 +950,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           noVat: 1,
           hasMedicalData: 1,
           hasColorsData: 1,
+          hasSizesData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -1153,7 +1157,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.errorBatch = '';
     let obj = {};
     if (item.workByBatch) {
-      if (item.hasColorsData) {
+      if (item.hasColorsData || item.hasSizesData) {
         obj = {
           count: 0,
         };
@@ -1222,7 +1226,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     } else {
       if (item.workByBatch) {
         let obj = {};
-        if (item.hasColorsData) {
+        if (item.hasColorsData || item.hasSizesData) {
           obj = {
             count: count,
           };

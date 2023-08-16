@@ -173,7 +173,11 @@ module.exports = function init(site) {
               }
 
               if (_item.workByBatch) {
-                if ((!_b.code || !_b.expiryDate || !_b.validitayDys) &&!_item.hasColorsData ) {
+                if (_item.hasColorsData && (!_b.code || !_b.color)) {
+                  notCode;
+                } else if (_item.hasSizesData && (!_b.code || !_b.size)) {
+                  notCode;
+                } else if (!_b.code || !_b.expiryDate || !_b.validitayDys) {
                   notCode = true;
                 }
               } else if (_item.workBySerial) {

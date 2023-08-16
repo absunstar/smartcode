@@ -842,6 +842,7 @@ module.exports = function init(site) {
           reorderLimit: 1,
           hasMedicalData: 1,
           hasColorsData: 1,
+          hasSizesData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,
@@ -1335,6 +1336,7 @@ module.exports = function init(site) {
             item.totalPrice = unitDoc.price * item.count;
             item.hasMedicalData = itemDoc.hasMedicalData;
             item.hasColorsData = itemDoc.hasColorsData;
+            item.hasSizesData = itemDoc.hasSizesData;
             item.itemsMedicalTypes = itemDoc.itemsMedicalTypes;
             item.totalDiscounts = item.discountType === 'value' ? item.discount : (item.totalPrice * item.discount) / 100;
             item.totalAfterDiscounts = item.totalPrice - item.totalDiscounts;

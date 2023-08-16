@@ -314,6 +314,7 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
           noVat: 1,
           hasMedicalData: 1,
           hasColorsData: 1,
+          hasSizesData: 1,
           workByBatch: 1,
           workBySerial: 1,
           workByQrCode: 1,

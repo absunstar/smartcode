@@ -57,16 +57,15 @@
           <div class="row">
             <table class="table loaded center bold hover details">
               <tr>
-                <th ng-show="!batch.workByQrCode">
-                  <p ng-if="!batch.hasColorsData">##word.Code##</p>
-                  <p ng-if="batch.hasColorsData">##word.Color##</p>
-                </th>
+                <th ng-show="!batch.workByQrCode">##word.Code##</th>
                 <th ng-show="batch.workByQrCode">##word.GTIN##</th>
                 <th ng-show="batch.workByQrCode">##word.BATCH##</th>
                 <th ng-show="batch.workByQrCode">##word.SERIAL NO.##</th>
-                <th ng-hide="batch.workByQrCode || batch.hasColorsData">##word.Production Date##</th>
-                <th ng-if="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData">##word.Expiry Date##</th>
-                <th ng-show="batch.workByBatch && !batch.hasColorsData">##word.validit Days##</th>
+                <th ng-show="batch.hasColorsData">##word.Color##</th>
+                <th ng-show="batch.hasSizesData">##word.Size##</th>
+                <th ng-hide="batch.workByQrCode || batch.hasColorsData || batch.hasSizesData">##word.Production Date##</th>
+                <th ng-if="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData && !batch.hasSizesData">##word.Expiry Date##</th>
+                <th ng-show="batch.workByBatch && !batch.hasColorsData && !batch.hasSizesData">##word.validit Days##</th>
                 <th ng-show="batch.workByBatch">##word.Current QTY.##</th>
                 <th ng-show="batch.workByBatch">##word.Quantity##</th>
                 <th ng-hide="mode == 'view' || batch.approved || batch.$view">##word.Actions##</th>
@@ -86,15 +85,21 @@
                 <td class="center" ng-show="batch.workByQrCode">
                   <p>{{c.sn}}</p>
                 </td>
-                <td class="center" ng-hide="batch.workByQrCode || batch.hasColorsData">
+                  <td class="center" ng-show="batch.hasColorsData">
+                  <p>{{c.color}}</p>
+                </td>
+                <td class="center" ng-show="batch.hasSizesData">
+                  <p>{{c.size}}</p>
+                </td>
+                <td class="center" ng-hide="batch.workByQrCode || batch.hasColorsData || batch.hasSizesData">
                   <p class="green">{{c.productionDate | date: "dd / MM / yyyy"}}</p>
                 </td>
 
-                <td class="center" ng-if="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData">
+                <td class="center" ng-if="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData && !batch.hasSizesData">
                   <p class="red">{{c.expiryDate | date: "dd / MM / yyyy"}}</p>
                 </td>
 
-                <td class="center" ng-show="batch.workByBatch && !batch.hasColorsData">
+                <td class="center" ng-show="batch.workByBatch && !batch.hasColorsData && !batch.hasSizesData">
                   <p class="green">{{c.validityDays}}</p>
                 </td>
                 <td class="center" ng-show="batch.workByBatch">
