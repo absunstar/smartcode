@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "vehiclesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "vehicles", "name": "importNationalities", "En": "Import", "Ar": "إستيراد" }
+]

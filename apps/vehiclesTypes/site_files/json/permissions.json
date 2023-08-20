@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "vehiclesTypesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "vehiclesTypes", "name": "importNationalities", "En": "Import", "Ar": "إستيراد" }
+]

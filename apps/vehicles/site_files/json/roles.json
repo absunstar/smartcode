@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "public" ,
+    "name": "vehiclesAdmin",
+    "En": "Vehicles Admin",
+    "Ar": "إدارة المركبات",
+    "permissions": ["vehiclesManage"]
+}]

@@ -17,6 +17,22 @@
   },
   {
     "category": "main",
+    "feature": "public",
+    "id": "vehicles",
+    "name": "vehicles",
+    "nameEn": "Vehicles",
+    "nameAr": "المركبات"
+  },
+  {
+    "category": "main",
+    "feature": "public",
+    "id": "vehiclesTypes",
+    "name": "vehiclesTypes",
+    "nameEn": "Vehicles Types",
+    "nameAr": "أنواع المركبات"
+  },
+  {
+    "category": "main",
     "feature": "restaurant",
     "id": "kitchens",
     "name": "kitchens",

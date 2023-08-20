@@ -3,19 +3,32 @@
     <div class="modal-header">
       <span class="close">&times;</span>
       <p class="center" ng-show="mode == 'add' ">
-        ##word.Add## ##word.employee##
+        ##word.Add##
+        <span ng-if="employeeType == 'employee'">##word.Employee##</span>
+        <span ng-if="employeeType == 'deliverers'">##word.Delivery##</span>
+        <span ng-if="employeeType == 'cashers'">##word.Casher##</span>
+
         <i class="fa fa-plus"></i>
       </p>
       <p class="center" ng-show="mode == 'edit' ">
-        ##word.Edit## ##word.employee##
+        ##word.Edit##
+        <span ng-if="employeeType == 'employee'">##word.Employee##</span>
+        <span ng-if="employeeType == 'deliverers'">##word.Delivery##</span>
+        <span ng-if="employeeType == 'cashers'">##word.Casher##</span>
         <i class="fa fa-pencil"></i>
       </p>
       <p class="center" ng-show="mode == 'delete' ">
-        ##word.Delete## ##word.employee##
+        ##word.Delete##
+        <span ng-if="employeeType == 'employee'">##word.Employee##</span>
+        <span ng-if="employeeType == 'deliverers'">##word.Delivery##</span>
+        <span ng-if="employeeType == 'cashers'">##word.Casher##</span>
         <i class="fa fa-trash"></i>
       </p>
       <p class="center" ng-show="mode == 'view' ">
-        ##word.employee## ##word.Details##
+        <span ng-if="employeeType == 'employee'">##word.Employee##</span>
+        <span ng-if="employeeType == 'deliverers'">##word.Delivery##</span>
+        <span ng-if="employeeType == 'cashers'">##word.Casher##</span>
+        ##word.Details##
         <i class="fa fa-file"></i>
       </p>
     </div>

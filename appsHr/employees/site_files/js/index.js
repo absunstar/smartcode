@@ -1,5 +1,11 @@
 app.controller('employees', function ($scope, $http, $timeout) {
   $scope.setting = site.showObject(`##data.#setting##`);
+  $scope.employeeType = 'employee';
+  if (window.location.href.contains('deliverers')) {
+    $scope.employeeType = 'deliverers';
+  } else if (window.location.href.contains('cashers')) {
+    $scope.employeeType = 'cashers';
+  }
   $scope.baseURL = '';
   $scope.appName = 'employees';
   $scope.modalID = '#employeesManageModal';

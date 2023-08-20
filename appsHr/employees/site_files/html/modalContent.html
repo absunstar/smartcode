@@ -119,7 +119,21 @@
               </fieldset>
               <div class="row">
                 <i-date class="col6" label="##word.Issue Date##" ng-model="item.idIssueDate"> </i-date>
-                <i-control class="col6" label="##word.Issue Place##" ng-model="item.idIssuePlace"> </i-control>
+                <i-control class="col6" label="##word.Place of issue##" ng-model="item.idIssuePlace"> </i-control>
+              </div>
+            </fieldset>
+            <fieldset ng-if="employeeType == 'deliverers'">
+              <legend>##word.Driving license data##</legend>
+              <div class="row">
+                <div class="col9">
+                  <i-date ng-model="item.licenseStart" label="##word.Release Date##"></i-date>
+                  <i-date ng-model="item.licenseEnd" label="##word.Expiry Date##"></i-date>
+                  <i-control label="##word.Place of issue##" ng-model="item.licenseIssuePlace"> </i-control>
+                </div>
+                <div class="col3">
+                  <p>##word.Driver's license photo##</p>
+                  <i-image class="img128" ng-model="item.licenseImage"></i-image>
+                </div>
               </div>
             </fieldset>
           </div>
