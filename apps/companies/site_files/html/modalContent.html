@@ -3,7 +3,7 @@
   <div class="tabs">
     <div class="tabs-header full">
       <a class="tab-link" onclick="site.showTabContent(event, '#basicInformation')"> ##word.Company Basic Information## </a>
-      <a class="tab-link" onclick="site.showTabContent(event, '#companiesBranches')"> ##word.Companies Branches Informations## </a>
+      <a class="tab-link" onclick="site.showTabContent(event, '#companiesBranches')"> ##word.Company Branches Informations## </a>
       <a class="tab-link" onclick="site.showTabContent(event,'#modules')"> ##word.Modules## </a>
       <a class="tab-link" onclick="site.showTabContent(event,'#loginInformation')"> ##word.Login Information## </a>
     </div>
@@ -76,7 +76,7 @@
           </legend>
 
           <fieldset>
-            <legend>##word.Companies Branch Information##</legend>
+            <legend>##word.Company Branch Information##</legend>
 
             <div class="row">
               <i-control class="col2" label="##word.Branch Code##" ng-model="branch.code"> </i-control>
@@ -156,6 +156,7 @@
             <i-checkbox label="##word.Show Reports##" ng-model="company.showReports"></i-checkbox>
             <i-checkbox label="##word.Show Setting##" ng-model="company.showSetting"></i-checkbox>
             <i-checkbox label="##word.Show POS##" ng-model="company.showPos"></i-checkbox>
+            <i-checkbox label="##word.Show Restaurant##" ng-model="company.showRestaurant"></i-checkbox>
           </div>
         </fieldset>
       </div>

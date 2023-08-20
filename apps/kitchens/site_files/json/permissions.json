@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "kitchensUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "kitchens", "name": "importTables", "En": "Import", "Ar": "إستيراد" }
+]

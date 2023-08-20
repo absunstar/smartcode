@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "public",
+        "name": "tablesGroupsAdmin",
+        "En": "Tables Groups Admin",
+        "Ar": "إدارة مجموعات الطاولات",
+        "permissions": ["tablesGroupsManage"]
+    }
+]

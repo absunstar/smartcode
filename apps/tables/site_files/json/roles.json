@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "public",
+        "name": "tablesAdmin",
+        "En": "Tables Admin",
+        "Ar": "إدارة الطاولات",
+        "permissions": ["tablesManage"]
+    }
+]

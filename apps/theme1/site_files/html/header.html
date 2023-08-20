@@ -64,6 +64,92 @@
     <!-- nav bar -->
     <div class="navbar">
       <ul class="nav d-flex flex-column" x-permissions="login">
+        <li id="Restaurant" class="navlink" onclick="showAndHide('Restaurant')" x-data="setting.showRestaurant">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="linktext">##word.Restaurant##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="Customers" x-permissions="customersUi || customersManage">
+                <a class="menuTag" href="/customers">
+                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
+                  <p>##word.Customers##</p>
+                </a>
+              </li>
+              <li id="Vendors" x-permissions="vendorsUi || vendorsManage">
+                <a class="menuTag" href="/vendors">
+                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
+                  <p>##word.Vendors##</p>
+                </a>
+              </li>
+              <li id="receiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
+                <a class="menuTag" href="/receiptVouchers">
+                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
+                  <p>##word.Receipt Vouchers##</p>
+                </a>
+              </li>
+              <li id="expenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
+                <a class="menuTag" href="/expenseVouchers">
+                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
+                  <p>##word.Expense Vouchers##</p>
+                </a>
+              </li>
+
+              <li id="StoresItems" x-permissions="storesItemsUi || storesItemsManage">
+                <a class="menuTag" href="/storesItems">
+                  <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
+                  <p>##word.Stores Items##</p>
+                </a>
+              </li>
+              <li id="Employees" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/employees">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Employees##</p>
+                </a>
+              </li>
+              <li id="Delivery" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/deliverers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Deliverers##</p>
+                </a>
+              </li>
+              <li id="Cashers" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/cashers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Cashers##</p>
+                </a>
+              </li>
+
+              <li id="deliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
+                <a class="menuTag" href="/deliveryManage">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Delivery Manage##</p>
+                </a>
+              </li>
+              <li id="Kitchens" x-permissions="kitchensUi || kitchensManage">
+                <a class="menuTag" href="/kitchens">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Kitchens##</p>
+                </a>
+              </li>
+              <li id="Tables" x-permissions="tablesUi || tablesManage">
+                <a class="menuTag" href="/tables">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Tables##</p>
+                </a>
+              </li>
+              <li id="TablesGroups" x-permissions="tablesGroupsUi || tablesGroupsManage">
+                <a class="menuTag" href="/tablesGroups">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Tables Groups##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
         <li id="Pos" class="navlink" onclick="showAndHide('Pos')" x-data="setting.showPos">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -1141,7 +1227,7 @@
               <li id="printersPaths" x-permissions="printersPathsUi || printersPathsManage">
                 <a class="menuTag" href="/printersPaths">
                   <img src="/theme1/images/setting/printers Paths.png" width="45" height="45" />
-                  <p>##word.printers Paths##</p>
+                  <p>##word.Printers Paths##</p>
                 </a>
               </li>
 

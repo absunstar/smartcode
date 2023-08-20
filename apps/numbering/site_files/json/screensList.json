@@ -16,6 +16,30 @@
     "nameAr": "أسباب إلغاء التوصيل"
   },
   {
+    "category": "main",
+    "feature": "restaurant",
+    "id": "kitchens",
+    "name": "kitchens",
+    "nameEn": "Kitchens",
+    "nameAr": "المطابخ"
+  },
+  {
+    "category": "main",
+    "feature": "restaurant",
+    "id": "tables",
+    "name": "tables",
+    "nameEn": "Tables",
+    "nameAr": "الطاولات"
+  },
+  {
+    "category": "main",
+    "feature": "restaurant",
+    "id": "tablesGroups",
+    "name": "tablesGroups",
+    "nameEn": "Tables Groups",
+    "nameAr": "مجموعات الطاولات"
+  },
+  {
     "category": "hmis",
     "feature": "public",
     "id": "offersOrders",

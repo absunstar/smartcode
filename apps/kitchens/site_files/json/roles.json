@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "public",
+        "name": "kitchensAdmin",
+        "En": "Kitchens Admin",
+        "Ar": "إدارة المطابخ",
+        "permissions": ["kitchensManage"]
+    }
+]

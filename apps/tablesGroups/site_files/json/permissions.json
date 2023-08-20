@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "tablesGroupsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "tablesGroups", "name": "importTablesGroups", "En": "Import", "Ar": "إستيراد" }
+]

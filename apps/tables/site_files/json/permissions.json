@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "tables", "name": "tablesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "tables", "name": "tablesUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "tables", "name": "importTables", "En": "Import", "Ar": "إستيراد" }
+]
