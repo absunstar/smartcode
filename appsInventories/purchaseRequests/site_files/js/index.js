@@ -360,6 +360,7 @@ app.controller('purchaseRequests', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          image: 1,
           noVat: 1,
           hasMedicalData: 1,
           hasColorsData: 1,

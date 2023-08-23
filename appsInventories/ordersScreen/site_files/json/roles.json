@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "salesInvoicesAdmin",
+        "En": "Sales Invoices For Customers Admin",
+        "Ar": "إدارة فواتير مبيعات للعملاء",
+        "permissions": ["salesInvoicesManage"]
+    }
+]

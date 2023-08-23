@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="En" data-ng-app="myApp">
+  <head x-import="theme1/head.html">
+    <style x-import="ordersScreen/ordersScreen.css"></style>
+  </head>
+
+  <body class="##session.lang##">
+    <!--     <div x-import="theme1/header.html"></div> -->
+    <div id="main-layout" ng-controller="ordersScreen" class="container loaded">
+      <div class="row" x-permissions="salesInvoicesUi || salesInvoicesManage">
+        <div x-import="ordersScreen/itemEdit.html"></div>
+        <div x-import="salesInvoices/modal.html"></div>
+        <div x-import="salesInvoices/batchModal.html"></div>
+        <div x-import="salesInvoices/batchSearchModal.html"></div>
+        <div x-import="salesInvoices/modalSearch.html"></div>
+        <div x-import="salesInvoices/installmentsModal.html"></div>
+        <div x-import="salesInvoices/changeDelivery.html"></div>
+        <div x-import="salesInvoices/deliveryStatus.html"></div>
+        <div x-import="purchaseOrders/expenseVouchersModal.html"></div>
+        <div class="row">
+          <div class="col6 order-invoice">
+            <div class="row">
+              <div class="row">
+                <h2 class="bold center red">{{error}}</h2>
+
+                <div class="row">
+                  <i-date class="col-6" ng-model="item.date" label="##word.Date##"></i-date>
+                  <i-list
+                    ng-search="item.$salesCategory"
+                    class="col-3"
+                    display="name##session.lang##"
+                    ng-model="item.salesCategory"
+                    label="##word.Sales Category##"
+                    items="salesCategoriesList"
+                    ng-change="changeSalesCategory(item) ; calc(item)"
+                  >
+                  </i-list>
+                </div>
+
+                <div class="row">
+                  <i-button type="bg-blue white" ng-show="item.salesCategory.id == 3" label="##word.Table##" ng-click="showOrderDetails(item,'table');showTables()"> </i-button>
+
+                  <i-button type="bg-blue white" label="##word.Customer##" fa="user-tie" ng-hide="item.salesCategory.id == 2" ng-click="showOrderDetails(item,'customer')"> </i-button>
+
+                  <i-button type="bg-blue white" ng-show="item.salesCategory.id == 2" label="##word.Delivery##" fa="motorcycle" ng-click="showOrderDetails(item,'delivery')"> </i-button>
+
+                  <i-button type="bg-black white" label="##word.Print##" fa="print" ng-click="printOrdersToday()"> </i-button>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="table-content items">
+                <div class="table-headers center">
+                  <div class="col-4 header">##word.Item##</div>
+                  <div class="col-2 header">##word.Count## ##word.+##</div>
+                  <div class="col-1 header">##word.Price##</div>
+                  <div class="col-1 header" x-data="setting.showRestaurant">##word.extras##</div>
+                  <div class="col-2 header">##word.Total##</div>
+                  <div class="col-2 header">##word.Actions##</div>
+                </div>
+                <div class="table-items center" ng-repeat="itm in item.itemsList">
+                  <div class="col-4 item">
+                    <p>{{itm.name##session.lang##}}</p>
+                  </div>
+                  <div class="col-2 item">
+                    <i-control min="0" type="number" ng-change="calculate(item)" ng-model="itm.count"></i-control>
+                  </div>
+                  <div class="col-1 item">
+                    <p class="text-center">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></p>
+                  </div>
+                  <div class="col-1 item" x-data="setting.showRestaurant">{{itm.totalExtras | xmoney2}}<span class="currency">##word.$##</span></div>
+                  <div class="col-2 item bold font-18 green">{{itm.total | xmoney2}}<span class="currency">##word.$##</span></div>
+                  <div class="col-2 item">
+                    <div class="row center">
+                      <div class="col-6">
+                        <i-button class="center" type="edit" ng-click="showEditItem(itm)"></i-button>
+                      </div>
+                      <div class="col-6">
+                        <i-button class="center" type="delete" ng-click="item.itemsList.splice($index,1);calculate(item)"></i-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+
+            <div class="row">
+              <div class="col10">
+                <div class="table-content">
+                  <div class="table-headers" style="height: 45px">
+                    <div class="col-3 header">##word.T-Before Vat##</div>
+                    <div class="col-2 header">##word.VAT##</div>
+                    <div class="col-3 header">##word.T-After Vat##</div>
+                    <div class="col-2 header">##word.Discount##</div>
+                    <div class="col-2 header">##word.Net##</div>
+                  </div>
+                  <div class="table-items">
+                    <div class="col-3 item center bold font-17">{{item.totalBeforeVat | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-2 item center bold font-17 red">{{item.totalVat | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-3 item center bold font-17">{{item.totalAfterVat | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-2 item center bold font-17">{{item.totalDiscounts | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-2 item center bold green font-20">{{item.totalNet | xmoney2}}<span class="currency">##word.$##</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col2">
+                <i-button type="bg-green white closing" fa="save" ng-hide="item.hold || '##user.type##' == 'table'" label="##word.Close##" ng-click="displayCloseOrder()"> </i-button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col6">
+            <div class="row">
+              <i-button fa="cart-plus" type="bg-green white btnOrders" label="##word.New##" ng-click="newOrderInvoice()"> </i-button>
+
+              <i-button fa="cart-arrow-down" type="bg-blue white btnOrders" label="##word.Open orders##" ng-click="viewInvoicesActiveList()"> </i-button>
+
+              <i-button fa="ban" type="bg-brown white btnOrders" ng-hide="item.hold || item.status.id == 2" label="##word.Hold##" ng-click="addOrderInvoice('hold')"> </i-button>
+
+              <i-button fa="ban" type="bg-brown white btnOrders" ng-show="item.hold" label="##word.Unhold##" ng-click="updateOrderInvoice(item,'unhold')"> </i-button>
+
+              <i-button type="bg-yellow btnOrders" ng-hide="item.status.id == 2" fa="cart-plus" label="##word.Save##" ng-click="saveOrder()"> </i-button>
+
+              <i-button type="bg-red white btnOrders" fa="window-close" label="##word.Cancel##" ng-click="cancelOrderInvoice(item)"> </i-button>
+            </div>
+
+            <fieldset x-data="setting.showRestaurant" ng-show="item.salesCategory.id == 3">
+              <div class="row center"><b class="font-16">##word.Table##</b> : <b class="font-16 bold blue">{{item.table.name##session.lang##}} ( {{item.table.code}} )</b></div>
+            </fieldset>
+
+            <div class="row scroll item-groups">
+              <a class="item pointer" ng-repeat="g in itemsGroupsList" ng-click="getStoresItems(g , $event)">
+                <img ng-src="{{g.image.url}}" />
+                <p>{{g.name##session.lang##}}</p>
+              </a>
+            </div>
+
+            <div class="row item-list">
+              <a class="item hover col4 pointer" ng-repeat="itm in itemsList" ng-click="addToItemsList(itm)">
+                <div class="row">
+                  <div class="col-4"><img ng-src="{{itm.image.url}}" ng-src2="/images/food.png" /></div>
+                  <div class="col-8"><p class="center">{{itm.name##session.lang##}}</p></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p class="error">{{mainError}}</p>
+      </div>
+      <div x-import="salesInvoices/thermalPrint.html"></div>
+      <div id="salesInvoicesDetails" x-import="salesInvoices/a4Print.html"></div>
+      <div id="salesInvoicesLabels" x-import="salesInvoices/labelPrint.html"></div>
+    </div>
+    <div x-import="theme1/footer.html"></div>
+    <script x-import="ordersScreen/index.js"></script>
+  </body>
+</html>

@@ -7,7 +7,9 @@
     "permissions": [
       "securityManage",
       "numberingManage",
+      "itemsExtrasManage",
       "dailyCashByDatesManage",
+      "orderInvoiceManage",
       "kitchensManage",
       "vehiclesManage",
       "vehiclesTypesManage",

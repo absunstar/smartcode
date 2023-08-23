@@ -888,7 +888,7 @@ module.exports = function init(site) {
               reportReorderLimits = true;
               delete where.reportReorderLimits;
             }
-
+            
             app.all({ where, select, limit }, (err, docs) => {
               const selectedDocs = [];
               if (reportReorderLimits) {

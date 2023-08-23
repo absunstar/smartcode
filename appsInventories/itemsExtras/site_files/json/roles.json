@@ -1,0 +1,9 @@
+[
+  {
+    "moduleName": "inventory",
+    "name": "itemsExtrasAdmin",
+    "En": "Items Extras Admin",
+    "Ar": "إدارة إضافات الأصناف",
+    "permissions": ["itemsExtrasManage"]
+  }
+]

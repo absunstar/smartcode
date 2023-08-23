@@ -40,7 +40,7 @@
                         <span class="text-success" ng-if="item.workByBatch">##word.Batch## - {{item.validityDays}} - ##word.Days##</span>
                         <span class="text-primary" ng-if="item.workBySerial">##word.Serial##</span>
                         <span class="text-primary" ng-if="item.workByQrCode">##word.Qr Code##</span>
-                        <span class="text-danger" ng-if="!item.workByBatch && !item.workBySerial && !item.workByQrCode">##word.Not Set##</span>
+                        <span class="text-danger" ng-if="!item.workByBatch && !item.workBySerial && !item.workByQrCode">##word.Not Found##</span>
                     </td>
                     <td class="center">
                         <span ng-show="item.active" class="text-success">##word.Active##</span>

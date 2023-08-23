@@ -460,7 +460,7 @@
         "feature": "order",
         "title_ar": "شاشة الطلبات",
         "title_en": "Orders screen",
-        "image_url": "/images/order_invoice.png",
+        "image_url": "/images/orderInvoice.png",
         "description_ar": "الشاشة المسئولة عن إضافة طلبات الأصناف للعملاء و أنواعها طاولات , تيك أواي , توصيل ويمكن منها إضافة عملاء و إنشاء فاتورة حساب للطلب",
         "description_en": "The screen responsible for adding items requests to customers and their types, tables, take away, delivery, and it is possible to add clients and create an account invoice for the order."
     },

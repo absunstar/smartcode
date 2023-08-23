@@ -27,9 +27,15 @@
     "category": "main",
     "feature": "public",
     "id": "vehiclesTypes",
-    "name": "vehiclesTypes",
     "nameEn": "Vehicles Types",
     "nameAr": "أنواع المركبات"
+  },
+  {
+    "category": "main",
+    "feature": "public",
+    "id": "itemsExtras",
+    "nameEn": "Items Extras",
+    "nameAr": "إضافات الأصناف"
   },
   {
     "category": "main",
@@ -234,6 +240,7 @@
     "id": "achiCodes",
     "name": "ACHI Codes"
   },
+
   {
     "category": "inventory",
     "feature": "public",

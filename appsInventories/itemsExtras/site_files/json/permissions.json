@@ -1,0 +1,73 @@
+[
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasManage",
+        "En": "Manage",
+        "Ar": "إدارة"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasAdd",
+        "En": "Add",
+        "Ar": "إضافة"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasUpdate",
+        "En": "Edit",
+        "Ar": "تعديل"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasDelete",
+        "En": "Delete",
+        "Ar": "حذف"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasView",
+        "En": "View",
+        "Ar": "عرض"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasSearch",
+        "En": "Search",
+        "Ar": "بحث"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasExport",
+        "En": "Export",
+        "Ar": "تصدير"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasPrint",
+        "En": "Print",
+        "Ar": "طباعة"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    },
+    {
+        "moduleName": "inventory",
+        "screenName": "itemsExtras",
+        "name": "itemsExtrasUi",
+        "En": "UI",
+        "Ar": "الواجهة الرسومية"
+    },
+    { "moduleName": "inventory", "screenName": "itemsExtras", "name": "importStoresUnits", "En": "Import", "Ar": "إستيراد" }
+]

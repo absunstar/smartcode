@@ -382,7 +382,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
     }
 
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store';
+      $scope.error = '##word.Please Select Store##';
       return;
     }
     $scope.busy = true;
@@ -402,6 +402,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          image: 1,
           noVat: 1,
           hasMedicalData: 1,
           hasColorsData: 1,
@@ -571,7 +572,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
       allowSale: true,
     };
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store';
+      $scope.error = '##word.Please Select Store##';
       return;
     }
     if (ev && ev.which != 13) {
@@ -598,6 +599,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          image: 1,
           noVat: 1,
           hasMedicalData: 1,
           hasColorsData: 1,

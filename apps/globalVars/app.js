@@ -29,7 +29,7 @@ module.exports = function init(site) {
     { id: 3, nameEn: 'Delivered', nameAr: 'تم التوصيل', name: 'delivered' },
     { id: 4, nameEn: 'Canceled', nameAr: 'ملغي', name: 'canceled' },
   ];
-  
+
   site.patientTypes = [
     { id: 1, code: 'N', nameEn: 'Normal', nameAr: 'عادي' },
     { id: 2, code: 'V', nameEn: 'VIP PATIENT', nameAr: 'مميز' },
@@ -393,7 +393,6 @@ module.exports = function init(site) {
     });
   });
 
-
   site.post('/api/scientificRanks', (req, res) => {
     res.json({
       done: true,
@@ -477,6 +476,9 @@ module.exports = function init(site) {
     });
   });
   site.post('/api/salesCategories', (req, res) => {
+    if (site.getCompanySetting(req).showRestaurant && site.salesCategories.length == 2) {
+      site.salesCategories.push({ id: 3, nameEn: 'Table', nameAr: 'طاولة', name: 'table' });
+    }
     res.json({
       done: true,
       list: site.salesCategories,

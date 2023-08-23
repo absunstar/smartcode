@@ -1,0 +1,79 @@
+<div id="editItemModal" class="modal small">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+    </div>
+
+    <div class="modal-body">
+      <fieldset>
+        <div class="row">
+          <i-list
+            ng-model="itemOrder.unit"
+            class="col4"
+            label="##word.Unit##"
+            display="unit.name##session.lang##"
+            ng-change="changeItemUnit(itemOrder);"
+            ng-search="itemOrder.$unit"
+            space=" - "
+            display2="barcode"
+            items="itemOrder.unitsList"
+          >
+          </i-list>
+
+          <i-control class="col2" type="number" label="##word.Price##" ng-change="calculate(item)" ng-model="itemOrder.price"> </i-control>
+
+          <i-control class="col2" type="number" label="##word.Discount##" ng-change="calculate(item)" ng-model="itemOrder.discount"> </i-control>
+          <div class="col2">
+            <i-radio ng-model="itemOrder.discountType" ng-click="calculate(item)" label="##word.Amount##" ng-value="number" group="type" type="radio"> </i-radio>
+          </div>
+          <div class="col2">
+            <i-radio ng-model="itemOrder.discountType" ng-click="calculate(item)" label="##word.Percent##" ng-value="percent" group="type" type="radio"> </i-radio>
+          </div>
+        </div>
+        <fieldset x-data="setting.showRestaurant">
+          <legend>##word.Item Extras##</legend>
+          <div class="row">
+            <i-list class="col5" ng-model="item.$itemExtra" ng-search="item.$_itemExtra" display="name##session.lang##" items="itemsExtrasList"> </i-list>
+
+            <div class="col2">
+              <i-button type="push" label="##word.add##" ng-click="addItemsExtras(itemOrder)"> </i-button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div ng-show="itemOrder.itemExtrasList.length > 0">
+              <table class="table hover bold center loaded">
+                <tr>
+                  <th>##word.Serial##</th>
+                  <th>##word.Extra Name##</th>
+                  <th>##word.Price##</th>
+                  <th>##word.Actions##</th>
+                </tr>
+
+                <tr ng-repeat="e in itemOrder.itemExtrasList track by $index">
+                  <td>{{$index + 1}}</td>
+
+                  <td>{{e.name##session.lang##}}</td>
+
+                  <td class="green">{{e.price}}</td>
+
+                  <td>
+                    <i-button type="delete default" ng-click="itemOrder.itemExtrasList.splice($index,1) ; calculate(item)"> </i-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="row">
+          <i-textarea label="##word.Notes##" ng-model="itemOrder.notes"></i-textarea>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="modal-footer center">
+      <i-button type="save" label="##word.Save##" onclick="site.hideModal('#editItemModal')"> </i-button>
+    </div>
+  </div>
+</div>

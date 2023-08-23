@@ -65,7 +65,7 @@
                 <th ng-show="batch.hasSizesData">##word.Size##</th>
                 <th ng-hide="batch.workByQrCode || batch.hasColorsData || batch.hasSizesData">##word.Production Date##</th>
                 <th ng-if="(batch.workByBatch || batch.workByQrCode) && !batch.hasColorsData && !batch.hasSizesData">##word.Expiry Date##</th>
-                <th ng-show="batch.workByBatch && !batch.hasColorsData && !batch.hasSizesData">##word.validit Days##</th>
+                <th ng-show="batch.workByBatch && !batch.hasColorsData && !batch.hasSizesData">##word.Validit Days##</th>
                 <th ng-show="batch.workByBatch">##word.Current QTY.##</th>
                 <th ng-show="batch.workByBatch">##word.Quantity##</th>
                 <th ng-hide="mode == 'view' || batch.approved || batch.$view">##word.Actions##</th>
