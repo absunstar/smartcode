@@ -73,6 +73,12 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+              <li id="ordersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
+                <a class="menuTag" href="/ordersScreen">
+                  <img src="/theme1/images/setting/ordersScreen.png" width="45" height="45" />
+                  <p>##word.Orders Screen##</p>
+                </a>
+              </li>
               <li id="Customers" x-permissions="customersUi || customersManage">
                 <a class="menuTag" href="/customers">
                   <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
@@ -83,6 +89,12 @@
                 <a class="menuTag" href="/vendors">
                   <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
                   <p>##word.Vendors##</p>
+                </a>
+              </li>
+              <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
+                <a class="menuTag" href="/salesInvoices">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Customers##</p>
                 </a>
               </li>
               <li id="receiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
@@ -165,6 +177,18 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+              <li id="ordersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
+                <a class="menuTag" href="/ordersScreen">
+                  <img src="/theme1/images/setting/ordersScreen.png" width="45" height="45" />
+                  <p>##word.Orders Screen##</p>
+                </a>
+              </li>
+              <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
+                <a class="menuTag" href="/salesInvoices">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Customers##</p>
+                </a>
+              </li>
               <li id="Customers" x-permissions="customersUi || customersManage">
                 <a class="menuTag" href="/customers">
                   <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
@@ -177,12 +201,7 @@
                   <p>##word.Vendors##</p>
                 </a>
               </li>
-              <li id="SalesInvoicseForCustomers" x-permissions="salesInvoicesUi || salesInvoicesManage">
-                <a class="menuTag" href="/salesInvoices">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Customers##</p>
-                </a>
-              </li>
+            
               <li id="SalesInvoicseForCompanies" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage">
                 <a class="menuTag" href="/salesCompaniesInvoices">
                   <img src="/theme1/images/inventory/sales Companies Invoices.png" width="45" height="45" />

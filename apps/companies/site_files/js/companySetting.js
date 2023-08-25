@@ -418,6 +418,11 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
           nameAr: 1,
           taxIdentificationNumber: 1,
           mobile: 1,
+          country:1,
+          gov:1,
+          city:1,
+          area:1,
+          street:1,
         },
         search: $search,
       },
@@ -865,6 +870,34 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
       }
     );
   };
+  
+  $scope.getSalesCategories = function () {
+    $scope.busy = true;
+    $scope.salesCategoriesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/salesCategories',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.salesCategoriesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
 
   $scope.loadSafes = function () {
     $scope.error = '';
@@ -911,4 +944,6 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
   $scope.getCompanySetting();
   $scope.getCurrencies();
   $scope.getDoctorsList();
+  $scope.getSalesCategories();
+
 });

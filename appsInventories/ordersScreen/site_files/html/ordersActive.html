@@ -1,0 +1,67 @@
+<style>
+  .btn.deleting {
+    width: 250px;
+    background: #e21212;
+    font-weight: bold;
+  }
+</style>
+<div id="ordersActiveModal" class="modal small">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>
+        ##word.Open Orders##
+        <i class="fa fa-plus"></i>
+      </h2>
+    </div>
+    <div class="modal-body">
+      <br />
+
+      <div class="center">
+        <div class="row">
+          <div class="col4 center" ng-repeat="s in ordersActivelist">
+            <div class="active-list pointer row">
+              <h4 class="bold center active-list-tittle"><span class="indigoD">##word.Code## :</span> {{s.code}}</h4>
+
+              <p class="center font-18 bold">
+                <span class="indigoD">##word.Date## : </span>
+                <span>{{s.date |date:"dd - MM - yyyy" }}</span>
+              </p>
+              <p class="center font-18 bold">
+                <span class="indigoD">##word.Sales Category## : </span>
+                {{s.salesCategory.name##session.lang##}}
+              </p>
+              <p class="center font-18 bold" ng-show="s.customer.id">
+                <span class="indigoD">##word.Customer## : </span>
+                {{s.customer.name##session.lang##}}
+              </p>
+              <p class="center font-18 bold" ng-show="s.salesCategory.id == 2">
+                <span class="indigoD">##word.Delivery## : </span>
+                {{s.delivery.name##session.lang##}}
+              </p>
+              <p class="center font-18 bold" ng-show="s.salesCategory.id == 3">
+                <span class="indigoD">##word.Table## :</span>
+                {{s.table.name##session.lang##}}
+              </p>
+              <p class="center font-18 bold" ng-show="s.salesCategory.id == 3">
+                <span class="indigoD"> ##word.Tables Group## : </span>
+                {{s.table.tablesGroup.name##session.lang##}}
+              </p>
+              <div class="modal-footer center">
+                <div class="row btn-center">
+                  <i-button ng-click="delete(s,'active')" type="delete" title="##word.Delete"></i-button>
+                  <i-button ng-click="returnWaitingOrder(s)" type="edit" title="##word.Edit"></i-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer center">
+      <h2 class="error">{{error}}</h2>
+
+      <i-button type="close" label="##word.close##" onclick="site.hideModal( '#ordersActiveModal')"> </i-button>
+    </div>
+  </div>
+</div>

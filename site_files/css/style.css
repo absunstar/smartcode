@@ -214,6 +214,14 @@ hr.line {
   color: #707070 !important;
 }
 
+.btn-center {
+  place-content: center;
+}
+
+.bg-white {
+  background: white !important;
+}
+
 .bg-table {
   background: #0094aa !important;
 }

@@ -389,6 +389,16 @@
                         ng-search="item.storesSetting.$itemGroup"
                       >
                       </i-list>
+                      <i-list
+                        ng-search="item.$salesCategory"
+                        class="col-3"
+                        v="r"
+                        display="name##session.lang##"
+                        ng-model="item.storesSetting.salesCategory"
+                        label="##word.Sales Category##"
+                        items="salesCategoriesList"
+                      >
+                      </i-list>
                     </div>
 
                     <div class="row">
@@ -414,15 +424,15 @@
 
                     <div class="row">
                       <i-list
-                      x-data="setting.showRestaurant || setting.showPos"
-                      class="col4"
-                      ng-model="item.storesSetting.ordersScreenStore"
-                      items="customersStoresList"
-                      display="name##session.lang##"
-                      label="##word.Orders Screen Store##"
-                      ng-search="item.storesSetting.$ordersScreenStore"
-                    >
-                    </i-list>
+                        x-data="setting.showRestaurant || setting.showPos"
+                        class="col4"
+                        ng-model="item.storesSetting.ordersScreenStore"
+                        items="customersStoresList"
+                        display="name##session.lang##"
+                        label="##word.Orders Screen Store##"
+                        ng-search="item.storesSetting.$ordersScreenStore"
+                      >
+                      </i-list>
                       <i-list class="col4" ng-model="item.storesSetting.customer" items="customersList" display="name##session.lang##" label="##word.Customer##" ng-get="getCustomers($search)">
                       </i-list>
                       <i-control class="col4" type="number" ng-model="item.storesSetting.vat" label="##word.VAT##"></i-control>

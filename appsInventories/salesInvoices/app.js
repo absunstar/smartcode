@@ -157,11 +157,17 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        if (!_data.itemsList || !_data.itemsList.length) {
+          response.error = `The items list is empty`;
+          res.json(response);
+          return;
+        }
         if (_data.salesCategory && _data.salesCategory.id == 2) {
           _data.deliveryStatus = { ...site.deliveryStatus[0], date: new Date() };
           _data.deliveryStatusList = [_data.deliveryStatus];
-
-          _data['approved'] = false;
+          _data['approved'] = _data['approved'] || false;
+        } else if (_data.orderScreen) {
+          _data['approved'] = _data['approved'] || false;
         } else {
           _data['approved'] = true;
         }
@@ -390,6 +396,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        if (!_data.itemsList || !_data.itemsList.length) {
+          response.error = `The items list is empty`;
+          res.json(response);
+          return;
+        }
         _data.editUserInfo = req.getUserFinger();
 
         app.update(_data, (err, result) => {

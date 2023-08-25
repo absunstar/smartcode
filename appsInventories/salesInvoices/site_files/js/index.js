@@ -78,11 +78,11 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       });
     }
 
-    /*   if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
+      if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
       $scope.item.customer = $scope.customersList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.customer.id;
       });
-    } */
+    }
     site.showModal($scope.modalID);
   };
 

@@ -4,7 +4,7 @@
         <div x-import="customers/modalSearch.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="customersAdd || customersManage" label="##word.New##" ng-click="showAdd()"></i-button>
+            <i-button type="add" x-permissions="customersAdd || customersManage" label="##word.New##" ng-click="showAddCustomer()"></i-button>
             <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Commercial Customer##" ng-click="searchAll(search={'type.id':6,commercialCustomer:true})"></i-button>
             <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Customer##" ng-click="searchAll(search={'type.id':6,commercialCustomer:false})"></i-button>
             <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
