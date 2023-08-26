@@ -43,7 +43,7 @@ module.exports = function init(site) {
     printerProgram: { itemsCountA4: 4, invoiceHeader: [], invoiceHeader2: [], invoiceFooter: [], thermalHeader: [], thermalFooter: [] },
     storesSetting: {
       showPos: true,
-      showAccountant: true,
+      showAccounting: true,
       showInventory: true,
       showHr: true,
       showHospital: true,

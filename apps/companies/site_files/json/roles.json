@@ -3,7 +3,7 @@
     "moduleName": "public",
     "name": "companiesAdmin",
     "En": "Administration Permissions",
-    "Ar": "َصلاحيات الإدارة",
+    "Ar": "صلاحيات الإدارة",
     "permissions": [
       "securityManage",
       "numberingManage",

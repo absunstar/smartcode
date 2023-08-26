@@ -13,7 +13,7 @@
                 <a class="tab-link" onclick="site.showTabContent(event, '#printerProgram')"> ##word.Printers Program## </a>
                 <a class="tab-link" ng-if="item.showHospital" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
                 <a class="tab-link" ng-if="item.showInventory" onclick="site.showTabContent(event, '#storesSettings')"> <span>##word.Stores Settings## </span></a>
-                <a class="tab-link" ng-if="item.showAccountant" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
+                <a class="tab-link" ng-if="item.showAccounting" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
                 <a class="tab-link" ng-if="item.showHr" onclick="site.showTabContent(event, '#hrSettings')"> <span>##word.HR Settings## </span></a>
                 <a class="tab-link" onclick="site.showTabContent(event, '#administrativeStructureSettings')"> <span>##word.Administrative Structure## </span></a>
                 <a class="tab-link" onclick="site.showTabContent(event, '#workflowAssignmentSettings')"> <span>##word.Workflow Assignment## </span></a>
@@ -467,7 +467,7 @@
                   </fieldset>
                 </div>
 
-                <div id="accountsSettings" ng-if="item.showAccountant" class="tab-content">
+                <div id="accountsSettings" ng-if="item.showAccounting" class="tab-content">
                   <fieldset>
                     <div class="row">
                       <i-list

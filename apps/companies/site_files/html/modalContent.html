@@ -1,4 +1,3 @@
-
 <div class="form">
   <div class="tabs">
     <div class="tabs-header full">
@@ -149,14 +148,211 @@
         <fieldset>
           <legend>##word.Modules##</legend>
           <div class="row">
-            <i-checkbox label="##word.Show Accountant##" ng-model="company.showAccountant"></i-checkbox>
-            <i-checkbox label="##word.Show Inventory##" ng-model="company.showInventory"></i-checkbox>
-            <i-checkbox label="##word.Show HR##" ng-model="company.showHr"></i-checkbox>
-            <i-checkbox label="##word.Show Hospital##" ng-model="company.showHospital"></i-checkbox>
-            <i-checkbox label="##word.Show Reports##" ng-model="company.showReports"></i-checkbox>
-            <i-checkbox label="##word.Show Setting##" ng-model="company.showSetting"></i-checkbox>
-            <i-checkbox label="##word.Show POS##" ng-model="company.showPos"></i-checkbox>
-            <i-checkbox label="##word.Show Restaurant##" ng-model="company.showRestaurant"></i-checkbox>
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show Accountant##" ng-change="showAccountingScreens()" ng-model="company.showAccounting"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showAccounting">
+                <i-checkbox label="##word.Show## ##word.Income List##" ng-model="company.showIncomeList"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Discount Types##" ng-model="company.showDiscountTypes"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Voucher Names##" ng-model="company.showVoucherNames"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Receipt Vouchers##" ng-model="company.showReceiptVouchers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Expense Vouchers##" ng-model="company.showExpenseVouchers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Safes##" ng-model="company.showSafes"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Banks##" ng-model="company.showBanks"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Currencies##" ng-model="company.showCurrencies"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Transfer Safes##" ng-model="company.showTransferSafes"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Accounts Guide##" ng-model="company.showAccountsGuide"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Cost Centers##" ng-model="company.showCostCenters"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.General Ledger##" ng-model="company.showGeneralLedger"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Assistant General Ledger##" ng-model="company.showAssistantGeneralLedger"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Journal Entry##" ng-model="company.showJournalEntry"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Budget Classifications##" ng-model="company.showBudgetClassifications"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Taxes Types##" ng-model="company.showTaxesTypes"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Safes Adjusting##" ng-model="company.showSafesAdjusting"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Safes Transactions##" ng-model="company.showSafesTransactions"></i-checkbox>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show Inventory##" ng-change="showInventoryScreens()" ng-model="company.showInventory"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showInventory">
+                <i-checkbox label="##word.Show## ##word.Sales Invoices##" ng-model="company.showSalesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Sales Companies Invoices##" ng-model="company.showSalesCompaniesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Return Sales Invoices##" ng-model="company.showReturnSalesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Purchase Requests##" ng-model="company.showPurchaseRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Purchase Orders##" ng-model="company.showPurchaseOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Return Purchase Orders##" ng-model="company.showReturnPurchaseOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores Items##" ng-model="company.showStoresItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vendors##" ng-model="company.showVendors"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Transfer Items Requests##" ng-model="company.showTransferItemsRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Transfer Items Orders##" ng-model="company.showTransferItemsOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Convert Units##" ng-model="company.showConvertUnits"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Damage Items##" ng-model="company.showDamageItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.StockTaking##" ng-model="company.showStockTaking"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores Items Card##" ng-model="company.showStoresItemsCard"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores Opening Balances##" ng-model="company.showStoresOpeningBalances"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Active Substances##" ng-model="company.showActiveSubstances"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores Units##" ng-model="company.showStoresUnits"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Items Groups##" ng-model="company.showItemsGroups"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores##" ng-model="company.showStores"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Reasons Destroying Items##" ng-model="company.showReasonsDestroyingItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vendors Groups##" ng-model="company.showVendorsGroups"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Delivery Manage##" ng-model="company.showDeliveryManage"></i-checkbox>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show HR##"  ng-change="showHrScreens()" ng-model="company.showHr"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showHr">
+                <i-checkbox label="##word.Show## ##word.Attendance##" ng-model="company.showAttendance"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vacations Requests##" ng-model="company.showVacationsRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Delay Requests##" ng-model="company.showDelayRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Work Errand Requests##" ng-model="company.showWorkErrandRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Overtime Requests##" ng-model="company.showOvertimeRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees Bonuses##" ng-model="company.showEmployeesBonuses"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees Penalties##" ng-model="company.showEmployeesPenalties"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees Advances##" ng-model="company.showEmployeesAdvances"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Payslips##" ng-model="company.showPayslips"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees##" ng-model="company.showEmployees"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Deliverers##" ng-model="company.showDeliverers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Cashers##" ng-model="company.showCashers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Create Vacations##" ng-model="company.showCreateVacations"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Departments##" ng-model="company.showDepartments"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Sections##" ng-model="company.showSections"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Jobs##" ng-model="company.showJobs"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Jobs Shifts##" ng-model="company.showJobsShifts"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Salary Allowances Names##" ng-model="company.showSalaryAllowancesNames"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Salary Deductions Names##" ng-model="company.showSalaryDeductionsNames"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees Bonus Names##" ng-model="company.showEmployeesBonusNames"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees Penalties Names##" ng-model="company.showEmployeesPenaltiesNames"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Jobs Tools##" ng-model="company.showJobsTools"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vacations Names##" ng-model="company.showVacationsNames"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Evaluation Items##" ng-model="company.showEvaluationItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Evaluation Templates##" ng-model="company.showEvaluationTemplates"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Jobs Advertisements##" ng-model="company.showJobsAdvertisements"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Jobs Applicants##" ng-model="company.showJobsApplicants"></i-checkbox>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show Hospital##" ng-model="company.showHospital"></i-checkbox>
+              </legend>
+            </fieldset>
+
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show Reports##" ng-change="showReportsScreens()" ng-model="company.showReports"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showReports">
+                <i-checkbox label="##word.Show## ##word.Daily Cash By Dates##" ng-model="company.showDailyCashByDates"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Daily Cash By Payment Number##" ng-model="company.showDailyCashByPaymentNumber"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Daily Cash By Users##" ng-model="company.showDailyCashByUsers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Daily Cash By User##" ng-model="company.showDailyCashByUser"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Reorder Limits##" ng-model="company.showReorderLimits"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.MostSelling Items##" ng-model="company.showMostSellingItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Lowest Selling Items##" ng-model="company.showLowestSellingItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Collected Items##" ng-model="company.showReportCollectedItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Medical Items##" ng-model="company.showReportMedicalItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Sales Invoices For Customer##" ng-model="company.showReportSalesInvoicesForCustomer"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Sales Invoices For Customers##" ng-model="company.showReportSalesInvoicesForCustomers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Sales Invoices For Company##" ng-model="company.showReportSalesInvoicesForCompany"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Sales Invoices For Companies##" ng-model="company.showReportSalesInvoicesForCompanies"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Return Sales Invoices For Customer##" ng-model="company.showReportReturnSalesInvoicesForCustomer"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Return Sales Invoices To Store##" ng-model="company.showReportReturnSalesInvoicesToStore"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Return Sales Invoices##" ng-model="company.showReportReturnSalesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Approved Purchase Requests##" ng-model="company.showReportApprovedPurchaseRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Not Approved Purchase Requests##" ng-model="company.showReportNotApprovedPurchaseRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Has Transaction Purchase Requests##" ng-model="company.showReportHasTransactionPurchaseRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Purchase Requests##" ng-model="company.showReportPurchaseRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Purchase Orders##" ng-model="company.showReportPurchaseOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Vendor Purchase Orders##" ng-model="company.showReportVendorPurchaseOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Attendance Report##" ng-model="company.showAttendanceReport"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Vacations Requests##" ng-model="company.showReportVacationsRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Delay Requests##" ng-model="company.showReportDelayRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Work Errand Requests##" ng-model="company.showReportWorkErrandRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Overtime Requests##" ng-model="company.showReportOvertimeRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Employees Bonuses##" ng-model="company.showReportEmployeesBonuses"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Employees Penalties##" ng-model="company.showReportEmployeesPenalties"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Report Employees Advances##" ng-model="company.showReportEmployeesAdvances"></i-checkbox>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show Setting##" ng-change="showSettingScreens()"  ng-model="company.showSetting"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showSetting">
+                <i-checkbox label="##word.Show## ##word.Customers##" ng-model="company.showCustomers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Customers Groups##" ng-model="company.showCustomersGroups"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Security##" ng-model="company.showSecurity"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Nationalities##" ng-model="company.showNationalities"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Countries##" ng-model="company.showCountries"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Goves##" ng-model="company.showGoves"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Cities##" ng-model="company.showCities"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Areas##" ng-model="company.showAreas"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Reasons Canceling Delivery##" ng-model="company.showReasonsCancelingDelivery"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vehicles##" ng-model="company.showVehicles"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vehicles Types##" ng-model="company.showVehiclesTypes"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Printers Paths##" ng-model="company.showPrintersPaths"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Names Conversions##" ng-model="company.showNamesConversions"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Numbering##" ng-model="company.showNumbering"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Words Manage##" ng-model="company.showXwords"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Company Setting##" ng-model="company.showCompanySetting"></i-checkbox>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show POS##" ng-change="showPosScreens()" ng-model="company.showPos"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showPos">
+                <i-checkbox label="##word.Show## ##word.Orders Screen##" ng-model="company.showOrdersScreen"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Sales Invoices##" ng-model="company.showSalesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Customers##" ng-model="company.showCustomers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vendors##" ng-model="company.showVendors"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Sales Companies Invoices##" ng-model="company.showSalesCompaniesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Receipt Vouchers##" ng-model="company.showReceiptVouchers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Expense Vouchers##" ng-model="company.showExpenseVouchers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Return Sales Invoices##" ng-model="company.showReturnSalesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Purchase Requests##" ng-model="company.showPurchaseRequests"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Purchase Orders##" ng-model="company.showPurchaseOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Return Purchase Orders##" ng-model="company.showReturnPurchaseOrders"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores Items##" ng-model="company.showStoresItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees##" ng-model="company.showEmployees"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Deliverers##" ng-model="company.showDeliverers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Cashers##" ng-model="company.showCashers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Delivery Manage##" ng-model="company.showDeliveryManage"></i-checkbox>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>
+                <i-checkbox label="##word.Show Restaurant##" ng-change="showRestaurantScreens()" ng-model="company.showRestaurant"></i-checkbox>
+              </legend>
+              <div class="row" ng-if="company.showRestaurant">
+                <i-checkbox label="##word.Show## ##word.Orders Screen##" ng-model="company.showOrdersScreen"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Customers##" ng-model="company.showCustomers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Vendors##" ng-model="company.showVendors"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Sales Invoices##" ng-model="company.showSalesInvoices"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Receipt Vouchers##" ng-model="company.showReceiptVouchers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Expense Vouchers##" ng-model="company.showExpenseVouchers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Stores Items##" ng-model="company.showStoresItems"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Employees##" ng-model="company.showEmployees"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Deliverers##" ng-model="company.showDeliverers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Cashers##" ng-model="company.showCashers"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Delivery Manage##" ng-model="company.showDeliveryManage"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Kitchens##" ng-model="company.showKitchens"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Tables##" ng-model="company.showTables"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Tables Groups##" ng-model="company.showTablesGroups"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Items Extras##" ng-model="company.showItemsExtras"></i-checkbox>
+              </div>
+            </fieldset>
+
           </div>
         </fieldset>
       </div>
