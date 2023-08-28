@@ -413,6 +413,7 @@ app.controller('stockTaking', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          kitchen: 1,
           image: 1,
         },
       },

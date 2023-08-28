@@ -22,6 +22,7 @@
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
                     <th>##word.Status##</th>
+                    <th>##word.Reserved##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
@@ -34,7 +35,10 @@
                         <span ng-show="item.active" class="text-success">##word.Active##</span>
                         <span ng-show="!item.active" class="text-danger">##word.Not Active##</span>
                     </td>
-
+                    <td class="center">
+                        <span ng-show="item.busy" class="text-danger">##word.Yes##</span>
+                        <span ng-show="!item.busy" class="text-success">##word.No##</span>
+                    </td>
                     <td class="center not-print">
                         <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 

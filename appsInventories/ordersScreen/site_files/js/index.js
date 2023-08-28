@@ -302,7 +302,9 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
 
   $scope.showDetails = function (item) {
     $scope.error = '';
-
+    if ($scope.item.salesCategory.id == 3) {
+      $scope.getTables();
+    }
     site.showModal('#orderDetailsModal');
   };
 
@@ -333,9 +335,15 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          country: 1,
+          gov: 1,
+          city: 1,
+          area: 1,
+          street: 1,
           taxIdentificationNumber: 1,
           commercialCustomer: 1,
           mobile: 1,
+          phone: 1,
         },
         search: $search,
       },
@@ -804,6 +812,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.govesList = response.data.list;
+          $scope.$applyAsync();
         }
       },
       function (err) {
@@ -835,6 +844,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.citiesList = response.data.list;
+          $scope.$applyAsync();
         }
       },
       function (err) {
@@ -844,7 +854,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getAreasList = function (city) {
+  $scope.getAreasList = function (city, callback) {
     $scope.busy = true;
     $scope.areasList = [];
     $http({
@@ -860,6 +870,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          deliveryPrice: 1,
         },
       },
     }).then(
@@ -867,6 +878,10 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.areasList = response.data.list;
+          callback(response.data.list);
+          $scope.$applyAsync();
+        } else {
+          callback(null);
         }
       },
       function (err) {
@@ -1060,6 +1075,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          kitchen: 1,
           image: 1,
         },
       },
@@ -1068,6 +1084,39 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.itemsGroupsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getKitchens = function () {
+    $scope.busy = true;
+    $scope.kitchensList = [];
+    $http({
+      method: 'POST',
+      url: '/api/kitchens/all',
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+          kitchen: 1,
+          image: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.kitchensList = response.data.list;
         }
       },
       function (err) {
@@ -1099,7 +1148,16 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   };
 
   $scope.calculate = function (obj) {
+    if (!obj.salesCategory) {
+      $scope.error = '##word.Must Select Sales Category##';
+      return;
+    }
     $timeout(() => {
+      if (obj.salesCategory.id == 2) {
+        obj.deliveryPrice = obj.deliveryPrice || 0;
+      } else {
+        obj.deliveryPrice = 0;
+      }
       $scope.itemsError = '';
       obj.totalDiscounts = 0;
       obj.totalCashDiscounts = 0;
@@ -1167,7 +1225,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       });
 
       obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
-      obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
+      obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes + obj.deliveryPrice;
       obj.totalVat = site.toNumber(obj.totalVat);
       obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
       obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
@@ -1952,6 +2010,37 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.selectCustomer = function () {
+    if ($scope.item.customer) {
+      if ($scope.item.customer.country) {
+        $scope.getGovesList($scope.item.customer.country);
+      }
+      if ($scope.item.customer.gov) {
+        $scope.getCitiesList($scope.item.customer.gov);
+      }
+      if ($scope.item.customer.city) {
+        $scope.getAreasList($scope.item.customer.city, (areasList) => {
+          if (areasList) {
+            if ($scope.item.customer.area) {
+              $scope.item.customer.area = areasList.find((_t) => {
+                return _t.id == $scope.item.customer.area.id;
+              });
+              $scope.selectArea($scope.item.customer.area);
+            }
+          }
+        });
+      }
+    }
+  };
+
+  $scope.selectArea = function (area) {
+    if ($scope.item.customer.area) {
+      $scope.item.deliveryPrice = area.deliveryPrice || 0;
+      $scope.calculate($scope.item);
+      $scope.$applyAsync();
+    }
+  };
+
   $scope.showDeliveryStatusModal = function (_item, type) {
     $scope.error = '';
     $scope.itemsError = '';
@@ -2010,6 +2099,117 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     }, 300);
   };
 
+  $scope.getTablesGroups = function () {
+    $scope.busy = true;
+    $scope.tablesGroupsList = [];
+    $http({
+      method: 'POST',
+      url: '/api/tablesGroups/all',
+      data: {
+        where: { active: true },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+          image: 1,
+          servicePrice: 1,
+          serviceType: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          response.data.list.forEach((tablesGroup) => {
+            tablesGroup.tablesList = [];
+            $scope.tablesList.forEach((_table) => {
+              if (tablesGroup.id === _table.tablesGroup.id) tablesGroup.tablesList.unshift(_table);
+            });
+          });
+          $scope.tablesGroupsList = response.data.list;
+
+          $scope.$applyAsync();
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.selectTable = function (newTable, tablesGroup) {
+    if ($scope.busySelectTable) {
+      return;
+    }
+    $scope.busySelectTable = true;
+    $scope.error = '';
+    if (($scope.item.table && $scope.item.table.id == newTable.id) || newTable.busy == true) {
+      $scope.error = '##word.The table is reserved##';
+      return;
+    }
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/tables/select`,
+      data: {
+        newTable: newTable,
+        oldTable: $scope.item.table,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.item.table = newTable;
+          $scope.item.tablesGroup = { id: tablesGroup.id, nameAr: tablesGroup.nameAr, nameEn: tablesGroup.nameEn, servicePrice: tablesGroup.servicePrice, serviceType: tablesGroup.serviceType };
+          $scope.getTables();
+        } else {
+          $scope.error = response.data.error;
+        }
+        $scope.busySelectTable = false;
+
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.getTables = function () {
+    $scope.busy = true;
+    $scope.tablesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/tables/all',
+      data: {
+        where: { active: true },
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+          image: 1,
+          minimum: 1,
+          maxmum: 1,
+          busy: 1,
+          tablesGroup: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.tablesList = response.data.list;
+          $scope.getTablesGroups();
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getInvoiceTypes();
   $scope.getSafes();
   $scope.getCurrentMonthDate();
@@ -2031,4 +2231,5 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   $scope.getStores();
   $scope.getNumberingAutoCustomers();
   $scope.getCountriesList();
+  $scope.getKitchens();
 });

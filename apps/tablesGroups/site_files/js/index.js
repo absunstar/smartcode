@@ -6,7 +6,7 @@ app.controller('tablesGroups', function ($scope, $http, $timeout) {
   $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: {url : '/images/tablesGroups.png'},
+    image: { url: '/images/tablesGroups.png' },
     active: true,
   };
   $scope.item = {};
@@ -15,7 +15,7 @@ app.controller('tablesGroups', function ($scope, $http, $timeout) {
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure };
+    $scope.item = { ...$scope.structure, serviceType: 'percent', servicePrice: 0 };
     site.showModal($scope.modalID);
   };
 

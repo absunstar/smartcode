@@ -56,7 +56,7 @@
                     <i-button type="add" label="##word.New Customer##" ng-click="showAddCustomer()"> </i-button>
                   </div>
                   <i-button ng-show="item.salesCategory.id == 2" label="##word.Delivery##" fa="motorcycle" ng-click="showDetails(item)"> </i-button>
-                  <i-button ng-show="item.salesCategory.id == 3" label="##word.Table##" ng-click="showDetails(item);showTables()"> </i-button>
+                  <i-button ng-show="item.salesCategory.id == 3" label="##word.Table##" ng-click="showDetails(item)"> </i-button>
                   <div class="col2">
                     <br ng-show="item.salesCategory.id == 1" />
                     <i-button label="##word.Print##" type="print" ng-click="printOrdersToday()"> </i-button>

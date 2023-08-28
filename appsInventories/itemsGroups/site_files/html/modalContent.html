@@ -8,6 +8,7 @@
         </div>
         <i-control type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
         <i-control type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
+        <i-list ng-model="item.kitchen" label="##word.Kitchens##" items="kitchensList" x-data="setting.showRestaurant" display="name##session.lang##"></i-list>
       </div>
     </div>
     <div class="col3 center">

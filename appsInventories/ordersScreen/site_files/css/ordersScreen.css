@@ -155,7 +155,11 @@ body {
   padding-top: 3px;
   text-align: center;
 }
-
+.table-busy{
+  border: 2px solid red !important;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
 .table-content .table-headers .header:last-child {
   border-left: none;
 }
