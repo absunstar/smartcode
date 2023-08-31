@@ -664,8 +664,10 @@ module.exports = function init(site) {
             } else {
               let barcodesList = [];
               docs.forEach((_doc) => {
-                _doc.unitsList.forEach((_unit) => {
-                  if (_data.unitsList.some((u) => u.barcode == _unit.barcode)) barcodesList.push(_unit.barcode);
+                _data.unitsList.forEach((_unit) => {
+                  if (_doc.unitsList.some((u) => u.barcode == _unit.barcode)) {
+                    barcodesList.push(_unit.barcode);
+                  }
                 });
               });
               if (barcodesList.length > 0) {
@@ -678,7 +680,21 @@ module.exports = function init(site) {
             }
           }
           _data.addUserInfo = req.getUserFinger();
+          let barcodesNotFoundList = [];
+          _data.unitsList.forEach((_u) => {
+            if (!_u.barcode) {
+              let name = `name${req.session.lang}`;
+              barcodesNotFoundList.push(_u.unit[name]);
+            }
+          });
 
+          if (barcodesNotFoundList.length > 0) {
+            let errorBarcode = '';
+            errorBarcode = barcodesNotFoundList.map((b) => b).join('-');
+            response.error = `Barcode Is not found ( ${errorBarcode} )`;
+            res.json(response);
+            return;
+          }
           app.add(_data, (err, doc) => {
             if (!err && doc) {
               response.done = true;
@@ -737,8 +753,10 @@ module.exports = function init(site) {
               let barcodesList = [];
               docs.forEach((_doc) => {
                 if (_doc.unitsList) {
-                  _doc.unitsList.forEach((_unit) => {
-                    if (_data.unitsList.some((u) => u.barcode == _unit.barcode)) barcodesList.push(_unit.barcode);
+                  _data.unitsList.forEach((_unit) => {
+                    if (_doc.unitsList.some((u) => u.barcode == _unit.barcode)) {
+                      barcodesList.push(_unit.barcode);
+                    }
                   });
                 }
               });
@@ -752,10 +770,23 @@ module.exports = function init(site) {
             }
           }
           _data.editUserInfo = req.getUserFinger();
+          let barcodesNotFoundList = [];
           _data.unitsList.forEach((_u) => {
+            if (!_u.barcode) {
+              let name = `name${req.session.lang}`;
+              barcodesNotFoundList.push(_u.unit[name]);
+            }
             _u.purchasePriceList.push({ price: _u.purchasePrice, date: new Date() });
             _u.salesPriceList.push({ price: _u.salesPrice, date: new Date() });
           });
+
+          if (barcodesNotFoundList.length > 0) {
+            let errorBarcode = '';
+            errorBarcode = barcodesNotFoundList.map((b) => b).join('-');
+            response.error = `Barcode Is not found ( ${errorBarcode} )`;
+            res.json(response);
+            return;
+          }
 
           app.update(_data, (err, result) => {
             if (!err) {
@@ -888,7 +919,7 @@ module.exports = function init(site) {
               reportReorderLimits = true;
               delete where.reportReorderLimits;
             }
-            
+
             app.all({ where, select, limit }, (err, docs) => {
               const selectedDocs = [];
               if (reportReorderLimits) {

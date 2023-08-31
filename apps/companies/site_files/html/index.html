@@ -9,9 +9,7 @@
       <div class="row" >
         <div class="row" ng-controller="companies">
           <div x-import="companies/modal.html"></div>
-
-          <div x-import="companies/search_all_modal.html"></div>
-
+          Show Restaurant
           <div class="top-actions">
             <i-button type="add" label="##word.Company New##" ng-click="displayAddCompany()"></i-button>
 
@@ -20,7 +18,7 @@
             <span ng-show="busy">
               <span class="sr-only">Loading...</span>
             </span>
-            <h3 class="bold text-center">##word.count## : {{count}}</h3>
+            <h3 class="bold text-center">##word.Count## : {{count}}</h3>
             <br />
           </div>
 
@@ -29,7 +27,7 @@
               <tr>
                 <th class="not-print">##word.Logo##</th>
                 <th>##word.Code##</th>
-                <th>##word.Companies Name##</th>
+                <th>##word.Company Name##</th>
                 <th>##word.Status##</th>
                 <th class="not-print">##word.Actions##</th>
               </tr>
