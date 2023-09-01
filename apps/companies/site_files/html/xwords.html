@@ -10,6 +10,10 @@
         <div class="row">
           <h2 class="green bold center">{{success}}</h2>
         </div>
+        <div class="row">
+          <i-upload class="col2" api="/x-api/words/importNewWords" label="Import New"></i-upload>
+          <i-upload class="col2" api="/x-api/words/importReplaceWords" label="Import Replace"></i-upload>
+        </div>
         <div class="row padding margin border">
           <div class="col9">
             <i-control ng-model="nameSearch" label="Search Words"></i-control>
@@ -19,7 +23,7 @@
             <i-button type="save" ng-click="saveWords()" label="Save All Words"></i-button>
           </div>
         </div>
-      
+
         <table class="table bold hover center">
           <tr>
             <th>S/N</th>
@@ -65,7 +69,7 @@
                   <i-control class="col3" v="r" label="##word.English##" ng-model="$word.En"></i-control>
                   <i-control class="col3" v="r" label="##word.Arabic##" ng-model="$word.Ar"></i-control>
                   <div class="col3">
-                    <br>
+                    <br />
                     <i-button type="push" ng-click="addToHostList($word)" label="##word.Add To List##"></i-button>
                   </div>
                 </div>

@@ -731,6 +731,105 @@ module.exports = function init(site) {
     });
   });
 
+  site.post({ name: '/x-api/words/importNewWords' }, (req, res) => {
+    let response = {
+      done: false,
+      file: req.form.files.fileToUpload,
+    };
+
+    if (site.isFileExistsSync(response.file.filepath)) {
+      let docs = [];
+      if (response.file.originalFilename.like('*.xls*')) {
+        let workbook = site.XLSX.readFile(response.file.filepath);
+        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+      } else {
+        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+      }
+
+      if (Array.isArray(docs)) {
+        let wordsList = [];
+        let userWordsPath = process.cwd() + '/.words.json';
+        let words2 = JSON.parse(site.readFileSync(userWordsPath));
+        if (words2 && Array.isArray(words2)) {
+          wordsList = words2;
+        }
+
+        for (let i = 0; i < docs.length; i++) {
+          if (docs[i].Ar || docs[i].En) {
+            let index = wordsList.findIndex((a) => a.name === docs[i].name || a.Ar === docs[i].Ar || a.En === docs[i].En);
+            if (index === -1) {
+              if (!docs[i].name) {
+                docs[i].name = docs[i].En;
+              }
+              if (!docs[i].En) {
+                docs[i].En = docs[i].name;
+              }
+              wordsList.push(docs[i]);
+            }
+          }
+        }
+
+        site.writeFileSync(userWordsPath, JSON.stringify(wordsList));
+      } else {
+        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+        console.log(site.dbMessage);
+      }
+    } else {
+      site.dbMessage = 'file not exists : ' + response.file.filepath;
+      console.log(site.dbMessage);
+    }
+  });
+
+  site.post({ name: '/x-api/words/importReplaceWords' }, (req, res) => {
+    let response = {
+      done: false,
+      file: req.form.files.fileToUpload,
+    };
+    if (site.isFileExistsSync(response.file.filepath)) {
+      let docs = [];
+      if (response.file.originalFilename.like('*.xls*')) {
+        let workbook = site.XLSX.readFile(response.file.filepath);
+        docs = site.XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+      } else {
+        docs = site.fromJson(site.readFileSync(response.file.filepath).toString());
+      }
+
+      if (Array.isArray(docs)) {
+        let wordsList = [];
+        let userWordsPath = process.cwd() + '/.words.json';
+        let words2 = JSON.parse(site.readFileSync(userWordsPath));
+        if (words2 && Array.isArray(words2)) {
+          wordsList = words2;
+        }
+
+        for (let i = 0; i < docs.length; i++) {
+          if (docs[i].Ar || docs[i].En) {
+            let index = wordsList.findIndex((a) => a.name === docs[i].name || a.Ar === docs[i].Ar || a.En === docs[i].En);
+            if (!docs[i].name) {
+              docs[i].name = docs[i].En;
+            }
+            if (!docs[i].En) {
+              docs[i].En = docs[i].name;
+            }
+            if (index === -1) {
+              wordsList.push(index);
+            } else {
+              wordsList[index] = docs[i];
+            }
+          }
+        }
+
+        site.writeFileSync(userWordsPath, JSON.stringify(wordsList));
+      } else {
+        site.dbMessage = 'can not import unknown type : ' + site.typeof(docs);
+        console.log(site.dbMessage);
+      }
+    } else {
+      site.dbMessage = 'file not exists : ' + response.file.filepath;
+      console.log(site.dbMessage);
+    }
+  });
+
   site.post({ name: `/api/companySetting/get`, public: true }, (req, res) => {
     let companySetting = site.getCompanySetting(req);
     res.json({

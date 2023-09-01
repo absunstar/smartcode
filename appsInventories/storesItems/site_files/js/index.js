@@ -938,7 +938,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
   };
   $scope.showPricesList = function (unit, type) {
     $scope.unitsPrice = unit;
-    $scope.unitsPrice.$showPrice = type == 'sales' ? 'sales' : 'purchase';
+    $scope.unitsPrice.$showPrice = type === 'sales' ? 'sales' : 'purchase';
     site.showModal('#pricesModal');
   };
   $scope.changeDate = function (i, str) {
