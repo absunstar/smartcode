@@ -147,14 +147,13 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
-      site.get(
-        {
-          name: app.name,
-        },
-        (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Expense Vouchers', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      site.get([{ name: app.name }, { name: 'generalPurchaseInvoices' }, { name: 'cashers' }], (req, res) => {
+        let appName = 'Expense Vouchers';
+        if (req.url === '/generalPurchaseInvoices') {
+          appName = 'General Purchase Invoices';
         }
-      );
+        res.render(app.name + '/index.html', { title: app.name, appName, setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      });
     }
 
     if (app.allowRouteAdd) {

@@ -69,8 +69,9 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
-      $scope.getSafes($scope.item.paymentType);
-
+      if($scope.item.paymentType){
+        $scope.getSafes($scope.item.paymentType);
+      }
     }
 
     if ($scope.setting.storesSetting.store && $scope.setting.storesSetting.store.id) {
@@ -816,7 +817,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
         obj.totalItemsDiscounts += _item.totalDiscounts;
 
         if (!_item.noVat) {
-          _item.vat = $scope.setting.storesSetting.vat;
+          _item.vat = $scope.setting.storesSetting.vat || 0;
           _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100);
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {

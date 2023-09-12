@@ -69,7 +69,7 @@
       <i-button x-permissions="doctorDeskTopSearch || doctorDeskTopManage" type="search" label="##word.Detected##" ng-click="search['status.id'] = 3;getAll(search)"></i-button>
       <i-button x-permissions="doctorDeskTopSearch || doctorDeskTopManage" type="search" label="##word.Cancel detection##" ng-click="search['status.id'] = 4;getAll(search)"></i-button>
       <i-button x-permissions="doctorDeskTopSearch || doctorDeskTopManage" type="search" label="##word.All Status##" ng-click="getAll(search,'all')"></i-button>
-      <i-checkbox class="col2" ng-model="today" ng-click="getAll(search)" label="##word.today's date##"></i-checkbox>
+      <i-checkbox class="col2" ng-model="today" ng-click="getAll(search)" label="##word.Today's date##"></i-checkbox>
      
     </div>
     <div class="row" ng-show="!today" x-permissions="doctorDeskTopSearch || doctorDeskTopManage">

@@ -8,7 +8,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
   $scope.structure = {
     type: 'out',
     grossAmount: 0,
-    totalDiscount: 0,
+    totalDiscounts: 0,
     totalPVat: 0,
     totalVat: 0,
     totalComVat: 0,
@@ -36,7 +36,9 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
 
-      $scope.getSafes($scope.item.paymentType);
+      if ($scope.item.paymentType) {
+        $scope.getSafes($scope.item.paymentType);
+      }
     }
   };
 
@@ -664,7 +666,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           ordersList: 1,
           diagnosis: 1,
           doctorReccomendList: 1,
-          maxDeductAmount : 1,
+          maxDeductAmount: 1,
           type: 1,
         },
       },
@@ -908,7 +910,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     $timeout(() => {
       _item.grossAmount = 0;
-      _item.totalDiscount = 0;
+      _item.totalDiscounts = 0;
       _item.totalVat = 0;
       _item.total = 0;
       _item.totalPVat = 0;
@@ -921,7 +923,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
         console.log(_service.totalPVat);
         _item.grossAmount += _service.price;
         _item.totalAfterDisc += _service.totalAfterDisc;
-        _item.totalDiscount += _service.totalDisc;
+        _item.totalDiscounts += _service.totalDisc;
         _item.totalVat += _service.totalVat;
         _item.total += _service.total;
         _item.totalPVat += _service.totalPVat;

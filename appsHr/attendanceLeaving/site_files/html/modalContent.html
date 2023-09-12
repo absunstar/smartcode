@@ -5,7 +5,7 @@
 
             <i-date class="col6" label="##word.Date##" ng-model="item.date"></i-date>
 
-            <i-list v="r" class="col4" label="##word.employee##" ng-change="getShiftData(item)" ng-model="item.employee" items="employeesList" display="fullName##session.lang##"> </i-list>
+            <i-list v="r" class="col4" label="##word.Employee##" ng-change="getShiftData(item)" ng-model="item.employee" items="employeesList" display="fullName##session.lang##"> </i-list>
             <div class="table-responsive">
                 <table class="table center hover bold" ng-show="item.employee && item.employee.id">
                     <thead>

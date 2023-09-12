@@ -838,7 +838,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
         obj.totalItemsDiscounts += _item.totalDiscounts;
 
         if (!_item.noVat) {
-          _item.vat = $scope.setting.storesSetting.vat;
+          _item.vat = $scope.setting.storesSetting.vat || 0;
           _item.totalVat = (_item.totalAfterDiscounts * _item.vat) / 100;
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {

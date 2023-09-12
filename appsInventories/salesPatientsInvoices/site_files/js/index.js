@@ -69,7 +69,9 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
-      $scope.getSafes($scope.item.paymentType);
+      if ($scope.item.paymentType) {
+        $scope.getSafes($scope.item.paymentType);
+      }
     }
 
     if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
@@ -818,7 +820,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         obj.totalItemsDiscounts += _item.totalDiscounts;
 
         if (!_item.noVat) {
-          _item.vat = $scope.setting.storesSetting.vat;
+          _item.vat = $scope.setting.storesSetting.vat || 0;
           _item.totalVat = ((_item.totalAfterDiscounts * _item.vat) / 100);
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {
@@ -1338,7 +1340,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
     let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
     if (index === -1) {
       batch.currentCount = batch.count;
-      item.batchesList.unshift({...batch,count : 1});
+      item.batchesList.unshift({ ...batch, count: 1 });
       item.$batchCount += 1;
       $scope.addBatch = 'Added successfully';
       $timeout(() => {

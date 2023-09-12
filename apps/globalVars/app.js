@@ -361,7 +361,9 @@ module.exports = function init(site) {
   ];
 
   site.vouchersTypes = [
-    { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
+    { id: 'generalSalesInvoice', nameEn: 'General Sales Invoice', nameAr: 'فاتورة مبيعات عامة' },
+    { id: 'generalPurchaseInvoice', nameEn: 'General Purchase Invoice', nameAr: 'فاتورة مشتريات عامة' },
+    { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات ' },
     { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
     { id: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
     { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },

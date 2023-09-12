@@ -68,7 +68,9 @@
       <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="left">Patient. MRN</span> <span class="center">{{thermal.patient.code}}</span> <span class="right">رقم الملف</span></p>
       <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="left">Patient Name</span> <span class="center">{{thermal.patient.fullNameEn}}</span></p>
       <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="center">{{thermal.patient.fullNameAr}}</span> <span class="right">إسم المريض</span></p>
-      <p class="black font-18 bold" ng-show="thermal.patient.id"><span class="left">Nationality</span> <span class="center">{{thermal.patient.nationality.nameAr}}</span> <span class="right">الجنسية</span></p>
+      <p class="black font-18 bold" ng-show="thermal.patient.id">
+        <span class="left">Nationality</span> <span class="center">{{thermal.patient.nationality.nameAr}}</span> <span class="right">الجنسية</span>
+      </p>
       <p class="black font-18 bold" ng-show="thermal.mainInsuranceCompany.id">
         <span class="left">Company</span> <span class="center">{{thermal.mainInsuranceCompany.nameAr}}</span> <span class="right">الشركة</span>
       </p>
@@ -76,17 +78,18 @@
 
     <br />
 
-    <div class="row center bold border-1" ng-show="item.servicesList.length > 0">
-      <div class="col-2">
-        <p class="bold center font-12">الرقم</p>
+    <div class="row center bold border-1" ng-show="item.itemsList.length > 0">
+      <div class="col-2" ng-show="item.voucherType.id =='offersOrders'">
+        <p class="bold center font-12">الكود</p>
         <p class="bold center font-12">Code</p>
       </div>
       <div class="col-5">
-        <p class="bold center font-12">إسم الخدمة</p>
-        <p class="bold center font-12">Service Name</p>
+        <p class="bold center font-12">الإسم</p>
+        <p class="bold center font-12">Name</p>
       </div>
       <div class="col-2">
-        <p class="bold center font-12">الضريبة</p>
+        <p class="bold center font-12" ng-show="item.voucherType.id =='offersOrders'">الضريبة</p>
+        <p class="bold center font-12" ng-show="item.voucherType.id =='generalSalesInvoice'">DISC</p>
         <p class="bold center font-12">VAT</p>
       </div>
       <div class="col-2">
@@ -95,16 +98,21 @@
       </div>
     </div>
 
-    <div class="row" ng-show="item.servicesList.length > 0" ng-repeat="itm in thermal.servicesList">
+    <div class="row" ng-show="item.itemsList.length > 0" ng-repeat="itm in thermal.itemsList">
       <div class="border-1">
-        <div class="col-2">
+        <div class="col-2" ng-show="item.voucherType.id =='offersOrders'">
           <p class="black bold center font-14">{{itm.code}}</p>
         </div>
         <div class="col-6">
-          <p class="black bold center font-14">{{itm.name##session.lang##}}</p>
+          <p class="black bold center font-14">{{itm.name || itm.name##session.lang##}}</p>
         </div>
         <div class="col-2">
-          <p class="black bold center font-14">{{itm.totalPVat | xmoney2}} <span class="currency">##word.$##</span></p>
+          <p class="black bold center font-14">
+            <span ng-show="item.voucherType.id =='offersOrders'">{{itm.totalPVat | xmoney2}}</span>
+            <span ng-show="item.voucherType.id =='generalSalesInvoice'">{{itm.totalDiscounts | xmoney2}}</span>
+            <span ng-show="item.voucherType.id =='generalSalesInvoice'">{{itm.totalVat | xmoney2}}</span>
+            <span class="currency">##word.$##</span>
+          </p>
         </div>
         <div class="col-2 black">
           <p class="black bold center font-14">{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
@@ -119,8 +127,8 @@
         <span class="left">Gross</span> <span class="center">{{thermal.grossAmount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الإجمالي</span>
       </p>
 
-      <p class="bold black font-18" ng-show="thermal.totalDiscount">
-        <span class="left">Discount</span> <span class="center">{{thermal.totalDiscount | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الخصم</span>
+      <p class="bold black font-18" ng-show="thermal.totalDiscounts">
+        <span class="left">Discount</span> <span class="center">{{thermal.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الخصم</span>
       </p>
 
       <p class="bold black font-18" ng-show="thermal.patientDeduct">
@@ -131,8 +139,17 @@
         <span class="left">Patient VAT</span> <span class="center">{{thermal.totalPVat | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الضريبة</span>
       </p>
 
-      <p class="bold black font-22 ">
-        <span class="left underline">Paid Amt.</span> <span class="center underline">{{thermal.total | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right underline">المبلغ المدفوع</span>
+      <div class="row center col-12 border-1" ng-show="setting.storesSetting.vat">
+        <p class="bold black">Total Before Tax : {{thermal.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span> : الإجمالي قبل الضريبة</p>
+      </div>
+
+      <p class="bold black font-18" ng-show="thermal.totalVat">
+        <span class="left">VAT</span> <span class="center">{{thermal.totalVat | xmoney2}} <span class="currency">##word.$##</span></span> <span class="right">الضريبة</span>
+      </p>
+
+      <p class="bold black font-22">
+        <span class="left underline">Paid Amt.</span> <span class="center underline">{{thermal.total | xmoney2}} <span class="currency">##word.$##</span></span>
+        <span class="right underline">المبلغ المدفوع</span>
       </p>
     </div>
     <br />

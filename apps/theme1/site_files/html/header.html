@@ -279,6 +279,7 @@
             </ul>
           </div>
         </li>
+
         <li id="Accountant" class="navlink" onclick="showAndHide('Accountant')" x-data="setting.showAccounting">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -300,14 +301,24 @@
                   <p>##word.Discount Types##</p>
                 </a>
               </li>
-
               <li id="voucherNames" x-data="setting.showVoucherNames" x-permissions="voucherNamesUi || voucherNamesManage">
                 <a class="menuTag" href="/voucherNames">
                   <img src="/theme1/images/accounting/Voucher.png" width="45" height="45" />
                   <p>##word.Voucher Names##</p>
                 </a>
               </li>
-
+              <li id="generalSalesInvoices" x-data="setting.showGeneralSalesInvoices" x-permissions="receiptVouchersUi || receiptVouchersManage">
+                <a class="menuTag" href="/generalSalesInvoices">
+                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
+                  <p>##word.General Sales Invoice##</p>
+                </a>
+              </li>
+              <li id="generalPurchaseInvoices" x-data="setting.showGeneralPurchaseInvoices" x-permissions="expenseVouchersUi || expenseVouchersManage">
+                <a class="menuTag" href="/generalPurchaseInvoices">
+                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
+                  <p>##word.General Purchase Invoice##</p>
+                </a>
+              </li>
               <li id="receiptVouchers" x-data="setting.showReceiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
                 <a class="menuTag" href="/receiptVouchers">
                   <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
@@ -320,7 +331,6 @@
                   <p>##word.Expense Vouchers##</p>
                 </a>
               </li>
-
               <li id="safe" x-data="setting.showSafes" x-permissions="safesUi || safesManage">
                 <a class="menuTag" href="/safes">
                   <img src="/theme1/images/accounting/safe.png" width="45" height="45" />
@@ -333,7 +343,6 @@
                   <p>##word.Banks##</p>
                 </a>
               </li>
-
               <li id="currencies" x-data="setting.showCurrencies" x-permissions="currenciesUi || currenciesManage">
                 <a class="menuTag" href="/currencies">
                   <img src="/theme1/images/accounting/currencies.png" width="45" height="45" />
@@ -382,14 +391,12 @@
                   <p>##word.Budget Classifications##</p>
                 </a>
               </li>
-
               <li id="taxesTypes" x-data="setting.showTaxesTypes" x-permissions="taxesTypesUi || taxesTypesManage">
                 <a class="menuTag" href="/taxesTypes">
                   <img src="/theme1/images/accounting/Taxes Types.png" width="45" height="45" />
                   <p>##word.Taxes Types##</p>
                 </a>
               </li>
-
               <li id="safesAdjusting" x-data="setting.showSafesAdjusting" x-permissions="safesAdjustingUi || safesAdjustingManage">
                 <a class="menuTag" href="/safesAdjusting">
                   <img src="/theme1/images/accounting/Safes Adjusting.png" width="45" height="45" />
@@ -563,6 +570,7 @@
             </ul>
           </div>
         </li>
+
         <li id="HR" class="navlink d-flex flex-row gap-2" onclick="showAndHide('HR')" x-data="setting.showHr">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -743,6 +751,7 @@
             </ul>
           </div>
         </li>
+
         <li id="Hospital" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Hospital')" x-data="setting.showHospital">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -959,6 +968,7 @@
             </ul>
           </div>
         </li>
+
         <li id="Reports" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Reports')" x-data="setting.showReports">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
@@ -1158,6 +1168,7 @@
             </ul>
           </div>
         </li>
+
         <li id="SettingModule" class="navlink d-flex flex-row gap-2" onclick="showAndHide('SettingModule')" x-data="setting.showSetting">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">

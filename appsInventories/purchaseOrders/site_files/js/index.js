@@ -224,7 +224,9 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
-          $scope.getSafes($scope.item.paymentType);
+          if ($scope.item.paymentType) {
+            $scope.getSafes($scope.item.paymentType);
+          }
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
               ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
@@ -1057,7 +1059,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
         item.totalItemsDiscounts += _item.totalDiscounts;
 
         if (!_item.noVat) {
-          _item.vat = $scope.setting.storesSetting.vat;
+          _item.vat = $scope.setting.storesSetting.vat || 0;
           _item.totalVat = (_item.totalAfterDiscounts * _item.vat) / 100;
           _item.totalVat = site.toNumber(_item.totalVat);
         } else {

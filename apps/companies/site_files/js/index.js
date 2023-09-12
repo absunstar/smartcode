@@ -484,6 +484,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showDiscountTypes = $scope.company.showAccounting;
     $scope.company.showVoucherNames = $scope.company.showAccounting;
     $scope.company.showReceiptVouchers = $scope.company.showAccounting;
+    $scope.company.showgeneralSalesInvoice = $scope.company.showAccounting;
     $scope.company.showExpenseVouchers = $scope.company.showAccounting;
     $scope.company.showSafes = $scope.company.showAccounting;
     $scope.company.showBanks = $scope.company.showAccounting;

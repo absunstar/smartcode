@@ -19,7 +19,9 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
-      $scope.getSafes($scope.item.paymentType);
+      if ($scope.item.paymentType) {
+        $scope.getSafes($scope.item.paymentType);
+      }
     }
   };
 
@@ -149,12 +151,11 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
 
   $scope.changeInvoiceType = function (_item) {
     $scope.error = '';
-  if($scope.item.invoiceType && $scope.item.invoiceType.id == 1) {
-    $scope.item.amountPaid = $scope.item.totalNet;
-  } else {
-    $scope.item.amountPaid = 0;
-
-  }
+    if ($scope.item.invoiceType && $scope.item.invoiceType.id == 1) {
+      $scope.item.amountPaid = $scope.item.totalNet;
+    } else {
+      $scope.item.amountPaid = 0;
+    }
   };
 
   $scope.delete = function (_item) {
@@ -270,7 +271,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
           insuranceClass: 1,
           expiryDate: 1,
           havisaNum: 1,
-          member:1,
+          member: 1,
         },
         search: $search,
       },
@@ -312,7 +313,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
           totalAfterVat: 1,
           totalPrice: 1,
           totalNet: 1,
-          totalDiscount: 1,
+          totalDiscounts: 1,
           servicesList: 1,
         },
         search: $search,
@@ -428,7 +429,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
   $scope.showAttend = function (_item) {
     $scope.error = '';
     $scope.mode = 'view';
-    $scope.view(_item,'attend');
+    $scope.view(_item, 'attend');
     site.showModal('#attendModal');
   };
 
@@ -497,12 +498,11 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.view({ id: _item.invoiceId },'attend');
-         
+          $scope.view({ id: _item.invoiceId }, 'attend');
+
           site.hideModal('#expenseVouchersModal');
           site.resetValidated('#expenseVouchersModal');
           $scope.$applyAsync();
-
         } else {
           $scope.error = response.data.error;
         }

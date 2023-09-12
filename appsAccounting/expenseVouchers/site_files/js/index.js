@@ -9,13 +9,27 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
   $scope.structure = {
     image: { url: '/images/expenseVouchers.png' },
   };
+  if (window.location.href.contains('generalPurchaseInvoices')) {
+    $scope.invoiceType = 'generalPurchaseInvoices';
+    $scope.structure = { voucherType: { id: 'generalPurchaseInvoice', nameEn: 'General Purchase Invoice', nameAr: 'فاتورة مشتريات عامة' } };
+  }
+
+
   $scope.item = {};
   $scope.list = [];
 
   $scope.showAdd = function (_item) {
     $scope.error = '';
     $scope.mode = 'add';
-    $scope.item = { ...$scope.structure, date: new Date(), total: 0 };
+    $scope.item = { ...$scope.structure, date: new Date(), total: 0, $mainItem: { discountType: 'percent', count: 1, mainDiscount: 0 } };
+    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+      $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
+        return _t.id == $scope.setting.accountsSetting.paymentType.id;
+      });
+      if ($scope.item.paymentType) {
+        $scope.getSafes($scope.item.paymentType);
+      }
+    }
     site.showModal($scope.modalID);
   };
 
@@ -292,7 +306,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'type.id': paymentType.safeType.id,
+          'paymentType.id': paymentType.id,
         },
         select: {
           id: 1,
@@ -306,6 +320,15 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.safesList = response.data.list;
+          if (paymentType.id == 1 && $scope.setting.accountsSetting.safeCash) {
+            $scope.item.paymentType = $scope.safesList.find((_t) => {
+              return _t.id == $scope.setting.accountsSetting.safeCash.id;
+            });
+          } else if (paymentType.id == 2 && $scope.setting.accountsSetting.safeBank) {
+            $scope.item.paymentType = $scope.safesList.find((_t) => {
+              return _t.id == $scope.setting.accountsSetting.safeBank.id;
+            });
+          }
         }
       },
       function (err) {
@@ -442,6 +465,76 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
     $timeout(() => {
       item.$remainAmount = item.$remainPaid - item.total;
     }, 300);
+  };
+
+  $scope.addToItemsList = function () {
+    $scope.error = '';
+    $scope.itemsError = '';
+    $scope.item.itemsList = $scope.item.itemsList || [];
+    if (!$scope.item.$mainItem.price) {
+      $scope.itemsError = '##word.Must add a price##';
+      return;
+    } else if (!$scope.item.$mainItem.name) {
+      $scope.itemsError = '##word.Must add a name##';
+      return;
+    } else if (!$scope.item.$mainItem.count) {
+      $scope.itemsError = '##word.Must add a count##';
+      return;
+    }
+    $scope.item.$mainItem.mainDiscount = $scope.item.$mainItem.mainDiscount || 0;
+    $scope.item.itemsList.unshift($scope.item.$mainItem);
+    $scope.item.$mainItem = { discountType: 'percent', count: 1, mainDiscount: 0 };
+    $scope.calculate($scope.item);
+  };
+
+  $scope.calculate = function (obj) {
+    $timeout(() => {
+      $scope.error = '';
+      $scope.itemsError = '';
+      obj.totalDiscounts = 0;
+      obj.total = 0;
+      obj.totalPrice = 0;
+      obj.totalVat = 0;
+      obj.totalBeforeVat = 0;
+      obj.itemsList.forEach((_item) => {
+        let discountValue = 0;
+
+        _item.totalVat = 0;
+        _item.totalPrice = _item.price * _item.count;
+        discountValue = _item.discountType === 'value' ? _item.mainDiscount : (_item.price * _item.mainDiscount) / 100;
+        _item.totalDiscounts = discountValue * _item.count;
+        _item.totalDiscounts = site.toNumber(_item.totalDiscounts);
+        _item.totalAfterDiscounts = _item.totalPrice - _item.totalDiscounts;
+
+        obj.totalPrice += _item.totalPrice;
+
+        obj.totalDiscounts += _item.totalDiscounts;
+
+        if (!_item.noVat) {
+          _item.vat = $scope.setting.storesSetting.vat || 0;
+          _item.totalVat = (_item.totalAfterDiscounts * _item.vat) / 100;
+          _item.totalVat = site.toNumber(_item.totalVat);
+        } else {
+          _item.vat = 0;
+        }
+
+        _item.vat = site.toNumber(_item.vat);
+        _item.totalVat = site.toNumber(_item.totalVat);
+        _item.total = _item.totalAfterDiscounts + _item.totalVat;
+        _item.total = site.toNumber(_item.total);
+        obj.totalBeforeVat += _item.totalAfterDiscounts;
+        obj.totalVat += _item.totalVat;
+        obj.total += _item.total;
+      });
+
+      obj.totalVat = site.toNumber(obj.totalVat);
+      obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
+      obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
+      obj.total = site.toNumber(obj.total);
+      obj.amountPaid = obj.total;
+    }, 300);
+
+    $scope.itemsError = '';
   };
 
   $scope.thermalPrint = function (obj) {

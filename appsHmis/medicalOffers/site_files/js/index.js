@@ -285,7 +285,7 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
       _item.totalPrice = 0;
       _item.totalAfterVat = 0;
       _item.totalNet = 0;
-      _item.totalDiscount = 0;
+      _item.totalDiscounts = 0;
 
       _item.servicesList.forEach((_service) => {
         _service.totalAfterVat = 0;
@@ -303,12 +303,12 @@ app.controller('medicalOffers', function ($scope, $http, $timeout) {
       });
 
       if (_item.discountType == 'percent') {
-        _item.totalDiscount = (_item.discount * _item.totalAfterVat) / 100;
+        _item.totalDiscounts = (_item.discount * _item.totalAfterVat) / 100;
       } else {
-        _item.totalDiscount = _item.discount;
+        _item.totalDiscounts = _item.discount;
       }
 
-      _item.totalNet = _item.totalAfterVat - _item.totalDiscount;
+      _item.totalNet = _item.totalAfterVat - _item.totalDiscounts;
       _item.totalAfterVat = site.toNumber(_item.totalAfterVat);
       _item.totalNet = site.toNumber(_item.totalNet);
     }, 300);

@@ -192,7 +192,7 @@ module.exports = function init(site) {
           appName: app.name,
           patient: _data.patient,
           totalNet: _data.totalNet,
-          totalDiscounts: _data.medicalOffer.totalDiscount,
+          totalDiscounts: _data.medicalOffer.totalDiscounts,
           totalVat: _data.medicalOffer.totalVat,
           totalAverageCost: 0,
           userInfo: _data.addUserInfo,

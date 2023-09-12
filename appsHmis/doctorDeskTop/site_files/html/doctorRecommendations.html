@@ -50,7 +50,7 @@
                 ng-click="dcafPrint(item)"
               ></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Orders##" ng-click="ordersPrint(item)"></i-button>
-              <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Attendance Notic##" ng-click="attendanceNoticPrint(item)"></i-button>
+              <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Attendance Notice##" ng-click="attendanceNoticPrint(item)"></i-button>
               <i-button type="print" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Medical Report##" ng-click="medicalReportPrint(item)"></i-button>
               <i-button type="print" ng-show="item.leave.done" x-permissions="doctorDeskTopPrint || doctorDeskTopManage" label="##word.Sick Leave##" ng-click="sickLeavePrint(item)"></i-button>
             </div>
@@ -229,7 +229,7 @@
 
                     <div class="col6">
                       <div class="row">
-                        <i-list label="##word.diagnoses##" class="col10" ng-model="item.$diagnosis" display="name##session.lang##" items="diagnosesList" ng-search="item.$diagnosis"></i-list>
+                        <i-list label="##word.Diagnoses##" class="col10" ng-model="item.$diagnosis" display="name##session.lang##" items="diagnosesList" ng-search="item.$diagnosis"></i-list>
                         <div class="col2">
                           <br />
                           <i-button type="add" ng-click="addDoctorReccomend('$diagnosis','DIAG')"></i-button>
@@ -522,7 +522,7 @@
               <i-control type="text" label="##word.BMI##" ng-model="item.bmi"></i-control>
               <i-control type="text" label="##word.FBS##" ng-model="item.fbs"></i-control>
               <i-control type="text" label="##word.Rbs##" ng-model="item.rbs"></i-control>
-              <i-textarea label="##word.notes##" ng-model="item.notesAfter"></i-textarea>
+              <i-textarea label="##word.Notes##" ng-model="item.notesAfter"></i-textarea>
             </div>
           </fieldset>
         </div>

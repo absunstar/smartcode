@@ -148,14 +148,13 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
-      site.get(
-        {
-          name: app.name,
-        },
-        (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Receipt Vouchers', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      site.get([{ name: app.name }, { name: 'generalSalesInvoices' }, { name: 'cashers' }], (req, res) => {
+        let appName = 'Receipt Vouchers';
+        if (req.url === '/generalSalesInvoices') {
+          appName = 'General Sales Invoices';
         }
-      );
+        res.render(app.name + '/index.html', { title: app.name, appName, setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      });
     }
 
     if (app.allowRouteAdd) {
@@ -229,7 +228,7 @@ module.exports = function init(site) {
               objJournal.user = doc.customer;
             } else if (doc.patient && doc.patient.id) {
               objJournal.user = doc.patient;
-            }else if (doc.vendor && doc.vendor.id) {
+            } else if (doc.vendor && doc.vendor.id) {
               objJournal.user = doc.vendor;
             }
             site.autoJournalEntryVoucher(objJournal);
@@ -349,7 +348,7 @@ module.exports = function init(site) {
             totalNet: doc.total,
             userInfo: doc.addUserInfo,
           };
-          objJournal.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr+ ' (' + doc.code + ' )';
+          objJournal.nameAr = 'سند قبض' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
           objJournal.nameEn = 'Receipt Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
           objJournal.voucherType = doc.voucherType;
           objJournal.session = { company: obj.company };
