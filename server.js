@@ -16,7 +16,7 @@ const site = require('../isite')({
     },
   },
   security: {
-    keys: ['21232f297a57a5a743894a0e4a801fc3', 'f6fdffe48c908deb0f4c3bd36c032e72'],
+    keys: ['21232f297a57a5a743894a0e4a801fc3', 'f6fdffe48c908deb0f4c3bd36c032e72' , 'ba0644892c52beb6594c41c8b1ff02c6' , 'c53e479b03b3220d3d56da88c4cace20'],
   },
 });
 
