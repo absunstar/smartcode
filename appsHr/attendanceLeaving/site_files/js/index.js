@@ -32,7 +32,7 @@ app.controller('attendanceLeaving', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].ar;
+            $scope.error = v.messages[0].Ar;
             return;
         }
         $scope.item.date = new Date(new Date(_item.date).getFullYear(), new Date(_item.date).getMonth(), new Date(_item.date).getDate());
@@ -78,7 +78,7 @@ app.controller('attendanceLeaving', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].ar;
+            $scope.error = v.messages[0].Ar;
             return;
         }
         $scope.busy = true;

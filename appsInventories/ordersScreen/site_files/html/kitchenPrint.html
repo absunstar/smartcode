@@ -1,0 +1,145 @@
+<div class="row center border font_cairo" ng-repeat="kitchenPrint in kitchenPrintList" id="kitchenPrint_{{$index}}" style="width: 88mm !important">
+  <div class="center txt23">
+    <b class="black">##word.Kitchen## : </b>
+    <b class="black">{{kitchenPrint.kitchen.name##session.lang##}} </b>
+  </div>
+  <div class="row center txt19 border_black">
+    <b class="black">##word.Invoice Number## : </b>
+    <b class="black">{{kitchenPrint.code}} </b>
+  </div>
+
+  <br />
+  <br />
+
+  <div class="row">
+    <div class="col6">
+      <b class="black">##word.Date## : {{kitchenPrint.date |date:"dd - MM - yyyy" }} </b>
+    </div>
+    <div class="col2"></div>
+    <div class="col4">
+      <b class="black">##word.Time## : {{kitchenPrint.date |date:"hh : mm" }} </b>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <br />
+  <hr />
+
+  <div class="row center bold">
+    <div class="col5 light_gray">
+      <p>##word.Name##</p>
+    </div>
+    <div class="col5 light_gray">
+      <p>##word.Extras##</p>
+    </div>
+    <div class="col2 light_gray">
+      <p>##word.Quantity##</p>
+    </div>
+  </div>
+
+  <div class="row" ng-repeat="itm in kitchenPrint.itemsList"></div>
+
+  <div class="hidden" id="kitchenPrint" style="width: 100%; margin-top: 0%">
+    <div class="row">
+      <div class="center">
+        <div class="row">
+          <p ng-show="setting.printerProgram.thermalLang.id == 1" class="black center font-20 bold">##session.company.nameAr##</p>
+          <p ng-show="setting.printerProgram.thermalLang.id == 2" class="black center font-20 bold">##session.company.nameEn##</p>
+          <p ng-show="'##session.lang##' == 'Ar' && setting.printerProgram.thermalLang.id == 3" class="black center font-20 bold">##session.company.nameAr##</p>
+          <p ng-show="'##session.lang##' == 'En' && setting.printerProgram.thermalLang.id == 3" class="black center font-20 bold">##session.company.nameEn##</p>
+        </div>
+
+        <div class="row">
+          <p ng-show="setting.printerProgram.thermalLang.id == 1" class="black center font-18 bold">##session.branch.nameAr##</p>
+          <p ng-show="setting.printerProgram.thermalLang.id == 2" class="black center font-18 bold">##session.branch.nameEn##</p>
+          <p ng-show="'##session.lang##' == 'Ar' && setting.printerProgram.thermalLang.id == 3" class="black center font-18 bold">##session.branch.nameAr##</p>
+          <p ng-show="'##session.lang##' == 'En' && setting.printerProgram.thermalLang.id == 3" class="black center font-18 bold">##session.branch.nameEn##</p>
+        </div>
+        <br />
+
+        <div class="row">
+          <p ng-show="setting.printerProgram.thermalLang.id == 1" class="black center font-18 bold">مطبخ : {{kitchenPrint.kitchen.nameAr}}</p>
+          <p ng-show="setting.printerProgram.thermalLang.id == 2" class="black center font-18 bold">Kitchen : {{kitchenPrint.kitchen.nameEn}}</p>
+          <p ng-show="'##session.lang##' == 'Ar' && setting.printerProgram.thermalLang.id == 3" class="black center font-18 bold">مطبخ : {{kitchenPrint.kitchen.nameAr}}</p>
+          <p ng-show="'##session.lang##' == 'En' && setting.printerProgram.thermalLang.id == 3" class="black center font-18 bold">Kitchen : {{kitchenPrint.kitchen.nameEn}}</p>
+        </div>
+
+        <div class="row" ng-show="kitchenPrint.salesCategory.id == 3">
+          <p ng-show="setting.printerProgram.thermalLang.id == 1" class="black center font-20 bold">طاولة : {{kitchenPrint.table.nameAr}}</p>
+          <p ng-show="setting.printerProgram.thermalLang.id == 2" class="black center font-20 bold">Table : {{kitchenPrint.table.nameEn}}</p>
+          <p ng-show="'##session.lang##' == 'Ar' && setting.printerProgram.thermalLang.id == 3" class="black center font-20 bold">طاولة : {{kitchenPrint.table.nameAr}}</p>
+          <p ng-show="'##session.lang##' == 'En' && setting.printerProgram.thermalLang.id == 3" class="black center font-20 bold">Table : {{kitchenPrint.table.nameEn}}</p>
+        </div>
+
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6 center border_black">
+            <b class="black font-14" ng-show="setting.printerProgram.thermalLang.id == 1">رقم الفاتورة : </b>
+            <b class="black font-14" ng-show="setting.printerProgram.thermalLang.id == 2">Invoice Number : </b>
+            <b class="black font-14" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Invoice Number## : </b>
+            <b class="black font-14">{{kitchenPrint.code}} </b>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 center">
+            <b class="black font-11" ng-show="setting.printerProgram.thermalLang.id == 1">التاريخ : </b>
+            <b class="black font-11" ng-show="setting.printerProgram.thermalLang.id == 2">Date : </b>
+            <b class="black font-11" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Date## : </b>
+            <b class="black font-11">{{kitchenPrint.date |date:"dd - MM - yyyy" }}</b>
+          </div>
+          <div class="col-5 center">
+            <b class="black font-11 left" ng-show="setting.printerProgram.thermalLang.id == 1 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar'"
+              >الوقت : {{kitchenPrint.date |date:"mm : hh" }}</b
+            >
+            <b class="black font-11 left" ng-show="setting.printerProgram.thermalLang.id == 2 || setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En'"
+              >Time : {{kitchenPrint.date |date:"hh : mm" }}</b
+            >
+          </div>
+        </div>
+
+        <br />
+        <hr />
+
+        <div class="row center bold">
+          <div class="col-5">
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 1">الإسم</p>
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 2">Name</p>
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Name##</p>
+          </div>
+          <div class="col-2">
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 1">إضافات</p>
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 2">Extras</p>
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Extras##</p>
+          </div>
+          <div class="col-2">
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 1">الكمية</p>
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 2">Qty.</p>
+            <p class="bold center font-10" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Qty##</p>
+          </div>
+        </div>
+        <div class="row bold" ng-repeat="itm in kitchenPrint.itemsList">
+          <div class="row">
+            <div class="col-5">
+              <p class="black bold center font-8" ng-show="setting.printerProgram.thermalLang.id == 1">{{itm.nameAr }}</p>
+              <p class="black bold center font-8" ng-show="setting.printerProgram.thermalLang.id == 2">{{itm.nameEn }}</p>
+              <p class="black bold center font-8" ng-show="setting.printerProgram.thermalLang.id == 3">{{itm.name##session.lang## }}</p>
+            </div>
+            <div class="col-2 black">
+              <p class="black center font-10 bold">
+                <span ng-repeat="extra in itm.itemExtrasList">
+                  <span class="black bold center font-8" ng-show="setting.printerProgram.thermalLang.id == 1">{{extra.nameAr }} </span>
+                  <span class="black bold center font-8" ng-show="setting.printerProgram.thermalLang.id == 2">{{extra.nameEn }} </span>
+                  <span class="black bold center font-8" ng-show="setting.printerProgram.thermalLang.id == 3">{{extra.name##session.lang## }} </span>
+                  -
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

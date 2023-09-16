@@ -296,8 +296,8 @@ module.exports = function init(site) {
             let systemCode = 0;
 
             docs.forEach((doc) => {
-              let nameAr = doc.nameAr || doc['name ar'];
-              let nameEn = doc.nameEn || doc['name en'] || nameAr;
+              let nameAr = doc.nameAr || doc['name Ar'];
+              let nameEn = doc.nameEn || doc['name En'] || nameAr;
 
               nameAr = nameAr.toLowerCase().trim();
               nameEn = nameEn.toLowerCase().trim();

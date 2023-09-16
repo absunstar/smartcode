@@ -368,18 +368,6 @@
     "name": "Sales Invoices For Customers"
   },
   {
-    "category": "inventory",
-    "feature": "public",
-    "id": "salesCompaniesInvoices",
-    "name": "Sales Invoices For Companies"
-  },
-  {
-    "category": "inventory",
-    "feature": "public",
-    "id": "salesPatientsInvoices",
-    "name": "Sales Invoices For Patients"
-  },
-  {
     "category": "hmis",
     "feature": "public",
     "id": "chiefComplaints",

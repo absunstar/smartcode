@@ -91,8 +91,8 @@ app.controller('security', function ($scope, $http, $interval) {
                 $scope.screens.forEach((s) => {
                   let newname = data.find((el) => el.name == s.name.replace(/-/g, '_'));
                   if (newname) {
-                    s.nameAr = newname.ar;
-                    s.nameEn = newname.en;
+                    s.nameAr = newname.Ar;
+                    s.nameEn = newname.En;
                   }
                 });
               }
@@ -180,8 +180,8 @@ app.controller('security', function ($scope, $http, $interval) {
     }
     $scope.user.roles.push({
       name: role.name,
-      en: role.en,
-      ar: role.ar,
+      En: role.En,
+      Ar: role.Ar,
     });
     $scope.role = {};
   };

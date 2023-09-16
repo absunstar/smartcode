@@ -100,7 +100,7 @@
             <fieldset ng-show="setting.accountsSetting.linkAccountsToStores">
               <div class="row">
                 <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
-                <i-control class="col2" label="##word.Paid By Customer##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.$paidByCustomer"> </i-control>
+                <i-control class="col2" label="##word.Paid##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.$paidByCustomer"> </i-control>
                 <div class="col1">
                   <br />
                   <span class="currency">##word.$##</span>
@@ -161,7 +161,7 @@
             </div>
 
             <fieldset x-data="setting.showRestaurant" ng-show="item.salesCategory.id == 3">
-              <div class="row center"><b class="font-16">##word.Table##</b> : <b class="font-16 bold blue">{{item.table.name##session.lang##}} ( {{item.table.code}} )</b></div>
+              <div class="row center"><p class="font-20">{{item.table.tablesGroup.name##session.lang##}} <span class="font-22 bold blue">{{item.table.name##session.lang##}} ( {{item.table.code}} )</p> </span></div>
             </fieldset>
             <fieldset>
               <legend>##word.Barcode##</legend>
@@ -188,6 +188,7 @@
         <p class="error">{{mainError}}</p>
       </div>
       <div x-import="salesInvoices/thermalPrint.html"></div>
+      <div x-import="ordersScreen/kitchenPrint.html"></div>
       <div id="salesInvoicesDetails" x-import="salesInvoices/a4Print.html"></div>
       <div id="salesInvoicesLabels" x-import="salesInvoices/labelPrint.html"></div>
     </div>

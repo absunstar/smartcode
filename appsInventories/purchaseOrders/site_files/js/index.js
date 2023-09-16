@@ -118,7 +118,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     delete _item.purchaseRequest?.itemsList;
@@ -167,7 +167,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     delete _item.purchaseRequest?.itemsList;
@@ -229,12 +229,12 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           }
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
-              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
-              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+              Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
             };
             site.strings['from100'] = {
-              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
-              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+              Ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
         } else {
@@ -1109,7 +1109,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     delete _item.purchaseRequest?.itemsList;
@@ -1193,7 +1193,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#batchModalModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -1529,7 +1529,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#expenseVouchersModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 

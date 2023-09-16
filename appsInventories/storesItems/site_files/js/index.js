@@ -147,7 +147,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     $scope.medicalInformationsError = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -204,7 +204,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     $scope.medicalInformationsError = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -758,7 +758,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalUnitConversionData);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -898,7 +898,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#toBatchModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 

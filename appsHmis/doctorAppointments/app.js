@@ -443,7 +443,7 @@ module.exports = function init(site) {
 
   site.post(`/api/${app.name}/datesDay`, (req, res) => {
     let response = {};
-    req.headers.language = req.headers.language || 'en';
+    req.headers.language = req.headers.language || 'En';
     if (!req.session.user) {
       response.message = site.word('loginFirst')[req.headers.language];
       response.done = false;

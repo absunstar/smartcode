@@ -83,7 +83,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     delete _item.purchaseRequest?.itemsList;
@@ -132,7 +132,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     delete _item.purchaseRequest?.itemsList;
@@ -709,7 +709,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     delete _item.purchaseRequest?.itemsList;
@@ -789,7 +789,7 @@ app.controller('storesOpeningBalances', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#batchModalModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 

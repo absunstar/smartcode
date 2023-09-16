@@ -85,7 +85,7 @@
                   <div class="row">
                     <div class="col-4 center"><img ng-src="{{item.table.image.url}}" /></div>
                     <div class="center"><p class="center font-18">{{item.tablesGroup.name##session.lang##}}</p></div>
-                    <div class="col-8"><p class="center font-20">{{item.table.name##session.lang##}} ( {{item.table.code}} )</p></div>
+                    <div class=""><p class="center font-20">{{item.table.name##session.lang##}} ( {{item.table.code}} )</p></div>
                   </div>
                 </a>
               </fieldset>
@@ -95,7 +95,6 @@
             <div class="col7">
               <div class="row">
                 <i-control class="col6" ng-model="item.table.minimum" label="##word.Minimum persons##" type="number" disabled></i-control>
-
                 <i-control class="col6" disabled ng-model="item.table.maximum" label="##word.Maximum persons##" type="number"></i-control>
               </div>
 

@@ -69,8 +69,8 @@ app.controller('security', function ($scope, $http, $interval) {
             /*   $scope.screens.forEach((s) => {
                 let newname = data.find((el) => el.name == s.name);
                 if (newname) {
-                  s.nameAr = newname.ar;
-                  s.nameEn = newname.en;
+                  s.nameAr = newname.Ar;
+                  s.nameEn = newname.En;
                 }
               }); */
        

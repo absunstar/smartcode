@@ -70,9 +70,9 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       });
     }
 
-    if ($scope.setting.storesSetting.ordersScreenStore && $scope.setting.storesSetting.ordersScreenStore.id) {
+    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.ordersScreenStore.id;
+        return _t.id == $scope.setting.storesSetting.customersStore.id;
       });
     }
     if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
@@ -86,13 +86,58 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     let type = 'add';
     if (_item.id) {
       type = 'update';
     }
+
+    $scope.kitchenPrintList = [];
+    let nameLang = 'nameAr';
+    if ('##session.lang##' === 'nameEn') nameLang = 'nameEn';
+    if ($scope.setting.showRestaurant) {
+      $scope.kitchensList.forEach((_kitchen, i) => {
+        let kitchenPrint = {
+          date: _item.date,
+          code: _item.code,
+          table: _item.table,
+          salesCategory: _item.salesCategory,
+          kitchen: _kitchen,
+          itemsList: [],
+        };
+        kitchenPrint.printer = $scope.printersPathsList.find((_printer) => {
+          if (_kitchen.printer) {
+            return _printer.id === _kitchen.printer.id;
+          }
+        });
+
+        if (_item.itemsList && _item.itemsList.length > 0) {
+          _item.itemsList.forEach((_item) => {
+            if (_item.kitchen && !_item.printed) {
+              if (_item.kitchen.id == _kitchen.id) {
+                if (_item.itemExtrasList && _item.itemExtrasList.length > 0) {
+                  _item.itemExtrasList.forEach((_extra) => {
+                    if (_item.extras) {
+                      _item.extras = _item.extras + ' - ' + _extra[nameLang];
+                    } else {
+                      _item.extras = _extra[nameLang];
+                    }
+                  });
+                }
+                _item.printed = true;
+                kitchenPrint.itemsList.unshift({ ..._item });
+              }
+            }
+          });
+        }
+        if (_item.itemsList.some((b) => !b.printed) && kitchenPrint.printer) {
+          $scope.kitchenPrintList.push(kitchenPrint);
+        }
+      });
+    }
+
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -104,6 +149,10 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.resetValidated($scope.modalID);
           let doc = response.data.doc || response.data.result.doc;
+          // if ($scope.setting.showRestaurant) {
+          //   $scope.kitchenPrint(doc);
+          // }
+
           if ($scope.setting.printerProgram.autoThermalPrintSalesInvo && doc.approved) {
             $scope.thermalPrint(doc);
           }
@@ -134,7 +183,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     let dataValid = $scope.validateData(_item);
@@ -186,12 +235,12 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           $scope.item = response.data.doc;
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
-              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
-              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+              Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
             };
             site.strings['from100'] = {
-              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
-              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+              Ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
         } else {
@@ -913,7 +962,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#customersManageModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -1663,6 +1712,56 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getPrintersPaths = function () {
+    $scope.busy = true;
+    $scope.printersPathsList = [];
+    $http({
+      method: 'POST',
+      url: '/api/printersPaths/all',
+      data: {
+        where: { active: true },
+        select: {
+          id: 1,
+          code: 1,
+          ip: 1,
+          nameEn: 1,
+          nameAr: 1,
+          ipDevice: 1,
+          portDevice: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.printersPathsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.kitchenPrint = function (obj) {
+    $scope.error = '';
+    $('#kitchenPrint').removeClass('hidden');
+    $timeout(() => {
+      $scope.kitchenPrintList.forEach((k, i) => {
+        site.print(
+          {
+            selector: '#kitchenPrint_' + i,
+            ip: '127.0.0.1',
+            port: '60080',
+            printer: k.printer.ip.name.trim(),
+          },
+          () => {}
+        );
+      });
+    }, 1000 * 2);
+  };
+
   $scope.selectBatch = function (item, batch) {
     $scope.addBatch = '';
     $scope.errorBatch = '';
@@ -1803,7 +1902,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#expenseVouchersModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -2167,7 +2266,6 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           $scope.error = response.data.error;
         }
         $scope.busySelectTable = false;
-
       },
       function (err) {
         console.log(err);
@@ -2190,7 +2288,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           nameAr: 1,
           image: 1,
           minimum: 1,
-          maxmum: 1,
+          maximum: 1,
           busy: 1,
           tablesGroup: 1,
         },
@@ -2232,4 +2330,5 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   $scope.getNumberingAutoCustomers();
   $scope.getCountriesList();
   $scope.getKitchens();
+  $scope.getPrintersPaths();
 });

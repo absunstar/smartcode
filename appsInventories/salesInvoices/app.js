@@ -225,19 +225,18 @@ module.exports = function init(site) {
             return;
           }
 
-          let appName = 'salesInvoices';
 
-          if (_data.salesType.code == 'company') {
-            appName = 'salesCompaniesInvoices';
-          } else if (_data.salesType.code == 'patient') {
-            appName = 'salesPatientsInvoices';
-          } else if (_data.salesType.code == 'er') {
-            appName = 'salesErInvoices';
-          }
+          // if (_data.salesType.code == 'company') {
+          //   appName = 'salesCompaniesInvoices';
+          // } else if (_data.salesType.code == 'patient') {
+          //   appName = 'salesPatientsInvoices';
+          // } else if (_data.salesType.code == 'er') {
+          //   appName = 'salesErInvoices';
+          // }
 
           let numObj = {
             company: site.getCompany(req),
-            screen: appName,
+            screen: 'salesInvoices',
             date: new Date(),
           };
 
@@ -484,7 +483,6 @@ module.exports = function init(site) {
           });
         } else {
           where['company.id'] = site.getCompany(req).id;
-
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
             if (req.body.claims && docs) {
               let list = [];
@@ -541,6 +539,7 @@ module.exports = function init(site) {
                 list: list,
               });
             } else {
+
               res.json({ done: true, list: docs });
             }
           });
@@ -568,7 +567,6 @@ module.exports = function init(site) {
           delete where.fromDate;
           delete where.toDate;
         }
-        // console.log('salesInvoices',where);
 
         where['company.id'] = site.getCompany(req).id;
 

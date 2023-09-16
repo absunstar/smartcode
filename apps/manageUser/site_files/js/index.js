@@ -72,7 +72,7 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
 
         const v = site.validated('#viewManageUserModal');
         if (!v.ok && type == 'password') {
-            $scope.error = v.messages[0].ar;
+            $scope.error = v.messages[0].Ar;
             return;
         }
 

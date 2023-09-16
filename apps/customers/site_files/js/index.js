@@ -30,7 +30,7 @@ app.controller('customers', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -72,7 +72,7 @@ app.controller('customers', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     $scope.busy = true;

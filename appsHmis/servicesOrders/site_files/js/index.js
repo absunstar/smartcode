@@ -46,7 +46,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
 
@@ -91,7 +91,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     $scope.busy = true;
@@ -123,7 +123,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].ar;
+      $scope.error = v.messages[0].Ar;
       return;
     }
     $scope.busy = true;
@@ -190,12 +190,12 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
           $scope.item = response.data.doc;
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
-              ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
-              en: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+              Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
             };
             site.strings['from100'] = {
-              ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
-              en: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+              Ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
+              En: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
         } else {
