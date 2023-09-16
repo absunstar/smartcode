@@ -27,7 +27,17 @@
                 <h2 class="bold center red">{{error}}</h2>
 
                 <div class="row">
-                  <i-date class="col-6" ng-model="item.date" label="##word.Date##"></i-date>
+                  <i-date class="col-4" ng-model="item.date" label="##word.Date##"></i-date>
+                  <i-list
+                  class="col-4"
+                  ng-show="item.invoiceType.id == 1"
+                  ng-change="getSafes(item.paymentType)"
+                  ng-model="item.paymentType"
+                  display="name##session.lang##"
+                  items="paymentTypesList"
+                  label="##word.Payment Type##"
+                  ng-search="item.$paymentType"
+                ></i-list>
                   <i-list
                     ng-search="item.$salesCategory"
                     class="col-3"
@@ -186,6 +196,13 @@
         </div>
 
         <p class="error">{{mainError}}</p>
+      </div>
+      <div id="alert" class="modal alert small">
+        <div class="modal-content height-auto">
+          <div class="modal-body">
+            <h1 class="blue center">##word.Saved successfully##</h1>
+          </div>
+        </div>
       </div>
       <div x-import="salesInvoices/thermalPrint.html"></div>
       <div x-import="ordersScreen/kitchenPrint.html"></div>

@@ -53,17 +53,19 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       discountsList: [],
       taxesList: [],
     };
-    if ($scope.setting.accountsSetting.safeCash && $scope.setting.accountsSetting.safeCash.id) {
+   /*  if ($scope.setting.accountsSetting.safeCash && $scope.setting.accountsSetting.safeCash.id) {
       $scope.item.safe = $scope.safesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.safeCash.id;
       });
-    }
+    } */
     if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
+        if ($scope.item.paymentType) {
+        $scope.getSafes($scope.item.paymentType);
+      }
     }
-
     if ($scope.setting.storesSetting.salesCategory && $scope.setting.storesSetting.salesCategory.id) {
       $scope.item.salesCategory = $scope.salesCategoriesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.salesCategory.id;
@@ -149,9 +151,14 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.resetValidated($scope.modalID);
           let doc = response.data.doc || response.data.result.doc;
-          // if ($scope.setting.showRestaurant) {
-          //   $scope.kitchenPrint(doc);
-          // }
+         /*  if ($scope.setting.showRestaurant) {
+            $scope.kitchenPrint(doc);
+          }
+ */
+          site.showModal('#alert');
+          $timeout(() => {
+            site.hideModal('#alert');
+          }, 1500);
 
           if ($scope.setting.printerProgram.autoThermalPrintSalesInvo && doc.approved) {
             $scope.thermalPrint(doc);
@@ -2006,7 +2013,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'paymentType.id': 1,
+          'paymentType.id': paymentType.id,
         },
         select: {
           id: 1,
@@ -2020,6 +2027,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.safesList = response.data.list;
+          $scope.item.safe = $scope.safesList[0];
         }
       },
       function (err) {
@@ -2309,7 +2317,6 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   };
 
   $scope.getInvoiceTypes();
-  $scope.getSafes();
   $scope.getCurrentMonthDate();
   $scope.getAll();
   $scope.getPaymentTypes();
