@@ -225,7 +225,6 @@ module.exports = function init(site) {
             return;
           }
 
-
           // if (_data.salesType.code == 'company') {
           //   appName = 'salesCompaniesInvoices';
           // } else if (_data.salesType.code == 'patient') {
@@ -302,6 +301,7 @@ module.exports = function init(site) {
                   if (doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
                     site.addReceiptVouchers({
                       session: req.session,
+                      itemsList: doc.itemsList,
                       date: new Date(),
                       delivery: doc.delivery,
                       customer: doc.customer,
@@ -539,7 +539,6 @@ module.exports = function init(site) {
                 list: list,
               });
             } else {
-
               res.json({ done: true, list: docs });
             }
           });
@@ -776,6 +775,7 @@ module.exports = function init(site) {
               site.addReceiptVouchers({
                 session: req.session,
                 date: new Date(),
+                itemsList: result.doc.itemsList,
                 delivery: result.doc.delivery,
                 customer: result.doc.customer,
                 patient: result.doc.patient,

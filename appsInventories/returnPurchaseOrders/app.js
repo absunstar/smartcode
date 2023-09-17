@@ -248,6 +248,7 @@ module.exports = function init(site) {
               date: new Date(),
               voucherType: site.vouchersTypes[1],
               vendor: _data.vendor,
+              itemsList: _data.itemsList,
               invoiceId: _data.id,
               invoiceCode: _data.code,
               total: _data.amountPaid,

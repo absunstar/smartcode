@@ -286,6 +286,7 @@ module.exports = function init(site) {
                 voucherType: site.vouchersTypes[3],
                 invoiceId: result.doc.id,
                 doctorDeskTop: result.doc.doctorDeskTop,
+                itemsList: result.doc.itemsList,
                 customer: result.doc.customer,
                 patient: result.doc.patient,
                 invoiceCode: result.doc.code,
