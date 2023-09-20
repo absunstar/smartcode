@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="row" id="purchaseVat">
+    <div class="row" id="purchaseVatReport">
       <div class="row">
         <fieldset>
           <legend>##word.Totals##</legend>
@@ -42,7 +42,7 @@
               <th>##word.Invoice No##</th>
               <th>##word.Date##</th>
               <th>##word.Payment Type##</th>
-              <th>##word.Customer##</th>
+              <th>##word.Vendor##</th>
               <th>##word.Net##</th>
               <th>##word.Vat##</th>
               <th>##word.Total##</th>
@@ -52,7 +52,7 @@
               <td class="center">{{c.invoiceCode|| c.code}}</td>
               <td class="center">{{c.date |date:"dd - MM - yyyy"}} <span class="currency">##word.$##</span></td>
               <td class="center">{{c.paymentType.name##session.lang##}}</td>
-              <td class="center">{{c.customer.name##session.lang##}}</td>
+              <td class="center">{{c.vendor.name##session.lang##}}</td>
               <td class="center">{{c.$totalNetByVat | xmoney2}} <span class="currency">##word.$##</span></td>
               <td class="center">{{c.$totalVatByVat | xmoney2}} <span class="currency">##word.$##</span></td>
               <td class="center">{{c.$totalByVat | xmoney2}} <span class="currency">##word.$##</span></td>
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <i-button x-permissions="purchaseVatPrint || purchaseVatManage" type="print" label="##word.Print##" onclick="site.print('#purchaseVat')"></i-button>
-    <i-button x-permissions="purchaseVatExport || purchaseVatManage" type="export" label="##word.Export to excel##" onclick="site.export('#purchaseVat')"> </i-button>
+    <i-button x-permissions="purchaseVatPrint || purchaseVatManage" type="print" label="##word.Print##" onclick="site.print('#purchaseVatReport')"></i-button>
+    <i-button x-permissions="purchaseVatExport || purchaseVatManage" type="export" label="##word.Export to excel##" onclick="site.export('#purchaseVatReport')"> </i-button>
  </div>
 </div>

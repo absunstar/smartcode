@@ -263,7 +263,7 @@ module.exports = function init(site) {
 
               let objVoucher = {
                 date: new Date(),
-                voucherType: site.vouchersTypes[5],
+                voucherType: site.vouchersTypes[6],
                 invoiceId: doc.id,
                 doctor: doc.doctor,
                 patient: doc.patient,
@@ -577,7 +577,7 @@ module.exports = function init(site) {
 
         let objVoucher = {
           date: new Date(),
-          voucherType: site.vouchersTypes[5],
+          voucherType: site.vouchersTypes[6],
           invoiceId: result.doc.id,
           doctor: result.doc.doctor,
           patient: result.doc.patient,

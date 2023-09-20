@@ -223,7 +223,6 @@ module.exports = function init(site) {
           items: _data.itemsList,
         };
 
-      
         site.checkOverDraft(req, overDraftObj, (overDraftCb) => {
           if (!overDraftCb.done) {
             let error = '';
@@ -244,20 +243,23 @@ module.exports = function init(site) {
               res.json(response);
               return;
             }
-            let obj = {
-              date: new Date(),
-              voucherType: site.vouchersTypes[1],
-              vendor: _data.vendor,
-              itemsList: _data.itemsList,
-              invoiceId: _data.id,
-              invoiceCode: _data.code,
-              total: _data.amountPaid,
-              safe: _data.safe,
-              paymentType: _data.paymentType,
-              addUserInfo: _data.addApprovedInfo,
-              company: _data.company,
-              branch: _data.branch,
-            };
+            if(_data.paymentType.id && _data.safe.id){
+
+              let obj = {
+                date: new Date(),
+                voucherType: site.vouchersTypes[3],
+                vendor: _data.vendor,
+                itemsList: _data.itemsList,
+                invoiceId: _data.id,
+                invoiceCode: _data.code,
+                storeInvoiceId: _data.invoiceId,
+                total: _data.amountPaid,
+                safe: _data.safe,
+                paymentType: _data.paymentType,
+                addUserInfo: _data.addApprovedInfo,
+                company: _data.company,
+                branch: _data.branch,
+              };
             _data.remainPaid = _data.totalNet - _data.amountPaid;
             obj.session = req.session;
             site.addReceiptVouchers(obj);
@@ -265,6 +267,7 @@ module.exports = function init(site) {
             _data.remainPaid = _data.totalNet;
           }
   
+        }
           app.update(_data, (err, result) => {
             if (!err) {
               response.done = true;

@@ -331,6 +331,7 @@ module.exports = function init(site) {
   
       where['company.id'] = site.getCompany(req).id;
       where.$or = [{ 'voucherType.id': 'generalPurchaseInvoice' }, { 'voucherType.id': 'purchaseInvoice' }, { 'voucherType.id': 'salesReturn' }];
+      where['hasReturnStore'] = { $ne: true };
   
       if (where && where.fromDate && where.toDate) {
         let d1 = site.toDate(where.fromDate);
@@ -351,7 +352,6 @@ module.exports = function init(site) {
             docs[i].$totalNetByVat = 0;
             docs[i].$totalVatByVat = 0;
             docs[i].$totalByVat = 0;
-            console.log(docs[i].invoiceCode);
             if (docs[i].itemsList && docs[i].itemsList.length > 0) {
               docs[i].itemsList.forEach((_item) => {
                 if (!_item.noVat) {
@@ -388,7 +388,11 @@ module.exports = function init(site) {
     let cb = site.getNumbering(numObj);
     obj.code = cb.code;
     if (obj.code) {
+      obj.hasReturnStore = false;
       app.add(obj, (err, doc) => {
+        const receiptVouchersApp = site.getApp('receiptVouchers');
+        receiptVouchersApp.$collection.update({ where: { invoiceId: doc.storeInvoiceId }, set: { hasReturnStore: true } });
+
         let objJournal = {
           code: doc.code,
           appName: app.name,
@@ -399,7 +403,7 @@ module.exports = function init(site) {
         objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
         objJournal.nameEn = 'Expense Vouchers' + ' ' + doc.voucherType.nameEn + ' (' + doc.code + ' )';
         objJournal.voucherType = doc.voucherType;
-        objJournal.session = req.session;
+        objJournal.session = { company: obj.company };
         if (doc.patient && doc.patient.id) {
           objJournal.user = doc.patient;
         } else if (doc.customer && doc.customer.id) {

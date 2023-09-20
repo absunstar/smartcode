@@ -714,6 +714,7 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     $scope.item = {
       invoiceId: _item.id,
+      storeInvoiceId: _item.invoiceId,
       vendor: _item.vendor,
       invoiceCode: _item.code,
       $remainPaid: _item.remainPaid,

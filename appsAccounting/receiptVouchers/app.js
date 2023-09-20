@@ -333,10 +333,11 @@ module.exports = function init(site) {
     let where = req.body.where || {};
     let search = req.body.search || '';
     let limit = req.body.limit || 100000;
-    let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1,customer:1,paymentType:1, voucherType: 1, itemsList: 1, safe: 1, total: 1 };
+    let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1, customer: 1, paymentType: 1, voucherType: 1, itemsList: 1, safe: 1, total: 1 };
 
     where['company.id'] = site.getCompany(req).id;
-    where.$or = [{ 'voucherType.id': 'generalSalesInvoice' }, { 'voucherType.id': 'salesInvoice' }, { 'voucherType.id': 'purchaseReturn' }];
+    where.$or = [{ 'voucherType.id': 'generalSalesInvoice' }, { 'voucherType.id': 'salesInvoice' }];
+    where['hasReturnStore'] = { $ne: true };
 
     if (where && where.fromDate && where.toDate) {
       let d1 = site.toDate(where.fromDate);
@@ -357,7 +358,6 @@ module.exports = function init(site) {
           docs[i].$totalNetByVat = 0;
           docs[i].$totalVatByVat = 0;
           docs[i].$totalByVat = 0;
-          console.log(docs[i].invoiceCode);
           if (docs[i].itemsList && docs[i].itemsList.length > 0) {
             docs[i].itemsList.forEach((_item) => {
               if (!_item.noVat) {
@@ -393,8 +393,11 @@ module.exports = function init(site) {
     let cb = site.getNumbering(numObj);
     obj.code = cb.code;
     if (obj.code) {
+      obj.hasReturnStore = false;
       app.add(obj, (err, doc) => {
         if (!err) {
+          const expenseVouchersApp = site.getApp('expenseVouchers');
+          expenseVouchersApp.$collection.update({ where: { invoiceId: doc.storeInvoiceId }, set: { hasReturnStore: true } });
           let objJournal = {
             code: doc.code,
             appName: app.name,

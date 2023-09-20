@@ -283,8 +283,9 @@ module.exports = function init(site) {
             if (result.doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
               let objVoucher = {
                 date: new Date(),
-                voucherType: site.vouchersTypes[3],
+                voucherType: site.vouchersTypes[5],
                 invoiceId: result.doc.id,
+                storeInvoiceId: result.doc.invoiceId,
                 doctorDeskTop: result.doc.doctorDeskTop,
                 itemsList: result.doc.itemsList,
                 customer: result.doc.customer,
