@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "purchaseVat", "name": "purchaseVatManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "purchaseVat", "name": "purchaseVatView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "purchaseVat", "name": "purchaseVatExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "purchaseVat", "name": "purchaseVatPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "purchaseVat", "name": "purchaseVatUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

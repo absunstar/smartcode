@@ -251,6 +251,8 @@
                 <i-checkbox label="##word.Show## ##word.Reports##" ng-change="showReportsScreens()" ng-model="company.showReports"></i-checkbox>
               </legend>
               <div class="row" ng-if="company.showReports">
+                <i-checkbox label="##word.Show## ##word.Sales Vat##" ng-model="company.showSalesVat"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Purchase Vat##" ng-model="company.showPurchaseVat"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Daily Cash By Dates##" ng-model="company.showDailyCashByDates"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Daily Cash By Payment Number##" ng-model="company.showDailyCashByPaymentNumber"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Daily Cash By Users##" ng-model="company.showDailyCashByUsers"></i-checkbox>

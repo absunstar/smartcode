@@ -336,6 +336,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.showReportsScreens = function () {
+    $scope.company.showSalesVat = $scope.company.showReports;
+    $scope.company.showPurchaseVat = $scope.company.showReports;
     $scope.company.showDailyCashByDates = $scope.company.showReports;
     $scope.company.showDailyCashByPaymentNumber = $scope.company.showReports;
     $scope.company.showDailyCashByUsers = $scope.company.showReports;

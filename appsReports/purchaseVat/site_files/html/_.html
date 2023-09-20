@@ -1,0 +1,68 @@
+<div ng-controller="purchaseVat" class="loaded">
+  <div class="row" x-permissions="purchaseVatUi || purchaseVatManage">
+    <div x-import="purchaseVat/modalSearch.html"></div>
+    <div class="row" x-permissions="reportHasTransactionPurchaseRequestsManage">
+      <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+      <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.Search##" ng-click="getAll(_search)"></i-button>
+      </div>
+    </div>
+
+    <div class="row" id="purchaseVat">
+      <div class="row">
+        <fieldset>
+          <legend>##word.Totals##</legend>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total Net## : {{totals.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total VAT## : {{totals.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total## : {{totals.total | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.S/N##</th>
+              <th>##word.Invoice No##</th>
+              <th>##word.Date##</th>
+              <th>##word.Payment Type##</th>
+              <th>##word.Customer##</th>
+              <th>##word.Net##</th>
+              <th>##word.Vat##</th>
+              <th>##word.Total##</th>
+            </tr>
+            <tr ng-repeat="c in list">
+              <td class="center">{{$index + 1}}</td>
+              <td class="center">{{c.invoiceCode|| c.code}}</td>
+              <td class="center">{{c.date |date:"dd - MM - yyyy"}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.paymentType.name##session.lang##}}</td>
+              <td class="center">{{c.customer.name##session.lang##}}</td>
+              <td class="center">{{c.$totalNetByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.$totalVatByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.$totalByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <i-button x-permissions="purchaseVatPrint || purchaseVatManage" type="print" label="##word.Print##" onclick="site.print('#purchaseVat')"></i-button>
+    <i-button x-permissions="purchaseVatExport || purchaseVatManage" type="export" label="##word.Export to excel##" onclick="site.export('#purchaseVat')"> </i-button>
+ </div>
+</div>

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "purchaseVatAdmin",
+        "En": "Purchase VAT Report",
+        "Ar": "تقرير الضريبة للمشتريات",
+        "permissions": ["purchaseVatManage"]
+    }
+]

@@ -264,7 +264,7 @@ module.exports = function init(site) {
             _data.addUserInfo = req.getUserFinger();
 
             if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-              if (site.toNumber(_data.$paidByCustomer) < site.toNumber(_data.totalNet)) {
+              if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet)) {
                 response.error = 'Must Paid By Customer greater than or equal to ';
                 res.json(response);
                 return;
@@ -738,7 +738,7 @@ module.exports = function init(site) {
         _data.editUserInfo = req.getUserFinger();
 
         if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-          if (site.toNumber(_data.$paidByCustomer) < site.toNumber(_data.totalNet)) {
+          if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet)) {
             response.error = 'Must Paid By Customer greater than or equal to ';
             res.json(response);
             return;
@@ -780,7 +780,7 @@ module.exports = function init(site) {
                 customer: result.doc.customer,
                 patient: result.doc.patient,
                 company: result.doc.company,
-                doctorDeskTop: result.doc.result.doctorDeskTop,
+                doctorDeskTop: result.doc.doctorDeskTop,
                 voucherType: site.vouchersTypes[0],
                 invoiceId: result.doc.id,
                 invoiceCode: result.doc.code,
@@ -837,10 +837,10 @@ module.exports = function init(site) {
 
             if (result.doc.salesType.code == 'patient') {
               obj.user = result.doc.patient;
-              site.hasSalesDoctorDeskTop({ id: result.doc.result.doctorDeskTop.id, items: result.doc.itemsList });
+              site.hasSalesDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
             } else if (result.doc.salesType.code == 'er') {
               obj.user = result.doc.patient;
-              site.hasErDoctorDeskTop({ id: result.doc.result.doctorDeskTop.id, items: result.doc.itemsList });
+              site.hasErDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
             } else if (result.doc.salesType.code == 'company') {
               obj.user = result.doc.company;
             }

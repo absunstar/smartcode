@@ -275,7 +275,7 @@
     <fieldset ng-show="item.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores">
       <div class="row">
         <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
-        <i-control class="col2" label="##word.Paid By Customer##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.$paidByCustomer"> </i-control>
+        <i-control class="col2" label="##word.Paid By Customer##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.paidByCustomer"> </i-control>
         <div class="col1">
           <br />
           <span class="currency">##word.$##</span>
@@ -284,9 +284,9 @@
           <p>##word.Amount Paid##</p>
           <p>{{item.amountPaid| xmoney2}} <span class="currency">##word.$##</span></p>
         </div>
-        <div class="col2 font-18" ng-hide="item.id">
+        <div class="col2 font-18">
           <p>##word.Remain For Customer##</p>
-          <p>{{item.$remainForCustomer| xmoney2}} <span class="currency">##word.$##</span></p>
+          <p>{{item.remainForCustomer| xmoney2}} <span class="currency">##word.$##</span></p>
         </div>
       </div>
     </fieldset>

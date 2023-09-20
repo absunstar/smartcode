@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "salesVatAdmin",
+        "En": "Sales VAT Report",
+        "Ar": "تقرير الضريبة للمبيعات",
+        "permissions": ["salesVatManage"]
+    }
+]

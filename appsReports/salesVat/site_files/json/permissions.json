@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "salesVat", "name": "salesVatManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "salesVat", "name": "salesVatView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "salesVat", "name": "salesVatExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "salesVat", "name": "salesVatPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "salesVat", "name": "salesVatUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

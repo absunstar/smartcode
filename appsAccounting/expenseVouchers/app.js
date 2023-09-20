@@ -322,6 +322,60 @@ module.exports = function init(site) {
         }
       });
     }
+
+    site.post({ name: `/api/${app.name}/vat`, public: true }, (req, res) => {
+      let where = req.body.where || {};
+      let search = req.body.search || '';
+      let limit = req.body.limit || 100000;
+      let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1,vendor:1,paymentType:1, voucherType: 1, itemsList: 1, safe: 1, total: 1 };
+  
+      where['company.id'] = site.getCompany(req).id;
+      where.$or = [{ 'voucherType.id': 'generalPurchaseInvoice' }, { 'voucherType.id': 'purchaseInvoice' }, { 'voucherType.id': 'salesReturn' }];
+  
+      if (where && where.fromDate && where.toDate) {
+        let d1 = site.toDate(where.fromDate);
+        let d2 = site.toDate(where.toDate);
+        d2.setDate(d2.getDate() + 1);
+        where.date = {
+          $gte: d1,
+          $lte: d2,
+        };
+        delete where.fromDate;
+        delete where.toDate;
+      }
+  
+      app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
+        if (!err && docs) {
+          let totals = { totalNet: 0, totalVat: 0, total: 0 };
+          for (let i = 0; i < docs.length; i++) {
+            docs[i].$totalNetByVat = 0;
+            docs[i].$totalVatByVat = 0;
+            docs[i].$totalByVat = 0;
+            console.log(docs[i].invoiceCode);
+            if (docs[i].itemsList && docs[i].itemsList.length > 0) {
+              docs[i].itemsList.forEach((_item) => {
+                if (!_item.noVat) {
+                  totals.totalNet += _item.totalAfterDiscounts;
+                  totals.totalVat += _item.totalVat;
+                  totals.total += _item.total;
+                  docs[i].$totalNetByVat += _item.totalAfterDiscounts;
+                  docs[i].$totalVatByVat += _item.totalVat;
+                  docs[i].$totalByVat += _item.total;
+                }
+              });
+            }
+          }
+          res.json({
+            done: true,
+            list: docs,
+            totals,
+          });
+        } else {
+          response.error = err ? err.mesage : 'Data Not Found';
+          res.json(response);
+        }
+      });
+    });
   }
 
   site.addExpenseVouchers = function (obj) {

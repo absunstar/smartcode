@@ -770,8 +770,8 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
       obj.totalCompanyCash = site.toNumber(obj.totalCompanyCash);
       obj.totalNet = site.toNumber(obj.totalNet);
       obj.amountPaid = obj.totalNet;
-      obj.$paidByCustomer = obj.totalNet;
-      obj.$remainForCustomer = 0;
+      obj.paidByCustomer = obj.totalNet;
+      obj.remainForCustomer = 0;
     }, 300);
 
     $scope.itemsError = '';
@@ -779,8 +779,8 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
 
   $scope.calculateCustomerPaid = function (obj) {
     $timeout(() => {
-      obj.$remainForCustomer = obj.$paidByCustomer - obj.amountPaid;
-      obj.$remainForCustomer = site.toNumber(obj.$remainForCustomer);
+      obj.remainForCustomer = obj.paidByCustomer - obj.amountPaid;
+      obj.remainForCustomer = site.toNumber(obj.remainForCustomer);
     }, 300);
   };
 

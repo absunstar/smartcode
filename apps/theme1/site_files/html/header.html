@@ -978,6 +978,21 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+
+              <li id="salesVat" x-data="setting.showSalesVat" x-permissions="salesVatUi || salesVatManage">
+                <a class="menuTag" href="/salesVat">
+                  <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
+                  <p>##word.Sales Vat##</p>
+                </a>
+              </li>
+
+              <li id="purchaseVat" x-data="setting.showPurchaseVat" x-permissions="purchaseVatUi || purchaseVatManage">
+                <a class="menuTag" href="/purchaseVat">
+                  <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
+                  <p>##word.Purchase Vat##</p>
+                </a>
+              </li>
+              
               <li id="dailyCashByDates" x-data="setting.showDailyCashByDates" x-permissions="dailyCashByDatesUi || dailyCashByDatesManage">
                 <a class="menuTag" href="/dailyCashByDates">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
