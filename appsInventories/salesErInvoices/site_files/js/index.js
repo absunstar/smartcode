@@ -339,8 +339,16 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
           code: 1,
           nameEn: 1,
           nameAr: 1,
+          commercialCustomer: 1,
           taxIdentificationNumber: 1,
           mobile: 1,
+          phone: 1,
+          country:1,
+          gov:1,
+          city:1,
+          area:1,
+          address:1,
+          street:1,
         },
         search: $search,
       },
@@ -853,7 +861,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
             if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
               let qrString = {
-                vatNumber: '##session.company.taxNumber##',
+                vatNumber: '{{setting.taxNumber}}',
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat,
@@ -970,7 +978,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
           if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
             let qrString = {
-              vatNumber: '##session.company.taxNumber##',
+              vatNumber: '{{setting.taxNumber}}',
               time: new Date($scope.item.date).toISOString(),
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,

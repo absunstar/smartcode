@@ -566,7 +566,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
             if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
               let qrString = {
-                vatNumber: '##session.company.taxNumber##',
+                vatNumber: '{{setting.taxNumber}}',
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.total,
               };
@@ -679,7 +679,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
           if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
             let qrString = {
-              vatNumber: '##session.company.taxNumber##',
+              vatNumber: '{{setting.taxNumber}}',
               time: new Date($scope.item.date).toISOString(),
               total: $scope.item.total,
             };

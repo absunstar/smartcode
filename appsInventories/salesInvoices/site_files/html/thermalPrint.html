@@ -28,10 +28,10 @@
       </div>
     </div>
 
-    <div class="row center" ng-show="##session.company.taxNumber##">
-      <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 1">الرقم الضريبي : ##session.company.taxNumber##</p>
-      <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 2">Tax Number : ##session.company.taxNumber##</p>
-      <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Tax Number## : ##session.company.taxNumber##</p>
+    <div class="row center" ng-show="setting.taxNumber">
+      <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 1">الرقم الضريبي : {{setting.taxNumber}}</p>
+      <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 2">Tax Number : {{setting.taxNumber}}</p>
+      <p class="center black font-14 bold" ng-show="setting.printerProgram.thermalLang.id == 3">##word.Tax Number## : {{setting.taxNumber}}</p>
     </div>
 
     <div class="row center" ng-show="setting.printerProgram.printSimplifiedTaxInvoiceSentence">

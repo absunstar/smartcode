@@ -12,8 +12,8 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
           <p class="font-14 bold black center">{{i.name}}</p>
         </div>
-        <div class="row center" ng-show="##session.company.taxNumber##">
-          <p class="font-14 bold black center">Tax # : ##session.company.taxNumber##</p>
+        <div class="row center" ng-show="setting.taxNumber">
+          <p class="font-14 bold black center">Tax # : {{setting.taxNumber}}</p>
         </div> 
       </div>
 
@@ -32,8 +32,8 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
           <p class="font-14 bold black center">{{i.name}}</p>
         </div>
-        <div class="row center" ng-show="##session.company.taxNumber##">
-          <p class="font-14 bold black center">##session.company.taxNumber##  : الرقم الضريبي </p>
+        <div class="row center" ng-show="setting.taxNumber">
+          <p class="font-14 bold black center">{{setting.taxNumber}}  : الرقم الضريبي </p>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
           <div><p class="font-14 userPrint">Patient Name : <span class="bold">{{order.patient.fullNameEn}}</span> </p></div>
         </div>
         <div class="col-6">
-         <p class="t-right font-14 userPrint">إسم المريض : <span class="bold">{{order.patient.fullNameAr}}</span> </p>
+         <p class="text-right font-14 userPrint">إسم المريض : <span class="bold">{{order.patient.fullNameAr}}</span> </p>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
           <p class="font-14 bold userPrint">( {{order.patient.code}} )</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">رقم الملف</p>
+          <p class="font-14 userPrint text-right">رقم الملف</p>
         </div>
       </div>
 
@@ -70,7 +70,7 @@
           <p class="font-14 userPrint">Gender : <span class="bold">{{order.patient.gender.nameEn}}</span> </p>
         </div>
         <div class="col-6">
-          <p class="font-14 userPrint t-right">الجنس :  <span class="bold">{{order.patient.gender.nameAr}}</span></p>
+          <p class="font-14 userPrint text-right">الجنس :  <span class="bold">{{order.patient.gender.nameAr}}</span></p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@
           <p class="font-14 userPrint">Nationality : <span class="bold">{{order.patient.nationality.nameEn}}</span> </p>
         </div>
         <div class="col-6">
-          <p class="font-14 userPrint t-right">الجنسية :  <span class="bold">{{order.patient.nationality.nameAr}}</span></p>
+          <p class="font-14 userPrint text-right">الجنسية :  <span class="bold">{{order.patient.nationality.nameAr}}</span></p>
         </div>
       </div>
 
@@ -91,7 +91,7 @@
           <p class="font-14 center bold userPrint">{{order.patient.dateOfBirth |date:"dd / MM / yyyy"}} ({{order.patient.age}} Y)</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">تاريخ الميلاد</p>
+          <p class="font-14 userPrint text-right">تاريخ الميلاد</p>
         </div>
       </div>
 
@@ -103,7 +103,7 @@
           <p class="font-14 bold userPrint">{{order.leave.occupation}}</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">المهنة</p>
+          <p class="font-14 userPrint text-right">المهنة</p>
         </div>
       </div>
 
@@ -115,7 +115,7 @@
           <p class="font-14 bold userPrint">{{order.leave.placeOfWork}}</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">جهة العمل</p>
+          <p class="font-14 userPrint text-right">جهة العمل</p>
         </div>
       </div>
 
@@ -127,7 +127,7 @@
           <p class="font-14 bold center userPrint">{{order.date |date:"dd / MM / yyyy"}}</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">تاريخ المراجعة</p>
+          <p class="font-14 userPrint text-right">تاريخ المراجعة</p>
         </div>
       </div>
 
@@ -139,7 +139,7 @@
           <p class="font-14 bold userPrint"></p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">التوصيات</p>
+          <p class="font-14 userPrint text-right">التوصيات</p>
         </div>
       </div>
     </div>
@@ -151,7 +151,7 @@
           <p class="font-12 userPrint">TFollowing Medical Examination, it is Recommended</p>
         </div>
         <div class="col-6">
-          <p class="t-right font-12 userPrint">بالكشف علي المريض نوصي بالآتي</p>
+          <p class="text-right font-12 userPrint">بالكشف علي المريض نوصي بالآتي</p>
         </div>
       </div>
 
@@ -163,7 +163,7 @@
           <p class="font-14 center bold userPrint">{{order.leave.day}} يوم</p>
         </div>
         <div class="col-4">
-          <p class="font-14 userPrint t-right">منحه أجازة مرضية</p>
+          <p class="font-14 userPrint text-right">منحه أجازة مرضية</p>
         </div>
       </div>
 
@@ -178,7 +178,7 @@
             </div>
 
             <div class="col-3">
-              <div><p class="font-14 userPrint t-right">إلى تاريخ</p></div>
+              <div><p class="font-14 userPrint text-right">إلى تاريخ</p></div>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@
             </div>
 
             <div class="col-3">
-              <p class="font-14 userPrint t-right">من تاريخ</p>
+              <p class="font-14 userPrint text-right">من تاريخ</p>
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@
         </p>
       </div>
       <br />
-      <div class="row t-right">
+      <div class="row text-right">
         <p class="userPrint bold font-13">
           <span>It is because of his health condition &nbsp; - &nbsp;</span>
           <span>ذلك بسبب حالته الصحية</span>
@@ -266,39 +266,39 @@
     <div class="row full border-1">
       <div class="row">
         <div class="col-6">
-          <p class="font-16 t-right bold userPrint">المحترم</p>
+          <p class="font-16 text-right bold userPrint">المحترم</p>
         </div>
         <div class="col-6">
-          <p class="font-16 t-right bold userPrint">سعادة</p>
+          <p class="font-16 text-right bold userPrint">سعادة</p>
         </div>
       </div>
 
-      <div class="row t-right">
-        <p class="t-right font-14 col-5">بشأن طلب الكشف الطبي علي الموضح أعلاه</p>
-        <p class="t-right col-2"></p>
-        <p class="t-right font-14 col-1 underline">بتاريخ</p>
-        <p class="t-right col-1"></p>
-        <p class="t-right font-14 col-3 userPrint">إشارة إلي حالتكم رقم</p>
+      <div class="row text-right">
+        <p class="text-right font-14 col-5">بشأن طلب الكشف الطبي علي الموضح أعلاه</p>
+        <p class="text-right col-2"></p>
+        <p class="text-right font-14 col-1 underline">بتاريخ</p>
+        <p class="text-right col-1"></p>
+        <p class="text-right font-14 col-3 userPrint">إشارة إلي حالتكم رقم</p>
       </div>
       <div class="row">
-        <p class="font-14 t-right userPrint">إشارة إلي مراجعة الموظف لديكم الموضح إسمه أعلاه للكشف عليه تجدون بعاليه التقرير الصادر بشأنه</p>
+        <p class="font-14 text-right userPrint">إشارة إلي مراجعة الموظف لديكم الموضح إسمه أعلاه للكشف عليه تجدون بعاليه التقرير الصادر بشأنه</p>
       </div>
       <div class="row">
         <p class="font-16 bold">الختم الرسمي</p>
       </div>
       <br />
-      <div class="row t-right">
+      <div class="row text-right">
         <div class="col-2"></div>
         <div class="col-5">
           <div class="row">
-            <p class="font-14 t-right bold col-4 userPrint">التاريخ</p>
-            <p class="dotted t-right col-6"></p>
+            <p class="font-14 text-right bold col-4 userPrint">التاريخ</p>
+            <p class="dotted text-right col-6"></p>
           </div>
         </div>
         <div class="col-5">
           <div class="row">
-            <p class="font-14 t-right bold col-4 userPrint">التوقيع</p>
-            <p class="dotted t-right col-6"></p>
+            <p class="font-14 text-right bold col-4 userPrint">التوقيع</p>
+            <p class="dotted text-right col-6"></p>
           </div>
         </div>
       </div>

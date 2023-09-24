@@ -12,8 +12,8 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
           <p class="font-14 bold black center">{{i.name}}</p>
         </div>
-        <div class="row center" ng-show="##session.company.taxNumber##">
-          <p class="font-14 bold black center">Tax # : ##session.company.taxNumber##</p>
+        <div class="row center" ng-show="setting.taxNumber">
+          <p class="font-14 bold black center">Tax # : {{setting.taxNumber}}</p>
         </div> 
       </div>
 
@@ -32,8 +32,8 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
           <p class="font-14 bold black center">{{i.name}}</p>
         </div>
-        <div class="row center" ng-show="##session.company.taxNumber##">
-          <p class="font-14 bold black center">##session.company.taxNumber##  : الرقم الضريبي </p>
+        <div class="row center" ng-show="setting.taxNumber">
+          <p class="font-14 bold black center">{{setting.taxNumber}}  : الرقم الضريبي </p>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
           <div><p class="font-14 userPrint">Patient Name : <span class="bold">{{order.patient.fullNameEn}}</span> </p></div>
         </div>
         <div class="col-6">
-         <p class="t-right font-14 userPrint">إسم المريض : <span class="bold">{{order.patient.fullNameAr}}</span> </p>
+         <p class="text-right font-14 userPrint">إسم المريض : <span class="bold">{{order.patient.fullNameAr}}</span> </p>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
           <p class="font-14 bold userPrint">( {{order.patient.code}} )</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">رقم الملف</p>
+          <p class="font-14 userPrint text-right">رقم الملف</p>
         </div>
       </div>
 
@@ -73,7 +73,7 @@
           <p class="font-14 userPrint">( {{order.patient.havisaNum}} )</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">رقم الهوية</p>
+          <p class="font-14 userPrint text-right">رقم الهوية</p>
         </div>
       </div>
 
@@ -83,7 +83,7 @@
           <p class="font-14 userPrint">Gender : <span class="bold">{{order.patient.gender.nameEn}}</span> </p>
         </div>
         <div class="col-6">
-          <p class="font-14 userPrint t-right">الجنس :  <span class="bold">{{order.patient.gender.nameAr}}</span></p>
+          <p class="font-14 userPrint text-right">الجنس :  <span class="bold">{{order.patient.gender.nameAr}}</span></p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
           <p class="font-14 userPrint">Nationality : <span class="bold">{{order.patient.nationality.nameEn}}</span> </p>
         </div>
         <div class="col-6">
-          <p class="font-14 userPrint t-right">الجنسية :  <span class="bold">{{order.patient.nationality.nameAr}}</span></p>
+          <p class="font-14 userPrint text-right">الجنسية :  <span class="bold">{{order.patient.nationality.nameAr}}</span></p>
         </div>
       </div>
 
@@ -104,7 +104,7 @@
           <p class="font-14 center bold userPrint">{{order.patient.dateOfBirth |date:"dd / MM / yyyy"}} ({{order.patient.age}} Y)</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">تاريخ الميلاد</p>
+          <p class="font-14 userPrint text-right">تاريخ الميلاد</p>
         </div>
       </div>
 
@@ -116,7 +116,7 @@
           <p class="font-14 bold center userPrint">{{order.date |date:"dd / MM / yyyy"}}</p>
         </div>
         <div class="col-3">
-          <p class="font-14 userPrint t-right">تاريخ المراجعة</p>
+          <p class="font-14 userPrint text-right">تاريخ المراجعة</p>
         </div>
       </div>
     </div>
@@ -128,7 +128,7 @@
           <p class="font-16 userPrint">The above-mentioned patient attended to the hospital and see a clinic</p>
         </div>
         <div class="col-6">
-         <p class="t-right font-16 userPrint">المريض المذكور أعلاه حضر إلى المستشفى و راجع عيادة</p>
+         <p class="text-right font-16 userPrint">المريض المذكور أعلاه حضر إلى المستشفى و راجع عيادة</p>
         </div>
       </div>
       <div class="row">
@@ -136,7 +136,7 @@
           <p class="font-16 userPrint">By Dr. : {{order.doctor.nameEn}}</p>
         </div>
         <div class="col-6">
-          <p class="font-16 bold userPrint t-right">لدى د. : {{order.doctor.nameAr}}</p>
+          <p class="font-16 bold userPrint text-right">لدى د. : {{order.doctor.nameAr}}</p>
         </div>
       </div>
 
@@ -149,7 +149,7 @@
         </div>
 
         <div class="col-3">
-        <p class="font-16 userPrint t-right">و ذلك بتاريخ</p>
+        <p class="font-16 userPrint text-right">و ذلك بتاريخ</p>
         </div>
       </div>
 
@@ -158,7 +158,7 @@
           <p class="font-18 userPrint">The work has been done</p>
         </div>
         <div class="col-6">
-        <p class="font-18 userPrint t-right">وقد تم عمل اللازم</p>
+        <p class="font-18 userPrint text-right">وقد تم عمل اللازم</p>
         </div>
       </div>
     </div>
@@ -199,8 +199,8 @@
         <p class="font-14 userPrint">Signature :</p>
       </div>
       <div class=" col-6">
-        <p class="font-14 userPrint t-right">إسم الطبيب المعالج : <span class="bold">{{order.doctor.nameAr}}</span> </p>
-        <p class="font-14 userPrint t-right">: التوقيع </p>
+        <p class="font-14 userPrint text-right">إسم الطبيب المعالج : <span class="bold">{{order.doctor.nameAr}}</span> </p>
+        <p class="font-14 userPrint text-right">: التوقيع </p>
       </div>
     </div>
     <br />

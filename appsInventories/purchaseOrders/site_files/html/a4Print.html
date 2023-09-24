@@ -12,8 +12,8 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader2">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
-        <div class="row center" ng-show="##session.company.taxNumber##">
-          <p class="font-14 bold black center">Tax # : ##session.company.taxNumber##</p>
+        <div class="row center" ng-show="setting.taxNumber">
+          <p class="font-14 bold black center">Tax # : {{setting.taxNumber}}</p>
         </div> 
       </div>
 
@@ -32,8 +32,8 @@
         <div class="row center" ng-repeat="i in setting.printerProgram.invoiceHeader">
           <p class="font-12 bold black center">{{i.name}}</p>
         </div>
-        <div class="row center" ng-show="##session.company.taxNumber##">
-          <p class="font-14 bold black center">##session.company.taxNumber##  : الرقم الضريبي </p>
+        <div class="row center" ng-show="setting.taxNumber">
+          <p class="font-14 bold black center">{{setting.taxNumber}}  : الرقم الضريبي </p>
         </div>
       </div>
     </div>

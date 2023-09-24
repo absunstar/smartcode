@@ -15,6 +15,13 @@
 .bg-theme {
   background: #c8ffca !important;
 }
+.height-50 {
+  height: 50px;
+}
+.qrcode-a4 {
+  position: relative;
+  display: inline-block;
+}
 .table.branch tr {
   height: 50px;
 }
@@ -36,8 +43,7 @@
 }
 hr.line {
   color: black !important;
-  height: 2px;
-  margin-top: auto;
+  margin: 2px;
 }
 .font-5 {
   font-family: 'Font Awesome 5 Free';
@@ -127,10 +133,11 @@ hr.line {
   padding: 1px 4px 0 2px; */
 }
 .border-1 {
-  border: 2px var(--theme-color) solid;
+  border: 2px black solid;
   margin: 2px !important;
   border-radius: 5px;
 }
+
 
 .border-right {
   border-right: 2px solid black;
@@ -254,10 +261,12 @@ hr.line {
   padding: 5px;
   background: #00b086e0;
 }
-.t-right {
+.text-right {
   text-align: -webkit-right;
 }
-
+.pre-line {
+  white-space: pre-line;
+}
 .dotted {
   border-top-style: dotted;
   top: 15px !important;
@@ -401,10 +410,6 @@ i-image[view] img {
   user-select: text;
 }
 
-.text-right {
-  text-align: right;
-}
-
 .text-left {
   text-align: left;
 }
@@ -480,6 +485,10 @@ i-checkbox label {
 .m-top-50 {
   margin-top: 50px !important;
 }
+.bg-lightGray {
+  background: #dedcdc !important;
+}
+
 .logoThermalPrint {
   width: 125px !important;
   height: 105px !important;
@@ -489,8 +498,8 @@ i-checkbox label {
   border: 1px solid var(--background-color) !important;
 }
 .logoPrint {
-  width: 130px;
-  height: 110px;
+  width: 240px;
+  height: 130px;
   margin: 0.7px;
   padding: 0.5px;
   border-radius: 0;

@@ -252,6 +252,9 @@ div#availabelDoctorCurosel {
 #appointmentDetailsButton {
   margin-bottom: 17px !important;
 }
+.bg-darkGray {
+  background: darkgray !important;
+}
 
 .mainscreen .table {
   border: none !important;
