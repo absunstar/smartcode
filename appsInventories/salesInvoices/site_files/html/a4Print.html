@@ -152,13 +152,21 @@
         <table class="table center details">
           <tr class="bold">
             <th class="width-15-mm font-10" style="background: #dedcdc !important">
-              <p>رقم الصنف</p>
-              <p>Item No.</p>
+              <p>الإجمالي</p>
+              <p>Total</p>
             </th>
 
-            <th class="width-60-mm font-10" style="background: #dedcdc !important">
-              <p>إسم الصنف</p>
-              <p>Item Name</p>
+            <th class="width-15-mm font-10" style="background: #dedcdc !important" ng-show="setting.storesSetting.vat > 0">
+              <p>VAT</p>
+              <p>VAT PER.</p>
+            </th>
+            <th class="width-15-mm font-10" style="background: #dedcdc !important">
+              <p>سعر الوحدة</p>
+              <p>Unit Price</p>
+            </th>
+            <th class="width-15-mm font-10" style="background: #dedcdc !important">
+              <p>الكمية</p>
+              <p>Qty.</p>
             </th>
 
             <th class="width-15-mm font-10" style="background: #dedcdc !important">
@@ -166,30 +174,29 @@
               <p>Total DISC</p>
             </th>
 
-            <th class="width-15-mm font-10" style="background: #dedcdc !important">
-              <p>الكمية</p>
-              <p>Qty.</p>
+            <th class="width-60-mm font-10" style="background: #dedcdc !important">
+              <p>إسم الصنف</p>
+              <p>Item Name</p>
             </th>
-
             <th class="width-15-mm font-10" style="background: #dedcdc !important">
-              <p>سعر الوحدة</p>
-              <p>Unit Price</p>
-            </th>
-
-            <th class="width-15-mm font-10" style="background: #dedcdc !important" ng-show="setting.storesSetting.vat > 0">
-              <p>VAT</p>
-              <p>VAT PER.</p>
-            </th>
-
-            <th class="width-15-mm font-10" style="background: #dedcdc !important">
-              <p>الإجمالي</p>
-              <p>Total</p>
+              <p>رقم الصنف</p>
+              <p>Item No.</p>
             </th>
           </tr>
 
           <tr ng-repeat="itm in sInvoice.itemsList">
-            <td class="center width-15-mm font-12">{{itm.barcode}}</td>
-
+            <td class="center width-15-mm font-12">
+              <p>{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center width-15-mm font-12" ng-show="setting.storesSetting.vat > 0">
+              <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+              <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
+            </td>
+            <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
+            <td class="center width-15-mm font-12">{{itm.count}}</td>
+            <td class="center width-15-mm font-12">
+              <p>{{itm.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+            </td>
             <td class="center width-60-mm">
               <!-- <p class="font-12">{{itm.nameAr}} ( {{itm.unit.nameAr}} )</p> -->
               <p class="font-12">{{itm.nameEn}} ( {{itm.unit.nameEn}} )</p>
@@ -200,22 +207,7 @@
                 <span class="" ng-show="itm.workByQrCode"> {{b.gtin}} ({{b.count}}##word.+##) </span>
               </p>
             </td>
-
-            <td class="center width-15-mm font-12">
-              <p>{{itm.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
-            </td>
-
-            <td class="center width-15-mm font-12">{{itm.count}}</td>
-
-            <td class="center width-15-mm font-12">{{itm.price | xmoney2}} <span class="currency">##word.$##</span></td>
-
-            <td class="center width-15-mm font-12" ng-show="setting.storesSetting.vat > 0">
-              <p>{{itm.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
-              <p>{{itm.vat | xmoney2}} <span class="currency">##word.%##</span></p>
-            </td>
-            <td class="center width-15-mm font-12">
-              <p>{{itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
-            </td>
+            <td class="center width-15-mm font-12">{{itm.barcode}}</td>
           </tr>
         </table>
       </div>
@@ -223,17 +215,11 @@
       <div class="footer">
         <div class="row full" ng-show="($index+1) == invList.length">
           <div class="row">
-            <div class="col-5">
-              <div class="center">
-                <span class="qrcode-a4"></span>
-              </div>
-            </div>
-
             <div class="col-7">
               <div class="row">
                 <div class="col-4"><p class="font-12">Total Discounts :</p></div>
                 <div class="col-4">
-                  <p class="bold black font-12">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+                  <p class="bold black center font-12">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-4"><p class="font-12 right">: إجمالي الخصومات</p></div>
               </div>
@@ -241,7 +227,7 @@
               <div class="row">
                 <div class="col-4"><p class="font-12">Total VAT :</p></div>
                 <div class="col-4">
-                  <p class="bold black font-12">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                  <p class="bold black center font-12">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-4"><p class="font-12 right">: إجمالي الضريبة</p></div>
               </div>
@@ -250,7 +236,7 @@
               <div class="row">
                 <div class="col-4"><p class="font-12">Total Before VAT :</p></div>
                 <div class="col-3">
-                  <p class="bold black font-12">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                  <p class="bold black center font-12">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-5"><p class="font-12 right">: الإجمالي قبل الضريبة</p></div>
               </div>
@@ -259,7 +245,7 @@
               <div class="row bg-lightGray">
                 <div class="col-4"><p class="font-12 bold">Total After VAT :</p></div>
                 <div class="col-3">
-                  <p class="bold black font-12">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                  <p class="bold black center font-12">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-5"><p class="font-12 right bold">: الإجمالي بعد الضريبة</p></div>
               </div>
@@ -272,6 +258,11 @@
               <div class="col-4"><p class="font-12">: الإجمالي</p></div>
             </div>
             <hr class="line" /> -->
+            </div>
+            <div class="col-5">
+              <div class="center">
+                <span class="qrcode-a4"></span>
+              </div>
             </div>
           </div>
 
