@@ -390,12 +390,12 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           taxIdentificationNumber: 1,
           mobile: 1,
           phone: 1,
-          country:1,
-          gov:1,
-          city:1,
-          area:1,
-          address:1,
-          street:1,
+          country: 1,
+          gov: 1,
+          city: 1,
+          area: 1,
+          address: 1,
+          street: 1,
         },
         search: $search,
       },
@@ -1243,7 +1243,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.busy = false;
     $timeout(() => {
-    /*   $('#salesInvoicesDetails').addClass('hidden'); */
+      $('#salesInvoicesDetails').addClass('hidden');
     }, 8000);
   };
 

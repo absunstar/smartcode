@@ -315,7 +315,6 @@ module.exports = function init(site) {
                       safe: doc.safe,
                       paymentType: doc.paymentType,
                       addUserInfo: doc.addUserInfo,
-                      company: doc.company,
                       branch: doc.branch,
                     });
                   }
@@ -368,8 +367,6 @@ module.exports = function init(site) {
                   } else if (doc.salesType.code == 'er') {
                     obj.user = doc.patient;
                     site.hasErDoctorDeskTop({ id: doc.doctorDeskTop.id, items: doc.itemsList });
-                  } else if (doc.salesType.code == 'company') {
-                    obj.user = doc.company;
                   }
                   obj.nameAr = 'فاتورة مبيعات' + ' (' + doc.code + ' )';
                   obj.nameEn = 'Sales Invoice' + ' (' + doc.code + ' )';
@@ -699,13 +696,13 @@ module.exports = function init(site) {
 
       let appName = 'salesInvoices';
 
-      if (_data.salesType.code == 'company') {
-        appName = 'salesCompaniesInvoices';
-      } else if (_data.salesType.code == 'patient') {
-        appName = 'salesPatientsInvoices';
-      } else if (_data.salesType.code == 'er') {
-        appName = 'salesErInvoices';
-      }
+      // if (_data.salesType.code == 'company') {
+      //   appName = 'salesCompaniesInvoices';
+      // } else if (_data.salesType.code == 'patient') {
+      //   appName = 'salesPatientsInvoices';
+      // } else if (_data.salesType.code == 'er') {
+      //   appName = 'salesErInvoices';
+      // }
 
       let numObj = {
         company: site.getCompany(req),
@@ -779,7 +776,6 @@ module.exports = function init(site) {
                 delivery: result.doc.delivery,
                 customer: result.doc.customer,
                 patient: result.doc.patient,
-                company: result.doc.company,
                 doctorDeskTop: result.doc.doctorDeskTop,
                 voucherType: site.vouchersTypes[2],
                 invoiceId: result.doc.id,
@@ -841,9 +837,7 @@ module.exports = function init(site) {
             } else if (result.doc.salesType.code == 'er') {
               obj.user = result.doc.patient;
               site.hasErDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
-            } else if (result.doc.salesType.code == 'company') {
-              obj.user = result.doc.company;
-            }
+            } 
             obj.nameAr = 'فاتورة مبيعات' + ' (' + result.doc.code + ' )';
             obj.nameEn = 'Sales Invoice' + ' (' + result.doc.code + ' )';
             obj.session = req.session;
