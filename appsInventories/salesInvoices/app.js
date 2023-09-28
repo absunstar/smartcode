@@ -162,6 +162,8 @@ module.exports = function init(site) {
           res.json(response);
           return;
         }
+        const storesSetting = site.getCompanySetting(req).storesSetting;
+
         if (_data.salesCategory && _data.salesCategory.id == 2) {
           _data.deliveryStatus = { ...site.deliveryStatus[0], date: new Date() };
           _data.deliveryStatusList = [_data.deliveryStatus];
@@ -172,7 +174,6 @@ module.exports = function init(site) {
           _data['approved'] = true;
         }
         _data.company = site.getCompany(req);
-        const storesSetting = site.getCompanySetting(req).storesSetting;
         let errBatchList = [];
         let medicationDosesList = [];
         const accountsSetting = site.getCompanySetting(req).accountsSetting;

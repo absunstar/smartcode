@@ -219,7 +219,8 @@ module.exports = function init(site) {
         const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         let _data = req.data;
-
+        _data.approved = true;
+        _data.approvedDate = new Date();
         let overDraftObj = {
           store: _data.store,
           items: _data.itemsList,

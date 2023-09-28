@@ -1,0 +1,210 @@
+<div id="returnOrderModal" class="modal full" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <p class="center">
+        ##word.New## ##word.Return Order##
+        <i class="fa fa-plus"></i>
+      </p>
+    </div>
+    <div class="row modal-body">
+      <fieldset>
+        <legend>##word.Invoice Informations##</legend>
+        <div class="row">
+          <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="returned.code"> </i-control>
+          <i-date class="col4" label="##word.Date##" ng-model="returned.date"> </i-date>
+          <i-list class="col2" v="r" ng-model="returned.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="returned.$invoiceType"></i-list>
+          <i-list
+            class="col2"
+            ng-show="returned.invoiceType.id == 1"
+            ng-change="getSafes(returned.paymentType)"
+            ng-model="returned.paymentType"
+            display="name##session.lang##"
+            items="paymentTypesList"
+            label="##word.Payment Type##"
+            ng-search="returned.$paymentType"
+          ></i-list>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>##word.Search##</legend>
+        <div class="row">
+          <i-control class="col3" label="##word.Code##" ng-model="search.code"> </i-control>
+          <i-date class="col3" label="##word.Date##" ng-model="search.date"> </i-date>
+          <i-button type="search" ng-click="getSalesInvoicesToReturn(search)"> </i-button>
+        </div>
+      </fieldset>
+
+      <fieldset ng-show="returnSalesInvoicesList.length > 0">
+        <legend>##word.Orders Invoices##</legend>
+        <div class="table-responsive">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.S##</th>
+              <th>##word.Code##</th>
+              <th>##word.Customer##</th>
+              <th>##word.Date##</th>
+              <th>##word.Payment Type##</th>
+              <th class="not-print">##word.Actions##</th>
+            </tr>
+            <tr ng-repeat="bill in returnSalesInvoicesList">
+              <td class="center">{{$index+1}}</td>
+              <td class="center">{{bill.code}}</td>
+              <td class="center">{{bill.customer.name##session.lang## ||bill.patient.fullName##session.lang##}}</td>
+              <td class="center">{{bill.date|date:'dd/MM/yyyy'}} - {{bill.date|date:'hh:mm:ss a'}}</td>
+              <td class="center">{{bill.paymentType.name##session.lang##}}</td>
+
+              <td class="center">
+                <i-button type="push" ng-click="addToItemsListToReturn(bill)"> </i-button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </fieldset>
+
+      <div class="row" ng-show="returned.invoiceCode && returnSalesInvoicesList.length == 0">
+        <div class="cart">
+          <div class="row">
+            <p class="bold" ng-show="returned.salesType.code == 'customer'">
+              <span class="darkGray"> ##word.Customer## : </span> {{returned.customer.name##session.lang##}} ( <span class="blue">{{returned.customer.code}}</span> )
+            </p>
+            <p class="bold" ng-show="returned.salesType.code == 'company'">
+              <span class="darkGray"> ##word.Company## : </span> {{returned.customer.name##session.lang##}} ( <span class="blue">{{returned.customer.code}}</span> )
+            </p>
+            <p class="bold" ng-show="returned.salesType.code == 'patient'">
+              <span class="darkGray"> ##word.Patient## : </span> {{returned.patient.fullName##session.lang##}} ( <span class="blue">{{returned.patient.code}}</span> )
+            </p>
+          </div>
+
+          <div class="row">
+            <div class="col6">
+              <p class="bold"><span class="darkGray"> ##word.Order / Invoice Date## : </span> {{returned.date | date:'dd/MM/yyyy'}} - {{returned.date | date:'hh:mm a'}}</p>
+            </div>
+            <div class="col4">
+              <p class="bold text-right"><span class="darkGray">##word.Code## : </span> {{returned.invoiceCode}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col6">
+              <p class="bold"><span class="darkGray"> ##word.Payment Type## : </span> {{returned.invoicePaymentType.name##session.lang##}}</p>
+            </div>
+            <div class="col4">
+              <p class="bold text-right"><span class="darkGray">##word.Store## : </span> {{returned.store.name##session.lang##}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <fieldset ng-show="returned.invoiceCode">
+        <legend>##word.Items Information##</legend>
+
+        <p class="error">{{itemsError}}</p>
+        <table class="table hover center bold">
+          <tr>
+            <th>##word.S##</th>
+            <th>##word.Item##</th>
+            <th>##word.Unit##</th>
+            <th>##word.Count##</th>
+            <th>##word.Total Price##</th>
+            <th>##word.Discount 1## ##word.%##</th>
+            <th>##word.Discount 2##</th>
+            <th>##word.Total VAT##</th>
+            <th>##word.Total##</th>
+            <th>##word.Actions##</th>
+          </tr>
+          <tr ng-repeat="elem in returned.itemsList">
+            <td class="center">{{$index+1}}</td>
+            <td class="center">{{elem.name##session.lang##}}</td>
+            <td class="center">{{elem.unit.name##session.lang##}}</td>
+            <td class="center">
+              <p class="center">{{elem.count}} <span>##word.+##</span></p>
+            </td>
+            <td class="center">
+              <p class="text-center">{{elem.totalPrice}} <span class="currency">##word.$##</span></p>
+              <p class="text-center blue">( {{elem.price}} <span class="currency">##word.$##</span> )</p>
+            </td>
+            <td class="center">
+              <p>{{elem.extraDiscount}} <span class="currency">##word.%##</span></p>
+            </td>
+            <td class="center">
+              <p>{{elem.totalMainDiscounts}} <span class="currency">##word.$##</span></p>
+
+              <p class="text-center green">
+                ( {{elem.discount}}
+                <span ng-if="elem.discountType === 'percent'"> <span class="currency">##word.%##</span> </span>
+                <span ng-if="elem.discountType === 'value'"><span class="currency">##word.$##</span> </span>
+                )
+              </p>
+            </td>
+            <td class="center">
+              <p>{{elem.totalVat}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center">
+              <p class="text-center">{{elem.total}} <span class="currency">##word.$##</span></p>
+            </td>
+
+            <td class="center">
+              <i-button type="edit" label="##word.Batch##" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode || elem.hasMedicalData" ng-click="showBatchModal(elem)"> </i-button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+
+      <div class="row" ng-show="returned.invoiceCode">
+        <fieldset>
+          <legend>##word.Totals##</legend>
+          <div class="row">
+            <div class="col4">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Total Prices## : {{returned.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+            <div class="col4">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Total Discounts## : {{returned.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+            <div class="col4">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Total Before VAT## : {{returned.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+            <div class="col4">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Total VAT## : {{returned.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+            <div class="col4">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Total After VAT## : {{returned.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+            <div class="col4">
+              <fieldset class="gray-bg">
+                <p class="bold font-22">##word.Total Net## : {{returned.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+              </fieldset>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <fieldset ng-show="returned.invoiceType.id == 1 && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
+        <div class="row">
+          <i-list class="col3" display="name##session.lang##" ng-model="returned.safe" items="safesList" label="##word.Safe##" ng-search="returned.$safe"></i-list>
+          <i-control class="col2" type="number" disabled label="##word.Amount Paid##" ng-model="returned.amountPaid"> </i-control>
+          <div class="col1">
+            <br />
+            <span class="currency">##word.$##</span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="modal-footer center">
+      <p class="error">{{error}}</p>
+      <i-button type="add" label="##word.Add##" ng-click="addReturnOrder(returned)"></i-button>
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#returnOrderModal')"></i-button>
+    </div>
+  </div>
+</div>

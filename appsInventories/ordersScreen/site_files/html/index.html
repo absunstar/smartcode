@@ -11,6 +11,7 @@
         <div x-import="ordersScreen/itemEdit.html"></div>
         <div x-import="ordersScreen/ordersActive.html"></div>
         <div x-import="ordersScreen/orderDetailsModal.html"></div>
+        <div x-import="ordersScreen/returnOrderModal.html"></div>
         <div x-import="customers/modal.html"></div>
         <div x-import="salesInvoices/modal.html"></div>
         <div x-import="salesInvoices/batchModal.html"></div>
@@ -167,7 +168,8 @@
 
               <i-button ng-hide="item.status.id == 2" fa="cart-plus" label="##word.Save##" ng-click="saveOrder(item)"> </i-button>
 
-              <i-button fa="window-close" label="##word.Cancel##" ng-click="cancelOrder(item)"> </i-button>
+              <i-button label="##word.Returned##" ng-click="showAddReturned()"> </i-button>
+              <i-button label="##word.Cancel##" ng-click="cancelOrder(item)"> </i-button>
             </div>
 
             <fieldset x-data="setting.showRestaurant" ng-show="item.salesCategory.id == 3">

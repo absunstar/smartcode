@@ -77,8 +77,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       return;
     }
 
-    _item.approved = true;
-    _item.approvedDate = new Date();
+   
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -480,6 +479,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     delete where.patient;
     delete where.customer;
     delete where['active'];
+    where['approved'] = true;
     where['hasReturnTransaction'] = { $ne: true };
     $scope.busy = true;
     $scope.returnSalesInvoicesList = [];

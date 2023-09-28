@@ -33,6 +33,16 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     return { firstDay, lastDay };
   };
 
+  $scope.showAddReturned = function (_item) {
+    $scope.error = '';
+    $scope.itemsError = '';
+    $scope.mode = 'add';
+    $scope.returned = { approved: false, active: true, date: new Date() };
+    $scope.search = { ...$scope.structure };
+    site.showModal('#returnOrderModal');
+    $scope.returnSalesInvoicesList = [];
+  };
+
   $scope.newOrder = function () {
     $scope.error = '';
     $scope.mainError = '';
@@ -53,7 +63,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       discountsList: [],
       taxesList: [],
     };
-   /*  if ($scope.setting.accountsSetting.safeCash && $scope.setting.accountsSetting.safeCash.id) {
+    /*  if ($scope.setting.accountsSetting.safeCash && $scope.setting.accountsSetting.safeCash.id) {
       $scope.item.safe = $scope.safesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.safeCash.id;
       });
@@ -62,7 +72,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
         return _t.id == $scope.setting.accountsSetting.paymentType.id;
       });
-        if ($scope.item.paymentType) {
+      if ($scope.item.paymentType) {
         $scope.getSafes($scope.item.paymentType);
       }
     }
@@ -151,7 +161,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.resetValidated($scope.modalID);
           let doc = response.data.doc || response.data.result.doc;
-         /*  if ($scope.setting.showRestaurant) {
+          /*  if ($scope.setting.showRestaurant) {
             $scope.kitchenPrint(doc);
           }
  */
@@ -395,12 +405,12 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
           taxIdentificationNumber: 1,
           mobile: 1,
           phone: 1,
-          country:1,
-          gov:1,
-          city:1,
-          area:1,
-          address:1,
-          street:1,
+          country: 1,
+          gov: 1,
+          city: 1,
+          area: 1,
+          address: 1,
+          street: 1,
         },
         search: $search,
       },
@@ -2058,6 +2068,94 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.error = err;
       }
     );
+  };
+
+  $scope.getSalesInvoicesToReturn = function (where) {
+    $scope.searchError = '';
+
+    where['hasReturnTransaction'] = { $ne: true };
+    where['approved'] = true;
+    $scope.busy = true;
+    $scope.returnSalesInvoicesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/salesInvoices/all',
+      data: {
+        where: where,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length) {
+          $scope.returnSalesInvoicesList = response.data.list;
+        } else {
+          $scope.searchError = 'No Data Match Your Search';
+        }
+        $scope.search = {};
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.addReturnOrder = function (_item) {
+    $scope.error = '';
+    const v = site.validated('#returnOrderModal');
+    if (!v.ok) {
+      $scope.error = v.messages[0].Ar;
+      return;
+    }
+
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/returnSalesInvoices/add`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal('#returnOrderModal');
+        } else {
+          $scope.error = response.data.error;
+          if (response.data.error && response.data.error.like('*Must Enter Code*')) {
+            $scope.error = '##word.Must Enter Code##';
+          }
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.addToItemsListToReturn = function (invoice) {
+    $scope.returned = {
+      ...$scope.returned,
+      invoiceCode: invoice.code,
+      invoiceId: invoice.id,
+      doctorDeskTop: invoice.doctorDeskTop,
+      salesType: invoice.salesType,
+      store: invoice.store,
+      sourceType: invoice.sourceType,
+      invoicePaymentType: invoice.paymentType,
+      itemsList: invoice.itemsList,
+      totalDiscounts: invoice.totalDiscounts,
+      totalItemsDiscounts: invoice.totalItemsDiscounts,
+      totalExtraDiscounts: invoice.totalExtraDiscounts,
+      totalTaxes: invoice.totalTaxes,
+      discountType: invoice.discountType,
+      totalBeforeVat: invoice.totalBeforeVat,
+      totalVat: invoice.totalVat,
+      totalAfterVat: invoice.totalAfterVat,
+      totalNet: invoice.totalNet,
+      amountPaid: invoice.totalNet,
+      customer:invoice.customer,
+      totalPrice: invoice.totalPrice,
+    };    
+    $scope.returnSalesInvoicesList = [];
   };
 
   $scope.getOrdersActiveList = function () {
