@@ -63,7 +63,6 @@
 
     <div class="tabs-content">
       <div id="contactInformations" class="tab-content">
-
         <fieldset>
           <legend>##word.Contact Informations##</legend>
           <div class="row">
@@ -90,12 +89,9 @@
           <legend>##word.Web And Social Accounts##</legend>
           <div class="row">
             <i-control class="col3" label="##word.Website##" ng-model="customer.website"></i-control>
-
+            <i-control class="col3" label="##word.Email##" ng-model="customer.socialEmail"></i-control>
             <i-control class="col3" label="##word.Facebook##" ng-model="customer.facebook"></i-control>
-
             <i-control class="col3" label="##word.Twitter##" ng-model="customer.twitter"></i-control>
-
-            <i-control class="col3" label="##word.Google##" ng-model="customer.google"></i-control>
           </div>
         </fieldset>
 
@@ -109,7 +105,7 @@
               ng-change="getGovesList(customer.country)"
               ng-model="customer.country"
               display="name##session.lang##"
-              items="countriesList" 
+              items="countriesList"
               display2="callingCode"
               ng-get="getCountriesList($search)"
             ></i-list>
@@ -126,13 +122,21 @@
           </div>
 
           <div class="row">
-            <i-list class="col6" label="##word.City##" ng-model="customer.city" ng-change="getAreasList(customer.city)" items="citiesList" display="name##session.lang##" ng-search="customer.$area.$cityitem">
+            <i-list
+              class="col6"
+              label="##word.City##"
+              ng-model="customer.city"
+              ng-change="getAreasList(customer.city)"
+              items="citiesList"
+              display="name##session.lang##"
+              ng-search="customer.$area.$cityitem"
+            >
             </i-list>
             <i-list class="col6" label="##word.Area##" ng-model="customer.area" items="areasList" display="name##session.lang##" ng-search="customer.$area.$areaitem"> </i-list>
           </div>
 
           <div class="row">
-            <i-control class="col6" label="##word.Street##" ng-model="customer.street"> </i-control>
+            <i-control class="col6" label="##word.Address##" ng-model="customer.address"> </i-control>
             <i-control class="col6" label="##word.P.O.Box##" ng-model="customer.poBox"> </i-control>
           </div>
 

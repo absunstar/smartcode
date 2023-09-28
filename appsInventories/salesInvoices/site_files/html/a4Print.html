@@ -84,25 +84,25 @@
       <div class="row">
         <div class="col-6">
           <div class="row">
-            <p class="black font-13 text-right col-5">{{setting.phone}} <i class="fas fa-phone"></i></p>
-            <p class="black font-13 text-right col-7">{{setting.socialEmail}} <i class="fas fa-envelope"></i></p>
+            <p class="black font-12 text-right col-4" ng-show="setting.phone">{{setting.phone}} <i class="fas fa-phone"></i></p>
+            <p class="black font-12 text-right col-8" ng-show="setting.socialEmail">{{setting.socialEmail}} <i class="fas fa-envelope"></i></p>
           </div>
           <div class="row">
-            <p class="black font-13 text-right col-5">{{setting.mobile}} <i class="fas fa-mobile-alt"></i></p>
-            <p class="black font-13 text-right col-7">{{setting.website}} <i class="fas fa-globe"></i></p>
-            <p class="black font-13 text-right">
+            <p class="black font-12 text-right col-4" ng-show="setting.mobile">{{setting.mobile}} <i class="fas fa-mobile-alt"></i></p>
+            <p class="black font-12 text-right col-8" ng-show="setting.website">{{setting.website}} <i class="fas fa-globe"></i></p>
+            <p class="black font-12 text-right">
               {{setting.area.name##session.lang##}} {{setting.city.name##session.lang##}} {{setting.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
           <div class="row">
-            <p class="black font-13 text-right pre-line">{{setting.address}}</p>
+            <p class="black font-12 text-right pre-line">{{setting.address}}</p>
           </div>
         </div>
         <div class="col-6">
           <div class="row">
             <p class="font-16 text-right bold">##session.company.nameAr##</p>
             <p class="font-16 text-right bold">##session.company.nameEn##</p>
-            <p class="text-right bold font-14">##session.branch.nameEn## - ##session.branch.nameAr##</p>
+            <p class="text-right bold font-14">##session.branch.nameEn## ##session.branch.nameAr##</p>
             <div class="row">
               <p class="black bold font-13 text-right" ng-show="setting.taxNumber">({{setting.taxNumber}}) : TRN/الرقم الضريبي</p>
             </div>
@@ -123,15 +123,21 @@
         </div>
         <div class="col-6">
           <div class="row">
-            <p class="black font-13 text-right col-6" ng-show="item.customer.phone">{{sInvoice.customer.phone}} <i class="fas fa-phone"></i></p>
-            <p class="black font-13 text-right col-6" ng-show="item.customer.mobile">{{sInvoice.customer.mobile}} <i class="fas fa-mobile-alt"></i></p>
-            <p class="black font-13 text-right" ng-show="item.customer.gov && item.customer.gov.id">
+            <div class="row">
+              <p class="black font-12 text-right col-4" ng-show="item.customer.phone">{{item.customer.phone}} <i class="fas fa-phone"></i></p>
+              <p class="black font-12 text-right col-8" ng-show="item.customer.socialEmail">{{item.customer.socialEmail}} <i class="fas fa-envelope"></i></p>
+            </div>
+            <div class="row">
+              <p class="black font-12 text-right col-4" ng-show="item.customer.mobile">{{item.customer.mobile}} <i class="fas fa-mobile-alt"></i></p>
+              <p class="black font-12 text-right col-8" ng-show="item.customer.website">{{item.customer.website}} <i class="fas fa-globe"></i></p>
+            </div>
+            <p class="black font-12 text-right" ng-show="item.customer.gov && item.customer.gov.id">
               {{sInvoice.customer.area.name##session.lang##}} {{sInvoice.customer.city.name##session.lang##}} {{sInvoice.customer.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
 
           <div class="row" ng-show="item.customer.address">
-            <p class="black font-13 text-right pre-line">{{sInvoice.customer.address}}</p>
+            <p class="black font-12 text-right pre-line">{{sInvoice.customer.address}}</p>
           </div>
         </div>
         <div class="col-6">
@@ -199,7 +205,7 @@
             </td>
             <td class="center width-60-mm">
               <!-- <p class="font-12">{{itm.nameAr}} ( {{itm.unit.nameAr}} )</p> -->
-              <p class="font-12">{{itm.name##session.lang##}} ( {{itm.unit.name##session.lang##}} )</p>
+              <p class="font-12">{{itm.name##session.lang##}} <span ng-show="setting.printerProgram.showUnit">( {{itm.unit.name##session.lang##}} )</span></p>
               <p ng-repeat="b in itm.batchesList" ng-show="b.count > 0">
                 <span class="" ng-show="b.productionDate"> {{b.productionDate| date : 'dd-MM-yyyy'}} &nbsp; </span>
                 <span class="" ng-show="b.expiryDate"> {{b.expiryDate| date : 'dd-MM-yyyy'}} &nbsp; </span>

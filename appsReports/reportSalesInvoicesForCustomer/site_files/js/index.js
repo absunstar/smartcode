@@ -47,6 +47,8 @@ app.controller('reportSalesInvoicesForCustomer', function ($scope, $http, $timeo
           taxIdentificationNumber: 1,
           mobile: 1,
           phone: 1,
+          socialEmail: 1,
+          website: 1,
           country:1,
           gov:1,
           city:1,
