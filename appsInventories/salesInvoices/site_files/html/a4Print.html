@@ -90,12 +90,12 @@
           <div class="row">
             <p class="black font-12 text-right col-4" ng-show="setting.mobile">{{setting.mobile}} <i class="fas fa-mobile-alt"></i></p>
             <p class="black font-12 text-right col-8" ng-show="setting.website">{{setting.website}} <i class="fas fa-globe"></i></p>
-            <p class="black font-12 text-right">
+            <p class="black font-12 text-right" ng-show="setting.gov.id">
               {{setting.area.name##session.lang##}} {{setting.city.name##session.lang##}} {{setting.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
-          <div class="row">
-            <p class="black font-12 text-right pre-line">{{setting.address}}</p>
+          <div class="row" ng-show="setting.address">
+            <p class="black font-12 text-right pre-line">{{setting.address}} <i class="fas fa-map-marked"></i></p>
           </div>
         </div>
         <div class="col-6">
@@ -131,13 +131,12 @@
               <p class="black font-12 text-right col-4" ng-show="item.customer.mobile">{{item.customer.mobile}} <i class="fas fa-mobile-alt"></i></p>
               <p class="black font-12 text-right col-8" ng-show="item.customer.website">{{item.customer.website}} <i class="fas fa-globe"></i></p>
             </div>
-            <p class="black font-12 text-right" ng-show="item.customer.gov && item.customer.gov.id">
-              {{sInvoice.customer.area.name##session.lang##}} {{sInvoice.customer.city.name##session.lang##}} {{sInvoice.customer.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
+            <p class="black font-12 text-right" ng-show="item.customer.gov.id">
+              {{item.customer.area.name##session.lang##}} {{item.customer.city.name##session.lang##}} {{item.customer.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
-
           <div class="row" ng-show="item.customer.address">
-            <p class="black font-12 text-right pre-line">{{sInvoice.customer.address}}</p>
+            <p class="black font-12 text-right pre-line">{{item.customer.address}} <i class="fas fa-map-marked"></i></p>
           </div>
         </div>
         <div class="col-6">
