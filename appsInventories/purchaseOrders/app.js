@@ -177,8 +177,10 @@ module.exports = function init(site) {
                   notCode;
                 } else if (_item.hasSizesData && (!_b.code || !_b.size)) {
                   notCode;
-                } else if (!_b.code || !_b.expiryDate || !_b.validitayDys) {
-                  notCode = true;
+                } else if (!_item.hasColorsData && !_item.hasSizesData) {
+                  if (!_b.code || !_b.expiryDate || !_b.validityDays) {
+                    notCode = true;
+                  }
                 }
               } else if (_item.workBySerial) {
                 if (!_b.code || !_b.productionDate) {
@@ -187,7 +189,6 @@ module.exports = function init(site) {
               }
             }
           });
-
           if (_item.$batchCount != _item.count + (_item.bonusCount || 0) || notCode) {
             let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
             cb.errBatchList.push(itemName);
@@ -586,6 +587,25 @@ module.exports = function init(site) {
       });
     }
   }
+
+  site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ['login'] } }, (req, res) => {
+    let response = {
+      done: false,
+    };
+
+    app.$collection.removeMany(
+      {
+        where: {
+          'company.id': req.data.id,
+        },
+      },
+      (err, result) => {
+        response.err = err;
+        response.done = true;
+        res.json(response);
+      }
+    );
+  });
 
   site.changeRemainPaidPurchaseOrder = function (obj) {
     // app.$collection.edit({ id: obj.id }, { $inc: { quantity: -obj.total } }, (err, result) => {

@@ -1461,6 +1461,35 @@ module.exports = function init(site) {
     });
   });
 
+  site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ['login'] } }, (req, res) => {
+    let response = {
+      done: false,
+    };
+
+    app.$collection.findMany(
+      {
+        where: {
+          'company.id': req.data.id,
+        },
+      },
+      (err, docs) => {
+        for (let i = 0; i < docs.length; i++) {
+          docs[i].unitsList.forEach(_unit => {
+            _unit.purchasePriceList = [{ price: _unit.purchasePrice, date: new Date() }];
+            _unit.salesPriceList = [{ price: _unit.salesPrice, date: new Date() }];
+            _unit.storesList = [];
+            _unit.currentCount = 0;
+          });
+          app.$collection.update(docs[i]);
+
+        }
+        response.err = err;
+        response.done = true;
+        res.json(response);
+      }
+    );
+  });
+
   app.init();
   site.addApp(app);
 };

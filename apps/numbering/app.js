@@ -111,7 +111,7 @@ module.exports = function init(site) {
           id: 3,
           name: 'Connected',
         };
-    
+
         _ml.firstValue = 1;
         _ml.lastValue = 0;
       });
@@ -163,6 +163,70 @@ module.exports = function init(site) {
       }
       res.json(response);
     });
+  });
+
+  site.post('/api/numbering/resetTransactions', (req, res) => {
+    let response = {
+      done: false,
+    };
+
+    if (!req.session.user) {
+      response.error = 'Please Login First';
+      res.json(response);
+      return;
+    }
+
+    let doc = null;
+    Numbering.forEach((n, i) => {
+      if (n.company.id == req.data.id) {
+        doc = Numbering[i];
+      }
+    });
+
+    if (doc) {
+      doc.screensList = doc.screensList || [];
+      doc.screensList.forEach((_sl) => {
+        if (
+          _sl.id == 'transferSafes' ||
+          _sl.id == 'journalEntry' ||
+          _sl.id == 'safesAdjusting' ||
+          _sl.id == 'receiptVouchers' ||
+          _sl.id == 'expenseVouchers' ||
+          _sl.id == 'purchaseRequests' ||
+          _sl.id == 'purchaseOrders' ||
+          _sl.id == 'transferItemsRequests' ||
+          _sl.id == 'storesItemsCard' ||
+          _sl.id == 'salesInvoices' ||
+          _sl.id == 'transferItemsOrders' ||
+          _sl.id == 'returnSalesInvoices' ||
+          _sl.id == 'convertUnits' ||
+          _sl.id == 'returnPurchaseOrders' ||
+          _sl.id == 'damageItems' ||
+          _sl.id == 'storesOpeningBalances' ||
+          _sl.id == 'stockTaking'
+        ) {
+          _sl.typeNumbering = {
+            id: 3,
+            name: 'Connected',
+          };
+          _sl.firstValue = 1;
+          _sl.lastValue = 0;
+        }
+      });
+      $numbering.update(doc, (err, result) => {
+        if (!err) {
+          Numbering.forEach((n, i) => {
+            if (result.doc && n.company.id == result.doc.company.id) {
+              Numbering[i] = result.doc;
+            }
+          });
+          response.done = true;
+        } else {
+          response.error = err.message;
+        }
+        res.json(response);
+      });
+    }
   });
 
   site.post('/api/numbering/getAutomatic', (req, res) => {

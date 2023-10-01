@@ -415,6 +415,25 @@ module.exports = function init(site) {
     }
   }
 
+  site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ['login'] } }, (req, res) => {
+    let response = {
+      done: false,
+    };
+
+    app.$collection.removeMany(
+      {
+        where: {
+          'company.id': req.data.id,
+        },
+      },
+      (err, result) => {
+        response.err = err;
+        response.done = true;
+        res.json(response);
+      }
+    );
+  });
+
   site.changeRemainPaidReturnPurchases = function (obj) {
     app.view({ id: obj.id }, (err, doc) => {
       if (!err && doc) {

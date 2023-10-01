@@ -7,6 +7,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
   $scope.displayAddCompany = function () {
     $scope.error = '';
     $scope.mode = 'add';
+    $scope.mode = 'add';
+
     $scope.company = {
       image: '/images/company.png',
       calenderType: 'gegorian',
@@ -182,6 +184,413 @@ app.controller('companies', function ($scope, $http, $timeout) {
               $scope.count -= 1;
             }
           });
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+  $scope.resetTransactions = function (id) {
+    if ($scope.busy) {
+      return;
+    }
+
+    $scope.busy = true;
+    $scope.error = '';
+
+    $http({
+      method: 'POST',
+      url: '/api/receiptVouchers/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/expenseVouchers/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/purchaseOrders/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/purchaseRequests/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/returnPurchaseOrders/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/returnSalesInvoices/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/salesInvoices/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/journalEntry/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/safesTransactions/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/safesAdjusting/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/transferSafes/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/safes/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/stockTaking/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/storesItemsCard/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/storesOpeningBalances/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/transferItemsOrders/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/transferItemsRequests/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/damageItems/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/convertUnits/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/storesItems/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
+      url: '/api/numbering/resetTransactions',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
         } else {
           $scope.error = response.data.error;
         }
