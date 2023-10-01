@@ -400,14 +400,23 @@ module.exports = function init(site) {
       done: false,
     };
 
-    app.$collection.update(
+    app.$collection.findMany(
       {
         where: {
           'company.id': req.data.id,
         },
-        set: { receiptBalance: 0, expenseBalance: 0, receiptBalanceTransfer: 0, expenseBalanceTransfer: 0, totalReceiptBalance: 0, totalExpenseBalance: 0, totalBalance: 0 },
       },
-      (err, result) => {
+      (err, docs) => {
+        for (let i = 0; i < docs.length; i++) {
+          docs[i].receiptBalance = 0;
+          docs[i].expenseBalance = 0;
+          docs[i].receiptBalanceTransfer = 0;
+          docs[i].expenseBalanceTransfer = 0;
+          docs[i].totalReceiptBalance = 0;
+          docs[i].totalExpenseBalance = 0;
+          docs[i].totalBalance = 0;
+          app.$collection.update(docs[i]);
+        }
         response.err = err;
         response.done = true;
         res.json(response);
