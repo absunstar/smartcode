@@ -1897,8 +1897,8 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       customer: _item.customer,
       invoiceCode: _item.code,
       $invoiceType: _item.invoiceType,
-      $remainAmount: 0,
-      $remainPaid: _item.remainPaid,
+      remainAmount: 0,
+      remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
     };
@@ -1912,7 +1912,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       $scope.item.total = _item.installmentsList[index].amount;
     }
 
-    $scope.item.$remainAmount = _item.remainPaid - $scope.item.total;
+    $scope.item.remainAmount = _item.remainPaid - $scope.item.total;
 
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');
@@ -2263,7 +2263,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
 
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 

@@ -611,20 +611,7 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
 
-        let numObj = {
-          company: site.getCompany(req),
-          screen: app.name,
-          date: new Date(),
-        };
-
-        let cb = site.getNumbering(numObj);
-        if (!_data.code && !cb.auto) {
-          response.error = 'Must Enter Code';
-          res.json(response);
-          return;
-        } else if (cb.auto) {
-          _data.code = cb.code;
-        }
+      
         let barcodes = [];
 
         _data.unitsList.forEach((_u) => {
@@ -695,6 +682,22 @@ module.exports = function init(site) {
             res.json(response);
             return;
           }
+          
+          let numObj = {
+            company: site.getCompany(req),
+            screen: app.name,
+            date: new Date(),
+          };
+  
+          let cb = site.getNumbering(numObj);
+          if (!_data.code && !cb.auto) {
+            response.error = 'Must Enter Code';
+            res.json(response);
+            return;
+          } else if (cb.auto) {
+            _data.code = cb.code;
+          }
+
           app.add(_data, (err, doc) => {
             if (!err && doc) {
               response.done = true;

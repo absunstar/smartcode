@@ -59,25 +59,25 @@
       <div class="row">
         <div class="col-6">
           <div class="row">
-            <p class="black font-13 text-right col-5">{{setting.phone}} <i class="fas fa-phone"></i></p>
-            <p class="black font-13 text-right col-7">{{setting.socialEmail}} <i class="fas fa-envelope"></i></p>
+            <p class="black font-12 text-right col-4" ng-show="setting.phone">{{setting.phone}} <i class="fas fa-phone"></i></p>
+            <p class="black font-12 text-right col-8" ng-show="setting.socialEmail">{{setting.socialEmail}} <i class="fas fa-envelope"></i></p>
           </div>
           <div class="row">
-            <p class="black font-13 text-right col-5">{{setting.mobile}} <i class="fas fa-mobile-alt"></i></p>
-            <p class="black font-13 text-right col-7">{{setting.website}} <i class="fas fa-globe"></i></p>
-            <p class="black font-13 text-right">
+            <p class="black font-12 text-right col-4" ng-show="setting.mobile">{{setting.mobile}} <i class="fas fa-mobile-alt"></i></p>
+            <p class="black font-12 text-right col-8" ng-show="setting.website">{{setting.website}} <i class="fas fa-globe"></i></p>
+            <p class="black font-12 text-right" ng-show="setting.gov.id">
               {{setting.area.name##session.lang##}} {{setting.city.name##session.lang##}} {{setting.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
-          <div class="row">
-            <p class="black font-13 text-right pre-line">{{setting.address}}</p>
+          <div class="row" ng-show="setting.address">
+            <p class="black font-12 text-right pre-line">{{setting.address}} <i class="fas fa-map-marked"></i></p>
           </div>
         </div>
         <div class="col-6">
           <div class="row">
             <p class="font-16 text-right bold">##session.company.nameAr##</p>
             <p class="font-16 text-right bold">##session.company.nameEn##</p>
-            <p class="text-right bold font-14">##session.branch.nameEn## - ##session.branch.nameAr##</p>
+            <p class="text-right bold font-14">##session.branch.nameEn## ##session.branch.nameAr##</p>
             <div class="row">
               <p class="black bold font-13 text-right" ng-show="setting.taxNumber">({{setting.taxNumber}}) : TRN/الرقم الضريبي</p>
             </div>
@@ -98,15 +98,20 @@
         </div>
         <div class="col-6">
           <div class="row">
-            <p class="black font-13 text-right col-6" ng-show="item.customer.phone">{{sInvoice.customer.phone}} <i class="fas fa-phone"></i></p>
-            <p class="black font-13 text-right col-6" ng-show="item.customer.mobile">{{sInvoice.customer.mobile}} <i class="fas fa-mobile-alt"></i></p>
-            <p class="black font-13 text-right" ng-show="item.customer.gov && item.customer.gov.id">
-              {{sInvoice.customer.area.name##session.lang##}} {{sInvoice.customer.city.name##session.lang##}} {{sInvoice.customer.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
+            <div class="row">
+              <p class="black font-12 text-right col-4" ng-show="item.customer.phone">{{item.customer.phone}} <i class="fas fa-phone"></i></p>
+              <p class="black font-12 text-right col-8" ng-show="item.customer.socialEmail">{{item.customer.socialEmail}} <i class="fas fa-envelope"></i></p>
+            </div>
+            <div class="row">
+              <p class="black font-12 text-right col-4" ng-show="item.customer.mobile">{{item.customer.mobile}} <i class="fas fa-mobile-alt"></i></p>
+              <p class="black font-12 text-right col-8" ng-show="item.customer.website">{{item.customer.website}} <i class="fas fa-globe"></i></p>
+            </div>
+            <p class="black font-12 text-right" ng-show="item.customer.gov.id">
+              {{item.customer.area.name##session.lang##}} {{item.customer.city.name##session.lang##}} {{item.customer.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
-
           <div class="row" ng-show="item.customer.address">
-            <p class="black font-13 text-right pre-line">{{sInvoice.customer.address}}</p>
+            <p class="black font-12 text-right pre-line">{{item.customer.address}} <i class="fas fa-map-marked"></i></p>
           </div>
         </div>
         <div class="col-6">
@@ -132,15 +137,20 @@
         </div>
         <div class="col-6">
           <div class="row">
-            <p class="black font-13 text-right col-6" ng-show="item.vendor.phone">{{sInvoice.vendor.phone}} <i class="fas fa-phone"></i></p>
-            <p class="black font-13 text-right col-6" ng-show="item.vendor.mobile">{{sInvoice.vendor.mobile}} <i class="fas fa-mobile-alt"></i></p>
-            <p class="black font-13 text-right" ng-show="item.vendor.gov && item.vendor.gov.id">
-              {{sInvoice.vendor.area.name##session.lang##}} {{sInvoice.vendor.city.name##session.lang##}} {{sInvoice.vendor.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
+            <div class="row">
+              <p class="black font-12 text-right col-4" ng-show="item.vendor.phone">{{item.vendor.phone}} <i class="fas fa-phone"></i></p>
+              <p class="black font-12 text-right col-8" ng-show="item.vendor.socialEmail">{{item.vendor.socialEmail}} <i class="fas fa-envelope"></i></p>
+            </div>
+            <div class="row">
+              <p class="black font-12 text-right col-4" ng-show="item.vendor.mobile">{{item.vendor.mobile}} <i class="fas fa-mobile-alt"></i></p>
+              <p class="black font-12 text-right col-8" ng-show="item.vendor.website">{{item.vendor.website}} <i class="fas fa-globe"></i></p>
+            </div>
+            <p class="black font-12 text-right" ng-show="item.vendor.gov.id">
+              {{item.vendor.area.name##session.lang##}} {{item.vendor.city.name##session.lang##}} {{item.vendor.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
             </p>
           </div>
-
           <div class="row" ng-show="item.vendor.address">
-            <p class="black font-13 text-right pre-line">{{sInvoice.vendor.address}}</p>
+            <p class="black font-12 text-right pre-line">{{item.vendor.address}} <i class="fas fa-map-marked"></i></p>
           </div>
         </div>
         <div class="col-6">

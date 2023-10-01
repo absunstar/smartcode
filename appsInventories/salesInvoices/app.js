@@ -234,21 +234,7 @@ module.exports = function init(site) {
           //   appName = 'salesErInvoices';
           // }
 
-          let numObj = {
-            company: site.getCompany(req),
-            screen: 'salesInvoices',
-            date: new Date(),
-          };
-
-          let cb = site.getNumbering(numObj);
-          if (!_data.code && !cb.auto) {
-            response.error = 'Must Enter Code';
-            res.json(response);
-            return;
-          } else if (cb.auto) {
-            _data.code = cb.code;
-          }
-
+       
           let overDraftObj = {
             store: _data.store,
             items: _data.itemsList,
@@ -294,6 +280,21 @@ module.exports = function init(site) {
                 }
               }
             }
+
+            let numObj = {
+              company: site.getCompany(req),
+              screen: 'salesInvoices',
+              date: new Date(),
+            };
+
+            let cb = site.getNumbering(numObj);
+            if (!_data.code && !cb.auto) {
+              response.error = 'Must Enter Code';
+              res.json(response);
+              return;
+            } else if (cb.auto) {
+              _data.code = cb.code;
+            }  
 
             app.add(_data, (err, doc) => {
               if (!err) {

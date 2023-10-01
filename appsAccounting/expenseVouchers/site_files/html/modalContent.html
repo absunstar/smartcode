@@ -119,14 +119,14 @@
   <div class="row">
     <div class="col3 font-18" ng-show="item.voucherType.id == 'salesInvoice' || item.voucherType.id == 'purchaseReturn'">
       <p>##word.Amount required##</p>
-      <p>({{item.$remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
+      <p>({{item.remainPaid | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
 
     <i-control v="r" class="col3" label="##word.Amount Paid## ##word.$##" ng-hide="item.voucherType.id == 'generalPurchaseInvoice'" type="number" ng-change="calcRemainVoucher(item)" ng-model="item.total"> </i-control>
 
     <div class="col3 font-18" ng-show="item.voucherType.id == 'purchaseInvoice' || item.voucherType.id == 'salesReturn'">
       <p>##word.Remain Amount##</p>
-      <p>({{item.$remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
+      <p>({{item.remainAmount | xmoney2}} <span class="currency">##word.$##</span>)</p>
     </div>
   </div>
 </div>

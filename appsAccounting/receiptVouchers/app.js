@@ -170,7 +170,7 @@ module.exports = function init(site) {
           _data.date = new Date();
         }
         if (_data.voucherType.id == 'salesInvoice' || _data.voucherType.id == 'purchaseReturn' || _data.voucherType.id == 'offersOrders') {
-          if (site.toNumber(_data.total) > site.toNumber(_data.$remainPaid)) {
+          if (site.toNumber(_data.total) > site.toNumber(_data.remainPaid)) {
             response.error = 'The amount paid is greater than the remaining invoice amount ';
             res.json(response);
             return;

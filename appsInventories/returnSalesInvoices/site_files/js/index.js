@@ -850,8 +850,8 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       storeInvoiceId: _item.invoiceId,
       customer: _item.customer,
       invoiceCode: _item.code,
-      $remainAmount : 0,
-      $remainPaid: _item.remainPaid,
+      remainAmount : 0,
+      remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
     };
@@ -944,7 +944,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
 
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 

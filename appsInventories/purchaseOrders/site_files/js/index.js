@@ -1516,9 +1516,9 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       vendor: _item.vendor,
       invoiceId: _item.id,
       invoiceCode: _item.code,
-      $remainPaid: _item.remainPaid,
+      remainPaid: _item.remainPaid,
       total: _item.remainPaid,
-      $remainAmount: 0,
+      remainAmount: 0,
       voucherType: { id: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
     };
     site.showModal('#expenseVouchersModal');
@@ -1557,7 +1557,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
 
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 

@@ -20,7 +20,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
 
     $scope.item.invoiceId = item.id;
     $scope.item.invoiceCode = item.code;
-    $scope.item.$remainPaid = item.remainPaid;
+    $scope.item.remainPaid = item.remainPaid;
     $scope.item.total = item.remainPaid;
     if (item.installmentsList && item.installmentsList.length > 0) {
       let index = item.installmentsList.findIndex((itm) => !itm.paid);
@@ -30,8 +30,8 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
       $scope.item.total = item.installmentsList[index].amount;
     }
     $scope.item.total = site.toMoney($scope.item.total);
-    $scope.item.$remainAmount = item.remainPaid - $scope.item.total;
-    $scope.item.$remainAmount = site.toMoney($scope.item.$remainAmount);
+    $scope.item.remainAmount = item.remainPaid - $scope.item.total;
+    $scope.item.remainAmount = site.toMoney($scope.item.remainAmount);
     if (item.vendor) {
       $scope.item.vendor = item.vendor;
     } else if (item.customer) {
@@ -471,7 +471,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   };
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 

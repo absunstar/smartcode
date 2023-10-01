@@ -717,8 +717,8 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
       storeInvoiceId: _item.invoiceId,
       vendor: _item.vendor,
       invoiceCode: _item.code,
-      $remainPaid: _item.remainPaid,
-      $remainAmount: 0,
+      remainPaid: _item.remainPaid,
+      remainAmount: 0,
       total: _item.remainPaid,
       voucherType: { id: 'purchaseReturn', nameEn: 'Purchase Return', nameAr: 'مرتجع شراء' },
     };
@@ -811,7 +811,7 @@ app.controller('returnPurchaseOrders', function ($scope, $http, $timeout) {
 
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 

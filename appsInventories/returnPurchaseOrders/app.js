@@ -159,31 +159,39 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
 
-        let numObj = {
-          company: site.getCompany(req),
-          screen: app.name,
-          date: new Date(),
-        };
-
-        let cb = site.getNumbering(numObj);
-        if (!_data.code && !cb.auto) {
-          response.error = 'Must Enter Code';
-          res.json(response);
-          return;
-        } else if (cb.auto) {
-          _data.code = cb.code;
-        }
-
-        _data.addUserInfo = req.getUserFinger();
-        app.add(_data, (err, doc) => {
-          if (!err) {
-            response.done = true;
-            response.doc = doc;
-          } else {
-            response.error = err.message;
+        app.$collection.find({ invoiceId: _data.invoiceId }, (err, doc) => {
+          if (doc) {
+            response.done = false;
+            response.error = 'This Invoice Is Exisit';
+            return res.json(response);
           }
 
-          res.json(response);
+          let numObj = {
+            company: site.getCompany(req),
+            screen: app.name,
+            date: new Date(),
+          };
+
+          let cb = site.getNumbering(numObj);
+          if (!_data.code && !cb.auto) {
+            response.error = 'Must Enter Code';
+            res.json(response);
+            return;
+          } else if (cb.auto) {
+            _data.code = cb.code;
+          }
+
+          _data.addUserInfo = req.getUserFinger();
+          app.add(_data, (err, doc) => {
+            if (!err) {
+              response.done = true;
+              response.doc = doc;
+            } else {
+              response.error = err.message;
+            }
+
+            res.json(response);
+          });
         });
       });
     }
@@ -233,7 +241,6 @@ module.exports = function init(site) {
           }
           _data.addApprovedInfo = req.getUserFinger();
           if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-      
             if (!_data.paymentType || !_data.paymentType.id) {
               response.error = 'Must Select Payment Type';
               res.json(response);
@@ -243,8 +250,7 @@ module.exports = function init(site) {
               res.json(response);
               return;
             }
-            if(_data.paymentType.id && _data.safe.id){
-
+            if (_data.paymentType.id && _data.safe.id) {
               let obj = {
                 date: new Date(),
                 voucherType: site.vouchersTypes[3],
@@ -260,14 +266,13 @@ module.exports = function init(site) {
                 company: _data.company,
                 branch: _data.branch,
               };
-            _data.remainPaid = _data.totalNet - _data.amountPaid;
-            obj.session = req.session;
-            site.addReceiptVouchers(obj);
-          } else {
-            _data.remainPaid = _data.totalNet;
+              _data.remainPaid = _data.totalNet - _data.amountPaid;
+              obj.session = req.session;
+              site.addReceiptVouchers(obj);
+            } else {
+              _data.remainPaid = _data.totalNet;
+            }
           }
-  
-        }
           app.update(_data, (err, result) => {
             if (!err) {
               response.done = true;
@@ -275,7 +280,6 @@ module.exports = function init(site) {
               const purchaseOrdersApp = site.getApp('purchaseOrders');
               purchaseOrdersApp.$collection.update({ where: { id: _data.invoiceId, code: _data.invoiceCode }, set: { hasReturnTransaction: true } });
 
-              
               result.doc.itemsList.forEach((_item) => {
                 let item = { ..._item };
                 item.store = { ...result.doc.store };
@@ -309,7 +313,7 @@ module.exports = function init(site) {
                 userInfo: result.doc.addApprovedInfo,
               };
               objJournal.nameAr = 'مرتجع شراء' + ' (' + result.doc.code + ' )';
-              objJournal.nameEn = 'Return Purchase'+ ' (' + result.doc.code + ' )';
+              objJournal.nameEn = 'Return Purchase' + ' (' + result.doc.code + ' )';
               objJournal.session = req.session;
               site.autoJournalEntry(objJournal);
               response.result = result;

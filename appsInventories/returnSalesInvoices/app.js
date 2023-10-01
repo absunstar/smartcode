@@ -160,32 +160,39 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
 
-        let numObj = {
-          company: site.getCompany(req),
-          screen: app.name,
-          date: new Date(),
-        };
-
-        let cb = site.getNumbering(numObj);
-        if (!_data.code && !cb.auto) {
-          response.error = 'Must Enter Code';
-          res.json(response);
-          return;
-        } else if (cb.auto) {
-          _data.code = cb.code;
-        }
-
-        _data.addUserInfo = req.getUserFinger();
-        app.add(_data, (err, doc) => {
-          if (!err) {
-            response.done = true;
-
-            response.doc = doc;
-          } else {
-            response.error = err.message;
+        app.$collection.find({ invoiceId: _data.invoiceId }, (err, doc) => {
+          if (doc) {
+            response.done = false;
+            response.error = 'This Invoice Is Exisit';
+            return res.json(response);
           }
 
-          res.json(response);
+          let numObj = {
+            company: site.getCompany(req),
+            screen: app.name,
+            date: new Date(),
+          };
+          let cb = site.getNumbering(numObj);
+          if (!_data.code && !cb.auto) {
+            response.error = 'Must Enter Code';
+            res.json(response);
+            return;
+          } else if (cb.auto) {
+            _data.code = cb.code;
+          }
+
+          _data.addUserInfo = req.getUserFinger();
+          app.add(_data, (err, doc) => {
+            if (!err) {
+              response.done = true;
+
+              response.doc = doc;
+            } else {
+              response.error = err.message;
+            }
+
+            res.json(response);
+          });
         });
       });
     }

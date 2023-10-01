@@ -388,7 +388,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
 
     $scope.item.invoiceId = item.id;
     $scope.item.invoiceCode = item.code;
-    $scope.item.$remainPaid = item.remainPaid;
+    $scope.item.remainPaid = item.remainPaid;
     $scope.item.total = item.remainPaid;
     if (item.vendor) {
       $scope.item.vendor = item.vendor;
@@ -463,7 +463,7 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
 
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 

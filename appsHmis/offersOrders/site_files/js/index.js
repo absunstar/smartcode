@@ -422,7 +422,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
 
   $scope.calcRemainVoucher = function (item) {
     $timeout(() => {
-      item.$remainAmount = item.$remainPaid - item.total;
+      item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
 
@@ -469,13 +469,13 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
       patient: _item.patient,
       invoiceCode: _item.code,
       $invoiceType: _item.invoiceType,
-      $remainAmount: 0,
-      $remainPaid: _item.remainPaid,
+      remainAmount: 0,
+      remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 'offersOrders', nameEn: 'Offers Orders', nameAr: 'طلبات العروض' },
     };
 
-    $scope.item.$remainAmount = _item.remainPaid - $scope.item.total;
+    $scope.item.remainAmount = _item.remainPaid - $scope.item.total;
 
     site.showModal('#expenseVouchersModal');
     site.resetValidated('#expenseVouchersModal');
