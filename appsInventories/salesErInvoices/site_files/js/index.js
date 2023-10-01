@@ -863,7 +863,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
             if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
               let qrString = {
-                vatNumber: '{{setting.taxNumber}}',
+                vatNumber: $scope.setting.taxNumber,
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat,
@@ -877,10 +877,10 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
               site.zakat2(
                 {
                   name: qrString.name,
-                  vatNumber: qrString.vatNumber,
+                  vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
-                  totalVat: qrString.totalVat.toString(),
+                  vat_total: qrString.totalVat.toString(),
                 },
                 (data) => {
                   site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });
@@ -980,7 +980,7 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
           if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
             let qrString = {
-              vatNumber: '{{setting.taxNumber}}',
+              vatNumber: $scope.setting.taxNumber,
               time: new Date($scope.item.date).toISOString(),
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,
@@ -994,10 +994,10 @@ app.controller('salesErInvoices', function ($scope, $http, $timeout) {
             site.zakat2(
               {
                 name: qrString.name,
-                vatNumber: qrString.vatNumber,
+                vat_number: qrString.vatNumber,
                 time: qrString.time,
                 total: qrString.total.toString(),
-                totalVat: qrString.totalVat.toString(),
+                vat_total: qrString.totalVat.toString(),
               },
               (data) => {
                 site.qrcode({ width: 140, height: 140, selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1], text: data.value });

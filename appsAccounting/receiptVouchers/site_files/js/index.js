@@ -566,9 +566,10 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
             if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
               let qrString = {
-                vatNumber: '{{setting.taxNumber}}',
+                vatNumber: $scope.setting.taxNumber,
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.total,
+                totalVat: $scope.thermal.totalVat,
               };
               if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
                 qrString.name = '##session.company.nameAr##';
@@ -579,9 +580,10 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
               site.zakat2(
                 {
                   name: qrString.name,
-                  vatNumber: qrString.vatNumber,
+                  vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
+                  vat_total: qrString.totalVat.toString(),
                 },
                 (data) => {
                   site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });
@@ -679,9 +681,10 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
           if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
             let qrString = {
-              vatNumber: '{{setting.taxNumber}}',
+              vatNumber: $scope.setting.taxNumber,
               time: new Date($scope.item.date).toISOString(),
               total: $scope.item.total,
+              totalVat: $scope.item.totalVat,
             };
             if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
               qrString.name = '##session.company.nameAr##';
@@ -692,9 +695,10 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
             site.zakat2(
               {
                 name: qrString.name,
-                vatNumber: qrString.vatNumber,
+                vat_number: qrString.vatNumber,
                 time: qrString.time,
                 total: qrString.total.toString(),
+                vat_total: qrString.totalVat.toString(),
               },
               (data) => {
                 site.qrcode({ width: 140, height: 140, selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1], text: data.value });
