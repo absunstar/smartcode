@@ -637,6 +637,13 @@ module.exports = function init(site) {
     };
 
     let _data = req.data;
+
+    if(!_data.id){
+      response.error = 'No Id';
+      res.json(response);
+      return;
+    }
+    
     if (_data.salesCategory && _data.salesCategory.id == 2) {
       _data.deliveryStatus = { ...site.deliveryStatus[1], date: new Date() };
       _data.deliveryStatusList.push(_data.deliveryStatus);
@@ -726,6 +733,8 @@ module.exports = function init(site) {
         items: _data.itemsList,
       };
 
+     
+
       site.checkOverDraft(req, overDraftObj, (overDraftCb) => {
         if (!overDraftCb.done) {
           let error = '';
@@ -770,6 +779,7 @@ module.exports = function init(site) {
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
+            if(result.doc) {
             if (result.doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
               site.addReceiptVouchers({
                 session: req.session,
@@ -845,6 +855,8 @@ module.exports = function init(site) {
             obj.session = req.session;
             site.autoJournalEntry(obj);
             response.doc = result.doc;
+          }
+
           } else {
             response.error = err.message;
           }

@@ -238,6 +238,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
         if (_data.safe && _data.toSafe && _data.safe.id === _data.toSafe.id) {
           response.error = 'Same Safe';
           res.json(response);

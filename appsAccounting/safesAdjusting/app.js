@@ -230,7 +230,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
         if (_data.safe.totalBalance == _data.total) {
           response.error = 'New Balance Equal Safe Balance';
           res.json(response);

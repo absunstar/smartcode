@@ -270,7 +270,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
           if (callbackErrorBatches.errBatchList.length > 0) {
             let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');

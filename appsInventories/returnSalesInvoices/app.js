@@ -226,6 +226,11 @@ module.exports = function init(site) {
         const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         let _data = req.data;
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
         _data.approved = true;
         _data.approvedDate = new Date();
         let overDraftObj = {

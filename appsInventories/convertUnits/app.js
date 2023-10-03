@@ -222,7 +222,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
         _data.approvedUserInfo = req.getUserFinger();
 
         let overDraftObj = {

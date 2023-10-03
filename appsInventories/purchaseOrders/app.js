@@ -341,6 +341,12 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
         let response = { done: false };
         let _data = req.data;
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
+        
         const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {

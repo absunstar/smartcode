@@ -273,7 +273,11 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-
+        if(!_data.id){
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
         let errBatchList = [];
         _data.itemsList.forEach((_item) => {
           if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {

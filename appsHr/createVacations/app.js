@@ -271,7 +271,11 @@ module.exports = function init(site) {
                 };
 
                 let _data = req.data;
-
+                if(!_data.id){
+                    response.error = 'No Id';
+                    res.json(response);
+                    return;
+                  }
                 _data['approved'] = true;
                 _data['approvedDate'] = new Date();
                 _data.approvedUserInfo = req.getUserFinger();
