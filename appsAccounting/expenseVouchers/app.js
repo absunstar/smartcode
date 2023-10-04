@@ -349,6 +349,7 @@ module.exports = function init(site) {
         if (!err && docs) {
           let totals = { totalNet: 0, totalVat: 0, total: 0 };
           for (let i = 0; i < docs.length; i++) {
+            docs[i].$type = 'expense';
             docs[i].$totalNetByVat = 0;
             docs[i].$totalVatByVat = 0;
             docs[i].$totalByVat = 0;

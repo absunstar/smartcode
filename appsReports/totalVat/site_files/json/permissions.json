@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "totalVat", "name": "totalVatManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "totalVat", "name": "totalVatView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "totalVat", "name": "totalVatExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "totalVat", "name": "totalVatPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "totalVat", "name": "totalVatUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

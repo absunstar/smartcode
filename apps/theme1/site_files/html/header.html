@@ -978,6 +978,12 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+              <li id="totalVat" x-data="setting.showTotalVat" x-permissions="totalVatUi || totalVatManage">
+                <a class="menuTag" href="/totalVat">
+                  <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
+                  <p>##word.Total Vat##</p>
+                </a>
+              </li>
 
               <li id="salesVat" x-data="setting.showSalesVat" x-permissions="salesVatUi || salesVatManage">
                 <a class="menuTag" href="/salesVat">

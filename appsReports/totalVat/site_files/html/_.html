@@ -1,0 +1,94 @@
+<div ng-controller="totalVat" class="loaded">
+  <div class="row" x-permissions="totalVatUi || totalVatManage">
+    <div x-import="totalVat/modalSearch.html"></div>
+    <div class="row">
+      <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+      <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.Search##" ng-click="getSalesVatAll(_search)"></i-button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row">
+        <fieldset class="col5">
+          <legend>##word.Purchase Totals##</legend>
+          <div class="row">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total Net## : {{purchaseTotals.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="row">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total VAT## : {{purchaseTotals.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="row">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total## : {{purchaseTotals.total | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+        </fieldset>
+        <div class="col2"></div>
+        <fieldset class="col5">
+          <legend>##word.Sales Totals##</legend>
+          <div class="row">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total Net## : {{salesTotals.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="row">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total VAT## : {{salesTotals.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="row">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total## : {{salesTotals.total | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+        </fieldset>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table hover bold" id="totalVatReport">
+            <tr>
+              <th>##word.S/N##</th>
+              <th>##word.Type##</th>
+              <th>##word.Invoice No##</th>
+              <th>##word.Date##</th>
+              <th>##word.Payment Type##</th>
+              <th>##word.Customer##/##word.Vendor##</th>
+              <th>##word.Net##</th>
+              <th>##word.Vat##</th>
+              <th>##word.Total##</th>
+            </tr>
+            <tr ng-repeat="c in list">
+              <td class="center">{{$index + 1}}</td>
+              <td class="center">
+                <p ng-show="c.$type== 'expense'">##word.Purchase##</p>
+                <p ng-show="c.$type== 'receipt'">##word.Sales##</p>
+                <p>({{c.voucherType.name##session.lang##}})</p>
+              </td>
+              <td class="center">{{c.invoiceCode|| c.code}}</td>
+              <td class="center">{{c.date |date:"dd - MM - yyyy"}}</td>
+              <td class="center">{{c.paymentType.name##session.lang##}}</td>
+              <td class="center">{{c.customer.name##session.lang## || c.vendor.name##session.lang##}}</td>
+              <td class="center">{{c.$totalNetByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.$totalVatByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.$totalByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <i-button x-permissions="totalVatPrint || totalVatManage" type="print" label="##word.Print##" onclick="site.print('#totalVatReport')"></i-button>
+    <i-button x-permissions="totalVatExport || totalVatManage" type="export" label="##word.Export to excel##" onclick="site.export('#totalVatReport')"> </i-button>
+  </div>
+</div>

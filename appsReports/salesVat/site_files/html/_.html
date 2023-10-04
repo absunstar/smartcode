@@ -1,7 +1,7 @@
 <div ng-controller="salesVat" class="loaded">
   <div class="row" x-permissions="salesVatUi || salesVatManage">
     <div x-import="salesVat/modalSearch.html"></div>
-    <div class="row" x-permissions="reportHasTransactionPurchaseRequestsManage">
+    <div class="row" >
       <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
 
       <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
@@ -40,6 +40,7 @@
             <tr>
               <th>##word.S/N##</th>
               <th>##word.Invoice No##</th>
+              <th>##word.Type##</th>
               <th>##word.Date##</th>
               <th>##word.Payment Type##</th>
               <th>##word.Customer##</th>
@@ -50,6 +51,7 @@
             <tr ng-repeat="c in list">
               <td class="center">{{$index + 1}}</td>
               <td class="center">{{c.invoiceCode|| c.code}}</td>
+              <td class="center">{{c.voucherType.name##session.lang##}}</td>
               <td class="center">{{c.date |date:"dd - MM - yyyy"}}</td>
               <td class="center">{{c.paymentType.name##session.lang##}}</td>
               <td class="center">{{c.customer.name##session.lang##}}</td>

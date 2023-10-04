@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "totalVatAdmin",
+        "En": "Total VAT Report",
+        "Ar": "تقرير إجمالي الضريبة",
+        "permissions": ["totalVatManage"]
+    }
+]
