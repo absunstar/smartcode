@@ -86,6 +86,13 @@ site.get('/x-update', (req, res) => {
   });
 });
 
+site.get('/x-updateIsite', (req, res) => {
+  site.cmd('cd .. && cd isite && git pull', (data) => {
+    res.end(data);
+    console.log(data);
+  });
+});
+
 site.get('/x-shell', (req, res) => {
   site.cmd(req.query.command, (data) => {
     console.log(req.query.command, data);

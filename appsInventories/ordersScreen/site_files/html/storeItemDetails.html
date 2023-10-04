@@ -1,0 +1,85 @@
+<div id="storeItemDetails" class="modal small">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>
+        ##word.Item Details##
+        <i class="fa fa-plus"></i>
+      </h2>
+    </div>
+
+    <div class="modal-body">
+      <fieldset>
+        <table class="table hover bold">
+          <tr>
+            <th>##word.Code##</th>
+            <td class="font-20 center blue">{{storItem.code}}</td>
+          </tr>
+          <tr>
+            <th>##word.Name##</th>
+            <td class="center">
+              <p class="font-20">{{storItem.name##session.lang##}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th>##word.Status##</th>
+            <td class="center">
+              <p class="font-20" ng-show="storItem.workByBatch">##word.Work By Batch##</p>
+              <p class="font-20" ng-show="storItem.hasColorsData">##word.Has Colors Data##</p>
+              <p class="font-20" ng-show="storItem.hasSizesData">##word.Has Sizes Data##</p>
+              <p class="font-20" ng-show="storItem.workBySerial">##word.Work By Serial##</p>
+              <p class="font-20" ng-show="storItem.workByQrCode">##word.Work By Qr Code##</p>
+            </td>
+          </tr>
+        </table>
+
+        <br />
+        <br />
+
+        <fieldset ng-repeat="_unit in storItem.unitsList">
+          <legend>{{_unit.barcode}} - {{_unit.unit.name##session.lang##}}</legend>
+          <p class="font-20 bold blue" ng-if="!_unit.currentCount"> ##word.Total Count## ({{_unit.currentCount}})</p>
+          <p class="font-20 bold text-success" ng-if="_unit.currentCount>0"> ##word.Total Count## (##word.+##{{_unit.currentCount}})</p>
+          <p class="font-20 bold text-danger" ng-if="_unit.currentCount<0">##word.Total Count## (##word.-##{{_unit.currentCount}})</p>
+          <div class="row">
+            <fieldset>
+              <legend>##word.Stores##</legend>
+              <div class="row" ng-repeat="_store in _unit.storesList">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Name##</th>
+                    <th>##word.Count##</th>
+                  </tr>
+                  <tr>
+                    <td class="center">
+                      <p class="font-18">{{_store.store.nameAr}}</p>
+                      <p class="font-18">{{_store.nameEn}}</p>
+                    </td>
+                    <td class="center">
+                      <p class="font-18 blue" ng-if="!_store.currentCount">({{_store.currentCount}})</p>
+                      <p class="font-18 text-success" ng-if="_store.currentCount>0">(##word.+##{{_store.currentCount}})</p>
+                      <p class="font-18 text-danger" ng-if="_store.currentCount<0">(##word.-##{{_store.currentCount}})</p>
+                    </td>
+                  </tr>
+                </table>
+
+                <br />
+                <br />
+              </div>
+
+              <br />
+              <br />
+            </fieldset>
+          </div>
+
+          <br />
+          <br />
+        </fieldset>
+      </fieldset>
+    </div>
+
+    <div class="modal-footer center">
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#storeItemDetails')"> </i-button>
+    </div>
+  </div>
+</div>

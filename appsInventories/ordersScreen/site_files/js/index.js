@@ -728,6 +728,31 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     });
   };
 
+  $scope.viewStoreItem = function (id) {
+    $scope.busy = true;
+    $scope.error = '';
+    $http({
+      method: 'POST',
+      url: `/api/storesItems/view`,
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.storItem = response.data.doc;
+          site.showModal('#storeItemDetails');
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
   $scope.getBarcode = function (ev) {
     $scope.error = '';
     let where = {
@@ -2133,6 +2158,10 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.gotoPurchaseOrders = function () {
+    window.location.href = '/purchaseOrders';
+  };
+
   $scope.addToItemsListToReturn = function (invoice) {
     $scope.returned = {
       ...$scope.returned,
@@ -2154,9 +2183,9 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       totalAfterVat: invoice.totalAfterVat,
       totalNet: invoice.totalNet,
       amountPaid: invoice.totalNet,
-      customer:invoice.customer,
+      customer: invoice.customer,
       totalPrice: invoice.totalPrice,
-    };    
+    };
     $scope.returnSalesInvoicesList = [];
   };
 

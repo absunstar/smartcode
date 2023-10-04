@@ -12,6 +12,7 @@
         <div x-import="ordersScreen/ordersActive.html"></div>
         <div x-import="ordersScreen/orderDetailsModal.html"></div>
         <div x-import="ordersScreen/returnOrderModal.html"></div>
+        <div x-import="ordersScreen/storeItemDetails.html"></div>
         <div x-import="customers/modal.html"></div>
         <div x-import="salesInvoices/modal.html"></div>
         <div x-import="salesInvoices/batchModal.html"></div>
@@ -81,24 +82,25 @@
                 <div class="table-headers center">
                   <div class="col-4 header">##word.Item##</div>
                   <div class="col-2 header">##word.Count## ##word.+##</div>
-                  <div class="col-1 header">##word.Price##</div>
+                  <div class="col-2 header">##word.Price## (##word.$##)</div>
                   <div class="col-1 header" x-data="setting.showRestaurant">##word.Extras##</div>
-                  <div class="col-2 header">##word.Total##</div>
-                  <div class="col-2 header">##word.Actions##</div>
+                  <div class="col-1 header">##word.Total##</div>
+                  <div class="header">##word.Actions##</div>
                 </div>
                 <div class="table-items center" ng-repeat="elem in item.itemsList">
                   <div class="col-4 item">
-                    <p>{{elem.name##session.lang##}}</p>
+                    <p class="pointer" ng-click="viewStoreItem(elem.id)">{{elem.name##session.lang##}}</p>
                   </div>
                   <div class="col-2 item">
                     <i-control min="1" type="number" ng-change="calculate(item)" ng-model="elem.count"></i-control>
                   </div>
-                  <div class="col-1 item">
-                    <p class="text-center">{{elem.price | xmoney2}} <span class="currency">##word.$##</span></p>
+                  <div class="col-2 item">
+                    <i-control min="1" type="number" ng-change="calculate(item)" ng-model="elem.price"></i-control>
+
                   </div>
                   <div class="col-1 item" x-data="setting.showRestaurant">{{elem.totalExtras | xmoney2}}<span class="currency">##word.$##</span></div>
-                  <div class="col-2 item bold font-18 green">{{elem.total | xmoney2}}<span class="currency">##word.$##</span></div>
-                  <div class="col-2 item">
+                  <div class="col-1 item bold font-18 green">{{elem.total | xmoney2}}<span class="currency">##word.$##</span></div>
+                  <div class="item">
                     <i-button type="add" title="##word.Setting##" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode || elem.hasMedicalData" ng-click="showBatchModal(elem)"> </i-button>
                     <i-button type="edit" title="##word.Edit##" ng-click="showEditItem(elem)"></i-button>
                     <i-button type="delete" title="##word.Delete##" ng-click="item.itemsList.splice($index,1);calculate(item)"></i-button>
@@ -107,23 +109,17 @@
               </div>
             </div>
 
-            <br />
+            <i-control  label="Notes"  ng-model="item.notes"> </i-control>
+
             <fieldset ng-show="setting.accountsSetting.linkAccountsToStores">
               <div class="row">
                 <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
-                <i-control class="col2" label="##word.Paid##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.paidByCustomer"> </i-control>
-                <div class="col1">
-                  <br />
-                  <span class="currency">##word.$##</span>
-                </div>
-                <div class="col2 font-18">
-                  <p>##word.Amount Paid##</p>
-                  <p class="bold center">{{item.amountPaid| xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
-                <div class="col3 font-18" >
-                  <p>##word.Remain For Customer##</p>
-                  <p class="bold center">{{item.remainForCustomer| xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
+                <i-control class="col3" label="##word.Paid##(##word.$##)" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.paidByCustomer"> </i-control>
+              
+                <i-control class="col3" label="##word.Amount Paid##(##word.$##)" type="number" disabled ng-model="item.amountPaid"> </i-control>
+                <i-control class="col3" label="##word.Remain For Customer##(##word.$##)" type="number" disabled ng-model="item.remainForCustomer"> </i-control>
+
+             
               </div>
             </fieldset>
             <br />
@@ -169,6 +165,7 @@
               <i-button ng-hide="item.status.id == 2" fa="cart-plus" label="##word.Save##" ng-click="saveOrder(item)"> </i-button>
 
               <i-button label="##word.Returned##" ng-click="showAddReturned()"> </i-button>
+              <i-button label="##word.Purchase Orders##" ng-click="gotoPurchaseOrders()"> </i-button>
               <i-button label="##word.Cancel##" ng-click="cancelOrder(item)"> </i-button>
             </div>
 
