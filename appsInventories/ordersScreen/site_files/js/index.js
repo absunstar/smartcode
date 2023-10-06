@@ -68,14 +68,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         return _t.id == $scope.setting.accountsSetting.safeCash.id;
       });
     } */
-    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
-      $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
-        return _t.id == $scope.setting.accountsSetting.paymentType.id;
-      });
-      if ($scope.item.paymentType) {
-        $scope.getSafes($scope.item.paymentType);
-      }
-    }
+
     if ($scope.setting.storesSetting.salesCategory && $scope.setting.storesSetting.salesCategory.id) {
       $scope.item.salesCategory = $scope.salesCategoriesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.salesCategory.id;
@@ -92,6 +85,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         return _t.id == $scope.setting.storesSetting.customer.id;
       });
     }
+    $scope.selectInvoiceType($scope.item);
     document.querySelector('#searchBarcode input').focus();
   };
   $scope.saveOrder = function (_item) {
@@ -1325,18 +1319,59 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
       obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
       obj.totalNet = site.toNumber(obj.totalNet);
-      obj.amountPaid = obj.totalNet;
-      obj.paidByCustomer = obj.totalNet;
-      obj.remainForCustomer = 0;
+      $scope.selectInvoiceType(obj);
+      $scope.itemsError = '';
     }, 300);
+  };
 
-    $scope.itemsError = '';
+  $scope.selectInvoiceType = function (item) {
+    item.paymentList = [{}];
+    if (item.invoiceType && item.invoiceType.id == 1) {
+      if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+        item.paymentList[0].paymentType = $scope.paymentTypesList.find((_t) => {
+          return _t.id == $scope.setting.accountsSetting.paymentType.id;
+        });
+        if (item.paymentList[0].paymentType) {
+          $scope.getSafes(item.paymentList[0]);
+        }
+      }
+      item.paymentList[0].amountPaid = item.totalNet || 0;
+      item.paymentList[0].paidByCustomer = item.totalNet || 0;
+      item.paymentList[0].remainForCustomer = 0;
+    }
+  };
+
+  $scope.addToPaymentList = function (item) {
+    item.paymentList.push({});
+    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+      item.paymentList[item.paymentList.length - 1].paymentType = $scope.paymentTypesList.find((_t) => {
+        return _t.id == $scope.setting.accountsSetting.paymentType.id;
+      });
+      if (item.paymentList[item.paymentList.length - 1].paymentType) {
+        $scope.getSafes(item.paymentList[item.paymentList.length - 1]);
+      }
+    }
+    let amountPaid = 0;
+    item.paymentList.forEach((_p) => {
+      amountPaid += _p.paidByCustomer || 0;
+    });
+    item.paymentList[item.paymentList.length - 1].paidByCustomer = item.totalNet - amountPaid;
+    /*  item.paymentList[item.paymentList.length - 1].amountPaid = item.totalNet - amountPaid;
+    item.paymentList[item.paymentList.length - 1].paidByCustomer = item.totalNet - amountPaid; */
+    $scope.calculateCustomerPaid(item);
   };
 
   $scope.calculateCustomerPaid = function (obj) {
     $timeout(() => {
-      obj.remainForCustomer = obj.paidByCustomer - obj.amountPaid;
-      obj.remainForCustomer = site.toNumber(obj.remainForCustomer);
+      if (obj.paymentList && obj.paymentList.length == 1) {
+        obj.paymentList[0].remainForCustomer = obj.paymentList[0].paidByCustomer - obj.paymentList[0].amountPaid;
+        obj.paymentList[0].remainForCustomer = site.toNumber(obj.paymentList[0].remainForCustomer);
+      } else {
+        $scope.item.paymentList.forEach((element) => {
+          element.amountPaid = element.paidByCustomer || 0;
+          element.remainForCustomer = 0;
+        });
+      }
     }, 300);
   };
 
@@ -2042,37 +2077,50 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSafes = function (paymentType) {
+  $scope.getSafes = function (obj) {
     $scope.busy = true;
-    $scope.safesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/safes/all',
-      data: {
-        where: {
-          active: true,
-          'paymentType.id': paymentType.id,
+    if (obj.paymentType && obj.paymentType.id) {
+      $http({
+        method: 'POST',
+        url: '/api/safes/all',
+        data: {
+          where: {
+            active: true,
+            'paymentType.id': obj.paymentType.id,
+          },
+          select: {
+            id: 1,
+            code: 1,
+            nameEn: 1,
+            nameAr: 1,
+          },
         },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
+      }).then(
+        function (response) {
+          $scope.busy = false;
+          if (response.data.done && response.data.list.length > 0) {
+            obj.$safesList = response.data.list;
+            if (obj.paymentType.id == 1) {
+              if ($scope.setting.accountsSetting.safeCash) {
+                obj.safe = obj.$safesList.find((_t) => {
+                  return _t.id == $scope.setting.accountsSetting.safeCash.id;
+                });
+              }
+            } else {
+              if ($scope.setting.accountsSetting.safeBank) {
+                obj.safe = obj.$safesList.find((_t) => {
+                  return _t.id == $scope.setting.accountsSetting.safeBank.id;
+                });
+              }
+            }
+          }
         },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.safesList = response.data.list;
-          $scope.item.safe = $scope.safesList[0];
+        function (err) {
+          $scope.busy = false;
+          $scope.error = err;
         }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
+      );
+    }
   };
 
   $scope.getInvoiceTypes = function () {

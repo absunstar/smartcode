@@ -234,7 +234,6 @@ module.exports = function init(site) {
           //   appName = 'salesErInvoices';
           // }
 
-       
           let overDraftObj = {
             store: _data.store,
             items: _data.itemsList,
@@ -251,20 +250,36 @@ module.exports = function init(site) {
             _data.addUserInfo = req.getUserFinger();
 
             if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-              if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet)) {
+              if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet) && _data.paymentList.length == 1) {
                 response.error = 'Must Paid By Customer greater than or equal to ';
                 res.json(response);
                 return;
               }
-              if (!_data.paymentType || !_data.paymentType.id) {
-                response.error = 'Must Select Payment Type';
-                res.json(response);
-                return;
-              } else if (!_data.safe || !_data.safe.id) {
-                response.error = 'Must Select Safe';
+              // if (!_data.paymentType || !_data.paymentType.id) {
+              //   response.error = 'Must Select Payment Type';
+              //   res.json(response);
+              //   return;
+              // } else if (!_data.safe || !_data.safe.id) {
+              //   response.error = 'Must Select Safe';
+              //   res.json(response);
+              //   return;
+              // }
+              if (_data.paymentList && _data.paymentList.length > 0) {
+                _data.amountPaid = 0;
+                _data.paymentList.forEach((element) => {
+                  _data.amountPaid += element.amountPaid;
+                });
+                if (_data.amountPaid != _data.totalNet) {
+                  response.error = 'Must total amount Paid equal total Net';
+                  res.json(response);
+                  return;
+                }
+              } else {
+                response.error = 'Must Add Payment List';
                 res.json(response);
                 return;
               }
+
               _data.remainPaid = _data.totalNet - _data.amountPaid;
             } else {
               _data.remainPaid = _data.totalNet;
@@ -294,30 +309,34 @@ module.exports = function init(site) {
               return;
             } else if (cb.auto) {
               _data.code = cb.code;
-            }  
+            }
 
             app.add(_data, (err, doc) => {
               if (!err) {
                 response.done = true;
                 if (_data['approved']) {
                   if (doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-                    site.addReceiptVouchers({
-                      session: req.session,
-                      itemsList: doc.itemsList,
-                      date: new Date(),
-                      delivery: doc.delivery,
-                      customer: doc.customer,
-                      patient: doc.patient,
-                      company: doc.company,
-                      doctorDeskTop: doc.doctorDeskTop,
-                      voucherType: site.vouchersTypes[2],
-                      invoiceId: doc.id,
-                      invoiceCode: doc.code,
-                      total: doc.amountPaid,
-                      safe: doc.safe,
-                      paymentType: doc.paymentType,
-                      addUserInfo: doc.addUserInfo,
-                      branch: doc.branch,
+                    doc.paymentList.forEach((_p, i) => {
+                      setTimeout(() => {
+                        site.addReceiptVouchers({
+                          session: req.session,
+                          itemsList: doc.itemsList,
+                          date: new Date(),
+                          delivery: doc.delivery,
+                          customer: doc.customer,
+                          patient: doc.patient,
+                          company: doc.company,
+                          doctorDeskTop: doc.doctorDeskTop,
+                          voucherType: site.vouchersTypes[2],
+                          invoiceId: doc.id,
+                          invoiceCode: doc.code,
+                          total: _p.amountPaid,
+                          safe: _p.safe,
+                          paymentType: _p.paymentType,
+                          addUserInfo: doc.addUserInfo,
+                          branch: doc.branch,
+                        });
+                      }, 1000 * i);
                     });
                   }
                   let obj = {
@@ -638,12 +657,12 @@ module.exports = function init(site) {
 
     let _data = req.data;
 
-    if(!_data.id){
+    if (!_data.id) {
       response.error = 'No Id';
       res.json(response);
       return;
     }
-    
+
     if (_data.salesCategory && _data.salesCategory.id == 2) {
       _data.deliveryStatus = { ...site.deliveryStatus[1], date: new Date() };
       _data.deliveryStatusList.push(_data.deliveryStatus);
@@ -733,8 +752,6 @@ module.exports = function init(site) {
         items: _data.itemsList,
       };
 
-     
-
       site.checkOverDraft(req, overDraftObj, (overDraftCb) => {
         if (!overDraftCb.done) {
           let error = '';
@@ -746,17 +763,37 @@ module.exports = function init(site) {
         _data.editUserInfo = req.getUserFinger();
 
         if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-          if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet)) {
+          // if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet)) {
+          //   response.error = 'Must Paid By Customer greater than or equal to ';
+          //   res.json(response);
+          //   return;
+          // }
+          // if (!_data.paymentType || !_data.paymentType.id) {
+          //   response.error = 'Must Select Payment Type';
+          //   res.json(response);
+          //   return;
+          // } else if (!_data.safe || !_data.safe.id) {
+          //   response.error = 'Must Select Safe';
+          //   res.json(response);
+          //   return;
+          // }
+          if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet) && _data.paymentList.length == 1) {
             response.error = 'Must Paid By Customer greater than or equal to ';
             res.json(response);
             return;
           }
-          if (!_data.paymentType || !_data.paymentType.id) {
-            response.error = 'Must Select Payment Type';
-            res.json(response);
-            return;
-          } else if (!_data.safe || !_data.safe.id) {
-            response.error = 'Must Select Safe';
+          if (_data.paymentList && _data.paymentList.length > 0) {
+            _data.amountPaid = 0;
+            _data.paymentList.forEach((element) => {
+              _data.amountPaid += element.amountPaid;
+            });
+            if (_data.amountPaid != _data.totalNet) {
+              response.error = 'Must total amount Paid equal total Net';
+              res.json(response);
+              return;
+            }
+          } else {
+            response.error = 'Must Add Payment List';
             res.json(response);
             return;
           }
@@ -779,84 +816,87 @@ module.exports = function init(site) {
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
-            if(result.doc) {
-            if (result.doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-              site.addReceiptVouchers({
-                session: req.session,
-                date: new Date(),
-                itemsList: result.doc.itemsList,
+            if (result.doc) {
+              if (result.doc.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
+                result.doc.paymentList.forEach((_p, i) => {
+                  setTimeout(() => {
+                    site.addReceiptVouchers({
+                      session: req.session,
+                      date: new Date(),
+                      itemsList: result.doc.itemsList,
+                      delivery: result.doc.delivery,
+                      customer: result.doc.customer,
+                      patient: result.doc.patient,
+                      doctorDeskTop: result.doc.doctorDeskTop,
+                      voucherType: site.vouchersTypes[2],
+                      invoiceId: result.doc.id,
+                      invoiceCode: result.doc.code,
+                      total: _p.amountPaid,
+                      safe: _p.safe,
+                      paymentType: _p.paymentType,
+                      addUserInfo: result.doc.addUserInfo,
+                      company: result.doc.company,
+                      branch: result.doc.branch,
+                    });
+                  }, 1000 * i);
+                });
+              }
+              let obj = {
+                code: result.doc.code,
+                image: result.doc.image,
+                appName: app.name,
+                store: result.doc.store,
                 delivery: result.doc.delivery,
                 customer: result.doc.customer,
-                patient: result.doc.patient,
-                doctorDeskTop: result.doc.doctorDeskTop,
-                voucherType: site.vouchersTypes[2],
-                invoiceId: result.doc.id,
-                invoiceCode: result.doc.code,
-                total: result.doc.amountPaid,
-                safe: result.doc.safe,
-                paymentType: result.doc.paymentType,
-                addUserInfo: result.doc.addUserInfo,
                 company: result.doc.company,
-                branch: result.doc.branch,
+                user: result.doc.customer,
+                patient: result.doc.patient,
+                totalNet: result.doc.totalNet,
+                totalBeforeVat: result.doc.totalBeforeVat,
+                totalDiscounts: result.doc.totalDiscounts,
+                totalVat: result.doc.totalVat,
+                totalAverageCost: 0,
+                userInfo: result.doc.addUserInfo,
+              };
+
+              result.doc.itemsList.forEach((_item) => {
+                obj.totalAverageCost += _item.averageCost || 0;
+                let item = { ..._item };
+                item.store = { ...result.doc.store };
+                site.editItemsBalance(item, app.name);
+                item.invoiceId = result.doc.id;
+                item.company = result.doc.company;
+                item.date = result.doc.date;
+                item.delivery = result.doc.delivery;
+                item.customer = result.doc.customer;
+                item.patient = result.doc.patient;
+                item.countType = 'out';
+                item.orderCode = result.doc.code;
+                site.setItemCard(item, app.name);
               });
+
+              if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
+                site.sendRasdData({
+                  rasdUser: result.doc.store.rasdUser,
+                  rasdPass: result.doc.store.rasdPass,
+                  appName: app.name,
+                  items: result.doc.itemsList,
+                });
+              }
+
+              if (result.doc.salesType.code == 'patient') {
+                obj.user = result.doc.patient;
+                site.hasSalesDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
+              } else if (result.doc.salesType.code == 'er') {
+                obj.user = result.doc.patient;
+                site.hasErDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
+              }
+              obj.nameAr = 'فاتورة مبيعات' + ' (' + result.doc.code + ' )';
+              obj.nameEn = 'Sales Invoice' + ' (' + result.doc.code + ' )';
+              obj.session = req.session;
+              site.autoJournalEntry(obj);
+              response.doc = result.doc;
             }
-            let obj = {
-              code: result.doc.code,
-              image: result.doc.image,
-              appName: app.name,
-              store: result.doc.store,
-              delivery: result.doc.delivery,
-              customer: result.doc.customer,
-              company: result.doc.company,
-              user: result.doc.customer,
-              patient: result.doc.patient,
-              totalNet: result.doc.totalNet,
-              totalBeforeVat: result.doc.totalBeforeVat,
-              totalDiscounts: result.doc.totalDiscounts,
-              totalVat: result.doc.totalVat,
-              totalAverageCost: 0,
-              userInfo: result.doc.addUserInfo,
-            };
-
-            result.doc.itemsList.forEach((_item) => {
-              obj.totalAverageCost += _item.averageCost || 0;
-              let item = { ..._item };
-              item.store = { ...result.doc.store };
-              site.editItemsBalance(item, app.name);
-              item.invoiceId = result.doc.id;
-              item.company = result.doc.company;
-              item.date = result.doc.date;
-              item.delivery = result.doc.delivery;
-              item.customer = result.doc.customer;
-              item.patient = result.doc.patient;
-              item.countType = 'out';
-              item.orderCode = result.doc.code;
-              site.setItemCard(item, app.name);
-            });
-
-            if (result.doc.store.linkWithRasd && result.doc.store.rasdUser && result.doc.store.rasdPass) {
-              site.sendRasdData({
-                rasdUser: result.doc.store.rasdUser,
-                rasdPass: result.doc.store.rasdPass,
-                appName: app.name,
-                items: result.doc.itemsList,
-              });
-            }
-
-            if (result.doc.salesType.code == 'patient') {
-              obj.user = result.doc.patient;
-              site.hasSalesDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
-            } else if (result.doc.salesType.code == 'er') {
-              obj.user = result.doc.patient;
-              site.hasErDoctorDeskTop({ id: result.doc.doctorDeskTop.id, items: result.doc.itemsList });
-            } 
-            obj.nameAr = 'فاتورة مبيعات' + ' (' + result.doc.code + ' )';
-            obj.nameEn = 'Sales Invoice' + ' (' + result.doc.code + ' )';
-            obj.session = req.session;
-            site.autoJournalEntry(obj);
-            response.doc = result.doc;
-          }
-
           } else {
             response.error = err.message;
           }

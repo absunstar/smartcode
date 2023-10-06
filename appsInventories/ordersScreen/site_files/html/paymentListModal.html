@@ -1,0 +1,47 @@
+<div id="paymentListModal" class="modal small">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+    </div>
+
+    <div class="modal-body">
+      <fieldset ng-show="item.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores">
+        <legend>
+          ##word.Paymet List##
+          <i-button type="add" ng-click="addToPaymentList(item)"> </i-button>
+        </legend>
+        <fieldset ng-repeat="pay in item.paymentList">
+          <div class="row">
+            <i-list
+              class="col2"
+              v="r"
+              ng-change="getSafes(pay)"
+              ng-model="pay.paymentType"
+              display="name##session.lang##"
+              items="paymentTypesList"
+              label="##word.Payment Type##"
+              ng-search="pay.$paymentType"
+            ></i-list>
+            <i-list class="col2" v="r" display="name##session.lang##" ng-model="pay.safe" items="pay.$safesList" label="##word.Safe##" ng-search="pay.$safe"></i-list>
+            <i-control class="col3" v="r" label="##word.Paid By Customer## ##word.$##" type="number" ng-change="calculateCustomerPaid(item)" ng-model="pay.paidByCustomer"> </i-control>
+            <div class="col2 font-18" ng-show="item.paymentList.length === 1">
+              <p>##word.Amount Paid##</p>
+              <p>{{pay.amountPaid| xmoney2}} <span class="currency">##word.$##</span></p>
+            </div>
+            <div class="col2 font-18" ng-show="item.paymentList.length === 1">
+              <p>##word.Remain For Customer##</p>
+              <p>{{pay.remainForCustomer| xmoney2}} <span class="currency">##word.$##</span></p>
+            </div>
+            <i-button type="delete" class="col1" ng-click="item.paymentList.length === 1 ||  item.paymentList.splice($index,1);calculateCustomerPaid(item);"> </i-button>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+
+    <h2 class="error">{{error}}</h2>
+
+    <div class="modal-footer center">
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#paymentListModal')"> </i-button>
+    </div>
+  </div>
+</div>
