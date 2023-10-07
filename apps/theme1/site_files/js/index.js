@@ -89,7 +89,6 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
       url: '/api/doctorAppointments/details',
       data: {
         where: where,
-        limit: 10,
         select: {
           id: 1,
           date: 1,          
@@ -119,7 +118,6 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
       url: '/api/salesInvoices/details',
       data: {
         where: where,
-        limit: 10,
         select: {
           id: 1,
           date: 1,          
@@ -130,6 +128,93 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
           $scope.salesInvoicesDetails = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getGeneralSalesInvoicesDetails = function () {
+    $scope.busy = true;
+
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/receiptVouchers/generalSalesDetails',
+      data: {
+        where: where,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.generalSalesInvoicesDetails = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getPurchaseInvoicesDetails = function () {
+    $scope.busy = true;
+
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/purchaseOrders/details',
+      data: {
+        where: where,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.purchaseInvoicesDetails = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getGeneralPurchaseInvoicesDetails = function () {
+    $scope.busy = true;
+
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/expenseVouchers/generalPurchaseDetails',
+      data: {
+        where: where,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.generalPurchaseInvoicesDetails = response.data.doc;
         }
       },
       function (err) {
@@ -319,6 +404,9 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
   $scope.getDoctorAppointmentsList();
   $scope.getDoctorsList();
   $scope.getDoctorAppointmentsDetails();
-  $scope.getSalesInvoicesDetails();
   $scope.getDoctorDeskTopDetails();
+  $scope.getSalesInvoicesDetails();
+  $scope.getGeneralSalesInvoicesDetails();
+  $scope.getPurchaseInvoicesDetails();
+  $scope.getGeneralPurchaseInvoicesDetails();
 });

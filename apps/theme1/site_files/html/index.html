@@ -12,10 +12,122 @@
   <body>
     <div x-import="theme1/header.html"></div>
     <main>
-      <div ng-controller="mainHmis" x-data="setting.showHospital" class="mainscreen container loaded" id="main-layout">
+      <div ng-controller="mainHmis" class="mainscreen container loaded" id="main-layout">
         <div x-import="doctorAppointments/modal.html"></div>
         <div x-import="doctorAppointments/daysModal.html"></div>
-        <div class="topWedgit d-flex flex-row flex-wrap">
+        <div class="middalWedgit d-flex flex-row flex-wrap" style="margin: 0px 0px 40px 0px">
+          <div class="salesInvoicesDetails dashboardWedgit d-flex flex-column">
+            <div class="headAndTitle">
+              <div class="headWedgit">
+                <p>___</p>
+              </div>
+              <div class="wedgitTitle">
+                <p><strong>##word.Sales##</strong><br />##word.Details##</p>
+              </div>
+            </div>
+            <div class="wedgitContent">
+              <div class="allWedgitContent">
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{salesInvoicesDetails.today + generalSalesInvoicesDetails.today}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Today##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{salesInvoicesDetails.yesterday+ generalSalesInvoicesDetails.yesterday}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Yesterday##</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{salesInvoicesDetails.week+ generalSalesInvoicesDetails.week}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This week##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{salesInvoicesDetails.month+ generalSalesInvoicesDetails.month}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This month##</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wedgitButton">
+              <a href="#">
+                <p>##word.More details##</p>
+              </a>
+            </div>
+          </div>
+          <div class="purchaseInvoicesDetails dashboardWedgit d-flex flex-column">
+            <div class="headAndTitle">
+              <div class="headWedgit">
+                <p>___</p>
+              </div>
+              <div class="wedgitTitle">
+                <p><strong>##word.Purchase##</strong><br />##word.Details##</p>
+              </div>
+            </div>
+            <div class="wedgitContent">
+              <div class="allWedgitContent">
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{purchaseInvoicesDetails.today + generalPurchaseInvoicesDetails.today}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Today##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{purchaseInvoicesDetails.yesterday+ generalPurchaseInvoicesDetails.yesterday}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Yesterday##</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{purchaseInvoicesDetails.week+ generalPurchaseInvoicesDetails.week}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This week##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{purchaseInvoicesDetails.month+ generalPurchaseInvoicesDetails.month}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This month##</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wedgitButton">
+              <a href="#">
+                <p>##word.More details##</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="topWedgit d-flex flex-row flex-wrap" x-data="setting.showHospital">
           <div class="dashboardWedgit d-flex flex-row">
             <div class="headWedgit">
               <p>##data.doctorsCount##</p>
@@ -56,7 +168,7 @@
             </div>
           </div>
         </div>
-        <div class="middalWedgit d-flex flex-row flex-wrap">
+        <div class="middalWedgit d-flex flex-row flex-wrap" x-data="setting.showHospital">
           <div class="availabelDoctor dashboardWedgit d-flex flex-column">
             <div class="headAndTitle">
               <div class="headWedgit">
