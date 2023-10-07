@@ -108,6 +108,111 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
     );
   };
 
+
+  $scope.displayChart = function (t) {
+    $timeout(() => {
+      let male = 'Male';
+      let female = 'Female';
+      let pass = 'Succeed';
+      let notPass = 'Not Pass';
+
+      if (document.querySelector('body.ar')) {
+        male = 'ذكر';
+        female = 'أنثى';
+        pass = 'نجاح';
+        notPass = 'رسوب';
+      }
+
+      let data1 = {
+        data: [
+          {
+            Gender: male,
+            Count: 5,
+            Color: am4core.color('#2196f3'),
+          },
+          {
+            Gender: female,
+            Count:10,
+            Color: am4core.color('#ffeb3b'),
+          },
+        ],
+      };
+
+      let data2 = {
+        data: [
+          {
+            Trainees: pass,
+            Count: 15,
+            Color: am4core.color('#4caf50'),
+          },
+          {
+            Trainees: notPass,
+            Count:20,
+            Color: am4core.color('#f44336'),
+          },
+        ],
+      };
+
+      am4core.useTheme(am4themes_animated);
+      let chart1 = am4core.createFromConfig(data1, 'chart1', am4charts.PieChart);
+      let chart2 = am4core.createFromConfig(data2, 'chart2', am4charts.PieChart);
+
+      let pieSeries = chart1.series.push(new am4charts.PieSeries());
+      pieSeries.dataFields.value = 'Count';
+      pieSeries.dataFields.category = 'Gender';
+      pieSeries.slices.template.propertyFields.fill = 'Color';
+      pieSeries.labels.template.disabled = true;
+      pieSeries.ticks.template.disabled = true;
+      chart1.legend = new am4charts.Legend();
+
+      let pieSeries2 = chart2.series.push(new am4charts.PieSeries());
+      pieSeries2.dataFields.value = 'Count';
+      pieSeries2.dataFields.category = 'Trainees';
+      pieSeries2.slices.template.propertyFields.fill = 'Color';
+      pieSeries2.labels.template.disabled = true;
+      pieSeries2.ticks.template.disabled = true;
+      chart2.legend = new am4charts.Legend();
+      chart1.rtl = true;
+      chart2.rtl = true;
+      chart1.legend.position = 'left';
+      chart2.legend.position = 'left';
+      chart1.legend.labels.template.textAlign = 'end';
+      chart2.legend.labels.template.textAlign = 'end';
+      pieSeries.alignLabels = false;
+      pieSeries2.alignLabels = false;
+    }, 1000);
+  };
+  $scope.getReturnSalesInvoicesDetails = function () {
+    $scope.busy = true;
+
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/returnSalesInvoices/details',
+      data: {
+        where: where,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.returnSalesInvoicesDetails = response.data.doc;
+
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+
   $scope.getSalesInvoicesDetails = function () {
     $scope.busy = true;
 
@@ -128,6 +233,8 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
           $scope.salesInvoicesDetails = response.data.doc;
+          /* $scope.displayChart($scope.salesInvoicesDetails); */
+
         }
       },
       function (err) {
@@ -136,6 +243,7 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
       }
     );
   };
+
 
   $scope.getGeneralSalesInvoicesDetails = function () {
     $scope.busy = true;
@@ -165,7 +273,34 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
       }
     );
   };
+  $scope.getReturnPurchaseInvoicesDetails = function () {
+    $scope.busy = true;
 
+    let where = { date: new Date(), active: true };
+
+    $http({
+      method: 'POST',
+      url: '/api/returnPurchaseOrders/details',
+      data: {
+        where: where,
+        select: {
+          id: 1,
+          date: 1,          
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.doc) {
+          $scope.returnPurchaseInvoicesDetails = response.data.doc;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
   $scope.getPurchaseInvoicesDetails = function () {
     $scope.busy = true;
 
@@ -409,4 +544,7 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
   $scope.getGeneralSalesInvoicesDetails();
   $scope.getPurchaseInvoicesDetails();
   $scope.getGeneralPurchaseInvoicesDetails();
+  $scope.getReturnPurchaseInvoicesDetails();
+  $scope.getReturnSalesInvoicesDetails();
+
 });

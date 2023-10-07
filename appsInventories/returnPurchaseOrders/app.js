@@ -443,6 +443,52 @@ module.exports = function init(site) {
     );
   });
 
+  site.post({ name: `/api/${app.name}/details`, public: true }, (req, res) => {
+    let where = {};
+    let date = new Date();
+    let d1 = site.toDate(date);
+    let d2 = site.toDate(date);
+    d2.setMonth(d2.getMonth() + 1);
+    d2.setDate(1);
+    d1.setDate(1);
+    where.date = {
+      $gte: d1,
+      $lt: d2,
+    };
+    where['approved'] = true;
+    let select = { id: 1, code: 1, date: 1 };
+
+    app.all({ where, select }, (err, docs) => {
+      let obj = {
+        today: 0,
+        yesterday: 0,
+        week: 0,
+        month: 0,
+      };
+      if (!err && docs) {
+        let weekDate = site.weekDate();
+        obj.month = docs.length;
+        for (let i = 0; i < docs.length; i++) {
+          docs[i].date = new Date(docs[i].date);
+
+          if (docs[i].date.getDate() == new Date().getDate()) {
+            obj.today += 1;
+          }
+          if (docs[i].date.getDate() == new Date().getDate() - 1) {
+            obj.yesterday += 1;
+          }
+          if (weekDate.firstday.getDate() <= docs[i].date.getDate() && weekDate.lastday.getDate() >= docs[i].date.getDate()) {
+            obj.week += 1;
+          }
+        }
+      }
+      res.json({
+        done: true,
+        doc: obj,
+      });
+    });
+  });
+
   site.changeRemainPaidReturnPurchases = function (obj) {
     app.view({ id: obj.id }, (err, doc) => {
       if (!err && doc) {
@@ -451,6 +497,8 @@ module.exports = function init(site) {
       }
     });
   };
+
+
 
   app.init();
   site.addApp(app);

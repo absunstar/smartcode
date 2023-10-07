@@ -67,6 +67,7 @@ site.importApps(__dirname + '/appsReports');
 
 site.loadLocalApp('client-side');
 site.loadLocalApp('ui-print');
+site.loadLocalApp('charts');
 
 site.addFeature('m-hmis');
 site.addFeature('m-inventory');

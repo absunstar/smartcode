@@ -2,6 +2,30 @@
 <html lang="En" ng-app="myApp">
   <head x-import="theme1/head.html">
     <style>
+      .chart-box {
+        border: 2px solid #272727;
+        margin: 10px;
+        padding: 10px;
+        min-height: 600px;
+        background: #fff;
+      }
+      .chart-box h1 {
+        margin-bottom: 25px;
+      }
+      .charts {
+        margin: 10px !important;
+        margin-bottom: 100px !important;
+      }
+      .chart-area{
+        width: 100%;
+        height: 400px;
+      }
+      g[role="region"] + g{
+        display: none;
+      }
+      table.table{
+        margin-top: 100px;
+      }
       main {
         margin-left: 120px !important;
         flex-direction: inherit;
@@ -15,6 +39,7 @@
       <div ng-controller="mainHmis" class="mainscreen container loaded" id="main-layout">
         <div x-import="doctorAppointments/modal.html"></div>
         <div x-import="doctorAppointments/daysModal.html"></div>
+      
         <div class="middalWedgit d-flex flex-row flex-wrap" style="margin: 0px 0px 40px 0px">
           <div class="salesInvoicesDetails dashboardWedgit d-flex flex-column">
             <div class="headAndTitle">
@@ -66,7 +91,7 @@
               </div>
             </div>
             <div class="wedgitButton">
-              <a href="#">
+              <a href="/salesInvoices">
                 <p>##word.More details##</p>
               </a>
             </div>
@@ -121,7 +146,117 @@
               </div>
             </div>
             <div class="wedgitButton">
-              <a href="#">
+              <a href="/purchaseOrders">
+                <p>##word.More details##</p>
+              </a>
+            </div>
+          </div>
+          <div class="returnPurchaseInvoicesDetails dashboardWedgit d-flex flex-column">
+            <div class="headAndTitle">
+              <div class="headWedgit">
+                <p>___</p>
+              </div>
+              <div class="wedgitTitle">
+                <p><strong>##word.Return Purchase##</strong><br />##word.Details##</p>
+              </div>
+            </div>
+            <div class="wedgitContent">
+              <div class="allWedgitContent">
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnPurchaseInvoicesDetails.today}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Today##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnPurchaseInvoicesDetails.yesterday}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Yesterday##</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnPurchaseInvoicesDetails.week}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This week##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnPurchaseInvoicesDetails.month}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This month##</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wedgitButton">
+              <a href="/returnPurchaseOrders">
+                <p>##word.More details##</p>
+              </a>
+            </div>
+          </div>
+          <div class="returnSalesInvoicesDetails dashboardWedgit d-flex flex-column">
+            <div class="headAndTitle">
+              <div class="headWedgit">
+                <p>___</p>
+              </div>
+              <div class="wedgitTitle">
+                <p><strong>##word.Return Sales##</strong><br />##word.Details##</p>
+              </div>
+            </div>
+            <div class="wedgitContent">
+              <div class="allWedgitContent">
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnSalesInvoicesDetails.today}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Today##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnSalesInvoicesDetails.yesterday}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.Yesterday##</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnSalesInvoicesDetails.week}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This week##</p>
+                    </div>
+                  </div>
+                  <div class="col-6 wedgitDetail">
+                    <div class="wedgitDetailNumber">
+                      <p>{{returnSalesInvoicesDetails.month}}</p>
+                    </div>
+                    <div class="wedgitDetailText">
+                      <p>##word.This month##</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wedgitButton">
+              <a href="/returnSalesInvoices">
                 <p>##word.More details##</p>
               </a>
             </div>
@@ -506,9 +641,13 @@
           </div>
         </div>
         <div x-import="theme1/popup.html"></div>
+        <script src="/x-js/charts.js?v=##site.options.version##"></script>
       </div>
     </main>
-
+ <!--  <div class="row">
+          <div class="col6"><div class="chart-area" id="chart1"></div></div>
+              <div class="col6"><div class="chart-area"  id="chart2"></div></div>
+        </div> -->
     <div x-import="theme1/footer.html"></div>
     <script x-import="theme1/index.js"></script>
 

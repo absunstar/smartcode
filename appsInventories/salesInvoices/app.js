@@ -919,6 +919,7 @@ module.exports = function init(site) {
       $gte: d1,
       $lt: d2,
     };
+    where['approved'] = true;
     let select = { id: 1, code: 1, date: 1 };
 
     app.all({ where, select }, (err, docs) => {

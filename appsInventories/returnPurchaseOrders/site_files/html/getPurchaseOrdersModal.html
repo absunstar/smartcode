@@ -35,7 +35,6 @@
                                 <th>##word.Vendor##</th>
                                 <th>##word.Date##</th>
                                 <th>##word.Store##</th>
-                                <th>##word.Payment Type##</th>
                                 <th class="not-print">##word.Actions##</th>
                             </tr>
                             <tr ng-repeat="bill in returnPurchaseOrdersList">
@@ -45,7 +44,6 @@
                                 <td class="center">{{bill.date|date:'dd/MM/yyyy'}} - {{bill.date|date:'hh:mm:ss a'}}
                                 </td>
                                 <td class="center">{{bill.store.name##session.lang##}}</td>
-                                <td class="center">{{bill.paymentType.name##session.lang##}}</td>
 
                                 <td class="center">
                                     <i-button type="push" ng-click="addToItemsList(bill)"> </i-button>
