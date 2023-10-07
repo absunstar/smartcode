@@ -250,8 +250,8 @@ module.exports = function init(site) {
             _data.addUserInfo = req.getUserFinger();
 
             if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
-              if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet) && _data.paymentList.length == 1) {
-                response.error = 'Must Paid By Customer greater than or equal to ';
+              if (site.toNumber(_data.paymentList[0].paidByCustomer) < site.toNumber(_data.totalNet) && _data.paymentList.length == 1) {
+                response.error = 'Must Paid By Customer greater than or equal to total Net';
                 res.json(response);
                 return;
               }
@@ -777,8 +777,8 @@ module.exports = function init(site) {
           //   res.json(response);
           //   return;
           // }
-          if (site.toNumber(_data.paidByCustomer) < site.toNumber(_data.totalNet) && _data.paymentList.length == 1) {
-            response.error = 'Must Paid By Customer greater than or equal to ';
+          if (site.toNumber(_data.paymentList[0].paidByCustomer) < site.toNumber(_data.totalNet) && _data.paymentList.length == 1) {
+            response.error = 'Must Paid By Customer greater than or equal to total Net';
             res.json(response);
             return;
           }

@@ -265,9 +265,8 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   };
 
   $scope.cancelOrder = function (_item) {
-    if (!_item.id) {
-      $scope.newOrder();
-    } else if (!_item.approved) {
+    $scope.newOrder();
+    if (!_item.approved) {
       $scope.delete(_item);
     } else {
       $scope.error = 'The order cannot be cancelled';
@@ -469,6 +468,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   };
 
   $scope.addToItemsList = function (orderItem) {
+    $scope.error = '';
     $scope.itemsError = '';
     for (let i = 0; i < orderItem.unitsList.length; i++) {
       orderItem.unitsList[i] = { ...orderItem.unitsList[i], ...orderItem.unitsList[i].unit };
