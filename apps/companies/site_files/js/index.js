@@ -29,6 +29,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
 
   $scope.addCompany = function () {
     if ($scope.busy) {
+      $scope.error = 'App Busy';
       return;
     }
 
@@ -51,7 +52,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
           site.hideModal('#companyManageModal');
           $scope.list.unshift(response.data.doc);
           $scope.count += 1;
-          $scope.busy = true;
+          $scope.busy = false;
         } else {
           $scope.error = response.data.error;
           $scope.busy = false;
