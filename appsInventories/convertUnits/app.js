@@ -233,6 +233,8 @@ module.exports = function init(site) {
           store: _data.store,
           items: _data.itemsList,
         };
+        _data.approved = true;
+        _data.approvedDate = new Date();
 
         let errBatchList = [];
         let errToBatchList = [];

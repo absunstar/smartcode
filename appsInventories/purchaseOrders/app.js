@@ -234,6 +234,14 @@ module.exports = function init(site) {
           screen: app.name,
           date: new Date(),
         };
+        let setting = site.getCompanySetting(req);
+        if(_data.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores && setting.storesSetting.autoApprovePurchases){
+          if (!_data.safe || !_data.safe.id) {
+            response.error = 'Must Select Safe';
+            res.json(response);
+            return;
+          }
+        }
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
           if (callbackErrorBatches.errBatchList.length > 0) {

@@ -59,7 +59,11 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          $scope.list.unshift(response.data.doc);
+          if ($scope.setting.storesSetting.autoApprovedConvertUnits) {
+            $scope.approve(response.data.doc, 'auto');
+          } else {
+            $scope.list.unshift(response.data.doc);
+          }
         } else {
           $scope.error = response.data.error;
           if (response.data.error && response.data.error.like('*Must Enter Code*')) {
@@ -521,7 +525,7 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
     let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
     if (index === -1) {
       batch.currentCount = batch.count;
-      item.batchesList.unshift({...batch,count : 1});
+      item.batchesList.unshift({ ...batch, count: 1 });
       item.$batchCount += 1;
       $scope.addBatch = 'Added successfully';
       $timeout(() => {
@@ -582,7 +586,7 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
     }
   };
 
-  $scope.approve = function (_item) {
+  $scope.approve = function (_item, type) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
@@ -593,8 +597,14 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
       $scope.error = '##word.Must Enter Items Data##';
       return success;
     }
-    _item.approved = true;
-    _item.approvedDate = new Date();
+    if (type == 'auto') {
+      _item.itemsList.forEach((element) => {
+        element.approved = true;
+      });
+    } else if (_item.itemsList.some((itm) => !itm.approved)) {
+      $scope.error = '##word.Must Approve All Items##';
+      return;
+    }
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -604,11 +614,15 @@ app.controller('convertUnits', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal($scope.modalID);
-          site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
-          if (index !== -1) {
-            $scope.list[index] = response.data.result.doc;
+          if (type == 'auto') {
+            $scope.list.unshift(response.data.result.doc);
+          } else {
+            site.resetValidated($scope.modalID);
+            site.hideModal($scope.modalID);
+            let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+            if (index !== -1) {
+              $scope.list[index] = response.data.result.doc;
+            }
           }
         } else {
           $scope.error = response.data.error;

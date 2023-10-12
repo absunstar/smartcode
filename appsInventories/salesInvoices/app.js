@@ -170,6 +170,8 @@ module.exports = function init(site) {
           _data['approved'] = _data['approved'] || false;
         } else if (_data.orderScreen) {
           _data['approved'] = _data['approved'] || false;
+        } else if(storesSetting.autoApproveSales) {
+          _data['approved'] = true;
         } else {
           _data['approved'] = true;
         }

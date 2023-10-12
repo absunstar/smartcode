@@ -69,7 +69,6 @@
                         </div>
 
                         <div class="row">
-     
                           <i-list
                             ng-search="item.printerProgram.$labelPrinter"
                             class="col3"
@@ -448,6 +447,18 @@
                     </div>
                     <div class="row">
                       <i-checkbox ng-model="item.storesSetting.workFifo" class="col3" label="##word.Sale By Fifo##"></i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.autoApproveSales" class="col3" label="##word.Auto Approve Sales##"></i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.autoApprovePurchases" class="col3" label="##word.Auto Approve Purchase Order##"></i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.autoApprovedamage" class="col3" label="##word.Auto Approve Damage##"></i-checkbox>
+                    </div>
+                    <div class="row">
+                      <i-checkbox ng-model="item.storesSetting.autoApprovedConvertUnits" class="col3" label="##word.Auto Approve Convert Units##"></i-checkbox>
                     </div>
                     <!--   <div class="row">
                                 <i-checkbox ng-model="item.storesSetting.taxesAppearingInInvoices" class="col3" label="##word.Taxes appearing in invoices##"></i-checkbox>
