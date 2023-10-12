@@ -86,6 +86,12 @@
   {
     "category": "accounting",
     "feature": "public",
+    "id": "dailyCashiers",
+    "name": "Daily Cashiers"
+  },
+  {
+    "category": "accounting",
+    "feature": "public",
     "id": "transferSafes",
     "name": "Transfer Safes"
   },

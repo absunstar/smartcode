@@ -79,6 +79,13 @@
                   <p>##word.Orders Screen##</p>
                 </a>
               </li>
+
+              <li id="dailyCashiers" x-data="setting.showDailyCashiers" x-permissions="dailyCashiersUi || dailyCashiersManage">
+                <a class="menuTag" href="/dailyCashiers">
+                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
+                  <p>##word.Daily Cashiers##</p>
+                </a>
+              </li>
               <li id="Customers" x-data="setting.showCustomers" x-permissions="customersUi || customersManage">
                 <a class="menuTag" href="/customers">
                   <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
@@ -181,6 +188,12 @@
                 <a class="menuTag" href="/ordersScreen">
                   <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
                   <p>##word.Orders Screen##</p>
+                </a>
+              </li>
+              <li id="dailyCashiers" x-data="setting.showDailyCashiers" x-permissions="dailyCashiersUi || dailyCashiersManage">
+                <a class="menuTag" href="/dailyCashiers">
+                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
+                  <p>##word.Daily Cashiers##</p>
                 </a>
               </li>
               <li id="SalesInvoicseForCustomers" x-data="setting.showSalesInvoices" x-permissions="salesInvoicesUi || salesInvoicesManage">
@@ -289,6 +302,12 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+              <li id="dailyCashiers" x-data="setting.showDailyCashiers" x-permissions="dailyCashiersUi || dailyCashiersManage">
+                <a class="menuTag" href="/dailyCashiers">
+                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
+                  <p>##word.Daily Cashiers##</p>
+                </a>
+              </li>
               <li id="incomeLists" x-data="setting.showIncomeList" x-permissions="incomeListUi || incomeListManage">
                 <a class="menuTag" href="/incomeList">
                   <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
@@ -422,6 +441,12 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+              <li id="ordersScreen" x-data="setting.showOrdersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
+                <a class="menuTag" href="/ordersScreen">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Orders Screen##</p>
+                </a>
+              </li>
               <li id="SalesInvoicseForCustomers" x-data="setting.showSalesInvoices" x-permissions="salesInvoicesUi || salesInvoicesManage">
                 <a class="menuTag" href="/salesInvoices">
                   <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
@@ -434,7 +459,7 @@
                   <p>##word.Sales Invoicse For Companies##</p>
                 </a>
               </li>
-              <li id="SalesInvoicseForPatients" x-data="setting.showHospital"  x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage">
+              <li id="SalesInvoicseForPatients" x-data="setting.showHospital" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage">
                 <a class="menuTag" href="/salesPatientsInvoices">
                   <img src="/theme1/images/inventory/sales Patients Invoices.png" width="45" height="45" />
                   <p>##word.Sales Invoicse For Patients##</p>
@@ -580,7 +605,7 @@
           </a>
           <div class="submenu hideSection">
             <ul>
-              <li id="Attendance"  x-data="setting.showAttendance" x-permissions="attendanceUi || attendanceManage">
+              <li id="Attendance" x-data="setting.showAttendance" x-permissions="attendanceUi || attendanceManage">
                 <a class="menuTag" href="/attendance">
                   <img src="/theme1/images/hr/Attendance.png" width="45" height="45" />
                   <p>##word.Attendance##</p>
@@ -998,7 +1023,7 @@
                   <p>##word.Purchase Vat##</p>
                 </a>
               </li>
-              
+
               <li id="dailyCashByDates" x-data="setting.showDailyCashByDates" x-permissions="dailyCashByDatesUi || dailyCashByDatesManage">
                 <a class="menuTag" href="/dailyCashByDates">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
@@ -1083,13 +1108,21 @@
                   <p>##word.Rreport Sales Invoices For Companies##</p>
                 </a>
               </li>
-              <li id="reportReturnSalesInvoicesForCustomer" x-data="setting.showReportReturnSalesInvoicesForCustomer" x-permissions="reportReturnSalesInvoicesForCustomerUi || reportReturnSalesInvoicesForCustomerManage">
+              <li
+                id="reportReturnSalesInvoicesForCustomer"
+                x-data="setting.showReportReturnSalesInvoicesForCustomer"
+                x-permissions="reportReturnSalesInvoicesForCustomerUi || reportReturnSalesInvoicesForCustomerManage"
+              >
                 <a class="menuTag" href="/reportReturnSalesInvoicesForCustomer">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Rreport Return Sales Invoices For Customer##</p>
                 </a>
               </li>
-              <li id="reportReturnSalesInvoicesToStore" x-data="setting.showReportReturnSalesInvoicesToStore" x-permissions="reportReturnSalesInvoicesToStoreUi || reportReturnSalesInvoicesToStoreManage">
+              <li
+                id="reportReturnSalesInvoicesToStore"
+                x-data="setting.showReportReturnSalesInvoicesToStore"
+                x-permissions="reportReturnSalesInvoicesToStoreUi || reportReturnSalesInvoicesToStoreManage"
+              >
                 <a class="menuTag" href="/reportReturnSalesInvoicesToStore">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Rreport Return Sales Invoices To Store##</p>
@@ -1107,13 +1140,21 @@
                   <p>##word.Rreport Approved Purchase Requests##</p>
                 </a>
               </li>
-              <li id="reportNotApprovedPurchaseRequests" x-data="setting.showReportNotApprovedPurchaseRequests" x-permissions="reportNotApprovedPurchaseRequestsUi || reportNotApprovedPurchaseRequestsManage">
+              <li
+                id="reportNotApprovedPurchaseRequests"
+                x-data="setting.showReportNotApprovedPurchaseRequests"
+                x-permissions="reportNotApprovedPurchaseRequestsUi || reportNotApprovedPurchaseRequestsManage"
+              >
                 <a class="menuTag" href="/reportNotApprovedPurchaseRequests">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Rreport Not Approved Purchase Requests##</p>
                 </a>
               </li>
-              <li id="reportHasTransactionPurchaseRequests" x-data="setting.showReportHasTransactionPurchaseRequests" x-permissions="reportHasTransactionPurchaseRequestsUi || reportHasTransactionPurchaseRequestsManage">
+              <li
+                id="reportHasTransactionPurchaseRequests"
+                x-data="setting.showReportHasTransactionPurchaseRequests"
+                x-permissions="reportHasTransactionPurchaseRequestsUi || reportHasTransactionPurchaseRequestsManage"
+              >
                 <a class="menuTag" href="/reportHasTransactionPurchaseRequests">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Rreport Has Transaction Purchase Requests##</p>
