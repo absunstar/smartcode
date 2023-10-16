@@ -104,9 +104,9 @@ app.controller('company_register', function ($scope, $http) {
           $scope.error = response.data.error;
           if (response.data.error) {
             if (response.data.error.like('*ername must be typed correctly*')) {
-              $scope.error = '##word.err_username_contain##';
+              $scope.error = '##word.Username must be typed correctly##';
             } else if (response.data.error.like('*User Is Exist*')) {
-              $scope.error = '##word.user_exists##';
+              $scope.error = '##word.User Exists##';
             }
           }
         }

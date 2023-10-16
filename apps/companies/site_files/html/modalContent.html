@@ -206,7 +206,7 @@
           <div class="row">
             <i-list class="col4" label="##word.Bank Name##" ng-model="bank.bankName" items="bankList" display="name" ng-search="_search.$banNameSearch"> </i-list>
 
-            <i-control class="col4" label="##word.Bank_accoun Number##" ng-model="bank.accountNumber"></i-control>
+            <i-control class="col4" label="##word.Bank Accoun Number##" ng-model="bank.accountNumber"></i-control>
           </div>
         </fieldset>
       </div> -->
@@ -239,7 +239,6 @@
                 <i-checkbox label="##word.Show## ##word.Taxes Types##" ng-model="company.showTaxesTypes"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Safes Adjusting##" ng-model="company.showSafesAdjusting"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Safes Transactions##" ng-model="company.showSafesTransactions"></i-checkbox>
-                <i-checkbox label="##word.Show## ##word.Daily Cashiers##" ng-model="company.showDailyCashiers"></i-checkbox>
               </div>
             </fieldset>
             <fieldset>
@@ -318,6 +317,7 @@
                 <i-checkbox label="##word.Show## ##word.Reports##" ng-change="showReportsScreens()" ng-model="company.showReports"></i-checkbox>
               </legend>
               <div class="row" ng-if="company.showReports">
+                <i-checkbox label="##word.Show## ##word.Daily Cashiers##" ng-model="company.showDailyCashiers"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Total Vat##" ng-model="company.showTotalVat"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Sales Vat##" ng-model="company.showSalesVat"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Purchase Vat##" ng-model="company.showPurchaseVat"></i-checkbox>
@@ -398,7 +398,6 @@
                 <i-checkbox label="##word.Show## ##word.Employees##" ng-model="company.showEmployees"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Deliverers##" ng-model="company.showDeliverers"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Cashiers##" ng-model="company.showCashers"></i-checkbox>
-                <i-checkbox label="##word.Show## ##word.Daily Cashiers##" ng-model="company.showDailyCashiers"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Delivery Manage##" ng-model="company.showDeliveryManage"></i-checkbox>
               </div>
             </fieldset>
@@ -418,7 +417,6 @@
                 <i-checkbox label="##word.Show## ##word.Employees##" ng-model="company.showEmployees"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Deliverers##" ng-model="company.showDeliverers"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Cashers##" ng-model="company.showCashers"></i-checkbox>
-                <i-checkbox label="##word.Show## ##word.Daily Cashiers##" ng-model="company.showDailyCashiers"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Delivery Manage##" ng-model="company.showDeliveryManage"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Kitchens##" ng-model="company.showKitchens"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Tables##" ng-model="company.showTables"></i-checkbox>
@@ -441,7 +439,7 @@
           <legend>##word.Login Information##</legend>
           <div class="row">
             <i-control help-id="" v="r e" class="col4" label="##word.User Name##" ng-model="company.username"> </i-control>
-            <i-control help-id="" v="r" class="col4" label="##word.password##" ng-model="company.password"> </i-control>
+            <i-control help-id="" v="r" class="col4" label="##word.Password##" ng-model="company.password"> </i-control>
           </div>
           <!-- <div class="row">
             <i ng-show="company.host" class="grayDark bold">{{company.username}}{{company.host}}</i>

@@ -1,9 +1,0 @@
-[
-  {
-    "moduleName": "accounting",
-    "name": "dailyCashiersAdmin",
-    "En": "Daily Cashiers Admin",
-    "Ar": "إدارة يوميات الصرافين",
-    "permissions": ["dailyCashiersManage"]
-  } 
-]

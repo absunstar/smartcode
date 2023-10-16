@@ -403,6 +403,101 @@ module.exports = function init(site) {
     });
   });
 
+  site.post({ name: `/api/${app.name}/dailyCashiers`, public: true }, (req, res) => {
+    let where = req.body.where || {};
+    let search = req.body.search || '';
+    let limit = req.body.limit || 100000;
+    let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1, vendor: 1, customer: 1, paymentType: 1, voucherType: 1, safe: 1, total: 1 };
+
+    where['company.id'] = site.getCompany(req).id;
+
+    if (where['safe']) {
+      where['safe.id'] = where['safe.id'];
+      delete where['safe'];
+    }
+
+    if (where['employee']) {
+      where['addUserInfo.id'] = where['employee.id'];
+      delete where['employee'];
+    }
+
+    if (where && where.fromDate && where.toDate) {
+      let d1 = site.toDate(where.fromDate);
+      let d2 = site.toDate(where.toDate);
+      d2.setDate(d2.getDate() + 1);
+      where.date = {
+        $gte: d1,
+        $lte: d2,
+      };
+      delete where.fromDate;
+      delete where.toDate;
+    }
+
+    app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
+      if (!err && docs) {
+        let receiptVouchers = {
+          returnPurchaseList: [],
+          salesList: [],
+          cashSales: 0,
+          creditCardSales: 0,
+          chequeSales: 0,
+          spanCardSales: 0,
+          bankDepositSales: 0,
+          totalSales: 0,
+          cashReturnPurchase: 0,
+          creditCardReturnPurchase: 0,
+          chequeReturnPurchase: 0,
+          spanCardReturnPurchase: 0,
+          bankDepositReturnPurchase: 0,
+          totalReturnPurchase: 0,
+        };
+        for (let i = 0; i < docs.length; i++) {
+          if (docs[i].voucherType.id == 'generalSalesInvoice' || docs[i].voucherType.id == 'salesInvoice') {
+            receiptVouchers.salesList.push(docs[i]);
+            if (docs[i].paymentType) {
+              if (docs[i].paymentType.id == 1) {
+                receiptVouchers.cashSales += docs[i].total;
+              } else if (docs[i].paymentType.id == 2) {
+                receiptVouchers.chequeSales += docs[i].total;
+              } else if (docs[i].paymentType.id == 3) {
+                receiptVouchers.creditCardSales += docs[i].total;
+              } else if (docs[i].paymentType.id == 4) {
+                receiptVouchers.spanCardSales += docs[i].total;
+              } else if (docs[i].paymentType.id == 5) {
+                receiptVouchers.bankDepositSales += docs[i].total;
+              }
+            }
+            receiptVouchers.totalSales += docs[i].total;
+          } else if (docs[i].voucherType.id == 'purchaseReturn') {
+            receiptVouchers.returnPurchaseList.push(docs[i]);
+            if (docs[i].paymentType) {
+              if (docs[i].paymentType.id == 1) {
+                receiptVouchers.cashReturnPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 2) {
+                receiptVouchers.chequeReturnPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 3) {
+                receiptVouchers.creditCardReturnPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 4) {
+                receiptVouchers.spanCardReturnPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 5) {
+                receiptVouchers.bankDepositReturnPurchase += docs[i].total;
+              }
+            }
+            receiptVouchers.totalReturnPurchase += docs[i].total;
+          }
+      
+        }
+        res.json({
+          done: true,
+          receiptVouchers,
+        });
+      } else {
+        response.error = err ? err.mesage : 'Data Not Found';
+        res.json(response);
+      }
+    });
+  });
+
   site.addReceiptVouchers = function (obj, callback) {
     let numObj = {
       company: obj.company,

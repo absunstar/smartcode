@@ -321,11 +321,11 @@ app.controller('expenseVouchers', function ($scope, $http, $timeout) {
         if (response.data.done && response.data.list.length > 0) {
           $scope.safesList = response.data.list;
           if (paymentType.id == 1 && $scope.setting.accountsSetting.safeCash) {
-            $scope.item.paymentType = $scope.safesList.find((_t) => {
+            $scope.item.safe = $scope.safesList.find((_t) => {
               return _t.id == $scope.setting.accountsSetting.safeCash.id;
             });
           } else if (paymentType.id == 2 && $scope.setting.accountsSetting.safeBank) {
-            $scope.item.paymentType = $scope.safesList.find((_t) => {
+            $scope.item.safe = $scope.safesList.find((_t) => {
               return _t.id == $scope.setting.accountsSetting.safeBank.id;
             });
           }

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "dailyCashiersAdmin",
+        "En": "Daily Cashiers Report",
+        "Ar": "تقرير يومية الصرافين",
+        "permissions": ["dailyCashiersManage"]
+    }
+]

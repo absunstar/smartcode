@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "dailyCashiers", "name": "dailyCashiersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "dailyCashiers", "name": "dailyCashiersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "dailyCashiers", "name": "dailyCashiersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "dailyCashiers", "name": "dailyCashiersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "dailyCashiers", "name": "dailyCashiersUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

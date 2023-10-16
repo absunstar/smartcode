@@ -219,7 +219,7 @@ module.exports = function init(site) {
               objJournal.user = doc.customer;
             } else if (doc.patient && doc.patient.id) {
               objJournal.user = doc.patient;
-            }else if (doc.vendor && doc.vendor.id) {
+            } else if (doc.vendor && doc.vendor.id) {
               objJournal.user = doc.vendor;
             }
             objJournal.nameAr = 'سند صرف' + ' ' + doc.voucherType.nameAr + ' (' + doc.code + ' )';
@@ -327,12 +327,12 @@ module.exports = function init(site) {
       let where = req.body.where || {};
       let search = req.body.search || '';
       let limit = req.body.limit || 100000;
-      let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1,vendor:1,paymentType:1, voucherType: 1, itemsList: 1, safe: 1, total: 1 };
-  
+      let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1, vendor: 1, paymentType: 1, voucherType: 1, itemsList: 1, safe: 1, total: 1 };
+
       where['company.id'] = site.getCompany(req).id;
       where.$or = [{ 'voucherType.id': 'generalPurchaseInvoice' }, { 'voucherType.id': 'purchaseInvoice' }, { 'voucherType.id': 'salesReturn' }];
       where['hasReturnStore'] = { $ne: true };
-  
+
       if (where && where.fromDate && where.toDate) {
         let d1 = site.toDate(where.fromDate);
         let d2 = site.toDate(where.toDate);
@@ -344,7 +344,7 @@ module.exports = function init(site) {
         delete where.fromDate;
         delete where.toDate;
       }
-  
+
       app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
         if (!err && docs) {
           let totals = { totalNet: 0, totalVat: 0, total: 0 };
@@ -378,6 +378,101 @@ module.exports = function init(site) {
       });
     });
   }
+
+  site.post({ name: `/api/${app.name}/dailyCashiers`, public: true }, (req, res) => {
+    let where = req.body.where || {};
+    let search = req.body.search || '';
+    let limit = req.body.limit || 100000;
+    let select = req.body.select || { id: 1, invoiceCode: 1, code: 1, date: 1, vendor: 1, customer: 1, paymentType: 1, voucherType: 1, safe: 1, total: 1 };
+
+    where['company.id'] = site.getCompany(req).id;
+
+    if (where['safe']) {
+      where['safe.id'] = where['safe.id'];
+      delete where['safe'];
+    }
+
+    if (where['employee']) {
+      where['addUserInfo.id'] = where['employee.id'];
+      delete where['employee'];
+    }
+
+    if (where && where.fromDate && where.toDate) {
+      let d1 = site.toDate(where.fromDate);
+      let d2 = site.toDate(where.toDate);
+      d2.setDate(d2.getDate() + 1);
+      where.date = {
+        $gte: d1,
+        $lte: d2,
+      };
+      delete where.fromDate;
+      delete where.toDate;
+    }
+
+    app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
+      if (!err && docs) {
+        let expenseVouchers = {
+          returnSalseList: [],
+          purchaseList: [],
+          cashPurchase: 0,
+          creditCardPurchase: 0,
+          chequePurchase: 0,
+          spanCardPurchase: 0,
+          bankDepositPurchase: 0,
+          totalPurchase: 0,
+          cashReturnPurchase: 0,
+          creditCardReturnSalse: 0,
+          chequeReturnSalse: 0,
+          spanCardReturnSalse: 0,
+          bankDepositReturnSalse: 0,
+          totalReturnSalse: 0,
+        };
+        for (let i = 0; i < docs.length; i++) {
+          if (docs[i].voucherType.id == 'generalPurchaseInvoice' || docs[i].voucherType.id == 'purchaseInvoice') {
+            expenseVouchers.purchaseList.push(docs[i]);
+            if (docs[i].paymentType) {
+              if (docs[i].paymentType.id == 1) {
+                expenseVouchers.cashPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 2) {
+                expenseVouchers.chequePurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 3) {
+                expenseVouchers.creditCardPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 4) {
+                expenseVouchers.spanCardPurchase += docs[i].total;
+              } else if (docs[i].paymentType.id == 5) {
+                expenseVouchers.bankDepositPurchase += docs[i].total;
+              }
+            }
+            expenseVouchers.totalPurchase += docs[i].total;
+          } else if (docs[i].voucherType.id == 'purchaseReturn') {
+            expenseVouchers.returnSalseList.push(docs[i]);
+            if (docs[i].paymentType) {
+              if (docs[i].paymentType.id == 1) {
+                expenseVouchers.cashReturnSalse += docs[i].total;
+              } else if (docs[i].paymentType.id == 2) {
+                expenseVouchers.chequeReturnSalse += docs[i].total;
+              } else if (docs[i].paymentType.id == 3) {
+                expenseVouchers.creditCardReturnSalse += docs[i].total;
+              } else if (docs[i].paymentType.id == 4) {
+                expenseVouchers.spanCardReturnSalse += docs[i].total;
+              } else if (docs[i].paymentType.id == 5) {
+                expenseVouchers.bankDepositReturnSalse += docs[i].total;
+              }
+            }
+            expenseVouchers.totalReturnSalse += docs[i].total;
+          }
+      
+        }
+        res.json({
+          done: true,
+          expenseVouchers,
+        });
+      } else {
+        response.error = err ? err.mesage : 'Data Not Found';
+        res.json(response);
+      }
+    });
+  });
 
   site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ['login'] } }, (req, res) => {
     let response = {

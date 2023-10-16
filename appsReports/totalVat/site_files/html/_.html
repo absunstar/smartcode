@@ -78,7 +78,10 @@
               <td class="center">{{c.invoiceCode|| c.code}}</td>
               <td class="center">{{c.date |date:"dd - MM - yyyy"}}</td>
               <td class="center">{{c.paymentType.name##session.lang##}}</td>
-              <td class="center">{{c.customer.name##session.lang## || c.vendor.name##session.lang##}}</td>
+              <td class="center">{{c.customer.name##session.lang## || c.vendor.name##session.lang##}}
+                <p>{{c.customer.taxIdentificationNumber || c.vendor.name##session.lang##}}</p>
+
+              </td>
               <td class="center">{{c.$totalNetByVat | xmoney2}} <span class="currency">##word.$##</span></td>
               <td class="center">{{c.$totalVatByVat | xmoney2}} <span class="currency">##word.$##</span></td>
               <td class="center">{{c.$totalByVat | xmoney2}} <span class="currency">##word.$##</span></td>

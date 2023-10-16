@@ -58,9 +58,9 @@ app.controller('companies', function ($scope, $http, $timeout) {
           $scope.busy = false;
           /* if (response.data.error) {
                         if (response.data.error.like('*ername must be typed correctly*')) {
-                            $scope.error = '##word.err_username_contain##';
+                            $scope.error = '##word.Username must be typed correctly##';
                         } else if (response.data.error.like('*User Is Exist*')) {
-                            $scope.error = '##word.user_exists##';
+                            $scope.error = '##word.User Exists##';
                         }
                     } */
         }
@@ -813,6 +813,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.showReportsScreens = function () {
+    $scope.company.showDailyCashiers = $scope.company.showAccounting;
     $scope.company.showTotalVat = $scope.company.showReports;
     $scope.company.showSalesVat = $scope.company.showReports;
     $scope.company.showPurchaseVat = $scope.company.showReports;
@@ -884,7 +885,6 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showDeliverers = $scope.company.showPos;
     $scope.company.showCashers = $scope.company.showPos;
     $scope.company.showDeliveryManage = $scope.company.showPos;
-    $scope.company.showDailyCashiers = $scope.company.showPos;
   };
 
   $scope.showRestaurantScreens = function () {
@@ -903,7 +903,6 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showTables = $scope.company.showRestaurant;
     $scope.company.showTablesGroups = $scope.company.showRestaurant;
     $scope.company.showItemsExtras = $scope.company.showRestaurant;
-    $scope.company.showDailyCashiers = $scope.company.showRestaurant;
   };
 
   $scope.showHrScreens = function () {
@@ -981,7 +980,6 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showTaxesTypes = $scope.company.showAccounting;
     $scope.company.showSafesAdjusting = $scope.company.showAccounting;
     $scope.company.showSafesTransactions = $scope.company.showAccounting;
-    $scope.company.showDailyCashiers = $scope.company.showAccounting;
   };
   $scope.getCountriesList();
   $scope.getcompanyList();

@@ -1,0 +1,270 @@
+<div ng-controller="dailyCashiers" class="loaded">
+  <div class="row" x-permissions="dailyCashiersUi || dailyCashiersManage">
+    <div x-import="dailyCashiers/modalSearch.html"></div>
+    <div class="row">
+      <i-datetime class="col6" label="##word.From Date##" ng-model="_search.fromDate"> </i-datetime>
+      <i-datetime class="col6" label="##word.To Date##" ng-model="_search.toDate"> </i-datetime>
+    </div>
+    <div class="row">
+      <i-list
+        label="##word.Employee##"
+        class="col4"
+        ng-model="_search.employee"
+        ng-change="getAll(_search)"
+        ng-get="getEmployees($search)"
+        display="fullName##session.lang##"
+        items="employeesList"
+      ></i-list>
+      <i-list class="col4" ng-model="_search.safe" label="##word.Safe##" display="name##session.lang##" items="safesList"></i-list>
+
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.Search##" ng-click="searchAll(_search)"></i-button>
+      </div>
+    </div>
+
+    <div class="row" ng-show="_search.employee.id">
+      <div class="cart">
+        <div class="row">
+          <div class="col7">
+            <p class="bold">
+              <span class="darkGray">##word.Name English## : </span> {{_search.employee.nameEn}} ( <span class="blue">{{_search.employee.code}}</span> )
+              <img class="img-logo" ng-src="{{_search.employee.image.url}}" alt="" />
+            </p>
+          </div>
+          <div class="col5">
+            <p class="bold text-right"><span class="darkGray">الإسم بالعربي : </span> {{_search.employee.nameAr}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <fieldset class="col6">
+        <legend>##word.Sales Invoices##</legend>
+        <div class="row">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.Payment Type##</th>
+              <th>##word.Total##</th>
+              <th>##word.Actions##</th>
+            </tr>
+            <tr>
+              <td class="center">##word.Cash##</td>
+              <td class="center">{{receiptVouchers.cashSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Credit Card##</td>
+              <td class="center">{{receiptVouchers.creditCardSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Cheque##</td>
+              <td class="center">{{receiptVouchers.chequeSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Span Card##</td>
+              <td class="center">{{receiptVouchers.spanCardSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Bank Deposit##</td>
+              <td class="center">{{receiptVouchers.bankDepositSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Total##</td>
+              <td class="center">{{receiptVouchers.totalSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+          </table>
+        </div>
+      </fieldset>
+      <fieldset class="col6">
+        <legend>##word.Return Sales##</legend>
+        <div class="row">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.Payment Type##</th>
+              <th>##word.Total##</th>
+              <th>##word.Actions##</th>
+            </tr>
+            <tr>
+              <td class="center">##word.Cash##</td>
+              <td class="center">{{expenseVouchers.cashReturnSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Credit Card##</td>
+              <td class="center">{{expenseVouchers.creditCardReturnSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Cheque##</td>
+              <td class="center">{{expenseVouchers.chequeReturnSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Span Card##</td>
+              <td class="center">{{expenseVouchers.spanCardReturnSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Bank Deposit##</td>
+              <td class="center">{{expenseVouchers.bankDepositReturnSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Total##</td>
+              <td class="center">{{expenseVouchers.totalReturnSales || 0}}</td>
+              <td class="center"></td>
+            </tr>
+          </table>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="row">
+      <fieldset class="col6">
+        <legend>##word.Purchase Invoices##</legend>
+        <div class="row">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.Payment Type##</th>
+              <th>##word.Total##</th>
+              <th>##word.Actions##</th>
+            </tr>
+            <tr>
+              <td class="center">##word.Cash##</td>
+              <td class="center">{{expenseVouchers.cashPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Credit Card##</td>
+              <td class="center">{{expenseVouchers.creditCardPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Cheque##</td>
+              <td class="center">{{expenseVouchers.chequePurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Span Card##</td>
+              <td class="center">{{expenseVouchers.spanCardPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Bank Deposit##</td>
+              <td class="center">{{expenseVouchers.bankDepositPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Total##</td>
+              <td class="center">{{expenseVouchers.totalPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+          </table>
+        </div>
+      </fieldset>
+      <fieldset class="col6">
+        <legend>##word.Return Purchase##</legend>
+        <div class="row">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.Payment Type##</th>
+              <th>##word.Total##</th>
+              <th>##word.Actions##</th>
+            </tr>
+            <tr>
+              <td class="center">##word.Cash##</td>
+              <td class="center">{{receiptVouchers.cashReturnPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Credit Card##</td>
+              <td class="center">{{receiptVouchers.creditCardReturnPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Cheque##</td>
+              <td class="center">{{receiptVouchers.chequeReturnPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Span Card##</td>
+              <td class="center">{{receiptVouchers.spanCardReturnPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Bank Deposit##</td>
+              <td class="center">{{receiptVouchers.bankDepositReturnPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+            <tr>
+              <td class="center">##word.Total##</td>
+              <td class="center">{{receiptVouchers.totalReturnPurchase || 0}}</td>
+              <td class="center"></td>
+            </tr>
+          </table>
+        </div>
+      </fieldset>
+    </div>
+    <!--  <div class="row" id="dailyCashiersReport">
+      <div class="row">
+        <fieldset>
+          <legend>##word.Totals##</legend>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total Net## : {{totals.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total VAT## : {{totals.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">##word.Total## : {{totals.total | xmoney2}} <span class="currency">##word.$##</span></p>
+            </fieldset>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table hover bold">
+            <tr>
+              <th>##word.S/N##</th>
+              <th>##word.Invoice No##</th>
+              <th>##word.Type##</th>
+              <th>##word.Date##</th>
+              <th>##word.Payment Type##</th>
+              <th>##word.Vendor##</th>
+              <th>##word.Net##</th>
+              <th>##word.Vat##</th>
+              <th>##word.Total##</th>
+            </tr>
+            <tr ng-repeat="c in list">
+              <td class="center">{{$index + 1}}</td>
+              <td class="center">{{c.invoiceCode|| c.code}}</td>
+              <td class="center">{{c.voucherType.name##session.lang##}}</td>
+              <td class="center">{{c.date |date:"dd - MM - yyyy"}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.paymentType.name##session.lang##}}</td>
+              <td class="center">{{c.vendor.name##session.lang##}}</td>
+              <td class="center">{{c.$totalNetByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.$totalVatByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+              <td class="center">{{c.$totalByVat | xmoney2}} <span class="currency">##word.$##</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div> -->
+
+    <i-button x-permissions="dailyCashiersPrint || dailyCashiersManage" type="print" label="##word.Print##" onclick="site.print('#dailyCashiersReport')"></i-button>
+    <i-button x-permissions="dailyCashiersExport || dailyCashiersManage" type="export" label="##word.Export to excel##" onclick="site.export('#dailyCashiersReport')"> </i-button>
+  </div>
+</div>
