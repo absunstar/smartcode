@@ -388,12 +388,12 @@ module.exports = function init(site) {
     where['company.id'] = site.getCompany(req).id;
 
     if (where['safe']) {
-      where['safe.id'] = where['safe.id'];
+      where['safe.id'] = where['safe'].id;
       delete where['safe'];
     }
 
     if (where['employee']) {
-      where['addUserInfo.id'] = where['employee.id'];
+      where['addUserInfo.id'] = where['employee'].id;
       delete where['employee'];
     }
 
@@ -408,7 +408,6 @@ module.exports = function init(site) {
       delete where.fromDate;
       delete where.toDate;
     }
-
     app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
       if (!err && docs) {
         let expenseVouchers = {
