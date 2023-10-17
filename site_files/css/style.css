@@ -129,7 +129,7 @@ hr.line {
   font-family: Wingdings;
   font-size: 26px;
   display: inline;
- /*  border: 2px solid black;
+  /*  border: 2px solid black;
   padding: 1px 4px 0 2px; */
 }
 .border-1 {
@@ -138,16 +138,14 @@ hr.line {
   border-radius: 5px;
 }
 
-
 .border-right {
   border-right: 2px solid black;
- border-radius: unset;
+  border-radius: unset;
 }
-
 
 .border-dashed {
   border: 2px black dashed;
- /*  margin: 2px !important; */
+  /*  margin: 2px !important; */
 }
 .blue-dark {
   color: #000654;
@@ -359,9 +357,9 @@ i-image[view] img {
 /* .table th {
   background-color: #03a9f4 !important;
 } */
-/* .tabs .tabs-content {
+.tabs .tabs-content {
   width: 100% !important;
-} */
+}
 
 .cart:hover {
   background: #69def6;
