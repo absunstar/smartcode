@@ -36,7 +36,7 @@
   <body>
     <div x-import="theme1/header.html"></div>
     <main>
-      <div ng-controller="mainHmis" class="mainscreen container loaded" id="main-layout">
+      <div ng-controller="mainHmis" class="mainscreen container loaded" id="main-layout" x-permissions="login">
         <div x-import="doctorAppointments/modal.html"></div>
         <div x-import="doctorAppointments/daysModal.html"></div>
       
