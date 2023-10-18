@@ -503,6 +503,17 @@ module.exports = function init(site) {
           });
         } else {
           where['company.id'] = site.getCompany(req).id;
+          if (where && where.fromDate && where.toDate) {
+            let d1 = site.toDate(where.fromDate);
+            let d2 = site.toDate(where.toDate);
+            d2.setDate(d2.getDate() + 1);
+            where.date = {
+              $gte: d1,
+              $lt: d2,
+            };
+            delete where.fromDate;
+            delete where.toDate;
+          }
           app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
             if (req.body.claims && docs) {
               let list = [];
@@ -922,6 +933,7 @@ module.exports = function init(site) {
       $lt: d2,
     };
     where['approved'] = true;
+    where['company.id'] = site.getCompany(req).id;
     let select = { id: 1, code: 1, date: 1 };
 
     app.all({ where, select }, (err, docs) => {

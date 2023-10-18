@@ -2,8 +2,8 @@
   <div class="border page-a4">
     <div class="row">
       <div class="row">
-        <div class="col-6">
-          <div class="row">
+        <div class="col-7">
+          <!-- <div class="row">
             <div class="col-5">
               <p class="black font-13" ng-show="item.customer.commercialCustomer || item.vendor.taxIdentificationNumber">Tax Invoice</p>
               <p class="black font-13" ng-show="!item.customer.commercialCustomer && !item.vendor.taxIdentificationNumber">Simplified Tax Invoice</p>
@@ -14,16 +14,37 @@
               <p class="black font-13 text-right" ng-show="!item.customer.commercialCustomer && !item.vendor.taxIdentificationNumber">فاتورة ضريبية مبسطة</p>
             </div>
             <hr class="line" />
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-5">
-              <p class="black font-13">{{sInvoice.voucherType.nameEn}}</p>
+              <p ng-show="item.$receipt" class="black font-13">Receipt Voucher No.</p>
+              <p ng-show="item.$expense" class="black font-13">Expense Voucher No.</p>
             </div>
             <div class="col-2">
               <p class="black bold font-13">({{item.code}})</p>
             </div>
             <div class="col-5">
-              <p class="black font-13 text-right">{{sInvoice.voucherType.nameAr}} رقم</p>
+              <p ng-show="item.$receipt" class="black font-13 text-right">سند قبض رقم</p>
+              <p ng-show="item.$expense" class="black font-13 text-right">سند صرف رقم</p>
+            </div>
+            <hr class="line" />
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <p class="black font-13">{{sInvoice.vendor.name##session.lang## || sInvoice.customer.name##session.lang##}}</p>
+            </div>
+            <div class="col-7">
+              <p class="black font-12 text-right" ng-show="item.$receipt">: إستلمنا من السيد/Received From M-s</p>
+              <p class="black font-12 text-right" ng-show="item.$expense">: إصرفوا إلى السيد/Pay To M-s</p>
+            </div>
+            <hr class="line" />
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p class="black font-13">{{sInvoice.voucherType.nameEn}}/{{sInvoice.voucherType.nameAr}}</p>
+            </div>
+            <div class="col-6">
+              <p class="black font-13 text-right">: وذلك مقابل/Being </p>
             </div>
             <hr class="line" />
           </div>
@@ -52,7 +73,7 @@
             <hr class="line" />
           </div>
         </div>
-        <div class="col-6 text-right" ng-show="invoiceLogo">
+        <div class="col-5 text-right" ng-show="invoiceLogo">
           <img class="logoPrint" ng-src="{{invoiceLogo}}" />
         </div>
       </div>
@@ -244,21 +265,21 @@
               </div>
               <hr class="line" />
               <div class="row">
-                <div class="col-4"><p class="font-12">Total VAT :</p></div>
-                <div class="col-4">
-                  <p class="bold black center font-12">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
-                </div>
-                <div class="col-4"><p class="font-12 right">: إجمالي الضريبة</p></div>
-              </div>
-              <hr class="line" />
-
-              <div class="row">
                 <div class="col-4"><p class="font-12">Total Before VAT :</p></div>
                 <div class="col-3">
                   <p class="bold black center font-12">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-5"><p class="font-12 right">: الإجمالي قبل الضريبة</p></div>
               </div>
+              <hr class="line" />
+              <div class="row">
+                <div class="col-4"><p class="font-12">Total VAT :</p></div>
+                <div class="col-4">
+                  <p class="bold black center font-12">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-12 right">: إجمالي الضريبة</p></div>
+              </div>
+
               <hr class="line" />
 
               <div class="row bg-lightGray">
@@ -312,7 +333,7 @@
             <p class="black">Name / الإسم</p>
             <p class="black">Signature / التوقيع</p>
           </div>
-         
+
           <div class="col-6 border-1" ng-show="item.vendor.id">
             <p class="font-12 black">Vendor / المورد</p>
             <p class="black">Name / الإسم</p>

@@ -336,7 +336,17 @@ module.exports = function init(site) {
           });
         } else {
           where['company.id'] = site.getCompany(req).id;
-
+          if (where && where.fromDate && where.toDate) {
+            let d1 = site.toDate(where.fromDate);
+            let d2 = site.toDate(where.toDate);
+            d2.setDate(d2.getDate() + 1);
+            where.date = {
+              $gte: d1,
+              $lt: d2,
+            };
+            delete where.fromDate;
+            delete where.toDate;
+          }
           app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
             res.json({
               done: true,
@@ -485,7 +495,6 @@ module.exports = function init(site) {
             }
             receiptVouchers.totalReturnPurchase += docs[i].total;
           }
-      
         }
         res.json({
           done: true,
@@ -565,6 +574,7 @@ module.exports = function init(site) {
     };
     let select = { id: 1, code: 1, date: 1 };
     where['voucherType.id'] = 'generalSalesInvoice';
+    where['company.id'] = site.getCompany(req).id;
     app.all({ where, select }, (err, docs) => {
       let obj = {
         today: 0,

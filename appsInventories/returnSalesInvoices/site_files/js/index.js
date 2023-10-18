@@ -33,6 +33,14 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     $scope.item = { ...$scope.structure, date: new Date() };
     $scope.search = { ...$scope.structure };
     site.showModal($scope.modalID);
+    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+      $scope.item.paymentType = $scope.paymentTypesList.find((_t) => {
+        return _t.id == $scope.setting.accountsSetting.paymentType.id;
+      });
+      if ($scope.item.paymentType) {
+        $scope.getSafes($scope.item);
+      }
+    }
     $scope.returnSalesInvoicesList = [];
   };
 
@@ -55,7 +63,11 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          $scope.list.unshift(response.data.doc);
+          if ($scope.setting.storesSetting.autoApprovedReturnSales) {
+            $scope.approve(response.data.doc, 'auto');
+          } else {
+            $scope.list.unshift(response.data.doc);
+          }
         } else {
           $scope.error = response.data.error;
           if (response.data.error && response.data.error.like('*Must Enter Code*')) {
@@ -69,7 +81,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.approve = function (_item) {
+  $scope.approve = function (_item,type) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
@@ -77,7 +89,6 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       return;
     }
 
-   
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -87,11 +98,15 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal($scope.modalID);
-          site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
-          if (index !== -1) {
-            $scope.list[index] = response.data.result.doc;
+          if (type == 'auto') {
+            $scope.list.unshift(response.data.result.doc);
+          } else {
+            site.resetValidated($scope.modalID);
+            site.hideModal($scope.modalID);
+            let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+            if (index !== -1) {
+              $scope.list[index] = response.data.result.doc;
+            }
           }
         } else {
           $scope.error = response.data.error;
@@ -168,8 +183,9 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.item = response.data.doc;
-          $scope.getSafes(response.data.doc.paymentType);
-
+          if ($scope.item.paymentType) {
+            $scope.getSafes($scope.item);
+          }
           if ($scope.setting.accountsSetting.currency) {
             site.strings['currency'] = {
               Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
@@ -315,12 +331,12 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
           phone: 1,
           socialEmail: 1,
           website: 1,
-          country:1,
-          gov:1,
-          city:1,
-          area:1,
-          address:1,
-          street:1,
+          country: 1,
+          gov: 1,
+          city: 1,
+          area: 1,
+          address: 1,
+          street: 1,
         },
         search: $search,
       },
@@ -371,7 +387,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
           insuranceClass: 1,
           expiryDate: 1,
           havisaNum: 1,
-          member:1,
+          member: 1,
         },
         search: $search,
       },
@@ -526,7 +542,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
           nameAr: 1,
           rasdUser: 1,
           rasdPass: 1,
-          linkWithRasd : 1,
+          linkWithRasd: 1,
         },
       },
     }).then(
@@ -656,7 +672,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
                 vatNumber: $scope.setting.taxNumber,
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.totalNet,
-                totalVat: $scope.thermal.totalVat,
+                totalVat: $scope.thermal.totalVat || 0,
               };
               if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
                 qrString.name = '##session.company.nameAr##';
@@ -670,7 +686,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
                   vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
-                  vat_total: qrString.totalVat.toString(),
+                  vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
                 },
                 (data) => {
                   site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });
@@ -786,7 +802,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
                 vat_number: qrString.vatNumber,
                 time: qrString.time,
                 total: qrString.total.toString(),
-                vat_total: qrString.totalVat.toString(),
+                vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
               },
               (data) => {
                 site.qrcode({ width: 140, height: 140, selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1], text: data.value });
@@ -850,7 +866,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       storeInvoiceId: _item.invoiceId,
       customer: _item.customer,
       invoiceCode: _item.code,
-      remainAmount : 0,
+      remainAmount: 0,
       remainPaid: _item.remainPaid,
       total: _item.remainPaid,
       voucherType: { id: 'salesReturn', nameEn: 'Sales Return', nameAr: 'مرتجع مبيعات' },
@@ -889,7 +905,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getSafes = function (paymentType) {
+  $scope.getSafes = function (obj) {
     $scope.busy = true;
     $scope.safesList = [];
     $http({
@@ -898,7 +914,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'paymentType.id': paymentType.id,
+          'paymentType.id': obj.paymentType.id,
         },
         select: {
           id: 1,
@@ -912,6 +928,19 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.safesList = response.data.list;
+          if (obj.paymentType.id == 1) {
+            if ($scope.setting.accountsSetting.safeCash) {
+              obj.safe = $scope.safesList.find((_t) => {
+                return _t.id == $scope.setting.accountsSetting.safeCash.id;
+              });
+            }
+          } else {
+            if ($scope.setting.accountsSetting.safeBank) {
+              obj.safe = $scope.safesList.find((_t) => {
+                return _t.id == $scope.setting.accountsSetting.safeBank.id;
+              });
+            }
+          }
         }
       },
       function (err) {
@@ -947,6 +976,10 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
       item.remainAmount = item.remainPaid - item.total;
     }, 300);
   };
+
+  if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
+    $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+  }
 
   $scope.getCurrentMonthDate();
   $scope.getAll();

@@ -13,7 +13,16 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     $scope.invoiceType = 'generalSalesInvoices';
     $scope.structure = { voucherType: { id: 'generalSalesInvoice', nameEn: 'General Sales Invoice', nameAr: 'فاتورة مبيعات عامة' } };
   }
-
+  $scope.getCurrentMonthDate = function () {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    $scope._search.fromDate = new Date(firstDay);
+    $scope._search.toDate = new Date(lastDay);
+    return { firstDay, lastDay };
+  };
   $scope.setTotalValue = function (item) {
     $scope.error = '';
     $scope.item = { ...$scope.structure, paymentType: $scope.item.paymentType, safe: $scope.item.safe, voucherType: $scope.item.voucherType };
@@ -267,8 +276,8 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     site.showModal($scope.modalSearchID);
   };
 
-  $scope.searchAll = function () {
-    $scope.getAll($scope.search);
+  $scope.searchAll = function (search) {
+    $scope.getAll(search);
     site.hideModal($scope.modalSearchID);
     $scope.search = {};
   };
@@ -569,7 +578,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
                 vatNumber: $scope.setting.taxNumber,
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.total,
-                totalVat: $scope.thermal.totalVat,
+                totalVat: $scope.thermal.totalVat || 0,
               };
               if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
                 qrString.name = '##session.company.nameAr##';
@@ -583,7 +592,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
                   vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
-                  vat_total: qrString.totalVat.toString(),
+                  vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
                 },
                 (data) => {
                   site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });
@@ -631,8 +640,8 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $('#receiptVouchersDetails').removeClass('hidden');
     $scope.item.netTxt = site.stringfiy($scope.item.total);
-
-    if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
+    $scope.item.$receipt = true;
+    if ($scope.item.itemsList && $scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
       $scope.invList = [];
       let invLength = $scope.item.itemsList.length / $scope.setting.printerProgram.itemsCountA4;
       invLength = parseInt(invLength);
@@ -656,9 +665,11 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
         $scope.invList.push(so);
       }
     } else {
-      $scope.item.itemsList.forEach((_item, i) => {
-        _item.$index = i + 1;
-      });
+      if ($scope.item.itemsList) {
+        $scope.item.itemsList.forEach((_item, i) => {
+          _item.$index = i + 1;
+        });
+      }
       $scope.invList = [{ ...$scope.item }];
     }
 
@@ -698,7 +709,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
                 vat_number: qrString.vatNumber,
                 time: qrString.time,
                 total: qrString.total.toString(),
-                vat_total: qrString.totalVat.toString(),
+                vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
               },
               (data) => {
                 site.qrcode({ width: 140, height: 140, selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1], text: data.value });
@@ -760,6 +771,7 @@ app.controller('receiptVouchers', function ($scope, $http, $timeout) {
   }
 
   $scope.getPaymentTypes();
+  $scope.getCurrentMonthDate();
   $scope.getAll();
   $scope.getCurrencies();
   $scope.getVouchersTypes();

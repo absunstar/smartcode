@@ -158,7 +158,14 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.company = site.getCompany(req);
-
+        let setting = site.getCompanySetting(req);
+        if(_data.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores && setting.storesSetting.autoApprovePurchases){
+          if (!_data.safe || !_data.safe.id) {
+            response.error = 'Must Select Safe';
+            res.json(response);
+            return;
+          }
+        }
         app.$collection.find({ invoiceId: _data.invoiceId }, (err, doc) => {
           if (doc) {
             response.done = false;
@@ -456,6 +463,7 @@ module.exports = function init(site) {
       $lt: d2,
     };
     where['approved'] = true;
+    where['company.id'] = site.getCompany(req).id;
     let select = { id: 1, code: 1, date: 1 };
 
     app.all({ where, select }, (err, docs) => {

@@ -615,6 +615,7 @@ module.exports = function init(site) {
       $lt: d2,
     };
     where['approved'] = true;
+    where['company.id'] = site.getCompany(req).id;
     let select = { id: 1, code: 1, date: 1 };
 
     app.all({ where, select }, (err, docs) => {

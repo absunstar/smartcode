@@ -1004,7 +1004,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
                 vatNumber: $scope.setting.taxNumber,
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.total,
-                totalVat: $scope.thermal.totalVat,
+                totalVat: $scope.thermal.totalVat || 0,
               };
               if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
                 qrString.name = '##session.company.nameAr##';
@@ -1018,7 +1018,7 @@ app.controller('servicesOrders', function ($scope, $http, $timeout) {
                   vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
-                  vat_total: qrString.totalVat.toString(),
+                  vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
                 },
                 (data) => {
                   site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });

@@ -27,7 +27,7 @@ module.exports = function init(site) {
 
           let total = _elm.total;
           if (_elm.type == 'min') {
-            -Math.abs(total);
+            total = -Math.abs(total);
           }
           let obj = {
             date: new Date(),
@@ -285,12 +285,12 @@ module.exports = function init(site) {
         let where = req.body.where || {};
         let select = req.body.select || {};
         let list = [];
-    
+
         if (where.safe) {
           where['safe.id'] = where.safe.id;
           delete where.safe;
         }
-     
+
         if (where.voucherType) {
           where['voucherType.id'] = where.voucherType.id;
           delete where.voucherType;

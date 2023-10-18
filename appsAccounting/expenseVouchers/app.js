@@ -312,7 +312,17 @@ module.exports = function init(site) {
           });
         } else {
           where['company.id'] = site.getCompany(req).id;
-
+          if (where && where.fromDate && where.toDate) {
+            let d1 = site.toDate(where.fromDate);
+            let d2 = site.toDate(where.toDate);
+            d2.setDate(d2.getDate() + 1);
+            where.date = {
+              $gte: d1,
+              $lt: d2,
+            };
+            delete where.fromDate;
+            delete where.toDate;
+          }
           app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
             res.json({
               done: true,
@@ -411,7 +421,7 @@ module.exports = function init(site) {
     app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
       if (!err && docs) {
         let expenseVouchers = {
-          returnSalseList: [],
+          returnSalesList: [],
           purchaseList: [],
           cashPurchase: 0,
           creditCardPurchase: 0,
@@ -419,12 +429,12 @@ module.exports = function init(site) {
           spanCardPurchase: 0,
           bankDepositPurchase: 0,
           totalPurchase: 0,
-          cashReturnPurchase: 0,
-          creditCardReturnSalse: 0,
-          chequeReturnSalse: 0,
-          spanCardReturnSalse: 0,
-          bankDepositReturnSalse: 0,
-          totalReturnSalse: 0,
+          cashReturnSales: 0,
+          creditCardReturnSales: 0,
+          chequeReturnSales: 0,
+          spanCardReturnSales: 0,
+          bankDepositReturnSales: 0,
+          totalReturnSales: 0,
         };
         for (let i = 0; i < docs.length; i++) {
           if (docs[i].voucherType.id == 'generalPurchaseInvoice' || docs[i].voucherType.id == 'purchaseInvoice') {
@@ -443,24 +453,23 @@ module.exports = function init(site) {
               }
             }
             expenseVouchers.totalPurchase += docs[i].total;
-          } else if (docs[i].voucherType.id == 'purchaseReturn') {
-            expenseVouchers.returnSalseList.push(docs[i]);
+          } else if (docs[i].voucherType.id == 'salesReturn') {
+            expenseVouchers.returnSalesList.push(docs[i]);
             if (docs[i].paymentType) {
               if (docs[i].paymentType.id == 1) {
-                expenseVouchers.cashReturnSalse += docs[i].total;
+                expenseVouchers.cashReturnSales += docs[i].total;
               } else if (docs[i].paymentType.id == 2) {
-                expenseVouchers.chequeReturnSalse += docs[i].total;
+                expenseVouchers.chequeReturnSales += docs[i].total;
               } else if (docs[i].paymentType.id == 3) {
-                expenseVouchers.creditCardReturnSalse += docs[i].total;
+                expenseVouchers.creditCardReturnSales += docs[i].total;
               } else if (docs[i].paymentType.id == 4) {
-                expenseVouchers.spanCardReturnSalse += docs[i].total;
+                expenseVouchers.spanCardReturnSales += docs[i].total;
               } else if (docs[i].paymentType.id == 5) {
-                expenseVouchers.bankDepositReturnSalse += docs[i].total;
+                expenseVouchers.bankDepositReturnSales += docs[i].total;
               }
             }
-            expenseVouchers.totalReturnSalse += docs[i].total;
+            expenseVouchers.totalReturnSales += docs[i].total;
           }
-      
         }
         res.json({
           done: true,
@@ -546,6 +555,7 @@ module.exports = function init(site) {
       $lt: d2,
     };
     let select = { id: 1, code: 1, date: 1 };
+    where['company.id'] = site.getCompany(req).id;
     where['voucherType.id'] = 'generalPurchaseInvoice';
     app.all({ where, select }, (err, docs) => {
       let obj = {

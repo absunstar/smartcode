@@ -6,6 +6,11 @@
 
     <div class="top-actions">
       <i-button type="add" x-permissions="receiptVouchersAdd || receiptVouchersManage" label="##word.New##" ng-click="showAdd()"></i-button>
+      <i-button type="search" x-permissions="receiptVouchersSearch || receiptVouchersManage" label="##word.Search##" ng-click="searchAll(_search)"></i-button>
+    </div>
+    <div class="row" x-permissions="receiptVouchersSearch || receiptVouchersManage">
+      <i-date class="col4" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+      <i-date class="col4" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
     </div>
 
     <div class="row padding">

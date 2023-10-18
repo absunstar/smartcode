@@ -356,6 +356,7 @@ module.exports = function init(site) {
     };
 
     let select = { id: 1, code: 1, date: 1 };
+    where['company.id'] = site.getCompany(req).id;
 
     app.all({ where, select }, (err, docs) => {
       let obj = {

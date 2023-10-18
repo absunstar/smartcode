@@ -334,7 +334,7 @@ app.controller('mainHmis', function ($scope, $http, $timeout) {
     $scope.busy = true;
 
     let where = { date: new Date(), active: true };
-
+ 
     $http({
       method: 'POST',
       url: '/api/expenseVouchers/generalPurchaseDetails',
