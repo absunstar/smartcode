@@ -45,15 +45,13 @@
               <th>##word.Code##</th>
               <th>##word.Customer##</th>
               <th>##word.Date##</th>
-              <th>##word.Payment Type##</th>
               <th class="not-print">##word.Actions##</th>
             </tr>
             <tr ng-repeat="bill in returnSalesInvoicesList">
               <td class="center">{{$index+1}}</td>
               <td class="center">{{bill.code}}</td>
-              <td class="center">{{bill.customer.name##session.lang## ||bill.patient.fullName##session.lang##}}</td>
+              <td class="center">{{bill.customer.name##session.lang##}}</td>
               <td class="center">{{bill.date|date:'dd/MM/yyyy'}} - {{bill.date|date:'hh:mm:ss a'}}</td>
-              <td class="center">{{bill.paymentType.name##session.lang##}}</td>
 
               <td class="center">
                 <i-button type="push" ng-click="addToItemsListToReturn(bill)"> </i-button>
@@ -190,7 +188,7 @@
         </fieldset>
       </div>
 
-      <fieldset ng-show="returned.invoiceType.id == 1 && mode == 'edit' && setting.accountsSetting.linkAccountsToStores">
+      <fieldset ng-show="returned.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores">
         <div class="row">
           <i-list class="col3" display="name##session.lang##" ng-model="returned.safe" items="safesList" label="##word.Safe##" ng-search="returned.$safe"></i-list>
           <i-control class="col2" type="number" disabled label="##word.Amount Paid##" ng-model="returned.amountPaid"> </i-control>

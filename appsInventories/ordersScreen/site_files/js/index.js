@@ -2193,11 +2193,53 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           site.hideModal('#returnOrderModal');
-        } else {
+          site.resetValidated($scope.modalID);
+          if ($scope.setting.storesSetting.autoApprovedReturnSales) {
+            $scope.approveReturnSales(response.data.doc, 'auto');
+          }
+        }
+        else {
           $scope.error = response.data.error;
           if (response.data.error && response.data.error.like('*Must Enter Code*')) {
             $scope.error = '##word.Must Enter Code##';
           }
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.approveReturnSales = function (_item,type) {
+    $scope.error = '';
+    const v = site.validated($scope.modalID);
+    if (!v.ok) {
+      $scope.error = v.messages[0].Ar;
+      return;
+    }
+
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/returnSalesInvoices/approve`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          if (type == 'auto') {
+            $scope.list.unshift(response.data.result.doc);
+          } else {
+            site.resetValidated($scope.modalID);
+            site.hideModal($scope.modalID);
+            let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+            if (index !== -1) {
+              $scope.list[index] = response.data.result.doc;
+            }
+          }
+        } else {
+          $scope.error = response.data.error;
         }
       },
       function (err) {
