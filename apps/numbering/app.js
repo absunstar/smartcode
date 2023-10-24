@@ -137,6 +137,48 @@ module.exports = function init(site) {
     }
   });
 
+  site.post('/api/numbering/newUpdate', (req, res) => {
+    let response = {
+      done: false,
+    };
+
+    if (!req.session.user) {
+      response.error = 'Please Login First';
+      res.json(response);
+      return;
+    }
+
+    let data = req.data;
+      
+      moduleListCore.forEach((_ml) => {
+        let index = data.screensList.findIndex((itm) => itm.id === _ml.id);
+        if(index == -1){
+         let ml = {..._ml};
+          ml.typeNumbering = {
+            id: 3,
+            name: 'Connected',
+          };
+          ml.firstValue = 1;
+          ml.lastValue = 0;
+          data.screensList.push(ml);
+        }
+      });
+
+    $numbering.update(data, (err, result) => {
+      if (!err) {
+        Numbering.forEach((n, i) => {
+          if (result.doc && n.company.id == result.doc.company.id) {
+            Numbering[i] = result.doc;
+          }
+        });
+        response.done = true;
+      } else {
+        response.error = err.message;
+      }
+      res.json(response);
+    });
+  });
+
   site.post('/api/numbering/save', (req, res) => {
     let response = {
       done: false,

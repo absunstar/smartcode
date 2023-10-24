@@ -299,6 +299,25 @@ app.controller('companies', function ($scope, $http, $timeout) {
 
     $http({
       method: 'POST',
+      url: '/api/offersPrices/resetForCompany',
+      data: {
+        id: id,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+
+    $http({
+      method: 'POST',
       url: '/api/returnSalesInvoices/resetForCompany',
       data: {
         id: id,
@@ -936,6 +955,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.showInventoryScreens = function () {
+    $scope.company.showOffersPrices = $scope.company.showInventory;
     $scope.company.showSalesInvoices = $scope.company.showInventory;
     $scope.company.showSalesCompaniesInvoices = $scope.company.showInventory;
     $scope.company.showReturnSalesInvoices = $scope.company.showInventory;

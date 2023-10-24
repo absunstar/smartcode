@@ -1,11 +1,24 @@
-app.controller('deliveryManage', function ($scope, $http, $timeout) {
+app.controller('offersPrices', function ($scope, $http, $timeout) {
   $scope.setting = site.showObject(`##data.#setting##`);
+
   $scope.baseURL = '';
-  $scope.appName = 'salesInvoices';
-  $scope.modalID = '#salesInvoicesManageModal';
-  $scope.modalSearchID = '#salesInvoicesSearchModal';
+  $scope.appName = 'offersPrices';
+  $scope.modalID = '#offersPricesManageModal';
+  $scope.modalSearchID = '#offersPricesSearchModal';
   $scope.mode = 'add';
   $scope._search = { fromDate: new Date(), toDate: new Date() };
+  $scope.structure = {
+    image: { url: '/images/offersPrices.png' },
+    totalPrice: 0,
+    totalItemsDiscounts: 0,
+    totalDiscounts: 0,
+    totalTaxes: 0,
+    totalBeforeVat: 0,
+    totalVat: 0,
+    totalAfterVat: 0,
+    totalNet: 0,
+    active: true,
+  };
   $scope.item = {};
   $scope.orderItem = {};
   $scope.list = [];
@@ -33,71 +46,30 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       total: 0,
     };
   };
-
-  $scope.showUpdate = function (_item) {
+  $scope.showAdd = function (_item) {
     $scope.error = '';
+    $scope.mainError = '';
+
+    if (!$scope.setting || !$scope.setting.id) {
+      $scope.mainError = '##word.Please Contact System Administrator to Set System Setting Or Reload Page##';
+      return;
+    }
     $scope.itemsError = '';
-    $scope.mode = 'edit';
+    $scope.mode = 'add';
     $scope.resetOrderItem();
-    $scope.view(_item);
-    $scope.item = {};
+    $scope.item = {
+      ...$scope.structure,
+      date: new Date(),
+      itemsList: [],
+      discountsList: [],
+      taxesList: [],
+    };
+
+   
     site.showModal($scope.modalID);
   };
 
-  $scope.update = function (_item, modalID) {
-    $scope.error = '';
-    if (modalID) {
-      const v = site.validated(modalID);
-      if (!v.ok) {
-        $scope.error = v.messages[0].Ar;
-        return;
-      }
-      let dataValid = $scope.validateData(_item);
-      if (!dataValid.success) {
-        return;
-      }
-    }
-    if (_item.$deliveredType == 'delivered') {
-      _item.deliveryStatus = { ...$scope.deliveryStatusList[2], date: new Date() };
-      _item.deliveryStatusList.push(_item.deliveryStatus);
-    } else if (_item.$deliveredType == 'canceled') {
-      if (!_item.reasonCancelingDelivery || !_item.reasonCancelingDelivery.id) {
-        $scope.error = '##word.You must choose the reason for canceling the delivery order##';
-        return;
-      }
-      _item.deliveryStatus = { ...$scope.deliveryStatusList[3], date: new Date() };
-      _item.deliveryStatusList.push(_item.deliveryStatus);
-    }
-
-    $scope.busy = true;
-    $http({
-      method: 'POST',
-      url: `${$scope.baseURL}/api/${$scope.appName}/update`,
-      data: _item,
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done) {
-          if (modalID) {
-            console.log(modalID);
-            site.hideModal(modalID);
-            site.resetValidated(modalID);
-          }
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
-          if (index !== -1) {
-            $scope.list[index] = response.data.result.doc;
-          }
-        } else {
-          $scope.error = response.data.error;
-        }
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
-  };
-
-  $scope.approve = function (_item) {
+  $scope.add = function (_item) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
@@ -111,7 +83,53 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $http({
       method: 'POST',
-      url: `${$scope.baseURL}/api/${$scope.appName}/approve`,
+      url: `${$scope.baseURL}/api/${$scope.appName}/add`,
+      data: $scope.item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal($scope.modalID);
+          site.resetValidated($scope.modalID);
+          $scope.list.unshift(response.data.doc);
+        } else {
+          $scope.error = response.data.error;
+          if (response.data.error && response.data.error.like('*Must Enter Code*')) {
+            $scope.error = '##word.Must Enter Code##';
+          }
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.showUpdate = function (_item) {
+    $scope.error = '';
+    $scope.itemsError = '';
+    $scope.mode = 'edit';
+    $scope.resetOrderItem();
+    $scope.view(_item);
+    $scope.item = {};
+    site.showModal($scope.modalID);
+  };
+
+  $scope.update = function (_item) {
+    $scope.error = '';
+    const v = site.validated($scope.modalID);
+    if (!v.ok) {
+      $scope.error = v.messages[0].Ar;
+      return;
+    }
+    let dataValid = $scope.validateData(_item);
+    if (!dataValid.success) {
+      return;
+    }
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/update`,
       data: _item,
     }).then(
       function (response) {
@@ -165,6 +183,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
               En: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
             };
           }
+          $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
         } else {
           $scope.error = response.data.error;
         }
@@ -212,12 +231,49 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.approve = function (_item) {
+    $scope.error = '';
+    const v = site.validated($scope.modalID);
+    if (!v.ok) {
+      $scope.error = v.messages[0].Ar;
+      return;
+    }
+    if (!_item.itemsList.length) {
+      $scope.error = '##word.Must Enter One Item At Least##';
+      return;
+    }
+
+    _item['approved'] = true;
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/approve`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal($scope.modalID);
+          site.resetValidated($scope.modalID);
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.result.doc;
+          }
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+
   $scope.getAll = function (where) {
     $scope.busy = true;
     $scope.list = [];
-    where = where || {};
-
-    where['salesCategory.id'] = 2;
+    where = where || { approved: false };
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
@@ -248,7 +304,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       method: 'POST',
       url: '/api/numbering/getAutomatic',
       data: {
-        screen: $scope.appName,
+        screen: 'salesInvoices',
       },
     }).then(
       function (response) {
@@ -288,7 +344,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          commercialCustomer: false,
+          commercialCustomer: true,
           'type.id': 6,
         },
         select: {
@@ -302,12 +358,12 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
           phone: 1,
           socialEmail: 1,
           website: 1,
-          country:1,
-          gov:1,
-          city:1,
-          area:1,
-          address:1,
-          street:1,
+          country: 1,
+          gov: 1,
+          city: 1,
+          area: 1,
+          address: 1,
+          street: 1,
         },
         search: $search,
       },
@@ -362,7 +418,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       $scope.itemsError = '##word.Please Enter Count##';
       return;
     }
-
     let item = {
       sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
       id: orderItem.item.id,
@@ -376,97 +431,28 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       price: orderItem.unit.price,
       averageCost: orderItem.unit.averageCost,
       noVat: orderItem.item.noVat,
-      extraDiscount: orderItem.extraDiscount || 0,
       hasMedicalData: orderItem.item.hasMedicalData,
       hasColorsData: orderItem.item.hasColorsData,
       hasSizesData: orderItem.item.hasSizesData,
+      extraDiscount: orderItem.extraDiscount || 0,
       discount: orderItem.unit.discount,
       maxDiscount: orderItem.unit.maxDiscount,
       discountType: orderItem.unit.discountType,
     };
-
-    if (orderItem.item.workByBatch || orderItem.item.workBySerial || orderItem.item.workByQrCode) {
-      item.workByBatch = orderItem.item.workByBatch;
-      item.workBySerial = orderItem.item.workBySerial;
-      item.workByQrCode = orderItem.item.workByQrCode;
-      item.gtin = orderItem.item.gtin;
-      item.validityDays = orderItem.item.validityDays;
-      item.batchesList = item.batchesList || [];
-
-      /*  orderItem.unit.storesList = orderItem.unit.storesList || []; */
-      /* let unitStore = orderItem.unit.storesList.find((_s) => {
-        return _s.store.id === $scope.item.store.id;
-      }); */
-
-      /* if (unitStore) {
-        unitStore.batchesList = unitStore.batchesList || [];
-        unitStore.batchesList.forEach((_b) => {
-          if (_b.count > 0) {
-            let batch = { ..._b };
-            batch.currentCount = batch.count;
-            batch.count = 0;
-            item.batchesList.push(batch);
-          }
-        });
-      } */
-    }
-
+   
     let index = $scope.item.itemsList.findIndex((_item) => _item.id === item.id && _item.unit.id == item.unit.id);
-
     if (index == -1) {
       $scope.item.itemsList.unshift(item);
-      if (item.workByQrCode && $scope.orderItem.barcode) {
-        $scope.item.itemsList[0].$search = $scope.orderItem.barcode;
-        $scope.getBatch({ which: 13 }, $scope.item.itemsList[0]);
-      }
+     
     } else {
       $scope.item.itemsList[index].count += 1;
-      if (item.workByQrCode && $scope.orderItem.barcode) {
-        $scope.item.itemsList[index].$search = $scope.orderItem.barcode;
-        $scope.getBatch({ which: 13 }, $scope.item.itemsList[index]);
-      }
     }
-
     $scope.calculate($scope.item);
     $scope.resetOrderItem();
     $scope.itemsError = '';
   };
 
-  $scope.getStores = function () {
-    $scope.busy = true;
-    $scope.storesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/stores/all',
-      data: {
-        where: {
-          active: true,
-          salesForCustomers: true,
-        },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-          rasdUser: 1,
-          rasdPass: 1,
-          linkWithRasd: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.storesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
+ 
   $scope.getDiscountTypes = function () {
     $scope.busy = true;
     $scope.discountTypesList = [];
@@ -593,10 +579,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       active: true,
       allowSale: true,
     };
-    if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store##';
-      return;
-    }
+
     if (ev && ev.which != 13) {
       return;
     }
@@ -615,7 +598,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       method: 'POST',
       url: '/api/storesItems/all',
       data: {
-        storeId: $scope.item.store.id,
         where: where,
         select: {
           id: 1,
@@ -684,18 +666,12 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     if ($search && $search.length < 1) {
       return;
     }
-
-    if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store##';
-      return;
-    }
     $scope.busy = true;
     $scope.itemsList = [];
     $http({
       method: 'POST',
       url: '/api/storesItems/all',
       data: {
-        storeId: $scope.item.store.id,
         where: {
           active: true,
           allowSale: true,
@@ -727,83 +703,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.itemsList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getSalesCategories = function () {
-    $scope.busy = true;
-    $scope.salesCategoriesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/salesCategories',
-      data: {
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.salesCategoriesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getPaymentTypes = function () {
-    $scope.busy = true;
-    $scope.paymentTypesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/paymentTypes',
-      data: {
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.paymentTypesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.geDeliveryStatus = function () {
-    $scope.busy = true;
-    $scope.deliveryStatusList = [];
-    $http({
-      method: 'POST',
-      url: '/api/deliveryStatus',
-      data: {},
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.deliveryStatusList = response.data.list;
         }
       },
       function (err) {
@@ -874,7 +773,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       obj.taxesList.forEach((t) => {
         obj.totalCashTaxes += (obj.totalPrice * t.value) / 100;
       });
-
       obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
       obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
       obj.totalVat = site.toNumber(obj.totalVat);
@@ -882,18 +780,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
       obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
       obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
       obj.totalNet = site.toNumber(obj.totalNet);
-      obj.amountPaid = obj.totalNet;
-      obj.paidByCustomer = obj.totalNet;
-      obj.remainForCustomer = 0;
-    }, 300);
-
-    $scope.itemsError = '';
-  };
-
-  $scope.calculateCustomerPaid = function (obj) {
-    $timeout(() => {
-      obj.remainForCustomer = obj.paidByCustomer - obj.amountPaid;
-      obj.remainForCustomer = site.toNumber(obj.remainForCustomer);
+      $scope.itemsError = '';
     }, 300);
   };
 
@@ -910,48 +797,11 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     return { success, _item };
   };
 
-  $scope.saveBatch = function (item) {
-    $scope.errorBatch = '';
-    $scope.error = '';
-
-    if (item.batchesList.some((b) => b.count > b.currentCount)) {
-      $scope.errorBatch = '##word.New quantity cannot be greater than current quantity##';
-      return;
-    }
-
-    if (item.$batchCount === item.count) {
-      site.hideModal('#batchModalModal');
-    } else {
-      $scope.errorBatch = 'The Count is not correct';
-      return;
-    }
-  };
-
-  $scope.showBatchModal = function (item) {
-    $scope.error = '';
-    $scope.errorBatch = '';
-    if (item.workByBatch || item.workBySerial || item.workByQrCode) {
-      item.batchesList = item.batchesList || [];
-    }
-    $scope.batch = item;
-    $scope.calcBatch($scope.batch);
-    site.showModal('#batchModalModal');
-  };
-
-  $scope.calcBatch = function (item) {
-    $timeout(() => {
-      $scope.errorBatch = '';
-      $scope.error = '';
-      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a + b.count, 0) : 0;
-    }, 250);
-  };
-
   $scope.thermalPrint = function (obj) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
     obj.netTxt = site.stringfiy(obj.totalNet);
-
     if ($scope.setting.printerProgram.thermalPrinter) {
       $('#thermalPrint').removeClass('hidden');
       $scope.thermal = { ...obj };
@@ -1030,8 +880,8 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     $scope.error = '';
     if ($scope.busy) return;
     $scope.busy = true;
-    $('#salesInvoicesDetails').removeClass('hidden');
     $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
+    $('#salesInvoicesDetails').removeClass('hidden');
 
     if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
       $scope.invList = [];
@@ -1055,7 +905,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
             so.itemsList.push(item);
           }
         });
-
         $scope.invList.push(so);
       }
     } else {
@@ -1159,216 +1008,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     }, 8000);
   };
 
-  $scope.labelPrint = function () {
-    $scope.error = '';
-    if ($scope.busy) return;
-    $scope.busy = true;
-    $('#salesInvoicesLabels').removeClass('hidden');
-    $scope.labelList = [];
-    $scope.item.itemsList.forEach((itm) => {
-      if (itm.hasMedicalData) {
-        let so = {
-          nameAr: itm.nameAr,
-          nameEn: itm.nameEn,
-          patient: $scope.item.customer,
-          date: $scope.item.date,
-          medicineDuration: itm.medicineDuration,
-          medicineFrequency: itm.medicineFrequency,
-          medicineRoute: itm.medicineRoute,
-          barcode: itm.barcode,
-          workByBatch: itm.workByBatch,
-          workBySerial: itm.workBySerial,
-          workByQrCode: itm.workByQrCode,
-          count: itm.count,
-        };
-        if (itm.batchesList && itm.batchesList.length > 0) {
-          so.expiryDate = itm.batchesList[0].expiryDate;
-          so.productionDate = itm.batchesList[0].productionDate;
-        }
-        $scope.labelList.push(so);
-      }
-    });
-    $scope.localPrint = function () {
-      let printer = {};
-      if ($scope.setting.printerProgram.labelPrinter) {
-        printer = $scope.setting.printerProgram.labelPrinter;
-      } else {
-        $scope.error = '##word.Label printer must select##';
-        return;
-      }
-      if ('##user.labelPrinter##' && '##user.labelPrinter.id##' > 0) {
-        printer = JSON.parse('##user.labelPrinter##');
-      }
-      $timeout(() => {
-        site.print({
-          selector: '#salesInvoicesLabels',
-          ip: printer.ipDevice,
-          port: printer.portDevice,
-          pageSize: 'A4',
-          printer: printer.ip.name.trim(),
-        });
-      }, 500);
-    };
-
-    $scope.localPrint();
-
-    $scope.busy = false;
-    $timeout(() => {
-      $('#salesInvoicesLabels').addClass('hidden');
-    }, 8000);
-  };
-
-  $scope.getMedicineDurationsList = function () {
-    $scope.busy = true;
-    $scope.medicineDurationsList = [];
-    $http({
-      method: 'POST',
-      url: '/api/medicineDurations/all',
-      data: {
-        where: { active: true },
-        select: {
-          id: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.medicineDurationsList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-  $scope.getMedicineFrequenciesList = function () {
-    $scope.busy = true;
-    $scope.medicineFrequenciesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/medicineFrequencies/all',
-      data: {
-        where: { active: true },
-        select: {
-          id: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.medicineFrequenciesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-  $scope.getBatch = function (ev, item) {
-    if (ev && ev.which != 13) {
-      return;
-    }
-    $scope.errorBatch = '';
-    $scope.busy = true;
-    $http({
-      method: 'POST',
-      url: '/api/storesItems/getBatch',
-      data: {
-        where: { active: true, id: item.id, storeId: $scope.item.store.id, unitId: item.unit.id, code: item.$search },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || (itm.sn && itm.sn == response.data.doc.sn));
-          if (index === -1) {
-            item.batchesList.push(response.data.doc);
-            item.$batchCount += 1;
-          } else {
-            if (item.workByBatch) {
-              item.batchesList[index].count += 1;
-              item.$batchCount += 1;
-            } else {
-              $scope.errorBatch = 'Item Is Exist';
-            }
-          }
-          item.$search = '';
-        } else if (response.data.done && response.data.docs) {
-          $scope.searchbBatchesList = response.data.docs;
-          site.showModal('#batchSearchModal');
-        } else {
-          $scope.errorBatch = response.data.error;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.selectBatch = function (item, batch) {
-    $scope.addBatch = '';
-    $scope.errorBatch = '';
-    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
-    if (index === -1) {
-      batch.currentCount = batch.count;
-      item.batchesList.unshift({ ...batch, count: 1 });
-      item.$batchCount += 1;
-      $scope.addBatch = 'Added successfully';
-      $timeout(() => {
-        $scope.addBatch = '';
-      }, 1500);
-    } else {
-      if (item.workByBatch) {
-        item.batchesList[index].count += 1;
-        item.$batchCount += 1;
-        $timeout(() => {
-          $scope.addBatch = '';
-        }, 1500);
-      } else {
-        $scope.errorBatch = 'Item Is Exist';
-      }
-    }
-    item.$search = '';
-  };
-
-  $scope.getMedicineRoutesList = function () {
-    $scope.busy = true;
-    $scope.medicineRoutesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/medicineRoutes/all',
-      data: {
-        where: { active: true },
-        select: {
-          id: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.medicineRoutesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
   $scope.readQR = function (code) {
     $timeout(() => {
       if ($scope.code) {
@@ -1378,295 +1017,11 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
     }, 300);
   };
 
-  if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
-    $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
-  }
-
-  $scope.showAddVoucher = function (_item) {
-    $scope.error = '';
-
-    $scope.item = {
-      invoiceId: _item.id,
-      customer: _item.customer,
-      invoiceCode: _item.code,
-      $invoiceType: _item.invoiceType,
-      remainAmount: 0,
-      remainPaid: _item.remainPaid,
-      total: _item.remainPaid,
-      voucherType: { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
-    };
-
-    if (_item.invoiceType.id == 2 && _item.installmentsList && _item.installmentsList.length > 0) {
-      let index = _item.installmentsList.findIndex((itm) => !itm.paid);
-
-      _item.installmentsList[index].$beingPaid = true;
-      $scope.item.$installmentsList = _item.installmentsList;
-      $scope.item.installment = _item.installmentsList[index];
-      $scope.item.total = _item.installmentsList[index].amount;
-    }
-
-    $scope.item.remainAmount = _item.remainPaid - $scope.item.total;
-
-    site.showModal('#expenseVouchersModal');
-    site.resetValidated('#expenseVouchersModal');
-  };
-
-  $scope.addExpenseVoucher = function (_item) {
-    $scope.error = '';
-    const v = site.validated('#expenseVouchersModal');
-    if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
-      return;
-    }
-
-    $scope.busy = true;
-    $http({
-      method: 'POST',
-      url: `/api/receiptVouchers/add`,
-      data: _item,
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done) {
-          $scope.getAll();
-          site.hideModal('#expenseVouchersModal');
-          site.resetValidated('#expenseVouchersModal');
-        } else {
-          $scope.error = response.data.error;
-        }
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
-  };
-  $scope.selectSalesCategory = function () {
-    if ($scope.item.salesCategory && $scope.item.salesCategory.id) {
-      if ($scope.item.salesCategory.id == 1) {
-        $scope.item.invoiceType = $scope.invoiceTypesList[0];
-      } else if ($scope.item.salesCategory.id == 1) {
-        $scope.item.invoiceType = $scope.invoiceTypesList[1];
-      }
-    }
-  };
-
-  $scope.getDelivery = function () {
-    $scope.busy = true;
-    $scope.deliveryList = [];
-    $http({
-      method: 'POST',
-      url: '/api/employees/all',
-      data: {
-        where: { active: true, 'jobType.id': 3 },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-          fullNameEn: 1,
-          fullNameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.deliveryList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getSafes = function (paymentType) {
-    $scope.busy = true;
-    $scope.safesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/safes/all',
-      data: {
-        where: {
-          active: true,
-          'paymentType.id': paymentType.id,
-        },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.safesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getInvoiceTypes = function () {
-    $scope.busy = true;
-    $scope.invoiceTypesList = [];
-    $http({
-      method: 'POST',
-      url: '/api/invoiceTypes',
-      data: {},
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.invoiceTypesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.showDeliveryStatusModal = function (_item, type) {
-    $scope.error = '';
-    $scope.itemsError = '';
-    $scope.item = _item;
-    if (type == 'canceled') {
-      $scope.item.$deliveredType = 'canceled';
-    } else if (type == 'delivered') {
-      $scope.item.$deliveredType = 'delivered';
-    }
-    site.showModal('#deliveryStatusModal');
-  };
-
-  $scope.getReasonsCancelingDelivery = function () {
-    $scope.busy = true;
-    $scope.reasonsCancelingDeliveryList = [];
-    $http({
-      method: 'POST',
-      url: '/api/reasonsCancelingDelivery/all',
-      data: {
-        where: { active: true },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.reasonsCancelingDeliveryList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getDeliveryOrderStatus = function () {
-    $scope.busy = true;
-    $scope.deliveryOrderStatusList = [];
-    $http({
-      method: 'POST',
-      url: '/api/deliveryOrderStatus',
-      data: {},
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.deliveryOrderStatusList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.calcRemainVoucher = function (item) {
-    $timeout(() => {
-      item.remainAmount = item.remainPaid - item.total;
-    }, 300);
-  };
-
-  $scope.addDeliveryOrderStatus = function (id) {
-    $scope.item.deliveryOrderStatusList = $scope.item.deliveryOrderStatusList || [];
-    let status = $scope.deliveryOrderStatusList.find((_u) => {
-      return _u.id == id;
-    });
-    $scope.item.deliveryOrderStatusList.unshift({ status, date: new Date(), user: { id: '##user.id##', nameAr: '##user.nameAr##', nameEn: '##user.nameEn##' } });
-  };
-
-  $scope.showInstallmentsModal = function (item) {
-    item.$firstDueDate = new Date();
-    site.showModal('#installmentsModal');
-  };
-
-  $scope.setInstallments = function (_item) {
-    $scope.installmentError = '';
-
-    if (!_item.$numberOfMonths || _item.$numberOfMonths < 1) {
-      $scope.installmentError = '##word.Please Enter Number Of Payment Months##';
-      return;
-    }
-
-    if (!_item.totalNet) {
-      $scope.installmentError = '##word.Not Found Amount##';
-      return;
-    }
-
-    $timeout(() => {
-      let amount = _item.totalNet / _item.$numberOfMonths;
-      amount = site.toMoney(amount);
-      _item.installmentsList = [];
-      for (let i = 0; i < _item.$numberOfMonths; i++) {
-        _item.installmentsList.push({
-          date: new Date(new Date(_item.$firstDueDate).getFullYear(), new Date(_item.$firstDueDate).getMonth() + i + 1, new Date(_item.$firstDueDate).getDate()),
-          amount,
-          paid: false,
-        });
-      }
-    }, 300);
-  };
-
-  $scope.showChangeStatusModal = function (item) {
-    $scope.item = item;
-    site.showModal('#changeDeliveryOrderStatusModal');
-  };
-  $scope.showChangeDeliveryModal = function (item) {
-    $scope.item = item;
-    site.showModal('#changeDeliveryModal');
-  };
-
-  $scope.getInvoiceTypes();
   $scope.getCurrentMonthDate();
   $scope.getAll();
-  $scope.getPaymentTypes();
-  $scope.geDeliveryStatus();
   $scope.getDiscountTypes();
   $scope.getTaxTypes();
-  $scope.getStores();
-  $scope.getDelivery();
-  $scope.getSalesCategories();
   $scope.getCustomers();
   $scope.getStoresItems();
   $scope.getNumberingAuto();
-  $scope.getMedicineDurationsList();
-  $scope.getMedicineFrequenciesList();
-  $scope.getMedicineRoutesList();
-  $scope.getDeliveryOrderStatus();
-  $scope.getReasonsCancelingDelivery();
 });

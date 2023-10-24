@@ -8,6 +8,7 @@
       "securityManage",
       "numberingManage",
       "dailyCashiersManage",
+      "offersPricesManage",
       "totalVatManage",
       "salesVatManage",
       "purchaseVatManage",

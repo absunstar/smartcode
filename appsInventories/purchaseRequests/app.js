@@ -239,6 +239,7 @@ module.exports = function init(site) {
         }
         _data.approvedUserInfo = req.getUserFinger();
         _data.approvedDate = new Date();
+        _data.approved = true;
 
         app.update(_data, (err, result) => {
           if (!err) {
@@ -261,6 +262,7 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.unapprovedUserInfo = req.getUserFinger();
         _data.unapprovedDate = new Date();
+        _data.approved = false;
 
         app.update(_data, (err, result) => {
           if (!err) {

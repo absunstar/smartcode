@@ -27,6 +27,7 @@
     "category": "main",
     "feature": "public",
     "id": "vehiclesTypes",
+    "name": "Vehicles Types",
     "nameEn": "Vehicles Types",
     "nameAr": "أنواع المركبات"
   },
@@ -34,6 +35,7 @@
     "category": "main",
     "feature": "public",
     "id": "itemsExtras",
+    "name": "Items Extras",
     "nameEn": "Items Extras",
     "nameAr": "إضافات الأصناف"
   },
@@ -81,80 +83,113 @@
     "category": "accounting",
     "feature": "public",
     "id": "voucherNames",
-    "name": "Voucher Names"
+    "name": "Voucher Names",
+    "nameEn": "Vouchers Names",
+    "nameAr": "أسماء السندات"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "dailyCashiers",
-    "name": "Daily Cashiers"
+    "name": "Daily Cashiers",
+    "nameEn": "Daily Cashiers",
+    "nameAr": "يوميات الصرافين"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "transferSafes",
-    "name": "Transfer Safes"
+    "name": "Transfer Safes",
+    "nameEn": "Transfer Safes",
+    "nameAr": "تحويل بين الخزن"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "accountsGuide",
-    "name": "Accounts Guide"
+    "name": "Accounts Guide",
+    "nameEn": "Accounts Guide",
+    "nameAr": "دليل الحسابات"
   },
-  { "category": "accounting", "feature": "public", "id": "journalEntry", "name": "Journal Entry" },
+  {
+    "category": "accounting",
+    "feature": "public",
+    "id": "journalEntry",
+    "name": "Journal Entry",
+    "nameEn": "Journal Entry",
+    "nameAr": "قيود اليومية"
+  },
   {
     "category": "accounting",
     "feature": "public",
     "id": "generalLedger",
-    "name": "General Ledger"
+    "name": "General Ledger",
+    "nameEn": "General Ledger",
+    "nameAr": "الأستاذ العام"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "assistantGeneralLedger",
-    "name": "Assistant General Ledger"
+    "name": "Assistant General Ledger",
+    "nameEn": "Assistant General Ledger",
+    "nameAr": "مساعد الأستاذ العام"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "budgetClassifications",
-    "name": "Budget Classifications"
+    "name": "Budget Classifications",
+    "nameEn": "Budget Classifications",
+    "nameAr": "تصنيفات الميزانية"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "incomeList",
-    "name": "Income List"
+    "name": "Income List",
+    "nameEn": "Income List",
+    "nameAr": "قائمة الدخل"
   },
   {
     "category": "accounting",
     "feature": "public",
     "id": "costCenters",
-    "name": "Cost Centers"
+    "name": "Cost Centers",
+    "nameEn": "Cost Centers",
+    "nameAr": "مراكز التكلفة"
   },
   {
     "category": "hmis",
     "feature": "public",
     "id": "doctors",
-    "name": "Doctors"
+    "name": "Doctors",
+    "nameEn": "Doctors",
+    "nameAr": "الأطباء"
   },
   {
     "category": "hmis",
     "feature": "public",
     "id": "nurses",
-    "name": "Nurses"
+    "name": "Nurses",
+    "nameEn": "Nurses",
+    "nameAr": "التمريض"
   },
   {
     "category": "hmis",
     "feature": "public",
     "id": "hospitalResponsibilities",
-    "name": "Hospital Responsibilities"
+    "name": "Hospital Responsibilities",
+    "nameEn": "Hospital Responsibilities",
+    "nameAr": "مسؤوليات المستشفى"
   },
   {
     "category": "hmis",
     "feature": "public",
     "id": "insuranceClasses",
-    "name": "Insurance Classes"
+    "name": "Insurance Classes",
+    "nameEn": "Insurance Classes",
+    "nameAr": "فئات التأمين"
   },
   {
     "category": "hmis",
@@ -342,6 +377,12 @@
     "feature": "public",
     "id": "purchaseOrders",
     "name": "Purchase Orders"
+  },
+  {
+    "category": "inventory",
+    "feature": "public",
+    "id": "offersPrices",
+    "name": "Offers Prices"
   },
   {
     "category": "main",
@@ -703,12 +744,12 @@
     "category": "hr",
     "feature": "public",
     "id": "evaluationItems",
-    "name": "evaluationItems"
+    "name": "Evaluation Items"
   },
   {
     "category": "hr",
     "feature": "public",
     "id": "evaluationTemplates",
-    "name": "evaluationTemplates"
+    "name": "Evaluation Templates"
   }
 ]

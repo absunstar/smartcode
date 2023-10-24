@@ -1,0 +1,39 @@
+<style>
+  .btn.deleting {
+    width: 250px;
+    background: #e21212;
+    font-weight: bold;
+  }
+</style>
+<div id="quickCountingModal" class="modal small">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>
+        ##word.Quick Counting##
+        <i class="fa fa-plus"></i>
+      </h2>
+    </div>
+    <div class="modal-body">
+      <div class="center">
+        <div class="row">
+          <p class="col2">##word.Denomination## ##word.500##</p>
+          <i-control class="col4" ng-model="quickCounting.qc500"></i-control>
+          <div class="col1"></div>
+          <div class="col2">
+            <br>
+            <i class="fas fa-arrow-circle-right font-30 col2 center"></i>
+          </div>
+           <div class="col1"></div>
+          <fieldset class="gray-bg col4">
+            <p class="bold font-22">{{quickCounting.qc500 | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer center">
+
+      <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#quickCountingModal')"> </i-button>
+    </div>
+  </div>
+</div>

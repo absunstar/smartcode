@@ -1,90 +1,23 @@
 module.exports = function init(site) {
   let app = {
-    name: 'storesItemsCard',
+    name: 'offersPrices',
     allowMemory: false,
     memoryList: [],
-    allowCache: true,
+    allowCache: false,
     cacheList: [],
     allowRoute: true,
     allowRouteGet: true,
     allowRouteAdd: true,
     allowRouteUpdate: true,
+    allowRouteApprove: true,
+    allowRouteUnapprove: true,
     allowRouteDelete: true,
     allowRouteView: true,
     allowRouteAll: true,
-  };
-
-  site.setItemCard = function (_elm, screenName) {
-    app.all(
-      {
-        where: { itemId: _elm.id, 'unit.id': _elm.unit.id, 'store.id': _elm.store.id },
-        sort: { id: -1 },
-        limit: 1,
-      },
-      (err, docs) => {
-        if (!err) {
-          docs = docs || [];
-
-          let count = _elm.count;
-          if (_elm.countType == 'out') {
-            count = -Math.abs(count);
-          }
-
-          let obj = {
-            date: new Date(),
-            itemId: _elm.id,
-            itemCode: _elm.code,
-            orderCode: _elm.orderCode,
-            nameAr: _elm.nameAr,
-            nameEn: _elm.nameEn,
-            unit: _elm.unit,
-            itemGroup: _elm.itemGroup,
-            store: _elm.store,
-            vendor: _elm.vendor,
-            customer: _elm.customer,
-            invoiceId: _elm.invoiceId,
-            transactionType: site.storesTransactionsTypes.find((t) => t.code === screenName),
-            count: _elm.count,
-            price: _elm.price,
-            totalPrice: _elm.total,
-            currentCount: docs[0] ? docs[0].currentCount + count : count,
-            lastCount: docs[0] ? docs[0].currentCount : 0,
-            company: _elm.company,
-            countType: _elm.countType,
-          };
-          if (screenName === 'transferItemsOrders' && _elm.$type == 'transferItemsOrdersTo') {
-            obj = {
-              ...obj,
-              store: _elm.toStore,
-              countType: 'in',
-            };
-          } else if (screenName === 'convertUnits' && _elm.$type == 'convertUnitsTo') {
-            obj = {
-              ...obj,
-              unit: _elm.toUnit,
-              count: _elm.toCount,
-              price: _elm.toPrice,
-              total: _elm.toTotal,
-              countType: 'in',
-            };
-          } else if (_elm.bonusCount) {
-            obj.bonusCount = _elm.bonusCount;
-            obj.count += obj.bonusCount;
-            obj.purshaseCount = _elm.count;
-          }
-          app.$collection.add(obj);
-          if (screenName === 'transferItemsOrders' && !_elm.$type) {
-            site.setItemCard({ ..._elm, $type: 'transferItemsOrdersTo' }, screenName);
-          } else if (screenName === 'convertUnits' && !_elm.$type) {
-            site.setItemCard({ ..._elm, $type: 'convertUnitsTo' }, screenName);
-          }
-        }
-      }
-    );
+    allowRouteReport: true,
   };
 
   app.$collection = site.connectCollection(app.name);
-  //   where['name'] = site.get_RegExp(where['name'], 'i');
 
   app.init = function () {
     if (app.allowMemory) {
@@ -214,7 +147,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Stores Items Card', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: 'Offers Prices', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
@@ -227,7 +160,7 @@ module.exports = function init(site) {
 
         let _data = req.data;
         _data.company = site.getCompany(req);
-
+        _data.branch = site.getBranch(req);
         let numObj = {
           company: site.getCompany(req),
           screen: app.name,
@@ -242,17 +175,29 @@ module.exports = function init(site) {
         } else if (cb.auto) {
           _data.code = cb.code;
         }
-
-        _data.addUserInfo = req.getUserFinger();
-
-        app.add(_data, (err, doc) => {
-          if (!err && doc) {
-            response.done = true;
-            response.doc = doc;
-          } else {
-            response.error = err.mesage;
+        app.$collection.find({ code: _data.code }, (err, doc) => {
+          if (doc) {
+            response.error = 'Code Exisit';
+            res.json(response);
+            return;
           }
-          res.json(response);
+          _data.addUserInfo = req.getUserFinger();
+          const storesSetting = site.getCompanySetting(req).storesSetting;
+          if (storesSetting.autoApprovedOffersOrders) {
+            _data.approved = true;
+          } else {
+            _data.approved = false;
+          }
+          app.add(_data, (err, doc) => {
+            if (!err && doc) {
+              response.done = true;
+              response.doc = doc;
+            } else {
+              response.error = err.mesage;
+            }
+
+            res.json(response);
+          });
         });
       });
     }
@@ -264,7 +209,63 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        _data.editUserInfo = req.getUserFinger();
+        app.$collection.find({ id: _data.id, code: { $ne: _data.code } }, (err, doc) => {
+          if (doc) {
+            response.error = 'Code Exisit';
+            res.json(response);
+            return;
+          }
+          _data.editUserInfo = req.getUserFinger();
+
+          app.update(_data, (err, result) => {
+            if (!err) {
+              response.done = true;
+              response.result = result;
+            } else {
+              response.error = err.message;
+            }
+            res.json(response);
+          });
+        });
+      });
+    }
+
+    if (app.allowRouteApprove) {
+      site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+        if (!_data.id) {
+          response.error = 'No Id';
+          res.json(response);
+          return;
+        }
+        _data.approvedUserInfo = req.getUserFinger();
+        _data.approvedDate = new Date();
+
+        app.update(_data, (err, result) => {
+          if (!err) {
+            response.done = true;
+            response.result = result;
+          } else {
+            response.error = err.message;
+          }
+          res.json(response);
+        });
+      });
+    }
+
+    if (app.allowRouteUnapprove) {
+      site.post({ name: `/api/${app.name}/unapprove`, require: { permissions: ['login'] } }, (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+        _data.unapprovedUserInfo = req.getUserFinger();
+        _data.unapprovedDate = new Date();
 
         app.update(_data, (err, result) => {
           if (!err) {
@@ -319,51 +320,11 @@ module.exports = function init(site) {
     if (app.allowRouteAll) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
-        let select = req.body.select || {};
+        let search = req.body.search || '';
+        let limit = req.body.limit || 50;
+
+        let select = req.body.select || { id: 1, code: 1, title: 1, requestDate: 1, approvedDate: 1, itemsList: 1, approved: 1, active: 1, date: 1, hasTransaction: 1, customer: 1 };
         let list = [];
-        if (where.item) {
-          where['itemId'] = where.item.id;
-          delete where.item;
-        }
-
-        if (where.itemGroup) {
-          where['itemGroup.id'] = where.itemGroup.id;
-          delete where.itemGroup;
-        }
-
-        if (where.store) {
-          where['store.id'] = where.store.id;
-          delete where.store;
-        }
-
-        if (where.vendor) {
-          where['vendor.id'] = where.vendor.id;
-          delete where.vendor;
-        }
-
-        if (where.transactionType) {
-          where['transactionType.id'] = where.transactionType.id;
-          delete where.transactionType;
-        }
-
-        if (where && where.dateTo) {
-          let d1 = site.toDate(where.date);
-          let d2 = site.toDate(where.dateTo);
-          d2.setDate(d2.getDate() + 1);
-          where.date = {
-            $gte: d1,
-            $lt: d2,
-          };
-          delete where.dateTo;
-        } else if (where.date) {
-          let d1 = site.toDate(where.date);
-          let d2 = site.toDate(where.date);
-          d2.setDate(d2.getDate() + 1);
-          where.date = {
-            $gte: d1,
-            $lt: d2,
-          };
-        }
 
         if (app.allowMemory) {
           app.memoryList
@@ -376,16 +337,29 @@ module.exports = function init(site) {
                   delete obj[p];
                 }
               }
-              if (!where.active || doc.active) {
+              if ((!where.active || doc.active) && !doc.approved) {
                 list.push(obj);
               }
             });
           res.json({
             done: true,
-            list: list,
+            list: code,
           });
         } else {
-          app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
+          where['company.id'] = site.getCompany(req).id;
+
+          if (where && where.fromDate && where.toDate) {
+            let d1 = site.toDate(where.fromDate);
+            let d2 = site.toDate(where.toDate);
+            d2.setDate(d2.getDate() + 1);
+            where.date = {
+              $gte: d1,
+              $lte: d2,
+            };
+            delete where.fromDate;
+            delete where.toDate;
+          }
+          app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
             res.json({
               done: true,
               list: docs,
@@ -394,8 +368,39 @@ module.exports = function init(site) {
         }
       });
     }
-  }
 
+    if (app.allowRouteReport) {
+      site.post({ name: `/api/${app.name}/report`, public: true }, (req, res) => {
+        let where = req.body.where || {};
+        let search = req.body.search || '';
+        let limit = req.body.limit || 50;
+
+        let select = req.body.select || { id: 1, code: 1, title: 1, requestDate: 1, approvedDate: 1, itemsList: 1, approved: 1, active: 1, hasTransaction: 1 };
+        let list = [];
+
+        where['company.id'] = site.getCompany(req).id;
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.requestDate = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+
+        app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
+          res.json({
+            done: true,
+            list: docs,
+          });
+        });
+      });
+    }
+  }
   site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ['login'] } }, (req, res) => {
     let response = {
       done: false,

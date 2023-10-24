@@ -192,6 +192,32 @@ app.controller('numbering', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.newUpdateNumbering = function (where) {
+        $scope.busy = true;
+        $http({
+            method: 'POST',
+            url: '/api/numbering/newUpdate',
+            data: $scope.numbering,
+        }).then(
+            function (response) {
+                $scope.busy = false;
+                if (response.data.done) {
+                    $scope.loadNumbering();
+                    site.showModal('#alert');
+                    $timeout(() => {
+                        site.hideModal('#alert');
+                    }, 1500);
+                } else {
+                    $scope.error = response.data.error;
+                }
+            },
+            function (err) {
+                $scope.busy = false;
+                $scope.error = err;
+            }
+        );
+    };
+
     $scope.loadNumbering();
     $scope.typeNumberingList();
 });

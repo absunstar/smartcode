@@ -1,0 +1,12 @@
+[
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesApprove", "En": "Approve", "Ar": "إعتماد" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "offersPrices", "name": "offersPricesUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

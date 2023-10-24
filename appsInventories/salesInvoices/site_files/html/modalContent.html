@@ -16,6 +16,7 @@
             items="storesList"
             display="name##session.lang##"
           ></i-list>
+          <i-checkbox ng-model="item.fromOfferPrice" class="col2" ng-change="selectFromOfferPrice()" label="##word.From Offer Price##"></i-checkbox>
           <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
         </div>
         <div class="row">
@@ -29,18 +30,30 @@
             label="##word.Sales Category##"
             ng-search="item.$salesCategory"
           ></i-list>
+
+          <i-list
+            class="col4"
+            ng-show="item.fromOfferPrice"
+            ng-model="item.offerPrice"
+            label="##word.Offer Price##"
+            ng-search="item.$offerPrice"
+            items="offersPricesList"
+            ng-change="getOfferPriceItems(item.offerPrice)"
+            display="title"
+            display2="date"
+          ></i-list>
+          <i-list class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
+        </div>
+        <div class="row">
           <i-list
             class="col4"
             ng-show="item.salesCategory.id == 2"
             ng-model="item.delivery"
-            label="##word.Delivery##"
+            label="##word.Delivery Man##"
             ng-search="item.$delivery"
             items="deliveryList"
             display="fullName##session.lang##"
           ></i-list>
-          <i-list v="r" class="col4" ng-model="item.customer" label="##word.Customer##" ng-get="getCustomers($search)" items="customersList" display="name##session.lang##"></i-list>
-        </div>
-        <div class="row">
           <i-list
             class="col4"
             v="r"
@@ -64,9 +77,9 @@
     </div>
   </fieldset>
 
-  <fieldset ng-show="item.store && item.store.id">
+  <fieldset ng-show="item.store && item.store.id ">
     <legend>##word.Items Information##</legend>
-    <div class="row" ng-show="!item.approved">
+    <div class="row" ng-show="!item.approved && !item.fromOfferPrice">
       <i-control class="col3" ng-model="orderItem.barcode" ng-keydown="getBarcode($event)" label="##word.Barcode## / ##word.Qr Code##"></i-control>
       <i-list
         class="col2"

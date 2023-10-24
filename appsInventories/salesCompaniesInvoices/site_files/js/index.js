@@ -66,6 +66,12 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
       taxesList: [],
     };
 
+    if ($scope.setting.storesSetting.salesCategory && $scope.setting.storesSetting.salesCategory.id) {
+      $scope.item.salesCategory = $scope.salesCategoriesList.find((_t) => {
+        return _t.id == $scope.setting.storesSetting.salesCategory.id;
+      });
+    }
+
     if ($scope.setting.storesSetting.store && $scope.setting.storesSetting.store.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.store.id;
@@ -79,6 +85,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].Ar;
+      console.log(v.messages);
       return;
     }
     let dataValid = $scope.validateData(_item);
@@ -86,7 +93,6 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
       return;
     }
     $scope.busy = true;
-    console.log($scope.item.salesType);
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/add`,
@@ -139,6 +145,42 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $http({
       method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/update`,
+      data: _item,
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          site.hideModal($scope.modalID);
+          site.resetValidated($scope.modalID);
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          if (index !== -1) {
+            $scope.list[index] = response.data.result.doc;
+          }
+        } else {
+          $scope.error = response.data.error;
+        }
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
+  $scope.approve = function (_item) {
+    $scope.error = '';
+    const v = site.validated($scope.modalID);
+    if (!v.ok) {
+      $scope.error = v.messages[0].Ar;
+      return;
+    }
+    let dataValid = $scope.validateData(_item);
+    if (!dataValid.success) {
+      return;
+    }
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: `${$scope.baseURL}/api/${$scope.appName}/approve`,
       data: _item,
     }).then(
       function (response) {
@@ -452,6 +494,131 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     $scope.calculate($scope.item);
     $scope.resetOrderItem();
     $scope.itemsError = '';
+  };
+
+  $scope.getSalesCategories = function () {
+    $scope.busy = true;
+    $scope.salesCategoriesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/salesCategories',
+      data: {
+        select: {
+          id: 1,
+          code: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.salesCategoriesList = response.data.list.filter((s) => s.id != 3);
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getOffersPrices = function () {
+    $scope.busy = true;
+    $scope.offersPricesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/offersPrices/all',
+      data: {
+        where: {
+          approved: true,
+        },
+        select: {},
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.offersPricesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+  $scope.getOfferPriceItems = function (offerPrice) {
+    $scope.item.itemsList = [];
+    $http({
+      method: 'POST',
+      url: '/api/storesItems/handelItemsData',
+      data: { items: offerPrice.itemsList, storeId: $scope.item.store.id },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          if(offerPrice.customer && offerPrice.customer.id) {
+            $scope.item.customer = {...offerPrice.customer};
+          }
+          for (const elem of response.data.list) {
+            $scope.item.itemsList.unshift({
+              id: elem.id,
+              code: elem.code,
+              nameAr: elem.nameAr,
+              nameEn: elem.nameEn,
+              extraDiscount: elem.extraDiscount,
+
+              itemGroup: elem.itemGroup,
+              requestedCount: elem.count,
+              unit: elem.unit,
+              count: elem.count,
+              price: elem.price,
+              workByBatch: elem.workByBatch,
+              workBySerial: elem.workBySerial,
+              workByQrCode: elem.workByQrCode,
+              validityDays: elem.validityDays,
+              gtinList: elem.gtinList,
+              storeBalance: elem.storeBalance,
+              hasMedicalData: elem.hasMedicalData,
+              hasColorsData: elem.hasColorsData,
+              hasSizesData: elem.hasSizesData,
+              salesPrice: elem.salesPrice,
+              purchasePrice: 0,
+              discount: 0,
+              vendorDiscount: 0,
+              legalDiscount: 0,
+              total: 0,
+            });
+            $scope.calculate($scope.item);
+          }
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+  $scope.selectFromOfferPrice = function () {
+    if ($scope.item.fromOfferPrice) {
+      $scope.getOffersPrices();
+    } else {
+      $scope.item.offerPrice = {};
+      $scope.item.itemsList = [];
+      $scope.calculate($scope.item);
+    }
+  };
+
+  $scope.selectSalesCategory = function () {
+    if ($scope.item.salesCategory && $scope.item.salesCategory.id) {
+      if ($scope.item.salesCategory.id == 1) {
+        $scope.item.invoiceType = $scope.invoiceTypesList[0];
+      } else if ($scope.item.salesCategory.id == 2) {
+        $scope.item.invoiceType = $scope.invoiceTypesList[1];
+      }
+    }
   };
 
   $scope.getStores = function () {
@@ -1531,6 +1698,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
   $scope.getTaxTypes();
   $scope.getStores();
   $scope.getDelivery();
+  $scope.getSalesCategories();
   $scope.getCustomers();
   $scope.getStoresItems();
   $scope.getNumberingAuto();

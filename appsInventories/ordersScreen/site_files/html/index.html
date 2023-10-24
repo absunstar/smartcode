@@ -8,6 +8,7 @@
     <!--     <div x-import="theme1/header.html"></div> -->
     <div id="main-layout" ng-controller="ordersScreen" class="container loaded">
       <div class="row" x-permissions="salesInvoicesUi || salesInvoicesManage">
+        <div x-import="ordersScreen/quickCounting.html"></div>
         <div x-import="ordersScreen/itemEdit.html"></div>
         <div x-import="ordersScreen/ordersActive.html"></div>
         <div x-import="ordersScreen/orderDetailsModal.html"></div>
@@ -170,6 +171,7 @@
               <i-button label="##word.Cancel##" type="close" ng-click="cancelOrder(item)"> </i-button>
               <i-button label="##word.Other Pay##" onclick="site.showModal('#paymentListModal')"> </i-button>
               <i-button label="##word.Print##" type="print" ng-click="printOrdersToday()"> </i-button>
+              <i-button label="##word.Quick Counting##" onclick="site.showModal( '#quickCountingModal')"> </i-button>
             </div>
 
             <fieldset x-data="setting.showRestaurant" ng-show="item.salesCategory.id == 3">

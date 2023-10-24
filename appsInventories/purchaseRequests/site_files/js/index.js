@@ -142,7 +142,6 @@ app.controller('purchaseRequests', function ($scope, $http, $timeout) {
       return;
     }
 
-    _item['approved'] = true;
     $scope.busy = true;
     $http({
       method: 'POST',
@@ -180,7 +179,6 @@ app.controller('purchaseRequests', function ($scope, $http, $timeout) {
       return;
     }
 
-    _item['approved'] = false;
     $scope.busy = true;
     $http({
       method: 'POST',

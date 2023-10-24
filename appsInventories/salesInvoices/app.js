@@ -162,6 +162,20 @@ module.exports = function init(site) {
           res.json(response);
           return;
         }
+        if (_data.fromOfferPrice) {
+          if (!_data.offerPrice || !_data.offerPrice.id) {
+            response.error = `Must Select Offer Price`;
+            res.json(response);
+            return;
+          }
+        } else {
+          _data.offerPrice = {
+            id: _data.offerPrice.id,
+            code: _data.offerPrice.code,
+            date: _data.offerPrice.date,
+            title: _data.offerPrice.title,
+          };
+        }
         const storesSetting = site.getCompanySetting(req).storesSetting;
 
         if (_data.salesCategory && _data.salesCategory.id == 2) {
@@ -170,7 +184,7 @@ module.exports = function init(site) {
           _data['approved'] = _data['approved'] || false;
         } else if (_data.orderScreen) {
           _data['approved'] = _data['approved'] || false;
-        } else if(storesSetting.autoApproveSales) {
+        } else if (storesSetting.autoApproveSales) {
           _data['approved'] = true;
         } else {
           _data['approved'] = true;
@@ -421,7 +435,20 @@ module.exports = function init(site) {
           return;
         }
         _data.editUserInfo = req.getUserFinger();
-
+        if (_data.fromOfferPrice) {
+          if (!_data.offerPrice || !_data.offerPrice.id) {
+            response.error = `Must Select Offer Price`;
+            res.json(response);
+            return;
+          }
+        } else {
+          _data.offerPrice = {
+            id: _data.offerPrice.id,
+            code: _data.offerPrice.code,
+            date: _data.offerPrice.date,
+            title: _data.offerPrice.title,
+          };
+        }
         app.update(_data, (err, result) => {
           if (!err) {
             response.done = true;
@@ -674,6 +701,21 @@ module.exports = function init(site) {
       response.error = 'No Id';
       res.json(response);
       return;
+    }
+
+    if (_data.fromOfferPrice) {
+      if (!_data.offerPrice || !_data.offerPrice.id) {
+        response.error = `Must Select Offer Price`;
+        res.json(response);
+        return;
+      }
+    } else {
+      _data.offerPrice = {
+        id: _data.offerPrice.id,
+        code: _data.offerPrice.code,
+        date: _data.offerPrice.date,
+        title: _data.offerPrice.title,
+      };
     }
 
     if (_data.salesCategory && _data.salesCategory.id == 2) {

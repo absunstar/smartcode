@@ -4,6 +4,7 @@
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesUpdate", "En": "Edit", "Ar": "تعديل" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesDelete", "En": "Delete", "Ar": "حذف" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesApprove", "En": "Approve", "Ar": "إعتماد" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesSearch", "En": "Search", "Ar": "بحث" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesExport", "En": "Export", "Ar": "تصدير" },
     { "moduleName": "inventory", "screenName": "salesCompaniesInvoices", "name": "salesCompaniesInvoicesPrint", "En": "Print", "Ar": "طباعة" },
