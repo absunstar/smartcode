@@ -10,9 +10,8 @@
         <div class="row">
           <i-control class="col6" type="text" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
           <i-control class="col6" type="text" v="r" ng-model="item.nameAr" label="##word.Name Arabic##"></i-control>
-
           <i-control class="col6" type="number" v="r" ng-model="item.reorderLimit" label="##word.Reorder Limit##"></i-control>
-          <i-checkbox ng-model="item.collectionItem" ng-change="item.collectionItem?setItemCollectionInformations(item):''" class="col4" label="##word.Collection Item##"></i-checkbox>
+          <i-checkbox ng-show="company.packagesCompany.id != 1" ng-model="item.collectionItem" ng-change="item.collectionItem?setItemCollectionInformations(item):''" class="col4" label="##word.Collection Item##"></i-checkbox>
         </div>
         <div class="row">
           <i-checkbox ng-model="item.hasMedicalData" ng-change="setMedicalInformations(item)" class="col3" label="##word.Has Medical Data##"></i-checkbox>

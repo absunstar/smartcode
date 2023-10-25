@@ -194,6 +194,168 @@ app.controller('companies', function ($scope, $http, $timeout) {
       }
     );
   };
+  $scope.getPackagesCompaniesList = function () {
+    $scope.busy = true;
+    $scope.packagesCompaniesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/packagesCompanies',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.packagesCompaniesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.selectPackages = function () {
+    if ($scope.company.packagesCompany.id == 1) {
+      $scope.company.countEmployees = 2;
+    } else if ($scope.company.packagesCompany.id == 2) {
+      $scope.company.countEmployees = 3;
+    } else if ($scope.company.packagesCompany.id == 3) {
+      $scope.company.countEmployees = 4;
+    }
+    $scope.company.showCustomersGroups = true;
+    $scope.company.showOrdersScreen = true;
+    $scope.company.showSalesInvoices = true;
+    $scope.company.showCustomers = true;
+    $scope.company.showVendors = true;
+    $scope.company.showReturnSalesInvoices = true;
+    $scope.company.showPurchaseOrders = true;
+    $scope.company.showReturnPurchaseOrders = true;
+    $scope.company.showStoresItems = true;
+    $scope.company.showEmployees = true;
+    $scope.company.showCashers = true;
+    $scope.company.showOffersPrices = true;
+    $scope.company.showVendors = true;
+    $scope.company.showTransferItemsOrders = true;
+    $scope.company.showConvertUnits = true;
+    $scope.company.showDamageItems = true;
+    $scope.company.showStockTaking = true;
+    $scope.company.showStoresItemsCard = true;
+    $scope.company.showStoresOpeningBalances = true;
+    $scope.company.showActiveSubstances = true;
+    $scope.company.showStoresUnits = true;
+    $scope.company.showItemsGroups = true;
+    $scope.company.showStores = true;
+    $scope.company.showReasonsDestroyingItems = true;
+    $scope.company.showVendorsGroups = true;
+    $scope.company.showSafes = true;
+    $scope.company.showBanks = true;
+    $scope.company.showCurrencies = true;
+    $scope.company.showTransferSafes = true;
+    $scope.company.showDiscountTypes = true;
+    $scope.company.showTaxesTypes = true;
+    $scope.company.showSafesAdjusting = true;
+    $scope.company.showSafesTransactions = true;
+    $scope.company.showPurchaseRequests = true;
+    $scope.company.showTransferItemsRequests = true;
+    $scope.company.showSecurity = true;
+    $scope.company.showNationalities = true;
+    $scope.company.showCountries = true;
+    $scope.company.showGoves = true;
+    $scope.company.showCities = true;
+    $scope.company.showAreas = true;
+    $scope.company.showPrintersPaths = true;
+    $scope.company.showNamesConversions = true;
+    $scope.company.showNumbering = true;
+    $scope.company.showXwords = true;
+    $scope.company.showCompanySetting = true;
+    if ($scope.company.packagesCompany.id == 2 || $scope.company.packagesCompany.id == 3) {
+      $scope.company.showDeliverers = true;
+      $scope.company.showDeliveryManage = true;
+      $scope.company.showSalesCompaniesInvoices = true;
+      $scope.company.showReasonsCancelingDelivery = true;
+      $scope.company.showVehicles = true;
+      $scope.company.showVehiclesTypes = true;
+      $scope.company.showIncomeList = true;
+      $scope.company.showVoucherNames = true;
+      $scope.company.showReceiptVouchers = true;
+      $scope.company.showGeneralSalesInvoices = true;
+      $scope.company.showGeneralPurchaseInvoices = true;
+      $scope.company.showExpenseVouchers = true;
+      $scope.company.showAccountsGuide = true;
+      $scope.company.showCostCenters = true;
+      $scope.company.showGeneralLedger = true;
+      $scope.company.showAssistantGeneralLedger = true;
+      $scope.company.showJournalEntry = true;
+      $scope.company.showBudgetClassifications = true;
+      $scope.company.showPayslips = true;
+      $scope.company.showDepartments = true;
+      $scope.company.showSections = true;
+      $scope.company.showJobs = true;
+      $scope.company.showJobsShifts = true;
+      $scope.company.showTotalVat = true;
+      $scope.company.showSalesVat = true;
+      $scope.company.showPurchaseVat = true;
+    
+    }
+
+    $scope.company.showDailyCashiers = true;
+    $scope.company.showDailyCashByDates = true;
+    $scope.company.showDailyCashByPaymentNumber = true;
+    $scope.company.showDailyCashByUsers = true;
+    $scope.company.showDailyCashByUser = true;
+    $scope.company.showReorderLimits = true;
+    $scope.company.showMostSellingItems = true;
+    $scope.company.showLowestSellingItems = true;
+    $scope.company.showReportCollectedItems = true;
+    $scope.company.showReportMedicalItems = true;
+    $scope.company.showReportSalesInvoicesForCustomer = true;
+    $scope.company.showReportSalesInvoicesForCustomers = true;
+    $scope.company.showReportSalesInvoicesForCompany = true;
+    $scope.company.showReportSalesInvoicesForCompanies = true;
+    $scope.company.showReportReturnSalesInvoicesForCustomer = true;
+    $scope.company.showReportReturnSalesInvoicesToStore = true;
+    $scope.company.showReportReturnSalesInvoices = true;
+    $scope.company.showReportApprovedPurchaseRequests = true;
+    $scope.company.showReportNotApprovedPurchaseRequests = true;
+    $scope.company.showReportHasTransactionPurchaseRequests = true;
+    $scope.company.showReportPurchaseRequests = true;
+    $scope.company.showReportPurchaseOrders = true;
+    $scope.company.showReportVendorPurchaseOrders = true;
+
+    if ($scope.company.packagesCompany.id == 3) {
+      $scope.company.showAttendance = true;
+      $scope.company.showVacationsRequests = true;
+      $scope.company.showDelayRequests = true;
+      $scope.company.showWorkErrandRequests = true;
+      $scope.company.showOvertimeRequests = true;
+      $scope.company.showEmployeesBonuses = true;
+      $scope.company.showEmployeesPenalties = true;
+      $scope.company.showEmployeesAdvances = true;
+      $scope.company.showCreateVacations = true;
+
+      $scope.company.showSalaryAllowancesNames = true;
+      $scope.company.showSalaryDeductionsNames = true;
+      $scope.company.showEmployeesBonusNames = true;
+      $scope.company.showEmployeesPenaltiesNames = true;
+      $scope.company.showJobsTools = true;
+      $scope.company.showVacationsNames = true;
+      $scope.company.showEvaluationItems = true;
+      $scope.company.showEvaluationTemplates = true;
+      $scope.company.showJobsAdvertisements = true;
+      $scope.company.showJobsApplicants = true;
+
+      $scope.company.showAttendanceReport = true;
+      $scope.company.showReportVacationsRequests = true;
+      $scope.company.showReportDelayRequests = true;
+      $scope.company.showReportWorkErrandRequests = true;
+      $scope.company.showReportOvertimeRequests = true;
+      $scope.company.showReportEmployeesBonuses = true;
+      $scope.company.showReportEmployeesPenalties = true;
+      $scope.company.showReportEmployeesAdvances = true;
+    }
+  };
+
   $scope.resetTransactions = function (id) {
     if ($scope.busy) {
       return;
@@ -871,15 +1033,15 @@ app.controller('companies', function ($scope, $http, $timeout) {
   $scope.showSettingScreens = function () {
     $scope.company.showCustomers = $scope.company.showSetting;
     $scope.company.showCustomersGroups = $scope.company.showSetting;
+    $scope.company.showReasonsCancelingDelivery = $scope.company.showSetting;
+    $scope.company.showVehicles = $scope.company.showSetting;
+    $scope.company.showVehiclesTypes = $scope.company.showSetting;
     $scope.company.showSecurity = $scope.company.showSetting;
     $scope.company.showNationalities = $scope.company.showSetting;
     $scope.company.showCountries = $scope.company.showSetting;
     $scope.company.showGoves = $scope.company.showSetting;
     $scope.company.showCities = $scope.company.showSetting;
     $scope.company.showAreas = $scope.company.showSetting;
-    $scope.company.showReasonsCancelingDelivery = $scope.company.showSetting;
-    $scope.company.showVehicles = $scope.company.showSetting;
-    $scope.company.showVehiclesTypes = $scope.company.showSetting;
     $scope.company.showPrintersPaths = $scope.company.showSetting;
     $scope.company.showNamesConversions = $scope.company.showSetting;
     $scope.company.showNumbering = $scope.company.showSetting;
@@ -901,8 +1063,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showReturnPurchaseOrders = $scope.company.showPos;
     $scope.company.showStoresItems = $scope.company.showPos;
     $scope.company.showEmployees = $scope.company.showPos;
-    $scope.company.showDeliverers = $scope.company.showPos;
     $scope.company.showCashers = $scope.company.showPos;
+    $scope.company.showDeliverers = $scope.company.showPos;
     $scope.company.showDeliveryManage = $scope.company.showPos;
   };
 
@@ -981,28 +1143,30 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.showAccountingScreens = function () {
-    $scope.company.showIncomeList = $scope.company.showAccounting;
-    $scope.company.showDiscountTypes = $scope.company.showAccounting;
-    $scope.company.showVoucherNames = $scope.company.showAccounting;
-    $scope.company.showReceiptVouchers = $scope.company.showAccounting;
-    $scope.company.showgeneralSalesInvoice = $scope.company.showAccounting;
-    $scope.company.showExpenseVouchers = $scope.company.showAccounting;
     $scope.company.showSafes = $scope.company.showAccounting;
     $scope.company.showBanks = $scope.company.showAccounting;
     $scope.company.showCurrencies = $scope.company.showAccounting;
     $scope.company.showTransferSafes = $scope.company.showAccounting;
+    $scope.company.showDiscountTypes = $scope.company.showAccounting;
+    $scope.company.showTaxesTypes = $scope.company.showAccounting;
+    $scope.company.showSafesAdjusting = $scope.company.showAccounting;
+    $scope.company.showSafesTransactions = $scope.company.showAccounting;
+    $scope.company.showIncomeList = $scope.company.showAccounting;
+    $scope.company.showVoucherNames = $scope.company.showAccounting;
+    $scope.company.showReceiptVouchers = $scope.company.showAccounting;
+    $scope.company.showgeneralSalesInvoice = $scope.company.showAccounting;
+    $scope.company.showGeneralPurchaseInvoices = $scope.company.showAccounting;
+    $scope.company.showExpenseVouchers = $scope.company.showAccounting;
     $scope.company.showAccountsGuide = $scope.company.showAccounting;
     $scope.company.showCostCenters = $scope.company.showAccounting;
     $scope.company.showGeneralLedger = $scope.company.showAccounting;
     $scope.company.showAssistantGeneralLedger = $scope.company.showAccounting;
     $scope.company.showJournalEntry = $scope.company.showAccounting;
     $scope.company.showBudgetClassifications = $scope.company.showAccounting;
-    $scope.company.showTaxesTypes = $scope.company.showAccounting;
-    $scope.company.showSafesAdjusting = $scope.company.showAccounting;
-    $scope.company.showSafesTransactions = $scope.company.showAccounting;
   };
   $scope.getCountriesList();
   $scope.getcompanyList();
   $scope.getBankList();
+  $scope.getPackagesCompaniesList();
   /*  $scope.getcompanyActivityList(); */
 });

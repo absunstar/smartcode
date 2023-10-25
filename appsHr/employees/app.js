@@ -152,7 +152,7 @@ module.exports = function init(site) {
       autoOverTimeList: [],
     };
     paySlip = { ...paySlip, ...data };
-   
+
     site.getEmployeeBounus(paySlip, (paySlip2) => {
       site.getEmployeePenalties(req, paySlip2, (paySlip3) => {
         site.getEmployeeOvertime(req, paySlip3, (paySlip4) => {
@@ -590,63 +590,79 @@ module.exports = function init(site) {
         let _data = req.data;
         _data.company = site.getCompany(req);
         _data.branch = site.getBranch(req);
-        _data.branchList = [
-          {
-            company: _data.company,
-            branch: _data.branch,
-          },
-        ];
-        let numObj = {
-          company: site.getCompany(req),
-          screen: app.name,
-          date: new Date(),
-        };
-
-        if (!_data.email) {
-          const splitName = _data.fullNameEn.split(' ');
-          _data.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
-        }
-        _data.roles = [
-          {
-            moduleName: 'public',
-            name: 'employeePermissions',
-            En: 'Employee Permissions',
-            Ar: 'صلاحيات الموظف',
-          },
-        ];
-        _data.type = site.usersTypesList[3];
-
-        if (_data.mobileList && _data.mobileList.length > 0) {
-          _data.mobile = _data.mobileList[0].mobile;
-        } else {
-          response.error = 'Must Add Mobile Number';
-          res.json(response);
-          return;
-        }
-
-        let cb = site.getNumbering(numObj);
-        if (!_data.code && !cb.auto) {
-          response.error = 'Must Enter Code';
-          res.json(response);
-          return;
-        } else if (cb.auto) {
-          _data.code = cb.code;
-        }
-        _data.addUserInfo = req.getUserFinger();
-        if (_data.$deliverers) {
-          _data.jobType = site.employeesJobsTypesList[2];
-        } else if (_data.$cashers) {
-          _data.jobType = site.employeesJobsTypesList[3];
-        }
-     
-        app.add(_data, (err, doc) => {
-          if (!err && doc) {
-            response.done = true;
-            response.doc = doc;
-          } else {
-            response.error = err?.message || 'Add Not Exists';
+        let where = {};
+        where['company.id'] = site.getCompany(req).id;
+        where['type.id'] = 4;
+        let select = { id: 1 };
+        let setting = site.getCompanySetting(req);
+        app.all({ where, select }, (err1, docs) => {
+          if (docs && docs.length >= setting.countEmployees) {
+            response.error = 'You have exceeded the maximum number of employees';
+            res.json(response);
+            return;
+          } else if (err1) {
+            response.error = err1?.message || 'Has Err';
+            res.json(response);
+            return;
           }
-          res.json(response);
+          _data.branchList = [
+            {
+              company: _data.company,
+              branch: _data.branch,
+            },
+          ];
+          let numObj = {
+            company: site.getCompany(req),
+            screen: app.name,
+            date: new Date(),
+          };
+
+          if (!_data.email) {
+            const splitName = _data.fullNameEn.split(' ');
+            _data.email = splitName[0] + Math.floor(Math.random() * 1000 + 1).toString();
+          }
+          _data.roles = [
+            {
+              moduleName: 'public',
+              name: 'employeePermissions',
+              En: 'Employee Permissions',
+              Ar: 'صلاحيات الموظف',
+            },
+          ];
+          _data.type = site.usersTypesList[3];
+
+          if (_data.mobileList && _data.mobileList.length > 0) {
+            _data.mobile = _data.mobileList[0].mobile;
+          } else {
+            response.error = 'Must Add Mobile Number';
+            res.json(response);
+            return;
+          }
+
+          let cb = site.getNumbering(numObj);
+          if (!_data.code && !cb.auto) {
+            response.error = 'Must Enter Code';
+            res.json(response);
+            return;
+          } else if (cb.auto) {
+            _data.code = cb.code;
+          }
+          _data.addUserInfo = req.getUserFinger();
+          if (_data.$deliverers) {
+            _data.jobType = site.employeesJobsTypesList[2];
+          } else if (_data.$cashers) {
+            _data.jobType = site.employeesJobsTypesList[3];
+          }
+
+          app.add(_data, (err, doc) => {
+            if (!err && doc) {
+              response.done = true;
+              response.doc = doc;
+            } else {
+              response.error = err?.message || 'Add Not Exists';
+            }
+            res.json(response);
+          });
         });
       });
     }

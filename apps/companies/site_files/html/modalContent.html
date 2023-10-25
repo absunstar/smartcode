@@ -31,7 +31,18 @@
 
                 <i-control class="col4" label="##word.Tax Number##" ng-model="company.taxNumber"></i-control>
               </div>
+              <div class="row">
+                <i-list
+                  class="col4"
+                  label="##word.Packages##"
+                  ng-change="selectPackages()"
+                  ng-model="company.packagesCompany"
+                  display="name##session.lang##"
+                  items="packagesCompaniesList"
+                ></i-list>
+                <i-control class="col4" type="number" label="##word.Count of Employees##" ng-model="company.countEmployees"> </i-control>
 
+              </div>
               <div class="row">
                 <i-list
                   class="col4"
@@ -83,6 +94,9 @@
 
             <div class="col3">
               <i-image class="img128" category="companies" ng-model="company.image"></i-image>
+              <i-checkbox label="##word.Show## ##word.Hospital##" ng-model="company.showHospital"></i-checkbox>
+              <i-checkbox label="##word.Show## ##word.Restaurant##" ng-model="company.showRestaurant"></i-checkbox>
+
             </div>
           </div>
         </fieldset>

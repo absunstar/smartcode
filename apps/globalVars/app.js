@@ -11,6 +11,12 @@ module.exports = function init(site) {
     { id: 2, nameEn: 'Delivery', nameAr: 'توصيل', name: 'delivery' },
   ];
 
+  site.packagesCompanies = [
+    { id: 1, nameEn: 'First Package', nameAr: 'الباقة الأولى', name: 'first' },
+    { id: 2, nameEn: 'Second Package', nameAr: 'الباقة الثانية', name: 'second' },
+    { id: 3, nameEn: 'Third Package', nameAr: 'الباقة الثالثة', name: 'third' },
+  ];
+
   site.deliveryOrderStatus = [
     { id: 1, nameEn: 'Under Process', nameAr: 'قيد التجهيز', name: 'underProcess' },
     { id: 2, nameEn: 'On The Way', nameAr: 'في الطريق', name: 'onTheWay' },
@@ -581,6 +587,13 @@ module.exports = function init(site) {
     res.json({
       done: true,
       list: site.centersTypes,
+    });
+  });
+
+  site.post('/api/packagesCompanies', (req, res) => {
+    res.json({
+      done: true,
+      list: site.packagesCompanies,
     });
   });
 
