@@ -366,7 +366,7 @@ module.exports = function init(site) {
           }
 
           let duplicateCompany = app.memoryList.find(
-            (itm) => itm.nameAr == companiesDoc.nameAr || itm.nameEn == companiesDoc.nameEn || itm.host == companiesDoc.host || itm.username == companiesDoc.username
+            (itm) => itm.nameAr == companiesDoc.nameAr || itm.nameEn == companiesDoc.nameEn || (companiesDoc.host && itm.host == companiesDoc.host) || itm.username == companiesDoc.username
           );
           if (duplicateCompany) {
             if (duplicateCompany.nameAr === companiesDoc.nameAr) {
