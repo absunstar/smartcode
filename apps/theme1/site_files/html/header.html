@@ -209,7 +209,7 @@
           </div>
         </li>
 
-        <li id="Delivery" ng-show="setting.packagesCompany.id != 1" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Delivery')">
+        <li id="Delivery" ng-show="setting.packagesCompany.id == 2 || setting.packagesCompany.id == 3" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Delivery')">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-users"></i>
