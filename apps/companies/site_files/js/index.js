@@ -1,40 +1,40 @@
-app.controller('companies', function ($scope, $http, $timeout) {
+app.controller("companies", function ($scope, $http, $timeout) {
   $scope._search = {};
 
   $scope.company = {};
-  $scope.mode = 'add';
+  $scope.mode = "add";
 
   $scope.displayAddCompany = function () {
-    $scope.error = '';
-    $scope.mode = 'add';
-    $scope.mode = 'add';
+    $scope.error = "";
+    $scope.mode = "add";
+    $scope.mode = "add";
 
     $scope.company = {
-      image: '/images/company.png',
-      calenderType: 'gegorian',
+      image: "/images/company.png",
+      calenderType: "gegorian",
       active: true,
       branchList: [
         {
           code: 1,
-          nameAr: 'الفرع الرئيسى',
-          nameEn: 'Main Branch',
+          nameAr: "الفرع الرئيسى",
+          nameEn: "Main Branch",
           charge: [{}],
         },
       ],
       bank_list: [{}],
     };
-    site.showModal('#companyManageModal');
-    document.querySelector('#companyManageModal .tab-link').click();
+    site.showModal("#companyManageModal");
+    document.querySelector("#companyManageModal .tab-link").click();
   };
 
   $scope.addCompany = function () {
     if ($scope.busy) {
-      $scope.error = 'App Busy';
+      $scope.error = "App Busy";
       return;
     }
 
-    $scope.error = '';
-    const v = site.validated('#companyManageModal');
+    $scope.error = "";
+    const v = site.validated("#companyManageModal");
     if (!v.ok) {
       $scope.error = v.messages[0].Ar;
       return;
@@ -42,14 +42,14 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
 
     $http({
-      method: 'POST',
-      url: '/api/companies/add',
+      method: "POST",
+      url: "/api/companies/add",
       data: $scope.company,
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal('#companyManageModal');
+          site.hideModal("#companyManageModal");
           $scope.list.unshift(response.data.doc);
           $scope.count += 1;
           $scope.busy = false;
@@ -72,12 +72,12 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.displayUpdateCompany = function (company) {
-    $scope.error = '';
-    $scope.mode = 'edit';
+    $scope.error = "";
+    $scope.mode = "edit";
     $scope.detailsCompany(company);
     $scope.company = {};
-    site.showModal('#companyManageModal');
-    document.querySelector('#companyManageModal .tab-link').click();
+    site.showModal("#companyManageModal");
+    document.querySelector("#companyManageModal .tab-link").click();
   };
 
   $scope.updateCompany = function () {
@@ -85,8 +85,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
       return;
     }
 
-    $scope.error = '';
-    const v = site.validated('#companyManageModal');
+    $scope.error = "";
+    const v = site.validated("#companyManageModal");
     if (!v.ok) {
       $scope.error = v.messages[0].Ar;
       return;
@@ -95,14 +95,14 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
 
     $http({
-      method: 'POST',
-      url: '/api/companies/update',
+      method: "POST",
+      url: "/api/companies/update",
       data: $scope.company,
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal('#companyManageModal');
+          site.hideModal("#companyManageModal");
           $scope.list.forEach((b, i) => {
             if (b.id == response.data.doc.id) {
               $scope.list[i] = response.data.doc;
@@ -119,20 +119,20 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.displayDetailsCompany = function (company) {
-    $scope.error = '';
-    $scope.mode = 'view';
+    $scope.error = "";
+    $scope.mode = "view";
     $scope.detailsCompany(company);
     $scope.company = {};
-    site.showModal('#companyManageModal');
-    document.querySelector('#companyManageModal .tab-link').click();
+    site.showModal("#companyManageModal");
+    document.querySelector("#companyManageModal .tab-link").click();
   };
 
   $scope.detailsCompany = function (company) {
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
     $http({
-      method: 'POST',
-      url: '/api/companies/view',
+      method: "POST",
+      url: "/api/companies/view",
       data: {
         id: company.id,
       },
@@ -152,12 +152,12 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.displayDeleteCompany = function (company) {
-    $scope.error = '';
-    $scope.mode = 'delete';
+    $scope.error = "";
+    $scope.mode = "delete";
     $scope.detailsCompany(company);
     $scope.company = {};
-    site.showModal('#companyManageModal');
-    document.querySelector('#companyManageModal .tab-link').click();
+    site.showModal("#companyManageModal");
+    document.querySelector("#companyManageModal .tab-link").click();
   };
 
   $scope.deleteCompany = function () {
@@ -166,11 +166,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
     }
 
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
 
     $http({
-      method: 'POST',
-      url: '/api/companies/delete',
+      method: "POST",
+      url: "/api/companies/delete",
       data: {
         id: $scope.company.id,
       },
@@ -178,7 +178,7 @@ app.controller('companies', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.hideModal('#companyManageModal');
+          site.hideModal("#companyManageModal");
           $scope.list.forEach((b, i) => {
             if (b.id == response.data.doc.id) {
               $scope.list.splice(i, 1);
@@ -198,8 +198,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.packagesCompaniesList = [];
     $http({
-      method: 'POST',
-      url: '/api/packagesCompanies',
+      method: "POST",
+      url: "/api/packagesCompanies",
       data: {},
     }).then(
       function (response) {
@@ -223,6 +223,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
     } else if ($scope.company.packagesCompany.id == 3) {
       $scope.company.countEmployees = 4;
     }
+    $scope.company.showAccounting = true;
+    $scope.company.showInventory = true;
+    $scope.company.showHr = true;
+    $scope.company.showReports = true;
+    $scope.company.showSetting = true;
     $scope.company.showCustomersGroups = true;
     $scope.company.showOrdersScreen = true;
     $scope.company.showSalesInvoices = true;
@@ -269,7 +274,10 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showNumbering = true;
     $scope.company.showXwords = true;
     $scope.company.showCompanySetting = true;
-    if ($scope.company.packagesCompany.id == 2 || $scope.company.packagesCompany.id == 3) {
+    if (
+      $scope.company.packagesCompany.id == 2 ||
+      $scope.company.packagesCompany.id == 3
+    ) {
       $scope.company.showDeliverers = true;
       $scope.company.showDeliveryManage = true;
       $scope.company.showSalesCompaniesInvoices = true;
@@ -296,7 +304,6 @@ app.controller('companies', function ($scope, $http, $timeout) {
       $scope.company.showTotalVat = true;
       $scope.company.showSalesVat = true;
       $scope.company.showPurchaseVat = true;
-    
     }
 
     $scope.company.showDailyCashiers = true;
@@ -356,17 +363,155 @@ app.controller('companies', function ($scope, $http, $timeout) {
     }
   };
 
+  $scope.notSelectPackages = function () {
+    $scope.company.showAccounting = false;
+    $scope.company.showInventory = false;
+    $scope.company.showHr = false;
+    $scope.company.showReports = false;
+    $scope.company.showSetting = false;
+    $scope.company.showCustomersGroups = false;
+    $scope.company.showOrdersScreen = false;
+    $scope.company.showSalesInvoices = false;
+    $scope.company.showCustomers = false;
+    $scope.company.showVendors = false;
+    $scope.company.showReturnSalesInvoices = false;
+    $scope.company.showPurchaseOrders = false;
+    $scope.company.showReturnPurchaseOrders = false;
+    $scope.company.showStoresItems = false;
+    $scope.company.showEmployees = false;
+    $scope.company.showCashers = false;
+    $scope.company.showOffersPrices = false;
+    $scope.company.showVendors = false;
+    $scope.company.showTransferItemsOrders = false;
+    $scope.company.showConvertUnits = false;
+    $scope.company.showDamageItems = false;
+    $scope.company.showStockTaking = false;
+    $scope.company.showStoresItemsCard = false;
+    $scope.company.showStoresOpeningBalances = false;
+    $scope.company.showActiveSubstances = false;
+    $scope.company.showStoresUnits = false;
+    $scope.company.showItemsGroups = false;
+    $scope.company.showStores = false;
+    $scope.company.showReasonsDestroyingItems = false;
+    $scope.company.showVendorsGroups = false;
+    $scope.company.showSafes = false;
+    $scope.company.showBanks = false;
+    $scope.company.showCurrencies = false;
+    $scope.company.showTransferSafes = false;
+    $scope.company.showDiscountTypes = false;
+    $scope.company.showTaxesTypes = false;
+    $scope.company.showSafesAdjusting = false;
+    $scope.company.showSafesTransactions = false;
+    $scope.company.showPurchaseRequests = false;
+    $scope.company.showTransferItemsRequests = false;
+    $scope.company.showSecurity = false;
+    $scope.company.showNationalities = false;
+    $scope.company.showCountries = false;
+    $scope.company.showGoves = false;
+    $scope.company.showCities = false;
+    $scope.company.showAreas = false;
+    $scope.company.showPrintersPaths = false;
+    $scope.company.showNamesConversions = false;
+    $scope.company.showNumbering = false;
+    $scope.company.showXwords = false;
+    $scope.company.showCompanySetting = false;
+    $scope.company.showDeliverers = false;
+    $scope.company.showDeliveryManage = false;
+    $scope.company.showSalesCompaniesInvoices = false;
+    $scope.company.showReasonsCancelingDelivery = false;
+    $scope.company.showVehicles = false;
+    $scope.company.showVehiclesTypes = false;
+    $scope.company.showIncomeList = false;
+    $scope.company.showVoucherNames = false;
+    $scope.company.showReceiptVouchers = false;
+    $scope.company.showGeneralSalesInvoices = false;
+    $scope.company.showGeneralPurchaseInvoices = false;
+    $scope.company.showExpenseVouchers = false;
+    $scope.company.showAccountsGuide = false;
+    $scope.company.showCostCenters = false;
+    $scope.company.showGeneralLedger = false;
+    $scope.company.showAssistantGeneralLedger = false;
+    $scope.company.showJournalEntry = false;
+    $scope.company.showBudgetClassifications = false;
+    $scope.company.showPayslips = false;
+    $scope.company.showDepartments = false;
+    $scope.company.showSections = false;
+    $scope.company.showJobs = false;
+    $scope.company.showJobsShifts = false;
+    $scope.company.showTotalVat = false;
+    $scope.company.showSalesVat = false;
+    $scope.company.showPurchaseVat = false;
+
+    $scope.company.showDailyCashiers = false;
+    $scope.company.showDailyCashByDates = false;
+    $scope.company.showDailyCashByPaymentNumber = false;
+    $scope.company.showDailyCashByUsers = false;
+    $scope.company.showDailyCashByUser = false;
+    $scope.company.showReorderLimits = false;
+    $scope.company.showMostSellingItems = false;
+    $scope.company.showLowestSellingItems = false;
+    $scope.company.showReportCollectedItems = false;
+    $scope.company.showReportMedicalItems = false;
+    $scope.company.showReportSalesInvoicesForCustomer = false;
+    $scope.company.showReportSalesInvoicesForCustomers = false;
+    $scope.company.showReportSalesInvoicesForCompany = false;
+    $scope.company.showReportSalesInvoicesForCompanies = false;
+    $scope.company.showReportReturnSalesInvoicesForCustomer = false;
+    $scope.company.showReportReturnSalesInvoicesToStore = false;
+    $scope.company.showReportReturnSalesInvoices = false;
+    $scope.company.showReportApprovedPurchaseRequests = false;
+    $scope.company.showReportNotApprovedPurchaseRequests = false;
+    $scope.company.showReportHasTransactionPurchaseRequests = false;
+    $scope.company.showReportPurchaseRequests = false;
+    $scope.company.showReportPurchaseOrders = false;
+    $scope.company.showReportVendorPurchaseOrders = false;
+
+    $scope.company.showAttendance = false;
+    $scope.company.showVacationsRequests = false;
+    $scope.company.showDelayRequests = false;
+    $scope.company.showWorkErrandRequests = false;
+    $scope.company.showOvertimeRequests = false;
+    $scope.company.showEmployeesBonuses = false;
+    $scope.company.showEmployeesPenalties = false;
+    $scope.company.showEmployeesAdvances = false;
+    $scope.company.showCreateVacations = false;
+
+    $scope.company.showSalaryAllowancesNames = false;
+    $scope.company.showSalaryDeductionsNames = false;
+    $scope.company.showEmployeesBonusNames = false;
+    $scope.company.showEmployeesPenaltiesNames = false;
+    $scope.company.showJobsTools = false;
+    $scope.company.showVacationsNames = false;
+    $scope.company.showEvaluationItems = false;
+    $scope.company.showEvaluationTemplates = false;
+    $scope.company.showJobsAdvertisements = false;
+    $scope.company.showJobsApplicants = false;
+
+    $scope.company.showAttendanceReport = false;
+    $scope.company.showReportVacationsRequests = false;
+    $scope.company.showReportDelayRequests = false;
+    $scope.company.showReportWorkErrandRequests = false;
+    $scope.company.showReportOvertimeRequests = false;
+    $scope.company.showReportEmployeesBonuses = false;
+    $scope.company.showReportEmployeesPenalties = false;
+    $scope.company.showReportEmployeesAdvances = false;
+    $timeout(() => {
+      $scope.selectPackages();
+    }, 1000);
+    
+  };
+
   $scope.resetTransactions = function (id) {
     if ($scope.busy) {
       return;
     }
 
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
 
     $http({
-      method: 'POST',
-      url: '/api/receiptVouchers/resetForCompany',
+      method: "POST",
+      url: "/api/receiptVouchers/resetForCompany",
       data: {
         id: id,
       },
@@ -384,8 +529,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/expenseVouchers/resetForCompany',
+      method: "POST",
+      url: "/api/expenseVouchers/resetForCompany",
       data: {
         id: id,
       },
@@ -403,8 +548,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/purchaseOrders/resetForCompany',
+      method: "POST",
+      url: "/api/purchaseOrders/resetForCompany",
       data: {
         id: id,
       },
@@ -422,8 +567,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/purchaseRequests/resetForCompany',
+      method: "POST",
+      url: "/api/purchaseRequests/resetForCompany",
       data: {
         id: id,
       },
@@ -441,8 +586,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/returnPurchaseOrders/resetForCompany',
+      method: "POST",
+      url: "/api/returnPurchaseOrders/resetForCompany",
       data: {
         id: id,
       },
@@ -460,8 +605,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/offersPrices/resetForCompany',
+      method: "POST",
+      url: "/api/offersPrices/resetForCompany",
       data: {
         id: id,
       },
@@ -479,8 +624,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/returnSalesInvoices/resetForCompany',
+      method: "POST",
+      url: "/api/returnSalesInvoices/resetForCompany",
       data: {
         id: id,
       },
@@ -498,8 +643,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/salesInvoices/resetForCompany',
+      method: "POST",
+      url: "/api/salesInvoices/resetForCompany",
       data: {
         id: id,
       },
@@ -517,8 +662,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/journalEntry/resetForCompany',
+      method: "POST",
+      url: "/api/journalEntry/resetForCompany",
       data: {
         id: id,
       },
@@ -536,8 +681,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/safesTransactions/resetForCompany',
+      method: "POST",
+      url: "/api/safesTransactions/resetForCompany",
       data: {
         id: id,
       },
@@ -555,8 +700,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/safesAdjusting/resetForCompany',
+      method: "POST",
+      url: "/api/safesAdjusting/resetForCompany",
       data: {
         id: id,
       },
@@ -574,8 +719,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/transferSafes/resetForCompany',
+      method: "POST",
+      url: "/api/transferSafes/resetForCompany",
       data: {
         id: id,
       },
@@ -593,8 +738,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/safes/resetForCompany',
+      method: "POST",
+      url: "/api/safes/resetForCompany",
       data: {
         id: id,
       },
@@ -612,8 +757,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/stockTaking/resetForCompany',
+      method: "POST",
+      url: "/api/stockTaking/resetForCompany",
       data: {
         id: id,
       },
@@ -631,8 +776,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/storesItemsCard/resetForCompany',
+      method: "POST",
+      url: "/api/storesItemsCard/resetForCompany",
       data: {
         id: id,
       },
@@ -650,8 +795,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/storesOpeningBalances/resetForCompany',
+      method: "POST",
+      url: "/api/storesOpeningBalances/resetForCompany",
       data: {
         id: id,
       },
@@ -669,8 +814,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/transferItemsOrders/resetForCompany',
+      method: "POST",
+      url: "/api/transferItemsOrders/resetForCompany",
       data: {
         id: id,
       },
@@ -688,8 +833,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/transferItemsRequests/resetForCompany',
+      method: "POST",
+      url: "/api/transferItemsRequests/resetForCompany",
       data: {
         id: id,
       },
@@ -707,8 +852,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/damageItems/resetForCompany',
+      method: "POST",
+      url: "/api/damageItems/resetForCompany",
       data: {
         id: id,
       },
@@ -726,8 +871,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/convertUnits/resetForCompany',
+      method: "POST",
+      url: "/api/convertUnits/resetForCompany",
       data: {
         id: id,
       },
@@ -745,8 +890,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/storesItems/resetForCompany',
+      method: "POST",
+      url: "/api/storesItems/resetForCompany",
       data: {
         id: id,
       },
@@ -764,8 +909,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     );
 
     $http({
-      method: 'POST',
-      url: '/api/numbering/resetTransactions',
+      method: "POST",
+      url: "/api/numbering/resetTransactions",
       data: {
         id: id,
       },
@@ -787,8 +932,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     $http({
-      method: 'POST',
-      url: '/api/companiesActivities/all',
+      method: "POST",
+      url: "/api/companiesActivities/all",
       data: {
         select: {
           id: 1,
@@ -816,8 +961,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.countriesList = [];
     $http({
-      method: 'POST',
-      url: '/api/countries/all',
+      method: "POST",
+      url: "/api/countries/all",
       data: {
         where: {
           active: true,
@@ -850,12 +995,12 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.govesList = [];
 
     $http({
-      method: 'POST',
-      url: '/api/goves/all',
+      method: "POST",
+      url: "/api/goves/all",
       data: {
         where: {
           active: true,
-          'country.id': country.id,
+          "country.id": country.id,
         },
         select: {
           id: 1,
@@ -882,11 +1027,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.citiesList = [];
     $http({
-      method: 'POST',
-      url: '/api/cities/all',
+      method: "POST",
+      url: "/api/cities/all",
       data: {
         where: {
-          'gov.id': gov.id,
+          "gov.id": gov.id,
           active: true,
         },
         select: {
@@ -913,11 +1058,11 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.areasList = [];
     $http({
-      method: 'POST',
-      url: '/api/areas/all',
+      method: "POST",
+      url: "/api/areas/all",
       data: {
         where: {
-          'city.id': city.id,
+          "city.id": city.id,
           active: true,
         },
         select: {
@@ -942,13 +1087,13 @@ app.controller('companies', function ($scope, $http, $timeout) {
   };
 
   $scope.getcompanyList = function () {
-    $scope.error = '';
+    $scope.error = "";
     $scope.busy = true;
     $scope.list = [];
     $scope.count = 0;
     $http({
-      method: 'POST',
-      url: '/api/companies/all',
+      method: "POST",
+      url: "/api/companies/all",
       data: {},
     }).then(
       function (response) {
@@ -969,8 +1114,8 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     $http({
-      method: 'POST',
-      url: '/api/banks/all',
+      method: "POST",
+      url: "/api/banks/all",
       data: {
         select: {
           id: 1,
@@ -1007,16 +1152,25 @@ app.controller('companies', function ($scope, $http, $timeout) {
     $scope.company.showLowestSellingItems = $scope.company.showReports;
     $scope.company.showReportCollectedItems = $scope.company.showReports;
     $scope.company.showReportMedicalItems = $scope.company.showReports;
-    $scope.company.showReportSalesInvoicesForCustomer = $scope.company.showReports;
-    $scope.company.showReportSalesInvoicesForCustomers = $scope.company.showReports;
-    $scope.company.showReportSalesInvoicesForCompany = $scope.company.showReports;
-    $scope.company.showReportSalesInvoicesForCompanies = $scope.company.showReports;
-    $scope.company.showReportReturnSalesInvoicesForCustomer = $scope.company.showReports;
-    $scope.company.showReportReturnSalesInvoicesToStore = $scope.company.showReports;
+    $scope.company.showReportSalesInvoicesForCustomer =
+      $scope.company.showReports;
+    $scope.company.showReportSalesInvoicesForCustomers =
+      $scope.company.showReports;
+    $scope.company.showReportSalesInvoicesForCompany =
+      $scope.company.showReports;
+    $scope.company.showReportSalesInvoicesForCompanies =
+      $scope.company.showReports;
+    $scope.company.showReportReturnSalesInvoicesForCustomer =
+      $scope.company.showReports;
+    $scope.company.showReportReturnSalesInvoicesToStore =
+      $scope.company.showReports;
     $scope.company.showReportReturnSalesInvoices = $scope.company.showReports;
-    $scope.company.showReportApprovedPurchaseRequests = $scope.company.showReports;
-    $scope.company.showReportNotApprovedPurchaseRequests = $scope.company.showReports;
-    $scope.company.showReportHasTransactionPurchaseRequests = $scope.company.showReports;
+    $scope.company.showReportApprovedPurchaseRequests =
+      $scope.company.showReports;
+    $scope.company.showReportNotApprovedPurchaseRequests =
+      $scope.company.showReports;
+    $scope.company.showReportHasTransactionPurchaseRequests =
+      $scope.company.showReports;
     $scope.company.showReportPurchaseRequests = $scope.company.showReports;
     $scope.company.showReportPurchaseOrders = $scope.company.showReports;
     $scope.company.showReportVendorPurchaseOrders = $scope.company.showReports;

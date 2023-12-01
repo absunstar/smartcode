@@ -35,7 +35,7 @@
                 <i-list
                   class="col4"
                   label="##word.Packages##"
-                  ng-change="selectPackages()"
+                  ng-change="notSelectPackages()"
                   ng-model="company.packagesCompany"
                   display="name##session.lang##"
                   items="packagesCompaniesList"
@@ -393,7 +393,7 @@
               </div>
             </fieldset>
 
-            <fieldset>
+            <!-- <fieldset>
               <legend>
                 <i-checkbox label="##word.Show## ##word.POS##" ng-change="showPosScreens()" ng-model="company.showPos"></i-checkbox>
               </legend>
@@ -438,7 +438,7 @@
                 <i-checkbox label="##word.Show## ##word.Tables Groups##" ng-model="company.showTablesGroups"></i-checkbox>
                 <i-checkbox label="##word.Show## ##word.Items Extras##" ng-model="company.showItemsExtras"></i-checkbox>
               </div>
-            </fieldset>
+            </fieldset> -->
           </div>
         </fieldset>
       </div>
