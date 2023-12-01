@@ -66,9 +66,9 @@
         <fieldset>
           <legend>##word.Contact Informations##</legend>
           <div class="row">
-            <i-control class="col3" label="##word.Phone##" ng-model="customer.phone"></i-control>
+            <i-control class="col3" label="# ##word.Phone##" ng-model="customer.phone"></i-control>
 
-            <i-control class="col3" label="##word.Mobile##" ng-model="customer.mobile"></i-control>
+            <i-control class="col3" label="# ##word.Mobile##" ng-model="customer.mobile"></i-control>
 
             <i-control class="col3" label="##word.Fax##" ng-model="customer.fax"></i-control>
 
@@ -88,8 +88,8 @@
         <fieldset>
           <legend>##word.Web And Social Accounts##</legend>
           <div class="row">
-            <i-control class="col3" label="##word.Website##" ng-model="customer.website"></i-control>
-            <i-control class="col3" label="##word.Email##" ng-model="customer.socialEmail"></i-control>
+            <i-control class="col3" label="# ##word.Website##" ng-model="customer.website"></i-control>
+            <i-control class="col3" label="# ##word.Email##" ng-model="customer.socialEmail"></i-control>
             <i-control class="col3" label="##word.Facebook##" ng-model="customer.facebook"></i-control>
             <i-control class="col3" label="##word.Twitter##" ng-model="customer.twitter"></i-control>
           </div>
@@ -100,7 +100,7 @@
           <div class="row">
             <i-list
               class="col6"
-              label="##word.Country##"
+              label="# ##word.Country##"
               ng-change="getGovesList(customer.country)"
               ng-model="customer.country"
               display="name##session.lang##"
@@ -111,7 +111,7 @@
             <i-list
               help-id=""
               class="col6"
-              label="##word.Governorate##"
+              label="# ##word.Governorate##"
               ng-change="getCitiesList(customer.gov)"
               ng-model="customer.gov"
               display="name##session.lang##"
@@ -123,7 +123,7 @@
           <div class="row">
             <i-list
               class="col6"
-              label="##word.City##"
+              label="# ##word.City##"
               ng-model="customer.city"
               ng-change="getAreasList(customer.city)"
               items="citiesList"
@@ -131,11 +131,11 @@
               ng-search="customer.$area.$cityitem"
             >
             </i-list>
-            <i-list class="col6" label="##word.Area##" ng-model="customer.area" items="areasList" display="name##session.lang##" ng-search="customer.$area.$areaitem"> </i-list>
+            <i-list class="col6" label="# ##word.Area##" ng-model="customer.area" items="areasList" display="name##session.lang##" ng-search="customer.$area.$areaitem"> </i-list>
           </div>
 
           <div class="row">
-            <i-control class="col6" label="##word.Address##" ng-model="customer.address"> </i-control>
+            <i-control class="col6" label="# ##word.Address##" ng-model="customer.address"> </i-control>
             <i-control class="col6" label="##word.P.O.Box##" ng-model="customer.poBox"> </i-control>
           </div>
 
@@ -156,7 +156,7 @@
         <fieldset>
           <legend>##word.Tax Informations##</legend>
           <div class="row">
-            <i-control class="col3" label="##word.Tax Identification Number##" ng-model="customer.taxIdentificationNumber"></i-control>
+            <i-control class="col3" label="# ##word.Tax Identification Number##" ng-model="customer.taxIdentificationNumber"></i-control>
 
             <i-control class="col3" label="##word.Tax Card Number##" ng-model="customer.taxCardNumber"></i-control>
 

@@ -380,6 +380,138 @@ app.controller('vendors', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getCountriesList = function ($search) {
+        if ($search && $search.length < 1) {
+          return;
+        }
+        $scope.busy = true;
+        $scope.countriesList = [];
+        $http({
+          method: 'POST',
+          url: '/api/countries/all',
+          data: {
+            where: {
+              active: true,
+            },
+            select: {
+              id: 1,
+              code: 1,
+              nameEn: 1,
+              nameAr: 1,
+              callingCode: 1,
+            },
+            search: $search,
+          },
+        }).then(
+          function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+              $scope.countriesList = response.data.list;
+            }
+          },
+          function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+          }
+        );
+      };
+    
+      $scope.getGovesList = function (country) {
+        $scope.busy = true;
+        $scope.govesList = [];
+    
+        $http({
+          method: 'POST',
+          url: '/api/goves/all',
+          data: {
+            where: {
+              active: true,
+              'country.id': country.id,
+            },
+            select: {
+              id: 1,
+              code: 1,
+              nameEn: 1,
+              nameAr: 1,
+            },
+          },
+        }).then(
+          function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+              $scope.govesList = response.data.list;
+            }
+          },
+          function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+          }
+        );
+      };
+    
+      $scope.getCitiesList = function (gov) {
+        $scope.busy = true;
+        $scope.citiesList = [];
+        $http({
+          method: 'POST',
+          url: '/api/cities/all',
+          data: {
+            where: {
+              'gov.id': gov.id,
+              active: true,
+            },
+            select: {
+              id: 1,
+              nameEn: 1,
+              nameAr: 1,
+            },
+          },
+        }).then(
+          function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+              $scope.citiesList = response.data.list;
+            }
+          },
+          function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+          }
+        );
+      };
+    
+      $scope.getAreasList = function (city) {
+        $scope.busy = true;
+        $scope.areasList = [];
+        $http({
+          method: 'POST',
+          url: '/api/areas/all',
+          data: {
+            where: {
+              'city.id': city.id,
+              active: true,
+            },
+            select: {
+              id: 1,
+              code: 1,
+              nameEn: 1,
+              nameAr: 1,
+            },
+          },
+        }).then(
+          function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+              $scope.areasList = response.data.list;
+            }
+          },
+          function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+          }
+        );
+      };
+
     $scope.getAccountingLinkList = function () {
         $scope.busy = true;
         $scope.accountingLinkList = [];
@@ -448,4 +580,5 @@ app.controller('vendors', function ($scope, $http, $timeout) {
     $scope.getNationalities();
     $scope.getVendorsGroups();
     $scope.getAccountingLinkList();
+    $scope.getCountriesList();
 });

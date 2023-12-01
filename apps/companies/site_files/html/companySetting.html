@@ -8,16 +8,16 @@
       <div class="row">
         <div class="row" id="companySettingManageModal">
           <fieldset>
-            <div class="tabs full">
-              <div class="tabs-header">
+            <div class="tabs ">
+              <div class="tabs-header full">
                 <a class="tab-link" onclick="site.showTabContent(event, '#printerProgram')"> ##word.Printers Program## </a>
-                <a class="tab-link" ng-if="item.showHospital" onclick="site.showTabContent(event, '#hmisSettings')"> <span>##word.HMIS Settings## </span></a>
-                <a class="tab-link" ng-if="item.showInventory" onclick="site.showTabContent(event, '#storesSettings')"> <span>##word.Stores Settings## </span></a>
-                <a class="tab-link" ng-if="item.showAccounting" onclick="site.showTabContent(event, '#accountsSettings')"> <span>##word.Accounting Settings## </span></a>
-                <a class="tab-link" ng-if="item.showHr" onclick="site.showTabContent(event, '#hrSettings')"> <span>##word.HR Settings## </span></a>
-                <a class="tab-link" onclick="site.showTabContent(event, '#administrativeStructureSettings')"> <span>##word.Administrative Structure## </span></a>
-                <a class="tab-link" onclick="site.showTabContent(event, '#workflowAssignmentSettings')"> <span>##word.Workflow Assignment## </span></a>
-                <a class="tab-link" onclick="site.showTabContent(event, '#establishingAccountsSettings')"> <span>##word.Establishing accounts## </span></a>
+                <a class="tab-link" ng-show="item.showHospital" onclick="site.showTabContent(event, '#hmisSettings')"> ##word.HMIS Settings## </a>
+                <a class="tab-link" ng-show="item.showInventory" onclick="site.showTabContent(event, '#storesSettings')"> ##word.Stores Settings## </a>
+                <a class="tab-link" ng-show="item.showAccounting" onclick="site.showTabContent(event, '#accountsSettings')">##word.Accounting Settings## </a>
+                <a class="tab-link" ng-show="item.showHr" onclick="site.showTabContent(event, '#hrSettings')">##word.HR Settings## </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#administrativeStructureSettings')">##word.Administrative Structure## </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#workflowAssignmentSettings')">##word.Workflow Assignment## </a>
+                <a class="tab-link" onclick="site.showTabContent(event, '#establishingAccountsSettings')">##word.Establishing accounts## </a>
               </div>
 
               <div class="tabs-content">

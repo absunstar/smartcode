@@ -29,7 +29,7 @@
 
                 <i-control class="col4" label="##word.Host Domain##" ng-model="company.host"> </i-control>
 
-                <i-control class="col4" label="##word.Tax Number##" ng-model="company.taxNumber"></i-control>
+                <i-control class="col4" label="# ##word.Tax Number##" ng-model="company.taxNumber"></i-control>
               </div>
               <div class="row">
                 <i-list
@@ -46,7 +46,7 @@
               <div class="row">
                 <i-list
                   class="col4"
-                  label="##word.Country##"
+                  label="# ##word.Country##"
                   ng-change="getGovesList(company.country)"
                   ng-model="company.country"
                   display="name##session.lang##"
@@ -56,7 +56,7 @@
                 ></i-list>
                 <i-list
                   class="col4"
-                  label="##word.Governorate##"
+                  label="# ##word.Governorate##"
                   ng-change="getCitiesList(company.gov)"
                   ng-model="company.gov"
                   display="name##session.lang##"
@@ -65,7 +65,7 @@
                 ></i-list>
                 <i-list
                   class="col4"
-                  label="##word.City##"
+                  label="# ##word.City##"
                   ng-model="company.city"
                   ng-change="getAreasList(company.city)"
                   items="citiesList"
@@ -76,16 +76,16 @@
               </div>
 
               <div class="row">
-                <i-list class="col4" label="##word.Area##" ng-model="company.area" items="areasList" display="name##session.lang##" ng-search="company.$area.$areaitem"> </i-list>
-                <i-control class="col4" label="##word.Phone##" ng-model="company.phone"> </i-control>
-                <i-control class="col4" label="##word.Mobile##" ng-model="company.mobile"> </i-control>
+                <i-list class="col4" label="# ##word.Area##" ng-model="company.area" items="areasList" display="name##session.lang##" ng-search="company.$area.$areaitem"> </i-list>
+                <i-control class="col4" label="# ##word.Phone##" ng-model="company.phone"> </i-control>
+                <i-control class="col4" label="# ##word.Mobile##" ng-model="company.mobile"> </i-control>
               </div>
               <div class="row">
-                <i-control class="col4" label="##word.Email##" ng-model="company.socialEmail"> </i-control>
-                <i-control class="col4" label="##word.Website##" ng-model="company.website"> </i-control>
+                <i-control class="col4" label="# ##word.Email##" ng-model="company.socialEmail"> </i-control>
+                <i-control class="col4" label="# ##word.Website##" ng-model="company.website"> </i-control>
               </div>
 
-              <i-textarea class="row" ng-model="company.address" label="##word.Address##"> </i-textarea>
+              <i-textarea class="row" ng-model="company.address" label="# ##word.Address##"> </i-textarea>
 
               <div class="row">
                 <i class="grayDark bold">##word.Domain Example##</i>
