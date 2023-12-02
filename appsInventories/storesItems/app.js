@@ -634,6 +634,9 @@ module.exports = function init(site) {
             {
               'unitsList.barcode': { $in: barcodes },
             },
+            {
+              'company.id': site.getCompany(req).id
+            }
           ],
         };
         app.all(where, (err, docs) => {
@@ -738,6 +741,9 @@ module.exports = function init(site) {
             {
               'unitsList.barcode': { $in: barcodes },
             },
+            {
+              'company.id': site.getCompany(req).id
+            }
           ],
         };
         app.all(where, (err, docs) => {
