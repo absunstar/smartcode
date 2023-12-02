@@ -35,7 +35,7 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.item.department = $scope.item.employee.department;
@@ -74,7 +74,7 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         _item.department = _item.employee.department;
@@ -134,7 +134,7 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.busy = true;
@@ -166,7 +166,7 @@ app.controller('overtimeRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.busy = true;

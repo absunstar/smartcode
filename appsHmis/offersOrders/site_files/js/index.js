@@ -29,7 +29,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
 
@@ -70,7 +70,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
     $scope.busy = true;
@@ -485,7 +485,7 @@ app.controller('offersOrders', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#expenseVouchersModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
 

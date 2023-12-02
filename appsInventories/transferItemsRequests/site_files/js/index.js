@@ -46,7 +46,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
 
@@ -98,7 +98,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
 
@@ -140,7 +140,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
     if (!_item.itemsList.length) {
@@ -187,7 +187,7 @@ app.controller('transferItemsRequests', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
     if (!_item.itemsList.length) {

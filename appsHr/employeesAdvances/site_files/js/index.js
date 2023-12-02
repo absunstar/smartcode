@@ -39,7 +39,7 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.item.approvedAmount = $scope.item.amount || _item.amount;
@@ -94,7 +94,7 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         if (!$scope.item.employee || !$scope.item.employee.id) {
@@ -154,7 +154,7 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         if (!_item.approvedAmount || _item.approvedAmount < 1) {
@@ -202,7 +202,7 @@ app.controller('employeesAdvances', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
 

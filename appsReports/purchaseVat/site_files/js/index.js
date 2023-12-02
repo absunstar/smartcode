@@ -52,7 +52,7 @@ app.controller('purchaseVat', function ($scope, $http, $timeout) {
   $scope.searchAll = function () {
     const v = site.validated($scope.modalSearchID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
     $scope.getAll($scope.search);

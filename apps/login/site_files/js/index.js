@@ -13,7 +13,7 @@ app.controller('login', function ($scope, $http) {
     console.log('b', b);
     const v = site.validated('#loginModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
 

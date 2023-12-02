@@ -89,7 +89,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
+      console.log(v.messages[0]);
       return;
     }
     let dataValid = $scope.validateData(_item);
@@ -139,7 +140,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     if (modalID) {
       const v = site.validated(modalID);
       if (!v.ok) {
-        $scope.error = v.messages[0].Ar;
+        $scope.error = v.messages[0].ar;
         return;
       }
       let dataValid = $scope.validateData(_item);
@@ -191,7 +192,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
     let dataValid = $scope.validateData(_item);
@@ -1572,7 +1573,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.error = '';
     const v = site.validated('#expenseVouchersModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
 

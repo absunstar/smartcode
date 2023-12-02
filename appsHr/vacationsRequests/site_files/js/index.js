@@ -36,7 +36,7 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.item.approvedVacationType = $scope.item.approvedVacationType || _item.vacationType;
@@ -85,7 +85,7 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         delete $scope.item.regularVacation;
@@ -178,7 +178,7 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
 
@@ -214,7 +214,7 @@ app.controller('vacationsRequests', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         delete $scope.item.regularVacation;

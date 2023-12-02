@@ -26,7 +26,7 @@ app.controller('company_register', function ($scope, $http) {
     $scope.error = '';
     const v = site.validated('#companyRegisterModal');
     if (!v.ok) {
-      $scope.error = v.messages[0].Ar;
+      $scope.error = v.messages[0].ar;
       return;
     }
     /*   let user_name = company.username

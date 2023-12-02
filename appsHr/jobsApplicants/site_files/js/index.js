@@ -45,7 +45,7 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         const dataValid = $scope.validateInputData(_item);
@@ -91,7 +91,7 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         const dataValid = $scope.validateInputData(_item);
@@ -153,7 +153,7 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
 
@@ -196,7 +196,7 @@ app.controller('jobsApplicants', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.busy = true;

@@ -35,7 +35,7 @@ app.controller('employeesPenalties', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
 
@@ -78,7 +78,7 @@ app.controller('employeesPenalties', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         _item.department = _item.employee.department;
@@ -137,7 +137,7 @@ app.controller('employeesPenalties', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.busy = true;
@@ -169,7 +169,7 @@ app.controller('employeesPenalties', function ($scope, $http, $timeout) {
         $scope.error = '';
         const v = site.validated($scope.modalID);
         if (!v.ok) {
-            $scope.error = v.messages[0].Ar;
+            $scope.error = v.messages[0].ar;
             return;
         }
         $scope.busy = true;
