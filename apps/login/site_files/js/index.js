@@ -101,12 +101,13 @@ app.controller('login', function ($scope, $http) {
               $scope.companyList.push(b.company);
             }
           });
-
           if ($scope.branchList.length === 1 && $scope.user.email && $scope.user.password) {
             $scope.login($scope.branchList[0]);
           }
 
           $scope.$applyAsync();
+        } else {
+         $scope.error = '##word.Wrong email or password##';
         }
       },
       function (err) {

@@ -944,6 +944,213 @@ module.exports = function init(site) {
         }
       });
 
+      site.stores_items_import_busy = false;
+  site.post('/api/stores_items/import', (req, res) => {
+    let response = {
+      done: false,
+      busy: site.stores_items_import_busy,
+    };
+
+    res.json(response);
+
+    $itemsFile.findMany(
+      {
+        where: {
+          'company.id': site.get_company(req).id,
+          'branch.id': site.get_branch(req).id,
+        },
+        sort: req.body.sort || {
+          id: -1,
+        },
+      },
+      (err, oldDocs) => {
+        site.dbMessage = 'Load ItemsFile : ' + oldDocs.length;
+
+        let unitsList = [];
+        let itemsGroupList = [];
+
+        $units.deleteMany({
+          where: {
+            'company.id': site.get_company(req).id,
+            'branch.id': site.get_branch(req).id,
+          },
+        });
+        $items_group.deleteMany({
+          where: {
+            'company.id': site.get_company(req).id,
+            'branch.id': site.get_branch(req).id,
+          },
+        });
+        $stores_items.deleteMany({
+          where: {
+            'company.id': site.get_company(req).id,
+            'branch.id': site.get_branch(req).id,
+          },
+        });
+
+        oldDocs.forEach((_oldDoc) => {
+          let unitExists = unitsList.some((u) => u.name_ar === _oldDoc.unit);
+          if (!unitExists) {
+            unitsList.push({ name_en: _oldDoc.unit, name_ar: _oldDoc.unit });
+          }
+
+          let groupExists = itemsGroupList.some((g) => g.name_ar === _oldDoc.category_name_ar);
+          if (!groupExists) {
+            itemsGroupList.push({ name_en: _oldDoc.category_name_en, name_ar: _oldDoc.category_name_ar });
+          }
+        });
+
+        unitsList.forEach((u, i) => {
+          $units.add(
+            {
+              name_en: u.name_en,
+              name_ar: u.name_ar,
+              company: site.get_company(req),
+              branch: site.get_branch(req),
+              code: i + 1,
+              image_url: '/images/unit.png',
+              active: true,
+            },
+            (err, doc) => {
+              if (!err && doc) {
+                unitsList[i] = doc;
+              }
+            }
+          );
+        });
+
+        itemsGroupList.forEach((g, i) => {
+          $items_group.add(
+            {
+              name_en: g.name_en,
+              name_ar: g.name_ar,
+              company: site.get_company(req),
+              branch: site.get_branch(req),
+              image_url: '/images/product_group.png',
+              active: true,
+              code: i + 1,
+            },
+            (err, doc) => {
+              itemsGroupList[i] = doc;
+            }
+          );
+        });
+
+        site.dbMessage = 'Add UnitList : ' + unitsList.length + ' \n Add ItemsGroupsList : ' + itemsGroupList.length;
+
+        setTimeout(() => {
+          oldDocs.forEach((_oldDoc, i) => {
+            let itemGroup = itemsGroupList.find((g) => {
+              return g.name_ar === _oldDoc.category_name_ar;
+            });
+            let itemUnit = unitsList.find((u) => {
+              return u.name_ar === _oldDoc.unit;
+            });
+
+            $stores_items.add(
+              {
+                image_url: '/images/store_item.png',
+                allow_sell: true,
+                allow_buy: true,
+                is_pos: true,
+                with_discount: false,
+                item_type: {
+                  id: 1,
+                  name: 'store_item',
+                  en: 'Store Item',
+                  ar: 'صنف مخزني',
+                },
+                main_unit: itemUnit,
+                name_en: _oldDoc.name_en,
+                name_ar: _oldDoc.name_ar,
+                item_group: itemGroup,
+                units_list: [
+                  {
+                    id: itemUnit.id,
+                    name_ar: itemUnit.name_ar,
+                    name_en: itemUnit.name_en,
+                    convert: 1,
+                    start_count: 0,
+                    current_count: 0,
+                    cost: _oldDoc.cost,
+                    price: _oldDoc.price,
+                    average_cost: 0,
+                    discount: {
+                      value: 0,
+                      max: 0,
+                      type: 'number',
+                    },
+                    barcode: _oldDoc.barcode,
+                  },
+                ],
+                sizes: [
+                  {
+                    cost: 0,
+                    price: _oldDoc.price,
+                    discount: {
+                      value: 0,
+                      max: 0,
+                      type: 'number',
+                    },
+                    image_url: '/images/item_sizes.png',
+                    barcode: _oldDoc.barcode,
+                    size_ar: _oldDoc.name_ar,
+                    size_en: _oldDoc.name_en,
+                    start_count: 0,
+                    current_count: 0,
+                    total_sell_price: 0,
+                    total_sell_count: 0,
+                    total_buy_cost: 0,
+                    total_buy_count: 0,
+                    unitsList: [
+                      {
+                        id: itemUnit.id,
+                        name_ar: itemUnit.name_ar,
+                        name_en: itemUnit.name_en,
+                        convert: 1,
+                        start_count: 0,
+                        current_count: 0,
+                        cost: 0,
+                        price: _oldDoc.price,
+                        average_cost: 0,
+                        discount: {
+                          value: 0,
+                          max: 0,
+                          type: 'number',
+                        },
+                        barcode: _oldDoc.barcode,
+                      },
+                    ],
+                    item_type: {
+                      id: 1,
+                      name: 'store_item',
+                      en: 'Store Item',
+                      ar: 'صنف مخزني',
+                    },
+                  },
+                ],
+                company: site.get_company(req),
+                branch: site.get_branch(req),
+                add_user_info: site.security.getUserFinger({
+                  $req: req,
+                  $res: res,
+                }),
+                code: _oldDoc.id,
+              },
+              (err, doc) => {
+                if (!err && doc) {
+                  site.dbMessage = 'Add Item :' + doc.id;
+                } else {
+                  site.dbMessage = err.message;
+                }
+              }
+            );
+          });
+        }, 1000 * 5);
+      }
+    );
+  });
+
       site.post(`api/${app.name}/importIdfList`, (req, res) => {
         let response = {
           done: false,
