@@ -1,13 +1,13 @@
-app.controller('salesInvoices', function ($scope, $http, $timeout) {
+app.controller("salesInvoices", function ($scope, $http, $timeout) {
   $scope.setting = site.showObject(`##data.#setting##`);
-  $scope.baseURL = '';
-  $scope.appName = 'salesInvoices';
-  $scope.modalID = '#salesInvoicesManageModal';
-  $scope.modalSearchID = '#salesInvoicesSearchModal';
-  $scope.mode = 'add';
+  $scope.baseURL = "";
+  $scope.appName = "salesInvoices";
+  $scope.modalID = "#salesInvoicesManageModal";
+  $scope.modalSearchID = "#salesInvoicesSearchModal";
+  $scope.mode = "add";
   $scope._search = { fromDate: new Date(), toDate: new Date() };
   $scope.structure = {
-    image: { url: '/images/salesInvoices.png' },
+    image: { url: "/images/salesInvoices.png" },
     totalPrice: 0,
     totalItemsDiscounts: 0,
     totalDiscounts: 0,
@@ -35,49 +35,64 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.resetOrderItem = function () {
     $scope.orderItem = {
       count: 1,
-      barcode: '',
+      barcode: "",
       price: 0,
       extraDiscount: 0,
       discount: 0,
       maxDiscount: 0,
-      discountType: '',
+      discountType: "",
       total: 0,
     };
   };
   $scope.showAdd = function (_item) {
-    $scope.error = '';
-    $scope.mainError = '';
+    $scope.error = "";
+    $scope.mainError = "";
 
     if (!$scope.setting || !$scope.setting.id) {
-      $scope.mainError = '##word.Please Contact System Administrator to Set System Setting Or Reload Page##';
+      $scope.mainError =
+        "##word.Please Contact System Administrator to Set System Setting Or Reload Page##";
       return;
     }
 
-    $scope.itemsError = '';
-    $scope.mode = 'add';
+    $scope.itemsError = "";
+    $scope.mode = "add";
     $scope.resetOrderItem();
     $scope.item = {
       ...$scope.structure,
-      salesType: { id: 1, nameAr: 'مبيعات للعملاء', nameEn: 'Sales For Customers', code: 'customer' },
+      salesType: {
+        id: 1,
+        nameAr: "مبيعات للعملاء",
+        nameEn: "Sales For Customers",
+        code: "customer",
+      },
       date: new Date(),
       itemsList: [],
       discountsList: [],
       taxesList: [],
     };
 
-    if ($scope.setting.storesSetting.salesCategory && $scope.setting.storesSetting.salesCategory.id) {
+    if (
+      $scope.setting.storesSetting.salesCategory &&
+      $scope.setting.storesSetting.salesCategory.id
+    ) {
       $scope.item.salesCategory = $scope.salesCategoriesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.salesCategory.id;
       });
     }
 
-    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
+    if (
+      $scope.setting.storesSetting.customersStore &&
+      $scope.setting.storesSetting.customersStore.id
+    ) {
       $scope.item.store = $scope.storesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.customersStore.id;
       });
     }
 
-    if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
+    if (
+      $scope.setting.storesSetting.customer &&
+      $scope.setting.storesSetting.customer.id
+    ) {
       $scope.item.customer = $scope.customersList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.customer.id;
       });
@@ -86,7 +101,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.add = function (_item) {
-    $scope.error = '';
+    $scope.error = "";
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -99,7 +114,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }
     $scope.busy = true;
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/add`,
       data: $scope.item,
     }).then(
@@ -114,8 +129,11 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           }
         } else {
           $scope.error = response.data.error;
-          if (response.data.error && response.data.error.like('*Must Enter Code*')) {
-            $scope.error = '##word.Must Enter Code##';
+          if (
+            response.data.error &&
+            response.data.error.like("*Must Enter Code*")
+          ) {
+            $scope.error = "##word.Must Enter Code##";
           }
         }
       },
@@ -126,9 +144,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.showUpdate = function (_item) {
-    $scope.error = '';
-    $scope.itemsError = '';
-    $scope.mode = 'edit';
+    $scope.error = "";
+    $scope.itemsError = "";
+    $scope.mode = "edit";
     $scope.resetOrderItem();
     $scope.view(_item);
     $scope.item = {};
@@ -136,7 +154,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.update = function (_item, modalID) {
-    $scope.error = '';
+    $scope.error = "";
     if (modalID) {
       const v = site.validated(modalID);
       if (!v.ok) {
@@ -148,21 +166,28 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         return;
       }
     }
-    if (_item.$deliveredType == 'delivered') {
-      _item.deliveryStatus = { ...$scope.deliveryStatusList[2], date: new Date() };
+    if (_item.$deliveredType == "delivered") {
+      _item.deliveryStatus = {
+        ...$scope.deliveryStatusList[2],
+        date: new Date(),
+      };
       _item.deliveryStatusList.push(_item.deliveryStatus);
-    } else if (_item.$deliveredType == 'canceled') {
+    } else if (_item.$deliveredType == "canceled") {
       if (!_item.reasonCancelingDelivery || !_item.reasonCancelingDelivery.id) {
-        $scope.error = '##word.You must choose the reason for canceling the delivery order##';
+        $scope.error =
+          "##word.You must choose the reason for canceling the delivery order##";
         return;
       }
-      _item.deliveryStatus = { ...$scope.deliveryStatusList[3], date: new Date() };
+      _item.deliveryStatus = {
+        ...$scope.deliveryStatusList[3],
+        date: new Date(),
+      };
       _item.deliveryStatusList.push(_item.deliveryStatus);
     }
 
     $scope.busy = true;
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/update`,
       data: _item,
     }).then(
@@ -174,7 +199,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          let index = $scope.list.findIndex(
+            (itm) => itm.id == response.data.result.doc.id
+          );
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
@@ -189,7 +216,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.approve = function (_item) {
-    $scope.error = '';
+    $scope.error = "";
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -201,7 +228,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }
     $scope.busy = true;
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/approve`,
       data: _item,
     }).then(
@@ -210,7 +237,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          let index = $scope.list.findIndex(
+            (itm) => itm.id == response.data.result.doc.id
+          );
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
@@ -225,8 +254,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.showView = function (_item) {
-    $scope.error = '';
-    $scope.mode = 'view';
+    $scope.error = "";
+    $scope.mode = "view";
     $scope.item = {};
     $scope.view(_item);
     site.showModal($scope.modalID);
@@ -234,9 +263,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.view = function (_item) {
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/view`,
       data: {
         id: _item.id,
@@ -247,13 +276,19 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         if (response.data.done) {
           $scope.item = response.data.doc;
           if ($scope.setting.accountsSetting.currency) {
-            site.strings['currency'] = {
-              Ar: ' ' + $scope.setting.accountsSetting.currency.nameAr + ' ',
-              En: ' ' + $scope.setting.accountsSetting.currency.nameEn + ' ',
+            site.strings["currency"] = {
+              Ar: " " + $scope.setting.accountsSetting.currency.nameAr + " ",
+              En: " " + $scope.setting.accountsSetting.currency.nameEn + " ",
             };
-            site.strings['from100'] = {
-              Ar: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyAr + ' ',
-              En: ' ' + $scope.setting.accountsSetting.currency.smallCurrencyEn + ' ',
+            site.strings["from100"] = {
+              Ar:
+                " " +
+                $scope.setting.accountsSetting.currency.smallCurrencyAr +
+                " ",
+              En:
+                " " +
+                $scope.setting.accountsSetting.currency.smallCurrencyEn +
+                " ",
             };
           }
         } else {
@@ -267,8 +302,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.showDelete = function (_item) {
-    $scope.error = '';
-    $scope.mode = 'delete';
+    $scope.error = "";
+    $scope.mode = "delete";
     $scope.item = {};
     $scope.view(_item);
     site.showModal($scope.modalID);
@@ -276,10 +311,10 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.delete = function (_item) {
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
 
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/delete`,
       data: {
         id: $scope.item.id,
@@ -289,7 +324,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           site.hideModal($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          let index = $scope.list.findIndex(
+            (itm) => itm.id == response.data.result.doc.id
+          );
           if (index !== -1) {
             $scope.list.splice(index, 1);
           }
@@ -307,9 +344,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     where = where || { approved: false };
-    where['salesType.code'] = 'customer';
+    where["salesType.code"] = "customer";
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
       data: {
         where: where,
@@ -332,13 +369,13 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.getNumberingAuto = function () {
-    $scope.error = '';
+    $scope.error = "";
     $scope.busy = true;
     $http({
-      method: 'POST',
-      url: '/api/numbering/getAutomatic',
+      method: "POST",
+      url: "/api/numbering/getAutomatic",
       data: {
-        screen: 'salesInvoices',
+        screen: "salesInvoices",
       },
     }).then(
       function (response) {
@@ -355,7 +392,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.showSearch = function () {
-    $scope.error = '';
+    $scope.error = "";
     site.showModal($scope.modalSearchID);
   };
 
@@ -373,12 +410,12 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.customersList = [];
     $http({
-      method: 'POST',
-      url: '/api/customers/all',
+      method: "POST",
+      url: "/api/customers/all",
       data: {
         where: {
           active: true,
-          'type.id': 6,
+          "type.id": 6,
         },
         select: {
           id: 1,
@@ -438,31 +475,38 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.addToItemsList = function (orderItem) {
-    $scope.itemsError = '';
+    $scope.itemsError = "";
     if (!orderItem.item || !orderItem.item?.id) {
-      $scope.itemsError = '##word.Please Enter Item##';
+      $scope.itemsError = "##word.Please Enter Item##";
       return;
     }
 
     if (!orderItem.unit || !orderItem.unit.id) {
-      $scope.itemsError = '##word.Please Enter Item Unit##';
+      $scope.itemsError = "##word.Please Enter Item Unit##";
       return;
     }
 
     if (!orderItem.count > 0) {
-      $scope.itemsError = '##word.Please Enter Count##';
+      $scope.itemsError = "##word.Please Enter Count##";
       return;
     }
 
     let item = {
-      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : '',
+      sfdaCode: orderItem.item.sfdaCodeList
+        ? orderItem.item.sfdaCodeList[0]
+        : "",
       id: orderItem.item.id,
       code: orderItem.item.code,
       nameAr: orderItem.item.nameAr,
       nameEn: orderItem.item.nameEn,
       itemGroup: orderItem.item.itemGroup,
       barcode: orderItem.unit.barcode,
-      unit: { id: orderItem.unit.id, code: orderItem.unit.code, nameAr: orderItem.unit.nameAr, nameEn: orderItem.unit.nameEn },
+      unit: {
+        id: orderItem.unit.id,
+        code: orderItem.unit.code,
+        nameAr: orderItem.unit.nameAr,
+        nameEn: orderItem.unit.nameEn,
+      },
       count: orderItem.count,
       price: orderItem.unit.price,
       averageCost: orderItem.unit.averageCost,
@@ -476,7 +520,11 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       discountType: orderItem.unit.discountType,
     };
 
-    if (orderItem.item.workByBatch || orderItem.item.workBySerial || orderItem.item.workByQrCode) {
+    if (
+      orderItem.item.workByBatch ||
+      orderItem.item.workBySerial ||
+      orderItem.item.workByQrCode
+    ) {
       item.workByBatch = orderItem.item.workByBatch;
       item.workBySerial = orderItem.item.workBySerial;
       item.workByQrCode = orderItem.item.workByQrCode;
@@ -502,7 +550,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       } */
     }
 
-    let index = $scope.item.itemsList.findIndex((_item) => _item.id === item.id && _item.unit.id == item.unit.id);
+    let index = $scope.item.itemsList.findIndex(
+      (_item) => _item.id === item.id && _item.unit.id == item.unit.id
+    );
 
     if (index == -1) {
       $scope.item.itemsList.unshift(item);
@@ -520,15 +570,15 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.calculate($scope.item);
     $scope.resetOrderItem();
-    $scope.itemsError = '';
+    $scope.itemsError = "";
   };
 
   $scope.getStores = function () {
     $scope.busy = true;
     $scope.storesList = [];
     $http({
-      method: 'POST',
-      url: '/api/stores/all',
+      method: "POST",
+      url: "/api/stores/all",
       data: {
         where: {
           active: true,
@@ -561,8 +611,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.offersPricesList = [];
     $http({
-      method: 'POST',
-      url: '/api/offersPrices/all',
+      method: "POST",
+      url: "/api/offersPrices/all",
       data: {
         where: {
           approved: true,
@@ -587,8 +637,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.discountTypesList = [];
     $http({
-      method: 'POST',
-      url: '/api/discountTypes/all',
+      method: "POST",
+      url: "/api/discountTypes/all",
       data: {
         where: {
           active: true,
@@ -618,7 +668,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.addToList = function (discount, type) {
     if (discount && discount.id) {
-      if (type === 'discount') {
+      if (type === "discount") {
         $scope.item.discountsList.unshift({
           id: discount.id,
           code: discount.code,
@@ -630,7 +680,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         $scope.item.totalDiscounts += discount.discountValue;
         $scope.discount = {};
       }
-      if (type === 'tax') {
+      if (type === "tax") {
         $scope.item.taxesList.unshift({
           id: discount.id,
           code: discount.code,
@@ -646,16 +696,20 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.spliceFromList = function (discount, type) {
-    if (type === 'discount') {
-      const index = $scope.item.discountsList.findIndex((dis) => dis.id === discount.id);
+    if (type === "discount") {
+      const index = $scope.item.discountsList.findIndex(
+        (dis) => dis.id === discount.id
+      );
       if (index !== -1) {
         $scope.item.discountsList.splice(index, 1);
         $scope.item.totalDiscounts -= discount.value;
       }
     }
 
-    if (type === 'tax') {
-      const index = $scope.item.taxesList.findIndex((dis) => dis.id === discount.id);
+    if (type === "tax") {
+      const index = $scope.item.taxesList.findIndex(
+        (dis) => dis.id === discount.id
+      );
       if (index !== -1) {
         $scope.item.taxesList.splice(index, 1);
         $scope.item.totalTaxes -= discount.value;
@@ -668,8 +722,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.taxTypesList = [];
     $http({
-      method: 'POST',
-      url: '/api/taxesTypes/all',
+      method: "POST",
+      url: "/api/taxesTypes/all",
       data: {
         where: {
           active: true,
@@ -704,13 +758,13 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.getBarcode = function (ev) {
-    $scope.error = '';
+    $scope.error = "";
     let where = {
       active: true,
       allowSale: true,
     };
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store##';
+      $scope.error = "##word.Please Select Store##";
       return;
     }
     if (ev && ev.which != 13) {
@@ -719,17 +773,20 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
       $scope.qr = site.getQRcode($scope.orderItem.barcode);
-      where['gtinList.gtin'] = $scope.qr.gtin;
-      where.$and = [{ 'unitsList.storesList.batchesList.code': $scope.qr.code }, { 'unitsList.storesList.batchesList.count': { $gt: 0 } }];
+      where["gtinList.gtin"] = $scope.qr.gtin;
+      where.$and = [
+        { "unitsList.storesList.batchesList.code": $scope.qr.code },
+        { "unitsList.storesList.batchesList.count": { $gt: 0 } },
+      ];
     } else {
-      where['unitsList.barcode'] = $scope.orderItem.barcode;
+      where["unitsList.barcode"] = $scope.orderItem.barcode;
     }
 
     $scope.busy = true;
     $scope.itemsList = [];
     $http({
-      method: 'POST',
-      url: '/api/storesItems/all',
+      method: "POST",
+      url: "/api/storesItems/all",
       data: {
         storeId: $scope.item.store.id,
         where: where,
@@ -796,20 +853,20 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.getStoresItems = function ($search) {
-    $scope.error = '';
+    $scope.error = "";
     if ($search && $search.length < 1) {
       return;
     }
 
     if (!$scope.item.store || !$scope.item.store.id) {
-      $scope.error = '##word.Please Select Store##';
+      $scope.error = "##word.Please Select Store##";
       return;
     }
     $scope.busy = true;
     $scope.itemsList = [];
     $http({
-      method: 'POST',
-      url: '/api/storesItems/all',
+      method: "POST",
+      url: "/api/storesItems/all",
       data: {
         storeId: $scope.item.store.id,
         where: {
@@ -856,8 +913,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.salesCategoriesList = [];
     $http({
-      method: 'POST',
-      url: '/api/salesCategories',
+      method: "POST",
+      url: "/api/salesCategories",
       data: {
         select: {
           id: 1,
@@ -870,8 +927,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.salesCategoriesList = response.data.list.filter((s) => s.id !=3);
-
+          $scope.salesCategoriesList = response.data.list.filter(
+            (s) => s.id != 3
+          );
         }
       },
       function (err) {
@@ -885,8 +943,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.paymentTypesList = [];
     $http({
-      method: 'POST',
-      url: '/api/paymentTypes',
+      method: "POST",
+      url: "/api/paymentTypes",
       data: {
         select: {
           id: 1,
@@ -913,8 +971,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.deliveryStatusList = [];
     $http({
-      method: 'POST',
-      url: '/api/deliveryStatus',
+      method: "POST",
+      url: "/api/deliveryStatus",
       data: {},
     }).then(
       function (response) {
@@ -932,7 +990,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.calculate = function (obj) {
     $timeout(() => {
-      $scope.itemsError = '';
+      $scope.itemsError = "";
       obj.totalDiscounts = 0;
       obj.totalCashDiscounts = 0;
       obj.totalCashTaxes = 0;
@@ -949,10 +1007,15 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
         _item.totalVat = 0;
         _item.totalPrice = _item.price * _item.count;
-        mainDiscountValue = _item.discountType === 'value' ? _item.discount : (_item.price * _item.discount) / 100;
+        mainDiscountValue =
+          _item.discountType === "value"
+            ? _item.discount
+            : (_item.price * _item.discount) / 100;
         _item.totalMainDiscounts = mainDiscountValue * _item.count;
-        _item.totalExtraDiscounts = (_item.totalPrice * _item.extraDiscount) / 100;
-        _item.totalDiscounts = _item.totalMainDiscounts + _item.totalExtraDiscounts;
+        _item.totalExtraDiscounts =
+          (_item.totalPrice * _item.extraDiscount) / 100;
+        _item.totalDiscounts =
+          _item.totalMainDiscounts + _item.totalExtraDiscounts;
         _item.totalMainDiscounts = site.toNumber(_item.totalMainDiscounts);
         _item.totalExtraDiscounts = site.toNumber(_item.totalExtraDiscounts);
         _item.totalDiscounts = site.toNumber(_item.totalDiscounts);
@@ -981,9 +1044,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       });
 
       obj.discountsList.forEach((d) => {
-        if (d.type == 'value') {
+        if (d.type == "value") {
           obj.totalCashDiscounts += d.value;
-        } else if (d.type == 'percent') {
+        } else if (d.type == "percent") {
           obj.totalCashDiscounts += (obj.totalPrice * d.value) / 100;
         }
       });
@@ -993,21 +1056,25 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       });
 
       obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
-      obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
+      obj.totalNet =
+        obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
       obj.totalVat = site.toNumber(obj.totalVat);
       obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
       obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
       obj.totalDiscounts = site.toNumber(obj.totalDiscounts);
       obj.totalNet = site.toNumber(obj.totalNet);
       $scope.selectInvoiceType(obj);
-      $scope.itemsError = '';
+      $scope.itemsError = "";
     }, 300);
   };
 
   $scope.selectInvoiceType = function (item) {
     item.paymentList = [{}];
     if (item.invoiceType && item.invoiceType.id == 1) {
-      if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+      if (
+        $scope.setting.accountsSetting.paymentType &&
+        $scope.setting.accountsSetting.paymentType.id
+      ) {
         item.paymentList[0].paymentType = $scope.paymentTypesList.find((_t) => {
           return _t.id == $scope.setting.accountsSetting.paymentType.id;
         });
@@ -1023,10 +1090,14 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.addToPaymentList = function (item) {
     item.paymentList.push({});
-    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
-      item.paymentList[item.paymentList.length - 1].paymentType = $scope.paymentTypesList.find((_t) => {
-        return _t.id == $scope.setting.accountsSetting.paymentType.id;
-      });
+    if (
+      $scope.setting.accountsSetting.paymentType &&
+      $scope.setting.accountsSetting.paymentType.id
+    ) {
+      item.paymentList[item.paymentList.length - 1].paymentType =
+        $scope.paymentTypesList.find((_t) => {
+          return _t.id == $scope.setting.accountsSetting.paymentType.id;
+        });
       if (item.paymentList[item.paymentList.length - 1].paymentType) {
         $scope.getSafes(item.paymentList[item.paymentList.length - 1]);
       }
@@ -1035,8 +1106,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     item.paymentList.forEach((_p) => {
       amountPaid += _p.paidByCustomer || 0;
     });
-    item.paymentList[item.paymentList.length - 1].paidByCustomer = item.totalNet - amountPaid;
-   /*  item.paymentList[item.paymentList.length - 1].amountPaid = item.totalNet - amountPaid;
+    item.paymentList[item.paymentList.length - 1].paidByCustomer =
+      item.totalNet - amountPaid;
+    /*  item.paymentList[item.paymentList.length - 1].amountPaid = item.totalNet - amountPaid;
     item.paymentList[item.paymentList.length - 1].paidByCustomer = item.totalNet - amountPaid; */
     $scope.calculateCustomerPaid(item);
   };
@@ -1044,11 +1116,14 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.calculateCustomerPaid = function (obj) {
     $timeout(() => {
       if (obj.paymentList && obj.paymentList.length == 1) {
-        obj.paymentList[0].remainForCustomer = obj.paymentList[0].paidByCustomer - obj.paymentList[0].amountPaid;
-        obj.paymentList[0].remainForCustomer = site.toNumber(obj.paymentList[0].remainForCustomer);
+        obj.paymentList[0].remainForCustomer =
+          obj.paymentList[0].paidByCustomer - obj.paymentList[0].amountPaid;
+        obj.paymentList[0].remainForCustomer = site.toNumber(
+          obj.paymentList[0].remainForCustomer
+        );
       } else {
-        $scope.item.paymentList.forEach(element => {
-          element.amountPaid = element.paidByCustomer|| 0;
+        $scope.item.paymentList.forEach((element) => {
+          element.amountPaid = element.paidByCustomer || 0;
           element.remainForCustomer = 0;
         });
       }
@@ -1056,11 +1131,11 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.validateData = function (_item) {
-    $scope.itemsError = '';
-    $scope.error = '';
+    $scope.itemsError = "";
+    $scope.error = "";
     let success = false;
     if (!_item.itemsList.length) {
-      $scope.itemsError = '##word.Must Enter Items Data##';
+      $scope.itemsError = "##word.Must Enter Items Data##";
       return success;
     }
 
@@ -1069,49 +1144,53 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.saveBatch = function (item) {
-    $scope.errorBatch = '';
-    $scope.error = '';
+    $scope.errorBatch = "";
+    $scope.error = "";
 
     if (item.batchesList.some((b) => b.count > b.currentCount)) {
-      $scope.errorBatch = '##word.New quantity cannot be greater than current quantity##';
+      $scope.errorBatch =
+        "##word.New quantity cannot be greater than current quantity##";
       return;
     }
 
     if (item.$batchCount === item.count) {
-      site.hideModal('#batchModalModal');
+      site.hideModal("#batchModalModal");
     } else {
-      $scope.errorBatch = 'The Count is not correct';
+      $scope.errorBatch = "The Count is not correct";
       return;
     }
   };
 
   $scope.showBatchModal = function (item) {
-    $scope.error = '';
-    $scope.errorBatch = '';
+    $scope.error = "";
+    $scope.errorBatch = "";
     if (item.workByBatch || item.workBySerial || item.workByQrCode) {
       item.batchesList = item.batchesList || [];
     }
     $scope.batch = item;
     $scope.calcBatch($scope.batch);
-    site.showModal('#batchModalModal');
+    site.showModal("#batchModalModal");
   };
 
   $scope.calcBatch = function (item) {
     $timeout(() => {
-      $scope.errorBatch = '';
-      $scope.error = '';
-      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a + b.count, 0) : 0;
+      $scope.errorBatch = "";
+      $scope.error = "";
+      item.$batchCount =
+        item.batchesList.length > 0
+          ? item.batchesList.reduce((a, b) => a + b.count, 0)
+          : 0;
     }, 250);
   };
 
   $scope.thermalPrint = function (obj) {
-    $scope.error = '';
+    $scope.error = "";
     if ($scope.busy) return;
     $scope.busy = true;
     obj.netTxt = site.stringfiy(obj.totalNet);
 
     if ($scope.setting.printerProgram.thermalPrinter) {
-      $('#thermalPrint').removeClass('hidden');
+      $("#thermalPrint").removeClass("hidden");
       $scope.thermal = { ...obj };
       $scope.localPrint = function () {
         if ($scope.setting.printerProgram.placeQr) {
@@ -1119,56 +1198,97 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
             site.qrcode({
               width: 140,
               height: 140,
-              selector: document.querySelector('.qrcode'),
-              text: document.location.protocol + '//' + document.location.hostname + `/qr_storeout?id=${$scope.thermal.id}`,
+              selector: document.querySelector(".qrcode"),
+              text:
+                document.location.protocol +
+                "//" +
+                document.location.hostname +
+                `/qr_storeout?id=${$scope.thermal.id}`,
             });
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
-            if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
+            if (
+              $scope.setting.printerProgram.countryQr &&
+              $scope.setting.printerProgram.countryQr.id == 1
+            ) {
               let qrString = {
                 vatNumber: $scope.setting.taxNumber,
                 time: new Date($scope.thermal.date).toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat || 0,
               };
-              if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
-                qrString.name = '##session.company.nameAr##';
-              } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
-                qrString.name = '##session.company.nameEn##';
+              if (
+                $scope.setting.printerProgram.thermalLang.id == 1 ||
+                ($scope.setting.printerProgram.thermalLang.id == 3 &&
+                  "##session.lang##" == "Ar")
+              ) {
+                qrString.name = "##session.company.nameAr##";
+              } else if (
+                $scope.setting.printerProgram.thermalLang.id == 2 ||
+                ($scope.setting.printerProgram.thermalLang.id == 3 &&
+                  "##session.lang##" == "En")
+              ) {
+                qrString.name = "##session.company.nameEn##";
               }
-              qrString.name = '##session.company.nameEn##';
+              qrString.name = "##session.company.nameEn##";
               site.zakat2(
                 {
                   name: qrString.name,
                   vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
-                  vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
+                  vat_total: qrString.totalVat
+                    ? qrString.totalVat.toString()
+                    : 0,
                 },
                 (data) => {
-                  site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: data.value });
+                  site.qrcode({
+                    width: 140,
+                    height: 140,
+                    selector: document.querySelector(".qrcode"),
+                    text: data.value,
+                  });
                 }
               );
             } else {
               let datetime = new Date($scope.thermal.date);
               let formattedDate =
-                datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate() + ' ' + datetime.getHours() + ':' + datetime.getMinutes() + ':' + datetime.getSeconds();
-              let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
+                datetime.getFullYear() +
+                "-" +
+                (datetime.getMonth() + 1) +
+                "-" +
+                datetime.getDate() +
+                " " +
+                datetime.getHours() +
+                ":" +
+                datetime.getMinutes() +
+                ":" +
+                datetime.getSeconds();
+              let qrString = `[${"##session.company.nameAr##"}]\nرقم ضريبي : [${
+                $scope.setting.printerProgram.taxNumber
+              }]\nرقم الفاتورة :[${
                 $scope.thermal.code
-              }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${$scope.thermal.totalVat}]\nالصافي : [${$scope.thermal.totalNet}]`;
-              site.qrcode({ width: 140, height: 140, selector: document.querySelector('.qrcode'), text: qrString });
+              }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${
+                $scope.thermal.totalVat
+              }]\nالصافي : [${$scope.thermal.totalNet}]`;
+              site.qrcode({
+                width: 140,
+                height: 140,
+                selector: document.querySelector(".qrcode"),
+                text: qrString,
+              });
             }
           }
         }
         let printer = $scope.setting.printerProgram.thermalPrinter;
-        if ('##user.thermalPrinter##' && '##user.thermalPrinter.id##' > 0) {
-          printer = JSON.parse('##user.thermalPrinter##');
+        if ("##user.thermalPrinter##" && "##user.thermalPrinter.id##" > 0) {
+          printer = JSON.parse("##user.thermalPrinter##");
         }
         $timeout(() => {
           site.print({
-            selector: '#thermalPrint',
+            selector: "#thermalPrint",
             ip: printer.ipDevice,
             port: printer.portDevice,
-            pageSize: 'Letter',
+            pageSize: "Letter",
             printer: printer.ip.name.trim(),
           });
         }, 500);
@@ -1176,26 +1296,32 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
       $scope.localPrint();
     } else {
-      $scope.error = '##word.Thermal Printer Must Select##';
+      $scope.error = "##word.Thermal Printer Must Select##";
     }
     $scope.busy = false;
     $timeout(() => {
-      $('#thermalPrint').addClass('hidden');
+      $("#thermalPrint").addClass("hidden");
     }, 8000);
   };
 
   $scope.print = function (type) {
-    $scope.error = '';
+    $scope.error = "";
     if ($scope.busy) return;
     $scope.busy = true;
-    $('#salesInvoicesDetails').removeClass('hidden');
+    $("#salesInvoicesDetails").removeClass("hidden");
     $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
 
-    if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
+    if (
+      $scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4
+    ) {
       $scope.invList = [];
-      let invLength = $scope.item.itemsList.length / $scope.setting.printerProgram.itemsCountA4;
+      let invLength =
+        $scope.item.itemsList.length /
+        $scope.setting.printerProgram.itemsCountA4;
       invLength = parseInt(invLength);
-      let ramainItems = $scope.item.itemsList.length - invLength * $scope.setting.printerProgram.itemsCountA4;
+      let ramainItems =
+        $scope.item.itemsList.length -
+        invLength * $scope.setting.printerProgram.itemsCountA4;
 
       if (ramainItems) {
         invLength += 1;
@@ -1208,7 +1334,10 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         $scope.item.itemsList.forEach((itm, i) => {
           let item = { ...itm };
           item.$index = i + 1;
-          if (i < (iInv + 1) * $scope.setting.printerProgram.itemsCountA4 && !item.$doneInv) {
+          if (
+            i < (iInv + 1) * $scope.setting.printerProgram.itemsCountA4 &&
+            !item.$doneInv
+          ) {
             item.$doneInv = true;
             so.itemsList.push(item);
           }
@@ -1225,7 +1354,9 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     }
 
     $scope.localPrint = function () {
-      if (document.querySelectorAll('.qrcode-a4').length !== $scope.invList.length) {
+      if (
+        document.querySelectorAll(".qrcode-a4").length !== $scope.invList.length
+      ) {
         $timeout(() => {
           $scope.localPrint();
         }, 300);
@@ -1237,23 +1368,46 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
           site.qrcode({
             width: 140,
             height: 140,
-            selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1],
-            text: document.location.protocol + '//' + document.location.hostname + `/qr_storeout?id=${$scope.item.id}`,
+            selector:
+              document.querySelectorAll(".qrcode-a4")[
+                $scope.invList.length - 1
+              ],
+            text:
+              document.location.protocol +
+              "//" +
+              document.location.hostname +
+              `/qr_storeout?id=${$scope.item.id}`,
           });
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
-          if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
+          if (
+            $scope.setting.printerProgram.countryQr &&
+            $scope.setting.printerProgram.countryQr.id == 1
+          ) {
+            var d = new Date($scope.item.date);
+            var local = d.getTime();
+            var offset = d.getTimezoneOffset() * (60 * 1000);
+            var utc = new Date(local + offset);
+            var riyadh = new Date(utc.getTime() + 3 * 60 * 60 * 1000);
             let qrString = {
               vatNumber: $scope.setting.taxNumber,
-              time: new Date($scope.item.date).toISOString(),
+              time: riyadh.toISOString(),
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,
             };
-            if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'Ar')) {
-              qrString.name = '##session.company.nameAr##';
-            } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && '##session.lang##' == 'En')) {
-              qrString.name = '##session.company.nameEn##';
+            if (
+              $scope.setting.printerProgram.thermalLang.id == 1 ||
+              ($scope.setting.printerProgram.thermalLang.id == 3 &&
+                "##session.lang##" == "Ar")
+            ) {
+              qrString.name = "##session.company.nameAr##";
+            } else if (
+              $scope.setting.printerProgram.thermalLang.id == 2 ||
+              ($scope.setting.printerProgram.thermalLang.id == 3 &&
+                "##session.lang##" == "En")
+            ) {
+              qrString.name = "##session.company.nameEn##";
             }
-            qrString.name = '##session.company.nameEn##';
+            qrString.name = "##session.company.nameEn##";
             site.zakat2(
               {
                 name: qrString.name,
@@ -1263,47 +1417,77 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
                 vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
               },
               (data) => {
-                site.qrcode({ width: 140, height: 140, selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1], text: data.value });
+                site.qrcode({
+                  width: 140,
+                  height: 140,
+                  selector:
+                    document.querySelectorAll(".qrcode-a4")[
+                      $scope.invList.length - 1
+                    ],
+                  text: data.value,
+                });
               }
             );
           } else {
             let datetime = new Date($scope.item.date);
             let formattedDate =
-              datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate() + ' ' + datetime.getHours() + ':' + datetime.getMinutes() + ':' + datetime.getSeconds();
-            let qrString = `[${'##session.company.nameAr##'}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
+              datetime.getFullYear() +
+              "-" +
+              (datetime.getMonth() + 1) +
+              "-" +
+              datetime.getDate() +
+              " " +
+              datetime.getHours() +
+              ":" +
+              datetime.getMinutes() +
+              ":" +
+              datetime.getSeconds();
+            let qrString = `[${"##session.company.nameAr##"}]\nرقم ضريبي : [${
+              $scope.setting.printerProgram.taxNumber
+            }]\nرقم الفاتورة :[${
               $scope.item.code
-            }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${$scope.item.totalVat}]\nالصافي : [${$scope.item.totalNet}]`;
+            }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${
+              $scope.item.totalVat
+            }]\nالصافي : [${$scope.item.totalNet}]`;
 
-            site.qrcode({ width: 150, height: 150, selector: document.querySelectorAll('.qrcode-a4')[$scope.invList.length - 1], text: qrString });
+            site.qrcode({
+              width: 150,
+              height: 150,
+              selector:
+                document.querySelectorAll(".qrcode-a4")[
+                  $scope.invList.length - 1
+                ],
+              text: qrString,
+            });
           }
         }
       }
       let printer = {};
-      if (type == 'a4') {
+      if (type == "a4") {
         if ($scope.setting.printerProgram.a4Printer) {
           printer = $scope.setting.printerProgram.a4Printer;
         } else {
-          $scope.error = '##word.A4 printer must select##';
+          $scope.error = "##word.A4 printer must select##";
           return;
         }
-        if ('##user.a4Printer##' && '##user.a4Printer.id##' > 0) {
-          printer = JSON.parse('##user.a4Printer##');
+        if ("##user.a4Printer##" && "##user.a4Printer.id##" > 0) {
+          printer = JSON.parse("##user.a4Printer##");
         }
-      } else if (type === 'pdf') {
+      } else if (type === "pdf") {
         if ($scope.setting.printerProgram.pdfPrinter) {
           printer = $scope.setting.printerProgram.pdfPrinter;
         } else {
-          $scope.error = '##word.PDF printer must select##';
+          $scope.error = "##word.PDF printer must select##";
           return;
         }
       }
 
       $timeout(() => {
         site.print({
-          selector: '#salesInvoicesDetails',
+          selector: "#salesInvoicesDetails",
           ip: printer.ipDevice,
           port: printer.portDevice,
-          pageSize: 'A4',
+          pageSize: "A4",
           printer: printer.ip.name.trim(),
         });
       }, 500);
@@ -1313,15 +1497,15 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.busy = false;
     $timeout(() => {
-      $('#salesInvoicesDetails').addClass('hidden');
+      $("#salesInvoicesDetails").addClass("hidden");
     }, 8000);
   };
 
   $scope.labelPrint = function () {
-    $scope.error = '';
+    $scope.error = "";
     if ($scope.busy) return;
     $scope.busy = true;
-    $('#salesInvoicesLabels').removeClass('hidden');
+    $("#salesInvoicesLabels").removeClass("hidden");
     $scope.labelList = [];
     $scope.item.itemsList.forEach((itm) => {
       if (itm.hasMedicalData) {
@@ -1351,18 +1535,18 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       if ($scope.setting.printerProgram.labelPrinter) {
         printer = $scope.setting.printerProgram.labelPrinter;
       } else {
-        $scope.error = '##word.Label printer must select##';
+        $scope.error = "##word.Label printer must select##";
         return;
       }
-      if ('##user.labelPrinter##' && '##user.labelPrinter.id##' > 0) {
-        printer = JSON.parse('##user.labelPrinter##');
+      if ("##user.labelPrinter##" && "##user.labelPrinter.id##" > 0) {
+        printer = JSON.parse("##user.labelPrinter##");
       }
       $timeout(() => {
         site.print({
-          selector: '#salesInvoicesLabels',
+          selector: "#salesInvoicesLabels",
           ip: printer.ipDevice,
           port: printer.portDevice,
-          pageSize: 'A4',
+          pageSize: "A4",
           printer: printer.ip.name.trim(),
         });
       }, 500);
@@ -1372,7 +1556,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.busy = false;
     $timeout(() => {
-      $('#salesInvoicesLabels').addClass('hidden');
+      $("#salesInvoicesLabels").addClass("hidden");
     }, 8000);
   };
 
@@ -1380,8 +1564,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.medicineDurationsList = [];
     $http({
-      method: 'POST',
-      url: '/api/medicineDurations/all',
+      method: "POST",
+      url: "/api/medicineDurations/all",
       data: {
         where: { active: true },
         select: {
@@ -1407,8 +1591,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.medicineFrequenciesList = [];
     $http({
-      method: 'POST',
-      url: '/api/medicineFrequencies/all',
+      method: "POST",
+      url: "/api/medicineFrequencies/all",
       data: {
         where: { active: true },
         select: {
@@ -1434,19 +1618,29 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     if (ev && ev.which != 13) {
       return;
     }
-    $scope.errorBatch = '';
+    $scope.errorBatch = "";
     $scope.busy = true;
     $http({
-      method: 'POST',
-      url: '/api/storesItems/getBatch',
+      method: "POST",
+      url: "/api/storesItems/getBatch",
       data: {
-        where: { active: true, id: item.id, storeId: $scope.item.store.id, unitId: item.unit.id, code: item.$search },
+        where: {
+          active: true,
+          id: item.id,
+          storeId: $scope.item.store.id,
+          unitId: item.unit.id,
+          code: item.$search,
+        },
       },
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || (itm.sn && itm.sn == response.data.doc.sn));
+          let index = item.batchesList.findIndex(
+            (itm) =>
+              itm.code == response.data.doc.code ||
+              (itm.sn && itm.sn == response.data.doc.sn)
+          );
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -1455,13 +1649,13 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
               item.batchesList[index].count += 1;
               item.$batchCount += 1;
             } else {
-              $scope.errorBatch = 'Item Is Exist';
+              $scope.errorBatch = "Item Is Exist";
             }
           }
-          item.$search = '';
+          item.$search = "";
         } else if (response.data.done && response.data.docs) {
           $scope.searchbBatchesList = response.data.docs;
-          site.showModal('#batchSearchModal');
+          site.showModal("#batchSearchModal");
         } else {
           $scope.errorBatch = response.data.error;
         }
@@ -1474,37 +1668,39 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.selectBatch = function (item, batch) {
-    $scope.addBatch = '';
-    $scope.errorBatch = '';
-    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
+    $scope.addBatch = "";
+    $scope.errorBatch = "";
+    let index = item.batchesList.findIndex(
+      (itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn)
+    );
     if (index === -1) {
       batch.currentCount = batch.count;
       item.batchesList.unshift({ ...batch, count: 1 });
       item.$batchCount += 1;
-      $scope.addBatch = 'Added successfully';
+      $scope.addBatch = "Added successfully";
       $timeout(() => {
-        $scope.addBatch = '';
+        $scope.addBatch = "";
       }, 1500);
     } else {
       if (item.workByBatch) {
         item.batchesList[index].count += 1;
         item.$batchCount += 1;
         $timeout(() => {
-          $scope.addBatch = '';
+          $scope.addBatch = "";
         }, 1500);
       } else {
-        $scope.errorBatch = 'Item Is Exist';
+        $scope.errorBatch = "Item Is Exist";
       }
     }
-    item.$search = '';
+    item.$search = "";
   };
 
   $scope.getMedicineRoutesList = function () {
     $scope.busy = true;
     $scope.medicineRoutesList = [];
     $http({
-      method: 'POST',
-      url: '/api/medicineRoutes/all',
+      method: "POST",
+      url: "/api/medicineRoutes/all",
       data: {
         where: { active: true },
         select: {
@@ -1531,17 +1727,18 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $timeout(() => {
       if ($scope.code) {
         $scope.qr = site.getQRcode($scope.code);
-        $scope.code = '';
+        $scope.code = "";
       }
     }, 300);
   };
 
   if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
-    $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+    $scope.invoiceLogo =
+      document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
   }
 
   $scope.showAddVoucher = function (_item) {
-    $scope.error = '';
+    $scope.error = "";
 
     $scope.item = {
       invoiceId: _item.id,
@@ -1551,10 +1748,18 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       remainAmount: 0,
       remainPaid: _item.remainPaid,
       total: _item.remainPaid,
-      voucherType: { id: 'salesInvoice', nameEn: 'Sales Invoice', nameAr: 'فاتورة مبيعات' },
+      voucherType: {
+        id: "salesInvoice",
+        nameEn: "Sales Invoice",
+        nameAr: "فاتورة مبيعات",
+      },
     };
 
-    if (_item.invoiceType.id == 2 && _item.installmentsList && _item.installmentsList.length > 0) {
+    if (
+      _item.invoiceType.id == 2 &&
+      _item.installmentsList &&
+      _item.installmentsList.length > 0
+    ) {
       let index = _item.installmentsList.findIndex((itm) => !itm.paid);
 
       _item.installmentsList[index].$beingPaid = true;
@@ -1565,13 +1770,13 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.item.remainAmount = _item.remainPaid - $scope.item.total;
 
-    site.showModal('#expenseVouchersModal');
-    site.resetValidated('#expenseVouchersModal');
+    site.showModal("#expenseVouchersModal");
+    site.resetValidated("#expenseVouchersModal");
   };
 
   $scope.addExpenseVoucher = function (_item) {
-    $scope.error = '';
-    const v = site.validated('#expenseVouchersModal');
+    $scope.error = "";
+    const v = site.validated("#expenseVouchersModal");
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
       return;
@@ -1579,7 +1784,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
     $scope.busy = true;
     $http({
-      method: 'POST',
+      method: "POST",
       url: `/api/receiptVouchers/add`,
       data: _item,
     }).then(
@@ -1587,8 +1792,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           $scope.getAll();
-          site.hideModal('#expenseVouchersModal');
-          site.resetValidated('#expenseVouchersModal');
+          site.hideModal("#expenseVouchersModal");
+          site.resetValidated("#expenseVouchersModal");
         } else {
           $scope.error = response.data.error;
         }
@@ -1602,15 +1807,15 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   $scope.getOfferPriceItems = function (offerPrice) {
     $scope.item.itemsList = [];
     $http({
-      method: 'POST',
-      url: '/api/storesItems/handelItemsData',
+      method: "POST",
+      url: "/api/storesItems/handelItemsData",
       data: { items: offerPrice.itemsList, storeId: $scope.item.store.id },
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          if(offerPrice.customer && offerPrice.customer.id) {
-            $scope.item.customer = {...offerPrice.customer};
+          if (offerPrice.customer && offerPrice.customer.id) {
+            $scope.item.customer = { ...offerPrice.customer };
           }
           for (const elem of response.data.list) {
             $scope.item.itemsList.unshift({
@@ -1619,7 +1824,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
               nameAr: elem.nameAr,
               nameEn: elem.nameEn,
               extraDiscount: elem.extraDiscount,
-              
+
               itemGroup: elem.itemGroup,
               requestedCount: elem.count,
               unit: elem.unit,
@@ -1653,7 +1858,7 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.selectFromOfferPrice = function () {
-    if($scope.item.fromOfferPrice) {
+    if ($scope.item.fromOfferPrice) {
       $scope.getOffersPrices();
     } else {
       $scope.item.offerPrice = {};
@@ -1676,10 +1881,10 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.deliveryList = [];
     $http({
-      method: 'POST',
-      url: '/api/employees/all',
+      method: "POST",
+      url: "/api/employees/all",
       data: {
-        where: { active: true, 'jobType.id': 3 },
+        where: { active: true, "jobType.id": 3 },
         select: {
           id: 1,
           code: 1,
@@ -1707,8 +1912,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.reasonsCancelingDeliveryList = [];
     $http({
-      method: 'POST',
-      url: '/api/reasonsCancelingDelivery/all',
+      method: "POST",
+      url: "/api/reasonsCancelingDelivery/all",
       data: {
         where: { active: true },
         select: {
@@ -1736,12 +1941,12 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     if (obj.paymentType && obj.paymentType.id) {
       $http({
-        method: 'POST',
-        url: '/api/safes/all',
+        method: "POST",
+        url: "/api/safes/all",
         data: {
           where: {
             active: true,
-            'paymentType.id': obj.paymentType.id,
+            "paymentType.id": obj.paymentType.id,
           },
           select: {
             id: 1,
@@ -1782,8 +1987,8 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.invoiceTypesList = [];
     $http({
-      method: 'POST',
-      url: '/api/invoiceTypes',
+      method: "POST",
+      url: "/api/invoiceTypes",
       data: {},
     }).then(
       function (response) {
@@ -1800,15 +2005,15 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
   };
 
   $scope.showDeliveryStatusModal = function (_item, type) {
-    $scope.error = '';
-    $scope.itemsError = '';
+    $scope.error = "";
+    $scope.itemsError = "";
     $scope.item = _item;
-    if (type == 'canceled') {
-      $scope.item.$deliveredType = 'canceled';
-    } else if (type == 'delivered') {
-      $scope.item.$deliveredType = 'delivered';
+    if (type == "canceled") {
+      $scope.item.$deliveredType = "canceled";
+    } else if (type == "delivered") {
+      $scope.item.$deliveredType = "delivered";
     }
-    site.showModal('#deliveryStatusModal');
+    site.showModal("#deliveryStatusModal");
   };
 
   $scope.calcRemainVoucher = function (item) {
@@ -1819,24 +2024,25 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
 
   $scope.showInstallmentsModal = function (item) {
     item.$firstDueDate = new Date();
-    site.showModal('#installmentsModal');
+    site.showModal("#installmentsModal");
   };
 
   $scope.showChangeDeliveryModal = function (item) {
     $scope.item = item;
-    site.showModal('#changeDeliveryModal');
+    site.showModal("#changeDeliveryModal");
   };
 
   $scope.setInstallments = function (_item) {
-    $scope.installmentError = '';
+    $scope.installmentError = "";
 
     if (!_item.$numberOfMonths || _item.$numberOfMonths < 1) {
-      $scope.installmentError = '##word.Please Enter Number Of Payment Months##';
+      $scope.installmentError =
+        "##word.Please Enter Number Of Payment Months##";
       return;
     }
 
     if (!_item.totalNet) {
-      $scope.installmentError = '##word.Not Found Amount##';
+      $scope.installmentError = "##word.Not Found Amount##";
       return;
     }
 
@@ -1846,7 +2052,11 @@ app.controller('salesInvoices', function ($scope, $http, $timeout) {
       _item.installmentsList = [];
       for (let i = 0; i < _item.$numberOfMonths; i++) {
         _item.installmentsList.push({
-          date: new Date(new Date(_item.$firstDueDate).getFullYear(), new Date(_item.$firstDueDate).getMonth() + i + 1, new Date(_item.$firstDueDate).getDate()),
+          date: new Date(
+            new Date(_item.$firstDueDate).getFullYear(),
+            new Date(_item.$firstDueDate).getMonth() + i + 1,
+            new Date(_item.$firstDueDate).getDate()
+          ),
           amount,
           paid: false,
         });
