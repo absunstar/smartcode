@@ -1344,9 +1344,11 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
             });
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
             if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
+              $scope.thermal.date = new Date($scope.thermal.date);
+              let date =  new Date($scope.thermal.date.getTime() + (120*60*1000));
               let qrString = {
                 vatNumber: $scope.setting.taxNumber,
-                time: new Date($scope.thermal.date).toISOString(),
+                time: date.toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat || 0,
               };
@@ -1459,9 +1461,11 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           });
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
           if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
+            $scope.item.date = new Date($scope.item.date);
+            let date =  new Date($scope.item.date.getTime() + (120*60*1000));
             let qrString = {
               vatNumber: $scope.setting.taxNumber,
-              time: new Date($scope.item.date).toISOString(),
+              time: date.toISOString(),
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,
             };

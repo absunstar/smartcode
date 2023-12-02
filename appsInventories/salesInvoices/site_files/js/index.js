@@ -1210,9 +1210,11 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
               $scope.setting.printerProgram.countryQr &&
               $scope.setting.printerProgram.countryQr.id == 1
             ) {
+              $scope.thermal.date = new Date($scope.thermal.date);
+              let date =  new Date($scope.thermal.date.getTime() + (120*60*1000));
               let qrString = {
                 vatNumber: $scope.setting.taxNumber,
-                time: new Date($scope.thermal.date).toISOString(),
+                time: date.toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat || 0,
               };
@@ -1383,14 +1385,11 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
             $scope.setting.printerProgram.countryQr &&
             $scope.setting.printerProgram.countryQr.id == 1
           ) {
-            var d = new Date($scope.item.date);
-            var local = d.getTime();
-            var offset = d.getTimezoneOffset() * (60 * 1000);
-            var utc = new Date(local + offset);
-            var riyadh = new Date(utc.getTime() + 3 * 60 * 60 * 1000);
+            $scope.item.date = new Date($scope.item.date);
+            let date =  new Date($scope.item.date.getTime() + (120*60*1000));
             let qrString = {
               vatNumber: $scope.setting.taxNumber,
-              time: riyadh.toISOString(),
+              time: date.toISOString(),
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,
             };
