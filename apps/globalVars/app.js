@@ -118,7 +118,7 @@ module.exports = function init(site) {
     { id: 1, nameEn: 'Cash Payment', nameAr: 'كاش', safeType: site.safesTypes[0] },
     { id: 2, nameEn: 'Cheque', nameAr: 'بالشيك', safeType: site.safesTypes[1] },
     { id: 3, nameEn: 'Credit Card', nameAr: 'بطاقة أجلا', safeType: site.safesTypes[1] },
-    { id: 4, nameEn: 'Span Card', nameAr: 'بطاقة سبان', safeType: site.safesTypes[1] },
+    { id: 4, nameEn: 'Span Card', nameAr: 'بطاقة شبكة', safeType: site.safesTypes[1] },
     { id: 5, nameEn: 'Bank Deposit', nameAr: 'إيداع بنكي', safeType: site.safesTypes[1] },
   ];
 
