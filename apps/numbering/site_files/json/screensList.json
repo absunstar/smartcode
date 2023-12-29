@@ -1,5 +1,77 @@
 [
   {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "lawsuitDegrees",
+    "name": "Lawsuit Degrees",
+    "nameEn": "Lawsuit Degrees",
+    "nameAr": "درجات الدعوى"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "typesLawsuit",
+    "name": "Types Lawsuit",
+    "nameEn": "Types Lawsuit",
+    "nameAr": "أنواع الدعوى"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "statusLawsuit",
+    "name": "Status Lawsuit",
+    "nameEn": "Status Lawsuit",
+    "nameAr": "حالات الدعوى"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "adjectivesInLawsuit",
+    "name": "Adjectives In Lawsuit",
+    "nameEn": "Adjectives In Lawsuit",
+    "nameAr": "الصفات في الدعوى"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "typesPoa",
+    "name": "Types POA",
+    "nameEn": "Types POA",
+    "nameAr": "أنواع التوكيلات"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "reasonsSessions",
+    "name": "Reasons Sessions",
+    "nameEn": "Reasons Sessions",
+    "nameAr": "أسباب الجلسات"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "circles",
+    "name": "Circles",
+    "nameEn": "Circles",
+    "nameAr": "الدوائر"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "typeAdministrativeWork",
+    "name": "Typeof Administrative Work",
+    "nameEn": "Typeof Administrative Work",
+    "nameAr": "أنواع العمل الإداري"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "courts",
+    "name": "Courts",
+    "nameEn": "Courts",
+    "nameAr": "المحاكم"
+  },
+  {
     "category": "main",
     "feature": "public",
     "id": "printersPaths",
@@ -127,6 +199,7 @@
     "nameEn": "General Ledger",
     "nameAr": "الأستاذ العام"
   },
+
   {
     "category": "accounting",
     "feature": "public",

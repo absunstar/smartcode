@@ -60,6 +60,7 @@ site.get({
 
 site.importApps(__dirname + '/appsAccounting');
 site.importApps(__dirname + '/appsInventories');
+site.importApps(__dirname + '/appsLawyer');
 site.importApps(__dirname + '/appsHr');
 site.importApps(__dirname + '/appsHmis');
 site.importApp(__dirname + '/ui-print');

@@ -2,6 +2,10 @@
 <div class="form" id="numbering">
     <div class="tabs">
         <div class="tabs-header full">
+            <a class="tab-link" x-data="setting.showLawyer" onclick="site.showTabContent(event, '#lawyerTabs')">
+                <span> ##word.Lawyer##</span>
+            </a>
+
             <a class="tab-link" onclick="site.showTabContent(event, '#mainTabs')">
                 <span> ##word.Main##</span>
             </a>
@@ -24,6 +28,76 @@
         </div>
 
         <div class="tabs-content">
+            <div id="lawyerTabs" class="tab-content">
+                <fieldset>
+                    <div class="row">
+                        <i-list
+                            class="col3"
+                            ng-model="circulate.typeNumbering"
+                            items="typeNumberingList"
+                            display="name"
+                            label="##word.Numbering Type##"
+                            ng-search="_search.$searchTypeNumbering"
+                        ></i-list>
+
+                        <i-control class="col3" ng-model="circulate.firstValue" label="##word.Start Numbering##" type="number"></i-control>
+
+                        <i-control class="col3" ng-model="circulate.lengthLevel" label="##word.Length Level##" type="number"> </i-control>
+
+                        <div class="col2">
+                            <br />
+                            <i-button type="edit" label="##word.Circulate##" ng-click="setCirculate('lawyer')"> </i-button>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <table class="table loaded center bold hover">
+                            <tr>
+                                <th>##word.Screen Name##</th>
+                                <th>##word.Prefix##</th>
+                                <th>##word.Type Numbering##</th>
+                                <th>##word.Start Numbering##</th>
+                                <th>##word.Last Number##</th>
+                                <th>##word.Length Level##</th>
+                                <th>##word.Actions##</th>
+                            </tr>
+
+                            <tr ng-repeat="screen1 in numbering.screensList| filter:{category :'lawyer'}">
+                                <td>
+                                    <p class="text-center blue">{{screen1.name}}</p>
+                                </td>
+                                <td>
+                                    <i-control ng-model="screen0.prefix" type="text"> </i-control>
+                                </td>
+                                <td>
+                                    <i-list class="col3" ng-model="screen1.typeNumbering" items="typeNumberingList" display="name" ng-search="_search.$searchTypeNumbering"> </i-list>
+                                </td>
+
+                                <td>
+                                    <i-control ng-show="screen1.typeNumbering.id ==3" ng-model="screen1.firstValue" type="number"></i-control>
+                                </td>
+
+                                <td>
+                                    <p class="text-center red" ng-show="screen1.typeNumbering.id ==3">{{screen1.lastValue}}</p>
+                                </td>
+
+                                <td>
+                                    <i-control ng-show="screen1.typeNumbering.id ==3" ng-model="screen1.lengthLevel" type="number"></i-control>
+                                </td>
+
+                                <td class="center">
+                                    <i-button ng-show="screen1.typeNumbering.id ==3" type="reset" ng-click="screen1.lastValue = 0"></i-button>
+                                    <i-button type="list" ng-hide="screen1.typeNumbering.id ==3 || screen1.typeNumbering.id ==4 " ng-click="viewCurrentNumbering(screen1)"></i-button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+
             <div id="mainTabs" class="tab-content">
                 <fieldset>
                     <div class="row">

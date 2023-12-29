@@ -94,8 +94,9 @@
 
             <div class="col3">
               <i-image class="img128" category="companies" ng-model="company.image"></i-image>
+              <i-checkbox label="##word.Show## ##word.Lawyer##" ng-change="showLawyerScreens(company.showLawyer)" ng-model="company.showLawyer"></i-checkbox>
               <i-checkbox label="##word.Show## ##word.Hospital##" ng-model="company.showHospital"></i-checkbox>
-              <i-checkbox label="##word.Show## ##word.Restaurant##" ng-model="company.showRestaurant"></i-checkbox>
+              <i-checkbox label="##word.Show## ##word.Restaurant##" ng-change="showRestaurantScreens(company.showRestaurant)" ng-model="company.showRestaurant"></i-checkbox>
 
             </div>
           </div>
@@ -230,7 +231,7 @@
           <div class="row">
             <fieldset>
               <legend>
-                <i-checkbox label="##word.Show## ##word.Accountant##" ng-change="showAccountingScreens()" ng-model="company.showAccounting"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Accountant##" ng-change="showAccountingScreens(company.showAccounting)" ng-model="company.showAccounting"></i-checkbox>
               </legend>
               <div class="row" ng-if="company.showAccounting">
                 <i-checkbox label="##word.Show## ##word.Income List##" ng-model="company.showIncomeList"></i-checkbox>
@@ -255,9 +256,10 @@
                 <i-checkbox label="##word.Show## ##word.Safes Transactions##" ng-model="company.showSafesTransactions"></i-checkbox>
               </div>
             </fieldset>
+
             <fieldset>
               <legend>
-                <i-checkbox label="##word.Show## ##word.Inventory##" ng-change="showInventoryScreens()" ng-model="company.showInventory"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Inventory##" ng-change="showInventoryScreens(company.showInventory)" ng-model="company.showInventory"></i-checkbox>
               </legend>
               <div class="row" ng-if="company.showInventory">
                 <i-checkbox label="##word.Show## ##word.Sales Invoices##" ng-model="company.showSalesInvoices"></i-checkbox>
@@ -288,7 +290,7 @@
  
             <fieldset>
               <legend>
-                <i-checkbox label="##word.Show## ##word.HR##" ng-change="showHrScreens()" ng-model="company.showHr"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.HR##" ng-change="showHrScreens(company.showHr)" ng-model="company.showHr"></i-checkbox>
               </legend>
               <div class="row" ng-if="company.showHr">
                 <i-checkbox label="##word.Show## ##word.Attendance##" ng-model="company.showAttendance"></i-checkbox>
@@ -371,7 +373,7 @@
 
             <fieldset>
               <legend>
-                <i-checkbox label="##word.Show## ##word.Setting##" ng-change="showSettingScreens()" ng-model="company.showSetting"></i-checkbox>
+                <i-checkbox label="##word.Show## ##word.Setting##" ng-change="showSettingScreens(company.showSetting)" ng-model="company.showSetting"></i-checkbox>
               </legend>
               <div class="row" ng-if="company.showSetting">
                 <i-checkbox label="##word.Show## ##word.Customers##" ng-model="company.showCustomers"></i-checkbox>
