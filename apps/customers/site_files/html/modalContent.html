@@ -8,6 +8,7 @@
           <i-list class="col4" label="##word.Group##" ng-model="customer.group" items="customersGroupsList" display="name##session.lang##" ng-search="customer.$vendorGroup"></i-list>
           <div class="col4">
             <i-checkbox
+            x-data="!setting.showLawyer"
               ng-hide="customer.id"
               ng-click="customer.commercialCustomer?setCommercialInformations():''"
               ng-model="customer.commercialCustomer"
@@ -28,7 +29,7 @@
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset x-data="!setting.showLawyer">
     <legend>##word.Accounting Informations##</legend>
     <div class="row">
       <div class="col4">
@@ -56,13 +57,30 @@
       <a class="tab-link" onclick="site.showTabContent(event, '#contactInformations')"> <span>##word.Contact Informatins## </span></a>
       <a class="tab-link" ng-show="customer.commercialCustomer" onclick="site.showTabContent(event, '#taxAndBusinessInformations')"> <span>##word.Tax And Business Informatins## </span></a>
       <a class="tab-link" ng-show="customer.commercialCustomer" onclick="site.showTabContent(event, '#branchesInformations')"> <span>##word.Branches Informatins## </span></a>
-
       <a class="tab-link" ng-show="customer.commercialCustomer" onclick="site.showTabContent(event,'#bankingAccounts')"> <span>##word.Banking Accounts## </span></a>
-      <a class="tab-link" ng-show="customer.commercialCustomer" onclick="site.showTabContent(event, '#vendorsFiles')"> <span>##word.Documents## </span></a>
+      <a class="tab-link" onclick="site.showTabContent(event, '#customersFiles')"> <span>##word.Documents## </span></a>
     </div>
 
     <div class="tabs-content">
       <div id="contactInformations" class="tab-content">
+        <fieldset x-data="setting.showLawyer">
+          <div class="row">
+          <i-date class="col4" label="##word.Date Of Birth ##" ng-model="customer.dateOfBirth"> </i-date>
+          <fieldset class="col8">
+            <div class="col6">
+              <br />
+              <i-radio class="col6" label="##word.ID##" ng-value="id" ng-model="customer.idType"> </i-radio>
+              <i-radio class="col6" label="##word.Passport /Iqama##" ng-value="iqama" ng-model="customer.idType"> </i-radio>
+            </div>
+            <i-control class="col6" v="r ll10 ml10" label="##word.ID /Iqama Number##" ng-model="customer.idNumber"> </i-control>
+          </fieldset>
+          </div>
+          <div class="row">
+          <i-list class="col4" label="##word.Gender##" ng-model="customer.gender" display="name##session.lang##" items="gendersList" ng-search="item.$genders"></i-list>
+          <i-list class="col4" label="##word.Marital Status##" ng-model="customer.maritalStatus" display="name##session.lang##" items="maritalStatusList" ng-search="item.$maritalStatus"></i-list>
+          
+        </div>
+        </fieldset>
         <fieldset>
           <legend>##word.Contact Informations##</legend>
           <div class="row">
@@ -308,7 +326,7 @@
         </fieldset>
       </div>
 
-      <div id="vendorsFiles" class="tab-content">
+      <div id="customersFiles" class="tab-content">
         <fieldset>
           <legend>
             <i-button type="push" ng-click="addFiles()"></i-button>

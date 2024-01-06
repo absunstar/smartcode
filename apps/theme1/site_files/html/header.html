@@ -83,6 +83,66 @@
     <div class="navbar">
       <ul class="nav d-flex flex-column" x-permissions="login">
         <li
+        x-data="setting.showLawyer"
+          id="LawyerModule"
+          class="navlink d-flex flex-row gap-2"
+          onclick="showAndHide('LawyerModule')"
+        >
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-cogs"></i>
+            </div>
+            <div class="linktext">##word.Lawyer Office##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li
+                id="Customers"
+                x-data="setting.showCustomers"
+                x-permissions="customersUi || customersManage"
+              >
+                <a class="menuTag" href="/customers">
+                  <img
+                    src="/theme1/images/setting/customers.png"
+                    width="45"
+                    height="45"
+                  />
+                  <p>##word.Customers##</p>
+                </a>
+              </li>
+              <li
+                id="CustomersGroups"
+                x-data="setting.showCustomersGroups"
+                x-permissions="customersGroupsUi || customersGroupsManage"
+              >
+                <a class="menuTag" href="/customersGroups">
+                  <img
+                    src="/theme1/images/setting/Customers Groups.png"
+                    width="45"
+                    height="45"
+                  />
+                  <p>##word.Customers Groups##</p>
+                </a>
+              </li>
+              <li
+                id="OpposingCounsels"
+                x-data="setting.showOpposingCounsels"
+                x-permissions="opposingCounselsUi || opposingCounselsManage"
+              >
+                <a class="menuTag" href="/opposingCounsels">
+                  <img
+                    src="/theme1/images/setting/opposingCounsels.png"
+                    width="45"
+                    height="45"
+                  />
+                  <p>##word.Opposing Counsels##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li
           id="Restaurant"
           class="navlink"
           onclick="showAndHide('Restaurant')"
@@ -951,6 +1011,20 @@
                     height="45"
                   />
                   <p>##word.Employees##</p>
+                </a>
+              </li>
+              <li
+                id="Lawyers"
+                x-data="setting.showLawyersOffice"
+                x-permissions="employeesUi || employeesManage"
+              >
+                <a class="menuTag" href="/lawyers">
+                  <img
+                    src="/theme1/images/hr/Employees.png"
+                    width="45"
+                    height="45"
+                  />
+                  <p>##word.Lawyers Office##</p>
                 </a>
               </li>
               <li
@@ -1861,19 +1935,19 @@
           <div class="submenu hideSection">
             <ul>
               <li
-              id="LawsuitDegrees"
-              x-data="setting.showLawsuitDegrees"
-              x-permissions="lawsuitDegreesUi || lawsuitDegreesManage"
-            >
-              <a class="menuTag" href="/lawsuitDegrees">
-                <img
-                  src="/theme1/images/setting/lawsuitDegrees.png"
-                  width="45"
-                  height="45"
-                />
-                <p>##word.Lawsuit Degrees##</p>
-              </a>
-            </li>
+                id="LawsuitDegrees"
+                x-data="setting.showLawsuitDegrees"
+                x-permissions="lawsuitDegreesUi || lawsuitDegreesManage"
+              >
+                <a class="menuTag" href="/lawsuitDegrees">
+                  <img
+                    src="/theme1/images/setting/lawsuitDegrees.png"
+                    width="45"
+                    height="45"
+                  />
+                  <p>##word.Lawsuit Degrees##</p>
+                </a>
+              </li>
 
               <li
                 id="TypesLawsuit"

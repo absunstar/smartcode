@@ -5,6 +5,7 @@
     "En": "Administration Permissions",
     "Ar": "صلاحيات الإدارة",
     "permissions": [
+      "opposingCounselsManage",
       "lawsuitDegreesManage",
       "typesLawsuitManage",
       "statusLawsuitManage",

@@ -571,12 +571,14 @@ module.exports = function init(site) {
 
   if (app.allowRoute) {
     if (app.allowRouteGet) {
-      site.get([{ name: app.name }, { name: 'deliverers' }, { name: 'cashers' }], (req, res) => {
+      site.get([{ name: app.name }, { name: 'deliverers' }, { name: 'cashers' }, { name: 'lawyers' }], (req, res) => {
         let appName = 'Employees';
-        if (req.url === '/Deliverers') {
+        if (req.url === '/deliverers') {
           appName = 'Deliverers';
         } else if (req.url === '/cashers') {
           appName = 'Cashers';
+        }else if (req.url === '/lawyers') {
+          appName = 'Lawyers Office';
         }
         res.render(app.name + '/index.html', { title: app.name, appName, setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
       });
@@ -649,10 +651,13 @@ module.exports = function init(site) {
           }
           _data.addUserInfo = req.getUserFinger();
           if (_data.$deliverers) {
-            _data.jobType = site.employeesJobsTypesList[2];
+            _data.jobType = site.employeesJobsTypesList.find((itm) => itm.name == 'deliverers');
           } else if (_data.$cashers) {
-            _data.jobType = site.employeesJobsTypesList[3];
+            _data.jobType = site.employeesJobsTypesList.find((itm) => itm.name == 'casher');
+          }else if (_data.$lawyers) {
+            _data.jobType = site.employeesJobsTypesList.find((itm) => itm.name == 'lawyers');
           }
+
 
           app.add(_data, (err, doc) => {
             if (!err && doc) {

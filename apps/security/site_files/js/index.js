@@ -371,6 +371,26 @@ app.controller('security', function ($scope, $http, $interval) {
     );
   };
 
+  $scope.getEmployeesJobsTypesList = function () {
+    $scope.employeesJobsTypesList = [];
+
+    $http({
+      method: 'POST',
+      url: '/api/employeesJobsTypesList',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.employeesJobsTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.loadStores = function () {
     $scope.error = '';
     $scope.busy = true;
@@ -421,6 +441,7 @@ app.controller('security', function ($scope, $http, $interval) {
       method: 'POST',
       url: '/api/printersPaths/all',
       data: {
+        where: { active: true },
         select: {
           id: 1,
           nameAr: 1,
@@ -436,7 +457,7 @@ app.controller('security', function ($scope, $http, $interval) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          $scope.printersPathList = response.data.list;
+          $scope.printersPathsList = response.data.list;
         }
       },
       function (err) {
@@ -550,4 +571,6 @@ app.controller('security', function ($scope, $http, $interval) {
   $scope.loadRoles();
   $scope.loadPermissions();
   $scope.getUsersTypesList();
+  $scope.getEmployeesJobsTypesList();
+
 });

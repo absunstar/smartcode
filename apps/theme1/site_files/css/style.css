@@ -68,6 +68,10 @@ ul {
   z-index: 1000000;
 }
 
+.border-bottom {
+  border-bottom: solid 1px
+}
+
 @keyframes showMenu {
   from {
     top: 100vh;

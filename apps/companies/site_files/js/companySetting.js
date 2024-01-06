@@ -571,7 +571,7 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
     }).then(
       function (response) {
         $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
+        if (response.data.done) {
           $scope.printersPathsList = response.data.list;
         }
       },

@@ -1,6 +1,6 @@
 <script src="/x-js/sa.js?v=##site.options.version##"></script>
 <script>
-  site.features = '##req.features##';
+  site.features = "##req.features##";
   site.feature = (f) => site.features.indexOf(f) !== -1;
 </script>
 
@@ -10,42 +10,42 @@
 <script x-import="ui-print/index.js"></script>
 
 <div x-permission="!login" x-import="security/loginModal.html"></div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
   site.getQRcode = function (code) {
     let qr = {
       code: code,
     };
-    let index01 = code.indexOf('01');
+    let index01 = code.indexOf("01");
     qr.gtin = code.slice(index01 + 2, index01 + 2 + 14);
-    code = code.replace('01' + qr.gtin, '');
+    code = code.replace("01" + qr.gtin, "");
 
-    let index17 = code.indexOf('17');
+    let index17 = code.indexOf("17");
     qr.expiryDate = code.slice(index17 + 2, index17 + 2 + 6);
-    code = code.replace('17' + qr.expiryDate, '');
+    code = code.replace("17" + qr.expiryDate, "");
 
-    if (qr['expiryDate']) {
-      let y = parseInt(qr['expiryDate'].slice(0, 2));
-      let m = parseInt(qr['expiryDate'].slice(2, 4)) - 1;
-      let d = parseInt(qr['expiryDate'].slice(4, 6));
-      qr['expiryDate'] = new Date(2000 + y, m, d);
+    if (qr["expiryDate"]) {
+      let y = parseInt(qr["expiryDate"].slice(0, 2));
+      let m = parseInt(qr["expiryDate"].slice(2, 4)) - 1;
+      let d = parseInt(qr["expiryDate"].slice(4, 6));
+      qr["expiryDate"] = new Date(2000 + y, m, d);
     }
 
-    let index10 = code.indexOf('10');
-    let index21 = code.indexOf('21');
+    let index10 = code.indexOf("10");
+    let index21 = code.indexOf("21");
 
     if (index10 < index21) {
       qr.batch = code.slice(index10 + 2, index21);
-      code = code.replace('10' + qr.batch, '');
-      index21 = code.indexOf('21');
+      code = code.replace("10" + qr.batch, "");
+      index21 = code.indexOf("21");
       qr.sn = code.slice(index21 + 2);
-      code = code.replace('21' + qr.sn, '');
+      code = code.replace("21" + qr.sn, "");
     } else {
       qr.sn = code.slice(index21 + 2, index10);
-      code = code.replace('21' + qr.sn, '');
-      index10 = code.indexOf('10');
+      code = code.replace("21" + qr.sn, "");
+      index10 = code.indexOf("10");
       qr.batch = code.slice(index10 + 2);
-      code = code.replace('10' + qr.batch, '');
+      code = code.replace("10" + qr.batch, "");
     }
 
     console.log(qr, code);
@@ -54,31 +54,31 @@
 
   function toggleShow(selector) {
     document.querySelectorAll(`.menu-bottom:not(${selector})`).forEach((m) => {
-      m.classList.remove('x-show');
-      m.classList.add('x-hide');
-    }); 
+      m.classList.remove("x-show");
+      m.classList.add("x-hide");
+    });
 
     if ((dom = document.querySelector(selector))) {
-      dom.classList.toggle('x-show');
-      dom.classList.toggle('x-hide');
+      dom.classList.toggle("x-show");
+      dom.classList.toggle("x-hide");
     }
   }
 </script>
 <script>
-  app.connectScope({ name: 'headerController' }, ($scope, $http, $timeout) => {
+  app.connectScope({ name: "headerController" }, ($scope, $http, $timeout) => {
     $scope.showLogin = function () {
       /* site.showModal('#loginModal'); */
       window.location.href = "/login";
     };
 
     $scope.logout = function () {
-      $scope.error = '';
+      $scope.error = "";
       $scope.busy = true;
 
-      $http.post('/api/user/logout').then(
+      $http.post("/api/user/logout").then(
         function (response) {
           if (response.data.done) {
-            window.location.href = '/';
+            window.location.href = "/";
           } else {
             $scope.error = response.data.error;
             $scope.busy = false;
@@ -92,7 +92,7 @@
     };
 
     $scope.login = function (b) {
-      $scope.error = '';
+      $scope.error = "";
       $scope.user = {
         company: b.company,
         branch: b.branch,
@@ -101,10 +101,10 @@
       $scope.busy = true;
 
       $http({
-        method: 'POST',
-        url: '/api/user/change-branch',
+        method: "POST",
+        url: "/api/user/change-branch",
         data: {
-          $encript: '123',
+          $encript: "123",
           company: site.to123({
             id: $scope.user.company.id,
             nameAr: $scope.user.company.nameAr,
@@ -139,8 +139,8 @@
 
     $scope.changeLang = function (lang) {
       $http({
-        method: 'POST',
-        url: '/x-language/change',
+        method: "POST",
+        url: "/x-language/change",
         data: {
           name: lang,
         },
@@ -152,13 +152,13 @@
     };
     $scope.loadUserBranches = function () {
       $scope.companyList = [];
-      let email = '##user.email##';
+      let email = "##user.email##";
       if (!email) {
         return;
       }
       $http({
-        method: 'POST',
-        url: '/api/user/branches/all',
+        method: "POST",
+        url: "/api/user/branches/all",
         data: {
           where: { email: email },
         },

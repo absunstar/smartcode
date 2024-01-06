@@ -5,7 +5,7 @@
 
         <div class="top-actions">
             <i-button type="add" x-permissions="customersAdd || customersManage" label="##word.New##" ng-click="showAddCustomer()"></i-button>
-            <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Commercial Customer##" ng-click="searchAll(search={'type.id':6,commercialCustomer:true})"></i-button>
+            <i-button x-data="!setting.showLawyer" type="search" x-permissions="customersSearch || customersManage" label="##word.Commercial Customer##" ng-click="searchAll(search={'type.id':6,commercialCustomer:true})"></i-button>
             <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Customer##" ng-click="searchAll(search={'type.id':6,commercialCustomer:false})"></i-button>
             <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
             <i-button type="search" x-permissions="customersSearch || customersManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
@@ -23,7 +23,7 @@
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
                     <th>##word.Group##</th>
-                    <th>##word.Commercial Customer##</th>
+                    <th  x-data="!setting.showLawyer">##word.Commercial Customer##</th>
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
@@ -37,7 +37,7 @@
                         <p class="text-center" ng-if="item.group.id">{{item.group.name##session.lang##}}</p>
                         <p class="text-center" ng-if="!item.group.id">-</p>
                     </td>
-                    <td class="center">
+                    <td class="center" x-data="!setting.showLawyer">
                         <span class="text-success" ng-show="item.commercialCustomer">##word.Yes##</span>
                         <span class="text-danger" ng-show="!item.commercialCustomer">##word.No##</span>
                     </td>

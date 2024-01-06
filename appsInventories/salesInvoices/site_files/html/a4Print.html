@@ -1,11 +1,11 @@
 <div ng-repeat="sInvoice in invList">
-  <div class="border page-a4">
+  <div class="border" style="background-color: #f1f1f1;">
     <div class="row">
       <div class="row">
         <div class="col-6">
           <div class="row">
             <div class="col-5">
-              <p class="black font-13" ng-show="item.customer.commercialCustomer">Tax Invoice</p>
+              <p class="black font-13" style="color: black;" >Tax Invoice</p>
               <p class="black font-13" ng-show="!item.customer.commercialCustomer ">Simplified Tax Invoice</p>
             </div>
             <div class="col-2"></div>
@@ -81,7 +81,7 @@
           <img class="logoPrint" ng-src="{{invoiceLogo}}" />
         </div>
       </div>
-      <div class="row">
+      <div class="row border-bottom padding">
         <div class="col-6">
           <div class="row">
             <p class="black font-12 text-right col-4" ng-show="setting.phone">{{setting.phone}} <i class="fas fa-phone"></i></p>
@@ -108,10 +108,9 @@
             </div>
           </div>
         </div>
-        <hr class="line" />
       </div>
 
-      <div class="row" ng-show="item.customer &&item.customer.id">
+      <div class="row padding" ng-show="item.customer &&item.customer.id">
         <div class="row bg-lightGray">
           <div class="col-4">
             <p class="black font-15">Customer Data</p>

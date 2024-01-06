@@ -518,7 +518,7 @@ module.exports = function init(site) {
               res.json(response);
               return;
             }
-          } else {
+          } else if(_data.offerPrice) {
             _data.offerPrice = {
               id: _data.offerPrice.id,
               code: _data.offerPrice.code,

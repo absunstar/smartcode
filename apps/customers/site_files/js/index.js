@@ -588,6 +588,48 @@ app.controller('customers', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getMaritalStatus = function () {
+    $scope.busy = true;
+    $scope.maritalStatusList = [];
+    $http({
+      method: 'POST',
+      url: '/api/maritalStatus',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.maritalStatusList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getGenders = function () {
+    $scope.busy = true;
+    $scope.gendersList = [];
+    $http({
+      method: 'POST',
+      url: '/api/genders',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.gendersList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getAll();
   $scope.getBanks();
   $scope.getNationalities();
@@ -596,4 +638,6 @@ app.controller('customers', function ($scope, $http, $timeout) {
   $scope.getCustomersGroups();
   $scope.getAccountingLinkList();
   $scope.getCountriesList();
+  $scope.getMaritalStatus();
+  $scope.getGenders();
 });

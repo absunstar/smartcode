@@ -1,26 +1,28 @@
-app.controller("courts", function ($scope, $http, $timeout) {
-  $scope.baseURL = "";
-  $scope.appName = "courts";
-  $scope.modalID = "#courtsManageModal";
-  $scope.modalSearchID = "#courtsSearchModal";
-  $scope.mode = "add";
+app.controller('opposingCounsels', function ($scope, $http, $timeout) {
+  $scope.baseURL = '';
+  $scope.appName = 'opposingCounsels';
+  $scope.modalID = '#opposingCounselsManageModal';
+  $scope.modalSearchID = '#opposingCounselsSearchModal';
+  $scope.mode = 'add';
   $scope._search = {};
   $scope.structure = {
-    image: { url: "/theme1/images/setting/courts.png" },
+    image: { url: '/images/opposingCounsels.png' },
     active: true,
   };
   $scope.item = {};
   $scope.list = [];
 
+
   $scope.showAdd = function (_item) {
-    $scope.error = "";
-    $scope.mode = "add";
+    $scope.error = '';
+    $scope.mode = 'add';
     $scope.item = { ...$scope.structure };
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.add = function (_item) {
-    $scope.error = "";
+    $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -29,7 +31,7 @@ app.controller("courts", function ($scope, $http, $timeout) {
 
     $scope.busy = true;
     $http({
-      method: "POST",
+      method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/add`,
       data: $scope.item,
     }).then(
@@ -41,11 +43,8 @@ app.controller("courts", function ($scope, $http, $timeout) {
           $scope.list.unshift(response.data.doc);
         } else {
           $scope.error = response.data.error;
-          if (
-            response.data.error &&
-            response.data.error.like("*Must Enter Code*")
-          ) {
-            $scope.error = "##word.Must Enter Code##";
+          if (response.data.error && response.data.error.like('*Must Enter Code*')) {
+            $scope.error = '##word.Must Enter Code##';
           }
         }
       },
@@ -56,15 +55,16 @@ app.controller("courts", function ($scope, $http, $timeout) {
   };
 
   $scope.showUpdate = function (_item) {
-    $scope.error = "";
-    $scope.mode = "edit";
+    $scope.error = '';
+    $scope.mode = 'edit';
     $scope.view(_item);
     $scope.item = {};
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.update = function (_item) {
-    $scope.error = "";
+    $scope.error = '';
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -72,7 +72,7 @@ app.controller("courts", function ($scope, $http, $timeout) {
     }
     $scope.busy = true;
     $http({
-      method: "POST",
+      method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/update`,
       data: _item,
     }).then(
@@ -81,9 +81,7 @@ app.controller("courts", function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex(
-            (itm) => itm.id == response.data.result.doc.id
-          );
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
@@ -98,18 +96,19 @@ app.controller("courts", function ($scope, $http, $timeout) {
   };
 
   $scope.showView = function (_item) {
-    $scope.error = "";
-    $scope.mode = "view";
+    $scope.error = '';
+    $scope.mode = 'view';
     $scope.item = {};
     $scope.view(_item);
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.view = function (_item) {
     $scope.busy = true;
-    $scope.error = "";
+    $scope.error = '';
     $http({
-      method: "POST",
+      method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/view`,
       data: {
         id: _item.id,
@@ -130,19 +129,20 @@ app.controller("courts", function ($scope, $http, $timeout) {
   };
 
   $scope.showDelete = function (_item) {
-    $scope.error = "";
-    $scope.mode = "delete";
+    $scope.error = '';
+    $scope.mode = 'delete';
     $scope.item = {};
     $scope.view(_item);
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.delete = function (_item) {
     $scope.busy = true;
-    $scope.error = "";
+    $scope.error = '';
 
     $http({
-      method: "POST",
+      method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/delete`,
       data: {
         id: $scope.item.id,
@@ -152,9 +152,7 @@ app.controller("courts", function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           site.hideModal($scope.modalID);
-          let index = $scope.list.findIndex(
-            (itm) => itm.id == response.data.result.doc.id
-          );
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list.splice(index, 1);
           }
@@ -172,10 +170,18 @@ app.controller("courts", function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     $http({
-      method: "POST",
+      method: 'POST',
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
       data: {
         where: where,
+        select: {
+          id: 1,
+          code: 1,
+          nameAr: 1,
+          nameEn: 1,
+          image: 1,
+          active: 1,
+        },
       },
     }).then(
       function (response) {
@@ -194,6 +200,86 @@ app.controller("courts", function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getNumberingAuto = function () {
+    $scope.error = '';
+    $scope.busy = true;
+    $http({
+      method: 'POST',
+      url: '/api/numbering/getAutomatic',
+      data: {
+        screen: $scope.appName,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done) {
+          $scope.disabledCode = response.data.isAuto;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.showSearch = function () {
+    $scope.error = '';
+    site.showModal($scope.modalSearchID);
+  };
+
+  $scope.searchAll = function () {
+    $scope.getAll($scope.search);
+    site.hideModal($scope.modalSearchID);
+    $scope.search = {};
+  };
+
+
+  $scope.addFiles = function () {
+    $scope.error = '';
+    $scope.item.filesList = $scope.item.filesList || [];
+    $scope.item.filesList.push({
+      file_date: new Date(),
+      file_upload_date: new Date(),
+      upload_by: '##user.name##',
+    });
+  };
+
+
+  $scope.getNationalities = function ($search) {
+    if ($search && $search.length < 1) {
+      return;
+    }
+    $scope.busy = true;
+    $scope.nationalitiesList = [];
+    $http({
+      method: 'POST',
+      url: '/api/nationalities/all',
+      data: {
+        where: { active: true },
+        select: {
+          id: 1,
+          code: 1,
+          nameAr: 1,
+          nameEn: 1,
+        },
+        search: $search,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.nationalitiesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+
   $scope.getCountriesList = function ($search) {
     if ($search && $search.length < 1) {
       return;
@@ -201,8 +287,8 @@ app.controller("courts", function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.countriesList = [];
     $http({
-      method: "POST",
-      url: "/api/countries/all",
+      method: 'POST',
+      url: '/api/countries/all',
       data: {
         where: {
           active: true,
@@ -235,12 +321,12 @@ app.controller("courts", function ($scope, $http, $timeout) {
     $scope.govesList = [];
 
     $http({
-      method: "POST",
-      url: "/api/goves/all",
+      method: 'POST',
+      url: '/api/goves/all',
       data: {
         where: {
           active: true,
-          "country.id": country.id,
+          'country.id': country.id,
         },
         select: {
           id: 1,
@@ -267,11 +353,11 @@ app.controller("courts", function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.citiesList = [];
     $http({
-      method: "POST",
-      url: "/api/cities/all",
+      method: 'POST',
+      url: '/api/cities/all',
       data: {
         where: {
-          "gov.id": gov.id,
+          'gov.id': gov.id,
           active: true,
         },
         select: {
@@ -298,11 +384,11 @@ app.controller("courts", function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.areasList = [];
     $http({
-      method: "POST",
-      url: "/api/areas/all",
+      method: 'POST',
+      url: '/api/areas/all',
       data: {
         where: {
-          "city.id": city.id,
+          'city.id': city.id,
           active: true,
         },
         select: {
@@ -326,20 +412,18 @@ app.controller("courts", function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getNumberingAuto = function () {
-    $scope.error = "";
+  $scope.getMaritalStatus = function () {
     $scope.busy = true;
+    $scope.maritalStatusList = [];
     $http({
-      method: "POST",
-      url: "/api/numbering/getAutomatic",
-      data: {
-        screen: $scope.appName,
-      },
+      method: 'POST',
+      url: '/api/maritalStatus',
+      data: {},
     }).then(
       function (response) {
         $scope.busy = false;
-        if (response.data.done) {
-          $scope.disabledCode = response.data.isAuto;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.maritalStatusList = response.data.list;
         }
       },
       function (err) {
@@ -348,49 +432,32 @@ app.controller("courts", function ($scope, $http, $timeout) {
       }
     );
   };
-/*
-  $scope.initMap = function () {
-    const myLatlng = { lat: -25.363, lng: 131.044 };
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: myLatlng,
-    });
-    // Create the initial InfoWindow.
-    let infoWindow = new google.maps.InfoWindow({
-      content: "Click the map to get Lat/Lng!",
-      position: myLatlng,
-    });
 
-    infoWindow.open(map);
-    // Configure the click listener.
-    map.addListener("click", (mapsMouseEvent) => {
-      // Close the current InfoWindow.
-      infoWindow.close();
-      // Create a new InfoWindow.
-      infoWindow = new google.maps.InfoWindow({
-        position: mapsMouseEvent.latLng,
-      });
-      infoWindow.setContent(
-        JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-      );
-      infoWindow.open(map);
-    });
-  }
-
-   window.initMap = $scope.initMap();
- */
-  $scope.showSearch = function () {
-    $scope.error = "";
-    site.showModal($scope.modalSearchID);
-  };
-
-  $scope.searchAll = function () {
-    $scope.getAll($scope.search);
-    site.hideModal($scope.modalSearchID);
-    $scope.search = {};
+  $scope.getGenders = function () {
+    $scope.busy = true;
+    $scope.gendersList = [];
+    $http({
+      method: 'POST',
+      url: '/api/genders',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.gendersList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
   };
 
   $scope.getAll();
-  $scope.getCountriesList();
+  $scope.getNationalities();
   $scope.getNumberingAuto();
+  $scope.getCountriesList();
+  $scope.getMaritalStatus();
+  $scope.getGenders();
 });

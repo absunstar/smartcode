@@ -18,6 +18,14 @@
   {
     "category": "lawyer",
     "feature": "public",
+    "id": "opposingCounsels",
+    "name": "Opposing Counsels",
+    "nameEn": "Opposing Counsels",
+    "nameAr": "محاميين الخصوم"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
     "id": "statusLawsuit",
     "name": "Status Lawsuit",
     "nameEn": "Status Lawsuit",

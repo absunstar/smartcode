@@ -5,6 +5,8 @@ app.controller('employees', function ($scope, $http, $timeout) {
     $scope.employeeType = 'deliverers';
   } else if (window.location.href.contains('cashers')) {
     $scope.employeeType = 'cashers';
+  }else if (window.location.href.contains('lawyers')) {
+    $scope.employeeType = 'lawyers';
   }
   $scope.baseURL = '';
   $scope.appName = 'employees';
@@ -71,6 +73,8 @@ app.controller('employees', function ($scope, $http, $timeout) {
       $scope.item.$deliverers = true;
     } else if (window.location.href.contains('cashers')) {
       $scope.item.$cashers = true;
+    }else if (window.location.href.contains('lawyers')) {
+      $scope.item.$lawyers = true;
     }
     $scope.busy = true;
     $http({
@@ -246,9 +250,11 @@ app.controller('employees', function ($scope, $http, $timeout) {
     $scope.list = [];
     where = where || {};
     if (window.location.href.contains('deliverers')) {
-      where['jobType.id'] = 3;
+      where['jobType.name'] = 'deliverers';
     } else if (window.location.href.contains('cashers')) {
-      where['jobType.id'] = 4;
+      where['jobType.name'] = 'cashers';
+    }  else if (window.location.href.contains('lawyers')) {
+      where['jobType.name'] = 'lawyers';
     } else {
       where['jobType.id'] = null;
     }
