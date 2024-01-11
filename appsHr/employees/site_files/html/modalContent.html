@@ -543,7 +543,7 @@
             <fieldset>
               <div class="row">
                 <i-list
-                  v="r"
+                  
                   class="col4"
                   label="##word.Department##"
                   ng-model="item.department"
@@ -553,7 +553,7 @@
                   ng-search="item.$department"
                 ></i-list>
                 <i-list
-                  v="r"
+                  
                   class="col4"
                   label="##word.Section##"
                   ng-change="getJobs(item.section)"
@@ -563,9 +563,9 @@
                   ng-search="item.$section"
                 ></i-list>
 
-                <i-list v="r" class="col4" label="##word.Job##" ng-model="item.job" display="name##session.lang##" items="jobsList" ng-search="item.$job"></i-list>
+                <i-list  class="col4" label="##word.Job##" ng-model="item.job" display="name##session.lang##" items="jobsList" ng-search="item.$job"></i-list>
 
-                <i-list v="r" class="col4" label="##word.Shift##" ng-model="item.shift" display="name##session.lang##" items="jobsShiftsList" ng-search="item.$shift"></i-list>
+                <i-list class="col4" label="##word.Shift##" ng-model="item.shift" display="name##session.lang##" items="jobsShiftsList" ng-search="item.$shift"></i-list>
 
                 <i-date class="col6" label="##word.Contract Work Start Date ##" ng-model="item.contractWorkStartDate"> </i-date>
                 <i-date class="col6" label="##word.Contract Work End Date ##" ng-model="item.contractWorkEndDate"> </i-date>

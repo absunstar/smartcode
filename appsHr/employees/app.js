@@ -651,11 +651,11 @@ module.exports = function init(site) {
           }
           _data.addUserInfo = req.getUserFinger();
           if (_data.$deliverers) {
-            _data.jobType = site.employeesJobsTypesList.find((itm) => itm.name == 'deliverers');
+            _data.jobType = { id: 3, nameEn: "Delivery", nameAr: "موصل طلبات", name: "deliverers" };
           } else if (_data.$cashers) {
-            _data.jobType = site.employeesJobsTypesList.find((itm) => itm.name == 'casher');
+            _data.jobType = { id: 4, nameEn: "Casher", nameAr: "كاشير / صراف", name: "cashers" };
           }else if (_data.$lawyers) {
-            _data.jobType = site.employeesJobsTypesList.find((itm) => itm.name == 'lawyers');
+            _data.jobType = { id: 6, nameEn: "Lawyer", nameAr: "محامي", name: "lawyers" };
           }
 
 

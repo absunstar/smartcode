@@ -5,12 +5,11 @@ var menuBusy = false;
 function pdfPrint(obj, callback) {
   setTimeout(() => {
     html2pdf()
-      .from(document.getElementById(obj.id))
       .set({
-        margin: 1,
+        margin: 0,
         filename: "salesInvoice-" + obj.code + ".pdf",
         image: { type: "jpeg", quality: 1 },
-        html2canvas: { scale: 2, scrollX: 80, scrollY: 0 },
+        html2canvas: { scale: 3, scrollX: 80, scrollY: 2, },
         jsPDF: {
           unit: "pt",
           format: "letter",
@@ -18,8 +17,8 @@ function pdfPrint(obj, callback) {
           compressPDF: true,
         },
         pagebreak: { mode: "avoid-all", before: ".inv_page", avoid: "img" },
-
       })
+      .from(document.getElementById(obj.id))
       .save()
       .then(function () {
         $("#" + obj.id).addClass("hidden");

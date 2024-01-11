@@ -2,6 +2,14 @@
   {
     "category": "lawyer",
     "feature": "public",
+    "id": "powerOfAttorney",
+    "name": "Power Of Attorney",
+    "nameEn": "Power Of Attorney",
+    "nameAr": "التوكيلات"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
     "id": "lawsuitDegrees",
     "name": "Lawsuit Degrees",
     "nameEn": "Lawsuit Degrees",
@@ -22,6 +30,14 @@
     "name": "Opposing Counsels",
     "nameEn": "Opposing Counsels",
     "nameAr": "محاميين الخصوم"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "opponents",
+    "name": "Opponents",
+    "nameEn": "Opponents",
+    "nameAr": "الخصوم"
   },
   {
     "category": "lawyer",
