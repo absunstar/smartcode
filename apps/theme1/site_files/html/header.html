@@ -142,6 +142,235 @@
           </div>
         </li>
 
+        <li id="Hospital" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Hospital')" x-data="setting.showHospital">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-stethoscope"></i>
+            </div>
+            <div class="linktext">##word.Hospital##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="Patients" x-permissions="patientsUi || patientsManage">
+                <a class="menuTag" href="/patients">
+                  <img src="/theme1/images/hospital/Patients.png" width="45" height="45" />
+                  <p>##word.Patients##</p>
+                </a>
+              </li>
+              <li id="Doctors" x-permissions="doctorsUi || doctorsManage">
+                <a class="menuTag" href="/doctors">
+                  <img src="/theme1/images/hospital/Doctors.png" width="45" height="45" />
+                  <p>##word.Doctors##</p>
+                </a>
+              </li>
+              <li id="Nurses" x-permissions="nursesUi || nursesManage">
+                <a class="menuTag" href="/nurses">
+                  <img src="/theme1/images/hospital/Nurses.png" width="45" height="45" />
+                  <p>##word.Nurses##</p>
+                </a>
+              </li>
+              <li id="ServicesOrders" x-permissions="servicesOrdersUi || servicesOrdersManage">
+                <a class="menuTag" href="/servicesOrders">
+                  <img src="/theme1/images/hospital/Services Orders.png" width="45" height="45" />
+                  <p>##word.Services Orders##</p>
+                </a>
+              </li>
+              <li id="DoctorDeskTop" x-permissions="doctorDeskTopUi || doctorDeskTopManage">
+                <a class="menuTag" href="/doctorDeskTop">
+                  <img src="/theme1/images/hospital/Doctor DeskTop.png" width="45" height="45" />
+                  <p>##word.Doctor DeskTop##</p>
+                </a>
+              </li>
+              <li id="DoctorAppointments" x-permissions="doctorAppointmentsUi || doctorAppointmentsManage">
+                <a class="menuTag" href="/doctorAppointments">
+                  <img src="/theme1/images/hospital/Doctor Appointments.png" width="45" height="45" />
+                  <p>##word.Doctor Appointments##</p>
+                </a>
+              </li>
+              <li id="PatientHistory" x-permissions="patientHistoryUi || patientHistoryManage">
+                <a class="menuTag" href="/patientHistory">
+                  <img src="/theme1/images/hospital/Patient History.png" width="45" height="45" />
+                  <p>##word.Patient History##</p>
+                </a>
+              </li>
+              <li id="LaboratoryDeskTop" x-permissions="laboratoryDeskTopUi || laboratoryDeskTopManage">
+                <a class="menuTag" href="/laboratoryDeskTop">
+                  <img src="/theme1/images/hospital/Laboratory DeskTop.png" width="45" height="45" />
+                  <p>##word.Laboratory DeskTop##</p>
+                </a>
+              </li>
+              <li id="RadiologyDeskTop" x-permissions="radiologyDeskTopUi || radiologyDeskTopManage">
+                <a class="menuTag" href="/radiologyDeskTop">
+                  <img src="/theme1/images/hospital/Radiology DeskTop.png" width="45" height="45" />
+                  <p>##word.Radiology DeskTop##</p>
+                </a>
+              </li>
+              <li id="SalesInvoicseForPatients" x-data="setting.showHospital" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage">
+                <a class="menuTag" href="/salesPatientsInvoices">
+                  <img src="/theme1/images/inventory/sales Patients Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Patients##</p>
+                </a>
+              </li>
+              <li id="SalesInvoicseForER" x-data="setting.showHospital" x-permissions="salesErInvoicesUi || salesErInvoicesManage">
+                <a class="menuTag" href="/salesErInvoices">
+                  <img src="/theme1/images/inventory/sales Er Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For ER##</p>
+                </a>
+              </li>
+              <li id="PatientsApproval" x-permissions="patientsApprovalUi || patientsApprovalManage">
+                <a class="menuTag" href="/patientsApproval">
+                  <img src="/theme1/images/hospital/Patients Approval.png" width="45" height="45" />
+                  <p>##word.Patients Approval##</p>
+                </a>
+              </li>
+              <li id="MedicalOffers" x-permissions="medicalOffersUi || medicalOffersManage">
+                <a class="menuTag" href="/medicalOffers">
+                  <img src="/theme1/images/hospital/Medical Offers.png" width="45" height="45" />
+                  <p>##word.Medical Offers##</p>
+                </a>
+              </li>
+              <li id="OffersOrders" x-permissions="offersOrdersUi || offersOrdersManage">
+                <a class="menuTag" href="/offersOrders">
+                  <img src="/theme1/images/hospital/Offers Orders.png" width="45" height="45" />
+                  <p>##word.Offers Orders##</p>
+                </a>
+              </li>
+              <li id="Services" x-permissions="servicesUi || servicesManage">
+                <a class="menuTag" href="/services">
+                  <img src="/theme1/images/hospital/Services.png" width="45" height="45" />
+                  <p>##word.Services##</p>
+                </a>
+              </li>
+              <li id="ServicesCategories" x-permissions="servicesCategoriesUi || servicesCategoriesManage">
+                <a class="menuTag" href="/servicesCategories">
+                  <img src="/theme1/images/hospital/Services Categories.png" width="45" height="45" />
+                  <p>##word.Services Categories##</p>
+                </a>
+              </li>
+              <li id="ServicesGroups" x-permissions="servicesGroupsUi || servicesGroupsManage">
+                <a class="menuTag" href="/servicesGroups">
+                  <img src="/theme1/images/hospital/Services Groups.png" width="45" height="45" />
+                  <p>##word.Services Groups##</p>
+                </a>
+              </li>
+              <li id="MainInsuranceCompanies" x-permissions="mainInsuranceCompaniesUi || mainInsuranceCompaniesManage">
+                <a class="menuTag" href="/mainInsuranceCompanies">
+                  <img src="/theme1/images/hospital/Main Insurance Companies.png" width="45" height="45" />
+                  <p>##word.Main Insurance Companies##</p>
+                </a>
+              </li>
+              <li id="InsuranceCompanies" x-permissions="insuranceCompaniesUi || insuranceCompaniesManage">
+                <a class="menuTag" href="/insuranceCompanies">
+                  <img src="/theme1/images/hospital/Insurance Companies.png" width="45" height="45" />
+                  <p>##word.Insurance Companies##</p>
+                </a>
+              </li>
+              <li id="InsuranceClasses" x-permissions="insuranceClassesUi || insuranceClassesManage">
+                <a class="menuTag" href="/insuranceClasses">
+                  <img src="/theme1/images/hospital/Insurance Classes.png" width="45" height="45" />
+                  <p>##word.Insurance Classes##</p>
+                </a>
+              </li>
+              <li id="InsuranceContracts" x-permissions="insuranceContractsUi || insuranceContractsManage">
+                <a class="menuTag" href="/insuranceContracts">
+                  <img src="/theme1/images/hospital/Insurance Contracts.png" width="45" height="45" />
+                  <p>##word.Insurance Contracts##</p>
+                </a>
+              </li>
+              <li id="ACHICodes" x-permissions="achiCodesUi || achiCodesManage">
+                <a class="menuTag" href="/achiCodes">
+                  <img src="/theme1/images/hospital/ACHI Codes.png" width="45" height="45" />
+                  <p>##word.ACHI Codes##</p>
+                </a>
+              </li>
+              <li id="MedicineDurations" x-permissions="medicineDurationsUi || medicineDurationsManage">
+                <a class="menuTag" href="/medicineDurations">
+                  <img src="/theme1/images/hospital/Medicine Durations.png" width="45" height="45" />
+                  <p>##word.Medicine Durations##</p>
+                </a>
+              </li>
+              <li id="MedicineRoutes" x-permissions="medicineRoutesUi || medicineRoutesManage">
+                <a class="menuTag" href="/medicineRoutes">
+                  <img src="/theme1/images/hospital/Medicine Routes.png" width="45" height="45" />
+                  <p>##word.Medicine Routes##</p>
+                </a>
+              </li>
+              <li id="MedicineFrequencies" x-permissions="medicineFrequenciesUi || medicineFrequenciesManage">
+                <a class="menuTag" href="/medicineFrequencies">
+                  <img src="/theme1/images/hospital/Medicine Frequencies.png" width="45" height="45" />
+                  <p>##word.Medicine Frequencies##</p>
+                </a>
+              </li>
+              <li id="ChiefComplaints" x-permissions="chiefComplaintsUi || chiefComplaintsManage">
+                <a class="menuTag" href="/chiefComplaints">
+                  <img src="/theme1/images/hospital/Chief Complaints.png" width="45" height="45" />
+                  <p>##word.Chief Complaints##</p>
+                </a>
+              </li>
+              <li id="SignificantSigns" x-permissions="significantSignsUi || significantSignsManage">
+                <a class="menuTag" href="/significantSigns">
+                  <img src="/theme1/images/hospital/Significant Signs.png" width="45" height="45" />
+                  <p>##word.Significant Signs##</p>
+                </a>
+              </li>
+              <li id="Diagnoses" x-permissions="diagnosesUi || diagnosesManage">
+                <a class="menuTag" href="/diagnoses">
+                  <img src="/theme1/images/hospital/Diagnoses.png" width="45" height="45" />
+                  <p>##word.Diagnoses##</p>
+                </a>
+              </li>
+              <li id="PatientRecommend" x-permissions="patientRecommendationsUi || patientRecommendationsManage">
+                <a class="menuTag" href="/patientRecommendations">
+                  <img src="/theme1/images/hospital/patient Recommendations.png" width="45" height="45" />
+                  <p>##word.Patient Recommend##</p>
+                </a>
+              </li>
+              <li id="PatientEducations" x-permissions="patientEducationsUi || patientEducationsManage">
+                <a class="menuTag" href="/patientEducations">
+                  <img src="/theme1/images/hospital/Patient Educations.png" width="45" height="45" />
+                  <p>##word.Patient Educations##</p>
+                </a>
+              </li>
+              <li id="OtherConditions" x-permissions="otherConditionsUi || otherConditionsManage">
+                <a class="menuTag" href="/otherConditions">
+                  <img src="/theme1/images/hospital/Other Conditions.png" width="45" height="45" />
+                  <p>##word.Other Conditions##</p>
+                </a>
+              </li>
+              <li id="Specialties" x-permissions="specialtiesUi || specialtiesManage">
+                <a class="menuTag" href="/specialties">
+                  <img src="/theme1/images/hospital/Specialties.png" width="45" height="45" />
+                  <p>##word.Specialties##</p>
+                </a>
+              </li>
+              <li id="HospitalResponsibilities" x-permissions="hospitalResponsibilitiesUi || hospitalResponsibilitiesManage">
+                <a class="menuTag" href="/hospitalResponsibilities">
+                  <img src="/theme1/images/hospital/Hospital Responsibilities.png" width="45" height="45" />
+                  <p>##word.Hospital Responsibilities##</p>
+                </a>
+              </li>
+              <li id="Drinks" x-permissions="drinksUi || drinksManage">
+                <a class="menuTag" href="/drinks">
+                  <img src="/theme1/images/hospital/Drinks.png" width="45" height="45" />
+                  <p>##word.Drinks##</p>
+                </a>
+              </li>
+              <li id="Foods" x-permissions="foodsUi || foodsManage">
+                <a class="menuTag" href="/foods">
+                  <img src="/theme1/images/hospital/Foods.png" width="45" height="45" />
+                  <p>##word.Foods##</p>
+                </a>
+              </li>
+              <li id="Packages" x-permissions="packagesUi || packagesManage">
+                <a class="menuTag" href="/packages">
+                  <img src="/theme1/images/hospital/Packages.png" width="45" height="45" />
+                  <p>##word.Packages##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
         <li
           id="Restaurant"
           class="navlink"

@@ -497,7 +497,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showReportEmployeesAdvances = false;
     $timeout(() => {
       $scope.selectPackages();
-    }, 1000);
+    }, 500);
     
   };
 
@@ -1221,6 +1221,9 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showDeliverers = type;
     $scope.company.showDeliveryManage = type;
   };
+
+  $scope.showHospitalScreens = function (type) {
+  }
 
   $scope.showLawyerScreens = function (type) {
     $scope.company.showCourts = type;

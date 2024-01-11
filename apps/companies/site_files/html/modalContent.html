@@ -95,7 +95,7 @@
             <div class="col3">
               <i-image class="img128" category="companies" ng-model="company.image"></i-image>
               <i-checkbox label="##word.Show## ##word.Lawyer##" ng-change="showLawyerScreens(company.showLawyer)" ng-model="company.showLawyer"></i-checkbox>
-              <i-checkbox label="##word.Show## ##word.Hospital##" ng-model="company.showHospital"></i-checkbox>
+              <i-checkbox label="##word.Show## ##word.Hospital##" ng-change="showHospitalScreens(company.showHospital)"  ng-model="company.showHospital"></i-checkbox>
               <i-checkbox label="##word.Show## ##word.Restaurant##" ng-change="showRestaurantScreens(company.showRestaurant)" ng-model="company.showRestaurant"></i-checkbox>
 
             </div>
