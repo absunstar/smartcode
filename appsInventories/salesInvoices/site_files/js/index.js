@@ -1,5 +1,5 @@
 app.controller("salesInvoices", function ($scope, $http, $timeout) {
- $scope.setting = site.showObject(`##data.#setting##`);
+  $scope.setting = site.showObject(`##data.#setting##`);
   $scope.baseURL = "";
   $scope.appName = "salesInvoices";
   $scope.modalID = "#salesInvoicesManageModal";
@@ -1646,32 +1646,11 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       }
     }
     if ($scope.invList.length) {
-      $timeout(() => {
-
-        html2pdf()
-          .from(document.getElementById("salesInvoicesDetails"))
-          .set({
-            margin: [0.1, 0.1, 0, 0],
-            image: { type: "jpeg", quality: 0.98 },
-            filename: "salesInvoice-" + $scope.item.code + ".pdf",
-            html2canvas: {
-              backgroundColor: "#fff",
-              scale: 2,
-              y: 0,
-              x: 0,
-              scrollY: 0,
-              scrollX: 0, 
-              windowWidth: 800,
-
-              /* dpi: 192, letterRendering: true, width: 1024, height: 1448 */
-            },
-            jsPDF: { orientation: "portrait", unit: "in", format: "letter" },
-          })
-          .save();
-        $timeout(() => {
-          $("#salesInvoicesDetails").addClass("hidden");
-        }, 1000);
-      }, 2000);
+      pdfPrint({ id: "salesInvoicesDetails", code: $scope.item.code }, (cb) => {
+        if (cb) {
+          $scope.invList = [];
+        }
+      });
     }
   };
 
