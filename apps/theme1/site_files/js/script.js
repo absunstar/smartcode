@@ -3,7 +3,14 @@ const submenuLists = document.querySelectorAll(".navlink .submenu");
 
 var menuBusy = false;
 function pdfPrint(obj, callback) {
+  
   setTimeout(() => {
+    const ps = document.getElementById(obj.id).querySelectorAll("table span");
+    console.log(ps);
+    ps.forEach((p) => {
+      p.innerHTML = p.innerText.replace(/\s/g, "\u00a0");
+      console.log(p);
+    });
     html2pdf()
       .set({
         margin: 0,
