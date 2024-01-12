@@ -1239,6 +1239,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showOpposingCounsels = type;
     $scope.company.showOpponents = type;
     $scope.company.showPowerOfAttorney = type;
+    $scope.company.showLawsuits = type;
   }
 
   $scope.showRestaurantScreens = function (type) {

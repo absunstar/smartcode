@@ -1,12 +1,11 @@
-app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
+app.controller("lawsuits", function ($scope, $http, $timeout) {
   $scope.baseURL = "";
-  $scope.appName = "powerOfAttorney";
-  $scope.modalID = "#powerOfAttorneyManageModal";
-  $scope.modalSearchID = "#powerOfAttorneySearchModal";
+  $scope.appName = "lawsuits";
+  $scope.modalID = "#lawsuitsManageModal";
+  $scope.modalSearchID = "#lawsuitsSearchModal";
   $scope.mode = "add";
   $scope._search = {};
   $scope.structure = {
-    image: { url: "/theme1/images/setting/powerOfAttorney.png" },
     active: true,
   };
   $scope.item = {};
@@ -20,6 +19,8 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
       date: new Date(),
       clientsList: [],
       clientsLawyersList: [],
+      opponentsList: [],
+      opposingCounselsList: [],
     };
     site.showModal($scope.modalID);
     document.querySelector(`${$scope.modalID} .tab-link`).click();
@@ -202,6 +203,32 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
       }
     );
   };
+  $scope.getAdjectivesInLawsuit = function () {
+    $scope.busy = true;
+    $scope.adjectivesInLawsuitList = [];
+    $http({
+      method: "POST",
+      url: "/api/adjectivesInLawsuit/all",
+      data: {
+        select: {
+          id: 1,
+          name: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.adjectivesInLawsuitList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getDocumentsTypes = function () {
     $scope.busy = true;
     $scope.documentsTypesList = [];
@@ -306,7 +333,7 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
       method: "POST",
       url: "/api/employees/all",
       data: {
-        where: { active: true, "type.id": 4,'jobType.name' : 'lawyers' },
+        where: { active: true, "type.id": 4, "jobType.name": "lawyers" },
         select: {
           id: 1,
           code: 1,
@@ -367,15 +394,15 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getCountriesList = function ($search) {
+  $scope.getOpponentsList = function ($search) {
     if ($search && $search.length < 1) {
       return;
     }
     $scope.busy = true;
-    $scope.countriesList = [];
+    $scope.opponentsList = [];
     $http({
       method: "POST",
-      url: "/api/countries/all",
+      url: "/api/opponents/all",
       data: {
         where: {
           active: true,
@@ -383,9 +410,9 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
         select: {
           id: 1,
           code: 1,
+          image: 1,
           nameEn: 1,
           nameAr: 1,
-          callingCode: 1,
         },
         search: $search,
       },
@@ -393,7 +420,7 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.countriesList = response.data.list;
+          $scope.opponentsList = response.data.list;
         }
       },
       function (err) {
@@ -403,93 +430,189 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getGovesList = function (country) {
+  $scope.getOpposingCounselsList = function ($search) {
+    if ($search && $search.length < 1) {
+      return;
+    }
     $scope.busy = true;
-    $scope.govesList = [];
-
+    $scope.opposingCounselsList = [];
     $http({
       method: "POST",
-      url: "/api/goves/all",
+      url: "/api/opposingCounsels/all",
       data: {
         where: {
-          active: true,
-          "country.id": country.id,
-        },
-        select: {
-          id: 1,
-          code: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.govesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getCitiesList = function (gov) {
-    $scope.busy = true;
-    $scope.citiesList = [];
-    $http({
-      method: "POST",
-      url: "/api/cities/all",
-      data: {
-        where: {
-          "gov.id": gov.id,
-          active: true,
-        },
-        select: {
-          id: 1,
-          nameEn: 1,
-          nameAr: 1,
-        },
-      },
-    }).then(
-      function (response) {
-        $scope.busy = false;
-        if (response.data.done && response.data.list.length > 0) {
-          $scope.citiesList = response.data.list;
-        }
-      },
-      function (err) {
-        $scope.busy = false;
-        $scope.error = err;
-      }
-    );
-  };
-
-  $scope.getAreasList = function (city) {
-    $scope.busy = true;
-    $scope.areasList = [];
-    $http({
-      method: "POST",
-      url: "/api/areas/all",
-      data: {
-        where: {
-          "city.id": city.id,
           active: true,
         },
         select: {
           id: 1,
           code: 1,
+          image: 1,
           nameEn: 1,
           nameAr: 1,
+        },
+        search: $search,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.opposingCounselsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getLawsuitDegreesList = function () {
+    $scope.busy = true;
+    $scope.lawsuitDegreesList = [];
+
+    $http({
+      method: "POST",
+      url: "/api/lawsuitDegrees/all",
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          name: 1,
         },
       },
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.areasList = response.data.list;
+          $scope.lawsuitDegreesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getStatusLawsuitList = function () {
+    $scope.busy = true;
+    $scope.statusLawsuitList = [];
+
+    $http({
+      method: "POST",
+      url: "/api/statusLawsuit/all",
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          name: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.statusLawsuitList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getTypesLawsuitList = function () {
+    $scope.busy = true;
+    $scope.typesLawsuitList = [];
+
+    $http({
+      method: "POST",
+      url: "/api/typesLawsuit/all",
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          name: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.typesLawsuitList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getCourtsList = function () {
+    $scope.busy = true;
+    $scope.courtsList = [];
+
+    $http({
+      method: "POST",
+      url: "/api/courts/all",
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          name: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.courtsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getCirclesList = function (courtId) {
+    $scope.busy = true;
+    $scope.circlesList = [];
+
+    $http({
+      method: "POST",
+      url: "/api/circles/all",
+      data: {
+        where: {
+          active: true,
+          'court.id' : courtId
+        },
+        select: {
+          id: 1,
+          code: 1,
+          name: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.circlesList = response.data.list;
         }
       },
       function (err) {
@@ -501,40 +624,130 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
 
   $scope.addClients = function () {
     $scope.error = "";
-    if ($scope.item.$client) {
-      let index = $scope.item.clientsList.findIndex(
-        (itm) => itm.client.id == $scope.item.$client.id
-      );
-      if (index === -1) {
-        $scope.item.clientsList.push({ client: $scope.item.$client });
-        $scope.item.$client = {};
-      } else {
-        $scope.item.$clientError = "##word.Exists before##";
-        $timeout(() => {
-          $scope.item.$clientError = "";
-        }, 1000);
-      }
+    $timeout(() => {
+      $scope.item.$clientError = "";
+    }, 1500);
+    if (!$scope.item.$client || !$scope.item.$client.id) {
+      $scope.item.$clientError = "##word.Must add client##";
+      return;
+    }
+    if (
+      !$scope.item.$adjectiveInLawsuitClient ||
+      !$scope.item.$adjectiveInLawsuitClient.id
+    ) {
+      $scope.item.$clientError = "##word.Must add adjective in lawsuit##";
+      return;
+    }
+    let index = $scope.item.clientsList.findIndex(
+      (itm) => itm.client.id == $scope.item.$client.id
+    );
+    if (index === -1) {
+      $scope.item.clientsList.push({
+        client: $scope.item.$client,
+        adjectiveInLawsuit: $scope.item.$adjectiveInLawsuitClient,
+      });
+      $scope.item.$client = {};
+      $scope.item.$adjectiveInLawsuitClient = {};
+    } else {
+      $scope.item.$clientError = "##word.Exists before##";
     }
   };
 
   $scope.addClientsLawyers = function () {
     $scope.error = "";
-    if ($scope.item.$clientLawyer) {
-      let index = $scope.item.clientsLawyersList.findIndex(
-        (itm) => itm.lawyer.id == $scope.item.$clientLawyer.id
-      );
-      if (index === -1) {
-        $scope.item.clientsLawyersList.push({ lawyer: $scope.item.$clientLawyer });
-        $scope.item.$clientLawyer = {};
-      } else {
-        $scope.item.$clientLawyerError = "##word.Exists before##";
-        $timeout(() => {
-          $scope.item.$clientLawyerError = "";
-        }, 1000);
-      }
+    $timeout(() => {
+      $scope.item.$clientLawyerError = "";
+    }, 1500);
+    if (!$scope.item.$clientLawyer || !$scope.item.$clientLawyer.id) {
+      $scope.item.$clientLawyerError = "##word.Must add client lawyer##";
+      return;
+    }
+    if (
+      !$scope.item.$adjectiveInLawsuitClientLawyer ||
+      !$scope.item.$adjectiveInLawsuitClientLawyer.id
+    ) {
+      $scope.item.$clientLawyerError = "##word.Must add adjective in lawsuit##";
+      return;
+    }
+    let index = $scope.item.clientsLawyersList.findIndex(
+      (itm) => itm.lawyer.id == $scope.item.$clientLawyer.id
+    );
+    if (index === -1) {
+      $scope.item.$clientLawyer.nameAr = $scope.item.$clientLawyer.fullNameAr;
+      $scope.item.$clientLawyer.nameEn = $scope.item.$clientLawyer.fullNameEn;
+      $scope.item.clientsLawyersList.push({
+        lawyer: $scope.item.$clientLawyer,
+        adjectiveInLawsuit: $scope.item.$adjectiveInLawsuitClientLawyer,
+      });
+      $scope.item.$clientLawyer = {};
+      $scope.item.$adjectiveInLawsuitClientLawyer = {};
+    } else {
+      $scope.item.$clientLawyerError = "##word.Exists before##";
     }
   };
 
+  $scope.addOpponents = function () {
+    $scope.error = "";
+    $timeout(() => {
+      $scope.item.$opponentError = "";
+    }, 1500);
+    if (!$scope.item.$opponent || !$scope.item.$opponent.id) {
+      $scope.item.$opponentError = "##word.Must add opponent##";
+      return;
+    }
+    if (
+      !$scope.item.$adjectiveInLawsuitOpponent ||
+      !$scope.item.$adjectiveInLawsuitOpponent.id
+    ) {
+      $scope.item.$opponentError = "##word.Must add adjective in lawsuit##";
+      return;
+    }
+    let index = $scope.item.opponentsList.findIndex(
+      (itm) => itm.opponent.id == $scope.item.$opponent.id
+    );
+    if (index === -1) {
+      $scope.item.opponentsList.push({
+        opponent: $scope.item.$opponent,
+        adjectiveInLawsuit: $scope.item.$adjectiveInLawsuitOpponent,
+      });
+      $scope.item.$opponent = {};
+      $scope.item.$adjectiveInLawsuitOpponent = {};
+    } else {
+      $scope.item.$opponentError = "##word.Exists before##";
+    }
+  };
+
+  $scope.addOpposingCounsels = function () {
+    $scope.error = "";
+    $timeout(() => {
+      $scope.item.$opposingCounselError = "";
+    }, 1500);
+    if (!$scope.item.$opposingCounsel || !$scope.item.$opposingCounsel.id) {
+      $scope.item.$opposingCounselError = "##word.Must add opposing counsel##";
+      return;
+    }
+    if (
+      !$scope.item.$adjectiveInLawsuitOpposingCounsel ||
+      !$scope.item.$adjectiveInLawsuitOpposingCounsel.id
+    ) {
+      $scope.item.$opposingCounselError =
+        "##word.Must add adjective in lawsuit##";
+      return;
+    }
+    let index = $scope.item.opposingCounselsList.findIndex(
+      (itm) => itm.opposingCounsel.id == $scope.item.$opposingCounsel.id
+    );
+    if (index === -1) {
+      $scope.item.opposingCounselsList.push({
+        opposingCounsel: $scope.item.$opposingCounsel,
+        adjectiveInLawsuit: $scope.item.$adjectiveInLawsuitOpposingCounsel,
+      });
+      $scope.item.$opposingCounsel = {};
+      $scope.item.$adjectiveInLawsuitOpposingCounsel = {};
+    } else {
+      $scope.item.$opposingCounselError = "##word.Exists before##";
+    }
+  };
 
   $scope.showSearch = function () {
     $scope.error = "";
@@ -549,9 +762,15 @@ app.controller("powerOfAttorney", function ($scope, $http, $timeout) {
 
   $scope.getAll();
   $scope.getDocumentsTypes();
-  $scope.getCountriesList();
   $scope.getNumberingAuto();
   $scope.getClientsList();
+  $scope.getOpponentsList();
   $scope.getTypesPoaList();
   $scope.getClientsLawyersList();
+  $scope.getOpposingCounselsList();
+  $scope.getAdjectivesInLawsuit();
+  $scope.getCourtsList();
+  $scope.getLawsuitDegreesList();
+  $scope.getStatusLawsuitList();
+  $scope.getTypesLawsuitList();
 });

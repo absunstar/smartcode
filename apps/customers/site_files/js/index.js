@@ -290,7 +290,7 @@ app.controller('customers', function ($scope, $http, $timeout) {
       data: {
         select: {
           id: 1,
-          name: 1,
+          nameEn: 1,
           nameAr: 1,
         },
       },

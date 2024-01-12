@@ -2,6 +2,14 @@
   {
     "category": "lawyer",
     "feature": "public",
+    "id": "lawsuits",
+    "name": "Lawsuits",
+    "nameEn": "Lawsuits",
+    "nameAr": "الدعاوى"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
     "id": "powerOfAttorney",
     "name": "Power Of Attorney",
     "nameEn": "Power Of Attorney",
