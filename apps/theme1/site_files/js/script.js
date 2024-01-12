@@ -9,14 +9,14 @@ function pdfPrint(obj, callback) {
         margin: 0,
         filename: "salesInvoice-" + obj.code + ".pdf",
         image: { type: "jpeg", quality: 1 },
-        html2canvas: { scale: 3, scrollX: 80, scrollY: 2, },
+        html2canvas: { scale: 3, scrollX: 80, scrollY: 2 },
         jsPDF: {
           unit: "pt",
           format: "letter",
           orientation: "portrait",
           compressPDF: true,
         },
-        pagebreak: { mode: "avoid-all", before: ".inv_page", avoid: "img" },
+        pagebreak: { mode: "avoid-all", avoid: "img" },
       })
       .from(document.getElementById(obj.id))
       .save()
