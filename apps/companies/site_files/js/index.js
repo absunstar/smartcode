@@ -1228,7 +1228,8 @@ app.controller("companies", function ($scope, $http, $timeout) {
   $scope.showLawyerScreens = function (type) {
     $scope.company.showCourts = type;
     $scope.company.showCircles = type;
-    $scope.company.showTypeAdministrativeWork = type;
+    $scope.company.showTypeAdministrativeWorks = type;
+    $scope.company.showAdministrativeWorks = type;
     $scope.company.showReasonsSessions = type;
     $scope.company.showTypesPoa = type;
     $scope.company.showAdjectivesInLawsuit = type;
@@ -1240,6 +1241,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showOpponents = type;
     $scope.company.showPowerOfAttorney = type;
     $scope.company.showLawsuits = type;
+    $scope.company.showSessions = type;
   }
 
   $scope.showRestaurantScreens = function (type) {

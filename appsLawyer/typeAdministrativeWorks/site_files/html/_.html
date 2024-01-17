@@ -1,15 +1,15 @@
-<div ng-controller="typeAdministrativeWork" class="loaded">
-    <div class="row" x-permissions="typeAdministrativeWorkUi || typeAdministrativeWorkManage">
-        <div x-import="typeAdministrativeWork/modal.html"></div>
+<div ng-controller="typeAdministrativeWorks" class="loaded">
+    <div class="row" x-permissions="typeAdministrativeWorksUi || typeAdministrativeWorksManage">
+        <div x-import="typeAdministrativeWorks/modal.html"></div>
 
         <div class="top-actions">
-            <i-button type="add" x-permissions="typeAdministrativeWorkAdd || typeAdministrativeWorkManage" label="##word.New##"
+            <i-button type="add" x-permissions="typeAdministrativeWorksAdd || typeAdministrativeWorksManage" label="##word.New##"
                 ng-click="showAdd()"></i-button>
-            <i-upload api="api/typeAdministrativeWork/import" label="Import" x-permissions="typeAdministrativeWorkImport || typeAdministrativeWorkManage"></i-upload>
+            <i-upload api="api/typeAdministrativeWorks/import" label="Import" x-permissions="typeAdministrativeWorksImport || typeAdministrativeWorksManage"></i-upload>
         </div>
 
         <div class="row padding">
-            <i-control ng-model="$search" x-permissions="typeAdministrativeWorkSearch || typeAdministrativeWorkManage"></i-control>
+            <i-control ng-model="$search" x-permissions="typeAdministrativeWorksSearch || typeAdministrativeWorksManage"></i-control>
         </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
@@ -34,18 +34,18 @@
                     <td class="center not-print">
                         <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
 
-                        <i-button type="edit" x-permissions="typeAdministrativeWorkUpdate || typeAdministrativeWorkManage" title="##word.Edit##"
+                        <i-button type="edit" x-permissions="typeAdministrativeWorksUpdate || typeAdministrativeWorksManage" title="##word.Edit##"
                             ng-click="showUpdate(item)"></i-button>
 
-                        <i-button type="delete" x-permissions="typeAdministrativeWorkDelete || typeAdministrativeWorkManage" title="##word.Delete##"
+                        <i-button type="delete" x-permissions="typeAdministrativeWorksDelete || typeAdministrativeWorksManage" title="##word.Delete##"
                             ng-click="showDelete(item)"></i-button>
                     </td>
                 </tr>
             </table>
         </div>
-        <i-button x-permissions="typeAdministrativeWorkPrint || typeAdministrativeWorkManage" type="print" label="##word.Print##"
+        <i-button x-permissions="typeAdministrativeWorksPrint || typeAdministrativeWorksManage" type="print" label="##word.Print##"
             onclick="site.print('#t1')"></i-button>
-        <i-button x-permissions="typeAdministrativeWorkExport || typeAdministrativeWorkManage" type="export" label="##word.Export to excel##"
+        <i-button x-permissions="typeAdministrativeWorksExport || typeAdministrativeWorksManage" type="export" label="##word.Export to excel##"
             onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"> </i-button>
     </div>
 </div>

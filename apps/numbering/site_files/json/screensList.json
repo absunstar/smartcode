@@ -90,10 +90,26 @@
   {
     "category": "lawyer",
     "feature": "public",
-    "id": "typeAdministrativeWork",
-    "name": "Typeof Administrative Work",
-    "nameEn": "Typeof Administrative Work",
+    "id": "typeAdministrativeWorks",
+    "name": "Typeof Administrative Works",
+    "nameEn": "Typeof Administrative Works",
     "nameAr": "أنواع العمل الإداري"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "administrativeWorks",
+    "name": "Administrative Works",
+    "nameEn": "Administrative Works",
+    "nameAr": "العمل الإداري"
+  },
+  {
+    "category": "lawyer",
+    "feature": "public",
+    "id": "sessions",
+    "name": "Sessions",
+    "nameEn": "Sessions",
+    "nameAr": "الجلسات"
   },
   {
     "category": "lawyer",

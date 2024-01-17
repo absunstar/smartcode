@@ -153,6 +153,20 @@
                 </a>
               </li>
               <li
+              id="Sessions"
+              x-data="setting.showSessions"
+              x-permissions="sessionsUi || sessionsManage"
+            >
+              <a class="menuTag" href="/sessions">
+                <img
+                  src="/theme1/images/setting/sessions.png"
+                  width="45"
+                  height="45"
+                />
+                <p>##word.Sessions##</p>
+              </a>
+            </li>
+              <li
                 id="PowerOfAttorney"
                 x-data="setting.showPowerOfAttorney"
                 x-permissions="powerOfAttorneyUi || powerOfAttorneyManage"
@@ -164,6 +178,20 @@
                     height="45"
                   />
                   <p>##word.Power Of Attorney##</p>
+                </a>
+              </li>
+              <li
+                id="AdministrativeWorks"
+                x-data="setting.showAdministrativeWorks"
+                x-permissions="administrativeWorksUi || administrativeWorksManage"
+              >
+                <a class="menuTag" href="/administrativeWorks">
+                  <img
+                    src="/theme1/images/setting/administrativeWorks.png"
+                    width="45"
+                    height="45"
+                  />
+                  <p>##word.Administrative Works##</p>
                 </a>
               </li>
               <li
@@ -2557,19 +2585,20 @@
                 </a>
               </li>
               <li
-                id="TypeAdministrativeWork"
-                x-data="setting.showTypeAdministrativeWork"
-                x-permissions="typeAdministrativeWorkUi || typeAdministrativeWorkManage"
+                id="TypeAdministrativeWorks"
+                x-data="setting.showTypeAdministrativeWorks"
+                x-permissions="typeAdministrativeWorksUi || typeAdministrativeWorksManage"
               >
-                <a class="menuTag" href="/typeAdministrativeWork">
+                <a class="menuTag" href="/typeAdministrativeWorks">
                   <img
-                    src="/theme1/images/setting/typeAdministrativeWork.png"
+                    src="/theme1/images/setting/typeAdministrativeWorks.png"
                     width="45"
                     height="45"
                   />
-                  <p>##word.Typeof Administrative Work##</p>
+                  <p>##word.Typeof Administrative Works##</p>
                 </a>
               </li>
+              
               <li>
                 <p class="font-27">##word.Location Settings## :</p>
               </li>
@@ -2724,8 +2753,7 @@
 
               <li
                 id="words Manage"
-                x-data="setting.showXwords"
-                x-permissions="xwordsManage"
+                x-permissions="devleoper"
               >
                 <a class="menuTag" href="/xwords">
                   <img
@@ -2752,7 +2780,7 @@
                 </a>
               </li>
 
-              <li id="core Setting" x-permissions="developer">
+              <li id="core Setting" x-permissions="devleoper">
                 <a class="menuTag" href="/coreSetting">
                   <img
                     src="/theme1/images/setting/Company Setting.png"

@@ -1892,6 +1892,10 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           nameAr: 1,
           fullNameEn: 1,
           fullNameAr: 1,
+          department: 1,
+          section: 1,
+          job: 1,
+          mobile: 1,
         },
       },
     }).then(

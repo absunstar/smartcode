@@ -5,6 +5,7 @@
     "En": "Administration Permissions",
     "Ar": "صلاحيات الإدارة",
     "permissions": [
+      "sessionsManage",
       "lawsuitsManage",
       "powerOfAttorneyManage",
       "opponentsManage",
@@ -15,7 +16,8 @@
       "adjectivesInLawsuitManage",
       "typesPoaManage",
       "reasonsSessionsManage",
-      "typeAdministrativeWorkManage",
+      "typeAdministrativeWorksManage",
+      "administrativeWorksManage",
       "courtsManage",
       "circlesManage",
       "securityManage",

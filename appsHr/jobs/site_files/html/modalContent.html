@@ -1,222 +1,330 @@
 <div class="row">
-    <div class="row padding">
-        <div class="col9">
-            <div class="row">
-                <div class="row">
-                    <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code">
-                    </i-control>
-                    <i-control type="text" class="col4" v="r" ng-model="item.nameEn" label="##word.Name##"></i-control>
-                    <i-control type="text" class="col4" v="r" ng-model="item.nameAr"
-                        label="##word.Name Arabic##"></i-control>
-                    <i-checkbox ng-model="item.active" class="col2" label="##word.Active##"></i-checkbox>
+  <div class="row padding">
+    <div class="col9">
+      <div class="row">
+        <i-control
+          ng-hide="disabledCode"
+          class="col2"
+          label="##word.Code##"
+          ng-model="item.code"
+        >
+        </i-control>
+        <i-control
+          type="text"
+          class="col5"
+          v="r"
+          ng-model="item.nameEn"
+          label="##word.Name##"
+        ></i-control>
+        <i-control
+          type="text"
+          class="col5"
+          v="r"
+          ng-model="item.nameAr"
+          label="##word.Name Arabic##"
+        ></i-control>
+        <i-checkbox
+          ng-model="item.active"
+          class="col2"
+          label="##word.Active##"
+        ></i-checkbox>
 
-                    <i-list v="r" class="col6" label="##word.Department##" ng-model="item.department"
-                        ng-change="getSection(item.department)" ng-get="getDepartments($search)"
-                        display="name##session.lang##" items="departmentsList" ng-search="item.$department"></i-list>
-                    <i-list v="r" class="col6" label="##word.Section##" ng-model="item.section"
-                        display="name##session.lang##" items="sectionsList" ng-search="item.$section"></i-list>
+        <i-list
+          v="r"
+          class="col5"
+          label="##word.Department##"
+          ng-model="item.department"
+          ng-change="getSection(item.department)"
+          ng-get="getDepartments($search)"
+          display="name##session.lang##"
+          items="departmentsList"
+          ng-search="item.$department"
+        ></i-list>
 
-                    <i-textarea type="text" rows="3" ng-model="item.jobDescription"
-                        label="##word.Job Description##"></i-textarea>
-                </div>
-            </div>
-        </div>
-        <div class="col3 center">
-            <i-image class="img128 center" ng-model="item.image"></i-image>
-        </div>
+        <i-list
+          v="r"
+          class="col5"
+          label="##word.Section##"
+          ng-model="item.section"
+          display="name##session.lang##"
+          items="sectionsList"
+          ng-search="item.$section"
+        ></i-list>
+      </div>
     </div>
-    <div class="row padding">
-        <fieldset>
-            <div class="tabs">
-                <div class="tabs-header full">
-                    <a class="tab-link" onclick="site.showTabContent(event, '#jobTasks')">
-                        <span> ##word.Tasks##</span>
-                    </a>
-
-                    <a class="tab-link" onclick="site.showTabContent(event, '#jobTools')">
-                        <span> ##word.Tools##</span>
-                    </a>
-
-                    <a class="tab-link" onclick="site.showTabContent(event, '#skillsInformations')">
-                        <span> ##word.Required Skills##</span>
-                    </a>
-                </div>
-                <div class="tabs-content">
-                    <div id="jobTasks" class="tab-content">
-                        <fieldset>
-                            <legend>##word.Tasks##</legend>
-                            <div class="row">
-                                <i-control class="col4" type="text" ng-model="task.name"
-                                    label="##word.Task Name##"></i-control>
-                                <i-control class="col6" type="text" ng-model="task.notes"
-                                    label="##word.Notes##"></i-control>
-                                <div class="col2">
-                                    <br />
-                                    <i-button type="push" ng-click="addTask(task)"></i-button>
-                                </div>
-                            </div>
-                            <table class="table center hover bold">
-                                <tr>
-                                    <th>##word.S##</th>
-                                    <th>##word.Task##</th>
-                                    <th>##word.Notes##</th>
-                                    <th>##word.Status##</th>
-                                    <th class="not-print">##word.Actions##</th>
-                                </tr>
-                                <tr ng-repeat="mission in item.tasksList">
-                                    <td class="center">{{$index + 1}}</td>
-                                    <td class="center">
-                                        <p>{{mission.name}}</p>
-                                    </td>
-                                    <td class="center">
-                                        <p>{{mission.notes}}</p>
-                                    </td>
-                                    <td class="center">
-                                        <div class="row">
-                                            <i-checkbox class="col6" ng-model="mission.active"></i-checkbox>
-                                            <span class="col6 text-success"
-                                                ng-show="mission.active">##word.Active##</span>
-                                            <span class="col6 text-danger" ng-show="!mission.active">##word.Not
-                                                Active##</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <i-button type="delete" ng-click="item.tasksList.splice($index,1)"> </i-button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    </div>
-
-                    <div id="jobTools" class="tab-content">
-                        <fieldset>
-                            <legend>##word.Tools##</legend>
-                            <div class="row">
-                                <i-list class="col4" ng-model="selectedTool.tool" label="##word.Tool##"
-                                    display="name##session.lang##" items="jobsToolsList"
-                                    ng-get="getJobsToolsList($search)"></i-list>
-                                <i-checkbox class="col3" ng-model="selectedTool.companyMustProvide"
-                                    label="##word.Company Must Provide##"></i-checkbox>
-                                <i-control class="col4" type="text" ng-model="selectedTool.notes"
-                                    label="##word.Notes##"></i-control>
-                                <div class="col1">
-                                    <br />
-                                    <i-button type="push" ng-click="addTool(selectedTool)"></i-button>
-                                </div>
-                            </div>
-                            <table class="table center hover bold">
-                                <tr>
-                                    <th>##word.S##</th>
-                                    <th>##word.Tool##</th>
-                                    <th>##word.Company Must Provide##</th>
-                                    <th>##word.Notes##</th>
-                                    <th>##word.Status##</th>
-                                    <th class="not-print">##word.Actions##</th>
-                                </tr>
-                                <tr ng-repeat="tol in item.toolsList">
-                                    <td class="center">{{$index + 1}}</td>
-                                    <td class="center">
-                                        <p>{{tol.tool.name##session.lang##}}</p>
-                                    </td>
-
-                                    <td class="center">
-                                        <span class="text-success" ng-show="tol.companyMustProvide">##word.Yes##</span>
-                                        <span class="text-danger" ng-show="!tol.companyMustProvide">##word.No##</span>
-                                    </td>
-                                    <td class="center">
-                                        <p>{{tol.notes}}</p>
-                                    </td>
-                                    <td class="center">
-                                        <div class="row">
-                                            <i-checkbox class="col6" ng-model="tol.active"></i-checkbox>
-                                            <span class="col6 text-success" ng-show="tol.active">##word.Active##</span>
-                                            <span class="col6 text-danger" ng-show="!tol.active">##word.Not
-                                                Active##</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <i-button type="delete" ng-click="item.toolsList.splice($index,1)"> </i-button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    </div>
-
-                    <div id="skillsInformations" class="tab-content">
-                        <fieldset>
-                            <legend>##word.Skills##</legend>
-                            <div class="row">
-                                <i-control class="col3" type="text" ng-model="skill.name"
-                                    label="##word.Skill Name##"></i-control>
-                                <i-control class="col3" type="number" ng-model="skill.experienceYears"
-                                    label="##word.Experience Years##"></i-control>
-                                <i-control class="col3" type="text" ng-model="skill.notes"
-                                    label="##word.Notes##"></i-control>
-                                <div class="col2">
-                                    <br />
-                                    <i-button type="push" ng-click="addSkill(skill)"></i-button>
-                                </div>
-                            </div>
-                            <table class="table center hover bold">
-                                <tr>
-                                    <th>##word.S##</th>
-                                    <th>##word.Skill##</th>
-                                    <th>##word.Experience Years##</th>
-                                    <th>##word.Notes##</th>
-                                    <th>##word.Status##</th>
-                                    <th class="not-print">##word.Actions##</th>
-                                </tr>
-                                <tr ng-repeat="gift in item.skillsList">
-                                    <td class="center">{{$index + 1}}</td>
-                                    <td class="center">
-                                        <p>{{gift.name}}</p>
-                                    </td>
-                                    <td class="center">
-                                        <p>{{gift.experienceYears}}</p>
-                                    </td>
-                                    <td class="center">
-                                        <p>{{gift.notes}}</p>
-                                    </td>
-                                    <td class="center">
-                                        <div class="row">
-                                            <i-checkbox class="col6" ng-model="gift.active"></i-checkbox>
-                                            <span class="col6 text-success" ng-show="gift.active">##word.Active##</span>
-                                            <span class="col6 text-danger" ng-show="!gift.active">##word.Not
-                                                Active##</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <i-button type="delete" ng-click="item.skillsList.splice($index,1)"> </i-button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
+    <div class="col3 center">
+      <i-image class="img128 center" ng-model="item.image"></i-image>
     </div>
+    <i-textarea
+      type="text"
+      rows="3"
+      ng-model="item.jobDescription"
+      label="##word.Job Description##"
+    ></i-textarea>
+  </div>
+  <div class="row padding">
+    <fieldset>
+      <div class="tabs">
+        <div class="tabs-header full">
+          <a class="tab-link" onclick="site.showTabContent(event, '#jobTasks')">
+            <span> ##word.Tasks##</span>
+          </a>
+
+          <a class="tab-link" onclick="site.showTabContent(event, '#jobTools')">
+            <span> ##word.Tools##</span>
+          </a>
+
+          <a
+            class="tab-link"
+            onclick="site.showTabContent(event, '#skillsInformations')"
+          >
+            <span> ##word.Required Skills##</span>
+          </a>
+        </div>
+        <div class="tabs-content">
+          <div id="jobTasks" class="tab-content">
+            <fieldset>
+              <legend>##word.Tasks##</legend>
+              <div class="row">
+                <i-control
+                  class="col4"
+                  type="text"
+                  ng-model="task.name"
+                  label="##word.Task Name##"
+                ></i-control>
+                <i-control
+                  class="col6"
+                  type="text"
+                  ng-model="task.notes"
+                  label="##word.Notes##"
+                ></i-control>
+                <div class="col2">
+                  <br />
+                  <i-button type="push" ng-click="addTask(task)"></i-button>
+                </div>
+              </div>
+              <table class="table center hover bold">
+                <tr>
+                  <th>##word.S##</th>
+                  <th>##word.Task##</th>
+                  <th>##word.Notes##</th>
+                  <th>##word.Status##</th>
+                  <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="mission in item.tasksList">
+                  <td class="center">{{$index + 1}}</td>
+                  <td class="center">
+                    <p>{{mission.name}}</p>
+                  </td>
+                  <td class="center">
+                    <p>{{mission.notes}}</p>
+                  </td>
+                  <td class="center">
+                    <div class="row">
+                      <i-checkbox
+                        class="col6"
+                        ng-model="mission.active"
+                      ></i-checkbox>
+                      <span class="col6 text-success" ng-show="mission.active"
+                        >##word.Active##</span
+                      >
+                      <span class="col6 text-danger" ng-show="!mission.active"
+                        >##word.Not Active##</span
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <i-button
+                      type="delete"
+                      ng-click="item.tasksList.splice($index,1)"
+                    >
+                    </i-button>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </div>
+
+          <div id="jobTools" class="tab-content">
+            <fieldset>
+              <legend>##word.Tools##</legend>
+              <div class="row">
+                <i-list
+                  class="col4"
+                  ng-model="selectedTool.tool"
+                  label="##word.Tool##"
+                  display="name##session.lang##"
+                  items="jobsToolsList"
+                  ng-get="getJobsToolsList($search)"
+                ></i-list>
+                <i-checkbox
+                  class="col3"
+                  ng-model="selectedTool.companyMustProvide"
+                  label="##word.Company Must Provide##"
+                ></i-checkbox>
+                <i-control
+                  class="col4"
+                  type="text"
+                  ng-model="selectedTool.notes"
+                  label="##word.Notes##"
+                ></i-control>
+                <div class="col1">
+                  <br />
+                  <i-button
+                    type="push"
+                    ng-click="addTool(selectedTool)"
+                  ></i-button>
+                </div>
+              </div>
+              <table class="table center hover bold">
+                <tr>
+                  <th>##word.S##</th>
+                  <th>##word.Tool##</th>
+                  <th>##word.Company Must Provide##</th>
+                  <th>##word.Notes##</th>
+                  <th>##word.Status##</th>
+                  <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="tol in item.toolsList">
+                  <td class="center">{{$index + 1}}</td>
+                  <td class="center">
+                    <p>{{tol.tool.name##session.lang##}}</p>
+                  </td>
+
+                  <td class="center">
+                    <span class="text-success" ng-show="tol.companyMustProvide"
+                      >##word.Yes##</span
+                    >
+                    <span class="text-danger" ng-show="!tol.companyMustProvide"
+                      >##word.No##</span
+                    >
+                  </td>
+                  <td class="center">
+                    <p>{{tol.notes}}</p>
+                  </td>
+                  <td class="center">
+                    <div class="row">
+                      <i-checkbox
+                        class="col6"
+                        ng-model="tol.active"
+                      ></i-checkbox>
+                      <span class="col6 text-success" ng-show="tol.active"
+                        >##word.Active##</span
+                      >
+                      <span class="col6 text-danger" ng-show="!tol.active"
+                        >##word.Not Active##</span
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <i-button
+                      type="delete"
+                      ng-click="item.toolsList.splice($index,1)"
+                    >
+                    </i-button>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </div>
+
+          <div id="skillsInformations" class="tab-content">
+            <fieldset>
+              <legend>##word.Skills##</legend>
+              <div class="row">
+                <i-control
+                  class="col3"
+                  type="text"
+                  ng-model="skill.name"
+                  label="##word.Skill Name##"
+                ></i-control>
+                <i-control
+                  class="col3"
+                  type="number"
+                  ng-model="skill.experienceYears"
+                  label="##word.Experience Years##"
+                ></i-control>
+                <i-control
+                  class="col3"
+                  type="text"
+                  ng-model="skill.notes"
+                  label="##word.Notes##"
+                ></i-control>
+                <div class="col2">
+                  <br />
+                  <i-button type="push" ng-click="addSkill(skill)"></i-button>
+                </div>
+              </div>
+              <table class="table center hover bold">
+                <tr>
+                  <th>##word.S##</th>
+                  <th>##word.Skill##</th>
+                  <th>##word.Experience Years##</th>
+                  <th>##word.Notes##</th>
+                  <th>##word.Status##</th>
+                  <th class="not-print">##word.Actions##</th>
+                </tr>
+                <tr ng-repeat="gift in item.skillsList">
+                  <td class="center">{{$index + 1}}</td>
+                  <td class="center">
+                    <p>{{gift.name}}</p>
+                  </td>
+                  <td class="center">
+                    <p>{{gift.experienceYears}}</p>
+                  </td>
+                  <td class="center">
+                    <p>{{gift.notes}}</p>
+                  </td>
+                  <td class="center">
+                    <div class="row">
+                      <i-checkbox
+                        class="col6"
+                        ng-model="gift.active"
+                      ></i-checkbox>
+                      <span class="col6 text-success" ng-show="gift.active"
+                        >##word.Active##</span
+                      >
+                      <span class="col6 text-danger" ng-show="!gift.active"
+                        >##word.Not Active##</span
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <i-button
+                      type="delete"
+                      ng-click="item.skillsList.splice($index,1)"
+                    >
+                    </i-button>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">
-    <table class="table hover border">
-        <tr>
-            <th>##word.Add Info##</th>
-            <th>##word.Last Edit Info##</th>
-        </tr>
-        <tr>
-            <td class="center">
-                <p class="blue">{{item.addUserInfo.name}}</p>
-                <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
-                <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
-                <p class="bold">IP : {{item.addUserInfo.ip}}</p>
-            </td>
+  <table class="table hover border">
+    <tr>
+      <th>##word.Add Info##</th>
+      <th>##word.Last Edit Info##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
 
-            <td class="center">
-                <p class="blue">{{item.editUserInfo.name}}</p>
-                <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
-                <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
-                <p class="bold">IP : {{item.editUserInfo.ip}}</p>
-            </td>
-        </tr>
-    </table>
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
 </div>

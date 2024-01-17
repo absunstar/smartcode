@@ -1,26 +1,27 @@
-app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
-  $scope.baseURL = '';
-  $scope.appName = 'typeAdministrativeWork';
-  $scope.modalID = '#typeAdministrativeWorkManageModal';
-  $scope.modalSearchID = '#typeAdministrativeWorkSearchModal';
-  $scope.mode = 'add';
+app.controller("sessions", function ($scope, $http, $timeout) {
+  $scope.baseURL = "";
+  $scope.appName = "sessions";
+  $scope.modalID = "#sessionsManageModal";
+  $scope.modalSearchID = "#sessionsSearchModal";
+  $scope.mode = "add";
   $scope._search = {};
   $scope.structure = {
-    image: {url : '/theme1/images/setting/typeAdministrativeWork.png'},
+    image: { url: "/theme1/images/setting/sessions.png" },
     active: true,
   };
   $scope.item = {};
   $scope.list = [];
 
   $scope.showAdd = function (_item) {
-    $scope.error = '';
-    $scope.mode = 'add';
-    $scope.item = { ...$scope.structure };
+    $scope.error = "";
+    $scope.mode = "add";
+    $scope.item = { ...$scope.structure,date : new Date() };
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.add = function (_item) {
-    $scope.error = '';
+    $scope.error = "";
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -29,7 +30,7 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
 
     $scope.busy = true;
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/add`,
       data: $scope.item,
     }).then(
@@ -41,8 +42,11 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
           $scope.list.unshift(response.data.doc);
         } else {
           $scope.error = response.data.error;
-          if (response.data.error && response.data.error.like('*Must Enter Code*')) {
-            $scope.error = '##word.Must Enter Code##';
+          if (
+            response.data.error &&
+            response.data.error.like("*Must Enter Code*")
+          ) {
+            $scope.error = "##word.Must Enter Code##";
           }
         }
       },
@@ -53,15 +57,16 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
   };
 
   $scope.showUpdate = function (_item) {
-    $scope.error = '';
-    $scope.mode = 'edit';
+    $scope.error = "";
+    $scope.mode = "edit";
     $scope.view(_item);
     $scope.item = {};
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.update = function (_item) {
-    $scope.error = '';
+    $scope.error = "";
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -69,7 +74,7 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
     }
     $scope.busy = true;
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/update`,
       data: _item,
     }).then(
@@ -78,7 +83,9 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          let index = $scope.list.findIndex(
+            (itm) => itm.id == response.data.result.doc.id
+          );
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
@@ -93,18 +100,19 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
   };
 
   $scope.showView = function (_item) {
-    $scope.error = '';
-    $scope.mode = 'view';
+    $scope.error = "";
+    $scope.mode = "view";
     $scope.item = {};
     $scope.view(_item);
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.view = function (_item) {
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/view`,
       data: {
         id: _item.id,
@@ -125,19 +133,20 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
   };
 
   $scope.showDelete = function (_item) {
-    $scope.error = '';
-    $scope.mode = 'delete';
+    $scope.error = "";
+    $scope.mode = "delete";
     $scope.item = {};
     $scope.view(_item);
     site.showModal($scope.modalID);
+    document.querySelector(`${$scope.modalID} .tab-link`).click();
   };
 
   $scope.delete = function (_item) {
     $scope.busy = true;
-    $scope.error = '';
+    $scope.error = "";
 
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/delete`,
       data: {
         id: $scope.item.id,
@@ -147,7 +156,9 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           site.hideModal($scope.modalID);
-          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
+          let index = $scope.list.findIndex(
+            (itm) => itm.id == response.data.result.doc.id
+          );
           if (index !== -1) {
             $scope.list.splice(index, 1);
           }
@@ -165,7 +176,7 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.list = [];
     $http({
-      method: 'POST',
+      method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
       data: {
         where: where,
@@ -187,12 +198,107 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.getDocumentsTypes = function () {
+    $scope.busy = true;
+    $scope.documentsTypesList = [];
+    $http({
+      method: "POST",
+      url: "/api/documentsTypes",
+      data: {
+        select: {
+          id: 1,
+          nameEn: 1,
+          nameAr: 1,
+        },
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.documentsTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+
+  $scope.getreasonsSessionsList = function ($search) {
+    if ($search && $search.length < 1) {
+      return;
+    }
+    $scope.busy = true;
+    $scope.reasonsSessionsList = [];
+    $http({
+      method: "POST",
+      url: "/api/reasonsSessions/all",
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+          name : 1
+        },
+        search: $search,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.reasonsSessionsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
+  $scope.getLawsuitsList = function ($search) {
+    if ($search && $search.length < 1) {
+      return;
+    }
+    $scope.busy = true;
+    $scope.lawsuitsList = [];
+    $http({
+      method: "POST",
+      url: "/api/lawsuit/all",
+      data: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: 1,
+          code: 1,
+        },
+        search: $search,
+      },
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.lawsuitsList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.busy = false;
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.getNumberingAuto = function () {
-    $scope.error = '';
+    $scope.error = "";
     $scope.busy = true;
     $http({
-      method: 'POST',
-      url: '/api/numbering/getAutomatic',
+      method: "POST",
+      url: "/api/numbering/getAutomatic",
       data: {
         screen: $scope.appName,
       },
@@ -209,9 +315,18 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
       }
     );
   };
+  $scope.addFiles = function () {
+    $scope.error = "";
+    $scope.item.filesList = $scope.item.filesList || [];
+    $scope.item.filesList.push({
+      file_date: new Date(),
+      file_upload_date: new Date(),
+      upload_by: "##user.name##",
+    });
+  };
 
   $scope.showSearch = function () {
-    $scope.error = '';
+    $scope.error = "";
     site.showModal($scope.modalSearchID);
   };
 
@@ -222,5 +337,8 @@ app.controller('typeAdministrativeWork', function ($scope, $http, $timeout) {
   };
 
   $scope.getAll();
+  $scope.getLawsuitsList();
   $scope.getNumberingAuto();
+  $scope.getreasonsSessionsList();
+  $scope.getDocumentsTypes();
 });

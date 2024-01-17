@@ -1,7 +1,0 @@
-[{
-    "moduleName" : "lawyer" ,
-    "name": "typeAdministrativeWorkAdmin",
-    "En": "Typeof Administrative Work Admin",
-    "Ar": "إدارة نوع العمل الإداري",
-    "permissions": ["typeAdministrativeWorkManage"]
-}]
