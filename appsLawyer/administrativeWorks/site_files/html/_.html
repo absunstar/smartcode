@@ -13,18 +13,14 @@
         label="##word.New##"
         ng-click="showAdd()"
       ></i-button>
-      <i-upload
-        api="api/administrativeWorks/import"
-        label="Import"
-        x-permissions="administrativeWorksImport || administrativeWorksManage"
-      ></i-upload>
+      <i-button type="search" x-permissions="administrativeWorksSearch || administrativeWorksManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
+      <i-button type="search" x-permissions="administrativeWorksSearch || administrativeWorksManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
+      <i-button type="search" x-permissions="administrativeWorksSearch || administrativeWorksManage" label="##word.Done##" ng-click="searchAll(search={done:true})"></i-button>
+      <i-button type="search" x-permissions="administrativeWorksSearch || administrativeWorksManage" label="##word.Not Done##" ng-click="searchAll(search={done:false})"></i-button>
     </div>
 
     <div class="row padding">
-      <i-control
-        ng-model="$search"
-        x-permissions="administrativeWorksSearch || administrativeWorksManage"
-      ></i-control>
+      <i-control ng-model="_search" ng-keydown="searchGetAll($event,_search)" x-permissions="administrativeWorksSearch || administrativeWorksManage"></i-control>
     </div>
     <div class="table-responsive">
       <table class="table hover bold" id="t1">
@@ -36,7 +32,7 @@
           <th>##word.Status##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
-        <tr ng-repeat="item in list | filter:$search">
+        <tr ng-repeat="item in list">
           <td class="center">
             <span class="text-secondary" ng-show="item.done == undefined"
               >##word.Not Found##</span

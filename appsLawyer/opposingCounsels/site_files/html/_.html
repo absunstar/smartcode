@@ -11,7 +11,7 @@
         </div>
 
         <div class="row padding">
-            <i-control ng-model="$search" x-permissions="opposingCounselsSearch || opposingCounselsManage"></i-control>
+            <i-control ng-model="_search" ng-keydown="searchGetAll($event,_search)" x-permissions="opposingCounselsSearch || opposingCounselsManage"></i-control>
         </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
@@ -22,7 +22,7 @@
                     <th>##word.Status##</th>
                     <th class="not-print">##word.Actions##</th>
                 </tr>
-                <tr ng-repeat="item in list | filter:$search">
+                <tr ng-repeat="item in list">
                     <td>
                         <i-image view class="logo center" ng-model="item.image"></i-image>
                     </td>

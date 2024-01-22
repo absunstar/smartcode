@@ -277,6 +277,56 @@ module.exports = function init(site) {
           where.$or.push({
             nameEn: site.get_RegExp(search, 'i'),
           });
+
+          where.$or.push({
+            idNumber: site.get_RegExp(search, 'i'),
+          });
+
+          where.$or.push({
+            'gender.nameAr': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'gender.nameEn': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'maritalStatus.nameAr': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'maritalStatus.nameEn': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'phone': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'mobile': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'whatsapp': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'socialEmail': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'address': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'gov.nameAr': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'gov.nameEn': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'city.nameAr': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'city.nameEn': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'area.nameAr': site.get_RegExp(search, 'i'),
+          });
+          where.$or.push({
+            'area.nameEn': site.get_RegExp(search, 'i'),
+          });
         }
 
         if (app.allowMemory) {

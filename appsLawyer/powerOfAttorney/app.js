@@ -283,13 +283,17 @@ module.exports = function init(site) {
           code: 1,
           date: 1,
           number: 1,
+          letter: 1,
           year: 1,
+          type: 1,
+          active: 1,
         };
-        if (where && where.fromDate && where.toDate) {
+
+        if (where.fromDate && where.toDate) {
           let d1 = site.toDate(where.fromDate);
           let d2 = site.toDate(where.toDate);
           d2.setDate(d2.getDate() + 1);
-          where.date = {
+          where.powerOfAttorneyDate = {
             $gte: d1,
             $lte: d2,
           };
@@ -316,19 +320,16 @@ module.exports = function init(site) {
             where.$or = [];
 
             where.$or.push({
-              id: site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
               code: site.get_RegExp(search, "i"),
             });
             where.$or.push({
-              letter: site.get_RegExp(search, "i"),
+              letter: search,
             });
             where.$or.push({
-              number: site.get_RegExp(search, "i"),
+              number: search,
             });
             where.$or.push({
-              year: site.get_RegExp(search, "i"),
+              year: search,
             });
             where.$or.push({
               description: site.get_RegExp(search, "i"),

@@ -4,7 +4,6 @@ app.controller("administrativeWorks", function ($scope, $http, $timeout) {
   $scope.modalID = "#administrativeWorksManageModal";
   $scope.modalSearchID = "#administrativeWorksSearchModal";
   $scope.mode = "add";
-  $scope._search = {};
   $scope.structure = {
     image: { url: "/theme1/images/setting/administrativeWorks.png" },
     active: true,
@@ -226,27 +225,39 @@ app.controller("administrativeWorks", function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getAll = function (where) {
-    $scope.busy = true;
+  $scope.searchGetAll = function (ev, search) {
+    if (ev && ev.which != 13) {
+      return;
+    }
+
+    $scope.getAll({}, search);
+  };
+
+
+  $scope.getAll = function (where,search) {
+    if ($scope.busyAll) {
+      return;
+    }
+    $scope.busyAll = true;
     $scope.list = [];
     $http({
       method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
       data: {
         where: where,
+        search
       },
     }).then(
       function (response) {
-        $scope.busy = false;
+        $scope.busyAll = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.list = response.data.list;
           $scope.count = response.data.count;
           site.hideModal($scope.modalSearchID);
-          $scope.search = {};
         }
       },
       function (err) {
-        $scope.busy = false;
+        $scope.busyAll = false;
         $scope.error = err;
       }
     );

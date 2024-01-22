@@ -281,9 +281,13 @@ module.exports = function init(site) {
         let select = req.body.select || {
           id: 1,
           code: 1,
-          date: 1,
           number: 1,
+          date: 1,
           year: 1,
+          court: 1,
+          circle: 1,
+          lawsuitDegree: 1,
+          active: 1,
         };
         if (where && where.fromDate && where.toDate) {
           let d1 = site.toDate(where.fromDate);
@@ -296,140 +300,47 @@ module.exports = function init(site) {
           delete where.fromDate;
           delete where.toDate;
         }
-        if (app.allowMemory) {
-          let list = app.memoryList.filter(
-            (g) =>
-              g.company &&
-              g.company.id == site.getCompany(req).id &&
-              (typeof where.active != "boolean" || g.active === where.active) &&
-              JSON.stringify(g).contains(where.search)
-          );
 
-          res.json({
-            done: true,
-            list: list.slice(-limit),
+        where["company.id"] = site.getCompany(req).id;
+        if (search) {
+          where.$or = [];
+          where.$or.push({
+            code: site.get_RegExp(search, "i"),
           });
-        } else {
-          where["company.id"] = site.getCompany(req).id;
-          if (search) {
-            where.$or = [];
-
-            where.$or.push({
-              id: site.get_RegExp(search, "i"),
-            });
-
-            where.$or.push({
-              code: site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              lawsuitTopic: site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              description: site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              number: site.get_RegExp(search, "i"),
-            });
-
-            where.$or.push({
-              year: site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              "court.name": site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              "circle.name": site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              "lawsuitDegree.name": site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              "statusLawsuit.name": site.get_RegExp(search, "i"),
-            });
-            where.$or.push({
-              "typesLawsuit.name": site.get_RegExp(search, "i"),
-            });
-          }
-          app.all(
-            { where: where, limit, select, sort: { id: -1 } },
-            (err, docs) => {
-              res.json({ done: true, list: docs });
-            }
-          );
+          where.$or.push({
+            number: search,
+          });
+          where.$or.push({
+            year: search,
+          });
+          where.$or.push({
+            "court.name": site.get_RegExp(search, "i"),
+          });
+          where.$or.push({
+            "circle.name": site.get_RegExp(search, "i"),
+          });
+          where.$or.push({
+            "lawsuitDegree.name": site.get_RegExp(search, "i"),
+          });
+          where.$or.push({
+            "statusLawsuit.name": site.get_RegExp(search, "i"),
+          });
+          where.$or.push({
+            "typesLawsuit.name": site.get_RegExp(search, "i"),
+          });
+          where.$or.push({
+            lawsuitTopic: site.get_RegExp(search, "i"),
+          });
+          where.$or.push({
+            description: site.get_RegExp(search, "i"),
+          });
         }
-      });
-
-      site.post(`api/${app.name}/import`, (req, res) => {
-        let response = {
-          done: false,
-          file: req.form.files.fileToUpload,
-        };
-
-        if (site.isFileExistsSync(response.file.filepath)) {
-          let docs = [];
-          if (response.file.originalFilename.like("*.xls*")) {
-            let workbook = site.XLSX.readFile(response.file.filepath);
-            docs = site.XLSX.utils.sheet_to_json(
-              workbook.Sheets[workbook.SheetNames[0]]
-            );
-          } else {
-            docs = site.fromJson(
-              site.readFileSync(response.file.filepath).toString()
-            );
+        app.all(
+          { where: where, limit, select, sort: { id: -1 } },
+          (err, docs) => {
+            res.json({ done: true, list: docs });
           }
-
-          if (Array.isArray(docs)) {
-            console.log(`Importing ${app.name} : ${docs.length}`);
-            let systemCode = 0;
-            docs.forEach((doc) => {
-              let numObj = {
-                company: site.getCompany(req),
-                screen: app.name,
-                date: new Date(),
-              };
-              let cb = site.getNumbering(numObj);
-
-              if (cb.auto) {
-                systemCode = cb.code || ++systemCode;
-              } else {
-                systemCode++;
-              }
-
-              if (!doc.code) {
-                doc.code = systemCode;
-              }
-
-              let newDoc = {
-                code: doc.code,
-                name: doc.name ? doc.name.trim() : "",
-                active: true,
-              };
-
-              newDoc.company = site.getCompany(req);
-              newDoc.branch = site.getBranch(req);
-              newDoc.addUserInfo = req.getUserFinger();
-
-              app.add(newDoc, (err, doc2) => {
-                if (!err && doc2) {
-                  site.dbMessage = `Importing ${app.name} : ${doc2.id}`;
-                  console.log(site.dbMessage);
-                } else {
-                  site.dbMessage = err.message;
-                  console.log(site.dbMessage);
-                }
-              });
-            });
-          } else {
-            site.dbMessage =
-              "can not import unknown type : " + site.typeof(docs);
-            console.log(site.dbMessage);
-          }
-        } else {
-          site.dbMessage = "file not exists : " + response.file.filepath;
-          console.log(site.dbMessage);
-        }
-
-        res.json(response);
+        );
       });
     }
   }

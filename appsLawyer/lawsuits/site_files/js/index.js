@@ -4,13 +4,22 @@ app.controller("lawsuits", function ($scope, $http, $timeout) {
   $scope.modalID = "#lawsuitsManageModal";
   $scope.modalSearchID = "#lawsuitsSearchModal";
   $scope.mode = "add";
-  $scope._search = {};
   $scope.structure = {
     active: true,
   };
   $scope.item = {};
   $scope.list = [];
-
+  $scope.search = { fromDate: new Date(), toDate: new Date() };
+  $scope.getCurrentMonthDate = function () {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    $scope.search.fromDate = new Date(firstDay);
+    $scope.search.toDate = new Date(lastDay);
+    return { firstDay, lastDay };
+  };
   $scope.showAdd = function (_item) {
     $scope.error = "";
     $scope.mode = "add";
@@ -178,27 +187,37 @@ app.controller("lawsuits", function ($scope, $http, $timeout) {
     );
   };
 
-  $scope.getAll = function (where) {
-    $scope.busy = true;
+  $scope.searchGetAll = function (ev, search) {
+    if (ev && ev.which != 13) {
+      return;
+    }
+    $scope.getAll({}, search);
+  };
+
+  $scope.getAll = function (where, search) {
+    if ($scope.busyAll) {
+      return;
+    }
+    $scope.busyAll = true;
     $scope.list = [];
     $http({
       method: "POST",
       url: `${$scope.baseURL}/api/${$scope.appName}/all`,
       data: {
         where: where,
+        search,
       },
     }).then(
       function (response) {
-        $scope.busy = false;
+        $scope.busyAll = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.list = response.data.list;
           $scope.count = response.data.count;
           site.hideModal($scope.modalSearchID);
-          $scope.search = {};
         }
       },
       function (err) {
-        $scope.busy = false;
+        $scope.busyAll = false;
         $scope.error = err;
       }
     );
@@ -604,7 +623,7 @@ app.controller("lawsuits", function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          'court.id' : courtId
+          "court.id": courtId,
         },
         select: {
           id: 1,
@@ -761,7 +780,6 @@ app.controller("lawsuits", function ($scope, $http, $timeout) {
   $scope.searchAll = function () {
     $scope.getAll($scope.search);
     site.hideModal($scope.modalSearchID);
-    $scope.search = {};
   };
 
   $scope.getAll();
@@ -777,4 +795,5 @@ app.controller("lawsuits", function ($scope, $http, $timeout) {
   $scope.getLawsuitDegreesList();
   $scope.getStatusLawsuitList();
   $scope.getTypesLawsuitList();
+  $scope.getCurrentMonthDate();
 });

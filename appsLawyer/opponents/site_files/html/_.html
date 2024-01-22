@@ -6,12 +6,11 @@
             <i-button type="add" x-permissions="opponentsAdd || opponentsManage" label="##word.New##" ng-click="showAdd()"></i-button>
             <i-button type="search" x-permissions="opponentsSearch || opponentsManage" label="##word.Active##" ng-click="searchAll(search={active:true})"></i-button>
             <i-button type="search" x-permissions="opponentsSearch || opponentsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
-
             <i-upload api="api/opponents/import" label="Import" x-permissions="opponentsImport || opponentsManage"></i-upload>
         </div>
 
         <div class="row padding">
-            <i-control ng-model="$search" x-permissions="opponentsSearch || opponentsManage"></i-control>
+            <i-control ng-model="_search" ng-keydown="searchGetAll($event,_search)" x-permissions="opponentsSearch || opponentsManage"></i-control>
         </div>
         <div class="table-responsive">
             <table class="table hover bold" id="t1">

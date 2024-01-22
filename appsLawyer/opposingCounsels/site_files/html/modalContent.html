@@ -5,7 +5,7 @@
       <div class="col9">
         <div class="row">
           <i-control ng-hide="disabledCode" class="col4" label="##word.Code##" ng-model="item.code"> </i-control>
-         
+
           <div class="col4">
             <i-checkbox ng-model="item.active" label="##word.Active##"></i-checkbox>
           </div>
@@ -32,14 +32,14 @@
       <div id="contactInformations" class="tab-content">
         <fieldset x-data="setting.showLawyer">
           <div class="row">
-          <i-date class="col4" label="##word.Date Of Birth ##" ng-model="item.dateOfBirth"> </i-date>
+          <i-date class="col4" label="##word.Date Of Birth##" ng-model="item.dateOfBirth"> </i-date>
           <fieldset class="col8">
             <div class="col6">
               <br />
               <i-radio class="col6" label="##word.ID##" ng-value="id" ng-model="item.idType"> </i-radio>
-              <i-radio class="col6" label="##word.Passport /Iqama##" ng-value="iqama" ng-model="item.idType"> </i-radio>
+              <i-radio class="col6" label="##word.Passport##" ng-value="iqama" ng-model="item.idType"> </i-radio>
             </div>
-            <i-control class="col6" label="##word.ID /Iqama Number##" ng-model="item.idNumber"> </i-control>
+            <i-control class="col6" label="##word.ID /Passport Number##" ng-model="item.idNumber"> </i-control>
           </fieldset>
           </div>
           <div class="row">
