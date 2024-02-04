@@ -13,7 +13,7 @@
             <i-upload api="api/storesItems/importHumanDrugs" label="Import Human Drugs" x-permissions="importStoresItems || storesItemsManage"></i-upload>
 <!--             <i-upload label="نقل الأصناف" api="api/storesItems/import" x-permissions="importStoresItems || storesItemsManage"> </i-upload>
  -->            <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Collection Items##" ng-click="searchAll(search={collectionItem:true})"></i-button>
-            <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Medical Items##" ng-click="searchAll(search={hasMedicalData:true})"></i-button>
+            <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" ng-hide="setting.showRestaurant || setting.showLawyer" label="##word.Medical Items##" ng-click="searchAll(search={hasMedicalData:true})"></i-button>
             <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Work By Batch##" ng-click="searchAll(search={workByBatch:true})"></i-button>
             <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Work By Serial##" ng-click="searchAll(search={workBySerial:true})"></i-button>
             <i-button type="search" x-permissions="storesItemsSearch || storesItemsManage" label="##word.Not Active##" ng-click="searchAll(search={active:false})"></i-button>
@@ -32,7 +32,7 @@
                         <th>##word.Code##</th>
                         <th>##word.Name##</th>
                         <th>##word.Collection Item##</th>
-                        <th>##word.Medical Item##</th>
+                        <th ng-hide="setting.showRestaurant || setting.showLawyer">##word.Medical Item##</th>
                         <th>##word.Work By##</th>
                         <th>##word.Status##</th>
                         <th class="not-print">##word.Actions##</th>
@@ -47,7 +47,7 @@
                             <span class="text-success" ng-show="item.collectionItem">##word.Yes##</span>
                             <span class="text-danger" ng-show="!item.collectionItem">##word.No##</span>
                         </td>
-                        <td class="center">
+                        <td class="center" ng-hide="setting.showRestaurant || setting.showLawyer">
                             <span class="text-success" ng-show="item.hasMedicalData">##word.Yes##</span>
                             <span class="text-danger" ng-show="!item.hasMedicalData">##word.No##</span>
                         </td>

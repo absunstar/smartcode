@@ -66,7 +66,7 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
       workByQrCode: false,
       unitsList: [],
       workBySerial: false,
-      showOnTouchScreen: false,
+      showOnTouchScreen: true,
       collectionItem: false,
       noVat: false,
       autoPurchasePriceCalculation: true,

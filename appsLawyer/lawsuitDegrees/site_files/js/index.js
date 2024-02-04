@@ -113,6 +113,7 @@ app.controller('lawsuitDegrees', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
+          console.log(response.data.doc);
           $scope.item = response.data.doc;
         } else {
           $scope.error = response.data.error;

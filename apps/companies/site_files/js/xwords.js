@@ -24,6 +24,34 @@ app.controller('xwords', function ($scope, $http, $timeout) {
       $scope.$word = {};
     }
   };
+
+  $scope.resetWords = function () {
+    $http({
+      method: 'post',
+      url: '/x-api/words/reset',
+    }).then(function (response) {
+      if (response.data.done) {
+        $scope.success = 'Reset Is Done';
+        $timeout(() => {
+          $scope.success = '';
+        }, 1500);
+      }
+    });
+  };
+
+  $scope.exportJson = function () {
+    $http({
+      method: 'post',
+      url: '/x-api/words/export',
+    }).then(function (response) {
+      if (response.data.done) {
+        $scope.success = 'Export Is Done';
+        $timeout(() => {
+          $scope.success = '';
+        }, 1500);
+      }
+    });
+  };
   $scope.loadWords = function () {
     $http({
       method: 'get',

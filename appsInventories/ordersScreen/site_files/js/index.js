@@ -1040,10 +1040,11 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     document.querySelectorAll('a').forEach((a) => {
       a.classList.remove('item-click');
     });
+    if(e.target && e.target.parentNode){
 
-    e.target.parentNode.classList.add('item-click');
-    document.querySelector('#searchBarcode input').focus();
-
+      e.target.parentNode.classList.add('item-click');
+      document.querySelector('#searchBarcode input').focus();
+    }
     $scope.busy = true;
     $scope.itemsList = [];
     $http({

@@ -3,7 +3,6 @@ const submenuLists = document.querySelectorAll(".navlink .submenu");
 
 var menuBusy = false;
 function pdfPrint(obj, callback) {
-  
   setTimeout(() => {
     const ps = document.getElementById(obj.id).querySelectorAll("table span");
     console.log(ps);
@@ -64,13 +63,14 @@ document.addEventListener("click", () => {
 
 const header = document.querySelector("header");
 const menutoggle = document.querySelector(".menutoggle");
-
-menutoggle.addEventListener("click", () => {
-  if (header.classList.contains("showheader")) {
-    header.classList.remove("showheader");
-    header.classList.add("hideheader");
-  } else {
-    header.classList.add("showheader");
-    header.classList.remove("hideheader");
-  }
-});
+if (menutoggle) {
+  menutoggle.addEventListener("click", () => {
+    if (header.classList.contains("showheader")) {
+      header.classList.remove("showheader");
+      header.classList.add("hideheader");
+    } else {
+      header.classList.add("showheader");
+      header.classList.remove("hideheader");
+    }
+  });
+}
