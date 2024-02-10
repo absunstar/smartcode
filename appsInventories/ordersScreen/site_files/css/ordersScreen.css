@@ -23,8 +23,8 @@ body {
   height: 100%;
   text-align-last: center;
   font-size: xx-large;
-  color: var(--color3);
-  background: var(--backcolor3);
+  color:white;
+  background: #1b4c6b;
 }
 
 .item-groups {
@@ -111,11 +111,13 @@ body {
 }
 
 .item-list {
+  height: 77vh !important;
   padding: 5px !important;
   margin: 10px 0px 0px 0px !important;
   background-color: white;
   display: inline-flex;
   flex-flow: wrap;
+  overflow: scroll;
 }
 
 .item-list .item {
@@ -135,7 +137,11 @@ body {
 .item-list .item:hover img {
   border-radius: 20px 20px 0px 0px;
 }
-.item-list .item:hover  {
+.item-list .item:hover p {
+  border-radius: 0px 0px 20px 20px;
+}
+
+.item-list .item:hover {
   border-radius: 20px;
 }
 .item-list .item img {
