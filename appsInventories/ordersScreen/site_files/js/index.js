@@ -121,9 +121,9 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
 
         if (_item.itemsList && _item.itemsList.length > 0) {
           _item.itemsList.forEach((_item) => {
-            if (_item.kitchen && !_item.printed) {
-              if (_item.kitchen.id == _kitchen.id) {
-                if (_item.itemExtrasList && _item.itemExtrasList.length > 0) {
+            if (_item.itemGroup.kitchen && !_item.printed) {
+              if (_item.itemGroup.kitchen.id == _kitchen.id) {
+                /* if (_item.itemExtrasList && _item.itemExtrasList.length > 0) {
                   _item.itemExtrasList.forEach((_extra) => {
                     if (_item.extras) {
                       _item.extras = _item.extras + ' - ' + _extra[nameLang];
@@ -131,7 +131,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
                       _item.extras = _extra[nameLang];
                     }
                   });
-                }
+                } */
                 _item.printed = true;
                 kitchenPrint.itemsList.unshift({ ..._item });
               }
@@ -547,6 +547,8 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     let index = $scope.item.itemsList.findIndex((_item) => _item.id === item.id && _item.unit.id == item.unit.id);
 
     if ($scope.setting.showRestaurant || index == -1) {
+      item.doneKitchen = false;
+      item.randomCode = (Math.random() + 1).toString(36).substring(7);
       $scope.item.itemsList.unshift(item);
       if (item.workByQrCode && $scope.orderItem.barcode) {
         $scope.item.itemsList[0].$search = $scope.orderItem.barcode;

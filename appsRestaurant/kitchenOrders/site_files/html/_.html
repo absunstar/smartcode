@@ -1,0 +1,52 @@
+<style>
+  .inProgress-title {
+    font-size: 65px;
+    font-weight: bold;
+    font-family: initial;
+    border: 1px solid #adada0;
+    background-color: #adada0;
+    color: white;
+    text-align: center;
+  }
+  .inProgress-code {
+    font-size: 65px;
+    font-weight: bold;
+    font-family: initial;
+    color: #adada0;
+    text-align: -webkit-center;
+  }
+  .serving-title {
+    font-size: 65px;
+    font-weight: bold;
+    font-family: initial;
+    border: 1px solid #ea1b99;
+    background-color: #ea1b99;
+    color: white;
+    text-align: center;
+  }
+  .serving-code {
+    font-size: 65px;
+    font-weight: bold;
+    font-family: initial;
+    color: #ea1b99;
+    text-align: -webkit-center;
+  }
+</style>
+<div ng-controller="kitchenOrders" class="loaded">
+  <div class="row" x-permissions="kitchenOrdersUi || kitchenOrdersManage">
+    <div class="col4">
+      <p class="inProgress-title">##word.In Progress##</p>
+
+      <p class="inProgress-code" ng-repeat="item in inProgressList">{{item}}</p>
+    </div>
+    <div class="col4">
+      <p class="serving-title">##word.Now Serving##</p>
+
+      <p class="serving-code" ng-repeat="item in servingList">{{item}}</p>
+    </div>
+
+    <div class="col4">
+      <img ng-src="{{setting.image.url}}" width="100%" height="100%" alt="" />
+    </div>
+  </div>
+</div>

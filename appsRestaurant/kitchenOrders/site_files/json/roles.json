@@ -1,0 +1,7 @@
+[{
+    "moduleName" : "public" ,
+    "name": "kitchenOrdersAdmin",
+    "En": "Kitchen Orders Admin",
+    "Ar": "إدارة طلبات المطبخ",
+    "permissions": ["kitchenOrdersManage"]
+}]

@@ -1246,6 +1246,8 @@ app.controller("companies", function ($scope, $http, $timeout) {
 
   $scope.showRestaurantScreens = function (type) {
     $scope.company.showOrdersScreen = type;
+    $scope.company.showKitchenItems = type;
+    $scope.company.showKitchenOrders = type;
     $scope.company.showCustomers = type;
     $scope.company.showVendors = type;
     $scope.company.showSalesInvoices = type;

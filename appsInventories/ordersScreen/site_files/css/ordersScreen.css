@@ -7,7 +7,12 @@ body {
   margin-bottom: 0px;
   margin-top: 0px;
 }
-
+.main-page {
+  background-color: snow;
+  position: absolute;
+  width: 98% !important;
+  margin-top: -20px !important;
+}
 .order-invoice {
   padding: 5px !important;
 }
@@ -23,25 +28,32 @@ body {
 }
 
 .item-groups {
+  background-color: white;
   flex-flow: inherit;
-  background: var(--backcolor2);
+  /* background: var(--backcolor2); */
   white-space: initial;
 }
 .item-groups .item {
   margin: 5px;
+  padding: 0px;
   min-width: 180px;
   height: 20%;
   width: 220px;
   display: inline-flex;
-  border: 1px solid #eee;
-  background: var(--backcolor3);
+  border: 1px solid #1b4c6b;
+  background: #1b4c6b;
 }
+.item-groups .item:hover img {
+  border-radius: 20px 0px 0px 20px;
+}
+
 .item-groups .item:hover {
   border-radius: 20px;
 }
 
 .item-groups img {
-  height: 80px;
+  height: 95px;
+  width: 100px;
 }
 
 .item-groups .item p {
@@ -49,7 +61,7 @@ body {
  */
   white-space: pre-line;
   display: inline-block;
-  color: var(--color3);
+  color: white;
   text-align: center;
   padding: 7px;
   padding-top: 25px;
@@ -101,17 +113,19 @@ body {
 .item-list {
   padding: 5px !important;
   margin: 10px 0px 0px 0px !important;
-  background-color: var(--backcolor3);;
+  background-color: white;
   display: inline-flex;
   flex-flow: wrap;
 }
 
 .item-list .item {
   border: 2px solid #ddd;
-  background-color: var(--backcolor4);;
+  background-color: white;
   text-align: center;
-  height: 93px;
-  padding: 10px !important;
+  height: 170px;
+  width: 190px;
+  padding: 1px !important;
+  margin: 4px;
 }
 /* .item-list .item:hover,
 .item-list .item:hover p {
@@ -119,20 +133,24 @@ body {
   color: #ffffff;
 } */
 .item-list .item:hover img {
+  border-radius: 20px 20px 0px 0px;
+}
+.item-list .item:hover  {
   border-radius: 20px;
 }
 .item-list .item img {
-  width: 90px;
-  height: 75px;
-  background-color: #ffffff;
+  height: 90px;
+  width: 100%;
+  border-radius: 0px;
 }
 .item-list .item p {
-  color: var(--color4);
-  height: 80px;
-  font-size: 14px;
-  padding: 5px;
-  padding-top: 2px;
-  font-weight: 700;
+  background-color: #1b4c6b;
+  color: white;
+  height: 75px;
+  font-size: 25px;
+  padding: 0px;
+  font-family: initial;
+  text-align: center;
 }
 
 .table-content {

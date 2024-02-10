@@ -119,9 +119,8 @@ module.exports = function init(site) {
         }
       }
 
-      app.$collection.find({ id: _item.id }, (err, doc) => {
+      app.$collection.find({ id: _item.id || _item.invoiceId }, (err, doc) => {
         callback(err, doc);
-
         if (!err && doc) {
           if (app.allowMemory) {
             app.memoryList.push(doc);
@@ -518,7 +517,7 @@ module.exports = function init(site) {
               res.json(response);
               return;
             }
-          } else if(_data.offerPrice) {
+          } else if (_data.offerPrice) {
             _data.offerPrice = {
               id: _data.offerPrice.id,
               code: _data.offerPrice.code,
@@ -571,7 +570,8 @@ module.exports = function init(site) {
         };
 
         let _data = req.data;
-        app.view(_data, (err, doc) => {
+
+        app.view({ id: _data.id }, (err, doc) => {
           if (!err && doc) {
             response.done = true;
             response.doc = doc;
@@ -708,6 +708,210 @@ module.exports = function init(site) {
         }
       });
     }
+
+    site.post(
+      { name: `/api/${app.name}/kitchenItems`, public: true },
+      (req, res) => {
+        let where = req.body.where || {};
+        let select = req.body.select || {};
+        let search = req.body.search || "";
+        let limit = req.body.limit || 50;
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+
+        where["company.id"] = site.getCompany(req).id;
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+        app.all(
+          { where: where, limit, select, sort: { id: -1 } },
+          (err, docs) => {
+            if (docs) {
+              let list = [];
+              docs.forEach((_doc) => {
+                if (_doc.itemsList && _doc.itemsList.length > 0) {
+                  _doc.itemsList.forEach((_s) => {
+                    if (
+                      _s.itemGroup &&
+                      _s.itemGroup.kitchen &&
+                      _s.itemGroup.kitchen.id == req.body.kitchenId &&
+                      !_s.doneKitchen
+                    ) {
+                      _s.invoiceId = _doc.id;
+                      _s.invoiceCode = _doc.code;
+                      list.push({ ..._s });
+                    }
+                  });
+                }
+              });
+              res.json({
+                done: true,
+                list: list,
+              });
+            } else {
+              res.json({ done: true, list: [] });
+            }
+          }
+        );
+      }
+    );
+
+    site.post(
+      { name: `/api/${app.name}/kitchenInProgress`, public: true },
+      (req, res) => {
+        let where = req.body.where || {};
+        let select = req.body.select || {};
+        let search = req.body.search || "";
+        let limit = req.body.limit || 50;
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+
+        where["company.id"] = site.getCompany(req).id;
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+        app.all(
+          { where: where, limit, select, sort: { id: -1 } },
+          (err, docs) => {
+            if (docs) {
+              let list = [];
+              docs.forEach((_doc) => {
+                list.push(_doc.code);
+              });
+              res.json({
+                done: true,
+                list: list,
+              });
+            } else {
+              res.json({ done: true, list: [] });
+            }
+          }
+        );
+      }
+    );
+
+    site.post(
+      { name: `/api/${app.name}/kitchenServing`, public: true },
+      (req, res) => {
+        let where = req.body.where || {};
+        let select = req.body.select || {};
+        let search = req.body.search || "";
+        let limit = req.body.limit || 50;
+
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lte: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+
+        where["company.id"] = site.getCompany(req).id;
+        if (where && where.fromDate && where.toDate) {
+          let d1 = site.toDate(where.fromDate);
+          let d2 = site.toDate(where.toDate);
+          d2.setDate(d2.getDate() + 1);
+          where.date = {
+            $gte: d1,
+            $lt: d2,
+          };
+          delete where.fromDate;
+          delete where.toDate;
+        }
+        app.all(
+          { where: where, limit, select, sort: { id: -1 } },
+          (err, docs) => {
+            if (docs) {
+              let list = [];
+              docs.forEach((_doc) => {
+                list.push(_doc.code);
+              });
+              res.json({
+                done: true,
+                list: list,
+              });
+            } else {
+              res.json({ done: true, list: [] });
+            }
+          }
+        );
+      }
+    );
+
+    site.post(
+      { name: `/api/${app.name}/kitchenComplitedItem`, public: true },
+      (req, res) => {
+        let response = {
+          done: false,
+        };
+
+        let _data = req.data;
+        app.view({ invoiceId: _data.invoiceId }, (err, doc) => {
+          if (!err && doc) {
+            let _doc = { ...doc };
+            let itemIndex = _doc.itemsList.findIndex(
+              (itm) => itm.id === _data.id && _data.randomCode == itm.randomCode
+            );
+            if (itemIndex !== -1) {
+              _doc.itemsList[itemIndex].doneKitchen = true;
+            }
+            console.log(itemIndex);
+            console.log(_doc.itemsList[itemIndex].doneKitchen);
+            app.update(_doc, (err, result) => {
+              if (!err) {
+                response.done = true;
+              } else {
+                response.error = err.message;
+              }
+              res.json(response);
+            });
+          } else {
+            response.error = err?.message || "Not Exists";
+            res.json(response);
+          }
+        });
+      }
+    );
 
     if (app.allowRouteReport) {
       site.post(

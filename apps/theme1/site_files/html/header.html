@@ -688,6 +688,34 @@
           <div class="submenu hideSection">
             <ul>
               <li
+              id="kitchenItems"
+              x-data="setting.showKitchenItems"
+              x-permissions="kitchenItemsUi || kitchenItemsManage"
+            >
+              <a class="menuTag" href="/kitchenItems">
+                <img
+                  src="/theme1/images/hr/Employees.png"
+                  width="45"
+                  height="45"
+                />
+                <p>##word.Kitchen Items##</p>
+              </a>
+            </li>
+            <li
+            id="kitchenOrders"
+            x-data="setting.showKitchenOrders"
+            x-permissions="kitchenOrdersUi || kitchenOrdersManage"
+          >
+            <a class="menuTag" href="/kitchenOrders">
+              <img
+                src="/theme1/images/hr/Employees.png"
+                width="45"
+                height="45"
+              />
+              <p>##word.Kitchen Orders##</p>
+            </a>
+          </li>
+              <li
                 id="Kitchens"
                 x-data="setting.showKitchens"
                 x-permissions="kitchensUi || kitchensManage"

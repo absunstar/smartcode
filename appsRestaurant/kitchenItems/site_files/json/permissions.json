@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "kitchenItemsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "kitchenItems", "name": "importFoods", "En": "Import", "Ar": "إستيراد" }
+]

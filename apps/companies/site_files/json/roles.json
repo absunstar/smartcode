@@ -32,6 +32,8 @@
       "dailyCashByDatesManage",
       "orderInvoiceManage",
       "kitchensManage",
+      "kitchenItemsManage",
+      "kitchenOrdersManage",
       "vehiclesManage",
       "vehiclesTypesManage",
       "tablesManage",

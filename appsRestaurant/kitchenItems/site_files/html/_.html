@@ -1,0 +1,62 @@
+<div ng-controller="kitchenItems" class="loaded">
+  <div class="row" x-permissions="kitchenItemsUi || kitchenItemsManage">
+    <div class="top-actions">
+      <i-list
+        ng-search="$kitchen"
+        display="name##session.lang##"
+        ng-model="kitchen"
+        label="##word.Kitchen##"
+        items="kitchensList"
+      >
+      </i-list>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table hover bold" id="t1">
+        <tr>
+          <th>##word.Invoice Number##</th>
+          <th>##word.Item Name##</th>
+          <th>##word.Extra##</th>
+          <th>##word.Notes##</th>
+          <th class="not-print">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="item in list">
+          <td class="center">{{item.invoiceCode}}</td>
+          <td class="center">{{item.name##session.lang##}}</td>
+          <td class="center">
+            <p ng-repeat="e in item.itemExtrasList">
+              {{e.name##session.lang##}}
+            </p>
+            <span class="text-danger" ng-show="!item.itemExtrasList || item.itemExtrasList.length < 1"
+              >##word.Not Found##</span
+            >
+          </td>
+          <td class="center">{{item.notes}}
+            <span class="text-danger" ng-show="!item.notes"
+            >##word.Not Found##</span
+          >
+          </td>
+          <td class="center not-print">
+            <i-button
+              label="##word.Completed##"
+              ng-click="completedItem(item)"
+            ></i-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <i-button
+      x-permissions="kitchenItemsPrint || kitchenItemsManage"
+      type="print"
+      label="##word.Print##"
+      onclick="site.print('#t1')"
+    ></i-button>
+    <i-button
+      x-permissions="kitchenItemsExport || kitchenItemsManage"
+      type="export"
+      label="##word.Export to excel##"
+      onclick="export_to_xlsx('t1' , 'report_value_added.xlsx')"
+    >
+    </i-button>
+  </div>
+</div>

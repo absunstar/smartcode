@@ -1,0 +1,12 @@
+[
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "kitchenOrdersUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "public", "screenName": "kitchenOrders", "name": "importFoods", "En": "Import", "Ar": "إستيراد" }
+]

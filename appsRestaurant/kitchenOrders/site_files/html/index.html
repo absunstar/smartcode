@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="En" data-ng-app="myApp">
+  <head x-import="theme1/head.html"> </head>
+
+  <body class="##session.lang##">
+
+    <div
+      class="container"
+      x-import="kitchenOrders/_.html"
+      x-permissions="login"
+    ></div>
+
+    <div x-import="theme1/footer.html"></div>
+    <script x-import="kitchenOrders/index.js"></script>
+  </body>
+</html>
