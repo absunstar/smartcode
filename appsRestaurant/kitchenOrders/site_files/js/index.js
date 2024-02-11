@@ -61,4 +61,6 @@ app.controller("kitchenOrders", function ($scope, $http, $timeout) {
     $scope.getKitchenInProgress();
     $scope.getKitchenServing();
   }, 10 * 1000);
+  $scope.getKitchenInProgress();
+  $scope.getKitchenServing();
 });

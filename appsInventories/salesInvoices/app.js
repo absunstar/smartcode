@@ -895,8 +895,7 @@ module.exports = function init(site) {
             if (itemIndex !== -1) {
               _doc.itemsList[itemIndex].doneKitchen = true;
             }
-            console.log(itemIndex);
-            console.log(_doc.itemsList[itemIndex].doneKitchen);
+
             app.update(_doc, (err, result) => {
               if (!err) {
                 response.done = true;

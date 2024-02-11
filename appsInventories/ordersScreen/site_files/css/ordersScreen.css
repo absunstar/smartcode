@@ -8,7 +8,6 @@ body {
   margin-top: 0px;
 }
 .main-page {
-  background-color: snow;
   position: absolute;
   width: 98% !important;
   margin-top: -20px !important;
@@ -79,8 +78,9 @@ body {
   background-color: #5a47ff;
 }
 .active-list-tittle {
-  background: var(--backcolor2);
+  background: yellow;
   border-radius: 15px 15px 0px 0px;
+  color: black;
 }
 .item-groups::-webkit-scrollbar-thumb:hover {
   background: #2414ff;
@@ -98,12 +98,12 @@ body {
   height: 270px;
   margin: 15px;
   font-size: larger;
-  color: var(--color3);
-  background: var(--background-color3);
+  color: white;
+  background: #1b4c6b;
 }
 
 .active-list:hover {
-  background: #dfe4f0;
+  background: #868686;
   font-size: large;
 }
 .scroll {
@@ -124,8 +124,8 @@ body {
   border: 2px solid #ddd;
   background-color: white;
   text-align: center;
-  height: 170px;
-  width: 190px;
+  height: 140px;
+  width: 165px;
   padding: 1px !important;
   margin: 4px;
 }
@@ -145,15 +145,15 @@ body {
   border-radius: 20px;
 }
 .item-list .item img {
-  height: 90px;
+  height: 80px;
   width: 100%;
   border-radius: 0px;
 }
 .item-list .item p {
   background-color: #1b4c6b;
   color: white;
-  height: 75px;
-  font-size: 25px;
+  height: 60px;
+  font-size: 20px;
   padding: 0px;
   font-family: initial;
   text-align: center;

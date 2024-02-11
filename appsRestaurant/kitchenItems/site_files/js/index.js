@@ -35,9 +35,20 @@ app.controller("kitchenItems", function ($scope, $http, $timeout) {
     );
   };
 
+  $scope.kitchenSelect = function (k, e) {
+    $scope.kitchen = { ...k };
+
+    document.querySelectorAll("button").forEach((a) => {
+      a.classList.remove("kitchen-select");
+    });
+
+    let element = document.getElementById(`kitchen_${k.id}`);
+    element.classList.add("kitchen-select");
+    $scope.getAll();
+  };
+
   $scope.completedItem = function (item) {
     $scope.busyCompleted = true;
-    $scope.kitchensList = [];
     $http({
       method: "POST",
       url: "/api/salesInvoices/kitchenComplitedItem",
@@ -65,11 +76,14 @@ app.controller("kitchenItems", function ($scope, $http, $timeout) {
         url: "/api/salesInvoices/kitchenItems",
         data: {
           where: {
-            $and : [
-              {"itemsList.doneKitchen": false,"itemsList.itemGroup.kitchen.id": $scope.kitchen.id},
-            ]
+            $and: [
+              {
+                "itemsList.doneKitchen": false,
+                "itemsList.itemGroup.kitchen.id": $scope.kitchen.id,
+              },
+            ],
           },
-          kitchenId : $scope.kitchen.id
+          kitchenId: $scope.kitchen.id,
         },
       }).then(
         function (response) {

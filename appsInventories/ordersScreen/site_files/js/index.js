@@ -1043,7 +1043,6 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       a.classList.remove('item-click');
     });
     if(e.target && e.target.parentNode){
-      console.log(e);
       e.target.parentNode.classList.add('item-click');
       document.querySelector('#searchBarcode input').focus();
     }

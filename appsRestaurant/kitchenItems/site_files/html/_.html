@@ -1,14 +1,32 @@
+<style>
+  .kitchen {
+    width: 140px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+    margin: 10px;
+    border-radius: 10px;
+    color:  black;
+    background:  snow;
+  }
+  .kitchen-select {
+    color: white !important;
+    background: grey !important;
+    box-shadow: 1px 1px 5px 1px #1d1d1da6;
+  }
+</style>
 <div ng-controller="kitchenItems" class="loaded">
   <div class="row" x-permissions="kitchenItemsUi || kitchenItemsManage">
-    <div class="top-actions">
-      <i-list
-        ng-search="$kitchen"
-        display="name##session.lang##"
-        ng-model="kitchen"
-        label="##word.Kitchen##"
-        items="kitchensList"
+    <div class="row">
+      <button
+        ng-click="kitchenSelect(k,$event)"
+        class="kitchen"
+        id="kitchen_{{k.id}}"
+        ng-repeat="k in kitchensList"
       >
-      </i-list>
+        <i class="fas fa-sink"></i> {{k.name##session.lang##}}
+      </button>
     </div>
 
     <div class="table-responsive">
@@ -27,14 +45,17 @@
             <p ng-repeat="e in item.itemExtrasList">
               {{e.name##session.lang##}}
             </p>
-            <span class="text-danger" ng-show="!item.itemExtrasList || item.itemExtrasList.length < 1"
+            <span
+              class="text-danger"
+              ng-show="!item.itemExtrasList || item.itemExtrasList.length < 1"
               >##word.Not Found##</span
             >
           </td>
-          <td class="center">{{item.notes}}
+          <td class="center">
+            {{item.notes}}
             <span class="text-danger" ng-show="!item.notes"
-            >##word.Not Found##</span
-          >
+              >##word.Not Found##</span
+            >
           </td>
           <td class="center not-print">
             <i-button

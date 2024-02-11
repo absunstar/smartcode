@@ -4,7 +4,7 @@
     <style x-import="ordersScreen/ordersScreen.css"></style>
   </head>
 
-  <body class="##session.lang##">
+  <body class="##session.lang## bg-white">
     <!--     <div x-import="theme1/header.html"></div> -->
     <div id="main-layout" ng-controller="ordersScreen" class="container loaded">
       <div
@@ -81,19 +81,48 @@
                     >
                     </i-button>
                   </div>
-                  <i-button
+
+                  <fieldset
+                  class="pointer"
+                    ng-click="showDetails(item)"
                     ng-show="item.salesCategory.id == 2"
-                    label="##word.Delivery##"
-                    fa="motorcycle"
-                    ng-click="showDetails(item)"
                   >
-                  </i-button>
-                  <i-button
+                    <div class="row center">
+                      <p class="font-20" ng-show="item.delivery && item.delivery.id">
+                       ##word.Customer## : {{item.customer.name##session.lang##}} /
+                       ##word.Delivery Employee## : {{item.delivery.name##session.lang##}} 
+                      </p>
+                      <p
+                        class="font-20"
+                        ng-show="!item.delivery || !item.delivery.id"
+                      >
+                        ##word.Select Delivery##
+                      </p>
+                    </div>
+                  </fieldset>
+
+                  <fieldset
+                  class="pointer"
+                    ng-click="showDetails(item)"
+                    x-data="setting.showRestaurant"
                     ng-show="item.salesCategory.id == 3"
-                    label="##word.Table##"
-                    ng-click="showDetails(item)"
                   >
-                  </i-button>
+                    <div class="row center">
+                      <p class="font-20" ng-show="item.table && item.table.id">
+                        {{item.table.tablesGroup.name##session.lang##}}
+                        <span class="font-22 bold blue"
+                          >{{item.table.name##session.lang##}} (
+                          {{item.table.code}} )
+                        </span>
+                      </p>
+                      <p
+                        class="font-20"
+                        ng-show="!item.table || !item.table.id"
+                      >
+                        ##word.Select Table##
+                      </p>
+                    </div>
+                  </fieldset>
 
                   <!--  <div class="col2">
                     <br ng-show="item.salesCategory.id == 1" />
@@ -130,14 +159,14 @@
                     >
                     </i-button>
                     <i-button
-                      type="edit"
-                      title="##word.Edit##"
-                      ng-click="showEditItem(elem)"
-                    ></i-button>
-                    <i-button
                       type="delete"
                       title="##word.Delete##"
                       ng-click="item.itemsList.splice($index,1);calculate(item)"
+                    ></i-button>
+                    <i-button
+                      type="edit"
+                      title="##word.Edit##"
+                      ng-click="showEditItem(elem)"
                     ></i-button>
                   </div>
 
@@ -184,7 +213,7 @@
                   class="col3"
                   display="name##session.lang##"
                   ng-model="item.paymentList[0].safe"
-                  items="safesList"
+                  items="item.paymentList[0].$safesList"
                   label="##word.Safe##"
                   ng-search="item.paymentList[0].$safe"
                 ></i-list>
@@ -306,15 +335,16 @@
                 ng-click="gotoPurchaseOrders()"
               >
               </i-button>
+
+              <i-button
+                label="##word.Other Pay##"
+                onclick="site.showModal('#paymentListModal')"
+              >
+              </i-button>
               <i-button
                 label="##word.Cancel##"
                 type="close"
                 ng-click="cancelOrder(item)"
-              >
-              </i-button>
-              <i-button
-                label="##word.Other Pay##"
-                onclick="site.showModal('#paymentListModal')"
               >
               </i-button>
               <i-button
@@ -326,19 +356,6 @@
               <!-- <i-button label="##word.Quick Counting##" onclick="site.showModal( '#quickCountingModal')"> </i-button> -->
             </div>
 
-            <fieldset
-              x-data="setting.showRestaurant"
-              ng-show="item.salesCategory.id == 3"
-            >
-              <div class="row center">
-                <p class="font-20">
-                  {{item.table.tablesGroup.name##session.lang##}}
-                  <span class="font-22 bold blue"
-                    >{{item.table.name##session.lang##}} ( {{item.table.code}} )
-                  </span>
-                </p>
-              </div>
-            </fieldset>
             <fieldset>
               <legend>##word.Barcode##</legend>
               <i-control

@@ -12,7 +12,7 @@
           class="col5"
           display="name##session.lang##"
           ng-model="item.delivery"
-          label="##word.Delivery Boy##"
+          label="##word.Delivery Employee##"
           items="deliveryList"
         ></i-list>
         <div class="col7">
@@ -117,12 +117,26 @@
             </legend>
 
             <div class="row item-list border">
-              <a ng-class="{'table-busy' : table.busy }" class="item col4 pointer" ng-repeat="table in g.tablesList" ng-click="selectTable(table,g)" help-id="menu_monitor">
+              <div class="row item-list">
+                <a
+                ng-class="{'table-busy' : table.busy }"
+                  class="item hover pointer"
+                  ng-repeat="table in g.tablesList"
+                  ng-click="selectTable(table,g)"
+
+                >
+                  <img ng-src="{{table.image.url}}" ng-src2="/images/food.png" />
+                  <p>{{table.name##session.lang##}} ( {{table.code}} )</p>
+                </a>
+              </div>
+
+
+             <!--  <a ng-class="{'table-busy' : table.busy }" class="item col4 pointer" ng-repeat="table in g.tablesList" ng-click="selectTable(table,g)" help-id="menu_monitor">
                 <div class="row">
                   <div class="col-4 center"><img ng-src="{{table.image.url}}" /></div>
                   <div class="col-8"><p class="center font-18">{{table.name##session.lang##}} ( {{table.code}} )</p></div>
                 </div>
-              </a>
+              </a> -->
             </div>
           </fieldset>
         </div>
