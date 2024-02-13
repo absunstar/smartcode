@@ -6,16 +6,8 @@
 
     <div class="modal-body">
       <div class="row">
-        <i-list
-          ng-show="item.salesCategory.id == 2"
-          ng-search="item.$delivery"
-          class="col5"
-          display="name##session.lang##"
-          ng-model="item.delivery"
-          label="##word.Delivery Employee##"
-          items="deliveryList"
-        ></i-list>
-        <div class="col7">
+        
+        <div class="col7" ng-show="item.salesCategory.id == 2">
           <div class="row">
             <i-list
               ng-model="item.customer"
@@ -26,7 +18,12 @@
               items="customersList"
               display="name##session.lang##"
             ></i-list>
-            <i-button type="add" label="##word.New Customer##" ng-click="showAddCustomer()"> </i-button>
+            <i-button
+              type="add"
+              label="##word.New Customer##"
+              ng-click="showAddCustomer()"
+            >
+            </i-button>
           </div>
         </div>
 
@@ -69,8 +66,20 @@
             </div>
 
             <div class="row">
-              <i-control class="col4" ng-model="item.deliveryPrice" label="##word.Delivery Price##" ng-change="calculate(item)" type="number"> </i-control>
-              <i-control class="col8" label="##word.Street##" ng-model="item.customer.street"> </i-control>
+              <i-control
+                class="col4"
+                ng-model="item.deliveryPrice"
+                label="##word.Delivery Price##"
+                ng-change="calculate(item)"
+                type="number"
+              >
+              </i-control>
+              <i-control
+                class="col8"
+                label="##word.Street##"
+                ng-model="item.customer.street"
+              >
+              </i-control>
             </div>
           </div>
         </fieldset>
@@ -79,59 +88,85 @@
       <div class="row" ng-show="item.salesCategory.id == 3">
         <div class="row">
           <div class="row">
-            <div class="col4 " ng-show="item.table.id">
-              <fieldset>
-                <a class="">
-                  <div class="row">
-                    <div class="col-4 center"><img ng-src="{{item.table.image.url}}" /></div>
-                    <div class="center"><p class="center font-18">{{item.tablesGroup.name##session.lang##}}</p></div>
-                    <div class=""><p class="center font-20">{{item.table.name##session.lang##}} ( {{item.table.code}} )</p></div>
-                  </div>
+            <div class="col4" ng-show="item.table.id">
+              <div class="row item-list height-35hv">
+                <a class="item hover pointer">
+                  <img
+                    ng-src="{{item.table.image.url}}"
+                    ng-src2="/images/food.png"
+                  />
+                  <p>
+                    {{item.tablesGroup.name##session.lang##}}
+                    <span class="display-block center"
+                      >{{item.table.name##session.lang##}} ( {{item.table.code}})</span
+                    >
+                  </p>
                 </a>
-              </fieldset>
+              </div>
             </div>
 
             <div class="col1"></div>
             <div class="col7">
               <div class="row">
-                <i-control class="col6" ng-model="item.table.minimum" label="##word.Minimum persons##" type="number" disabled></i-control>
-                <i-control class="col6" disabled ng-model="item.table.maximum" label="##word.Maximum persons##" type="number"></i-control>
+                <i-control
+                  class="col6"
+                  ng-model="item.table.minimum"
+                  label="##word.Minimum persons##"
+                  type="number"
+                  disabled
+                ></i-control>
+                <i-control
+                  class="col6"
+                  disabled
+                  ng-model="item.table.maximum"
+                  label="##word.Maximum persons##"
+                  type="number"
+                ></i-control>
               </div>
 
               <div class="row">
-                <i-control class="col6" ng-model="item.personsCount" label="##word.Count of people##" type="number"></i-control>
+                <i-control
+                  class="col6"
+                  ng-model="item.personsCount"
+                  label="##word.Count of people##"
+                  type="number"
+                ></i-control>
 
-                <i-control class="col6" ng-model="item.service" label="##word.Service##" type="number" ng-change="calc(item)"></i-control>
+                <i-control
+                  class="col6"
+                  ng-model="item.service"
+                  label="##word.Service##"
+                  type="number"
+                  ng-change="calc(item)"
+                ></i-control>
               </div>
             </div>
           </div>
         </div>
 
         <br />
-        <hr style="height: 5px; color: grey; background-color: rgb(0, 0, 199)" />
         <br />
         <div class="row" ng-repeat="g in tablesGroupsList">
           <fieldset>
-            <legend>
-              {{g.name##session.lang##}}
-            </legend>
+            <legend>{{g.name##session.lang##}}</legend>
 
             <div class="row item-list border">
               <div class="row item-list">
                 <a
-                ng-class="{'table-busy' : table.busy }"
+                  ng-class="{'table-busy' : table.busy }"
                   class="item hover pointer"
                   ng-repeat="table in g.tablesList"
                   ng-click="selectTable(table,g)"
-
                 >
-                  <img ng-src="{{table.image.url}}" ng-src2="/images/food.png" />
+                  <img
+                    ng-src="{{table.image.url}}"
+                    ng-src2="/images/food.png"
+                  />
                   <p>{{table.name##session.lang##}} ( {{table.code}} )</p>
                 </a>
               </div>
 
-
-             <!--  <a ng-class="{'table-busy' : table.busy }" class="item col4 pointer" ng-repeat="table in g.tablesList" ng-click="selectTable(table,g)" help-id="menu_monitor">
+              <!--  <a ng-class="{'table-busy' : table.busy }" class="item col4 pointer" ng-repeat="table in g.tablesList" ng-click="selectTable(table,g)" help-id="menu_monitor">
                 <div class="row">
                   <div class="col-4 center"><img ng-src="{{table.image.url}}" /></div>
                   <div class="col-8"><p class="center font-18">{{table.name##session.lang##}} ( {{table.code}} )</p></div>
@@ -141,14 +176,17 @@
           </fieldset>
         </div>
       </div>
-
-    
     </div>
 
     <h2 class="error">{{error}}</h2>
 
     <div class="modal-footer center">
-      <i-button type="close" label="##word.Close##" onclick="site.hideModal('#orderDetailsModal')"> </i-button>
+      <i-button
+        type="close"
+        label="##word.Close##"
+        onclick="site.hideModal('#orderDetailsModal')"
+      >
+      </i-button>
     </div>
   </div>
 </div>

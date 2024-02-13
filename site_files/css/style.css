@@ -219,6 +219,22 @@ hr.line {
   color: #707070 !important;
 }
 
+.scroll {
+  overflow: scroll;
+}
+.display-block {
+  display: block;
+}
+
+.scrolly {
+  overflow-y: scroll;
+}
+
+.scrollx {
+  overflow-x: scroll;
+}
+
+
 .btn-center {
   place-content: center;
 }

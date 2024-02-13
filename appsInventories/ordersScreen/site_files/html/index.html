@@ -81,37 +81,52 @@
                     >
                     </i-button>
                   </div>
+                  <i-list
+                    ng-show="item.salesCategory.id == 2"
+                    ng-search="item.$delivery"
+                    class="col5"
+                    display="name##session.lang##"
+                    ng-model="item.delivery"
+                    label="##word.Delivery Employee##"
+                    items="deliveryList"
+                  ></i-list>
+                  <div class="col1"></div>
+                  <div class="col6">
 
                   <fieldset
-                  class="pointer"
+                    class="pointer"
                     ng-click="showDetails(item)"
                     ng-show="item.salesCategory.id == 2"
                   >
                     <div class="row center">
-                      <p class="font-20" ng-show="item.delivery && item.delivery.id">
-                       ##word.Customer## : {{item.customer.name##session.lang##}} /
-                       ##word.Delivery Employee## : {{item.delivery.name##session.lang##}} 
+                      <p
+                        class="font-20"
+                        ng-show="item.customer && item.customer.id"
+                      >
+                        ##word.Customer## :
+                        {{item.customer.name##session.lang##}}
                       </p>
                       <p
                         class="font-20"
-                        ng-show="!item.delivery || !item.delivery.id"
+                        ng-show="!item.customer || !item.customer.id"
                       >
-                        ##word.Select Delivery##
+                        ##word.Select Customer## / ##word.Area##
                       </p>
                     </div>
                   </fieldset>
+                </div>
 
                   <fieldset
-                  class="pointer"
+                    class="pointer"
                     ng-click="showDetails(item)"
                     x-data="setting.showRestaurant"
                     ng-show="item.salesCategory.id == 3"
                   >
                     <div class="row center">
                       <p class="font-20" ng-show="item.table && item.table.id">
-                        {{item.table.tablesGroup.name##session.lang##}}
+                        {{item.table.tablesGroup.name##session.lang##}} /
                         <span class="font-22 bold blue"
-                          >{{item.table.name##session.lang##}} (
+                          >{{item.table.name##session.lang##}} / (
                           {{item.table.code}} )
                         </span>
                       </p>
@@ -364,7 +379,7 @@
                 ng-model="barcode"
               ></i-control>
             </fieldset>
-            <div class="row scroll item-groups">
+            <div class="row scrollx item-groups">
               <a
                 class="item pointer"
                 ng-repeat="g in itemsGroupsList"
@@ -375,7 +390,7 @@
               </a>
             </div>
 
-            <div class="row item-list">
+            <div class="row item-list scrolly">
               <a
                 class="item hover pointer"
                 ng-repeat="itm in itemsList"

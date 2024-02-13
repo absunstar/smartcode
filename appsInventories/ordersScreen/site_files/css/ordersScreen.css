@@ -106,18 +106,18 @@ body {
   background: #868686;
   font-size: large;
 }
-.scroll {
-  overflow: scroll;
+
+.height-35hv {
+  height: 35vh !important;
 }
 
 .item-list {
-  height: 77vh !important;
+  height: 77vh;
   padding: 5px !important;
   margin: 10px 0px 0px 0px !important;
   background-color: white;
   display: inline-flex;
   flex-flow: wrap;
-  overflow: scroll;
 }
 
 .item-list .item {

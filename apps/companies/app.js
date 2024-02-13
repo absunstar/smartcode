@@ -867,37 +867,13 @@ module.exports = function init(site) {
       }
 
       if (Array.isArray(docs)) {
-        // let wordsList = [];
-        // let userWordsPath = process.cwd() + "/.words.json";
-        // let words2 = JSON.parse(site.readFileSync(userWordsPath));
-        // if (words2 && Array.isArray(words2)) {
-        //   wordsList = words2;
-        // }
-
+   
         for (let i = 0; i < docs.length; i++) {
           site.words.add(docs[i]);
 
-          // if (docs[i].Ar || docs[i].En) {
-          //   let index = wordsList.findIndex(
-          //     (a) =>
-          //       a.name === docs[i].name ||
-          //       a.Ar === docs[i].Ar ||
-          //       a.En === docs[i].En
-          //   );
-          //   if (index === -1) {
-          //     if (!docs[i].name) {
-          //       docs[i].name = docs[i].En;
-          //     }
-          //     if (!docs[i].En) {
-          //       docs[i].En = docs[i].name;
-          //     }
-          //     wordsList.push(docs[i]);
-          //   }
-          // }
         }
 
         site.words.save();
-        // site.writeFileSync(userWordsPath, JSON.stringify(wordsList));
       } else {
         site.dbMessage = "can not import unknown type : " + site.typeof(docs);
         console.log(site.dbMessage);
@@ -925,7 +901,6 @@ module.exports = function init(site) {
           site.readFileSync(response.file.filepath).toString()
         );
       }
-      console.log("xxxxxxxxxxxxxxxxxxxxxxxx");
       if (Array.isArray(wordsList)) {
         app.$wordsCollection.findMany({}, (err, docs) => {
           let num = 0;
