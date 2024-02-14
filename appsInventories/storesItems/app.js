@@ -105,7 +105,8 @@ module.exports = function init(site) {
 
     app.busyList.push(_elm.id);
     app.view({ id: _elm.id }, (err, doc) => {
-      if (doc) {
+      if (doc && doc.itemType.id == 1) {
+
         let index = doc.unitsList.findIndex(
           (unt) => unt.unit.id == _elm.unit.id
         );
@@ -1142,7 +1143,7 @@ module.exports = function init(site) {
               reportReorderLimits = true;
               delete where.reportReorderLimits;
             }
-            app.all({ where, select, limit }, (err, docs) => {
+            app.all({ where, select, limit, sort: { id: -1 } }, (err, docs) => {
               const selectedDocs = [];
               if (reportReorderLimits) {
                 docs.forEach((doc) => {
