@@ -164,7 +164,7 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
             site.hideModal('#alert');
           }, 1500);
 
-          if ($scope.setting.printerProgram.autoThermalPrintSalesInvo && doc.approved) {
+          if ($scope.setting.printerProgram.autoThermalPrintOrderScreen && doc.approved) {
             $scope.thermalPrint(doc);
           }
           $scope.newOrder();
@@ -182,11 +182,9 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   };
 
   $scope.closeOrder = function (_item) {
-    if (_item.id) {
-      $scope.approve({ ..._item, approved: true });
-    } else {
+
       $scope.saveOrder({ ..._item, approved: true });
-    }
+    
     document.querySelector('#searchBarcode input').focus();
   };
 
