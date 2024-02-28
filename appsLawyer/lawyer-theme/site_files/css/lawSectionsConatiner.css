@@ -15,17 +15,21 @@ main .content .lawSectionsConatiner .lawSectoins .lawSection .section {
   cursor: pointer;
 }
 main .content .lawSectionsConatiner .lawSectoins .lawSection .section .sectionImg {
-  max-width: 260px !important;
-  max-height: 100px !important;
+  width: 260px;
+  height: 100px;
+  min-width: 260px;
+  min-height: 100px;
+  background: #272727;
 }
 main .content .lawSectionsConatiner .lawSectoins .lawSection .section .sectionTitle {
   position: absolute;
-  top: 50px !important;
-  margin: 0px 31px 0px 0px !important;
-  color: #fff;
-
+  top: 20px;
+  width: 100%;
+  background: #0000002e;
+  margin: 0 auto;
+  color: #ffffff;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
-  line-height: 0px;
+  text-shadow: 0 0 8px #121212;
 }
