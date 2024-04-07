@@ -304,6 +304,40 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
         );
     };
 
+    $scope.getStores = function () {
+        $scope.busy = true;
+        $scope.storesList = [];
+        $http({
+          method: 'POST',
+          url: '/api/stores/all',
+          data: {
+            where: {
+              active: true,
+            },
+            select: {
+              id: 1,
+              code: 1,
+              nameEn: 1,
+              nameAr: 1,
+              rasdUser: 1,
+              rasdPass: 1,
+              linkWithRasd: 1,
+            },
+          },
+        }).then(
+          function (response) {
+            $scope.busy = false;
+            if (response.data.done && response.data.list.length > 0) {
+              $scope.storesList = response.data.list;
+            }
+          },
+          function (err) {
+            $scope.busy = false;
+            $scope.error = err;
+          }
+        );
+      };
+
     $scope.saveUserChanges = function (user) {
         $scope.error = '';
 
@@ -327,4 +361,5 @@ app.controller('manageUser', function ($scope, $http, $timeout) {
     $scope.loadManageUser();
     $scope.getGendersList();
     $scope.getCountriesList();
+    $scope.getStores();
 });

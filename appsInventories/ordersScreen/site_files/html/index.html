@@ -44,11 +44,14 @@
                 <h2 class="bold center red">{{error}}</h2>
 
                 <div class="row">
-                  <i-date
-                    class="col-4"
-                    ng-model="item.date"
-                    label="##word.Date##"
-                  ></i-date>
+                  <i-list
+                    ng-search="item.$stores"
+                    class="col4"
+                    display="name##session.lang##"
+                    ng-model="item.store"
+                    label="##word.Stores##"
+                    items="storesList"
+                  ></i-list>
                   <i-list
                     class="col-4"
                     ng-show="item.invoiceType.id == 1"

@@ -632,10 +632,10 @@ app.controller('storesItems', function ($scope, $http, $timeout) {
       return;
     }
 
-    if (!itemUnit.barcode) {
+/*     if (!itemUnit.barcode) {
       $scope.unitsInformationsError = '##word.Please Enter Barcode##';
       return;
-    }
+    } */
 
     if (itemUnit.conversion < 0) {
       $scope.unitsInformationsError = '##word.Conversion Required##';

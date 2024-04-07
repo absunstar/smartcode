@@ -25,7 +25,7 @@
                     </td>
 
                     <td>
-                      <i-button type="update" label="#w#ord.Update##" ng-click="view('logo')"> </i-button>
+                      <i-button type="update" label="##word.Update##" ng-click="view('logo')"> </i-button>
                     </td>
                   </tr>
 
@@ -73,7 +73,7 @@
                     <td class="userPrint">{{manageUser.nameAr}} - {{manageUser.nameEn}}</td>
 
                     <td>
-                      <i-button type="update" label="##word.Update##" ng-click="view('nameAr')"> </i-button>
+                      <i-button type="update" label="##word.Update##" ng-click="view('name')"> </i-button>
                     </td>
                   </tr>
 
@@ -99,6 +99,15 @@
 
                     <td>
                       <i-button type="update" label="##word.Update##" ng-click="view('mobile')"> </i-button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="">##word.Store##</td>
+
+                    <td>{{manageUser.store.name##session.lang##}}</td>
+
+                    <td>
+                      <i-button type="update" label="##word.Update##" ng-click="view('store')"> </i-button>
                     </td>
                   </tr>
                 </table>

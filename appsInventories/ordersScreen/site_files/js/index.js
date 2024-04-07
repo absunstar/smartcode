@@ -74,12 +74,18 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
         return _t.id == $scope.setting.storesSetting.salesCategory.id;
       });
     }
+    
+      let storeId = 0;
+      if($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id){
+        storeId = $scope.setting.storesSetting.customersStore.id;
+      }
+      if(site.toNumber('##user.store.id##') > 0){
+        storeId = site.toNumber('##user.store.id##') ;
 
-    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
+      }
       $scope.item.store = $scope.storesList.find((_t) => {
-        return _t.id == $scope.setting.storesSetting.customersStore.id;
+        return _t.id == storeId;
       });
-    }
     if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
       $scope.item.customer = $scope.customersList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.customer.id;
@@ -384,7 +390,6 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          commercialCustomer: false,
           'type.id': 6,
         },
         select: {
@@ -449,18 +454,18 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
   };
 
   $scope.changeItemUnit = function (item) {
-    let u = { ...item.unit };
-
-    item.barcode = u.barcode;
-    item.price = u.salesPrice;
-    item.discount = u.discount;
-    item.maxDiscount = u.maxDiscount;
-    item.discountType = u.discountType;
+    let unit = { ...item.unit };
+    item.barcode = unit.barcode;
+    item.price = unit.salesPrice;
+    item.discount = unit.discount;
+    item.averageCost = unit.averageCost;
+    item.maxDiscount = unit.maxDiscount;
+    item.discountType = unit.discountType;
     item.unit = {
-      id: u.id,
-      code: u.code,
-      nameAr: u.nameAr,
-      nameEn: u.nameEn,
+      id: unit.id,
+      code: unit.code,
+      nameAr: unit.nameAr,
+      nameEn: unit.nameEn,
     };
     $scope.calculate($scope.item);
   };
@@ -471,21 +476,25 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
     for (let i = 0; i < orderItem.unitsList.length; i++) {
       orderItem.unitsList[i] = { ...orderItem.unitsList[i], ...orderItem.unitsList[i].unit };
     }
-
+    let unitIndex = 0;
+    if($scope.item.customer && $scope.item.customer.commercialCustomer){
+      unitIndex = orderItem.unitsList.length -1
+    }
+  
     if (!orderItem.unit) {
       orderItem.unit = {
-        id: orderItem.unitsList[0].id,
-        barcode: orderItem.unitsList[0].barcode,
-        code: orderItem.unitsList[0].code,
-        nameEn: orderItem.unitsList[0].nameEn,
-        nameAr: orderItem.unitsList[0].nameAr,
-        price: orderItem.unitsList[0].salesPrice,
-        averageCost: orderItem.unitsList[0].averageCost,
-        maxDiscount: orderItem.unitsList[0].maxDiscount,
-        discount: orderItem.unitsList[0].discount,
-        extraDiscount: orderItem.unitsList[0].extraDiscount,
-        discountType: orderItem.unitsList[0].discountType,
-        storesList: orderItem.unitsList[0].storesList,
+        id: orderItem.unitsList[unitIndex].id,
+        barcode: orderItem.unitsList[unitIndex].barcode,
+        code: orderItem.unitsList[unitIndex].code,
+        nameEn: orderItem.unitsList[unitIndex].nameEn,
+        nameAr: orderItem.unitsList[unitIndex].nameAr,
+        price: orderItem.unitsList[unitIndex].salesPrice,
+        averageCost: orderItem.unitsList[unitIndex].averageCost,
+        maxDiscount: orderItem.unitsList[unitIndex].maxDiscount,
+        discount: orderItem.unitsList[unitIndex].discount,
+        extraDiscount: orderItem.unitsList[unitIndex].extraDiscount,
+        discountType: orderItem.unitsList[unitIndex].discountType,
+        storesList: orderItem.unitsList[unitIndex].storesList,
       };
     }
     let item = {
@@ -575,7 +584,6 @@ app.controller('ordersScreen', function ($scope, $http, $timeout) {
       data: {
         where: {
           active: true,
-          salesForCustomers: true,
         },
         select: {
           id: 1,

@@ -9,24 +9,27 @@
         <div class="row">
           <i-list
             ng-model="itemOrder.unit"
-            class="col4"
+            class="col3"
             label="##word.Unit##"
-            display="unit.name##session.lang##"
-            ng-change="changeItemUnit(itemOrder);"
+            display="name##session.lang##"
+            ng-change="changeItemUnit(itemOrder)"
             ng-search="itemOrder.$unit"
             space=" - "
-            display2="barcode"
+            display2="code"
             items="itemOrder.unitsList"
           >
           </i-list>
-
+          <div class="col2">
+            <p class="center">##word.Average Cost##</p>
+            <p class="center font-18">{{itemOrder.averageCost}}</p>
+          </div>
           <i-control class="col2" type="number" label="##word.Price##" ng-change="calculate(item)" ng-model="itemOrder.price"> </i-control>
 
           <i-control class="col2" type="number" label="##word.Discount##" ng-change="calculate(item)" ng-model="itemOrder.discount"> </i-control>
-          <div class="col2">
+          <div class="col1">
             <i-radio ng-model="itemOrder.discountType" ng-click="calculate(item)" label="##word.Amount##" ng-value="number" group="type" type="radio"> </i-radio>
           </div>
-          <div class="col2">
+          <div class="col1">
             <i-radio ng-model="itemOrder.discountType" ng-click="calculate(item)" label="##word.Percent##" ng-value="percent" group="type" type="radio"> </i-radio>
           </div>
         </div>

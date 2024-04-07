@@ -112,6 +112,9 @@ module.exports = function init(site) {
             _user.mobile = req.body.user.mobile;
             _user.mobileList = req.body.user.mobileList;
           }
+          else if (type === 'store') {
+            _user.store = req.body.user.store;
+          }
 
           site.security.isUserExists(_user, function (err, userFound) {
             if (userFound && type === 'email') {

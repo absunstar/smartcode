@@ -106,7 +106,6 @@ module.exports = function init(site) {
     app.busyList.push(_elm.id);
     app.view({ id: _elm.id }, (err, doc) => {
       if (doc && doc.itemType.id == 1) {
-
         let index = doc.unitsList.findIndex(
           (unt) => unt.unit.id == _elm.unit.id
         );
@@ -794,8 +793,18 @@ module.exports = function init(site) {
           _data.company = site.getCompany(req);
 
           let barcodes = [];
-
-          _data.unitsList.forEach((_u) => {
+          let date = new Date();
+          _data.unitsList.forEach((_u, i) => {
+            if (!_u.barcode) {
+              let generate = Math.random().toString(36).substr(2, 5);
+              _u.barcode =
+              date.getDate().toString() +
+              date.getDay().toString() +
+              date.getMinutes().toString() +
+              date.getHours().toString() +
+              i.toString() +
+              generate;
+            }
             barcodes.push(_u.barcode);
             _u.purchasePriceList.push({
               price: _u.purchasePrice,
@@ -817,7 +826,7 @@ module.exports = function init(site) {
               },
               {
                 "unitsList.barcode": { $in: barcodes },
-              }
+              },
             ],
           };
           where["company.id"] = site.getCompany(req).id;
@@ -912,10 +921,21 @@ module.exports = function init(site) {
 
           let _data = req.data;
           let barcodes = [];
-          _data.unitsList.forEach((_u) => {
+          let date = new Date();
+          _data.unitsList.forEach((_u, i) => {
+            if (!_u.barcode) {
+              let generate = Math.random().toString(36).substr(2, 5);
+              _u.barcode =
+                date.getDate().toString() +
+                date.getDay().toString() +
+                date.getMinutes().toString() +
+                date.getHours().toString() +
+                i.toString() +
+                generate;
+            }
             barcodes.push(_u.barcode);
           });
-          
+
           let where = {
             id: { $ne: _data.id },
             $or: [
@@ -930,7 +950,7 @@ module.exports = function init(site) {
               },
               {
                 "unitsList.barcode": { $in: barcodes },
-              }
+              },
             ],
           };
           where["company.id"] = site.getCompany(req).id;

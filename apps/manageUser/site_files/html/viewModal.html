@@ -18,6 +18,7 @@
         <i-date ng-show="viewText === 'birthDate'" ng-model="manageUser.dateOfBirth" label="##word.Birth Date##"> </i-date>
 
         <i-list ng-show="viewText === 'gender'" ng-search="manageUser.$genderSearch" label="##word.Gender##" ng-model="manageUser.gender" items="gendersList" display="name##session.lang##"> </i-list>
+        <i-list ng-show="viewText === 'store'" ng-search="manageUser.$storeSearch" label="##word.Store##" ng-model="manageUser.store" items="storesList" display="name##session.lang##"> </i-list>
 
         <i-control ng-show="viewText === 'email'" label="##word.New Email##" ng-model="manageUser.newEmail"> </i-control>
 
@@ -76,6 +77,7 @@
       <i-button type="save" ng-show="viewText === 'gender'" label="##word.Save##" ng-click="editPersonalInfoUser('gender')"></i-button>
       <i-button type="save" ng-show="viewText === 'email'" label="##word.Save##" ng-click="editPersonalInfoUser('email')"></i-button>
       <i-button type="save" ng-show="viewText === 'mobile'" label="##word.Save##" ng-click="editPersonalInfoUser('mobile')"></i-button>
+      <i-button type="save" ng-show="viewText === 'store'" label="##word.Save##" ng-click="editPersonalInfoUser('store')"></i-button>
       <i-button type="close" label="##word.Close##" onclick="site.hideModal( '#viewManageUserModal')"> </i-button>
     </div>
   </div>
