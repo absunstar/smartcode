@@ -1,9 +1,0 @@
-[
-    {
-        "moduleName": "public",
-        "name": "opposingCounselsAdmin",
-        "En": "Opposing Counsels Admin",
-        "Ar": "إدارة محامين الخصوم",
-        "permissions": ["opposingCounselsManage"]
-    }
-]
