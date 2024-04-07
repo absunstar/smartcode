@@ -50,7 +50,7 @@ header::before {
 }
 
 .headerbody .profileSection {
-  height: 150px;
+  height: 90px;
   margin-left: 2px !important;
   color: var(--color1);
   align-items: flex-start;

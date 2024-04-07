@@ -938,7 +938,6 @@ module.exports = function init(site) {
     let response = {
       done: false,
     };
-
     app.$wordsCollection.findMany({}, (err, wordsList) => {
       if (!err && wordsList) {
         response.done = true;
