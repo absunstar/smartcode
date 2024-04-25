@@ -869,6 +869,8 @@ module.exports = function init(site) {
       if (Array.isArray(docs)) {
    
         for (let i = 0; i < docs.length; i++) {
+          delete docs[i].id;
+          delete docs[i]._id;
           site.words.add(docs[i]);
 
         }
@@ -913,6 +915,8 @@ module.exports = function init(site) {
                   w.Ar == wordsList[i].Ar ||
                   w.En == wordsList[i].En
               );
+              delete wordsList[i].id;
+              delete wordsList[i]._id;
               if (index != -1) {
                 num += 1
                 site.words.set(wordsList[i]);
@@ -949,6 +953,7 @@ module.exports = function init(site) {
     });
   });
 
+  
   site.post({ name: `/x-api/words/reset`, public: true }, (req, res) => {
     let response = {
       done: false,
