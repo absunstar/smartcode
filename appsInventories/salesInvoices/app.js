@@ -152,7 +152,7 @@ module.exports = function init(site) {
             app.name + "/index.html",
             {
               title: app.name,
-              appName: "Sales Invoices For Customers",
+              appName: req.word("Sales Invoices"),
               setting: site.getCompanySetting(req),
             },
             { parser: "html", compres: true }

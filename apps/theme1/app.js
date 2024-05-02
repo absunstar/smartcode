@@ -60,7 +60,7 @@ module.exports = function init(site) {
     },
     (req, res) => {
 
-      res.render('theme1/index.html', { title: req.word('HMIS'), appName: 'Home Page', nursesCount: site.nursesCount || '0', doctorsCount: site.doctorsCount|| '0' , setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+      res.render('theme1/index.html', { title: req.word('HMIS'), appName: req.word("Home Page"), nursesCount: site.nursesCount || '0', doctorsCount: site.doctorsCount|| '0' , setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
     }
   );
 };

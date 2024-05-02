@@ -306,7 +306,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Attendance', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: req.word("Attendance"), setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }

@@ -184,7 +184,7 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: 'Vacations Requests', setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + '/index.html', { title: app.name, appName: req.word("Vacations Requests"), setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
         }
       );
     }
