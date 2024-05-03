@@ -870,10 +870,11 @@ module.exports = function init(site) {
         for (let i = 0; i < docs.length; i++) {
           delete docs[i].id;
           delete docs[i]._id;
-          site.words.add(docs[i]);
+         
+          app.$wordsCollection.add(docs[i]);
         }
 
-        site.words.save();
+        // site.words.save();
       } else {
         site.dbMessage = "can not import unknown type : " + site.typeof(docs);
         console.log(site.dbMessage);
@@ -906,7 +907,7 @@ module.exports = function init(site) {
           let num = 0;
           let num2 = 0;
           for (let i = 0; i < wordsList.length; i++) {
-            if (wordsList[i].Ar || wordsList[i].En) {
+            if (wordsList[i].Ar && wordsList[i].En) {
               let index = docs.findIndex(
                 (w) =>
                   w.name == wordsList[i].name ||
@@ -915,6 +916,9 @@ module.exports = function init(site) {
               );
               delete wordsList[i].id;
               delete wordsList[i]._id;
+              if(wordsList[i].name == "Sales"){
+                console.log(wordsList[i]);
+              }
               if (index != -1) {
                 num += 1;
                 site.words.set(wordsList[i]);
