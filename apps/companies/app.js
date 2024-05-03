@@ -867,12 +867,10 @@ module.exports = function init(site) {
       }
 
       if (Array.isArray(docs)) {
-   
         for (let i = 0; i < docs.length; i++) {
           delete docs[i].id;
           delete docs[i]._id;
           site.words.add(docs[i]);
-
         }
 
         site.words.save();
@@ -918,10 +916,10 @@ module.exports = function init(site) {
               delete wordsList[i].id;
               delete wordsList[i]._id;
               if (index != -1) {
-                num += 1
+                num += 1;
                 site.words.set(wordsList[i]);
               } else {
-                num2 += 1
+                num2 += 1;
                 site.words.add(wordsList[i]);
               }
             }
@@ -929,7 +927,8 @@ module.exports = function init(site) {
           site.words.save();
         });
       } else {
-        site.dbMessage = "can not import unknown type : " + site.typeof(wordsList);
+        site.dbMessage =
+          "can not import unknown type : " + site.typeof(wordsList);
         console.log(site.dbMessage);
       }
     } else {
@@ -953,7 +952,6 @@ module.exports = function init(site) {
     });
   });
 
-  
   site.post({ name: `/x-api/words/reset`, public: true }, (req, res) => {
     let response = {
       done: false,
@@ -965,6 +963,24 @@ module.exports = function init(site) {
     });
   });
 
+  site.post(
+    { name: `/x-api/words/deleteDuplicated`, public: true },
+    (req, res) => {
+      let response = {
+        done: false,
+      };
+
+      app.$wordsCollection.findMany({}, (err, docs) => {
+        docs.forEach((_doc) => {
+          if (!_doc.Ar) {
+            app.$wordsCollection.delete({ id: _doc.id });
+          }
+        });
+        response.done = true;
+        res.json(response);
+      });
+    }
+  );
 
   site.post({ name: `/api/companySetting/get`, public: true }, (req, res) => {
     let companySetting = site.getCompanySetting(req);
