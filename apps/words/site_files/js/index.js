@@ -25,21 +25,6 @@ app.controller('xwords', function ($scope, $http, $timeout) {
     }
   };
 
-  
-  $scope.deleteDuplicated = function () {
-    $http({
-      method: 'post',
-      url: '/x-api/words/deleteDuplicated',
-    }).then(function (response) {
-      if (response.data.done) {
-        $scope.success = 'Delete Duplicated Is Done';
-        $timeout(() => {
-          $scope.success = '';
-        }, 1500);
-      }
-    });
-  };
-
   $scope.resetWords = function () {
     $http({
       method: 'post',
