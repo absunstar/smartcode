@@ -254,7 +254,7 @@ module.exports = function init(site) {
                 if (co.id === b.company.id) {
                   co.branchList = co.branchList || [];
                   co.branchList.forEach((br) => {
-                    if (b.branch.code == br.code) {
+                    if (b.branch && br && b.branch.code == br.code) {
                       branchList.push({
                         company: {
                           id: co.id,
