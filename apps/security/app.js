@@ -455,10 +455,11 @@ module.exports = function init(site) {
           }
         }
 
+        req.session.user_id = user.id;
         req.session.user = user;
         req.session.company = req.body.company;
         req.session.branch = req.body.branch;
-        site.saveSession(req.session);
+        req.session.$save();
 
         response.user = {
           id: user.id,

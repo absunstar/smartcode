@@ -13,14 +13,21 @@ app.controller('sitebottom', ($scope, $http) => {
     site.showModal('#logOutModal');
   };
 
-  $scope.changeLang = function (lang) {
+  $scope.changeLang = function (language) {
+    if (typeof language == 'string') {
+      language = { id: language, dir: 'rtl', text: 'right' };
+      if (language.id.like('*en*')) {
+        language.dir = 'ltr';
+        language.text = 'left';
+      }
+    }
     $http({
       method: 'POST',
       url: '/x-language/change',
-      data: { name: lang },
+      data: language,
     }).then(function (response) {
       if (response.data.done) {
-        window.location.reload(true);
+        window.location.reload(!0);
       }
     });
   };
