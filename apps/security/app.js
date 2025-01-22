@@ -254,21 +254,19 @@ module.exports = function init(site) {
                 if (co.id === b.company.id) {
                   co.branchList = co.branchList || [];
                   co.branchList.forEach((br) => {
-                    if (b.branch.code == br.code) {
-                      branchList.push({
-                        company: {
-                          id: co.id,
-                          code: co.code,
-                          nameAr: co.nameAr,
-                          nameEn: co.nameEn,
-                        },
-                        branch: {
-                          code: br.code,
-                          nameAr: br.nameAr,
-                          nameEn: br.nameEn,
-                        },
-                      });
-                    }
+                    branchList.push({
+                      company: {
+                        id: co.id,
+                        code: co.code,
+                        nameAr: co.nameAr,
+                        nameEn: co.nameEn,
+                      },
+                      branch: {
+                        code: br.code,
+                        nameAr: br.nameAr,
+                        nameEn: br.nameEn,
+                      },
+                    });
                   });
                 }
               });
@@ -455,10 +453,11 @@ module.exports = function init(site) {
           }
         }
 
+        req.session.user_id = user.id;
         req.session.user = user;
         req.session.company = req.body.company;
         req.session.branch = req.body.branch;
-        site.saveSession(req.session);
+        req.session.$save();
 
         response.user = {
           id: user.id,
