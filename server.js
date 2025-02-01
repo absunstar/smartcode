@@ -83,14 +83,14 @@ site.get('/x-update', (req, res) => {
   site.cmd('git pull', (data) => {
     res.end(data);
     console.log(data);
-    site.cmd('pm2 restart 0', (data) => {
+    site.cmd('pm2 restart 14', (data) => {
       console.log(data);
     });
   });
 });
 
 site.get('/x-restart', (req, res) => {
-  site.cmd('pm2 restart 0', (data) => {
+  site.cmd('pm2 restart 14', (data) => {
     console.log(data);
   });
 });
