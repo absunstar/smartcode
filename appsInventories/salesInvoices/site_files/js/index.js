@@ -109,7 +109,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       return;
     }
     let dataValid = $scope.validateData(_item);
-    if (!dataValid.success) {
+    if (!dataValid.success &&  !_item.openingBalance) {
       return;
     }
     $scope.busy = true;
@@ -1134,7 +1134,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $scope.itemsError = "";
     $scope.error = "";
     let success = false;
-    if (!_item.itemsList.length) {
+    if (!_item.itemsList.length && !_item.openingBalance) {
       $scope.itemsError = "##word.Must Enter Items Data##";
       return success;
     }
