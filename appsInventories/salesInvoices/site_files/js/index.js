@@ -1748,6 +1748,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       remainAmount: 0,
       remainPaid: _item.remainPaid,
       total: _item.remainPaid,
+      $total: _item.remainPaid,
       voucherType: {
         id: "salesInvoice",
         nameEn: "Sales Invoice",

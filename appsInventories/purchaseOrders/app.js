@@ -1,6 +1,6 @@
 module.exports = function init(site) {
   let app = {
-    name: 'purchaseOrders',
+    name: "purchaseOrders",
     allowMemory: false,
     memoryList: [],
     allowCache: false,
@@ -147,6 +147,10 @@ module.exports = function init(site) {
       errBatchDuplicateList: [],
     };
 
+    if (!itemsList || itemsList.length == 0) {
+      return callBack(cb);
+    }
+
     itemsList.forEach((_item) => {
       if (_item.workByBatch || _item.workBySerial || _item.workByQrCode) {
         if (_item.batchesList && _item.batchesList.length > 0) {
@@ -190,23 +194,23 @@ module.exports = function init(site) {
             }
           });
           if (_item.$batchCount != _item.count + (_item.bonusCount || 0) || notCode) {
-            let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+            let itemName = lang == "Ar" ? _item.nameAr : _item.nameEn;
             cb.errBatchList.push(itemName);
           } else if (duplicate) {
-            let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+            let itemName = lang == "Ar" ? _item.nameAr : _item.nameEn;
             cb.errBatchDuplicateList.push(itemName);
           } else if (notGtin) {
-            let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+            let itemName = lang == "Ar" ? _item.nameAr : _item.nameEn;
             cb.errBatchGtinList.push(itemName);
           }
         } else {
-          let itemName = lang == 'Ar' ? _item.nameAr : _item.nameEn;
+          let itemName = lang == "Ar" ? _item.nameAr : _item.nameEn;
           cb.errBatchList.push(itemName);
         }
       }
     });
 
-    callBack(cb);
+    return callBack(cb);
   };
 
   if (app.allowRoute) {
@@ -216,13 +220,13 @@ module.exports = function init(site) {
           name: app.name,
         },
         (req, res) => {
-          res.render(app.name + '/index.html', { title: app.name, appName: req.word("Purchase Orders"), setting: site.getCompanySetting(req) }, { parser: 'html', compres: true });
+          res.render(app.name + "/index.html", { title: app.name, appName: req.word("Purchase Orders"), setting: site.getCompanySetting(req) }, { parser: "html", compres: true });
         }
       );
     }
 
     if (app.allowRouteAdd) {
-      site.post({ name: `/api/${app.name}/add`, require: { permissions: ['login'] } }, (req, res) => {
+      site.post({ name: `/api/${app.name}/add`, require: { permissions: ["login"] } }, (req, res) => {
         let response = {
           done: false,
         };
@@ -235,9 +239,9 @@ module.exports = function init(site) {
           date: new Date(),
         };
         let setting = site.getCompanySetting(req);
-        if(_data.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores && setting.storesSetting.autoApprovePurchases){
+        if (_data.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores && setting.storesSetting.autoApprovePurchases) {
           if (!_data.safe || !_data.safe.id) {
-            response.error = 'Must Select Safe';
+            response.error = "Must Select Safe";
             res.json(response);
             return;
           }
@@ -245,17 +249,17 @@ module.exports = function init(site) {
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
           if (callbackErrorBatches.errBatchList.length > 0) {
-            let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchList.map((m) => m).join("-");
             response.error = `The Batches is not correct in ( ${error} )`;
             res.json(response);
             return;
           } else if (callbackErrorBatches.errBatchGtinList.length > 0) {
-            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join("-");
             response.error = `Found GTIN Error Batches in ( ${error} )`;
             res.json(response);
             return;
           } else if (callbackErrorBatches.errBatchDuplicateList.length > 0) {
-            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join("-");
             response.error = `Found Duplication Batches in ( ${error} )`;
             res.json(response);
             return;
@@ -263,7 +267,7 @@ module.exports = function init(site) {
 
           let cb = site.getNumbering(numObj);
           if (!_data.code && !cb.auto) {
-            response.error = 'Must Enter Code';
+            response.error = "Must Enter Code";
             res.json(response);
             return;
           } else if (cb.auto) {
@@ -273,7 +277,7 @@ module.exports = function init(site) {
           app.$collection.find({ code: _data.code }, (err, doc) => {
             if (doc) {
               response.done = false;
-              response.error = 'There Is Order Exisit With Same Code';
+              response.error = "There Is Order Exisit With Same Code";
               return res.json(response);
             }
             _data.addUserInfo = req.getUserFinger();
@@ -281,7 +285,7 @@ module.exports = function init(site) {
             app.add(_data, (err, doc) => {
               if (!err && doc) {
                 if (_data.sourceType.id === 1 && _data.purchaseRequest && _data.purchaseRequest.id) {
-                  const purchaseRequestsApp = site.getApp('purchaseRequests');
+                  const purchaseRequestsApp = site.getApp("purchaseRequests");
                   purchaseRequestsApp.$collection.update({ where: { id: _data.purchaseRequest.id }, set: { hasTransaction: true } });
                 }
                 response.done = true;
@@ -297,7 +301,7 @@ module.exports = function init(site) {
     }
 
     if (app.allowRouteUpdate) {
-      site.post({ name: `/api/${app.name}/update`, require: { permissions: ['login'] } }, (req, res) => {
+      site.post({ name: `/api/${app.name}/update`, require: { permissions: ["login"] } }, (req, res) => {
         let response = {
           done: false,
         };
@@ -306,17 +310,17 @@ module.exports = function init(site) {
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
           if (callbackErrorBatches.errBatchList.length > 0) {
-            let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchList.map((m) => m).join("-");
             response.error = `The Batches is not correct in ( ${error} )`;
             res.json(response);
             return;
           } else if (callbackErrorBatches.errBatchGtinList.length > 0) {
-            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join("-");
             response.error = `Found GTIN Error Batches in ( ${error} )`;
             res.json(response);
             return;
           } else if (callbackErrorBatches.errBatchDuplicateList.length > 0) {
-            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join("-");
             response.error = `Found Duplication Batches in ( ${error} )`;
             res.json(response);
             return;
@@ -325,7 +329,7 @@ module.exports = function init(site) {
           app.$collection.find({ code: _data.code, id: { $ne: _data.id } }, (err, doc) => {
             if (doc) {
               response.done = false;
-              response.error = 'There Is Order Exisit With Same Code';
+              response.error = "There Is Order Exisit With Same Code";
               res.json(response);
               return;
             }
@@ -346,30 +350,30 @@ module.exports = function init(site) {
     }
 
     if (app.allowRouteApprove) {
-      site.post({ name: `/api/${app.name}/approve`, require: { permissions: ['login'] } }, (req, res) => {
+      site.post({ name: `/api/${app.name}/approve`, require: { permissions: ["login"] } }, (req, res) => {
         let response = { done: false };
         let _data = req.data;
-        if(!_data.id){
-          response.error = 'No Id';
+        if (!_data.id) {
+          response.error = "No Id";
           res.json(response);
           return;
         }
-        
+
         const accountsSetting = site.getCompanySetting(req).accountsSetting;
 
         site.checkBatchesError(_data.itemsList, req.session.lang, (callbackErrorBatches) => {
           if (callbackErrorBatches.errBatchList.length > 0) {
-            let error = callbackErrorBatches.errBatchList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchList.map((m) => m).join("-");
             response.error = `The Batches is not correct in ( ${error} )`;
             res.json(response);
             return;
           } else if (callbackErrorBatches.errBatchGtinList.length > 0) {
-            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchGtinList.map((m) => m).join("-");
             response.error = `Found GTIN Error Batches in ( ${error} )`;
             res.json(response);
             return;
           } else if (callbackErrorBatches.errBatchDuplicateList.length > 0) {
-            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join('-');
+            let error = callbackErrorBatches.errBatchDuplicateList.map((m) => m).join("-");
             response.error = `Found Duplication Batches in ( ${error} )`;
             res.json(response);
             return;
@@ -381,11 +385,11 @@ module.exports = function init(site) {
 
           if (_data.invoiceType.id == 1 && accountsSetting.linkAccountsToStores) {
             if (!_data.paymentType || !_data.paymentType.id) {
-              response.error = 'Must Select Payment Type';
+              response.error = "Must Select Payment Type";
               res.json(response);
               return;
             } else if (!_data.safe || !_data.safe.id) {
-              response.error = 'Must Select Safe';
+              response.error = "Must Select Safe";
               res.json(response);
               return;
             }
@@ -434,7 +438,7 @@ module.exports = function init(site) {
                 item.company = result.doc.company;
                 item.date = result.doc.date;
                 item.vendor = result.doc.vendor;
-                item.countType = 'in';
+                item.countType = "in";
                 item.orderCode = result.doc.code;
                 site.setItemCard(item, app.name);
               });
@@ -448,8 +452,8 @@ module.exports = function init(site) {
                 });
               }
 
-              objJournal.nameAr = 'أمر شراء' + ' (' + result.doc.code + ' )';
-              objJournal.nameEn = 'Purchase Order' + ' (' + result.doc.code + ' )';
+              objJournal.nameAr = "أمر شراء" + " (" + result.doc.code + " )";
+              objJournal.nameEn = "Purchase Order" + " (" + result.doc.code + " )";
               objJournal.session = req.session;
               site.autoJournalEntry(objJournal);
 
@@ -465,7 +469,7 @@ module.exports = function init(site) {
     }
 
     if (app.allowRouteDelete) {
-      site.post({ name: `/api/${app.name}/delete`, require: { permissions: ['login'] } }, (req, res) => {
+      site.post({ name: `/api/${app.name}/delete`, require: { permissions: ["login"] } }, (req, res) => {
         let response = {
           done: false,
         };
@@ -476,7 +480,7 @@ module.exports = function init(site) {
             response.done = true;
             response.result = result;
           } else {
-            response.error = err?.message || 'Deleted Not Exists';
+            response.error = err?.message || "Deleted Not Exists";
           }
           res.json(response);
         });
@@ -495,7 +499,7 @@ module.exports = function init(site) {
             response.done = true;
             response.doc = doc;
           } else {
-            response.error = err?.message || 'Not Exists';
+            response.error = err?.message || "Not Exists";
           }
           res.json(response);
         });
@@ -506,7 +510,7 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/all`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let select = req.body.select || {};
-        let search = req.body.search || '';
+        let search = req.body.search || "";
         let limit = req.body.limit || 50;
         let list = [];
 
@@ -530,7 +534,7 @@ module.exports = function init(site) {
             list: list,
           });
         } else {
-          where['company.id'] = site.getCompany(req).id;
+          where["company.id"] = site.getCompany(req).id;
           // if (where && where.dateTo) {
           //     let d1 = site.toDate(where.date);
           //     let d2 = site.toDate(where.dateTo);
@@ -574,11 +578,11 @@ module.exports = function init(site) {
       site.post({ name: `/api/${app.name}/report`, public: true }, (req, res) => {
         let where = req.body.where || {};
         let select = req.body.select || {};
-        let search = req.body.search || '';
+        let search = req.body.search || "";
         let limit = req.body.limit || 50;
         let list = [];
 
-        where['company.id'] = site.getCompany(req).id;
+        where["company.id"] = site.getCompany(req).id;
 
         if (where && where.fromDate && where.toDate) {
           let d1 = site.toDate(where.fromDate);
@@ -614,8 +618,8 @@ module.exports = function init(site) {
       $gte: d1,
       $lt: d2,
     };
-    where['approved'] = true;
-    where['company.id'] = site.getCompany(req).id;
+    where["approved"] = true;
+    where["company.id"] = site.getCompany(req).id;
     let select = { id: 1, code: 1, date: 1 };
 
     app.all({ where, select }, (err, docs) => {
@@ -626,7 +630,6 @@ module.exports = function init(site) {
         month: 0,
       };
       if (!err && docs) {
-
         let weekDate = site.weekDate();
         obj.month = docs.length;
         for (let i = 0; i < docs.length; i++) {
@@ -650,7 +653,7 @@ module.exports = function init(site) {
     });
   });
 
-  site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ['login'] } }, (req, res) => {
+  site.post({ name: `/api/${app.name}/resetForCompany`, require: { permissions: ["login"] } }, (req, res) => {
     let response = {
       done: false,
     };
@@ -658,7 +661,7 @@ module.exports = function init(site) {
     app.$collection.removeMany(
       {
         where: {
-          'company.id': req.data.id,
+          "company.id": req.data.id,
         },
       },
       (err, result) => {

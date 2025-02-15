@@ -133,7 +133,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     delete _item.purchaseRequest?.approved;
     delete _item.purchaseRequest?.hasTransaction;
     let dataValid = $scope.validateData(_item);
-    if (!dataValid.success) {
+    if (!dataValid.success && !_item.openingBalance) {
       return;
     }
     $scope.busy = true;
@@ -153,6 +153,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
             $scope.list.unshift(response.data.doc);
           }
         } else {
+          
           $scope.error = response.data.error;
           if (response.data.error && response.data.error.like('*Must Enter Code*')) {
             $scope.error = '##word.Must Enter Code##';
@@ -523,7 +524,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.safesList = response.data.list;
+          obj.$safesList = response.data.list;
           if (obj.paymentType.id == 1) {
             if ($scope.setting.accountsSetting.safeCash) {
               obj.safe = $scope.safesList.find((_t) => {
@@ -1148,7 +1149,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       _item.itemsList.forEach((element) => {
         element.approved = true;
       });
-    } else if (_item.itemsList.some((itm) => !itm.approved)) {
+    } else if (_item.itemsList.some((itm) => !itm.approved)) {      
       $scope.error = '##word.Must Approve All Items##';
       return;
     }
@@ -1186,7 +1187,9 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
     $scope.itemsError = '';
     $scope.error = '';
     let success = false;
-    if (!_item.itemsList.length) {
+    
+    if (!_item.itemsList.length && !_item.openingBalance) {
+      
       $scope.itemsError = '##word.Must Enter Items Data##';
       return success;
     }
@@ -1563,6 +1566,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
       invoiceCode: _item.code,
       remainPaid: _item.remainPaid,
       total: _item.remainPaid,
+      $total: _item.remainPaid,
       remainAmount: 0,
       voucherType: { id: 'purchaseInvoice', nameEn: 'Purchase Invoice', nameAr: 'فاتورة مشتريات' },
     };
