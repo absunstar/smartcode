@@ -199,7 +199,9 @@ module.exports = function init(site) {
         } else {
           _data["approved"] = true;
         }
+
         _data.company = site.getCompany(req);
+
         let errBatchList = [];
         let medicationDosesList = [];
         const accountsSetting = site.getCompanySetting(req).accountsSetting;
@@ -915,10 +917,10 @@ module.exports = function init(site) {
       }
     } else {
       _data.offerPrice = {
-        id: _data.offerPrice.id,
-        code: _data.offerPrice.code,
-        date: _data.offerPrice.date,
-        title: _data.offerPrice.title,
+        id: _data?.offerPrice?.id,
+        code: _data?.offerPrice?.code,
+        date: _data?.offerPrice?.date,
+        title: _data?.offerPrice?.title,
       };
     }
 
