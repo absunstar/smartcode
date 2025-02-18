@@ -535,7 +535,7 @@ module.exports = function init(site) {
         let where = req.body.where || {};
         let select = req.body.select || {};
         let search = req.body.search || "";
-        let limit = req.body.limit || 50;
+        let limit = req.body.limit || 500;
         if (select == "all") {
           select = {};
         }
