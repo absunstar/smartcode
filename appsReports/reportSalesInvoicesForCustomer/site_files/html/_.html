@@ -14,6 +14,40 @@
       </div>
     </div>
 
+    <div class="row">
+      <fieldset>
+        <legend>##word.Totals##</legend>
+        <div class="row">
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Net## : {{totalNet | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Paid## : {{totalPaid | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Remain## : {{totalRemain | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
     <p class="error">{{ error}}</p>
     <div class="table-responsive">
       <table class="table hover bold" id="reportSalesInvoicesForCustomer">
@@ -21,12 +55,18 @@
           <th>##word.S##</th>
           <th>##word.Name##</th>
           <th>##word.Date##</th>
+          <th>##word.Amount required##</th>
+          <th>##word.Amount Paid##</th>
+          <th>##word.Remain Amount##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
         <tr ng-repeat="item in list | filter:$search">
           <td class="center">{{$index+1}}</td>
           <td class="center">{{item.customer.name##session.lang##}}</td>
           <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+          <td class="center">{{item.totalNet | xmoney2}}</td>
+          <td class="center">{{item.totalPaid | xmoney2}}</td>
+          <td class="center">{{item.remainPaid | xmoney2}}</td>
 
           <td class="center not-print">
             <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>

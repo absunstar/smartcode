@@ -341,6 +341,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   };
 
   $scope.getAll = function (where) {
+    
     $scope.busy = true;
     $scope.list = [];
     where = where || { approved: false };

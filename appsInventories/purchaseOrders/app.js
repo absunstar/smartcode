@@ -579,7 +579,7 @@ module.exports = function init(site) {
         let where = req.body.where || {};
         let select = req.body.select || {};
         let search = req.body.search || "";
-        let limit = req.body.limit || 50;
+        let limit = req.body.limit || 5000;
         let list = [];
 
         where["company.id"] = site.getCompany(req).id;
@@ -597,10 +597,16 @@ module.exports = function init(site) {
         }
 
         app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {
-          res.json({
-            done: true,
-            list: docs,
-          });
+          let totalNet = 0;
+          let totalPaid = 0;
+          let totalRemain = 0;
+          for (let i = 0; i < docs.length; i++) {
+            totalNet += Number(docs[i].totalNet);
+            docs[i].totalPaid = Number(docs[i].totalNet) - Number(docs[i].remainPaid);
+            totalPaid += docs[i].totalPaid;
+            totalRemain += Number(docs[i].remainPaid);
+          }
+          res.json({ done: true, totalNet, totalPaid, totalRemain, list: docs });
         });
       });
     }

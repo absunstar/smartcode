@@ -13,6 +13,39 @@
         <i-button type="search" label="##word.Search##" ng-click="searchAll()"></i-button>
       </div>
     </div>
+    <div class="row">
+      <fieldset>
+        <legend>##word.Totals##</legend>
+        <div class="row">
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Net## : {{totalNet | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Paid## : {{totalPaid | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Remain## : {{totalRemain | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+    </div>
 
     <p class="error">{{ error}}</p>
     <div class="table-responsive">
@@ -22,8 +55,9 @@
           <th>##word.Vendor##</th>
           <th>##word.Source##</th>
           <th>##word.Date##</th>
-          <th>##word.Approved##</th>
-
+          <th>##word.Amount required##</th>
+          <th>##word.Amount Paid##</th>
+          <th>##word.Remain Amount##</th>
           <th class="not-print">##word.Actions##</th>
         </tr>
         <tr ng-repeat="item in list | filter:$search">
@@ -31,12 +65,12 @@
           <td class="center">{{item.vendor.name##session.lang##}}</td>
           <td class="center">{{item.sourceType.name##session.lang##}}</td>
           <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
-          <td class="center">
-            <span ng-show="item.approved"> <span class="text-success">( ##word.Yes## )</span> {{item.approvedDate |date:'dd/MM/yyyy' }} - {{item.approvedDate |date:'hh:mm:ss a' }} </span>
+          <td class="center">{{item.totalNet | xmoney2}}</td>
+          <td class="center">{{item.totalPaid | xmoney2}}</td>
+          <td class="center">{{item.remainPaid | xmoney2}}</td>
 
-            <span class="text-danger" ng-show="!item.approved">##word.No##</span>
-          </td>
- 
+          <td class="center">
+     
           <td class="center not-print">
             <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
           </td>

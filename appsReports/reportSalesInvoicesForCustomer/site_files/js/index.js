@@ -130,7 +130,9 @@ app.controller('reportSalesInvoicesForCustomer', function ($scope, $http, $timeo
           id: 1,
           salesType: 1,
           date: 1,
-          itemsList: 1,
+          /* itemsList: 1, */
+          totalNet: 1,
+          remainPaid: 1,
           store: 1,
           invoiceType: 1,
           paymentType: 1,
@@ -142,6 +144,9 @@ app.controller('reportSalesInvoicesForCustomer', function ($scope, $http, $timeo
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.list = response.data.list;
+          $scope.totalNet = response.data.totalNet;
+          $scope.totalPaid = response.data.totalPaid;
+          $scope.totalRemain = response.data.totalRemain;
           $scope.count = response.data.count;
 
           $scope.search = {};

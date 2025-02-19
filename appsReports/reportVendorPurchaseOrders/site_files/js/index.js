@@ -121,6 +121,8 @@ app.controller('reportVendorPurchaseOrders', function ($scope, $http, $timeout) 
           id: 1,
           vendor: 1,
           sourceType: 1,
+          totalNet: 1,
+          remainPaid: 1,
           date: 1,
           vendor: 1,
           approvedDate: 1,
@@ -132,6 +134,9 @@ app.controller('reportVendorPurchaseOrders', function ($scope, $http, $timeout) 
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
           $scope.list = response.data.list;
+          $scope.totalNet = response.data.totalNet;
+          $scope.totalPaid = response.data.totalPaid;
+          $scope.totalRemain = response.data.totalRemain;
           $scope.count = response.data.count;
 
           $scope.search = {};
