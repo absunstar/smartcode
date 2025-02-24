@@ -308,6 +308,58 @@
         </fieldset>
       </div>
     </div> -->
+    <fieldset>
+      <div class="row">
+        <div class="col6">
+          <fieldset>
+            <legend>##word.Discounts Information##</legend>
+            <div class="row" ng-show="!item.approved">
+              <i-list class="col6" ng-model="discount" display="name##session.lang##" items="discountTypesList" label="##word.Discount##" ng-search="$discount"></i-list>
+              <i-control label="##word.Value##" type="number" class="col3" ng-model="discount.discountValue"></i-control>
+              <div class="col3">
+                <br />
+                <i-button type="push" ng-click="addToList(discount,'discount')"> </i-button>
+              </div>
+            </div>
+            <div class="row" ng-show="discount.id">
+              <div class="col6"></div>
+              <div class="col4">
+                <fieldset>
+                  <i-radio class="col6" label="##word.Value##" ng-value="value" ng-model="discount.discountType"> </i-radio>
+
+                  <i-radio class="col6" label="##word.Pecent##" ng-value="percent" ng-model="discount.discountType"> </i-radio>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table hover bold">
+                  <tr>
+                    <th>##word.Name##</th>
+                    <th>##word.Value##</th>
+                    <th class="not-print" ng-show="!item.approved">##word.Actions##</th>
+                  </tr>
+                  <tr ng-repeat="discount in item.discountsList">
+                    <td class="center"><p>{{discount.name##session.lang##}}</p></td>
+                    <td class="center">
+                      <p>
+                        {{discount.value}}
+                        <span ng-if="discount.type == 'value'" class="green">##word.$##</span>
+                        <span ng-if="discount.type == 'percent'" class="green">##word.%##</span>
+                      </p>
+                    </td>
+                    <td class="center" ng-show="!item.approved">
+                      <i-button type="delete" ng-click="spliceFromList(discount,'discount');"> </i-button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </fieldset>
     <div class="row">
       <fieldset>
         <legend>##word.Totals##</legend>
@@ -359,7 +411,6 @@
       </div>
     </fieldset>
     <i-textarea label="##word.Notes##" ng-model="item.notes"></i-textarea>
-
   </div>
 </div>
 <div ng-show="mode !== 'add' " class="row">

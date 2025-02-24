@@ -866,6 +866,7 @@ app.controller('returnSalesInvoices', function ($scope, $http, $timeout) {
   $scope.showAddVoucher = function (_item) {
     $scope.error = '';
     $scope.item = {
+      date : new Date(),
       invoiceId: _item.id,
       storeInvoiceId: _item.invoiceId,
       customer: _item.customer,

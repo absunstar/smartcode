@@ -1106,12 +1106,16 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           item.totalCashDiscounts += d.value;
         } else if (d.type == 'percent') {
           item.totalCashDiscounts += (item.totalPrice * d.value) / 100;
+        } else {
+          item.totalCashDiscounts += d.value;
+
         }
       });
 
       item.taxesList.forEach((t) => {
         item.totalCashTaxes += (item.totalPrice * t.value) / 100;
       });
+      
       item.totalDiscounts = item.totalCashDiscounts + item.totalItemsDiscounts;
       item.totalNet = item.totalAfterVat - item.totalCashDiscounts + item.totalCashTaxes;
       item.totalVat = site.toNumber(item.totalVat);
@@ -1561,6 +1565,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
   $scope.showAddVoucher = function (_item) {
     $scope.error = '';
     $scope.item = {
+      date : new Date(),
       vendor: _item.vendor,
       invoiceId: _item.id,
       invoiceCode: _item.code,

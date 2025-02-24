@@ -668,7 +668,6 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   };
 
   $scope.addToList = function (discount, type) {
-    if (discount && discount.id) {
       if (type === "discount") {
         $scope.item.discountsList.unshift({
           id: discount.id,
@@ -692,7 +691,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
         $scope.item.totalTaxes += discount.value;
         $scope.tax = {};
       }
-    }
+    
     $scope.calculate($scope.item);
   };
 
@@ -1049,6 +1048,8 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           obj.totalCashDiscounts += d.value;
         } else if (d.type == "percent") {
           obj.totalCashDiscounts += (obj.totalPrice * d.value) / 100;
+        } else {
+          obj.totalCashDiscounts += d.value;
         }
       });
 
@@ -1066,7 +1067,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       obj.totalNet = site.toNumber(obj.totalNet);
       $scope.selectInvoiceType(obj);
       $scope.itemsError = "";
-    }, 300);
+    }, 500);
   };
 
   $scope.selectInvoiceType = function (item) {
@@ -1742,6 +1743,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $scope.error = "";
 
     $scope.item = {
+      date : new Date(),
       invoiceId: _item.id,
       customer: _item.customer,
       invoiceCode: _item.code,
