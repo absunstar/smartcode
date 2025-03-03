@@ -72,6 +72,18 @@
             <i-button type="view" title="##word.View##" ng-click="showView(item)"></i-button>
           </td>
         </tr>
+
+        <tr>
+          <td class="center">0</td>
+          <td class="center">{{item.customer.name##session.lang##}}</td>
+          <td class="center"></td>
+          <td class="center font-19">({{totalNet | xmoney2}})</td>
+          <td class="center font-19">({{totalPaid | xmoney2}})</td>
+          <td class="center font-19">({{totalRemain | xmoney2}})</td>
+
+          <td class="center not-print">
+          </td>
+        </tr>
       </table>
     </div>
     <i-button
