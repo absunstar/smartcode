@@ -1533,6 +1533,7 @@ app.controller('purchaseOrders', function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: 'A4',
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };

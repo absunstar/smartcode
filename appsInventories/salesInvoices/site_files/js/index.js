@@ -49,8 +49,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $scope.mainError = "";
 
     if (!$scope.setting || !$scope.setting.id) {
-      $scope.mainError =
-        "##word.Please Contact System Administrator to Set System Setting Or Reload Page##";
+      $scope.mainError = "##word.Please Contact System Administrator to Set System Setting Or Reload Page##";
       return;
     }
 
@@ -71,28 +70,19 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       taxesList: [],
     };
 
-    if (
-      $scope.setting.storesSetting.salesCategory &&
-      $scope.setting.storesSetting.salesCategory.id
-    ) {
+    if ($scope.setting.storesSetting.salesCategory && $scope.setting.storesSetting.salesCategory.id) {
       $scope.item.salesCategory = $scope.salesCategoriesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.salesCategory.id;
       });
     }
 
-    if (
-      $scope.setting.storesSetting.customersStore &&
-      $scope.setting.storesSetting.customersStore.id
-    ) {
+    if ($scope.setting.storesSetting.customersStore && $scope.setting.storesSetting.customersStore.id) {
       $scope.item.store = $scope.storesList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.customersStore.id;
       });
     }
 
-    if (
-      $scope.setting.storesSetting.customer &&
-      $scope.setting.storesSetting.customer.id
-    ) {
+    if ($scope.setting.storesSetting.customer && $scope.setting.storesSetting.customer.id) {
       $scope.item.customer = $scope.customersList.find((_t) => {
         return _t.id == $scope.setting.storesSetting.customer.id;
       });
@@ -109,7 +99,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       return;
     }
     let dataValid = $scope.validateData(_item);
-    if (!dataValid.success &&  !_item.openingBalance) {
+    if (!dataValid.success && !_item.openingBalance) {
       return;
     }
     $scope.busy = true;
@@ -129,10 +119,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           }
         } else {
           $scope.error = response.data.error;
-          if (
-            response.data.error &&
-            response.data.error.like("*Must Enter Code*")
-          ) {
+          if (response.data.error && response.data.error.like("*Must Enter Code*")) {
             $scope.error = "##word.Must Enter Code##";
           }
         }
@@ -174,8 +161,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       _item.deliveryStatusList.push(_item.deliveryStatus);
     } else if (_item.$deliveredType == "canceled") {
       if (!_item.reasonCancelingDelivery || !_item.reasonCancelingDelivery.id) {
-        $scope.error =
-          "##word.You must choose the reason for canceling the delivery order##";
+        $scope.error = "##word.You must choose the reason for canceling the delivery order##";
         return;
       }
       _item.deliveryStatus = {
@@ -199,9 +185,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }
-          let index = $scope.list.findIndex(
-            (itm) => itm.id == response.data.result.doc.id
-          );
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
@@ -237,9 +221,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
         if (response.data.done) {
           site.hideModal($scope.modalID);
           site.resetValidated($scope.modalID);
-          let index = $scope.list.findIndex(
-            (itm) => itm.id == response.data.result.doc.id
-          );
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list[index] = response.data.result.doc;
           }
@@ -281,14 +263,8 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
               En: " " + $scope.setting.accountsSetting.currency.nameEn + " ",
             };
             site.strings["from100"] = {
-              Ar:
-                " " +
-                $scope.setting.accountsSetting.currency.smallCurrencyAr +
-                " ",
-              En:
-                " " +
-                $scope.setting.accountsSetting.currency.smallCurrencyEn +
-                " ",
+              Ar: " " + $scope.setting.accountsSetting.currency.smallCurrencyAr + " ",
+              En: " " + $scope.setting.accountsSetting.currency.smallCurrencyEn + " ",
             };
           }
         } else {
@@ -324,9 +300,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           site.hideModal($scope.modalID);
-          let index = $scope.list.findIndex(
-            (itm) => itm.id == response.data.result.doc.id
-          );
+          let index = $scope.list.findIndex((itm) => itm.id == response.data.result.doc.id);
           if (index !== -1) {
             $scope.list.splice(index, 1);
           }
@@ -341,7 +315,6 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   };
 
   $scope.getAll = function (where) {
-    
     $scope.busy = true;
     $scope.list = [];
     where = where || { approved: false };
@@ -493,9 +466,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     }
 
     let item = {
-      sfdaCode: orderItem.item.sfdaCodeList
-        ? orderItem.item.sfdaCodeList[0]
-        : "",
+      sfdaCode: orderItem.item.sfdaCodeList ? orderItem.item.sfdaCodeList[0] : "",
       id: orderItem.item.id,
       code: orderItem.item.code,
       nameAr: orderItem.item.nameAr,
@@ -521,11 +492,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       discountType: orderItem.unit.discountType,
     };
 
-    if (
-      orderItem.item.workByBatch ||
-      orderItem.item.workBySerial ||
-      orderItem.item.workByQrCode
-    ) {
+    if (orderItem.item.workByBatch || orderItem.item.workBySerial || orderItem.item.workByQrCode) {
       item.workByBatch = orderItem.item.workByBatch;
       item.workBySerial = orderItem.item.workBySerial;
       item.workByQrCode = orderItem.item.workByQrCode;
@@ -551,9 +518,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       } */
     }
 
-    let index = $scope.item.itemsList.findIndex(
-      (_item) => _item.id === item.id && _item.unit.id == item.unit.id
-    );
+    let index = $scope.item.itemsList.findIndex((_item) => _item.id === item.id && _item.unit.id == item.unit.id);
 
     if (index == -1) {
       $scope.item.itemsList.unshift(item);
@@ -668,38 +633,36 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   };
 
   $scope.addToList = function (discount, type) {
-      if (type === "discount") {
-        $scope.item.discountsList.unshift({
-          id: discount.id,
-          code: discount.code,
-          nameAr: discount.nameAr,
-          nameEn: discount.nameEn,
-          value: discount.discountValue,
-          type: discount.discountType,
-        });
-        $scope.item.totalDiscounts += discount.discountValue;
-        $scope.discount = {};
-      }
-      if (type === "tax") {
-        $scope.item.taxesList.unshift({
-          id: discount.id,
-          code: discount.code,
-          nameAr: discount.nameAr,
-          nameEn: discount.nameEn,
-          value: discount.value,
-        });
-        $scope.item.totalTaxes += discount.value;
-        $scope.tax = {};
-      }
-    
+    if (type === "discount") {
+      $scope.item.discountsList.unshift({
+        id: discount.id,
+        code: discount.code,
+        nameAr: discount.nameAr,
+        nameEn: discount.nameEn,
+        value: discount.discountValue,
+        type: discount.discountType,
+      });
+      $scope.item.totalDiscounts += discount.discountValue;
+      $scope.discount = {};
+    }
+    if (type === "tax") {
+      $scope.item.taxesList.unshift({
+        id: discount.id,
+        code: discount.code,
+        nameAr: discount.nameAr,
+        nameEn: discount.nameEn,
+        value: discount.value,
+      });
+      $scope.item.totalTaxes += discount.value;
+      $scope.tax = {};
+    }
+
     $scope.calculate($scope.item);
   };
 
   $scope.spliceFromList = function (discount, type) {
     if (type === "discount") {
-      const index = $scope.item.discountsList.findIndex(
-        (dis) => dis.id === discount.id
-      );
+      const index = $scope.item.discountsList.findIndex((dis) => dis.id === discount.id);
       if (index !== -1) {
         $scope.item.discountsList.splice(index, 1);
         $scope.item.totalDiscounts -= discount.value;
@@ -707,9 +670,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     }
 
     if (type === "tax") {
-      const index = $scope.item.taxesList.findIndex(
-        (dis) => dis.id === discount.id
-      );
+      const index = $scope.item.taxesList.findIndex((dis) => dis.id === discount.id);
       if (index !== -1) {
         $scope.item.taxesList.splice(index, 1);
         $scope.item.totalTaxes -= discount.value;
@@ -774,10 +735,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     if ($scope.orderItem.barcode && $scope.orderItem.barcode.length > 30) {
       $scope.qr = site.getQRcode($scope.orderItem.barcode);
       where["gtinList.gtin"] = $scope.qr.gtin;
-      where.$and = [
-        { "unitsList.storesList.batchesList.code": $scope.qr.code },
-        { "unitsList.storesList.batchesList.count": { $gt: 0 } },
-      ];
+      where.$and = [{ "unitsList.storesList.batchesList.code": $scope.qr.code }, { "unitsList.storesList.batchesList.count": { $gt: 0 } }];
     } else {
       where["unitsList.barcode"] = $scope.orderItem.barcode;
     }
@@ -927,9 +885,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          $scope.salesCategoriesList = response.data.list.filter(
-            (s) => s.id != 3
-          );
+          $scope.salesCategoriesList = response.data.list.filter((s) => s.id != 3);
         }
       },
       function (err) {
@@ -1007,15 +963,10 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
 
         _item.totalVat = 0;
         _item.totalPrice = _item.price * _item.count;
-        mainDiscountValue =
-          _item.discountType === "value"
-            ? _item.discount
-            : (_item.price * _item.discount) / 100;
+        mainDiscountValue = _item.discountType === "value" ? _item.discount : (_item.price * _item.discount) / 100;
         _item.totalMainDiscounts = mainDiscountValue * _item.count;
-        _item.totalExtraDiscounts =
-          (_item.totalPrice * _item.extraDiscount) / 100;
-        _item.totalDiscounts =
-          _item.totalMainDiscounts + _item.totalExtraDiscounts;
+        _item.totalExtraDiscounts = (_item.totalPrice * _item.extraDiscount) / 100;
+        _item.totalDiscounts = _item.totalMainDiscounts + _item.totalExtraDiscounts;
         _item.totalMainDiscounts = site.toNumber(_item.totalMainDiscounts);
         _item.totalExtraDiscounts = site.toNumber(_item.totalExtraDiscounts);
         _item.totalDiscounts = site.toNumber(_item.totalDiscounts);
@@ -1058,8 +1009,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       });
 
       obj.totalDiscounts = obj.totalCashDiscounts + obj.totalItemsDiscounts;
-      obj.totalNet =
-        obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
+      obj.totalNet = obj.totalAfterVat - obj.totalCashDiscounts + obj.totalCashTaxes;
       obj.totalVat = site.toNumber(obj.totalVat);
       obj.totalAfterVat = site.toNumber(obj.totalAfterVat);
       obj.totalBeforeVat = site.toNumber(obj.totalBeforeVat);
@@ -1073,10 +1023,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   $scope.selectInvoiceType = function (item) {
     item.paymentList = [{}];
     if (item.invoiceType && item.invoiceType.id == 1) {
-      if (
-        $scope.setting.accountsSetting.paymentType &&
-        $scope.setting.accountsSetting.paymentType.id
-      ) {
+      if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
         item.paymentList[0].paymentType = $scope.paymentTypesList.find((_t) => {
           return _t.id == $scope.setting.accountsSetting.paymentType.id;
         });
@@ -1092,14 +1039,10 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
 
   $scope.addToPaymentList = function (item) {
     item.paymentList.push({});
-    if (
-      $scope.setting.accountsSetting.paymentType &&
-      $scope.setting.accountsSetting.paymentType.id
-    ) {
-      item.paymentList[item.paymentList.length - 1].paymentType =
-        $scope.paymentTypesList.find((_t) => {
-          return _t.id == $scope.setting.accountsSetting.paymentType.id;
-        });
+    if ($scope.setting.accountsSetting.paymentType && $scope.setting.accountsSetting.paymentType.id) {
+      item.paymentList[item.paymentList.length - 1].paymentType = $scope.paymentTypesList.find((_t) => {
+        return _t.id == $scope.setting.accountsSetting.paymentType.id;
+      });
       if (item.paymentList[item.paymentList.length - 1].paymentType) {
         $scope.getSafes(item.paymentList[item.paymentList.length - 1]);
       }
@@ -1108,8 +1051,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     item.paymentList.forEach((_p) => {
       amountPaid += _p.paidByCustomer || 0;
     });
-    item.paymentList[item.paymentList.length - 1].paidByCustomer =
-      item.totalNet - amountPaid;
+    item.paymentList[item.paymentList.length - 1].paidByCustomer = item.totalNet - amountPaid;
     /*  item.paymentList[item.paymentList.length - 1].amountPaid = item.totalNet - amountPaid;
     item.paymentList[item.paymentList.length - 1].paidByCustomer = item.totalNet - amountPaid; */
     $scope.calculateCustomerPaid(item);
@@ -1118,11 +1060,8 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   $scope.calculateCustomerPaid = function (obj) {
     $timeout(() => {
       if (obj.paymentList && obj.paymentList.length == 1) {
-        obj.paymentList[0].remainForCustomer =
-          obj.paymentList[0].paidByCustomer - obj.paymentList[0].amountPaid;
-        obj.paymentList[0].remainForCustomer = site.toNumber(
-          obj.paymentList[0].remainForCustomer
-        );
+        obj.paymentList[0].remainForCustomer = obj.paymentList[0].paidByCustomer - obj.paymentList[0].amountPaid;
+        obj.paymentList[0].remainForCustomer = site.toNumber(obj.paymentList[0].remainForCustomer);
       } else {
         $scope.item.paymentList.forEach((element) => {
           element.amountPaid = element.paidByCustomer || 0;
@@ -1150,8 +1089,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $scope.error = "";
 
     if (item.batchesList.some((b) => b.count > b.currentCount)) {
-      $scope.errorBatch =
-        "##word.New quantity cannot be greater than current quantity##";
+      $scope.errorBatch = "##word.New quantity cannot be greater than current quantity##";
       return;
     }
 
@@ -1178,10 +1116,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $timeout(() => {
       $scope.errorBatch = "";
       $scope.error = "";
-      item.$batchCount =
-        item.batchesList.length > 0
-          ? item.batchesList.reduce((a, b) => a + b.count, 0)
-          : 0;
+      item.$batchCount = item.batchesList.length > 0 ? item.batchesList.reduce((a, b) => a + b.count, 0) : 0;
     }, 250);
   };
 
@@ -1201,38 +1136,21 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
               width: 140,
               height: 140,
               selector: document.querySelector(".qrcode"),
-              text:
-                document.location.protocol +
-                "//" +
-                document.location.hostname +
-                `/qr_storeout?id=${$scope.thermal.id}`,
+              text: document.location.protocol + "//" + document.location.hostname + `/qr_storeout?id=${$scope.thermal.id}`,
             });
           } else if ($scope.setting.printerProgram.placeQr.id == 2) {
-            if (
-              $scope.setting.printerProgram.countryQr &&
-              $scope.setting.printerProgram.countryQr.id == 1
-            ) {
+            if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
               $scope.thermal.date = new Date($scope.thermal.date);
-              let date = new Date(
-                $scope.thermal.date.getTime() + 120 * 60 * 1000
-              );
+              let date = new Date($scope.thermal.date.getTime() + 120 * 60 * 1000);
               let qrString = {
                 vatNumber: $scope.setting.taxNumber,
                 time: date.toISOString(),
                 total: $scope.thermal.totalNet,
                 totalVat: $scope.thermal.totalVat || 0,
               };
-              if (
-                $scope.setting.printerProgram.thermalLang.id == 1 ||
-                ($scope.setting.printerProgram.thermalLang.id == 3 &&
-                  "##session.lang##" == "Ar")
-              ) {
+              if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && "##session.lang##" == "Ar")) {
                 qrString.name = "##session.company.nameAr##";
-              } else if (
-                $scope.setting.printerProgram.thermalLang.id == 2 ||
-                ($scope.setting.printerProgram.thermalLang.id == 3 &&
-                  "##session.lang##" == "En")
-              ) {
+              } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && "##session.lang##" == "En")) {
                 qrString.name = "##session.company.nameEn##";
               }
               qrString.name = "##session.company.nameEn##";
@@ -1242,9 +1160,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
                   vat_number: qrString.vatNumber,
                   time: qrString.time,
                   total: qrString.total.toString(),
-                  vat_total: qrString.totalVat
-                    ? qrString.totalVat.toString()
-                    : 0,
+                  vat_total: qrString.totalVat ? qrString.totalVat.toString() : 0,
                 },
                 (data) => {
                   site.qrcode({
@@ -1258,24 +1174,10 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
             } else {
               let datetime = new Date($scope.thermal.date);
               let formattedDate =
-                datetime.getFullYear() +
-                "-" +
-                (datetime.getMonth() + 1) +
-                "-" +
-                datetime.getDate() +
-                " " +
-                datetime.getHours() +
-                ":" +
-                datetime.getMinutes() +
-                ":" +
-                datetime.getSeconds();
-              let qrString = `[${"##session.company.nameAr##"}]\nرقم ضريبي : [${
-                $scope.setting.printerProgram.taxNumber
-              }]\nرقم الفاتورة :[${
+                datetime.getFullYear() + "-" + (datetime.getMonth() + 1) + "-" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
+              let qrString = `[${"##session.company.nameAr##"}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
                 $scope.thermal.code
-              }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${
-                $scope.thermal.totalVat
-              }]\nالصافي : [${$scope.thermal.totalNet}]`;
+              }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${$scope.thermal.totalVat}]\nالصافي : [${$scope.thermal.totalNet}]`;
               site.qrcode({
                 width: 140,
                 height: 140,
@@ -1317,17 +1219,11 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $("#salesInvoicesDetails").removeClass("hidden");
     $scope.item.netTxt = site.stringfiy($scope.item.totalNet);
 
-    if (
-      $scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4
-    ) {
+    if ($scope.item.itemsList.length > $scope.setting.printerProgram.itemsCountA4) {
       $scope.invList = [];
-      let invLength =
-        $scope.item.itemsList.length /
-        $scope.setting.printerProgram.itemsCountA4;
+      let invLength = $scope.item.itemsList.length / $scope.setting.printerProgram.itemsCountA4;
       invLength = parseInt(invLength);
-      let ramainItems =
-        $scope.item.itemsList.length -
-        invLength * $scope.setting.printerProgram.itemsCountA4;
+      let ramainItems = $scope.item.itemsList.length - invLength * $scope.setting.printerProgram.itemsCountA4;
 
       if (ramainItems) {
         invLength += 1;
@@ -1339,10 +1235,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
         so.itemsList = [];
         $scope.item.itemsList.forEach((itm, i) => {
           itm.$index = i + 1;
-          if (
-            i < (iInv + 1) * $scope.setting.printerProgram.itemsCountA4 &&
-            !itm.$doneInv
-          ) {
+          if (i < (iInv + 1) * $scope.setting.printerProgram.itemsCountA4 && !itm.$doneInv) {
             itm.$doneInv = true;
             so.itemsList.push(itm);
           }
@@ -1359,9 +1252,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     }
 
     $scope.localPrint = function () {
-      if (
-        document.querySelectorAll(".qrcode-a4").length !== $scope.invList.length
-      ) {
+      if (document.querySelectorAll(".qrcode-a4").length !== $scope.invList.length) {
         $timeout(() => {
           $scope.localPrint();
         }, 300);
@@ -1373,21 +1264,11 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           site.qrcode({
             width: 140,
             height: 140,
-            selector:
-              document.querySelectorAll(".qrcode-a4")[
-                $scope.invList.length - 1
-              ],
-            text:
-              document.location.protocol +
-              "//" +
-              document.location.hostname +
-              `/qr_storeout?id=${$scope.item.id}`,
+            selector: document.querySelectorAll(".qrcode-a4")[$scope.invList.length - 1],
+            text: document.location.protocol + "//" + document.location.hostname + `/qr_storeout?id=${$scope.item.id}`,
           });
         } else if ($scope.setting.printerProgram.placeQr.id == 2) {
-          if (
-            $scope.setting.printerProgram.countryQr &&
-            $scope.setting.printerProgram.countryQr.id == 1
-          ) {
+          if ($scope.setting.printerProgram.countryQr && $scope.setting.printerProgram.countryQr.id == 1) {
             $scope.item.date = new Date($scope.item.date);
             let date = new Date($scope.item.date.getTime() + 120 * 60 * 1000);
             let qrString = {
@@ -1396,17 +1277,9 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
               total: $scope.item.totalNet,
               totalVat: $scope.item.totalVat,
             };
-            if (
-              $scope.setting.printerProgram.thermalLang.id == 1 ||
-              ($scope.setting.printerProgram.thermalLang.id == 3 &&
-                "##session.lang##" == "Ar")
-            ) {
+            if ($scope.setting.printerProgram.thermalLang.id == 1 || ($scope.setting.printerProgram.thermalLang.id == 3 && "##session.lang##" == "Ar")) {
               qrString.name = "##session.company.nameAr##";
-            } else if (
-              $scope.setting.printerProgram.thermalLang.id == 2 ||
-              ($scope.setting.printerProgram.thermalLang.id == 3 &&
-                "##session.lang##" == "En")
-            ) {
+            } else if ($scope.setting.printerProgram.thermalLang.id == 2 || ($scope.setting.printerProgram.thermalLang.id == 3 && "##session.lang##" == "En")) {
               qrString.name = "##session.company.nameEn##";
             }
             qrString.name = "##session.company.nameEn##";
@@ -1422,10 +1295,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
                 site.qrcode({
                   width: 140,
                   height: 140,
-                  selector:
-                    document.querySelectorAll(".qrcode-a4")[
-                      $scope.invList.length - 1
-                    ],
+                  selector: document.querySelectorAll(".qrcode-a4")[$scope.invList.length - 1],
                   text: data.value,
                 });
               }
@@ -1433,32 +1303,15 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           } else {
             let datetime = new Date($scope.item.date);
             let formattedDate =
-              datetime.getFullYear() +
-              "-" +
-              (datetime.getMonth() + 1) +
-              "-" +
-              datetime.getDate() +
-              " " +
-              datetime.getHours() +
-              ":" +
-              datetime.getMinutes() +
-              ":" +
-              datetime.getSeconds();
-            let qrString = `[${"##session.company.nameAr##"}]\nرقم ضريبي : [${
-              $scope.setting.printerProgram.taxNumber
-            }]\nرقم الفاتورة :[${
+              datetime.getFullYear() + "-" + (datetime.getMonth() + 1) + "-" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
+            let qrString = `[${"##session.company.nameAr##"}]\nرقم ضريبي : [${$scope.setting.printerProgram.taxNumber}]\nرقم الفاتورة :[${
               $scope.item.code
-            }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${
-              $scope.item.totalVat
-            }]\nالصافي : [${$scope.item.totalNet}]`;
+            }]\nتاريخ : [${formattedDate}]\nضريبة القيمة المضافة : [${$scope.item.totalVat}]\nالصافي : [${$scope.item.totalNet}]`;
 
             site.qrcode({
               width: 150,
               height: 150,
-              selector:
-                document.querySelectorAll(".qrcode-a4")[
-                  $scope.invList.length - 1
-                ],
+              selector: document.querySelectorAll(".qrcode-a4")[$scope.invList.length - 1],
               text: qrString,
             });
           }
@@ -1491,6 +1344,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: "A4",
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };
@@ -1550,6 +1404,8 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: "A4",
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
+
         });
       }, 500);
     };
@@ -1638,11 +1494,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.doc) {
-          let index = item.batchesList.findIndex(
-            (itm) =>
-              itm.code == response.data.doc.code ||
-              (itm.sn && itm.sn == response.data.doc.sn)
-          );
+          let index = item.batchesList.findIndex((itm) => itm.code == response.data.doc.code || (itm.sn && itm.sn == response.data.doc.sn));
           if (index === -1) {
             item.batchesList.push(response.data.doc);
             item.$batchCount += 1;
@@ -1672,9 +1524,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   $scope.selectBatch = function (item, batch) {
     $scope.addBatch = "";
     $scope.errorBatch = "";
-    let index = item.batchesList.findIndex(
-      (itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn)
-    );
+    let index = item.batchesList.findIndex((itm) => itm.code == batch.code || (itm.sn && itm.sn == batch.sn));
     if (index === -1) {
       batch.currentCount = batch.count;
       item.batchesList.unshift({ ...batch, count: 1 });
@@ -1735,15 +1585,14 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
   };
 
   if ($scope.setting && $scope.setting.printerProgram.invoiceLogo) {
-    $scope.invoiceLogo =
-      document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
+    $scope.invoiceLogo = document.location.origin + $scope.setting.printerProgram.invoiceLogo.url;
   }
 
   $scope.showAddVoucher = function (_item) {
     $scope.error = "";
 
     $scope.item = {
-      date : new Date(),
+      date: new Date(),
       invoiceId: _item.id,
       customer: _item.customer,
       invoiceCode: _item.code,
@@ -1759,11 +1608,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       },
     };
 
-    if (
-      _item.invoiceType.id == 2 &&
-      _item.installmentsList &&
-      _item.installmentsList.length > 0
-    ) {
+    if (_item.invoiceType.id == 2 && _item.installmentsList && _item.installmentsList.length > 0) {
       let index = _item.installmentsList.findIndex((itm) => !itm.paid);
 
       _item.installmentsList[index].$beingPaid = true;
@@ -2044,8 +1889,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     $scope.installmentError = "";
 
     if (!_item.$numberOfMonths || _item.$numberOfMonths < 1) {
-      $scope.installmentError =
-        "##word.Please Enter Number Of Payment Months##";
+      $scope.installmentError = "##word.Please Enter Number Of Payment Months##";
       return;
     }
 
@@ -2060,11 +1904,7 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
       _item.installmentsList = [];
       for (let i = 0; i < _item.$numberOfMonths; i++) {
         _item.installmentsList.push({
-          date: new Date(
-            new Date(_item.$firstDueDate).getFullYear(),
-            new Date(_item.$firstDueDate).getMonth() + i + 1,
-            new Date(_item.$firstDueDate).getDate()
-          ),
+          date: new Date(new Date(_item.$firstDueDate).getFullYear(), new Date(_item.$firstDueDate).getMonth() + i + 1, new Date(_item.$firstDueDate).getDate()),
           amount,
           paid: false,
         });
