@@ -185,7 +185,6 @@ app.controller('companySetting', function ($scope, $http, $timeout) {
       },
       function (err) {
         $scope.error = err.data.error;
-        console.log('err', err);
       }
     );
   };

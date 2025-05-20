@@ -95,7 +95,6 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
-      console.log(v.messages[0]);
       return;
     }
     let dataValid = $scope.validateData(_item);
@@ -181,7 +180,6 @@ app.controller("salesInvoices", function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           if (modalID) {
-            console.log(modalID);
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }

@@ -402,7 +402,7 @@
 
     <fieldset ng-show="item.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores">
       <div class="row">
-        <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+        <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="item.$safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
         <i-control class="col2" disabled label="##word.Amount Paid##" ng-model="item.amountPaid"> </i-control>
         <div class="col1">
           <br />

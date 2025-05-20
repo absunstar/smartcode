@@ -377,7 +377,6 @@ module.exports = function init(site) {
       }
 
       app.all({ select, where }, (err, docs) => {
-        console.log(docs.length);
         if (type == 'fullNameEn'){
           objNames.fullNameAr = '';
           objNames.nameAr = '';

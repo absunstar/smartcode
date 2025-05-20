@@ -1,0 +1,13 @@
+[
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsAdd", "En": "Add", "Ar": "إضافة" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsUpdate", "En": "Edit", "Ar": "تعديل" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsDelete", "En": "Delete", "Ar": "حذف" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsSearch", "En": "Search", "Ar": "بحث" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "returnSalesInvoicesPartsUi", "En": "UI", "Ar": "الواجهة الرسومية" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "approveReturnSalesInvoice", "En": "Approve Return Sales Invoice", "Ar": "الموافقة علي إرجاع فاتورة بيع" },
+    { "moduleName": "inventory", "screenName": "returnSalesInvoicesParts", "name": "voucherReturnSalesInvoices", "En": "Add Voucher", "Ar": "إضافة سند" }
+]

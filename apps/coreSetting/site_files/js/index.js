@@ -27,7 +27,6 @@ app.controller('coreSetting', function ($scope, $http, $timeout) {
       },
       function (err) {
         $scope.error = err.data.error;
-        console.log('err', err);
       }
     );
   };
@@ -42,7 +41,6 @@ app.controller('coreSetting', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         $scope.item = response.data.doc;
-        console.log($scope.item);
         document.querySelector(`${$scope.modalID} .tab-link`).click();
       },
       function (err) {
@@ -66,7 +64,6 @@ app.controller('coreSetting', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         $scope.item = response.data.doc || {};
-        console.log(response.data.doc);
         $scope.$applyAsync();
       },
       function (err) {

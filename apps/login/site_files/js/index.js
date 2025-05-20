@@ -10,7 +10,6 @@ app.controller('login', function ($scope, $http) {
 
   $scope.login = function (b) {
     $scope.error = '';
-    console.log('b', b);
     const v = site.validated('#loginModal');
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
@@ -52,7 +51,6 @@ app.controller('login', function ($scope, $http) {
       },
     }).then(
       function (response) {
-        console.log('response', response);
 
         if (response.data.error) {
           $scope.error = response.data.error;

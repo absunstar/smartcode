@@ -85,7 +85,6 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
-      console.log(v.messages);
       return;
     }
     let dataValid = $scope.validateData(_item);

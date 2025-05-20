@@ -1,0 +1,214 @@
+<div class="row">
+  <fieldset>
+    <legend>##word.Invoice Informations##</legend>
+    <div class="row">
+      <i-control ng-hide="disabledCode" class="col2" label="##word.Code##" ng-model="item.code"> </i-control>
+      <i-date class="col4" label="##word.Date##" ng-model="item.date"> </i-date>
+      <i-list class="col2" v="r" ng-model="item.invoiceType" display="name##session.lang##" items="invoiceTypesList" label="##word.Invoice Type##" ng-search="item.$invoiceType"></i-list>
+      <i-list
+        class="col2"
+        ng-show="item.invoiceType.id == 1"
+        ng-change="getSafes(item.paymentType)"
+        ng-model="item.paymentType"
+        display="name##session.lang##"
+        items="paymentTypesList"
+        label="##word.Payment Type##"
+        ng-search="item.$paymentType"
+      ></i-list>
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.Search##" ng-click="showModalGetSalesInvoicesData()"> </i-button>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="row" ng-show="item.invoiceCode">
+    <div class="cart">
+      <div class="row">
+        <p class="bold" ng-show="item.salesType.code == 'customer'">
+          <span class="darkGray"> ##word.Customer## : </span> {{item.customer.name##session.lang##}} ( <span class="blue">{{item.customer.code}}</span> )
+        </p>
+        <p class="bold" ng-show="item.salesType.code == 'company'">
+          <span class="darkGray"> ##word.Company## : </span> {{item.customer.name##session.lang##}} ( <span class="blue">{{item.customer.code}}</span> )
+        </p>
+        <p class="bold" ng-show="item.salesType.code == 'patient'">
+          <span class="darkGray"> ##word.Patient## : </span> {{item.patient.fullName##session.lang##}} ( <span class="blue">{{item.patient.code}}</span> )
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col6">
+          <p class="bold"><span class="darkGray"> ##word.Order / Invoice Date## : </span> {{item.date | date:'dd/MM/yyyy'}} - {{item.date | date:'hh:mm a'}}</p>
+        </div>
+        <div class="col4">
+          <p class="bold text-right"><span class="darkGray">##word.Code## : </span> {{item.invoiceCode}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col6">
+          <p class="bold"><span class="darkGray"> ##word.Payment Type## : </span> {{item.invoicePaymentType.name##session.lang##}}</p>
+        </div>
+        <div class="col4">
+          <p class="bold text-right"><span class="darkGray">##word.Store## : </span> {{item.store.name##session.lang##}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <fieldset ng-show="item.invoiceCode">
+    <legend>##word.Items Information##</legend>
+
+    <p class="error">{{itemsError}}</p>
+    <table class="table hover center bold">
+      <tr>
+        <th>##word.S##</th>
+        <th>##word.Item##</th>
+        <th>##word.Unit##</th>
+        <th class="w150">##word.Main Count##</th>
+        <th>##word.Count## <span>##word.+##</span></th>
+        <th>##word.Total Price##</th>
+        <th>##word.Discount 1## ##word.%##</th>
+        <th>##word.Discount 2##</th>
+        <th>##word.Total VAT##</th>
+        <th>##word.Total##</th>
+        <th>##word.Actions##</th>
+      </tr>
+      <tr ng-repeat="elem in item.itemsList">
+        <td class="center">{{$index+1}}</td>
+        <td class="center">{{elem.name##session.lang##}}</td>
+        <td class="center">{{elem.unit.name##session.lang##}}</td>
+        <td class="center">
+          <p class="center">{{elem.mainCount}} <span>##word.+##</span></p>
+        </td>
+        <td class="center">
+          <p class="center"><i-control ng-change="calculate(item)" ng-model="elem.count"></i-control></p>
+        </td>
+        <td class="center">
+          <p class="text-center">{{elem.totalPrice}} <span class="currency">##word.$##</span></p>
+          <p class="text-center blue">( {{elem.price}} <span class="currency">##word.$##</span> )</p>
+        </td>
+        <td class="center">
+          <p>{{elem.extraDiscount}} <span class="currency">##word.%##</span></p>
+        </td>
+        <td class="center">
+          <p>{{elem.totalMainDiscounts}} <span class="currency">##word.$##</span></p>
+
+          <p class="text-center green">
+            ( {{elem.discount}}
+            <span ng-if="elem.discountType === 'percent'"> <span class="currency">##word.%##</span> </span>
+            <span ng-if="elem.discountType === 'value'"><span class="currency">##word.$##</span> </span>
+            )
+          </p>
+        </td>
+        <td class="center">
+          <p>{{elem.totalVat}} <span class="currency">##word.$##</span></p>
+        </td>
+        <td class="center">
+          <p class="text-center">{{elem.total}} <span class="currency">##word.$##</span></p>
+        </td>
+
+        <td class="center">
+          <i-button type="edit" label="##word.Batch##" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode || elem.hasMedicalData" ng-click="showBatchModal(elem)"> </i-button>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+
+  <div class="row" ng-show="item.discountsList.length > 0">
+    <div class="table-responsive">
+      <table class="table hover bold">
+        <tr>
+          <th>##word.Name##</th>
+          <th>##word.Value##</th>
+          <th class="not-print" ng-show="!item.approved">##word.Actions##</th>
+        </tr>
+        <tr ng-repeat="discount in item.discountsList">
+          <td class="center"><p>{{discount.name##session.lang##}}</p></td>
+          <td class="center">
+            <p>
+              {{discount.value}}
+              <span ng-if="discount.type == 'value'" class="green">##word.$##</span>
+              <span ng-if="discount.type == 'percent'" class="green">##word.%##</span>
+            </p>
+          </td>
+          <td class="center" ng-show="!item.approved">
+            <i-button type="delete" ng-click="spliceFromList(discount,'discount');"> </i-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" ng-show="item.invoiceCode">
+    <fieldset>
+      <legend>##word.Totals##</legend>
+      <div class="row">
+        <div class="col4">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total Prices## : {{item.totalPrice | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total Discounts## : {{item.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total Before VAT## : {{item.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total VAT## : {{item.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total After VAT## : {{item.totalAfterVat | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+        <div class="col4">
+          <fieldset class="gray-bg">
+            <p class="bold font-22">##word.Total Net## : {{item.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+          </fieldset>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <fieldset ng-show="item.invoiceType.id == 1 && setting.accountsSetting.linkAccountsToStores">
+    <div class="row">
+      <i-list class="col3" display="name##session.lang##" ng-model="item.safe" items="safesList" label="##word.Safe##" ng-search="item.$safe"></i-list>
+      <i-control class="col2" type="number" disabled label="##word.Amount Paid##" ng-model="item.amountPaid"> </i-control>
+      <div class="col1">
+        <br />
+        <span class="currency">##word.$##</span>
+      </div>
+    </div>
+  </fieldset>
+</div>
+<div ng-show="mode !== 'add' " class="row">
+  <table class="table hover border">
+    <tr>
+      <th>##word.Add Info##</th>
+      <th>##word.Last Edit Info##</th>
+    </tr>
+    <tr>
+      <td class="center">
+        <p class="blue">{{item.addUserInfo.name}}</p>
+        <small class="green"> {{item.addUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.addUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.addUserInfo.ip}}</p>
+      </td>
+
+      <td class="center">
+        <p class="blue">{{item.editUserInfo.name}}</p>
+        <small class="green"> {{item.editUserInfo.date |date:"hh:mm"}} </small>
+        <small> {{item.editUserInfo.date |date:"dd - MM - yyyy"}} </small>
+        <p class="bold">IP : {{item.editUserInfo.ip}}</p>
+      </td>
+    </tr>
+  </table>
+</div>

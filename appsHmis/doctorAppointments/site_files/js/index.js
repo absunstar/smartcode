@@ -314,7 +314,6 @@ app.controller('doctorAppointments', function ($scope, $http, $timeout) {
     $scope.busy = true;
     $scope.datesDaysList = [];
     if (time) {
-      console.log(time.day);
       $http({
         method: 'POST',
         url: `${$scope.baseURL}/api/${$scope.appName}/datesDay`,

@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "inventory",
+        "name": "returnSalesInvoicesPartsAdmin",
+        "En": "Return Sales Invoices Parts Admin",
+        "Ar": "إدارة مرتجعات فواتير البيع جزئي",
+        "permissions": ["returnSalesInvoicesPartsManage"]
+    }
+]

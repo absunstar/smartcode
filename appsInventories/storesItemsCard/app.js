@@ -3,7 +3,7 @@ module.exports = function init(site) {
     name: 'storesItemsCard',
     allowMemory: false,
     memoryList: [],
-    allowCache: true,
+    allowCache: false,
     cacheList: [],
     allowRoute: true,
     allowRouteGet: true,
@@ -44,14 +44,16 @@ module.exports = function init(site) {
             customer: _elm.customer,
             invoiceId: _elm.invoiceId,
             transactionType: site.storesTransactionsTypes.find((t) => t.code === screenName),
-            count: _elm.count,
-            price: _elm.price,
-            totalPrice: _elm.total,
+            count: site.toNumber(count),
+            price: site.toNumber(_elm.price),
+            totalPrice: site.toNumber(_elm.total),
             currentCount: docs[0] ? docs[0].currentCount + count : count,
             lastCount: docs[0] ? docs[0].currentCount : 0,
             company: _elm.company,
             countType: _elm.countType,
           };
+          obj.lastCount = site.toNumber(obj.lastCount);
+          obj.currentCount = site.toNumber(obj.currentCount);
           if (screenName === 'transferItemsOrders' && _elm.$type == 'transferItemsOrdersTo') {
             obj = {
               ...obj,
@@ -68,7 +70,7 @@ module.exports = function init(site) {
               countType: 'in',
             };
           } else if (_elm.bonusCount) {
-            obj.bonusCount = _elm.bonusCount;
+            obj.bonusCount = site.toNumber(_elm.bonusCount);
             obj.count += obj.bonusCount;
             obj.purshaseCount = _elm.count;
           }
@@ -385,6 +387,8 @@ module.exports = function init(site) {
             list: list,
           });
         } else {
+          console.log(where);
+          
           app.all({ where: where, select, sort: { id: -1 } }, (err, docs) => {
             res.json({
               done: true,
