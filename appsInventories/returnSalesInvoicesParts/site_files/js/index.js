@@ -438,6 +438,8 @@ app.controller("returnSalesInvoicesParts", function ($scope, $http, $timeout) {
   };
 
   $scope.addToItemsList = function (invoice) {
+    if ($scope.busyAddToItem) return;
+    $scope.busyAddToItem = true;
     if (!invoice.returnSalesInvoice) {
       invoice.returnSalesInvoice = invoice.returnSalesInvoice || {
         itemsList: [...invoice.itemsList],
@@ -498,6 +500,7 @@ app.controller("returnSalesInvoicesParts", function ($scope, $http, $timeout) {
     setTimeout(() => {
       $scope.calculate($scope.item);
       site.hideModal($scope.getSalesInvoicesModalID);
+      $scope.busyAddToItem = false;
     }, 1000 * 2);
   };
 
@@ -551,6 +554,7 @@ app.controller("returnSalesInvoicesParts", function ($scope, $http, $timeout) {
     delete where.customer;
     delete where["active"];
     where["approved"] = true;
+    where["isReturnParts"] = {$ne: true};
     where["hasReturnTransaction"] = { $ne: true };
     $scope.busy = true;
     $scope.returnSalesInvoicesPartsList = [];

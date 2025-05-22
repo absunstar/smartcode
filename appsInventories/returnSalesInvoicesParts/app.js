@@ -331,6 +331,10 @@ module.exports = function init(site) {
                 }
               }
             }
+            let every = salesInvoiceDoc.returnSalesInvoice.itemsList.every((a) => a.count == 0);
+            if(every){
+              salesInvoiceDoc.isReturnParts = true
+            }
             if (errorCount) {
               response.error = `This Item Is Not Available In Return Sales Invoice ${errorCountItemName}`;
               res.json(response);
