@@ -110,7 +110,7 @@
         </div>
       </div>
 
-      <div class="row padding" ng-show="item.customer &&item.customer.id">
+      <div class="row padding" ng-show="item.customer && item.customer.id">
         <div class="row bg-lightGray">
           <div class="col-4">
             <p class="black font-15">Customer Data</p>
@@ -227,7 +227,7 @@
                 </div>
                 <div class="col-4"><p class="font-12 right"> إجمالي خصومات</p></div>
               </div>
-              <hr class="line" />
+              <hr class="line" ng-show="setting.storesSetting.vat > 0" />
               <div class="row">
                 <div class="col-4"><p class="font-12">T. Before VAT </p></div>
                 <div class="col-3 center">
@@ -235,7 +235,7 @@
                 </div>
                 <div class="col-5"><p class="font-12 right"> إجمالي قبل الضريبة</p></div>
               </div>
-              <hr class="line" />
+              <hr class="line" ng-show="setting.storesSetting.vat > 0" />
               <div class="row">
                 <div class="col-4"><p class="font-12">T. VAT </p></div>
                 <div class="col-4 center">
