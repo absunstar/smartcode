@@ -79,7 +79,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           if (modalID) {
-            console.log(modalID);
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }

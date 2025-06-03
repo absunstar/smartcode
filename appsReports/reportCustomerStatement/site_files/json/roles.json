@@ -1,0 +1,9 @@
+[
+    {
+        "moduleName": "report",
+        "name": "reportCustomerStatementAdmin",
+        "En": "Report Customer Statement Admin",
+        "Ar": "تقرير كشف حساب العميل",
+        "permissions": ["reportCustomerStatementManage"]
+    }
+]

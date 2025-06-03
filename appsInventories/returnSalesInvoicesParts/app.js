@@ -332,8 +332,8 @@ module.exports = function init(site) {
               }
             }
             let every = salesInvoiceDoc.returnSalesInvoice.itemsList.every((a) => a.count == 0);
-            if(every){
-              salesInvoiceDoc.isReturnParts = true
+            if (every) {
+              salesInvoiceDoc.isReturnParts = true;
             }
             if (errorCount) {
               response.error = `This Item Is Not Available In Return Sales Invoice ${errorCountItemName}`;
@@ -609,6 +609,16 @@ module.exports = function init(site) {
       if (!err && doc) {
         doc.remainPaid -= obj.total;
         app.update(doc, (err, result) => {});
+      }
+    });
+  };
+
+  site.getSalesInvoicesReturnPartsFilter = function (where, callback) {
+    app.all({ where, sort: { id: -1 } }, (err, docs) => {
+      if (!err && docs) {
+        callback(docs);
+      } else {
+        callback(null);
       }
     });
   };

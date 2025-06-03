@@ -1,0 +1,7 @@
+[
+    { "moduleName": "report", "screenName": "reportCustomerStatement", "name": "reportCustomerStatementManage", "En": "Manage", "Ar": "إدارة" },
+    { "moduleName": "report", "screenName": "reportCustomerStatement", "name": "reportCustomerStatementView", "En": "View", "Ar": "عرض" },
+    { "moduleName": "report", "screenName": "reportCustomerStatement", "name": "reportCustomerStatementExport", "En": "Export", "Ar": "تصدير" },
+    { "moduleName": "report", "screenName": "reportCustomerStatement", "name": "reportCustomerStatementPrint", "En": "Print", "Ar": "طباعة" },
+    { "moduleName": "report", "screenName": "reportCustomerStatement", "name": "reportCustomerStatementUi", "En": "UI", "Ar": "الواجهة الرسومية" }
+]

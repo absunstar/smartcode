@@ -143,7 +143,7 @@ module.exports = function init(site) {
         {
           name: app.name,
         },
-        (req, res) => {          
+        (req, res) => {
           res.render(
             app.name + "/index.html",
             {
@@ -1296,6 +1296,18 @@ module.exports = function init(site) {
           }
         });
         callback({ docs, totalBrand, totalGeneric, totalMedicalDevice });
+      } else {
+        callback(null);
+      }
+    });
+  };
+
+  site.getSalesInvoicesFilter = function (where, callback) {
+    
+    app.all({ where, sort: { id: -1 } }, (err, docs) => {
+      
+      if (!err && docs) {
+        callback(docs);
       } else {
         callback(null);
       }
