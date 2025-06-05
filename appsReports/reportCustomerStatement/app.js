@@ -37,10 +37,9 @@ module.exports = function init(site) {
 
     where["company.id"] = site.getCompany(req).id;
     where["approved"] = true;
-    if(where.customer && where.customer.id) {
-
+    if (where.customer && where.customer.id) {
       where["customer.id"] = where.customer.id;
-      delete where.customer
+      delete where.customer;
     }
     if (where.fromDate && where.toDate) {
       let d1 = site.toDate(where.fromDate);
@@ -53,10 +52,9 @@ module.exports = function init(site) {
       delete where.fromDate;
       delete where.toDate;
     }
-    
+
     site.getSalesInvoicesFilter({ ...where, hasReturnTransaction: { $ne: true } }, (salesInvoicesCb) => {
-      site.getSalesInvoicesReturnPartsFilter({ ...where, hasReturnTransaction: { $ne: true } }, (salesInvoicesReturnPartsCb) => {        
-        
+      site.getSalesInvoicesReturnPartsFilter({ ...where, hasReturnTransaction: { $ne: true } }, (salesInvoicesReturnPartsCb) => {
         let obj = {
           totalNet: 0,
           remainPaid: 0,
@@ -81,17 +79,17 @@ module.exports = function init(site) {
             itemsList: salesInvoicesCb[i].itemsList,
             date: salesInvoicesCb[i].date,
             customer: salesInvoicesCb[i].customer,
-            totalNet: salesInvoicesCb[i].totalNet,
-            remainPaid: salesInvoicesCb[i].remainPaid,
-            amountPaid: (salesInvoicesCb[i].totalNet || 0) - (salesInvoicesCb[i].remainPaid || 0),
+            totalNet: salesInvoicesCb[i].totalNet || 0,
+            remainPaid: salesInvoicesCb[i].remainPaid || 0,
+            amountPaid: site.toNumber(salesInvoicesCb[i].totalNet || 0) - site.toNumber(salesInvoicesCb[i].remainPaid || 0),
           };
-          obj.totalNet += item.totalNet;
-          obj.remainPaid += item.remainPaid;
-          obj.amountPaid += item.amountPaid;
+          obj.totalNet += site.toNumber(item.totalNet || 0);
+          obj.remainPaid += site.toNumber(item.remainPaid || 0);
+          obj.amountPaid += site.toNumber(item.amountPaid || 0);
 
-          obj.totalNetInvoice += item.totalNet;
-          obj.remainPaidInvoice += item.remainPaid;
-          obj.amountPaidInvoice += item.amountPaid;
+          obj.totalNetInvoice += site.toNumber(item.totalNet || 0);
+          obj.remainPaidInvoice += site.toNumber(item.remainPaid || 0);
+          obj.amountPaidInvoice += site.toNumber(item.amountPaid || 0);
 
           list.unshift(item);
         }
@@ -107,21 +105,21 @@ module.exports = function init(site) {
             itemsList: salesInvoicesReturnPartsCb[i].itemsList,
             date: salesInvoicesReturnPartsCb[i].date,
             customer: salesInvoicesReturnPartsCb[i].customer,
-            totalNet: salesInvoicesReturnPartsCb[i].totalNet,
-            remainPaid: salesInvoicesReturnPartsCb[i].remainPaid,
-            amountPaid: salesInvoicesReturnPartsCb[i].totalNet - salesInvoicesReturnPartsCb[i].remainPaid,
+            totalNet: salesInvoicesReturnPartsCb[i].totalNet || 0,
+            remainPaid: salesInvoicesReturnPartsCb[i].remainPaid || 0,
+            amountPaid: site.toNumber(salesInvoicesReturnPartsCb[i].totalNet || 0) - site.toNumber(salesInvoicesReturnPartsCb[i].remainPaid || 0),
           };
-          obj.totalNet -= item.totalNet;
-          obj.remainPaid -= item.remainPaid;
-          obj.amountPaid -= item.amountPaid;
-          obj.totalNetReturn += item.totalNet;
-          obj.remainPaidReturn += item.remainPaid;
-          obj.amountPaidReturn += item.amountPaid;
+          obj.totalNet -= site.toNumber(item.totalNet || 0);
+          obj.remainPaid -= site.toNumber(item.remainPaid || 0);
+          obj.amountPaid -= site.toNumber(item.amountPaid || 0);
+          obj.totalNetReturn += site.toNumber(item.totalNet || 0);
+          obj.remainPaidReturn += site.toNumber(item.remainPaid || 0);
+          obj.amountPaidReturn += site.toNumber(item.amountPaid || 0);
 
           list.push(item);
         }
-        
-        res.json({done: true, list: list, ...obj });
+
+        res.json({ done: true, list: list, ...obj });
       });
     });
   });
