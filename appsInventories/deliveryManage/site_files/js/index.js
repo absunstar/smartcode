@@ -79,7 +79,6 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
         $scope.busy = false;
         if (response.data.done) {
           if (modalID) {
-            console.log(modalID);
             site.hideModal(modalID);
             site.resetValidated(modalID);
           }
@@ -1147,6 +1146,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: 'A4',
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };
@@ -1206,6 +1206,7 @@ app.controller('deliveryManage', function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: 'A4',
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };

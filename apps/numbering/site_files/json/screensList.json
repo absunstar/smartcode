@@ -721,12 +721,17 @@
     "id": "radiologyDeskTop",
     "name": "Radiology DeskTop"
   },
-
   {
     "category": "inventory",
     "feature": "public",
     "id": "convertUnits",
     "name": "Convert Units"
+  },
+  {
+    "category": "inventory",
+    "feature": "public",
+    "id": "returnSalesInvoicesParts",
+    "name": "Return Sales Invoices Parts"
   },
   {
     "category": "inventory",

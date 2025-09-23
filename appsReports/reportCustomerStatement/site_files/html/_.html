@@ -1,0 +1,159 @@
+<div ng-controller="reportCustomerStatement" class="loaded">
+  <div class="row" x-permissions="reportCustomerStatementUi || reportCustomerStatementManage">
+    <div x-import="salesInvoices/modal.html"></div>
+
+    <div class="row" x-permissions="reportCustomerStatementManage">
+      <i-list v="r" class="col3" display="name##session.lang##" ng-model="_search.customer" items="customersList" label="##word.Customer##" ng-search="item.$customer"></i-list>
+      <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+
+      <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+
+      <div class="col2">
+        <br />
+        <i-button type="search" label="##word.Search##" ng-click="searchAll()"></i-button>
+      </div>
+    </div>
+      <i-button type="print" label="##word.PDF printer##" ng-click="print('pdf')"></i-button>
+
+    <div class="row">
+      <fieldset>
+        <legend>##word.Totals##</legend>
+        <div class="row">
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Net## : {{totalNet | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Paid## : {{amountPaid | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Remain## : {{remainPaid | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+
+       <fieldset>
+        <legend>##word.Totals Sales##</legend>
+        <div class="row">
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Net## : {{totalNetInvoice | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Paid## : {{amountPaidInvoice | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Remain## : {{remainPaidInvoice | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+
+        <fieldset>
+        <legend>##word.Totals Return##</legend>
+        <div class="row">
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Net## : {{totalNetReturn | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Paid## : {{amountPaidReturn | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col4">
+            <fieldset class="gray-bg">
+              <p class="bold font-22">
+                ##word.Total Remain## : {{remainPaidReturn | xmoney2}}
+                <span class="currency">##word.$##</span>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <p class="error">{{ error}}</p>
+    <div class="table-responsive">
+      <table class="table hover bold" id="reportCustomerStatement">
+        <tr>
+          <th>##word.S##</th>
+          <th>##word.Items##</th>
+          <th>##word.Date##</th>
+          <th>##word.Type##</th>
+          <th>##word.Amount required##</th>
+          <th>##word.Amount Paid##</th>
+          <th>##word.Remain Amount##</th>
+        </tr>
+        <tr ng-repeat="item in list | filter:$search">
+          <td class="center">{{$index+1}}</td>
+          <td class="center">
+            <table class="table hover bold">
+              <th>##word.Name##</th>
+              <th>##word.Qty##</th>
+              <th>##word.Price##</th>
+              <th>##word.Total##</th>
+              <tr ng-repeat="_item in item.itemsList">
+                <td class="center">{{_item.name##session.lang##}}</td>
+                <td class="center">{{_item.count}}</td>
+                <td class="center">{{_item.price | xmoney2}}</td>
+                <td class="center">{{_item.total | xmoney2}}</td>
+              </tr>
+            </table>
+          </td>
+          <td class="center">{{item.date|date:'dd/MM/yyyy'}}</td>
+          <td class="center">{{item.type.name##session.lang##}}</td>
+          <td class="center">{{item.totalNet | xmoney2}}</td>
+          <td class="center">{{item.amountPaid | xmoney2}}</td>
+          <td class="center">{{item.remainPaid | xmoney2}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <i-button x-permissions="reportCustomerStatementPrint || reportCustomerStatementManage" type="print" label="##word.Print##" onclick="site.print('#reportCustomerStatement')"></i-button>
+    <i-button x-permissions="reportCustomerStatementExport || reportCustomerStatementManage" type="export" label="##word.Export to excel##" onclick="site.export('#reportCustomerStatement')">
+    </i-button>
+  </div>
+  <div id="reportCustomerStatementPrint" x-import="reportCustomerStatement/a4Print.html"></div>
+
+</div>

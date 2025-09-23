@@ -52,42 +52,19 @@
       </div>
     </div>
     <div x-permission="!login" class="center padding margin bg-gray">
-      <i-button
-        type="login"
-        label="##word.Login##"
-        ng-click="showLogin()"
-      ></i-button>
-      <i-button
-        class2="btn-light"
-        x-lang="Ar"
-        fa="fas fa-globe-europe"
-        label="English"
-        ng-click="changeLang('En')"
-      ></i-button>
-      <i-button
-        class2="btn-light"
-        x-lang="En"
-        fa="fas fa-globe-europe"
-        label="عربي"
-        ng-click="changeLang('Ar')"
-      ></i-button>
+      <i-button type="login" label="##word.Login##" ng-click="showLogin()"></i-button>
+      <i-button class2="btn-light" x-lang="Ar" fa="fas fa-globe-europe" label="English" ng-click="changeLang('En')"></i-button>
+      <i-button class2="btn-light" x-lang="En" fa="fas fa-globe-europe" label="عربي" ng-click="changeLang('Ar')"></i-button>
     </div>
 
     <!-- branch link -->
     <div class="branchLink">
-      <p id="currantPage" class="text-center bold screenNameStyle">
-        ##data.appName##
-      </p>
+      <p id="currantPage" class="text-center bold screenNameStyle">##data.appName##</p>
     </div>
     <!-- nav bar -->
     <div class="navbar">
       <ul class="nav d-flex flex-column" x-permissions="login">
-        <li
-          x-data="setting.showLawyer"
-          id="LawyerModule"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('LawyerModule')"
-        >
+        <li x-data="setting.showLawyer" id="LawyerModule" class="navlink d-flex flex-row gap-2" onclick="showAndHide('LawyerModule')">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-cogs"></i>
@@ -96,3428 +73,52 @@
           </a>
           <div class="submenu hideSection">
             <ul>
-              <li
-                id="Customers"
-                x-data="setting.showCustomers"
-                x-permissions="customersUi || customersManage"
-              >
+              <li id="Customers" x-data="setting.showCustomers" x-permissions="customersUi || customersManage">
                 <a class="menuTag" href="/customers">
-                  <img
-                    src="/theme1/images/setting/customers.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/customers.png" width="45" height="45" />
                   <p>##word.Customers##</p>
                 </a>
               </li>
-              <li
-                id="CustomersGroups"
-                x-data="setting.showCustomersGroups"
-                x-permissions="customersGroupsUi || customersGroupsManage"
-              >
+              <li id="CustomersGroups" x-data="setting.showCustomersGroups" x-permissions="customersGroupsUi || customersGroupsManage">
                 <a class="menuTag" href="/customersGroups">
-                  <img
-                    src="/theme1/images/setting/Customers Groups.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/Customers Groups.png" width="45" height="45" />
                   <p>##word.Customers Groups##</p>
                 </a>
               </li>
-              <li
-                id="OpposingCounsels"
-                x-data="setting.showOpposingCounsels"
-                x-permissions="opposingCounselsUi || opposingCounselsManage"
-              >
+              <li id="OpposingCounsels" x-data="setting.showOpposingCounsels" x-permissions="opposingCounselsUi || opposingCounselsManage">
                 <a class="menuTag" href="/opposingCounsels">
-                  <img
-                    src="/theme1/images/setting/opposingCounsels.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/opposingCounsels.png" width="45" height="45" />
                   <p>##word.Opposing Counsels##</p>
                 </a>
               </li>
-              <li
-                id="Opponents"
-                x-data="setting.showOpponents"
-                x-permissions="opponentsUi || opponentsManage"
-              >
+              <li id="Opponents" x-data="setting.showOpponents" x-permissions="opponentsUi || opponentsManage">
                 <a class="menuTag" href="/opponents">
-                  <img
-                    src="/theme1/images/setting/opponents.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/opponents.png" width="45" height="45" />
                   <p>##word.Opponents##</p>
                 </a>
               </li>
-              <li
-              id="Sessions"
-              x-data="setting.showSessions"
-              x-permissions="sessionsUi || sessionsManage"
-            >
-              <a class="menuTag" href="/sessions">
-                <img
-                  src="/theme1/images/setting/sessions.png"
-                  width="45"
-                  height="45"
-                />
-                <p>##word.Sessions##</p>
-              </a>
-            </li>
-              <li
-                id="PowerOfAttorney"
-                x-data="setting.showPowerOfAttorney"
-                x-permissions="powerOfAttorneyUi || powerOfAttorneyManage"
-              >
+              <li id="Sessions" x-data="setting.showSessions" x-permissions="sessionsUi || sessionsManage">
+                <a class="menuTag" href="/sessions">
+                  <img src="/theme1/images/setting/sessions.png" width="45" height="45" />
+                  <p>##word.Sessions##</p>
+                </a>
+              </li>
+              <li id="PowerOfAttorney" x-data="setting.showPowerOfAttorney" x-permissions="powerOfAttorneyUi || powerOfAttorneyManage">
                 <a class="menuTag" href="/powerOfAttorney">
-                  <img
-                    src="/theme1/images/setting/powerOfAttorney.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/powerOfAttorney.png" width="45" height="45" />
                   <p>##word.Power Of Attorney##</p>
                 </a>
               </li>
-              <li
-                id="AdministrativeWorks"
-                x-data="setting.showAdministrativeWorks"
-                x-permissions="administrativeWorksUi || administrativeWorksManage"
-              >
+              <li id="AdministrativeWorks" x-data="setting.showAdministrativeWorks" x-permissions="administrativeWorksUi || administrativeWorksManage">
                 <a class="menuTag" href="/administrativeWorks">
-                  <img
-                    src="/theme1/images/setting/administrativeWorks.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/administrativeWorks.png" width="45" height="45" />
                   <p>##word.Administrative Works##</p>
                 </a>
               </li>
-              <li
-                id="Lawsuits"
-                x-data="setting.showLawsuits"
-                x-permissions="lawsuitsUi || lawsuitsManage"
-              >
+              <li id="Lawsuits" x-data="setting.showLawsuits" x-permissions="lawsuitsUi || lawsuitsManage">
                 <a class="menuTag" href="/lawsuits">
-                  <img
-                    src="/theme1/images/setting/lawsuits.png"
-                    width="45"
-                    height="45"
-                  />
+                  <img src="/theme1/images/setting/lawsuits.png" width="45" height="45" />
                   <p>##word.Lawsuits##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="Hospital"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('Hospital')"
-          x-data="setting.showHospital"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-stethoscope"></i>
-            </div>
-            <div class="linktext">##word.Hospital##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li id="Patients" x-permissions="patientsUi || patientsManage">
-                <a class="menuTag" href="/patients">
-                  <img
-                    src="/theme1/images/hospital/Patients.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Patients##</p>
-                </a>
-              </li>
-              <li id="Doctors" x-permissions="doctorsUi || doctorsManage">
-                <a class="menuTag" href="/doctors">
-                  <img
-                    src="/theme1/images/hospital/Doctors.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Doctors##</p>
-                </a>
-              </li>
-              <li id="Nurses" x-permissions="nursesUi || nursesManage">
-                <a class="menuTag" href="/nurses">
-                  <img
-                    src="/theme1/images/hospital/Nurses.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Nurses##</p>
-                </a>
-              </li>
-              <li
-                id="ServicesOrders"
-                x-permissions="servicesOrdersUi || servicesOrdersManage"
-              >
-                <a class="menuTag" href="/servicesOrders">
-                  <img
-                    src="/theme1/images/hospital/Services Orders.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Services Orders##</p>
-                </a>
-              </li>
-              <li
-                id="DoctorDeskTop"
-                x-permissions="doctorDeskTopUi || doctorDeskTopManage"
-              >
-                <a class="menuTag" href="/doctorDeskTop">
-                  <img
-                    src="/theme1/images/hospital/Doctor DeskTop.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Doctor DeskTop##</p>
-                </a>
-              </li>
-              <li
-                id="DoctorAppointments"
-                x-permissions="doctorAppointmentsUi || doctorAppointmentsManage"
-              >
-                <a class="menuTag" href="/doctorAppointments">
-                  <img
-                    src="/theme1/images/hospital/Doctor Appointments.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Doctor Appointments##</p>
-                </a>
-              </li>
-              <li
-                id="PatientHistory"
-                x-permissions="patientHistoryUi || patientHistoryManage"
-              >
-                <a class="menuTag" href="/patientHistory">
-                  <img
-                    src="/theme1/images/hospital/Patient History.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Patient History##</p>
-                </a>
-              </li>
-              <li
-                id="LaboratoryDeskTop"
-                x-permissions="laboratoryDeskTopUi || laboratoryDeskTopManage"
-              >
-                <a class="menuTag" href="/laboratoryDeskTop">
-                  <img
-                    src="/theme1/images/hospital/Laboratory DeskTop.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Laboratory DeskTop##</p>
-                </a>
-              </li>
-              <li
-                id="RadiologyDeskTop"
-                x-permissions="radiologyDeskTopUi || radiologyDeskTopManage"
-              >
-                <a class="menuTag" href="/radiologyDeskTop">
-                  <img
-                    src="/theme1/images/hospital/Radiology DeskTop.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Radiology DeskTop##</p>
-                </a>
-              </li>
-              <li
-                id="SalesInvoicseForPatients"
-                x-data="setting.showHospital"
-                x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage"
-              >
-                <a class="menuTag" href="/salesPatientsInvoices">
-                  <img
-                    src="/theme1/images/inventory/sales Patients Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Sales Invoicse For Patients##</p>
-                </a>
-              </li>
-              <li
-                id="SalesInvoicseForER"
-                x-data="setting.showHospital"
-                x-permissions="salesErInvoicesUi || salesErInvoicesManage"
-              >
-                <a class="menuTag" href="/salesErInvoices">
-                  <img
-                    src="/theme1/images/inventory/sales Er Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Sales Invoicse For ER##</p>
-                </a>
-              </li>
-              <li
-                id="PatientsApproval"
-                x-permissions="patientsApprovalUi || patientsApprovalManage"
-              >
-                <a class="menuTag" href="/patientsApproval">
-                  <img
-                    src="/theme1/images/hospital/Patients Approval.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Patients Approval##</p>
-                </a>
-              </li>
-              <li
-                id="MedicalOffers"
-                x-permissions="medicalOffersUi || medicalOffersManage"
-              >
-                <a class="menuTag" href="/medicalOffers">
-                  <img
-                    src="/theme1/images/hospital/Medical Offers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Medical Offers##</p>
-                </a>
-              </li>
-              <li
-                id="OffersOrders"
-                x-permissions="offersOrdersUi || offersOrdersManage"
-              >
-                <a class="menuTag" href="/offersOrders">
-                  <img
-                    src="/theme1/images/hospital/Offers Orders.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Offers Orders##</p>
-                </a>
-              </li>
-              <li id="Services" x-permissions="servicesUi || servicesManage">
-                <a class="menuTag" href="/services">
-                  <img
-                    src="/theme1/images/hospital/Services.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Services##</p>
-                </a>
-              </li>
-              <li
-                id="ServicesCategories"
-                x-permissions="servicesCategoriesUi || servicesCategoriesManage"
-              >
-                <a class="menuTag" href="/servicesCategories">
-                  <img
-                    src="/theme1/images/hospital/Services Categories.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Services Categories##</p>
-                </a>
-              </li>
-              <li
-                id="ServicesGroups"
-                x-permissions="servicesGroupsUi || servicesGroupsManage"
-              >
-                <a class="menuTag" href="/servicesGroups">
-                  <img
-                    src="/theme1/images/hospital/Services Groups.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Services Groups##</p>
-                </a>
-              </li>
-              <li
-                id="MainInsuranceCompanies"
-                x-permissions="mainInsuranceCompaniesUi || mainInsuranceCompaniesManage"
-              >
-                <a class="menuTag" href="/mainInsuranceCompanies">
-                  <img
-                    src="/theme1/images/hospital/Main Insurance Companies.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Main Insurance Companies##</p>
-                </a>
-              </li>
-              <li
-                id="InsuranceCompanies"
-                x-permissions="insuranceCompaniesUi || insuranceCompaniesManage"
-              >
-                <a class="menuTag" href="/insuranceCompanies">
-                  <img
-                    src="/theme1/images/hospital/Insurance Companies.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Insurance Companies##</p>
-                </a>
-              </li>
-              <li
-                id="InsuranceClasses"
-                x-permissions="insuranceClassesUi || insuranceClassesManage"
-              >
-                <a class="menuTag" href="/insuranceClasses">
-                  <img
-                    src="/theme1/images/hospital/Insurance Classes.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Insurance Classes##</p>
-                </a>
-              </li>
-              <li
-                id="InsuranceContracts"
-                x-permissions="insuranceContractsUi || insuranceContractsManage"
-              >
-                <a class="menuTag" href="/insuranceContracts">
-                  <img
-                    src="/theme1/images/hospital/Insurance Contracts.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Insurance Contracts##</p>
-                </a>
-              </li>
-              <li id="ACHICodes" x-permissions="achiCodesUi || achiCodesManage">
-                <a class="menuTag" href="/achiCodes">
-                  <img
-                    src="/theme1/images/hospital/ACHI Codes.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.ACHI Codes##</p>
-                </a>
-              </li>
-              <li
-                id="MedicineDurations"
-                x-permissions="medicineDurationsUi || medicineDurationsManage"
-              >
-                <a class="menuTag" href="/medicineDurations">
-                  <img
-                    src="/theme1/images/hospital/Medicine Durations.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Medicine Durations##</p>
-                </a>
-              </li>
-              <li
-                id="MedicineRoutes"
-                x-permissions="medicineRoutesUi || medicineRoutesManage"
-              >
-                <a class="menuTag" href="/medicineRoutes">
-                  <img
-                    src="/theme1/images/hospital/Medicine Routes.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Medicine Routes##</p>
-                </a>
-              </li>
-              <li
-                id="MedicineFrequencies"
-                x-permissions="medicineFrequenciesUi || medicineFrequenciesManage"
-              >
-                <a class="menuTag" href="/medicineFrequencies">
-                  <img
-                    src="/theme1/images/hospital/Medicine Frequencies.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Medicine Frequencies##</p>
-                </a>
-              </li>
-              <li
-                id="ChiefComplaints"
-                x-permissions="chiefComplaintsUi || chiefComplaintsManage"
-              >
-                <a class="menuTag" href="/chiefComplaints">
-                  <img
-                    src="/theme1/images/hospital/Chief Complaints.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Chief Complaints##</p>
-                </a>
-              </li>
-              <li
-                id="SignificantSigns"
-                x-permissions="significantSignsUi || significantSignsManage"
-              >
-                <a class="menuTag" href="/significantSigns">
-                  <img
-                    src="/theme1/images/hospital/Significant Signs.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Significant Signs##</p>
-                </a>
-              </li>
-              <li id="Diagnoses" x-permissions="diagnosesUi || diagnosesManage">
-                <a class="menuTag" href="/diagnoses">
-                  <img
-                    src="/theme1/images/hospital/Diagnoses.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Diagnoses##</p>
-                </a>
-              </li>
-              <li
-                id="PatientRecommend"
-                x-permissions="patientRecommendationsUi || patientRecommendationsManage"
-              >
-                <a class="menuTag" href="/patientRecommendations">
-                  <img
-                    src="/theme1/images/hospital/patient Recommendations.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Patient Recommend##</p>
-                </a>
-              </li>
-              <li
-                id="PatientEducations"
-                x-permissions="patientEducationsUi || patientEducationsManage"
-              >
-                <a class="menuTag" href="/patientEducations">
-                  <img
-                    src="/theme1/images/hospital/Patient Educations.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Patient Educations##</p>
-                </a>
-              </li>
-              <li
-                id="OtherConditions"
-                x-permissions="otherConditionsUi || otherConditionsManage"
-              >
-                <a class="menuTag" href="/otherConditions">
-                  <img
-                    src="/theme1/images/hospital/Other Conditions.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Other Conditions##</p>
-                </a>
-              </li>
-              <li
-                id="Specialties"
-                x-permissions="specialtiesUi || specialtiesManage"
-              >
-                <a class="menuTag" href="/specialties">
-                  <img
-                    src="/theme1/images/hospital/Specialties.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Specialties##</p>
-                </a>
-              </li>
-              <li
-                id="HospitalResponsibilities"
-                x-permissions="hospitalResponsibilitiesUi || hospitalResponsibilitiesManage"
-              >
-                <a class="menuTag" href="/hospitalResponsibilities">
-                  <img
-                    src="/theme1/images/hospital/Hospital Responsibilities.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Hospital Responsibilities##</p>
-                </a>
-              </li>
-              <li id="Drinks" x-permissions="drinksUi || drinksManage">
-                <a class="menuTag" href="/drinks">
-                  <img
-                    src="/theme1/images/hospital/Drinks.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Drinks##</p>
-                </a>
-              </li>
-              <li id="Foods" x-permissions="foodsUi || foodsManage">
-                <a class="menuTag" href="/foods">
-                  <img
-                    src="/theme1/images/hospital/Foods.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Foods##</p>
-                </a>
-              </li>
-              <li id="Packages" x-permissions="packagesUi || packagesManage">
-                <a class="menuTag" href="/packages">
-                  <img
-                    src="/theme1/images/hospital/Packages.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Packages##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="Restaurant"
-          class="navlink"
-          onclick="showAndHide('Restaurant')"
-          x-data="setting.showRestaurant"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.Restaurant##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-              id="kitchenItems"
-              x-data="setting.showKitchenItems"
-              x-permissions="kitchenItemsUi || kitchenItemsManage"
-            >
-              <a class="menuTag" href="/kitchenItems">
-                <img
-                  src="/theme1/images/hr/Employees.png"
-                  width="45"
-                  height="45"
-                />
-                <p>##word.Kitchen Items##</p>
-              </a>
-            </li>
-            <li
-            id="kitchenOrders"
-            x-data="setting.showKitchenOrders"
-            x-permissions="kitchenOrdersUi || kitchenOrdersManage"
-          >
-            <a class="menuTag" href="/kitchenOrders">
-              <img
-                src="/theme1/images/hr/Employees.png"
-                width="45"
-                height="45"
-              />
-              <p>##word.Kitchen Orders##</p>
-            </a>
-          </li>
-              <li
-                id="Kitchens"
-                x-data="setting.showKitchens"
-                x-permissions="kitchensUi || kitchensManage"
-              >
-                <a class="menuTag" href="/kitchens">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Kitchens##</p>
-                </a>
-              </li>
-              <li
-                id="Tables"
-                x-data="setting.showTables"
-                x-permissions="tablesUi || tablesManage"
-              >
-                <a class="menuTag" href="/tables">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Tables##</p>
-                </a>
-              </li>
-              <li
-                id="TablesGroups"
-                x-data="setting.showTablesGroups"
-                x-permissions="tablesGroupsUi || tablesGroupsManage"
-              >
-                <a class="menuTag" href="/tablesGroups">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Tables Groups##</p>
-                </a>
-              </li>
-              <li
-                id="itemsExtras"
-                x-data="setting.showItemsExtras"
-                x-permissions="itemsExtrasUi || itemsExtrasManage"
-              >
-                <a class="menuTag" href="/itemsExtras">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Items Extras##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li id="Sales" class="navlink" onclick="showAndHide('Sales')">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.Sales##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="ordersScreen"
-                x-data="setting.showOrdersScreen"
-                x-permissions="ordersScreenUi || ordersScreenManage"
-              >
-                <a class="menuTag" href="/ordersScreen">
-                  <img
-                    src="/theme1/images/inventory/sales Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Orders Screen##</p>
-                </a>
-              </li>
-              <li
-                id="generalSalesInvoices"
-                x-data="setting.showGeneralSalesInvoices"
-                x-permissions="receiptVouchersUi || receiptVouchersManage"
-              >
-                <a class="menuTag" href="/generalSalesInvoices">
-                  <img
-                    src="/theme1/images/accounting/Receipt Vouchers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.General Sales Invoice##</p>
-                </a>
-              </li>
-
-              <li
-                id="SalesInvoicseForCustomers"
-                x-data="setting.showSalesInvoices"
-                x-permissions="salesInvoicesUi || salesInvoicesManage"
-              >
-                <a class="menuTag" href="/salesInvoices">
-                  <img
-                    src="/theme1/images/inventory/sales Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Sales Invoicse For Customers##</p>
-                </a>
-              </li>
-
-              <li
-                id="SalesInvoicseForCompanies"
-                x-data="setting.showSalesCompaniesInvoices"
-                x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage"
-              >
-                <a class="menuTag" href="/salesCompaniesInvoices">
-                  <img
-                    src="/theme1/images/inventory/sales Companies Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Sales Invoicse For Companies##</p>
-                </a>
-              </li>
-
-              <li
-                id="ReturnSalesInvoices"
-                x-data="setting.showReturnSalesInvoices"
-                x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage"
-              >
-                <a class="menuTag" href="/returnSalesInvoices">
-                  <img
-                    src="/theme1/images/inventory/Return Sales Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Return Sales Invoices##</p>
-                </a>
-              </li>
-              <li
-                id="Customers"
-                x-data="setting.showCustomers"
-                x-permissions="customersUi || customersManage"
-              >
-                <a class="menuTag" href="/customers">
-                  <img
-                    src="/theme1/images/setting/Customers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Customers##</p>
-                </a>
-              </li>
-              <li
-                id="CustomersGroups"
-                x-data="setting.showCustomersGroups"
-                x-permissions="customersGroupsUi || customersGroupsManage"
-              >
-                <a class="menuTag" href="/customersGroups">
-                  <img
-                    src="/theme1/images/setting/Customers Groups.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Customers Groups##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li id="Purchases" class="navlink" onclick="showAndHide('Purchases')">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.Purchases##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="PurchaseRequests"
-                x-data="setting.showPurchaseRequests"
-                x-permissions="purchaseRequestsUi || purchaseRequestsManage"
-              >
-                <a class="menuTag" href="/purchaseRequests">
-                  <img
-                    src="/theme1/images/inventory/Purchase Requests.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Purchase Requests##</p>
-                </a>
-              </li>
-              <li
-                id="generalPurchaseInvoices"
-                x-data="setting.showGeneralPurchaseInvoices"
-                x-permissions="expenseVouchersUi || expenseVouchersManage"
-              >
-                <a class="menuTag" href="/generalPurchaseInvoices">
-                  <img
-                    src="/theme1/images/accounting/Expense Vouchers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.General Purchase Invoice##</p>
-                </a>
-              </li>
-              <li
-                id="PurchaseOrder"
-                x-data="setting.showPurchaseOrders"
-                x-permissions="purchaseOrdersUi || purchaseOrdersManage"
-              >
-                <a class="menuTag" href="/purchaseOrders">
-                  <img
-                    src="/theme1/images/inventory/Purchase Orders.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Purchase Order##</p>
-                </a>
-              </li>
-              <li
-                id="ReturnPurchaseOrders"
-                x-data="setting.showReturnPurchaseOrders"
-                x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage"
-              >
-                <a class="menuTag" href="/returnPurchaseOrders">
-                  <img
-                    src="/theme1/images/inventory/Return Purchase Orders.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Return Purchase Orders##</p>
-                </a>
-              </li>
-
-              <li
-                id="Vendors"
-                x-data="setting.showVendors"
-                x-permissions="vendorsUi || vendorsManage"
-              >
-                <a class="menuTag" href="/vendors">
-                  <img
-                    src="/theme1/images/inventory/Vendors.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Vendors##</p>
-                </a>
-              </li>
-              <li
-                id="VendorsGroups"
-                x-data="setting.showVendorsGroups"
-                x-permissions="vendorsGroupsUi || vendorsGroupsManage"
-              >
-                <a class="menuTag" href="/vendorsGroups">
-                  <img
-                    src="/theme1/images/inventory/Vendors Groups.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Vendors Groups##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="Delivery"
-          ng-show="setting.packagesCompany.id == 2 || setting.packagesCompany.id == 3"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('Delivery')"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-users"></i>
-            </div>
-            <div class="linktext">##word.Deliveriers management##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="deliveryManage"
-                x-data="setting.showDeliveryManage"
-                x-permissions="deliveryManagesUi || deliveryManageManage"
-              >
-                <a class="menuTag" href="/deliveryManage">
-                  <img
-                    src="/theme1/images/inventory/sales Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Delivery Manage##</p>
-                </a>
-              </li>
-              <li
-                id="reasonsCancelingDelivery"
-                x-data="setting.showReasonsCancelingDelivery"
-                x-permissions="reasonsCancelingDeliveryUi || reasonsCancelingDeliveryManage"
-              >
-                <a class="menuTag" href="/reasonsCancelingDelivery">
-                  <img
-                    src="/theme1/images/setting/Printers Paths.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Reasons Canceling Delivery##</p>
-                </a>
-              </li>
-
-              <li
-                id="vehicles"
-                x-data="setting.showVehicles"
-                x-permissions="vehiclesUi || vehiclesManage"
-              >
-                <a class="menuTag" href="/vehicles">
-                  <img
-                    src="/theme1/images/setting/printers Paths.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Vehicles##</p>
-                </a>
-              </li>
-
-              <li
-                id="vehiclesTypes"
-                x-data="setting.showVehiclesTypes"
-                x-permissions="vehiclesTypesUi || vehiclesTypesManage"
-              >
-                <a class="menuTag" href="/vehiclesTypes">
-                  <img
-                    src="/theme1/images/setting/printers Paths.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Vehicles Types##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="Inventory"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('Inventory')"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-boxes"></i>
-            </div>
-            <div class="linktext">##word.Inventory##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="StoresItems"
-                x-data="setting.showStoresItems"
-                x-permissions="storesItemsUi || storesItemsManage"
-              >
-                <a class="menuTag" href="/storesItems">
-                  <img
-                    src="/theme1/images/inventory/Stores Items.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Stores Items##</p>
-                </a>
-              </li>
-
-              <li
-                id="TransferItemsRequests"
-                x-data="setting.showTransferItemsRequests"
-                x-permissions="transferItemsRequestsUi || transferItemsRequestsManage"
-              >
-                <a class="menuTag" href="/transferItemsRequests">
-                  <img
-                    src="/theme1/images/inventory/Transfer Items Requests.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Transfer Items Requests##</p>
-                </a>
-              </li>
-              <li
-                id="TransferItemsOrders"
-                x-data="setting.showTransferItemsOrders"
-                x-permissions="transferItemsOrdersUi || transferItemsOrdersManage"
-              >
-                <a class="menuTag" href="/transferItemsOrders">
-                  <img
-                    src="/theme1/images/inventory/Transfer Items Orders.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Transfer Items Orders##</p>
-                </a>
-              </li>
-              <li
-                id="convertUnits"
-                x-data="setting.showConvertUnits"
-                x-permissions="convertUnitsUi || convertUnitsManage"
-              >
-                <a class="menuTag" href="/convertUnits">
-                  <img
-                    src="/theme1/images/inventory/Damage Items.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Convert Units##</p>
-                </a>
-              </li>
-              <li
-                id="DamageItems"
-                x-data="setting.showDamageItems"
-                x-permissions="damageItemsUi || damageItemsManage"
-              >
-                <a class="menuTag" href="/damageItems">
-                  <img
-                    src="/theme1/images/inventory/Damage Items.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Damage Items##</p>
-                </a>
-              </li>
-              <li
-                id="Stocktaking"
-                x-data="setting.showStockTaking"
-                x-permissions="stockTakingUi || stockTakingManage"
-              >
-                <a class="menuTag" href="/stockTaking">
-                  <img
-                    src="/theme1/images/inventory/Stock taking.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Stocktaking##</p>
-                </a>
-              </li>
-
-              <li
-                id="StoresOpeningBalances"
-                x-data="setting.showStoresOpeningBalances"
-                x-permissions="storesOpeningBalancesUi || storesOpeningBalancesManage"
-              >
-                <a class="menuTag" href="/storesOpeningBalances">
-                  <img
-                    src="/theme1/images/inventory/Stores Opening Balances.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Stores Opening Balances##</p>
-                </a>
-              </li>
-              <li
-                id="ActiveSubstances"
-                x-data="setting.showActiveSubstances"
-                x-permissions="activeSubstancesUi || activeSubstancesManage"
-              >
-                <a class="menuTag" href="/activeSubstances">
-                  <img
-                    src="/theme1/images/inventory/Active Substances.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Active Substances##</p>
-                </a>
-              </li>
-              <li
-                id="StoresUnits"
-                x-data="setting.showStoresUnits"
-                x-permissions="storesUnitsUi || storesUnitsManage"
-              >
-                <a class="menuTag" href="/storesUnits">
-                  <img
-                    src="/theme1/images/inventory/Stores Units.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Stores Units##</p>
-                </a>
-              </li>
-              <li
-                id="ItemsGroups"
-                x-data="setting.showItemsGroups"
-                x-permissions="itemsGroupsUi || itemsGroupsManage"
-              >
-                <a class="menuTag" href="/itemsGroups">
-                  <img
-                    src="/theme1/images/inventory/Items Groups.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Items Groups##</p>
-                </a>
-              </li>
-              <li
-                id="Stores"
-                x-data="setting.showStores"
-                x-permissions="storesUi || storesManage"
-              >
-                <a class="menuTag" href="/stores">
-                  <img
-                    src="/theme1/images/inventory/Stores.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Stores##</p>
-                </a>
-              </li>
-              <li
-                id="ReasonsDestroyingItems"
-                x-data="setting.showReasonsDestroyingItems"
-                x-permissions="reasonsDestroyingItemsUi || reasonsDestroyingItemsManage"
-              >
-                <a class="menuTag" href="/reasonsDestroyingItems">
-                  <img
-                    src="/theme1/images/inventory/Reasons Destroying Items.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Reasons Destroying Items##</p>
-                </a>
-              </li>
-              <li
-                id="deliveryManage"
-                x-data="setting.showDeliveryManage"
-                x-permissions="deliveryManagesUi || deliveryManageManage"
-              >
-                <a class="menuTag" href="/deliveryManage">
-                  <img
-                    src="/theme1/images/inventory/sales Invoices.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Delivery Manage##</p>
-                </a>
-              </li>
-              <li
-                id="StoresItemsCard"
-                x-data="setting.showStoresItemsCard"
-                x-permissions="storesItemsCardUi || storesItemsCardManage"
-              >
-                <a class="menuTag" href="/storesItemsCard">
-                  <img
-                    src="/theme1/images/inventory/Stores Items Card.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Stores Items Card##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li id="Accountant" class="navlink" onclick="showAndHide('Accountant')">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.Accounting##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="incomeLists"
-                x-data="setting.showIncomeList"
-                x-permissions="incomeListUi || incomeListManage"
-              >
-                <a class="menuTag" href="/incomeList">
-                  <img
-                    src="/theme1/images/accounting/Income List.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Income Lists##</p>
-                </a>
-              </li>
-
-              <li
-                id="voucherNames"
-                x-data="setting.showVoucherNames"
-                x-permissions="voucherNamesUi || voucherNamesManage"
-              >
-                <a class="menuTag" href="/voucherNames">
-                  <img
-                    src="/theme1/images/accounting/Voucher.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Voucher Names##</p>
-                </a>
-              </li>
-
-              <li
-                id="receiptVouchers"
-                x-data="setting.showReceiptVouchers"
-                x-permissions="receiptVouchersUi || receiptVouchersManage"
-              >
-                <a class="menuTag" href="/receiptVouchers">
-                  <img
-                    src="/theme1/images/accounting/Receipt Vouchers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Receipt Vouchers##</p>
-                </a>
-              </li>
-              <li
-                id="expenseVouchers"
-                x-data="setting.showExpenseVouchers"
-                x-permissions="expenseVouchersUi || expenseVouchersManage"
-              >
-                <a class="menuTag" href="/expenseVouchers">
-                  <img
-                    src="/theme1/images/accounting/Expense Vouchers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Expense Vouchers##</p>
-                </a>
-              </li>
-              <li
-                id="safe"
-                x-data="setting.showSafes"
-                x-permissions="safesUi || safesManage"
-              >
-                <a class="menuTag" href="/safes">
-                  <img
-                    src="/theme1/images/accounting/safe.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Safe##</p>
-                </a>
-              </li>
-              <li
-                id="banks"
-                x-data="setting.showBanks"
-                x-permissions="banksUi || banksManage"
-              >
-                <a class="menuTag" href="/banks">
-                  <img
-                    src="/theme1/images/accounting/banks.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Banks##</p>
-                </a>
-              </li>
-              <li
-                id="currencies"
-                x-data="setting.showCurrencies"
-                x-permissions="currenciesUi || currenciesManage"
-              >
-                <a class="menuTag" href="/currencies">
-                  <img
-                    src="/theme1/images/accounting/currencies.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Currencies##</p>
-                </a>
-              </li>
-              <li
-                id="transferSafes"
-                x-data="setting.showTransferSafes"
-                x-permissions="transferSafesUi || transferSafesManage"
-              >
-                <a class="menuTag" href="/transferSafes">
-                  <img
-                    src="/theme1/images/accounting/transfer safes.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Transfer Safes##</p>
-                </a>
-              </li>
-              <li
-                id="accountsGuide"
-                x-data="setting.showAccountsGuide"
-                x-permissions="accountsGuideUi || accountsGuideManage"
-              >
-                <a class="menuTag" href="/accountsGuide">
-                  <img
-                    src="/theme1/images/accounting/accounts guide.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Accounts Guide##</p>
-                </a>
-              </li>
-              <li
-                id="costCenters"
-                x-data="setting.showCostCenters"
-                x-permissions="costCentersUi || costCentersManage"
-              >
-                <a class="menuTag" href="/costCenters">
-                  <img
-                    src="/theme1/images/accounting/cost Centers.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Cost Centers##</p>
-                </a>
-              </li>
-              <li
-                id="generalLedger"
-                x-data="setting.showGeneralLedger"
-                x-permissions="generalLedgerUi || generalLedgerManage"
-              >
-                <a class="menuTag" href="/generalLedger">
-                  <img
-                    src="/theme1/images/accounting/General Ledger.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.General Ledger##</p>
-                </a>
-              </li>
-              <li
-                id="assistantGeneralLedger"
-                x-data="setting.showAssistantGeneralLedger"
-                x-permissions="assistantGeneralLedgerUi || assistantGeneralLedgerManage"
-              >
-                <a class="menuTag" href="/assistantGeneralLedger">
-                  <img
-                    src="/theme1/images/accounting/Assistant General Ledger.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Assistant General Ledger##</p>
-                </a>
-              </li>
-              <li
-                id="journalEntry"
-                x-data="setting.showJournalEntry"
-                x-permissions="journalEntryUi || journalEntryManage"
-              >
-                <a class="menuTag" href="/journalEntry">
-                  <img
-                    src="/theme1/images/accounting/Journal Entry.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Journal Entry##</p>
-                </a>
-              </li>
-              <li
-                id="budgetClassifications"
-                x-data="setting.showBudgetClassifications"
-                x-permissions="budgetClassificationsUi || budgetClassificationsManage"
-              >
-                <a class="menuTag" href="/budgetClassifications">
-                  <img
-                    src="/theme1/images/accounting/Budget Classifications.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Budget Classifications##</p>
-                </a>
-              </li>
-              <li
-                id="safesAdjusting"
-                x-data="setting.showSafesAdjusting"
-                x-permissions="safesAdjustingUi || safesAdjustingManage"
-              >
-                <a class="menuTag" href="/safesAdjusting">
-                  <img
-                    src="/theme1/images/accounting/Safes Adjusting.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Safes Adjusting##</p>
-                </a>
-              </li>
-              <li
-                id="taxesTypes"
-                x-data="setting.showTaxesTypes"
-                x-permissions="taxesTypesUi || taxesTypesManage"
-              >
-                <a class="menuTag" href="/taxesTypes">
-                  <img
-                    src="/theme1/images/accounting/Taxes Types.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Taxes Types##</p>
-                </a>
-              </li>
-              <li
-                id="discountTypes"
-                x-data="setting.showDiscountTypes"
-                x-permissions="discountTypesUi || discountTypesManage"
-              >
-                <a class="menuTag" href="/discountTypes">
-                  <img
-                    src="/theme1/images/accounting/Discount Types.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Discount Types##</p>
-                </a>
-              </li>
-              <li
-                id="safesTransactions"
-                x-data="setting.showSafesTransactions"
-                x-permissions="safesTransactionsUi || safesTransactionsManage"
-              >
-                <a class="menuTag" href="/safesTransactions">
-                  <img
-                    src="/theme1/images/accounting/Safes Transactions.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Safes Transactions##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="HR"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('HR')"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-users"></i>
-            </div>
-            <div class="linktext">##word.HR##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="Employees"
-                x-data="setting.showEmployees"
-                x-permissions="employeesUi || employeesManage"
-              >
-                <a class="menuTag" href="/employees">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees##</p>
-                </a>
-              </li>
-              <li
-                id="Lawyers"
-                x-data="setting.showLawyersOffice"
-                x-permissions="employeesUi || employeesManage"
-              >
-                <a class="menuTag" href="/lawyers">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Lawyers Office##</p>
-                </a>
-              </li>
-              <li
-                id="Delivery"
-                x-data="setting.showDeliverers"
-                x-permissions="employeesUi || employeesManage"
-              >
-                <a class="menuTag" href="/deliverers">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Deliverers##</p>
-                </a>
-              </li>
-              <li
-                id="Cashers"
-                x-data="setting.showCashers"
-                x-permissions="employeesUi || employeesManage"
-              >
-                <a class="menuTag" href="/cashers">
-                  <img
-                    src="/theme1/images/hr/Employees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Cashers##</p>
-                </a>
-              </li>
-              <li
-                id="Attendance"
-                x-data="setting.showAttendance"
-                x-permissions="attendanceUi || attendanceManage"
-              >
-                <a class="menuTag" href="/attendance">
-                  <img
-                    src="/theme1/images/hr/Attendance.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Attendance##</p>
-                </a>
-              </li>
-              <li
-                id="VacationsRequests"
-                x-data="setting.showVacationsRequests"
-                x-permissions="vacationsRequestsUi || vacationsRequestsManage"
-              >
-                <a class="menuTag" href="/vacationsRequests">
-                  <img
-                    src="/theme1/images/hr/Vacations Requests.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Vacations Requests##</p>
-                </a>
-              </li>
-              <li
-                id="DelayRequests"
-                x-data="setting.showDelayRequests"
-                x-permissions="delayRequestsUi || delayRequestsManage"
-              >
-                <a class="menuTag" href="/delayRequests">
-                  <img
-                    src="/theme1/images/hr/Delay Requests.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Delay Requests##</p>
-                </a>
-              </li>
-              <li
-                id="WorkErrandRequests"
-                x-data="setting.showWorkErrandRequests"
-                x-permissions="workErrandRequestsUi || workErrandRequestsManage"
-              >
-                <a class="menuTag" href="/workErrandRequests">
-                  <img
-                    src="/theme1/images/hr/Work Errand Requests.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Work Errand Requests##</p>
-                </a>
-              </li>
-              <li
-                id="OvertimeRequests"
-                x-data="setting.showOvertimeRequests"
-                x-permissions="overtimeRequestsUi || overtimeRequestsManage"
-              >
-                <a class="menuTag" href="/overtimeRequests">
-                  <img
-                    src="/theme1/images/hr/Overtime Requests.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Overtime Requests##</p>
-                </a>
-              </li>
-              <li
-                id="EmployeesBonuses"
-                x-data="setting.showEmployeesBonuses"
-                x-permissions="employeesBonusesUi || employeesBonusesManage"
-              >
-                <a class="menuTag" href="/employeesBonuses">
-                  <img
-                    src="/theme1/images/hr/Employees Bonuses.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees Bonuses##</p>
-                </a>
-              </li>
-              <li
-                id="EmployeesPenalties"
-                x-data="setting.showEmployeesPenalties"
-                x-permissions="employeesPenaltiesUi || employeesPenaltiesManage"
-              >
-                <a class="menuTag" href="/employeesPenalties">
-                  <img
-                    src="/theme1/images/hr/Employees Penalties.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees Penalties##</p>
-                </a>
-              </li>
-              <li
-                id="EmployeesAdvances"
-                x-data="setting.showEmployeesAdvances"
-                x-permissions="employeesAdvancesUi || employeesAdvancesManage"
-              >
-                <a class="menuTag" href="/employeesAdvances">
-                  <img
-                    src="/theme1/images/hr/Employees Advances.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees Advances##</p>
-                </a>
-              </li>
-              <li
-                id="Payslips"
-                x-data="setting.showPayslips"
-                x-permissions="payslipsUi || payslipsManage"
-              >
-                <a class="menuTag" href="/payslips">
-                  <img
-                    src="/theme1/images/hr/Payslips.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Payslips##</p>
-                </a>
-              </li>
-
-              <li
-                id="CreateVacations"
-                x-data="setting.showCreateVacations"
-                x-permissions="createVacationsUi || createVacationsManage"
-              >
-                <a class="menuTag" href="/createVacations">
-                  <img
-                    src="/theme1/images/hr/Create Vacations.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Create Vacations##</p>
-                </a>
-              </li>
-              <li
-                id="Departments"
-                x-data="setting.showDepartments"
-                x-permissions="departmentsUi || departmentsManage"
-              >
-                <a class="menuTag" href="/departments">
-                  <img
-                    src="/theme1/images/hr/Departments.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Departments##</p>
-                </a>
-              </li>
-              <li
-                id="Sections"
-                x-data="setting.showSections"
-                x-permissions="sectionsUi || sectionsManage"
-              >
-                <a class="menuTag" href="/sections">
-                  <img
-                    src="/theme1/images/hr/Sections.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Sections##</p>
-                </a>
-              </li>
-              <li
-                id="Jobs"
-                x-data="setting.showJobs"
-                x-permissions="jobsUi || jobsManage"
-              >
-                <a class="menuTag" href="/jobs">
-                  <img
-                    src="/theme1/images/hr/Jobs.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Jobs##</p>
-                </a>
-              </li>
-              <li
-                id="JobsShifts"
-                x-data="setting.showJobsShifts"
-                x-permissions="jobsShiftsUi || jobsShiftsManage"
-              >
-                <a class="menuTag" href="/jobsShifts">
-                  <img
-                    src="/theme1/images/hr/Jobs Shifts.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Jobs Shifts##</p>
-                </a>
-              </li>
-              <li
-                id="SalaryAllowancesNames"
-                x-data="setting.showSalaryAllowancesNames"
-                x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage"
-              >
-                <a class="menuTag" href="/salaryAllowancesNames">
-                  <img
-                    src="/theme1/images/hr/Salary Allowances Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Salary Allowances Names##</p>
-                </a>
-              </li>
-              <li
-                id="SalaryDeductionsNames"
-                x-data="setting.showSalaryDeductionsNames"
-                x-permissions="salaryDeductionsNamesUi || salaryDeductionsNamesManage"
-              >
-                <a class="menuTag" href="/salaryDeductionsNames">
-                  <img
-                    src="/theme1/images/hr/Salary Deductions Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Salary Deductions Names##</p>
-                </a>
-              </li>
-              <li
-                id="EmployeesBonusNames"
-                x-data="setting.showEmployeesBonusNames"
-                x-permissions="employeesBonusNamesUi || employeesBonusNamesManage"
-              >
-                <a class="menuTag" href="/employeesBonusNames">
-                  <img
-                    src="/theme1/images/hr/Employees Bonus Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees Bonus Names##</p>
-                </a>
-              </li>
-              <li
-                id="EmployeesPenaltiesNames"
-                x-data="setting.showEmployeesPenaltiesNames"
-                x-permissions="employeesPenaltiesNamesUi || employeesPenaltiesNamesManage"
-              >
-                <a class="menuTag" href="/employeesPenaltiesNames">
-                  <img
-                    src="/theme1/images/hr/Employees Penalties Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees Penalties Names##</p>
-                </a>
-              </li>
-              <li
-                id="JobsTools"
-                x-data="setting.showJobsTools"
-                x-permissions="jobsToolsUi || jobsToolsManage"
-              >
-                <a class="menuTag" href="/jobsTools">
-                  <img
-                    src="/theme1/images/hr/Jobs Tools.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Jobs Tools##</p>
-                </a>
-              </li>
-              <li
-                id="VacationsNames"
-                x-data="setting.showVacationsNames"
-                x-permissions="vacationsNamesUi || vacationsNamesManage"
-              >
-                <a class="menuTag" href="/vacationsNames">
-                  <img
-                    src="/theme1/images/hr/Vacations Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Vacations Names##</p>
-                </a>
-              </li>
-              <li
-                id="VacationsNames"
-                x-data="setting.showEvaluationItems"
-                x-permissions="evaluationItemsUi || evaluationItemsManage"
-              >
-                <a class="menuTag" href="/evaluationItems">
-                  <img
-                    src="/theme1/images/hr/Vacations Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Evaluation Items##</p>
-                </a>
-              </li>
-              <li
-                id="VacationsNames"
-                x-data="setting.showEvaluationTemplates"
-                x-permissions="evaluationTemplatesUi || evaluationTemplatesManage"
-              >
-                <a class="menuTag" href="/evaluationTemplates">
-                  <img
-                    src="/theme1/images/hr/Vacations Names.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Evaluation Templates##</p>
-                </a>
-              </li>
-              <li
-                id="JobsAdvertisements"
-                x-data="setting.showJobsAdvertisements"
-                x-permissions="jobsAdvertisementsUi || jobsAdvertisementsManage"
-              >
-                <a class="menuTag" href="/jobsAdvertisements">
-                  <img
-                    src="/theme1/images/hr/Jobs Advertisements.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Jobs Advertisements##</p>
-                </a>
-              </li>
-              <li
-                id="JobsApplicants"
-                x-data="setting.showJobsApplicants"
-                x-permissions="jobsApplicantsUi || jobsApplicantsManage"
-              >
-                <a class="menuTag" href="/jobsApplicants">
-                  <img
-                    src="/theme1/images/hr/Jobs Applicants.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Jobs Applicants##</p>
-                </a>
-              </li>
-              <li
-                id="EmployeesContracts"
-                x-data="setting.showEmployeesContracts"
-                x-permissions="employeesContractsUi || employeesContractsManage"
-              >
-                <a class="menuTag" href="/employeesContracts">
-                  <img
-                    src="/theme1/images/hr/Employees Contracts.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Employees Contracts##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="Reports"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('Reports')"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-paste"></i>
-            </div>
-            <div class="linktext">##word.Reports##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="dailyCashiers"
-                x-data="setting.showDailyCashiers"
-                x-permissions="dailyCashiersUi || dailyCashiersManage"
-              >
-                <a class="menuTag" href="/dailyCashiers">
-                  <img
-                    src="/theme1/images/accounting/Income List.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Daily Cashiers##</p>
-                </a>
-              </li>
-              <li
-                id="totalVat"
-                x-data="setting.showTotalVat"
-                x-permissions="totalVatUi || totalVatManage"
-              >
-                <a class="menuTag" href="/totalVat">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Total Vat##</p>
-                </a>
-              </li>
-
-              <li
-                id="salesVat"
-                x-data="setting.showSalesVat"
-                x-permissions="salesVatUi || salesVatManage"
-              >
-                <a class="menuTag" href="/salesVat">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Sales Vat##</p>
-                </a>
-              </li>
-
-              <li
-                id="purchaseVat"
-                x-data="setting.showPurchaseVat"
-                x-permissions="purchaseVatUi || purchaseVatManage"
-              >
-                <a class="menuTag" href="/purchaseVat">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Purchase Vat##</p>
-                </a>
-              </li>
-
-              <li
-                id="dailyCashByDates"
-                x-data="setting.showDailyCashByDates"
-                x-permissions="dailyCashByDatesUi || dailyCashByDatesManage"
-              >
-                <a class="menuTag" href="/dailyCashByDates">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Daily Cash By Dates##</p>
-                </a>
-              </li>
-              <li
-                id="dailyCashByPaymentNumber"
-                x-data="setting.showDailyCashByPaymentNumber"
-                x-permissions="dailyCashByPaymentNumberUi || dailyCashByPaymentNumberManage"
-              >
-                <a class="menuTag" href="/dailyCashByPaymentNumber">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Daily Cash By Payment Number##</p>
-                </a>
-              </li>
-              <li
-                id="dailyCashByUsers"
-                x-data="setting.showDailyCashByUsers"
-                x-permissions="dailyCashByUsersUi || dailyCashByUsersManage"
-              >
-                <a class="menuTag" href="/dailyCashByUsers">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Daily Cash By Users##</p>
-                </a>
-              </li>
-              <li
-                id="dailyCashByUser"
-                x-data="setting.showDailyCashByUser"
-                x-permissions="dailyCashByUserUi || dailyCashByUserManage"
-              >
-                <a class="menuTag" href="/dailyCashByUser">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Daily Cash By User##</p>
-                </a>
-              </li>
-              <li
-                id="insuranceCompaniesClaims"
-                x-data="setting.showHospital"
-                x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage"
-              >
-                <a class="menuTag" href="/insuranceCompaniesClaims">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Insurance Companies Claims##</p>
-                </a>
-              </li>
-              <li
-                id="reorderLimits"
-                x-data="setting.showReorderLimits"
-                x-permissions="reorderLimitsUi || reorderLimitsManage"
-              >
-                <a class="menuTag" href="/reorderLimits">
-                  <img
-                    src="/theme1/images/Report/Report Reorder Limits.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Reorder Limit##</p>
-                </a>
-              </li>
-              <li
-                id="mostSellingItems"
-                x-data="setting.showMostSellingItems"
-                x-permissions="mostSellingItemsUi || mostSellingItemsManage"
-              >
-                <a class="menuTag" href="/mostSellingItems">
-                  <img
-                    src="/theme1/images/Report/Most Selling Items.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Most Selling Items##</p>
-                </a>
-              </li>
-              <li
-                id="lowestSellingItems"
-                x-data="setting.showLowestSellingItems"
-                x-permissions="lowestSellingItemsUi || lowestSellingItemsManage"
-              >
-                <a class="menuTag" href="/lowestSellingItems">
-                  <img
-                    src="/theme1/images/Report/Lowest Selling Items.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Lowest Selling Items##</p>
-                </a>
-              </li>
-              <li
-                id="reportCollectedItems"
-                x-data="setting.showReportCollectedItems"
-                x-permissions="reportCollectedItemsUi || reportCollectedItemsManage"
-              >
-                <a class="menuTag" href="/reportCollectedItems">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Collected Items##</p>
-                </a>
-              </li>
-              <li
-                id="reportMedicalItems"
-                x-data="setting.showReportMedicalItems"
-                x-permissions="reportMedicalItemsUi || reportMedicalItemsManage"
-              >
-                <a class="menuTag" href="/reportMedicalItems">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Medical Items##</p>
-                </a>
-              </li>
-              <li
-                id="reportSalesInvoicesForCustomer"
-                x-data="setting.showReportSalesInvoicesForCustomer"
-                x-permissions="reportSalesInvoicesForCustomerUi || reportSalesInvoicesForCustomerManage"
-              >
-                <a class="menuTag" href="/reportSalesInvoicesForCustomer">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Sales Invoices For Customer##</p>
-                </a>
-              </li>
-              <li
-                id="reportSalesInvoicesForCustomers"
-                x-data="setting.showReportSalesInvoicesForCustomers"
-                x-permissions="reportSalesInvoicesForCustomersUi || reportSalesInvoicesForCustomersManage"
-              >
-                <a class="menuTag" href="/reportSalesInvoicesForCustomers">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Sales Invoices For Customers##</p>
-                </a>
-              </li>
-              <li
-                id="reportSalesInvoicesForCompany"
-                x-data="setting.showReportSalesInvoicesForCompany"
-                x-permissions="reportSalesInvoicesForCompanyUi || reportSalesInvoicesForCompanyManage"
-              >
-                <a class="menuTag" href="/reportSalesInvoicesForCompany">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Sales Invoices For Company##</p>
-                </a>
-              </li>
-              <li
-                id="reportSalesInvoicesForCompanies"
-                x-data="setting.showReportSalesInvoicesForCompanies"
-                x-permissions="reportSalesInvoicesForCompaniesUi || reportSalesInvoicesForCompaniesManage"
-              >
-                <a class="menuTag" href="/reportSalesInvoicesForCompanies">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Sales Invoices For Companies##</p>
-                </a>
-              </li>
-              <li
-                id="reportReturnSalesInvoicesForCustomer"
-                x-data="setting.showReportReturnSalesInvoicesForCustomer"
-                x-permissions="reportReturnSalesInvoicesForCustomerUi || reportReturnSalesInvoicesForCustomerManage"
-              >
-                <a class="menuTag" href="/reportReturnSalesInvoicesForCustomer">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Return Sales Invoices For Customer##</p>
-                </a>
-              </li>
-              <li
-                id="reportReturnSalesInvoicesToStore"
-                x-data="setting.showReportReturnSalesInvoicesToStore"
-                x-permissions="reportReturnSalesInvoicesToStoreUi || reportReturnSalesInvoicesToStoreManage"
-              >
-                <a class="menuTag" href="/reportReturnSalesInvoicesToStore">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Return Sales Invoices To Store##</p>
-                </a>
-              </li>
-              <li
-                id="reportReturnSalesInvoices"
-                x-data="setting.showReportReturnSalesInvoices"
-                x-permissions="reportReturnSalesInvoicesUi || reportReturnSalesInvoicesManage"
-              >
-                <a class="menuTag" href="/reportReturnSalesInvoices">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Return Sales Invoices##</p>
-                </a>
-              </li>
-              <li
-                id="reportApprovedPurchaseRequests"
-                x-data="setting.showReportApprovedPurchaseRequests"
-                x-permissions="reportApprovedPurchaseRequestsUi || reportApprovedPurchaseRequestsManage"
-              >
-                <a class="menuTag" href="/reportApprovedPurchaseRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Approved Purchase Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportNotApprovedPurchaseRequests"
-                x-data="setting.showReportNotApprovedPurchaseRequests"
-                x-permissions="reportNotApprovedPurchaseRequestsUi || reportNotApprovedPurchaseRequestsManage"
-              >
-                <a class="menuTag" href="/reportNotApprovedPurchaseRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Not Approved Purchase Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportHasTransactionPurchaseRequests"
-                x-data="setting.showReportHasTransactionPurchaseRequests"
-                x-permissions="reportHasTransactionPurchaseRequestsUi || reportHasTransactionPurchaseRequestsManage"
-              >
-                <a class="menuTag" href="/reportHasTransactionPurchaseRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Has Transaction Purchase Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportPurchaseRequests"
-                x-data="setting.showReportPurchaseRequests"
-                x-permissions="reportPurchaseRequestsUi || reportPurchaseRequestsManage"
-              >
-                <a class="menuTag" href="/reportPurchaseRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Purchase Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportPurchaseOrders"
-                x-data="setting.showReportPurchaseOrders"
-                x-permissions="reportPurchaseOrdersUi || reportPurchaseOrdersManage"
-              >
-                <a class="menuTag" href="/reportPurchaseOrders">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Purchase Orders##</p>
-                </a>
-              </li>
-              <li
-                id="reportVendorPurchaseOrders"
-                x-data="setting.showReportVendorPurchaseOrders"
-                x-permissions="reportVendorPurchaseOrdersUi || reportVendorPurchaseOrdersManage"
-              >
-                <a class="menuTag" href="/reportVendorPurchaseOrders">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Rreport Vendor Purchase Orders##</p>
-                </a>
-              </li>
-
-              <li
-                id="attendanceReport"
-                x-data="setting.showAttendanceReport"
-                x-permissions="attendanceReportUi || attendanceReportManage"
-              >
-                <a class="menuTag" href="/attendanceReport">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Attendance Report##</p>
-                </a>
-              </li>
-              <li
-                id="reportVacationsRequests"
-                x-data="setting.showReportVacationsRequests"
-                x-permissions="reportVacationsRequestsUi || reportVacationsRequestsManage"
-              >
-                <a class="menuTag" href="/reportVacationsRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Vacations Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportDelayRequests"
-                x-data="setting.showReportDelayRequests"
-                x-permissions="reportDelayRequestsUi || reportDelayRequestsManage"
-              >
-                <a class="menuTag" href="/reportDelayRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Delay Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportWorkErrandRequests"
-                x-data="setting.showReportWorkErrandRequests"
-                x-permissions="reportWorkErrandRequestsUi || reportWorkErrandRequestsManage"
-              >
-                <a class="menuTag" href="/reportWorkErrandRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Work Errand Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportOvertimeRequests"
-                x-data="setting.showReportOvertimeRequests"
-                x-permissions="reportOvertimeRequestsUi || reportOvertimeRequestsManage"
-              >
-                <a class="menuTag" href="/reportOvertimeRequests">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Overtime Requests##</p>
-                </a>
-              </li>
-              <li
-                id="reportEmployeesBonuses"
-                x-data="setting.showReportEmployeesBonuses"
-                x-permissions="reportEmployeesBonusesUi || reportEmployeesBonusesManage"
-              >
-                <a class="menuTag" href="/reportEmployeesBonuses">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Employees Bonuses##</p>
-                </a>
-              </li>
-              <li
-                id="reportEmployeesPenalties"
-                x-data="setting.showReportEmployeesPenalties"
-                x-permissions="reportEmployeesPenaltiesUi || reportEmployeesPenaltiesManage"
-              >
-                <a class="menuTag" href="/reportEmployeesPenalties">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Employees Penalties##</p>
-                </a>
-              </li>
-              <li
-                id="reportEmployeesAdvances"
-                x-data="setting.showReportEmployeesAdvances"
-                x-permissions="reportEmployeesAdvancesUi || reportEmployeesAdvancesManage"
-              >
-                <a class="menuTag" href="/reportEmployeesAdvances">
-                  <img
-                    src="/theme1/images/Report/Insurance Companies Claims.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Report Employees Advances##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li
-          id="SettingModule"
-          class="navlink d-flex flex-row gap-2"
-          onclick="showAndHide('SettingModule')"
-        >
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-cogs"></i>
-            </div>
-            <div class="linktext">##word.Settings##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li
-                id="LawsuitDegrees"
-                x-data="setting.showLawsuitDegrees"
-                x-permissions="lawsuitDegreesUi || lawsuitDegreesManage"
-              >
-                <a class="menuTag" href="/lawsuitDegrees">
-                  <img
-                    src="/theme1/images/setting/lawsuitDegrees.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Lawsuit Degrees##</p>
-                </a>
-              </li>
-
-              <li
-                id="TypesLawsuit"
-                x-data="setting.showTypesLawsuit"
-                x-permissions="typesLawsuitUi || typesLawsuitManage"
-              >
-                <a class="menuTag" href="/typesLawsuit">
-                  <img
-                    src="/theme1/images/setting/typesLawsuit.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Types Lawsuit##</p>
-                </a>
-              </li>
-
-              <li
-                id="StatusLawsuit"
-                x-data="setting.showStatusLawsuit"
-                x-permissions="statusLawsuitUi || statusLawsuitManage"
-              >
-                <a class="menuTag" href="/statusLawsuit">
-                  <img
-                    src="/theme1/images/setting/statusLawsuit.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Status Lawsuit##</p>
-                </a>
-              </li>
-
-              <li
-                id="AdjectivesInLawsuit"
-                x-data="setting.showAdjectivesInLawsuit"
-                x-permissions="adjectivesInLawsuitUi || adjectivesInLawsuitManage"
-              >
-                <a class="menuTag" href="/adjectivesInLawsuit">
-                  <img
-                    src="/theme1/images/setting/adjectivesInLawsuit.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Adjectives In Lawsuit##</p>
-                </a>
-              </li>
-
-              <li
-                id="ReasonsSessions"
-                x-data="setting.showReasonsSessions"
-                x-permissions="reasonsSessionsUi || reasonsSessionsManage"
-              >
-                <a class="menuTag" href="/reasonsSessions">
-                  <img
-                    src="/theme1/images/setting/reasonsSessions.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Reasons Sessions##</p>
-                </a>
-              </li>
-
-              <li
-                id="TypesPoa"
-                x-data="setting.showTypesPoa"
-                x-permissions="typesPoaUi || typesPoaManage"
-              >
-                <a class="menuTag" href="/typesPoa">
-                  <img
-                    src="/theme1/images/setting/typesPoa.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Types POA##</p>
-                </a>
-              </li>
-
-              <li
-                id="Courts"
-                x-data="setting.showCourts"
-                x-permissions="courtsUi || courtsManage"
-              >
-                <a class="menuTag" href="/courts">
-                  <img
-                    src="/theme1/images/setting/courts.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Courts##</p>
-                </a>
-              </li>
-
-              <li
-                id="Circles"
-                x-data="setting.showCircles"
-                x-permissions="circlesUi || circlesManage"
-              >
-                <a class="menuTag" href="/circles">
-                  <img
-                    src="/theme1/images/setting/circles.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Circles##</p>
-                </a>
-              </li>
-              <li
-                id="TypeAdministrativeWorks"
-                x-data="setting.showTypeAdministrativeWorks"
-                x-permissions="typeAdministrativeWorksUi || typeAdministrativeWorksManage"
-              >
-                <a class="menuTag" href="/typeAdministrativeWorks">
-                  <img
-                    src="/theme1/images/setting/typeAdministrativeWorks.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Typeof Administrative Works##</p>
-                </a>
-              </li>
-              
-              <li>
-                <p class="font-27">##word.Location Settings## :</p>
-              </li>
-
-              <li
-                id="Nationalities"
-                x-data="setting.showNationalities"
-                x-permissions="nationalitiesUi || nationalitiesManage"
-              >
-                <a class="menuTag" href="/nationalities">
-                  <img
-                    src="/theme1/images/setting/Nationalities.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Nationalities##</p>
-                </a>
-              </li>
-
-              <li
-                id="Countries"
-                x-data="setting.showCountries"
-                x-permissions="countriesUi || countriesManage"
-              >
-                <a class="menuTag" href="/countries">
-                  <img
-                    src="/theme1/images/setting/Countries.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Countries##</p>
-                </a>
-              </li>
-              <li
-                id="Governorates"
-                x-data="setting.showGoves"
-                x-permissions="govesUi || govesManage"
-              >
-                <a class="menuTag" href="/goves">
-                  <img
-                    src="/theme1/images/setting/governortes.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Governorates##</p>
-                </a>
-              </li>
-              <li
-                id="Cities"
-                x-data="setting.showCities"
-                x-permissions="citiesUi || citiesManage"
-              >
-                <a class="menuTag" href="/cities">
-                  <img
-                    src="/theme1/images/setting/Cities.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Cities##</p>
-                </a>
-              </li>
-              <li
-                id="Areas"
-                x-data="setting.showAreas"
-                x-permissions="areasUi || areasManage"
-              >
-                <a class="menuTag" href="/areas">
-                  <img
-                    src="/theme1/images/setting/Areas.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Areas##</p>
-                </a>
-              </li>
-
-              <li>
-                <p class="font-27">##word.General Settings## :</p>
-              </li>
-
-              <li
-                id="Security"
-                x-data="setting.showSecurity"
-                x-permissions="securityManage"
-              >
-                <a class="menuTag" href="/security/users">
-                  <img
-                    src="/theme1/images/setting/Security.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Security Users##</p>
-                </a>
-              </li>
-              <li
-                id="Security"
-                x-data="setting.showSecurity"
-                x-permissions="securityManage"
-              >
-                <a class="menuTag" href="/security/roles">
-                  <img
-                    src="/theme1/images/setting/Security.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Security Roles##</p>
-                </a>
-              </li>
-              <li
-                id="printersPaths"
-                x-data="setting.showPrintersPaths"
-                x-permissions="printersPathsUi || printersPathsManage"
-              >
-                <a class="menuTag" href="/printersPaths">
-                  <img
-                    src="/theme1/images/setting/printers Paths.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Printers Paths##</p>
-                </a>
-              </li>
-
-              <li
-                id="NamesConversions"
-                x-data="setting.showNamesConversions"
-                x-permissions="namesConversionsUi || namesConversionsManage"
-              >
-                <a class="menuTag" href="/namesConversions">
-                  <img
-                    src="/theme1/images/setting/Names Conversions.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Names Conversions##</p>
-                </a>
-              </li>
-              <li
-                id="NumberingSetting"
-                x-data="setting.showNumbering"
-                x-permissions="numberingUi || numberingManage"
-              >
-                <a class="menuTag" href="/numbering">
-                  <img
-                    src="/theme1/images/setting/Numbering.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Numbering Setting##</p>
-                </a>
-              </li>
-
-              <li
-                id="words Manage"
-                x-permissions="devleoper"
-              >
-                <a class="menuTag" href="/words">
-                  <img
-                    src="/theme1/images/setting/Company Setting.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Words Manage##</p>
-                </a>
-              </li>
-
-              <li
-                id="Company Setting"
-                x-data="setting.showCompanySetting"
-                x-permissions="companySettingManage"
-              >
-                <a class="menuTag" href="/companySetting">
-                  <img
-                    src="/theme1/images/setting/Company Setting.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Company Setting##</p>
-                </a>
-              </li>
-
-              <li id="core Setting" x-permissions="devleoper">
-                <a class="menuTag" href="/coreSetting">
-                  <img
-                    src="/theme1/images/setting/Company Setting.png"
-                    width="45"
-                    height="45"
-                  />
-                  <p>##word.Core Setting##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <!--  <li id="Restaurant" class="navlink" onclick="showAndHide('Restaurant')" x-data="setting.showRestaurant">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.Restaurant##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li id="ordersScreen" x-data="setting.showOrdersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
-                <a class="menuTag" href="/ordersScreen">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Orders Screen##</p>
-                </a>
-              </li>
-
-              <li id="Customers" x-data="setting.showCustomers" x-permissions="customersUi || customersManage">
-                <a class="menuTag" href="/customers">
-                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
-                  <p>##word.Customers##</p>
-                </a>
-              </li>
-              <li id="Vendors" x-data="setting.showVendors" x-permissions="vendorsUi || vendorsManage">
-                <a class="menuTag" href="/vendors">
-                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
-                  <p>##word.Vendors##</p>
-                </a>
-              </li>
-              <li id="SalesInvoicseForCustomers" x-data="setting.showSalesInvoices" x-permissions="salesInvoicesUi || salesInvoicesManage">
-                <a class="menuTag" href="/salesInvoices">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Customers##</p>
-                </a>
-              </li>
-              <li id="receiptVouchers" x-data="setting.showReceiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
-                <a class="menuTag" href="/receiptVouchers">
-                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
-                  <p>##word.Receipt Vouchers##</p>
-                </a>
-              </li>
-              <li id="expenseVouchers" x-data="setting.showExpenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
-                <a class="menuTag" href="/expenseVouchers">
-                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
-                  <p>##word.Expense Vouchers##</p>
-                </a>
-              </li>
-
-              <li id="StoresItems" x-data="setting.showStoresItems" x-permissions="storesItemsUi || storesItemsManage">
-                <a class="menuTag" href="/storesItems">
-                  <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
-                  <p>##word.Stores Items##</p>
-                </a>
-              </li>
-              <li id="Employees" x-data="setting.showEmployees" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/employees">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Employees##</p>
-                </a>
-              </li>
-              <li id="Delivery" x-data="setting.showDeliverers" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/deliverers">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Deliverers##</p>
-                </a>
-              </li>
-              <li id="Cashers" x-data="setting.showCashers" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/cashers">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Cashers##</p>
-                </a>
-              </li>
-
-              <li id="deliveryManage" x-data="setting.showDeliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
-                <a class="menuTag" href="/deliveryManage">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Delivery Manage##</p>
-                </a>
-              </li>
-              <li id="Kitchens" x-data="setting.showKitchens" x-permissions="kitchensUi || kitchensManage">
-                <a class="menuTag" href="/kitchens">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Kitchens##</p>
-                </a>
-              </li>
-              <li id="Tables" x-data="setting.showTables" x-permissions="tablesUi || tablesManage">
-                <a class="menuTag" href="/tables">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Tables##</p>
-                </a>
-              </li>
-              <li id="TablesGroups" x-data="setting.showTablesGroups" x-permissions="tablesGroupsUi || tablesGroupsManage">
-                <a class="menuTag" href="/tablesGroups">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Tables Groups##</p>
-                </a>
-              </li>
-              <li id="itemsExtras" x-data="setting.showItemsExtras" x-permissions="itemsExtrasUi || itemsExtrasManage">
-                <a class="menuTag" href="/itemsExtras">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Items Extras##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li id="Pos" class="navlink" onclick="showAndHide('Pos')" x-data="setting.showPos">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.POS##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li id="ordersScreen" x-data="setting.showOrdersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
-                <a class="menuTag" href="/ordersScreen">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Orders Screen##</p>
-                </a>
-              </li>
-
-              <li id="SalesInvoicseForCustomers" x-data="setting.showSalesInvoices" x-permissions="salesInvoicesUi || salesInvoicesManage">
-                <a class="menuTag" href="/salesInvoices">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Customers##</p>
-                </a>
-              </li>
-              <li id="Customers" x-data="setting.showCustomers" x-permissions="customersUi || customersManage">
-                <a class="menuTag" href="/customers">
-                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
-                  <p>##word.Customers##</p>
-                </a>
-              </li>
-              <li id="Vendors" x-data="setting.showVendors" x-permissions="vendorsUi || vendorsManage">
-                <a class="menuTag" href="/vendors">
-                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
-                  <p>##word.Vendors##</p>
-                </a>
-              </li>
-
-              <li id="SalesInvoicseForCompanies" x-data="setting.showSalesCompaniesInvoices" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage">
-                <a class="menuTag" href="/salesCompaniesInvoices">
-                  <img src="/theme1/images/inventory/sales Companies Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Companies##</p>
-                </a>
-              </li>
-              <li id="receiptVouchers" x-data="setting.showReceiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
-                <a class="menuTag" href="/receiptVouchers">
-                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
-                  <p>##word.Receipt Vouchers##</p>
-                </a>
-              </li>
-              <li id="expenseVouchers" x-data="setting.showExpenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
-                <a class="menuTag" href="/expenseVouchers">
-                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
-                  <p>##word.Expense Vouchers##</p>
-                </a>
-              </li>
-              <li id="ReturnSalesInvoices" x-data="setting.showReturnSalesInvoices" x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage">
-                <a class="menuTag" href="/returnSalesInvoices">
-                  <img src="/theme1/images/inventory/Return Sales Invoices.png" width="45" height="45" />
-                  <p>##word.Return Sales Invoices##</p>
-                </a>
-              </li>
-              <li id="PurchaseRequests" x-data="setting.showPurchaseRequests" x-permissions="purchaseRequestsUi || purchaseRequestsManage">
-                <a class="menuTag" href="/purchaseRequests">
-                  <img src="/theme1/images/inventory/Purchase Requests.png" width="45" height="45" />
-                  <p>##word.Purchase Requests##</p>
-                </a>
-              </li>
-              <li id="PurchaseOrder" x-data="setting.showPurchaseOrders" x-permissions="purchaseOrdersUi || purchaseOrdersManage">
-                <a class="menuTag" href="/purchaseOrders">
-                  <img src="/theme1/images/inventory/Purchase Orders.png" width="45" height="45" />
-                  <p>##word.Purchase Order##</p>
-                </a>
-              </li>
-              <li id="ReturnPurchaseOrders" x-data="setting.showReturnPurchaseOrders" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage">
-                <a class="menuTag" href="/returnPurchaseOrders">
-                  <img src="/theme1/images/inventory/Return Purchase Orders.png" width="45" height="45" />
-                  <p>##word.Return Purchase Orders##</p>
-                </a>
-              </li>
-
-              <li id="StoresItems" x-data="setting.showStoresItems" x-permissions="storesItemsUi || storesItemsManage">
-                <a class="menuTag" href="/storesItems">
-                  <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
-                  <p>##word.Stores Items##</p>
-                </a>
-              </li>
-              <li id="Employees" x-data="setting.showEmployees" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/employees">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Employees##</p>
-                </a>
-              </li>
-              <li id="Delivery" x-data="setting.showDeliverers" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/deliverers">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Deliverers##</p>
-                </a>
-              </li>
-              <li id="Cashers" x-data="setting.showCashers" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/cashers">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Cashers##</p>
-                </a>
-              </li>
-
-              <li id="deliveryManage" x-data="setting.showDeliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
-                <a class="menuTag" href="/deliveryManage">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Delivery Manage##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li id="Accountant" class="navlink" onclick="showAndHide('Accountant')" x-data="setting.showAccounting">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-hand-holding-usd"></i>
-            </div>
-            <div class="linktext">##word.Accounting##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li id="incomeLists" x-data="setting.showIncomeList" x-permissions="incomeListUi || incomeListManage">
-                <a class="menuTag" href="/incomeList">
-                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
-                  <p>##word.Income Lists##</p>
-                </a>
-              </li>
-              <li id="discountTypes" x-data="setting.showDiscountTypes" x-permissions="discountTypesUi || discountTypesManage">
-                <a class="menuTag" href="/discountTypes">
-                  <img src="/theme1/images/accounting/Discount Types.png" width="45" height="45" />
-                  <p>##word.Discount Types##</p>
-                </a>
-              </li>
-              <li id="voucherNames" x-data="setting.showVoucherNames" x-permissions="voucherNamesUi || voucherNamesManage">
-                <a class="menuTag" href="/voucherNames">
-                  <img src="/theme1/images/accounting/Voucher.png" width="45" height="45" />
-                  <p>##word.Voucher Names##</p>
-                </a>
-              </li>
-              <li id="generalSalesInvoices" x-data="setting.showGeneralSalesInvoices" x-permissions="receiptVouchersUi || receiptVouchersManage">
-                <a class="menuTag" href="/generalSalesInvoices">
-                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
-                  <p>##word.General Sales Invoice##</p>
-                </a>
-              </li>
-              <li id="generalPurchaseInvoices" x-data="setting.showGeneralPurchaseInvoices" x-permissions="expenseVouchersUi || expenseVouchersManage">
-                <a class="menuTag" href="/generalPurchaseInvoices">
-                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
-                  <p>##word.General Purchase Invoice##</p>
-                </a>
-              </li>
-              <li id="receiptVouchers" x-data="setting.showReceiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
-                <a class="menuTag" href="/receiptVouchers">
-                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
-                  <p>##word.Receipt Vouchers##</p>
-                </a>
-              </li>
-              <li id="expenseVouchers" x-data="setting.showExpenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
-                <a class="menuTag" href="/expenseVouchers">
-                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
-                  <p>##word.Expense Vouchers##</p>
-                </a>
-              </li>
-              <li id="safe" x-data="setting.showSafes" x-permissions="safesUi || safesManage">
-                <a class="menuTag" href="/safes">
-                  <img src="/theme1/images/accounting/safe.png" width="45" height="45" />
-                  <p>##word.Safe##</p>
-                </a>
-              </li>
-              <li id="banks" x-data="setting.showBanks" x-permissions="banksUi || banksManage">
-                <a class="menuTag" href="/banks">
-                  <img src="/theme1/images/accounting/banks.png" width="45" height="45" />
-                  <p>##word.Banks##</p>
-                </a>
-              </li>
-              <li id="currencies" x-data="setting.showCurrencies" x-permissions="currenciesUi || currenciesManage">
-                <a class="menuTag" href="/currencies">
-                  <img src="/theme1/images/accounting/currencies.png" width="45" height="45" />
-                  <p>##word.Currencies##</p>
-                </a>
-              </li>
-              <li id="transferSafes" x-data="setting.showTransferSafes" x-permissions="transferSafesUi || transferSafesManage">
-                <a class="menuTag" href="/transferSafes">
-                  <img src="/theme1/images/accounting/transfer safes.png" width="45" height="45" />
-                  <p>##word.Transfer Safes##</p>
-                </a>
-              </li>
-              <li id="accountsGuide" x-data="setting.showAccountsGuide" x-permissions="accountsGuideUi || accountsGuideManage">
-                <a class="menuTag" href="/accountsGuide">
-                  <img src="/theme1/images/accounting/accounts guide.png" width="45" height="45" />
-                  <p>##word.Accounts Guide##</p>
-                </a>
-              </li>
-              <li id="costCenters" x-data="setting.showCostCenters" x-permissions="costCentersUi || costCentersManage">
-                <a class="menuTag" href="/costCenters">
-                  <img src="/theme1/images/accounting/cost Centers.png" width="45" height="45" />
-                  <p>##word.Cost Centers##</p>
-                </a>
-              </li>
-              <li id="generalLedger" x-data="setting.showGeneralLedger" x-permissions="generalLedgerUi || generalLedgerManage">
-                <a class="menuTag" href="/generalLedger">
-                  <img src="/theme1/images/accounting/General Ledger.png" width="45" height="45" />
-                  <p>##word.General Ledger##</p>
-                </a>
-              </li>
-              <li id="assistantGeneralLedger" x-data="setting.showAssistantGeneralLedger" x-permissions="assistantGeneralLedgerUi || assistantGeneralLedgerManage">
-                <a class="menuTag" href="/assistantGeneralLedger">
-                  <img src="/theme1/images/accounting/Assistant General Ledger.png" width="45" height="45" />
-                  <p>##word.Assistant General Ledger##</p>
-                </a>
-              </li>
-              <li id="journalEntry" x-data="setting.showJournalEntry" x-permissions="journalEntryUi || journalEntryManage">
-                <a class="menuTag" href="/journalEntry">
-                  <img src="/theme1/images/accounting/Journal Entry.png" width="45" height="45" />
-                  <p>##word.Journal Entry##</p>
-                </a>
-              </li>
-              <li id="budgetClassifications" x-data="setting.showBudgetClassifications" x-permissions="budgetClassificationsUi || budgetClassificationsManage">
-                <a class="menuTag" href="/budgetClassifications">
-                  <img src="/theme1/images/accounting/Budget Classifications.png" width="45" height="45" />
-                  <p>##word.Budget Classifications##</p>
-                </a>
-              </li>
-              <li id="taxesTypes" x-data="setting.showTaxesTypes" x-permissions="taxesTypesUi || taxesTypesManage">
-                <a class="menuTag" href="/taxesTypes">
-                  <img src="/theme1/images/accounting/Taxes Types.png" width="45" height="45" />
-                  <p>##word.Taxes Types##</p>
-                </a>
-              </li>
-              <li id="safesAdjusting" x-data="setting.showSafesAdjusting" x-permissions="safesAdjustingUi || safesAdjustingManage">
-                <a class="menuTag" href="/safesAdjusting">
-                  <img src="/theme1/images/accounting/Safes Adjusting.png" width="45" height="45" />
-                  <p>##word.Safes Adjusting##</p>
-                </a>
-              </li>
-              <li id="safesTransactions" x-data="setting.showSafesTransactions" x-permissions="safesTransactionsUi || safesTransactionsManage">
-                <a class="menuTag" href="/safesTransactions">
-                  <img src="/theme1/images/accounting/Safes Transactions.png" width="45" height="45" />
-                  <p>##word.Safes Transactions##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li id="Inventory" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Inventory')" x-data="setting.showInventory">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-boxes"></i>
-            </div>
-            <div class="linktext">##word.Inventory##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li id="ordersScreen" x-data="setting.showOrdersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
-                <a class="menuTag" href="/ordersScreen">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Orders Screen##</p>
-                </a>
-              </li>
-              <li id="SalesInvoicseForCustomers" x-data="setting.showSalesInvoices" x-permissions="salesInvoicesUi || salesInvoicesManage">
-                <a class="menuTag" href="/salesInvoices">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Customers##</p>
-                </a>
-              </li>
-              <li id="SalesInvoicseForCompanies" x-data="setting.showSalesCompaniesInvoices" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage">
-                <a class="menuTag" href="/salesCompaniesInvoices">
-                  <img src="/theme1/images/inventory/sales Companies Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Companies##</p>
-                </a>
-              </li>
-              <li id="SalesInvoicseForPatients" x-data="setting.showHospital" x-permissions="salesPatientsInvoicesUi || salesPatientsInvoicesManage">
-                <a class="menuTag" href="/salesPatientsInvoices">
-                  <img src="/theme1/images/inventory/sales Patients Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For Patients##</p>
-                </a>
-              </li>
-              <li id="SalesInvoicseForER" x-data="setting.showHospital" x-permissions="salesErInvoicesUi || salesErInvoicesManage">
-                <a class="menuTag" href="/salesErInvoices">
-                  <img src="/theme1/images/inventory/sales Er Invoices.png" width="45" height="45" />
-                  <p>##word.Sales Invoicse For ER##</p>
-                </a>
-              </li>
-              <li id="ReturnSalesInvoices" x-data="setting.showReturnSalesInvoices" x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage">
-                <a class="menuTag" href="/returnSalesInvoices">
-                  <img src="/theme1/images/inventory/Return Sales Invoices.png" width="45" height="45" />
-                  <p>##word.Return Sales Invoices##</p>
-                </a>
-              </li>
-              <li id="offersPrices" x-data="setting.showOffersPrices" x-permissions="offersPricesUi || offersPricesManage">
-                <a class="menuTag" href="/offersPrices">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Orders Screen##</p>
-                </a>
-              </li>
-              <li id="PurchaseRequests" x-data="setting.showPurchaseRequests" x-permissions="purchaseRequestsUi || purchaseRequestsManage">
-                <a class="menuTag" href="/purchaseRequests">
-                  <img src="/theme1/images/inventory/Purchase Requests.png" width="45" height="45" />
-                  <p>##word.Purchase Requests##</p>
-                </a>
-              </li>
-              <li id="PurchaseOrder" x-data="setting.showPurchaseOrders" x-permissions="purchaseOrdersUi || purchaseOrdersManage">
-                <a class="menuTag" href="/purchaseOrders">
-                  <img src="/theme1/images/inventory/Purchase Orders.png" width="45" height="45" />
-                  <p>##word.Purchase Order##</p>
-                </a>
-              </li>
-              <li id="ReturnPurchaseOrders" x-data="setting.showReturnPurchaseOrders" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage">
-                <a class="menuTag" href="/returnPurchaseOrders">
-                  <img src="/theme1/images/inventory/Return Purchase Orders.png" width="45" height="45" />
-                  <p>##word.Return Purchase Orders##</p>
-                </a>
-              </li>
-              <li id="StoresItems" x-data="setting.showStoresItems" x-permissions="storesItemsUi || storesItemsManage">
-                <a class="menuTag" href="/storesItems">
-                  <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
-                  <p>##word.Stores Items##</p>
-                </a>
-              </li>
-              <li id="Vendors" x-data="setting.showVendors" x-permissions="vendorsUi || vendorsManage">
-                <a class="menuTag" href="/vendors">
-                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
-                  <p>##word.Vendors##</p>
-                </a>
-              </li>
-              <li id="TransferItemsRequests" x-data="setting.showTransferItemsRequests" x-permissions="transferItemsRequestsUi || transferItemsRequestsManage">
-                <a class="menuTag" href="/transferItemsRequests">
-                  <img src="/theme1/images/inventory/Transfer Items Requests.png" width="45" height="45" />
-                  <p>##word.Transfer Items Requests##</p>
-                </a>
-              </li>
-              <li id="TransferItemsOrders" x-data="setting.showTransferItemsOrders" x-permissions="transferItemsOrdersUi || transferItemsOrdersManage">
-                <a class="menuTag" href="/transferItemsOrders">
-                  <img src="/theme1/images/inventory/Transfer Items Orders.png" width="45" height="45" />
-                  <p>##word.Transfer Items Orders##</p>
-                </a>
-              </li>
-              <li id="convertUnits" x-data="setting.showConvertUnits" x-permissions="convertUnitsUi || convertUnitsManage">
-                <a class="menuTag" href="/convertUnits">
-                  <img src="/theme1/images/inventory/Damage Items.png" width="45" height="45" />
-                  <p>##word.Convert Units##</p>
-                </a>
-              </li>
-              <li id="DamageItems" x-data="setting.showDamageItems" x-permissions="damageItemsUi || damageItemsManage">
-                <a class="menuTag" href="/damageItems">
-                  <img src="/theme1/images/inventory/Damage Items.png" width="45" height="45" />
-                  <p>##word.Damage Items##</p>
-                </a>
-              </li>
-              <li id="Stocktaking" x-data="setting.showStockTaking" x-permissions="stockTakingUi || stockTakingManage">
-                <a class="menuTag" href="/stockTaking">
-                  <img src="/theme1/images/inventory/Stock taking.png" width="45" height="45" />
-                  <p>##word.Stocktaking##</p>
-                </a>
-              </li>
-              <li id="StoresItemsCard" x-data="setting.showStoresItemsCard" x-permissions="storesItemsCardUi || storesItemsCardManage">
-                <a class="menuTag" href="/storesItemsCard">
-                  <img src="/theme1/images/inventory/Stores Items Card.png" width="45" height="45" />
-                  <p>##word.Stores Items Card##</p>
-                </a>
-              </li>
-              <li id="StoresOpeningBalances" x-data="setting.showStoresOpeningBalances" x-permissions="storesOpeningBalancesUi || storesOpeningBalancesManage">
-                <a class="menuTag" href="/storesOpeningBalances">
-                  <img src="/theme1/images/inventory/Stores Opening Balances.png" width="45" height="45" />
-                  <p>##word.Stores Opening Balances##</p>
-                </a>
-              </li>
-              <li id="ActiveSubstances" x-data="setting.showActiveSubstances" x-permissions="activeSubstancesUi || activeSubstancesManage">
-                <a class="menuTag" href="/activeSubstances">
-                  <img src="/theme1/images/inventory/Active Substances.png" width="45" height="45" />
-                  <p>##word.Active Substances##</p>
-                </a>
-              </li>
-              <li id="StoresUnits" x-data="setting.showStoresUnits" x-permissions="storesUnitsUi || storesUnitsManage">
-                <a class="menuTag" href="/storesUnits">
-                  <img src="/theme1/images/inventory/Stores Units.png" width="45" height="45" />
-                  <p>##word.Stores Units##</p>
-                </a>
-              </li>
-              <li id="ItemsGroups" x-data="setting.showItemsGroups" x-permissions="itemsGroupsUi || itemsGroupsManage">
-                <a class="menuTag" href="/itemsGroups">
-                  <img src="/theme1/images/inventory/Items Groups.png" width="45" height="45" />
-                  <p>##word.Items Groups##</p>
-                </a>
-              </li>
-              <li id="Stores" x-data="setting.showStores" x-permissions="storesUi || storesManage">
-                <a class="menuTag" href="/stores">
-                  <img src="/theme1/images/inventory/Stores.png" width="45" height="45" />
-                  <p>##word.Stores##</p>
-                </a>
-              </li>
-              <li id="ReasonsDestroyingItems" x-data="setting.showReasonsDestroyingItems" x-permissions="reasonsDestroyingItemsUi || reasonsDestroyingItemsManage">
-                <a class="menuTag" href="/reasonsDestroyingItems">
-                  <img src="/theme1/images/inventory/Reasons Destroying Items.png" width="45" height="45" />
-                  <p>##word.Reasons Destroying Items##</p>
-                </a>
-              </li>
-              <li id="VendorsGroups" x-data="setting.showVendorsGroups" x-permissions="vendorsGroupsUi || vendorsGroupsManage">
-                <a class="menuTag" href="/vendorsGroups">
-                  <img src="/theme1/images/inventory/Vendors Groups.png" width="45" height="45" />
-                  <p>##word.Vendors Groups##</p>
-                </a>
-              </li>
-
-              <li id="deliveryManage" x-data="setting.showDeliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
-                <a class="menuTag" href="/deliveryManage">
-                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
-                  <p>##word.Delivery Manage##</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li id="HR" class="navlink d-flex flex-row gap-2" onclick="showAndHide('HR')" x-data="setting.showHr">
-          <a class="d-flex flex-row gap-2" href="#">
-            <div class="linkicon">
-              <i class="faicon fas fa-users"></i>
-            </div>
-            <div class="linktext">##word.HR##</div>
-          </a>
-          <div class="submenu hideSection">
-            <ul>
-              <li id="Attendance" x-data="setting.showAttendance" x-permissions="attendanceUi || attendanceManage">
-                <a class="menuTag" href="/attendance">
-                  <img src="/theme1/images/hr/Attendance.png" width="45" height="45" />
-                  <p>##word.Attendance##</p>
-                </a>
-              </li>
-              <li id="VacationsRequests" x-data="setting.showVacationsRequests" x-permissions="vacationsRequestsUi || vacationsRequestsManage">
-                <a class="menuTag" href="/vacationsRequests">
-                  <img src="/theme1/images/hr/Vacations Requests.png" width="45" height="45" />
-                  <p>##word.Vacations Requests##</p>
-                </a>
-              </li>
-              <li id="DelayRequests" x-data="setting.showDelayRequests" x-permissions="delayRequestsUi || delayRequestsManage">
-                <a class="menuTag" href="/delayRequests">
-                  <img src="/theme1/images/hr/Delay Requests.png" width="45" height="45" />
-                  <p>##word.Delay Requests##</p>
-                </a>
-              </li>
-              <li id="WorkErrandRequests" x-data="setting.showWorkErrandRequests" x-permissions="workErrandRequestsUi || workErrandRequestsManage">
-                <a class="menuTag" href="/workErrandRequests">
-                  <img src="/theme1/images/hr/Work Errand Requests.png" width="45" height="45" />
-                  <p>##word.Work Errand Requests##</p>
-                </a>
-              </li>
-              <li id="OvertimeRequests" x-data="setting.showOvertimeRequests" x-permissions="overtimeRequestsUi || overtimeRequestsManage">
-                <a class="menuTag" href="/overtimeRequests">
-                  <img src="/theme1/images/hr/Overtime Requests.png" width="45" height="45" />
-                  <p>##word.Overtime Requests##</p>
-                </a>
-              </li>
-              <li id="EmployeesBonuses" x-data="setting.showEmployeesBonuses" x-permissions="employeesBonusesUi || employeesBonusesManage">
-                <a class="menuTag" href="/employeesBonuses">
-                  <img src="/theme1/images/hr/Employees Bonuses.png" width="45" height="45" />
-                  <p>##word.Employees Bonuses##</p>
-                </a>
-              </li>
-              <li id="EmployeesPenalties" x-data="setting.showEmployeesPenalties" x-permissions="employeesPenaltiesUi || employeesPenaltiesManage">
-                <a class="menuTag" href="/employeesPenalties">
-                  <img src="/theme1/images/hr/Employees Penalties.png" width="45" height="45" />
-                  <p>##word.Employees Penalties##</p>
-                </a>
-              </li>
-              <li id="EmployeesAdvances" x-data="setting.showEmployeesAdvances" x-permissions="employeesAdvancesUi || employeesAdvancesManage">
-                <a class="menuTag" href="/employeesAdvances">
-                  <img src="/theme1/images/hr/Employees Advances.png" width="45" height="45" />
-                  <p>##word.Employees Advances##</p>
-                </a>
-              </li>
-              <li id="Payslips" x-data="setting.showPayslips" x-permissions="payslipsUi || payslipsManage">
-                <a class="menuTag" href="/payslips">
-                  <img src="/theme1/images/hr/Payslips.png" width="45" height="45" />
-                  <p>##word.Payslips##</p>
-                </a>
-              </li>
-              <li id="Employees" x-data="setting.showEmployees" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/employees">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Employees##</p>
-                </a>
-              </li>
-              <li id="Delivery" x-data="setting.showDeliverers" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/deliverers">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Deliverers##</p>
-                </a>
-              </li>
-              <li id="Cashers" x-data="setting.showCashers" x-permissions="employeesUi || employeesManage">
-                <a class="menuTag" href="/cashers">
-                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
-                  <p>##word.Cashers##</p>
-                </a>
-              </li>
-              <li id="CreateVacations" x-data="setting.showCreateVacations" x-permissions="createVacationsUi || createVacationsManage">
-                <a class="menuTag" href="/createVacations">
-                  <img src="/theme1/images/hr/Create Vacations.png" width="45" height="45" />
-                  <p>##word.Create Vacations##</p>
-                </a>
-              </li>
-              <li id="Departments" x-data="setting.showDepartments" x-permissions="departmentsUi || departmentsManage">
-                <a class="menuTag" href="/departments">
-                  <img src="/theme1/images/hr/Departments.png" width="45" height="45" />
-                  <p>##word.Departments##</p>
-                </a>
-              </li>
-              <li id="Sections" x-data="setting.showSections" x-permissions="sectionsUi || sectionsManage">
-                <a class="menuTag" href="/sections">
-                  <img src="/theme1/images/hr/Sections.png" width="45" height="45" />
-                  <p>##word.Sections##</p>
-                </a>
-              </li>
-              <li id="Jobs" x-data="setting.showJobs" x-permissions="jobsUi || jobsManage">
-                <a class="menuTag" href="/jobs">
-                  <img src="/theme1/images/hr/Jobs.png" width="45" height="45" />
-                  <p>##word.Jobs##</p>
-                </a>
-              </li>
-              <li id="JobsShifts" x-data="setting.showJobsShifts" x-permissions="jobsShiftsUi || jobsShiftsManage">
-                <a class="menuTag" href="/jobsShifts">
-                  <img src="/theme1/images/hr/Jobs Shifts.png" width="45" height="45" />
-                  <p>##word.Jobs Shifts##</p>
-                </a>
-              </li>
-              <li id="SalaryAllowancesNames" x-data="setting.showSalaryAllowancesNames" x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage">
-                <a class="menuTag" href="/salaryAllowancesNames">
-                  <img src="/theme1/images/hr/Salary Allowances Names.png" width="45" height="45" />
-                  <p>##word.Salary Allowances Names##</p>
-                </a>
-              </li>
-              <li id="SalaryDeductionsNames" x-data="setting.showSalaryDeductionsNames" x-permissions="salaryDeductionsNamesUi || salaryDeductionsNamesManage">
-                <a class="menuTag" href="/salaryDeductionsNames">
-                  <img src="/theme1/images/hr/Salary Deductions Names.png" width="45" height="45" />
-                  <p>##word.Salary Deductions Names##</p>
-                </a>
-              </li>
-              <li id="EmployeesBonusNames" x-data="setting.showEmployeesBonusNames" x-permissions="employeesBonusNamesUi || employeesBonusNamesManage">
-                <a class="menuTag" href="/employeesBonusNames">
-                  <img src="/theme1/images/hr/Employees Bonus Names.png" width="45" height="45" />
-                  <p>##word.Employees Bonus Names##</p>
-                </a>
-              </li>
-              <li id="EmployeesPenaltiesNames" x-data="setting.showEmployeesPenaltiesNames" x-permissions="employeesPenaltiesNamesUi || employeesPenaltiesNamesManage">
-                <a class="menuTag" href="/employeesPenaltiesNames">
-                  <img src="/theme1/images/hr/Employees Penalties Names.png" width="45" height="45" />
-                  <p>##word.Employees Penalties Names##</p>
-                </a>
-              </li>
-              <li id="JobsTools" x-data="setting.showJobsTools" x-permissions="jobsToolsUi || jobsToolsManage">
-                <a class="menuTag" href="/jobsTools">
-                  <img src="/theme1/images/hr/Jobs Tools.png" width="45" height="45" />
-                  <p>##word.Jobs Tools##</p>
-                </a>
-              </li>
-              <li id="VacationsNames" x-data="setting.showVacationsNames" x-permissions="vacationsNamesUi || vacationsNamesManage">
-                <a class="menuTag" href="/vacationsNames">
-                  <img src="/theme1/images/hr/Vacations Names.png" width="45" height="45" />
-                  <p>##word.Vacations Names##</p>
-                </a>
-              </li>
-              <li id="VacationsNames" x-data="setting.showEvaluationItems" x-permissions="evaluationItemsUi || evaluationItemsManage">
-                <a class="menuTag" href="/evaluationItems">
-                  <img src="/theme1/images/hr/Vacations Names.png" width="45" height="45" />
-                  <p>##word.Evaluation Items##</p>
-                </a>
-              </li>
-              <li id="VacationsNames" x-data="setting.showEvaluationTemplates" x-permissions="evaluationTemplatesUi || evaluationTemplatesManage">
-                <a class="menuTag" href="/evaluationTemplates">
-                  <img src="/theme1/images/hr/Vacations Names.png" width="45" height="45" />
-                  <p>##word.Evaluation Templates##</p>
-                </a>
-              </li>
-              <li id="JobsAdvertisements" x-data="setting.showJobsAdvertisements" x-permissions="jobsAdvertisementsUi || jobsAdvertisementsManage">
-                <a class="menuTag" href="/jobsAdvertisements">
-                  <img src="/theme1/images/hr/Jobs Advertisements.png" width="45" height="45" />
-                  <p>##word.Jobs Advertisements##</p>
-                </a>
-              </li>
-              <li id="JobsApplicants" x-data="setting.showJobsApplicants" x-permissions="jobsApplicantsUi || jobsApplicantsManage">
-                <a class="menuTag" href="/jobsApplicants">
-                  <img src="/theme1/images/hr/Jobs Applicants.png" width="45" height="45" />
-                  <p>##word.Jobs Applicants##</p>
-                </a>
-              </li>
-              <li id="EmployeesContracts" x-data="setting.showEmployeesContracts" x-permissions="employeesContractsUi || employeesContractsManage">
-                <a class="menuTag" href="/employeesContracts">
-                  <img src="/theme1/images/hr/Employees Contracts.png" width="45" height="45" />
-                  <p>##word.Employees Contracts##</p>
                 </a>
               </li>
             </ul>
@@ -3753,7 +354,619 @@
           </div>
         </li>
 
-        <li id="Reports" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Reports')" x-data="setting.showReports">
+        <li id="Restaurant" class="navlink" onclick="showAndHide('Restaurant')" x-data="setting.showRestaurant">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="linktext">##word.Restaurant##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="kitchenItems" x-data="setting.showKitchenItems" x-permissions="kitchenItemsUi || kitchenItemsManage">
+                <a class="menuTag" href="/kitchenItems">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Kitchen Items##</p>
+                </a>
+              </li>
+              <li id="kitchenOrders" x-data="setting.showKitchenOrders" x-permissions="kitchenOrdersUi || kitchenOrdersManage">
+                <a class="menuTag" href="/kitchenOrders">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Kitchen Orders##</p>
+                </a>
+              </li>
+              <li id="Kitchens" x-data="setting.showKitchens" x-permissions="kitchensUi || kitchensManage">
+                <a class="menuTag" href="/kitchens">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Kitchens##</p>
+                </a>
+              </li>
+              <li id="Tables" x-data="setting.showTables" x-permissions="tablesUi || tablesManage">
+                <a class="menuTag" href="/tables">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Tables##</p>
+                </a>
+              </li>
+              <li id="TablesGroups" x-data="setting.showTablesGroups" x-permissions="tablesGroupsUi || tablesGroupsManage">
+                <a class="menuTag" href="/tablesGroups">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Tables Groups##</p>
+                </a>
+              </li>
+              <li id="itemsExtras" x-data="setting.showItemsExtras" x-permissions="itemsExtrasUi || itemsExtrasManage">
+                <a class="menuTag" href="/itemsExtras">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Items Extras##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="Sales" class="navlink" onclick="showAndHide('Sales')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="linktext">##word.Sales##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="ordersScreen" x-data="setting.showOrdersScreen" x-permissions="ordersScreenUi || ordersScreenManage">
+                <a class="menuTag" href="/ordersScreen">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Orders Screen##</p>
+                </a>
+              </li>
+              <li id="generalSalesInvoices" x-data="setting.showGeneralSalesInvoices" x-permissions="receiptVouchersUi || receiptVouchersManage">
+                <a class="menuTag" href="/generalSalesInvoices">
+                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
+                  <p>##word.General Sales Invoice##</p>
+                </a>
+              </li>
+
+              <li id="SalesInvoicseForCustomers" x-data="setting.showSalesInvoices" x-permissions="salesInvoicesUi || salesInvoicesManage">
+                <a class="menuTag" href="/salesInvoices">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Customers##</p>
+                </a>
+              </li>
+
+              <li id="SalesInvoicseForCompanies" x-data="setting.showSalesCompaniesInvoices" x-permissions="salesCompaniesInvoicesUi || salesCompaniesInvoicesManage">
+                <a class="menuTag" href="/salesCompaniesInvoices">
+                  <img src="/theme1/images/inventory/sales Companies Invoices.png" width="45" height="45" />
+                  <p>##word.Sales Invoicse For Companies##</p>
+                </a>
+              </li>
+
+              <li id="ReturnSalesInvoicesParts" x-data="setting.showReturnSalesInvoices" x-permissions="returnSalesInvoicesPartsUi || returnSalesInvoicesPartsManage">
+                <a class="menuTag" href="/returnSalesInvoicesParts">
+                  <img src="/theme1/images/inventory/Return Sales Invoices.png" width="45" height="45" />
+                  <p>##word.Return Sales Invoices Parts##</p>
+                </a>
+              </li>
+              <li id="ReturnSalesInvoices" x-data="setting.showReturnSalesInvoicesParts" x-permissions="returnSalesInvoicesUi || returnSalesInvoicesManage">
+                <a class="menuTag" href="/returnSalesInvoices">
+                  <img src="/theme1/images/inventory/Return Sales Invoices.png" width="45" height="45" />
+                  <p>##word.Return Sales Invoices##</p>
+                </a>
+              </li>
+              <li id="Customers" x-data="setting.showCustomers" x-permissions="customersUi || customersManage">
+                <a class="menuTag" href="/customers">
+                  <img src="/theme1/images/setting/Customers.png" width="45" height="45" />
+                  <p>##word.Customers##</p>
+                </a>
+              </li>
+              <li id="CustomersGroups" x-data="setting.showCustomersGroups" x-permissions="customersGroupsUi || customersGroupsManage">
+                <a class="menuTag" href="/customersGroups">
+                  <img src="/theme1/images/setting/Customers Groups.png" width="45" height="45" />
+                  <p>##word.Customers Groups##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="Purchases" class="navlink" onclick="showAndHide('Purchases')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="linktext">##word.Purchases##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="PurchaseRequests" x-data="setting.showPurchaseRequests" x-permissions="purchaseRequestsUi || purchaseRequestsManage">
+                <a class="menuTag" href="/purchaseRequests">
+                  <img src="/theme1/images/inventory/Purchase Requests.png" width="45" height="45" />
+                  <p>##word.Purchase Requests##</p>
+                </a>
+              </li>
+              <li id="generalPurchaseInvoices" x-data="setting.showGeneralPurchaseInvoices" x-permissions="expenseVouchersUi || expenseVouchersManage">
+                <a class="menuTag" href="/generalPurchaseInvoices">
+                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
+                  <p>##word.General Purchase Invoice##</p>
+                </a>
+              </li>
+              <li id="PurchaseOrder" x-data="setting.showPurchaseOrders" x-permissions="purchaseOrdersUi || purchaseOrdersManage">
+                <a class="menuTag" href="/purchaseOrders">
+                  <img src="/theme1/images/inventory/Purchase Orders.png" width="45" height="45" />
+                  <p>##word.Purchase Order##</p>
+                </a>
+              </li>
+              <li id="ReturnPurchaseOrders" x-data="setting.showReturnPurchaseOrders" x-permissions="returnPurchaseOrdersUi || returnPurchaseOrdersManage">
+                <a class="menuTag" href="/returnPurchaseOrders">
+                  <img src="/theme1/images/inventory/Return Purchase Orders.png" width="45" height="45" />
+                  <p>##word.Return Purchase Orders##</p>
+                </a>
+              </li>
+
+              <li id="Vendors" x-data="setting.showVendors" x-permissions="vendorsUi || vendorsManage">
+                <a class="menuTag" href="/vendors">
+                  <img src="/theme1/images/inventory/Vendors.png" width="45" height="45" />
+                  <p>##word.Vendors##</p>
+                </a>
+              </li>
+              <li id="VendorsGroups" x-data="setting.showVendorsGroups" x-permissions="vendorsGroupsUi || vendorsGroupsManage">
+                <a class="menuTag" href="/vendorsGroups">
+                  <img src="/theme1/images/inventory/Vendors Groups.png" width="45" height="45" />
+                  <p>##word.Vendors Groups##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="Delivery" ng-show="setting.packagesCompany.id == 2 || setting.packagesCompany.id == 3" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Delivery')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-users"></i>
+            </div>
+            <div class="linktext">##word.Deliveriers management##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="deliveryManage" x-data="setting.showDeliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
+                <a class="menuTag" href="/deliveryManage">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Delivery Manage##</p>
+                </a>
+              </li>
+              <li id="reasonsCancelingDelivery" x-data="setting.showReasonsCancelingDelivery" x-permissions="reasonsCancelingDeliveryUi || reasonsCancelingDeliveryManage">
+                <a class="menuTag" href="/reasonsCancelingDelivery">
+                  <img src="/theme1/images/setting/Printers Paths.png" width="45" height="45" />
+                  <p>##word.Reasons Canceling Delivery##</p>
+                </a>
+              </li>
+
+              <li id="vehicles" x-data="setting.showVehicles" x-permissions="vehiclesUi || vehiclesManage">
+                <a class="menuTag" href="/vehicles">
+                  <img src="/theme1/images/setting/printers Paths.png" width="45" height="45" />
+                  <p>##word.Vehicles##</p>
+                </a>
+              </li>
+
+              <li id="vehiclesTypes" x-data="setting.showVehiclesTypes" x-permissions="vehiclesTypesUi || vehiclesTypesManage">
+                <a class="menuTag" href="/vehiclesTypes">
+                  <img src="/theme1/images/setting/printers Paths.png" width="45" height="45" />
+                  <p>##word.Vehicles Types##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="Inventory" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Inventory')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-boxes"></i>
+            </div>
+            <div class="linktext">##word.Inventory##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="StoresItems" x-data="setting.showStoresItems" x-permissions="storesItemsUi || storesItemsManage">
+                <a class="menuTag" href="/storesItems">
+                  <img src="/theme1/images/inventory/Stores Items.png" width="45" height="45" />
+                  <p>##word.Stores Items##</p>
+                </a>
+              </li>
+
+              <li id="TransferItemsRequests" x-data="setting.showTransferItemsRequests" x-permissions="transferItemsRequestsUi || transferItemsRequestsManage">
+                <a class="menuTag" href="/transferItemsRequests">
+                  <img src="/theme1/images/inventory/Transfer Items Requests.png" width="45" height="45" />
+                  <p>##word.Transfer Items Requests##</p>
+                </a>
+              </li>
+              <li id="TransferItemsOrders" x-data="setting.showTransferItemsOrders" x-permissions="transferItemsOrdersUi || transferItemsOrdersManage">
+                <a class="menuTag" href="/transferItemsOrders">
+                  <img src="/theme1/images/inventory/Transfer Items Orders.png" width="45" height="45" />
+                  <p>##word.Transfer Items Orders##</p>
+                </a>
+              </li>
+              <li id="convertUnits" x-data="setting.showConvertUnits" x-permissions="convertUnitsUi || convertUnitsManage">
+                <a class="menuTag" href="/convertUnits">
+                  <img src="/theme1/images/inventory/Damage Items.png" width="45" height="45" />
+                  <p>##word.Convert Units##</p>
+                </a>
+              </li>
+              <li id="DamageItems" x-data="setting.showDamageItems" x-permissions="damageItemsUi || damageItemsManage">
+                <a class="menuTag" href="/damageItems">
+                  <img src="/theme1/images/inventory/Damage Items.png" width="45" height="45" />
+                  <p>##word.Damage Items##</p>
+                </a>
+              </li>
+              <li id="Stocktaking" x-data="setting.showStockTaking" x-permissions="stockTakingUi || stockTakingManage">
+                <a class="menuTag" href="/stockTaking">
+                  <img src="/theme1/images/inventory/Stock taking.png" width="45" height="45" />
+                  <p>##word.Stocktaking##</p>
+                </a>
+              </li>
+
+              <li id="StoresOpeningBalances" x-data="setting.showStoresOpeningBalances" x-permissions="storesOpeningBalancesUi || storesOpeningBalancesManage">
+                <a class="menuTag" href="/storesOpeningBalances">
+                  <img src="/theme1/images/inventory/Stores Opening Balances.png" width="45" height="45" />
+                  <p>##word.Stores Opening Balances##</p>
+                </a>
+              </li>
+              <li id="ActiveSubstances" x-data="setting.showActiveSubstances" x-permissions="activeSubstancesUi || activeSubstancesManage">
+                <a class="menuTag" href="/activeSubstances">
+                  <img src="/theme1/images/inventory/Active Substances.png" width="45" height="45" />
+                  <p>##word.Active Substances##</p>
+                </a>
+              </li>
+              <li id="StoresUnits" x-data="setting.showStoresUnits" x-permissions="storesUnitsUi || storesUnitsManage">
+                <a class="menuTag" href="/storesUnits">
+                  <img src="/theme1/images/inventory/Stores Units.png" width="45" height="45" />
+                  <p>##word.Stores Units##</p>
+                </a>
+              </li>
+              <li id="ItemsGroups" x-data="setting.showItemsGroups" x-permissions="itemsGroupsUi || itemsGroupsManage">
+                <a class="menuTag" href="/itemsGroups">
+                  <img src="/theme1/images/inventory/Items Groups.png" width="45" height="45" />
+                  <p>##word.Items Groups##</p>
+                </a>
+              </li>
+              <li id="Stores" x-data="setting.showStores" x-permissions="storesUi || storesManage">
+                <a class="menuTag" href="/stores">
+                  <img src="/theme1/images/inventory/Stores.png" width="45" height="45" />
+                  <p>##word.Stores##</p>
+                </a>
+              </li>
+              <li id="ReasonsDestroyingItems" x-data="setting.showReasonsDestroyingItems" x-permissions="reasonsDestroyingItemsUi || reasonsDestroyingItemsManage">
+                <a class="menuTag" href="/reasonsDestroyingItems">
+                  <img src="/theme1/images/inventory/Reasons Destroying Items.png" width="45" height="45" />
+                  <p>##word.Reasons Destroying Items##</p>
+                </a>
+              </li>
+              <li id="deliveryManage" x-data="setting.showDeliveryManage" x-permissions="deliveryManagesUi || deliveryManageManage">
+                <a class="menuTag" href="/deliveryManage">
+                  <img src="/theme1/images/inventory/sales Invoices.png" width="45" height="45" />
+                  <p>##word.Delivery Manage##</p>
+                </a>
+              </li>
+              <li id="StoresItemsCard" x-data="setting.showStoresItemsCard" x-permissions="storesItemsCardUi || storesItemsCardManage">
+                <a class="menuTag" href="/storesItemsCard">
+                  <img src="/theme1/images/inventory/Stores Items Card.png" width="45" height="45" />
+                  <p>##word.Stores Items Card##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="Accountant" class="navlink" onclick="showAndHide('Accountant')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="linktext">##word.Accounting##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="incomeLists" x-data="setting.showIncomeList" x-permissions="incomeListUi || incomeListManage">
+                <a class="menuTag" href="/incomeList">
+                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
+                  <p>##word.Income Lists##</p>
+                </a>
+              </li>
+
+              <li id="voucherNames" x-data="setting.showVoucherNames" x-permissions="voucherNamesUi || voucherNamesManage">
+                <a class="menuTag" href="/voucherNames">
+                  <img src="/theme1/images/accounting/Voucher.png" width="45" height="45" />
+                  <p>##word.Voucher Names##</p>
+                </a>
+              </li>
+
+              <li id="receiptVouchers" x-data="setting.showReceiptVouchers" x-permissions="receiptVouchersUi || receiptVouchersManage">
+                <a class="menuTag" href="/receiptVouchers">
+                  <img src="/theme1/images/accounting/Receipt Vouchers.png" width="45" height="45" />
+                  <p>##word.Receipt Vouchers##</p>
+                </a>
+              </li>
+              <li id="expenseVouchers" x-data="setting.showExpenseVouchers" x-permissions="expenseVouchersUi || expenseVouchersManage">
+                <a class="menuTag" href="/expenseVouchers">
+                  <img src="/theme1/images/accounting/Expense Vouchers.png" width="45" height="45" />
+                  <p>##word.Expense Vouchers##</p>
+                </a>
+              </li>
+              <li id="safe" x-data="setting.showSafes" x-permissions="safesUi || safesManage">
+                <a class="menuTag" href="/safes">
+                  <img src="/theme1/images/accounting/safe.png" width="45" height="45" />
+                  <p>##word.Safe##</p>
+                </a>
+              </li>
+              <li id="banks" x-data="setting.showBanks" x-permissions="banksUi || banksManage">
+                <a class="menuTag" href="/banks">
+                  <img src="/theme1/images/accounting/banks.png" width="45" height="45" />
+                  <p>##word.Banks##</p>
+                </a>
+              </li>
+              <li id="currencies" x-data="setting.showCurrencies" x-permissions="currenciesUi || currenciesManage">
+                <a class="menuTag" href="/currencies">
+                  <img src="/theme1/images/accounting/currencies.png" width="45" height="45" />
+                  <p>##word.Currencies##</p>
+                </a>
+              </li>
+              <li id="transferSafes" x-data="setting.showTransferSafes" x-permissions="transferSafesUi || transferSafesManage">
+                <a class="menuTag" href="/transferSafes">
+                  <img src="/theme1/images/accounting/transfer safes.png" width="45" height="45" />
+                  <p>##word.Transfer Safes##</p>
+                </a>
+              </li>
+              <li id="accountsGuide" x-data="setting.showAccountsGuide" x-permissions="accountsGuideUi || accountsGuideManage">
+                <a class="menuTag" href="/accountsGuide">
+                  <img src="/theme1/images/accounting/accounts guide.png" width="45" height="45" />
+                  <p>##word.Accounts Guide##</p>
+                </a>
+              </li>
+              <li id="costCenters" x-data="setting.showCostCenters" x-permissions="costCentersUi || costCentersManage">
+                <a class="menuTag" href="/costCenters">
+                  <img src="/theme1/images/accounting/cost Centers.png" width="45" height="45" />
+                  <p>##word.Cost Centers##</p>
+                </a>
+              </li>
+              <li id="generalLedger" x-data="setting.showGeneralLedger" x-permissions="generalLedgerUi || generalLedgerManage">
+                <a class="menuTag" href="/generalLedger">
+                  <img src="/theme1/images/accounting/General Ledger.png" width="45" height="45" />
+                  <p>##word.General Ledger##</p>
+                </a>
+              </li>
+              <li id="assistantGeneralLedger" x-data="setting.showAssistantGeneralLedger" x-permissions="assistantGeneralLedgerUi || assistantGeneralLedgerManage">
+                <a class="menuTag" href="/assistantGeneralLedger">
+                  <img src="/theme1/images/accounting/Assistant General Ledger.png" width="45" height="45" />
+                  <p>##word.Assistant General Ledger##</p>
+                </a>
+              </li>
+              <li id="journalEntry" x-data="setting.showJournalEntry" x-permissions="journalEntryUi || journalEntryManage">
+                <a class="menuTag" href="/journalEntry">
+                  <img src="/theme1/images/accounting/Journal Entry.png" width="45" height="45" />
+                  <p>##word.Journal Entry##</p>
+                </a>
+              </li>
+              <li id="budgetClassifications" x-data="setting.showBudgetClassifications" x-permissions="budgetClassificationsUi || budgetClassificationsManage">
+                <a class="menuTag" href="/budgetClassifications">
+                  <img src="/theme1/images/accounting/Budget Classifications.png" width="45" height="45" />
+                  <p>##word.Budget Classifications##</p>
+                </a>
+              </li>
+              <li id="safesAdjusting" x-data="setting.showSafesAdjusting" x-permissions="safesAdjustingUi || safesAdjustingManage">
+                <a class="menuTag" href="/safesAdjusting">
+                  <img src="/theme1/images/accounting/Safes Adjusting.png" width="45" height="45" />
+                  <p>##word.Safes Adjusting##</p>
+                </a>
+              </li>
+              <li id="taxesTypes" x-data="setting.showTaxesTypes" x-permissions="taxesTypesUi || taxesTypesManage">
+                <a class="menuTag" href="/taxesTypes">
+                  <img src="/theme1/images/accounting/Taxes Types.png" width="45" height="45" />
+                  <p>##word.Taxes Types##</p>
+                </a>
+              </li>
+              <li id="discountTypes" x-data="setting.showDiscountTypes" x-permissions="discountTypesUi || discountTypesManage">
+                <a class="menuTag" href="/discountTypes">
+                  <img src="/theme1/images/accounting/Discount Types.png" width="45" height="45" />
+                  <p>##word.Discount Types##</p>
+                </a>
+              </li>
+              <li id="safesTransactions" x-data="setting.showSafesTransactions" x-permissions="safesTransactionsUi || safesTransactionsManage">
+                <a class="menuTag" href="/safesTransactions">
+                  <img src="/theme1/images/accounting/Safes Transactions.png" width="45" height="45" />
+                  <p>##word.Safes Transactions##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="HR" class="navlink d-flex flex-row gap-2" onclick="showAndHide('HR')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-users"></i>
+            </div>
+            <div class="linktext">##word.HR##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="Employees" x-data="setting.showEmployees" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/employees">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Employees##</p>
+                </a>
+              </li>
+              <li id="Lawyers" x-data="setting.showLawyersOffice" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/lawyers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Lawyers Office##</p>
+                </a>
+              </li>
+              <li id="Delivery" x-data="setting.showDeliverers" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/deliverers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Deliverers##</p>
+                </a>
+              </li>
+              <li id="Cashers" x-data="setting.showCashers" x-permissions="employeesUi || employeesManage">
+                <a class="menuTag" href="/cashers">
+                  <img src="/theme1/images/hr/Employees.png" width="45" height="45" />
+                  <p>##word.Cashers##</p>
+                </a>
+              </li>
+              <li id="Attendance" x-data="setting.showAttendance" x-permissions="attendanceUi || attendanceManage">
+                <a class="menuTag" href="/attendance">
+                  <img src="/theme1/images/hr/Attendance.png" width="45" height="45" />
+                  <p>##word.Attendance##</p>
+                </a>
+              </li>
+              <li id="VacationsRequests" x-data="setting.showVacationsRequests" x-permissions="vacationsRequestsUi || vacationsRequestsManage">
+                <a class="menuTag" href="/vacationsRequests">
+                  <img src="/theme1/images/hr/Vacations Requests.png" width="45" height="45" />
+                  <p>##word.Vacations Requests##</p>
+                </a>
+              </li>
+              <li id="DelayRequests" x-data="setting.showDelayRequests" x-permissions="delayRequestsUi || delayRequestsManage">
+                <a class="menuTag" href="/delayRequests">
+                  <img src="/theme1/images/hr/Delay Requests.png" width="45" height="45" />
+                  <p>##word.Delay Requests##</p>
+                </a>
+              </li>
+              <li id="WorkErrandRequests" x-data="setting.showWorkErrandRequests" x-permissions="workErrandRequestsUi || workErrandRequestsManage">
+                <a class="menuTag" href="/workErrandRequests">
+                  <img src="/theme1/images/hr/Work Errand Requests.png" width="45" height="45" />
+                  <p>##word.Work Errand Requests##</p>
+                </a>
+              </li>
+              <li id="OvertimeRequests" x-data="setting.showOvertimeRequests" x-permissions="overtimeRequestsUi || overtimeRequestsManage">
+                <a class="menuTag" href="/overtimeRequests">
+                  <img src="/theme1/images/hr/Overtime Requests.png" width="45" height="45" />
+                  <p>##word.Overtime Requests##</p>
+                </a>
+              </li>
+              <li id="EmployeesBonuses" x-data="setting.showEmployeesBonuses" x-permissions="employeesBonusesUi || employeesBonusesManage">
+                <a class="menuTag" href="/employeesBonuses">
+                  <img src="/theme1/images/hr/Employees Bonuses.png" width="45" height="45" />
+                  <p>##word.Employees Bonuses##</p>
+                </a>
+              </li>
+              <li id="EmployeesPenalties" x-data="setting.showEmployeesPenalties" x-permissions="employeesPenaltiesUi || employeesPenaltiesManage">
+                <a class="menuTag" href="/employeesPenalties">
+                  <img src="/theme1/images/hr/Employees Penalties.png" width="45" height="45" />
+                  <p>##word.Employees Penalties##</p>
+                </a>
+              </li>
+              <li id="EmployeesAdvances" x-data="setting.showEmployeesAdvances" x-permissions="employeesAdvancesUi || employeesAdvancesManage">
+                <a class="menuTag" href="/employeesAdvances">
+                  <img src="/theme1/images/hr/Employees Advances.png" width="45" height="45" />
+                  <p>##word.Employees Advances##</p>
+                </a>
+              </li>
+              <li id="Payslips" x-data="setting.showPayslips" x-permissions="payslipsUi || payslipsManage">
+                <a class="menuTag" href="/payslips">
+                  <img src="/theme1/images/hr/Payslips.png" width="45" height="45" />
+                  <p>##word.Payslips##</p>
+                </a>
+              </li>
+
+              <li id="CreateVacations" x-data="setting.showCreateVacations" x-permissions="createVacationsUi || createVacationsManage">
+                <a class="menuTag" href="/createVacations">
+                  <img src="/theme1/images/hr/Create Vacations.png" width="45" height="45" />
+                  <p>##word.Create Vacations##</p>
+                </a>
+              </li>
+              <li id="Departments" x-data="setting.showDepartments" x-permissions="departmentsUi || departmentsManage">
+                <a class="menuTag" href="/departments">
+                  <img src="/theme1/images/hr/Departments.png" width="45" height="45" />
+                  <p>##word.Departments##</p>
+                </a>
+              </li>
+              <li id="Sections" x-data="setting.showSections" x-permissions="sectionsUi || sectionsManage">
+                <a class="menuTag" href="/sections">
+                  <img src="/theme1/images/hr/Sections.png" width="45" height="45" />
+                  <p>##word.Sections##</p>
+                </a>
+              </li>
+              <li id="Jobs" x-data="setting.showJobs" x-permissions="jobsUi || jobsManage">
+                <a class="menuTag" href="/jobs">
+                  <img src="/theme1/images/hr/Jobs.png" width="45" height="45" />
+                  <p>##word.Jobs##</p>
+                </a>
+              </li>
+              <li id="JobsShifts" x-data="setting.showJobsShifts" x-permissions="jobsShiftsUi || jobsShiftsManage">
+                <a class="menuTag" href="/jobsShifts">
+                  <img src="/theme1/images/hr/Jobs Shifts.png" width="45" height="45" />
+                  <p>##word.Jobs Shifts##</p>
+                </a>
+              </li>
+              <li id="SalaryAllowancesNames" x-data="setting.showSalaryAllowancesNames" x-permissions="salaryAllowancesNamesUi || salaryAllowancesNamesManage">
+                <a class="menuTag" href="/salaryAllowancesNames">
+                  <img src="/theme1/images/hr/Salary Allowances Names.png" width="45" height="45" />
+                  <p>##word.Salary Allowances Names##</p>
+                </a>
+              </li>
+              <li id="SalaryDeductionsNames" x-data="setting.showSalaryDeductionsNames" x-permissions="salaryDeductionsNamesUi || salaryDeductionsNamesManage">
+                <a class="menuTag" href="/salaryDeductionsNames">
+                  <img src="/theme1/images/hr/Salary Deductions Names.png" width="45" height="45" />
+                  <p>##word.Salary Deductions Names##</p>
+                </a>
+              </li>
+              <li id="EmployeesBonusNames" x-data="setting.showEmployeesBonusNames" x-permissions="employeesBonusNamesUi || employeesBonusNamesManage">
+                <a class="menuTag" href="/employeesBonusNames">
+                  <img src="/theme1/images/hr/Employees Bonus Names.png" width="45" height="45" />
+                  <p>##word.Employees Bonus Names##</p>
+                </a>
+              </li>
+              <li id="EmployeesPenaltiesNames" x-data="setting.showEmployeesPenaltiesNames" x-permissions="employeesPenaltiesNamesUi || employeesPenaltiesNamesManage">
+                <a class="menuTag" href="/employeesPenaltiesNames">
+                  <img src="/theme1/images/hr/Employees Penalties Names.png" width="45" height="45" />
+                  <p>##word.Employees Penalties Names##</p>
+                </a>
+              </li>
+              <li id="JobsTools" x-data="setting.showJobsTools" x-permissions="jobsToolsUi || jobsToolsManage">
+                <a class="menuTag" href="/jobsTools">
+                  <img src="/theme1/images/hr/Jobs Tools.png" width="45" height="45" />
+                  <p>##word.Jobs Tools##</p>
+                </a>
+              </li>
+              <li id="VacationsNames" x-data="setting.showVacationsNames" x-permissions="vacationsNamesUi || vacationsNamesManage">
+                <a class="menuTag" href="/vacationsNames">
+                  <img src="/theme1/images/hr/Vacations Names.png" width="45" height="45" />
+                  <p>##word.Vacations Names##</p>
+                </a>
+              </li>
+              <li id="VacationsNames" x-data="setting.showEvaluationItems" x-permissions="evaluationItemsUi || evaluationItemsManage">
+                <a class="menuTag" href="/evaluationItems">
+                  <img src="/theme1/images/hr/Vacations Names.png" width="45" height="45" />
+                  <p>##word.Evaluation Items##</p>
+                </a>
+              </li>
+              <li id="VacationsNames" x-data="setting.showEvaluationTemplates" x-permissions="evaluationTemplatesUi || evaluationTemplatesManage">
+                <a class="menuTag" href="/evaluationTemplates">
+                  <img src="/theme1/images/hr/Vacations Names.png" width="45" height="45" />
+                  <p>##word.Evaluation Templates##</p>
+                </a>
+              </li>
+              <li id="JobsAdvertisements" x-data="setting.showJobsAdvertisements" x-permissions="jobsAdvertisementsUi || jobsAdvertisementsManage">
+                <a class="menuTag" href="/jobsAdvertisements">
+                  <img src="/theme1/images/hr/Jobs Advertisements.png" width="45" height="45" />
+                  <p>##word.Jobs Advertisements##</p>
+                </a>
+              </li>
+              <li id="JobsApplicants" x-data="setting.showJobsApplicants" x-permissions="jobsApplicantsUi || jobsApplicantsManage">
+                <a class="menuTag" href="/jobsApplicants">
+                  <img src="/theme1/images/hr/Jobs Applicants.png" width="45" height="45" />
+                  <p>##word.Jobs Applicants##</p>
+                </a>
+              </li>
+              <li id="EmployeesContracts" x-data="setting.showEmployeesContracts" x-permissions="employeesContractsUi || employeesContractsManage">
+                <a class="menuTag" href="/employeesContracts">
+                  <img src="/theme1/images/hr/Employees Contracts.png" width="45" height="45" />
+                  <p>##word.Employees Contracts##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li id="Reports" class="navlink d-flex flex-row gap-2" onclick="showAndHide('Reports')">
           <a class="d-flex flex-row gap-2" href="#">
             <div class="linkicon">
               <i class="faicon fas fa-paste"></i>
@@ -3762,6 +975,13 @@
           </a>
           <div class="submenu hideSection">
             <ul>
+               <li id="reportCustomerStatement" x-permissions="reportCustomerStatementUi || reportCustomerStatementManage">
+                <a class="menuTag" href="/reportCustomerStatement">
+                  <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
+                  <p>##word.Customer Statement##</p>
+                </a>
+              </li>
+
               <li id="dailyCashiers" x-data="setting.showDailyCashiers" x-permissions="dailyCashiersUi || dailyCashiersManage">
                 <a class="menuTag" href="/dailyCashiers">
                   <img src="/theme1/images/accounting/Income List.png" width="45" height="45" />
@@ -3813,7 +1033,7 @@
                   <p>##word.Daily Cash By User##</p>
                 </a>
               </li>
-              <li id="insuranceCompaniesClaims" x-data="setting.showHospital" x-data="setting.show" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
+              <li id="insuranceCompaniesClaims" x-data="setting.showHospital" x-permissions="insuranceCompaniesClaimsUi || insuranceCompaniesClaimsManage">
                 <a class="menuTag" href="/insuranceCompaniesClaims">
                   <img src="/theme1/images/Report/Insurance Companies Claims.png" width="45" height="45" />
                   <p>##word.Insurance Companies Claims##</p>
@@ -3994,7 +1214,174 @@
               </li>
             </ul>
           </div>
-        </li> -->
+        </li>
+
+        <li id="SettingModule" class="navlink d-flex flex-row gap-2" onclick="showAndHide('SettingModule')">
+          <a class="d-flex flex-row gap-2" href="#">
+            <div class="linkicon">
+              <i class="faicon fas fa-cogs"></i>
+            </div>
+            <div class="linktext">##word.Settings##</div>
+          </a>
+          <div class="submenu hideSection">
+            <ul>
+              <li id="LawsuitDegrees" x-data="setting.showLawsuitDegrees" x-permissions="lawsuitDegreesUi || lawsuitDegreesManage">
+                <a class="menuTag" href="/lawsuitDegrees">
+                  <img src="/theme1/images/setting/lawsuitDegrees.png" width="45" height="45" />
+                  <p>##word.Lawsuit Degrees##</p>
+                </a>
+              </li>
+
+              <li id="TypesLawsuit" x-data="setting.showTypesLawsuit" x-permissions="typesLawsuitUi || typesLawsuitManage">
+                <a class="menuTag" href="/typesLawsuit">
+                  <img src="/theme1/images/setting/typesLawsuit.png" width="45" height="45" />
+                  <p>##word.Types Lawsuit##</p>
+                </a>
+              </li>
+
+              <li id="StatusLawsuit" x-data="setting.showStatusLawsuit" x-permissions="statusLawsuitUi || statusLawsuitManage">
+                <a class="menuTag" href="/statusLawsuit">
+                  <img src="/theme1/images/setting/statusLawsuit.png" width="45" height="45" />
+                  <p>##word.Status Lawsuit##</p>
+                </a>
+              </li>
+
+              <li id="AdjectivesInLawsuit" x-data="setting.showAdjectivesInLawsuit" x-permissions="adjectivesInLawsuitUi || adjectivesInLawsuitManage">
+                <a class="menuTag" href="/adjectivesInLawsuit">
+                  <img src="/theme1/images/setting/adjectivesInLawsuit.png" width="45" height="45" />
+                  <p>##word.Adjectives In Lawsuit##</p>
+                </a>
+              </li>
+
+              <li id="ReasonsSessions" x-data="setting.showReasonsSessions" x-permissions="reasonsSessionsUi || reasonsSessionsManage">
+                <a class="menuTag" href="/reasonsSessions">
+                  <img src="/theme1/images/setting/reasonsSessions.png" width="45" height="45" />
+                  <p>##word.Reasons Sessions##</p>
+                </a>
+              </li>
+
+              <li id="TypesPoa" x-data="setting.showTypesPoa" x-permissions="typesPoaUi || typesPoaManage">
+                <a class="menuTag" href="/typesPoa">
+                  <img src="/theme1/images/setting/typesPoa.png" width="45" height="45" />
+                  <p>##word.Types POA##</p>
+                </a>
+              </li>
+
+              <li id="Courts" x-data="setting.showCourts" x-permissions="courtsUi || courtsManage">
+                <a class="menuTag" href="/courts">
+                  <img src="/theme1/images/setting/courts.png" width="45" height="45" />
+                  <p>##word.Courts##</p>
+                </a>
+              </li>
+
+              <li id="Circles" x-data="setting.showCircles" x-permissions="circlesUi || circlesManage">
+                <a class="menuTag" href="/circles">
+                  <img src="/theme1/images/setting/circles.png" width="45" height="45" />
+                  <p>##word.Circles##</p>
+                </a>
+              </li>
+              <li id="TypeAdministrativeWorks" x-data="setting.showTypeAdministrativeWorks" x-permissions="typeAdministrativeWorksUi || typeAdministrativeWorksManage">
+                <a class="menuTag" href="/typeAdministrativeWorks">
+                  <img src="/theme1/images/setting/typeAdministrativeWorks.png" width="45" height="45" />
+                  <p>##word.Typeof Administrative Works##</p>
+                </a>
+              </li>
+
+              <li>
+                <p class="font-27">##word.Location Settings## :</p>
+              </li>
+
+              <li id="Nationalities" x-data="setting.showNationalities" x-permissions="nationalitiesUi || nationalitiesManage">
+                <a class="menuTag" href="/nationalities">
+                  <img src="/theme1/images/setting/Nationalities.png" width="45" height="45" />
+                  <p>##word.Nationalities##</p>
+                </a>
+              </li>
+
+              <li id="Countries" x-data="setting.showCountries" x-permissions="countriesUi || countriesManage">
+                <a class="menuTag" href="/countries">
+                  <img src="/theme1/images/setting/Countries.png" width="45" height="45" />
+                  <p>##word.Countries##</p>
+                </a>
+              </li>
+              <li id="Governorates" x-data="setting.showGoves" x-permissions="govesUi || govesManage">
+                <a class="menuTag" href="/goves">
+                  <img src="/theme1/images/setting/governortes.png" width="45" height="45" />
+                  <p>##word.Governorates##</p>
+                </a>
+              </li>
+              <li id="Cities" x-data="setting.showCities" x-permissions="citiesUi || citiesManage">
+                <a class="menuTag" href="/cities">
+                  <img src="/theme1/images/setting/Cities.png" width="45" height="45" />
+                  <p>##word.Cities##</p>
+                </a>
+              </li>
+              <li id="Areas" x-data="setting.showAreas" x-permissions="areasUi || areasManage">
+                <a class="menuTag" href="/areas">
+                  <img src="/theme1/images/setting/Areas.png" width="45" height="45" />
+                  <p>##word.Areas##</p>
+                </a>
+              </li>
+
+              <li>
+                <p class="font-27">##word.General Settings## :</p>
+              </li>
+
+              <li id="Security" x-data="setting.showSecurity" x-permissions="securityManage">
+                <a class="menuTag" href="/security/users">
+                  <img src="/theme1/images/setting/Security.png" width="45" height="45" />
+                  <p>##word.Security Users##</p>
+                </a>
+              </li>
+              <li id="Security" x-data="setting.showSecurity" x-permissions="securityManage">
+                <a class="menuTag" href="/security/roles">
+                  <img src="/theme1/images/setting/Security.png" width="45" height="45" />
+                  <p>##word.Security Roles##</p>
+                </a>
+              </li>
+              <li id="printersPaths" x-data="setting.showPrintersPaths" x-permissions="printersPathsUi || printersPathsManage">
+                <a class="menuTag" href="/printersPaths">
+                  <img src="/theme1/images/setting/printers Paths.png" width="45" height="45" />
+                  <p>##word.Printers Paths##</p>
+                </a>
+              </li>
+
+              <li id="NamesConversions" x-data="setting.showNamesConversions" x-permissions="namesConversionsUi || namesConversionsManage">
+                <a class="menuTag" href="/namesConversions">
+                  <img src="/theme1/images/setting/Names Conversions.png" width="45" height="45" />
+                  <p>##word.Names Conversions##</p>
+                </a>
+              </li>
+              <li id="NumberingSetting" x-data="setting.showNumbering" x-permissions="numberingUi || numberingManage">
+                <a class="menuTag" href="/numbering">
+                  <img src="/theme1/images/setting/Numbering.png" width="45" height="45" />
+                  <p>##word.Numbering Setting##</p>
+                </a>
+              </li>
+
+              <li id="words Manage" x-permissions="devleoper">
+                <a class="menuTag" href="/words">
+                  <img src="/theme1/images/setting/Company Setting.png" width="45" height="45" />
+                  <p>##word.Words Manage##</p>
+                </a>
+              </li>
+
+              <li id="Company Setting" x-data="setting.showCompanySetting" x-permissions="companySettingManage">
+                <a class="menuTag" href="/companySetting">
+                  <img src="/theme1/images/setting/Company Setting.png" width="45" height="45" />
+                  <p>##word.Company Setting##</p>
+                </a>
+              </li>
+
+              <li id="core Setting" x-data="setting.showSiteSetting" x-permissions="companySettingManage">
+                <a class="menuTag" href="/coreSetting">
+                  <img src="/theme1/images/setting/Company Setting.png" width="45" height="45" />
+                  <p>##word.Core Setting##</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

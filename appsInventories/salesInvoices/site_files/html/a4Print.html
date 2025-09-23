@@ -5,13 +5,13 @@
         <div class="col-6">
           <div class="row">
             <div class="col-5">
-              <p class="black font-13" style="color: black;" >Tax Invoice</p>
-              <p class="black font-13" ng-show="!item.customer.commercialCustomer ">Simplified Tax Invoice</p>
+              <p class="black font-13" ng-show="item.customer.commercialCustomer" style="color: black;" >Tax Invoice</p>
+              <p class="black font-13" ng-show="!item.customer.commercialCustomer ">Simplified Invoice</p>
             </div>
             <div class="col-2"></div>
             <div class="col-5">
               <p class="black font-13 text-right" ng-show="item.customer.commercialCustomer">فاتورة ضريبية</p>
-              <p class="black font-13 text-right" ng-show="!item.customer.commercialCustomer ">فاتورة ضريبية مبسطة</p>
+              <p class="black font-13 text-right" ng-show="!item.customer.commercialCustomer ">فاتورة مبسطة</p>
             </div>
             <hr class="line" />
           </div>
@@ -110,7 +110,7 @@
         </div>
       </div>
 
-      <div class="row padding" ng-show="item.customer &&item.customer.id">
+      <div class="row padding" ng-show="item.customer && item.customer.id">
         <div class="row bg-lightGray">
           <div class="col-4">
             <p class="black font-15">Customer Data</p>
@@ -222,23 +222,23 @@
             <div class="col-7">
               <div class="row">
                 <div class="col-4"><p class="font-12">T. Discounts </p></div>
-                <div class="col-4">
+                <div class="col-4 center">
                   <p class="bold black center font-12">{{sInvoice.totalDiscounts | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-4"><p class="font-12 right"> إجمالي خصومات</p></div>
               </div>
-              <hr class="line" />
-              <div class="row">
+              <hr class="line" ng-show="setting.storesSetting.vat > 0" />
+              <div class="row" ng-show="setting.storesSetting.vat > 0">
                 <div class="col-4"><p class="font-12">T. Before VAT </p></div>
-                <div class="col-3">
+                <div class="col-3 center">
                   <p class="bold black center font-12">{{sInvoice.totalBeforeVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-5"><p class="font-12 right"> إجمالي قبل الضريبة</p></div>
               </div>
-              <hr class="line" />
-              <div class="row">
+              <hr class="line" ng-show="setting.storesSetting.vat > 0" />
+              <div class="row" ng-show="setting.storesSetting.vat > 0">
                 <div class="col-4"><p class="font-12">T. VAT </p></div>
-                <div class="col-4">
+                <div class="col-4 center">
                   <p class="bold black center font-12">{{sInvoice.totalVat | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
                 <div class="col-4"><p class="font-12 right"> إجمالي ضريبة</p></div>
@@ -247,11 +247,11 @@
               <hr class="line" />
 
               <div class="row bg-lightGray">
-                <div class="col-4"><p class="font-12 bold">T. After VAT </p></div>
-                <div class="col-3">
+                <div class="col-4"><p class="font-12 bold">Total Inv. </p></div>
+                <div class="col-3 center">
                   <p class="bold black center font-12">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
                 </div>
-                <div class="col-5"><p class="font-12 right bold"> إجمالي بعد الضريبة</p></div>
+                <div class="col-5"><p class="font-12 right bold"> إجمالي الفاتورة</p></div>
               </div>
               <hr class="line" />
               <!--   <div class="row">

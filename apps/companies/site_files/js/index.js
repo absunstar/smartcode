@@ -234,6 +234,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showCustomers = true;
     $scope.company.showVendors = true;
     $scope.company.showReturnSalesInvoices = true;
+    $scope.company.showReturnSalesInvoicesParts = true;
     $scope.company.showPurchaseOrders = true;
     $scope.company.showReturnPurchaseOrders = true;
     $scope.company.showStoresItems = true;
@@ -375,6 +376,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showCustomers = false;
     $scope.company.showVendors = false;
     $scope.company.showReturnSalesInvoices = false;
+    $scope.company.showReturnSalesInvoicesParts = false;
     $scope.company.showPurchaseOrders = false;
     $scope.company.showReturnPurchaseOrders = false;
     $scope.company.showStoresItems = false;
@@ -1212,6 +1214,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showReceiptVouchers = type;
     $scope.company.showExpenseVouchers = type;
     $scope.company.showReturnSalesInvoices = type;
+    $scope.company.showReturnSalesInvoicesParts = type;
     $scope.company.showPurchaseRequests = type;
     $scope.company.showPurchaseOrders = type;
     $scope.company.showReturnPurchaseOrders = type;
@@ -1299,6 +1302,7 @@ app.controller("companies", function ($scope, $http, $timeout) {
     $scope.company.showSalesInvoices = type;
     $scope.company.showSalesCompaniesInvoices = type;
     $scope.company.showReturnSalesInvoices = type;
+    $scope.company.showReturnSalesInvoicesParts = type;
     $scope.company.showPurchaseRequests = type;
     $scope.company.showPurchaseOrders = type;
     $scope.company.showReturnPurchaseOrders = type;

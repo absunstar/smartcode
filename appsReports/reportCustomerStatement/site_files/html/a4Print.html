@@ -1,0 +1,333 @@
+<style></style>
+<div ng-repeat="sInvoice in invList" class="page">
+  <div class="border" style="background-color: #f1f1f1">
+    <div class="row">
+      <div class="row">
+        <div class="col-7">
+          <div class="row">
+            <div class="col-5">
+              <p class="black font-13">Customer Statement</p>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+              <p class="black font-13 text-right">كشف حساب عميل</p>
+            </div>
+            <hr class="line" />
+          </div>
+
+          <div class="row">
+            <div class="col-2">
+              <p class="black font-13">Name</p>
+            </div>
+            <div class="col-8">
+              <p class="black center font-13">{{item.customer.name##session.lang## }}</p>
+            </div>
+            <div class="col-2">
+              <p class="black font-13 text-right">إسم</p>
+            </div>
+            <hr class="line" />
+          </div>
+
+          <div class="row">
+            <div class="col-3">
+              <p class="black font-13">Date From</p>
+            </div>
+            <div class="col-6">
+              <p class="black center font-13">{{item.dateFrom |date:"dd/MM/yyyy" }} <i class="fas fa-calendar-alt font-13"></i></p>
+            </div>
+            <div class="col-3">
+              <p class="black font-13 text-right">الفترة من</p>
+            </div>
+            <hr class="line" />
+          </div>
+
+          <div class="row">
+            <div class="col-3">
+              <p class="black font-13">Date To</p>
+            </div>
+            <div class="col6">
+              <p class="black center font-13">{{item.dateTo |date:"dd/MM/yyyy" }} <i class="fas fa-calendar-alt font-13"></i></p>
+            </div>
+            <div class="col-3">
+              <p class="black font-13 text-right">الفترة الى</p>
+            </div>
+            <hr class="line" />
+          </div>
+        </div>
+        <div class="col-5 text-right" ng-show="invoiceLogo">
+          <img class="logoPrint" ng-src="{{invoiceLogo}}" />
+        </div>
+      </div>
+      <div class="row border-bottom padding">
+        <div class="col-6">
+          <div class="row">
+            <p class="black font-11 text-right col-4" ng-show="setting.phone">{{setting.phone}} <i class="fas fa-phone"></i></p>
+            <p class="black font-11 text-right col-8" ng-show="setting.socialEmail">{{setting.socialEmail}} <i class="fas fa-envelope"></i></p>
+          </div>
+          <div class="row">
+            <p class="black font-11 text-right col-4" ng-show="setting.mobile">{{setting.mobile}} <i class="fas fa-mobile-alt"></i></p>
+            <p class="black font-11 text-right col-8" ng-show="setting.website">{{setting.website}} <i class="fas fa-globe"></i></p>
+            <p class="black font-11 text-right" ng-show="setting.gov.id">
+              {{setting.area.name##session.lang##}} {{setting.city.name##session.lang##}} {{setting.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
+            </p>
+          </div>
+          <div class="row" ng-show="setting.address">
+            <p class="black font-11 text-right pre-line">{{setting.address}} <i class="fas fa-map-marked"></i></p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <p class="font-16 text-right bold">##session.company.nameAr##</p>
+            <p class="font-16 text-right bold">##session.company.nameEn##</p>
+            <p class="text-right bold font-14">##session.branch.nameEn## ##session.branch.nameAr##</p>
+            <div class="row">
+              <p class="black bold font-13 text-right" ng-show="setting.taxNumber">({{setting.taxNumber}}) : TRN/الرقم الضريبي</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row padding" ng-show="item.customer && item.customer.id">
+        <div class="row bg-lightGray">
+          <div class="col-4">
+            <p class="black font-15">Customer Data</p>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-4">
+            <p class="black font-15 text-right">بيانات العميل</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="row">
+              <p class="black font-11 text-right col-4" ng-show="item.customer.phone">{{item.customer.phone}} <i class="fas fa-phone"></i></p>
+              <p class="black font-11 text-right col-8" ng-show="item.customer.socialEmail">{{item.customer.socialEmail}} <i class="fas fa-envelope"></i></p>
+            </div>
+            <div class="row">
+              <p class="black font-11 text-right col-4" ng-show="item.customer.mobile">{{item.customer.mobile}} <i class="fas fa-mobile-alt"></i></p>
+              <p class="black font-11 text-right col-8" ng-show="item.customer.website">{{item.customer.website}} <i class="fas fa-globe"></i></p>
+            </div>
+            <p class="black font-11 text-right" ng-show="item.customer.gov.id">
+              {{item.customer.area.name##session.lang##}} {{item.customer.city.name##session.lang##}} {{item.customer.gov.name##session.lang##}} <i class="fas fa-map-marker-alt"></i>
+            </p>
+          </div>
+          <div class="row" ng-show="item.customer.address">
+            <p class="black font-11 text-right pre-line">{{item.customer.address}} <i class="fas fa-map-marked"></i></p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <p class="font-15 text-right">{{sInvoice.customer.nameAr}}</p>
+            <p class="font-15 text-right">{{sInvoice.customer.nameEn}}</p>
+          </div>
+          <div class="row" ng-show="sInvoice.customer.taxIdentificationNumber && item.customer.commercialCustomer">
+            <p class="black font-13 text-right">({{sInvoice.customer.taxIdentificationNumber}}) : TRN/الرقم الضريبي للعميل</p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
+      <div class="row full">
+        <table class="table center details">
+          <tr class="bold">
+            <th class="width-15-mm font-10" style="background: #dedcdc !important">
+              <p>الباقي</p>
+              <p>Remain</p>
+            </th>
+            <th class="width-15-mm font-10" style="background: #dedcdc !important">
+              <p>المدفوع</p>
+              <p>Paid</p>
+            </th>
+            <th class="width-15-mm font-10" style="background: #dedcdc !important">
+              <p>الإجمالي</p>
+              <p>Total</p>
+            </th>
+
+            <th class="width-20-mm font-10" style="background: #dedcdc !important">
+              <p>التاريخ</p>
+              <p>Date</p>
+            </th>
+            <th class="width-100-mm font-10" style="background: #dedcdc !important">
+              <p>الأصناف</p>
+              <p>Items</p>
+            </th>
+          </tr>
+
+          <tr ng-repeat="itm in sInvoice.list">
+            <td class="center width-15-mm font-11">
+              <p>{{itm.remainPaid | xmoney2}} <span class="currency">##word.$##</span></p>
+            </td>
+            <td class="center width-15-mm font-11">{{itm.amountPaid | xmoney2}} <span class="currency">##word.$##</span></td>
+            <td class="center width-15-mm font-11">{{itm.totalNet | xmoney2}} <span class="currency">##word.$##</span></td>
+
+            <td class="center width-20-mm font-11">
+              <p>{{itm.date|date:'dd/MM/yyyy'}}</p>
+              <p>{{itm.type.name##session.lang##}}</p>
+            </td>
+            <td class="center width-90-mm">
+              <table class="table center details">
+                <tr class="bold">
+                  <th class="width-15-mm font-10" style="background: #dedcdc !important">
+                    <p>الإجمالي</p>
+                    <p>Total</p>
+                  </th>
+                  <th class="width-15-mm font-10" style="background: #dedcdc !important">
+                    <p>السعر</p>
+                    <p>Price</p>
+                  </th>
+                  <th class="width-15-mm font-10" style="background: #dedcdc !important">
+                    <p>الكمية</p>
+                    <p>Qty</p>
+                  </th>
+                  <th class="width-30-mm font-10" style="background: #dedcdc !important">
+                    <p>الإسم</p>
+                    <p>Name</p>
+                  </th>
+                </tr>
+
+                <tr ng-repeat="_itm in itm.itemsList">
+                  <td class="center width-15-mm font-11">
+                    <p>{{_itm.total | xmoney2}} <span class="currency">##word.$##</span></p>
+                  </td>
+                  <td class="center width-15-mm font-11">
+                    <p>{{_itm.price | xmoney2}} <span class="currency">##word.$##</span></p>
+                  </td>
+                  <td class="center width-15-mm font-11">
+                    <p>{{_itm.count | xmoney2}} <span class="currency">##word.$##</span></p>
+                  </td>
+                  <td class="center width-35-mm font-11">
+                    <p>{{_itm.name##session.lang##}}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="footer">
+        <div class="row full" ng-show="($index+1) == invList.length">
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4"><p class="font-11">Total Return</p></div>
+                <div class="col-4 center">
+                  <p class="bold black center font-11">{{sInvoice.totalNetReturn | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-11 right">إجمالي المرتجعات</p></div>
+              </div>
+              <hr class="line" />
+              <div class="row bg-lightGray">
+                <div class="col-4"><p class="font-11 bold">Return Paid</p></div>
+                <div class="col-3 center">
+                  <p class="bold black center font-11">{{sInvoice.amountPaidReturn | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-5"><p class="font-11 right bold">مدفوع المرتجعات</p></div>
+              </div>
+              <hr class="line" />
+              <div class="row bg-lightGray">
+                <div class="col-4"><p class="font-11 bold">Return Remain</p></div>
+                <div class="col-3 center">
+                  <p class="bold black center font-11">{{sInvoice.remainPaidReturn | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-5"><p class="font-11 right bold">باقي المرتجعات</p></div>
+              </div>
+              <hr class="line" />
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4"><p class="font-11">Total Sales</p></div>
+                <div class="col-4 center">
+                  <p class="bold black center font-11">{{sInvoice.totalNetInvoice | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-11 right">إجمالي المبيعات</p></div>
+              </div>
+              <hr class="line" />
+              <div class="row bg-lightGray">
+                <div class="col-4"><p class="font-11 bold">Sales Paid</p></div>
+                <div class="col-3 center">
+                  <p class="bold black center font-11">{{sInvoice.amountPaidInvoice | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-5"><p class="font-11 right bold">مدفوع المبيعات</p></div>
+              </div>
+              <hr class="line" />
+              <div class="row bg-lightGray">
+                <div class="col-4"><p class="font-11 bold">Sales Remain</p></div>
+                <div class="col-3 center">
+                  <p class="bold black center font-11">{{sInvoice.remainPaidInvoice | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-5"><p class="font-11 right bold">باقي المبيعات</p></div>
+              </div>
+              <hr class="line" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4"><p class="font-11">Total Net</p></div>
+                <div class="col-4 center">
+                  <p class="bold black center font-11">{{sInvoice.totalNet | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-4"><p class="font-11 right">إجمالي الصافي</p></div>
+              </div>
+              <hr class="line" />
+              <div class="row bg-lightGray">
+                <div class="col-4"><p class="font-11 bold">Total Paid</p></div>
+                <div class="col-3 center">
+                  <p class="bold black center font-11">{{sInvoice.amountPaid | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-5"><p class="font-11 right bold">إجمالي المدفوع</p></div>
+              </div>
+              <hr class="line" />
+              <div class="row bg-lightGray">
+                <div class="col-4"><p class="font-11 bold">Total Remain</p></div>
+                <div class="col-3 center">
+                  <p class="bold black center font-11">{{sInvoice.remainPaid | xmoney2}} <span class="currency">##word.$##</span></p>
+                </div>
+                <div class="col-5"><p class="font-11 right bold">إجمالي الباقي</p></div>
+              </div>
+              <hr class="line" />
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <div class="row full">
+            <div class="row" ng-show="setting.printerProgram.printWrittenAmount">
+              <div class="col-1"></div>
+              <div class="col-11">
+                <p ng-show="'##session.lang##' == 'Ar'" class="numStr bold center black">{{sInvoice.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}</p>
+                <p ng-show="'##session.lang##' == 'En'" class="numStr bold center black">{{sInvoice.netTxt}} {{setting.accountsSetting.endNumStrAr || ''}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" ng-show="sInvoice.notes">
+          <p class="black height-50 bg-lightGray font-13 text-right pre-line">{{sInvoice.notes}}</p>
+        </div>
+
+        <div class="row full" ng-show="setting.printerProgram.signatureShow">
+          <div class="col-6 border-1">
+            <p class="font-11 black">Receiver / المستلم</p>
+            <p class="black">Name / الإسم</p>
+            <p class="black">Signature / التوقيع</p>
+          </div>
+
+          <div class="col-6 border-1">
+            <p class="font-11 black">Customer / العميل</p>
+            <p class="black">Name / الإسم</p>
+            <p class="black">Signature / التوقيع</p>
+          </div>
+        </div>
+
+        <div class="row padding" ng-repeat="i in setting.printerProgram.invoiceFooter">
+          <p class="font-11 bold black center">{{i.name}}</p>
+        </div>
+
+        <p class="font-11 center bold black">Page {{$index + 1}} / {{invList.length}}</p>
+      </div>
+    </div>
+  </div>
+</div>

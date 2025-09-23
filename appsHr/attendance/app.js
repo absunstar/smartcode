@@ -454,7 +454,6 @@ module.exports = function init(site) {
         let search = req.body.search || {};
         let limit = req.body.limit || 50;
         
-        console.log('app', where);
         if (search && search.employee) {
           where.$or = [];
 

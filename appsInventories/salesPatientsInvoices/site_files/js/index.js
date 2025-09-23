@@ -621,7 +621,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
       function (response) {
         $scope.busy = false;
         if (response.data.done && response.data.list.length > 0) {
-          console.log(response.data.insuranceContract);
           if (response.data.insuranceContract) {
             $scope.item.doctorDeskTop.insuranceContract = { ...$scope.item.doctorDeskTop.insuranceContract, ...response.data.insuranceContract };
           }
@@ -842,7 +841,6 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
         _item.total = _item.totalAfterDiscounts + _item.totalVat;
         if ($scope.item.doctorDeskTop.insuranceContract && $scope.item.doctorDeskTop.insuranceContract.id) {
           if (_item.itemsMedicalTypes && $scope.item.doctorDeskTop.insuranceContract) {
-            console.log($scope.item.doctorDeskTop.insuranceContract);
             (_item.itemsMedicalTypes.id == 2 && $scope.item.doctorDeskTop.insuranceContract.appliesBrand == 'yes') ||
               (_item.itemsMedicalTypes.id == 3 && $scope.item.doctorDeskTop.insuranceContract.appliesMedicalDevice == 'yes');
             if (_item.itemsMedicalTypes.id == 1 && $scope.item.doctorDeskTop.insuranceContract.appliesGeneric == 'yes') {
@@ -1142,6 +1140,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: 'A4',
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };
@@ -1199,6 +1198,7 @@ app.controller('salesPatientsInvoices', function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: 'A4',
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };

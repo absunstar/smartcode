@@ -56,7 +56,6 @@
           code = code.replace('10' + qr.batch, '');
         }
 
-        console.log(qr, code);
         return qr;
       };
 
@@ -137,7 +136,6 @@
           let d = parseInt(qr['expiryDate'].slice(4, 6));
           qr['expiryDate'] = new Date(2000 + y, m, d);
         }
-        console.log(qr);
         return qr;
       };
 

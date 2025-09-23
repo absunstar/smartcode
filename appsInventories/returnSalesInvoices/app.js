@@ -443,7 +443,6 @@ module.exports = function init(site) {
           delete where.toDate;
         }
 
-        // console.log('returnSalesInvoices', where);
         where['company.id'] = site.getCompany(req).id;
 
         app.all({ where: where, limit, select, sort: { id: -1 } }, (err, docs) => {

@@ -85,7 +85,6 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
     const v = site.validated($scope.modalID);
     if (!v.ok) {
       $scope.error = v.messages[0].ar;
-      console.log(v.messages);
       return;
     }
     let dataValid = $scope.validateData(_item);
@@ -1324,6 +1323,7 @@ app.controller('salesCompaniesInvoices', function ($scope, $http, $timeout) {
           port: printer.portDevice,
           pageSize: 'A4',
           printer: printer.ip.name.trim(),
+          dpi: { horizontal: 600, vertical: 600 },
         });
       }, 500);
     };

@@ -127,7 +127,6 @@ app.controller('reorderLimits', function ($scope, $http, $timeout) {
   };
 
   $scope.getAll = function (where) {
-    // console.log('client', where);
 
     $scope.busy = true;
     $scope.list = [];
