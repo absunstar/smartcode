@@ -7,9 +7,8 @@
         --bs-modal-bg: #ffffff !important;
         background-color: #e1e1e1 !important;
       }
-      :root { 
+      :root {
         --theme-color: #8d8d8b !important;
-    
       }
     </style>
   </head>
@@ -17,10 +16,7 @@
   <body class="##session.lang## bg-white">
     <!--     <div x-import="theme1/header.html"></div> -->
     <div id="main-layout" ng-controller="ordersScreen" class="container loaded">
-      <div
-        class="row main-page"
-        x-permissions="salesInvoicesUi || salesInvoicesManage"
-      >
+      <div class="row main-page" x-permissions="salesInvoicesUi || salesInvoicesManage">
         <div x-import="ordersScreen/quickCounting.html"></div>
         <div x-import="ordersScreen/itemEdit.html"></div>
         <div x-import="ordersScreen/ordersActive.html"></div>
@@ -45,13 +41,22 @@
 
                 <div class="row">
                   <i-list
+                    ng-show="setting.storesSetting.showSellerOrderScreen"
+                    ng-search="item.$seller"
+                    class="col5"
+                    display="name##session.lang##"
+                    ng-model="item.seller"
+                    label="##word.Seller##"
+                    items="sellerList"
+                  ></i-list>
+                  <!-- <i-list
                     ng-search="item.$stores"
                     class="col4"
                     display="name##session.lang##"
                     ng-model="item.store"
                     label="##word.Stores##"
                     items="storesList"
-                  ></i-list>
+                  ></i-list> -->
                   <i-list
                     class="col-4"
                     ng-show="item.invoiceType.id == 1"
@@ -86,13 +91,7 @@
                     display="name##session.lang##"
                   ></i-list>
                   <div class="col3" ng-show="item.salesCategory.id == 1">
-                    <br />
-                    <i-button
-                      type="add"
-                      label="##word.New Customer##"
-                      ng-click="showAddCustomer()"
-                    >
-                    </i-button>
+                    <i-button type="add" label="##word.New Customer##" ng-click="showAddCustomer()"> </i-button>
                   </div>
                   <i-list
                     ng-show="item.salesCategory.id == 2"
@@ -105,50 +104,21 @@
                   ></i-list>
                   <div class="col1"></div>
                   <div class="col6">
+                    <fieldset class="pointer" ng-click="showDetails(item)" ng-show="item.salesCategory.id == 2">
+                      <div class="row center">
+                        <p class="font-20" ng-show="item.customer && item.customer.id">##word.Customer## : {{item.customer.name##session.lang##}}</p>
+                        <p class="font-20" ng-show="!item.customer || !item.customer.id">##word.Select Customer## / ##word.Area##</p>
+                      </div>
+                    </fieldset>
+                  </div>
 
-                  <fieldset
-                    class="pointer"
-                    ng-click="showDetails(item)"
-                    ng-show="item.salesCategory.id == 2"
-                  >
-                    <div class="row center">
-                      <p
-                        class="font-20"
-                        ng-show="item.customer && item.customer.id"
-                      >
-                        ##word.Customer## :
-                        {{item.customer.name##session.lang##}}
-                      </p>
-                      <p
-                        class="font-20"
-                        ng-show="!item.customer || !item.customer.id"
-                      >
-                        ##word.Select Customer## / ##word.Area##
-                      </p>
-                    </div>
-                  </fieldset>
-                </div>
-
-                  <fieldset
-                    class="pointer"
-                    ng-click="showDetails(item)"
-                    x-data="setting.showRestaurant"
-                    ng-show="item.salesCategory.id == 3"
-                  >
+                  <fieldset class="pointer" ng-click="showDetails(item)" x-data="setting.showRestaurant" ng-show="item.salesCategory.id == 3">
                     <div class="row center">
                       <p class="font-20" ng-show="item.table && item.table.id">
                         {{item.table.tablesGroup.name##session.lang##}} /
-                        <span class="font-22 bold blue"
-                          >{{item.table.name##session.lang##}} / (
-                          {{item.table.code}} )
-                        </span>
+                        <span class="font-22 bold blue">{{item.table.name##session.lang##}} / ( {{item.table.code}} ) </span>
                       </p>
-                      <p
-                        class="font-20"
-                        ng-show="!item.table || !item.table.id"
-                      >
-                        ##word.Select Table##
-                      </p>
+                      <p class="font-20" ng-show="!item.table || !item.table.id">##word.Select Table##</p>
                     </div>
                   </fieldset>
 
@@ -162,75 +132,37 @@
               </div>
             </div>
             <br />
-            <div class="row">
-              <div class="table-content items">
-                <div class="table-headers center">
-                  <div class="col-2 header">##word.Actions##</div>
-                  <div class="col-2 header">##word.Total##</div>
-                  <div class="col-1 header" x-data="setting.showRestaurant">
-                    ##word.Extras##
-                  </div>
-                  <div class="col-2 header">##word.Price## (##word.$##)</div>
-                  <div class="col-2 header">##word.Count## ##word.+##</div>
-                  <div class="header">##word.Item##</div>
-                </div>
-                <div
-                  class="table-items center"
-                  ng-repeat="elem in item.itemsList"
-                >
-                  <div class="col-2 item">
-                    <i-button
-                      type="add"
-                      title="##word.Setting##"
-                      ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode || elem.hasMedicalData"
-                      ng-click="showBatchModal(elem)"
-                    >
-                    </i-button>
-                    <i-button
-                      type="delete"
-                      title="##word.Delete##"
-                      ng-click="item.itemsList.splice($index,1);calculate(item)"
-                    ></i-button>
-                    <i-button
-                      type="edit"
-                      title="##word.Edit##"
-                      ng-click="showEditItem(elem)"
-                    ></i-button>
-                  </div>
-
-                  <div class="col-2 item bold font-18 green">
-                    {{elem.total | xmoney2}}<span class="currency"
-                      >##word.$##</span
-                    >
-                  </div>
-                  <div class="col-1 item" x-data="setting.showRestaurant">
-                    {{elem.totalExtras | xmoney2}}<span class="currency"
-                      >##word.$##</span
-                    >
-                  </div>
-                  <div class="col-2 item">
-                    <i-control
-                      min="1"
-                      type="number"
-                      ng-change="calculate(item)"
-                      ng-model="elem.price"
-                    ></i-control>
-                  </div>
-                  <div class="col-2 item">
-                    <i-control
-                      min="1"
-                      type="number"
-                      ng-change="calculate(item)"
-                      ng-model="elem.count"
-                    ></i-control>
-                  </div>
-                  <div class="item">
-                    <p class="pointer" ng-click="viewStoreItem(elem.id)">
-                      {{elem.name##session.lang##}}
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div class="table-responsive height-table">
+              <table class="table hover bold" id="t1">
+                <tr>
+                  <th class="">##word.Actions##</th>
+                  <th class="w150">##word.Total##</th>
+                  <th class="w100" x-data="setting.showRestaurant">##word.Extras##</th>
+                  <th class="w100">##word.Price## (##word.$##)</th>
+                  <th class="w100">##word.Count## ##word.+##</th>
+                  <th class="w400">##word.Item##</th>
+                </tr>
+                
+                <tr ng-repeat="elem in item.itemsList">
+                  <td class="center">
+                     <i-button type="add" title="##word.Setting##" ng-if="elem.workByBatch || elem.workBySerial || elem.workByQrCode || elem.hasMedicalData" ng-click="showBatchModal(elem)"> </i-button>
+                    <i-button type="delete" title="##word.Delete##" ng-click="item.itemsList.splice($index,1);calculate(item)"></i-button>
+                    <i-button type="edit" title="##word.Edit##" ng-click="showEditItem(elem)"></i-button>
+                  </td>
+                  <td class="bold font-18 green center">{{elem.total | xmoney2}}<span class="currency">##word.$##</span></td>
+                  <td x-data="setting.showRestaurant" class="center">{{elem.totalExtras | xmoney2}}<span class="currency">##word.$##</span></td>
+                  <td class="center">
+                    <i-control min="1" type="number" ng-change="calculate(item)" ng-model="elem.price"></i-control>
+                  </td>
+                  <td class="center">
+                    <i-control min="1" type="number" ng-change="calculate(item)" ng-model="elem.count"></i-control>
+                  </td>
+                  <td class="center">
+                     <p class="pointer" ng-click="viewStoreItem(elem.id)">{{elem.name##session.lang##}}</p>
+                  </td>
+                </tr>
+          
+              </table>
             </div>
 
             <i-control label="Notes" ng-model="item.notes"> </i-control>
@@ -245,31 +177,10 @@
                   label="##word.Safe##"
                   ng-search="item.paymentList[0].$safe"
                 ></i-list>
-                <i-control
-                  class="col3"
-                  label="##word.Paid##(##word.$##)"
-                  type="number"
-                  ng-change="calculateCustomerPaid(item)"
-                  ng-model="item.paymentList[0].paidByCustomer"
-                >
-                </i-control>
+                <i-control class="col3" label="##word.Paid##(##word.$##)" type="number" ng-change="calculateCustomerPaid(item)" ng-model="item.paymentList[0].paidByCustomer"> </i-control>
 
-                <i-control
-                  class="col3"
-                  label="##word.Amount Paid##(##word.$##)"
-                  type="number"
-                  disabled
-                  ng-model="item.paymentList[0].amountPaid"
-                >
-                </i-control>
-                <i-control
-                  class="col3"
-                  label="##word.Remain amount##(##word.$##)"
-                  type="number"
-                  disabled
-                  ng-model="item.paymentList[0].remainForCustomer"
-                >
-                </i-control>
+                <i-control class="col3" label="##word.Amount Paid##(##word.$##)" type="number" disabled ng-model="item.paymentList[0].amountPaid"> </i-control>
+                <i-control class="col3" label="##word.Remain amount##(##word.$##)" type="number" disabled ng-model="item.paymentList[0].remainForCustomer"> </i-control>
               </div>
             </fieldset>
             <br />
@@ -285,42 +196,16 @@
                     <div class="col-3 header">##word.T-Before Vat##</div>
                   </div>
                   <div class="table-items">
-                    <div class="col-2 item center bold green font-20">
-                      {{item.totalNet | xmoney2}}<span class="currency"
-                        >##word.$##</span
-                      >
-                    </div>
-                    <div class="col-2 item center bold font-17">
-                      {{item.totalDiscounts | xmoney2}}<span class="currency"
-                        >##word.$##</span
-                      >
-                    </div>
-                    <div class="col-3 item center bold font-17">
-                      {{item.totalAfterVat | xmoney2}}<span class="currency"
-                        >##word.$##</span
-                      >
-                    </div>
-                    <div class="col-2 item center bold font-17 red">
-                      {{item.totalVat | xmoney2}}<span class="currency"
-                        >##word.$##</span
-                      >
-                    </div>
-                    <div class="col-3 item center bold font-17">
-                      {{item.totalBeforeVat | xmoney2}}<span class="currency"
-                        >##word.$##</span
-                      >
-                    </div>
+                    <div class="col-2 item center bold green font-20">{{item.totalNet | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-2 item center bold font-17">{{item.totalDiscounts | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-3 item center bold font-17">{{item.totalAfterVat | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-2 item center bold font-17 red">{{item.totalVat | xmoney2}}<span class="currency">##word.$##</span></div>
+                    <div class="col-3 item center bold font-17">{{item.totalBeforeVat | xmoney2}}<span class="currency">##word.$##</span></div>
                   </div>
                 </div>
               </div>
               <div class="col2">
-                <button
-                  class="closing"
-                  ng-hide="item.hold || '##user.type##' == 'table'"
-                  ng-click="closeOrder(item)"
-                >
-                  ##word.Close##
-                </button>
+                <button class="closing" ng-hide="item.hold || '##user.type##' == 'table'" ng-click="closeOrder(item)">##word.Close##</button>
 
                 <!--                 <i-button type="bg-green white closing" ng-hide="item.hold || '##user.type##' == 'table'" label="##word.Close##" ng-click="displayCloseOrder()"> </i-button>
  -->
@@ -330,85 +215,38 @@
 
           <div class="col6">
             <div class="row">
-              <i-button
-                fa="cart-plus"
-                label="##word.New##"
-                ng-click="newOrder()"
-              >
-              </i-button>
+              <i-button fa="cart-plus" label="##word.New##" ng-click="newOrder()"> </i-button>
 
-              <i-button
-                fa="cart-arrow-down"
-                label="##word.Open orders##"
-                ng-click="getOrdersActiveList()"
-              >
-              </i-button>
+              <i-button fa="cart-arrow-down" label="##word.Open orders##" ng-click="getOrdersActiveList()"> </i-button>
 
               <!-- <i-button fa="ban" type="bg-brown white btnOrders" ng-hide="item.hold || item.status.id == 2" label="##word.Hold##" ng-click="addOrderInvoice('hold')"> </i-button>
 
               <i-button fa="ban" type="bg-brown white btnOrders" ng-show="item.hold" label="##word.Unhold##" ng-click="updateOrderInvoice(item,'unhold')"> </i-button> -->
 
-              <i-button
-                ng-hide="item.status.id == 2"
-                fa="cart-plus"
-                label="##word.Save##"
-                ng-click="saveOrder(item)"
-              >
-              </i-button>
+              <i-button ng-hide="item.status.id == 2" fa="cart-plus" label="##word.Save##" ng-click="saveOrder(item)"> </i-button>
 
-              <i-button label="##word.Returned##" ng-click="showAddReturned()">
-              </i-button>
-              <i-button
-                label="##word.Purchase Orders##"
-                ng-click="gotoPurchaseOrders()"
-              >
-              </i-button>
+              <i-button label="##word.Returned##" ng-click="showAddReturned()"> </i-button>
+              <i-button label="##word.Purchase Orders##" ng-click="gotoPurchaseOrders()"> </i-button>
 
-              <i-button
-                label="##word.Other Pay##"
-                onclick="site.showModal('#paymentListModal')"
-              >
-              </i-button>
-              <i-button
-                label="##word.Cancel##"
-                type="close"
-                ng-click="cancelOrder(item)"
-              >
-              </i-button>
-              <i-button
-                label="##word.Print##"
-                type="print"
-                ng-click="printOrdersToday()"
-              >
-              </i-button>
+              <i-button label="##word.Other Pay##" onclick="site.showModal('#paymentListModal')"> </i-button>
+              <i-button label="##word.Cancel##" type="close" ng-click="cancelOrder(item)"> </i-button>
+              <i-button label="##word.Print##" type="print" ng-click="printOrdersToday()"> </i-button>
               <!-- <i-button label="##word.Quick Counting##" onclick="site.showModal( '#quickCountingModal')"> </i-button> -->
             </div>
 
             <fieldset>
               <legend>##word.Barcode##</legend>
-              <i-control
-                id="searchBarcode"
-                ng-keydown="getBarcode($event)"
-                ng-model="barcode"
-              ></i-control>
+              <i-control id="searchBarcode" ng-keydown="getBarcode($event)" ng-model="barcode"></i-control>
             </fieldset>
             <div class="row scrollx item-groups">
-              <a
-                class="item pointer"
-                ng-repeat="g in itemsGroupsList"
-                ng-click="getStoresItems(g , $event)"
-              >
+              <a class="item pointer" ng-repeat="g in itemsGroupsList" ng-click="getStoresItems(g , $event)">
                 <img ng-src="{{g.image.url}}" />
                 <p>{{g.name##session.lang##}}</p>
               </a>
             </div>
 
             <div class="row item-list scrolly">
-              <a
-                class="item hover pointer"
-                ng-repeat="itm in itemsList"
-                ng-click="addToItemsList(itm)"
-              >
+              <a class="item hover pointer" ng-repeat="itm in itemsList" ng-click="addToItemsList(itm)">
                 <img ng-src="{{itm.image.url}}" ng-src2="/images/food.png" />
                 <p>{{itm.name##session.lang##}}</p>
               </a>
@@ -427,14 +265,8 @@
       </div>
       <div x-import="salesInvoices/thermalPrint.html"></div>
       <div x-import="ordersScreen/kitchenPrint.html"></div>
-      <div
-        id="salesInvoicesDetails"
-        x-import="salesInvoices/a4Print.html"
-      ></div>
-      <div
-        id="salesInvoicesLabels"
-        x-import="salesInvoices/labelPrint.html"
-      ></div>
+      <div id="salesInvoicesDetails" x-import="salesInvoices/a4Print.html"></div>
+      <div id="salesInvoicesLabels" x-import="salesInvoices/labelPrint.html"></div>
     </div>
     <div x-import="theme1/footer.html"></div>
     <script x-import="ordersScreen/index.js"></script>
