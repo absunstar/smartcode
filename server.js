@@ -4,6 +4,9 @@ const site = require('../isite')({
   language: { id: 'En', dir: 'ltr', text: 'left' },
   version: '_' + new Date().getTime(),
   name: 'HMIS',
+    upload_dir: __dirname + "/../uploads",
+  download_dir: __dirname + "/../downloads",
+  backup_dir: __dirname + "/../backups",
   require: {
     features: [],
     permissions: [],
