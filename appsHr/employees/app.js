@@ -1131,6 +1131,8 @@ module.exports = function init(site) {
         } else {
           where['company.id'] = site.getCompany(req).id;
           where['type.id'] = 4;
+          console.log(where);
+          
           app.all({ where, select, limit }, (err, docs) => {
             res.json({
               done: true,

@@ -259,7 +259,18 @@ module.exports = function init(site) {
           }
           let list = app.memoryList
             .filter((g) => g.company && g.company.id == site.getCompany(req).id && (typeof where.active != 'boolean' || g.active === where.active) && JSON.stringify(g).contains(search))
-            .slice(0, limit);
+            .slice(0, limit).map((item) => {
+              if (select && Object.keys(select).length > 0) {
+                let filtered = {};
+                for (let key in select) {
+                  if (select[key] && item[key] !== undefined) {
+                    filtered[key] = item[key];
+                  }
+                }
+                return filtered;
+              }
+              return item;
+            });
 
           res.json({
             done: true,

@@ -55,13 +55,21 @@
         <div class="row">
           <i-list
             class="col4"
-            v="r"
             label="##word.Marital Status##"
             ng-model="item.maritalStatus"
             display="name##session.lang##"
             items="maritalStatusList"
             ng-search="item.$maritalStatus"
           ></i-list>
+           <i-list
+              class="col4"
+              v="r"
+              ng-model="item.jobType"
+              items="employeesJobsTypesList"
+              display="name##session.lang##"
+              ng-search="item.$jobType"
+              label="##word.Employee Type##"
+            ></i-list>
         </div>
       </div>
       <div class="col3">
@@ -1075,7 +1083,6 @@
                     <div class="col10">
                       <i-control
                         type="number"
-                        v="r"
                         label="##word.Basic Salary##"
                         ng-change="calculateWorkCost(item)"
                         ng-model="item.basicSalary"
@@ -1088,7 +1095,6 @@
                   </div>
                   <i-control
                     type="number"
-                    v="r"
                     class="col4"
                     ng-change="calculateWorkCost(item)"
                     label="##word.Work Days##"
@@ -1097,7 +1103,6 @@
                   </i-control>
                   <i-control
                     type="number"
-                    v="r"
                     class="col4"
                     ng-change="calculateWorkCost(item)"
                     label="##word.Work Hours##"
