@@ -28,7 +28,7 @@ body {
 
 .item-groups {
   background-color: white;
-  flex-flow: inherit;
+  flex-flow: row-reverse;
   /* background: var(--backcolor2); */
   white-space: initial;
 }
@@ -111,8 +111,12 @@ body {
   height: 35vh !important;
 }
 
+.height-table {
+  height: 325px !important;
+}
+
 .item-list {
-  height: 77vh;
+  height: 60vh;
   padding: 5px !important;
   margin: 10px 0px 0px 0px !important;
   background-color: white;

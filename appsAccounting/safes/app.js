@@ -306,7 +306,18 @@ module.exports = function init(site) {
                 (!where['paymentType.id'] || (g.paymentType && g.paymentType.id === where['paymentType.id'])) &&
                 JSON.stringify(g).contains(search)
             )
-            .slice(0, limit);
+            .slice(0, limit).map((item) => {
+              if (select && Object.keys(select).length > 0) {
+                let filtered = {};
+                for (let key in select) {
+                  if (select[key] && item[key] !== undefined) {
+                    filtered[key] = item[key];
+                  }
+                }
+                return filtered;
+              }
+              return item;
+            });
 
           res.json({
             done: true,

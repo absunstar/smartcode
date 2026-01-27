@@ -255,8 +255,6 @@ app.controller('employees', function ($scope, $http, $timeout) {
       where['jobType.name'] = 'cashers';
     }  else if (window.location.href.contains('lawyers')) {
       where['jobType.name'] = 'lawyers';
-    } else {
-      where['jobType.id'] = null;
     }
 
     $http({
@@ -828,6 +826,26 @@ app.controller('employees', function ($scope, $http, $timeout) {
     );
   };
 
+    $scope.getEmployeesJobsTypesList = function () {
+    $scope.employeesJobsTypesList = [];
+
+    $http({
+      method: 'POST',
+      url: '/api/employeesJobsTypesList',
+      data: {},
+    }).then(
+      function (response) {
+        $scope.busy = false;
+        if (response.data.done && response.data.list.length > 0) {
+          $scope.employeesJobsTypesList = response.data.list;
+        }
+      },
+      function (err) {
+        $scope.error = err;
+      }
+    );
+  };
+
   $scope.showSearch = function () {
     $scope.error = '';
     site.showModal($scope.modalSearchID);
@@ -1241,4 +1259,5 @@ app.controller('employees', function ($scope, $http, $timeout) {
   $scope.getBanks();
   $scope.getJobsShiftsList();
   $scope.getPrintersPaths();
+  $scope.getEmployeesJobsTypesList();
 });

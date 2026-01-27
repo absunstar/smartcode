@@ -39,7 +39,7 @@ module.exports = function init(site) {
             nameEn: _elm.nameEn,
             unit: _elm.unit,
             itemGroup: _elm.itemGroup,
-            store: _elm.store,
+            store: { id: _elm.store.id, nameAr: _elm.store.nameAr, nameEn: _elm.store.nameEn },
             vendor: _elm.vendor,
             customer: _elm.customer,
             invoiceId: _elm.invoiceId,
