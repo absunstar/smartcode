@@ -4,9 +4,9 @@
         <div x-import="storesItems/modal.html"></div>
 
         <div class="row" x-permissions="purchaseOrdersSearch || purchaseOrdersManage">
-            <i-date class="col3" label="##word.From Date##" ng-model="_search.fromDate"> </i-date>
+            <i-date class="col3" label="##word.From Date##" ng-model="_search.date"> </i-date>
 
-            <i-date class="col3" label="##word.To Date##" ng-model="_search.toDate"> </i-date>
+            <i-date class="col3" label="##word.To Date##" ng-model="_search.dateTo"> </i-date>
             <i-list v="r" class="col3" display="name##session.lang##" ng-model="_search.store" items="storesList" label="##word.Store##" ng-search="item.$store"></i-list>
 
             <div class="col2">
@@ -17,7 +17,6 @@
         <div class="table-responsive">
             <table class="table hover bold" id="t1">
                 <tr>
-                    <th class="w150">##word.Logo##</th>
                     <th>##word.Code##</th>
                     <th>##word.Name##</th>
                     <th>##word.Medical Item##</th>
@@ -26,10 +25,8 @@
                     <th class="not-print">##word.Actions##</th>
                 </tr>
                 <tr ng-repeat="item in list | filter:$search">
-                    <td>
-                        <i-image view class="logo center" ng-model="item.image"></i-image>
-                    </td>
-                    <td class="center blue">{{item.code}}</td>
+                 
+                    <td class="center blue">{{item.itemCode}}</td>
                     <td class="center">{{item.name##session.lang##}}</td>
                     <td class="center">
                         <span class="text-success" ng-show="item.hasMedicalData">##word.Yes##</span>

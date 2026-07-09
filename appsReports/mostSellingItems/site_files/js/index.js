@@ -3,7 +3,7 @@ app.controller('mostSellingItems', function ($scope, $http, $timeout) {
     $scope.appName = 'mostSellingItems';
     $scope.list = [];
     $scope.item = {};
-    $scope._search = { fromDate: new Date(), toDate: new Date() };
+    $scope._search = { date: new Date(), dateTo: new Date() };
 
     $scope.getCurrentMonthDate = function () {
         const date = new Date();
@@ -11,8 +11,8 @@ app.controller('mostSellingItems', function ($scope, $http, $timeout) {
         const month = date.getMonth();
         const firstDay = new Date(year, month, 1);
         const lastDay = new Date(year, month + 1, 0);
-        $scope._search.fromDate = new Date(firstDay);
-        $scope._search.toDate = new Date(lastDay);
+        $scope._search.date = new Date(firstDay);
+        $scope._search.dateTo = new Date(lastDay);
         return { firstDay, lastDay };
     };
 

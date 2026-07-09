@@ -1788,6 +1788,152 @@ module.exports = function init(site) {
     }
   );
 
+  site.post({ name: `/api/${app.name}/topSoldByStore`, require: { permissions: ["login"] } }, (req, res) => {
+    let response = { done: false };
+
+    const storeId = Number(req.data.store.id);
+    const topN = parseInt(req.data.topN || 10, 10);
+    const useUnitDetails = !!req.data.useUnitDetails;
+
+    if (!Number.isFinite(storeId)) {
+      response.err = "storeId (number) is required";
+      return res.json(response);
+    }
+    if (!Number.isFinite(topN) || topN <= 0) {
+      response.err = "topN must be a positive integer";
+      return res.json(response);
+    }
+
+    let pipeline;
+    if (!useUnitDetails) {
+      pipeline = [
+        { $unwind: { path: "$unitsList", preserveNullAndEmptyArrays: false } },
+        { $unwind: { path: "$unitsList.storesList", preserveNullAndEmptyArrays: false } },
+        { $match: { "unitsList.storesList.store.id": storeId } },
+        {
+          $project: {
+            id: 1,
+            nameAr: 1,
+            nameEn: 1,
+            code: 1,
+            barcode: 1,
+            "unitsList.storesList.salesCount": 1,
+            "unitsList.storesList.salesPrice": 1,
+            "unitsList.storesList.lastSellingDate": 1,
+            mainUnit: 1,
+          },
+        },
+        {
+          $group: {
+            _id: "$id",
+            nameAr: { $first: "$nameAr" },
+            nameEn: { $first: "$nameEn" },
+            code: { $first: "$code" },
+            barcode: { $first: "$barcode" },
+            mainUnit: { $first: "$mainUnit" },
+            totalSalesCount: { $sum: { $ifNull: ["$unitsList.storesList.salesCount", 0] } },
+            totalSalesPrice: { $sum: { $ifNull: ["$unitsList.storesList.salesPrice", 0] } },
+            lastSellingDate: { $max: "$unitsList.storesList.lastSellingDate" },
+          },
+        },
+        { $match: { totalSalesCount: { $gt: 0 } } },
+        { $sort: { totalSalesCount: -1 } },
+        { $limit: topN },
+        {
+          $project: {
+            _id: 0,
+            itemId: "$_id",
+            nameAr: 1,
+            nameEn: 1,
+            code: 1,
+            barcode: 1,
+            mainUnit: { $ifNull: ["$mainUnit.nameAr", "$mainUnit.nameEn"] },
+            totalSalesCount: 1,
+            totalSalesPrice: 1,
+            lastSellingDate: 1,
+          },
+        },
+      ];
+    } else {
+      pipeline = [
+        { $unwind: { path: "$unitsList", preserveNullAndEmptyArrays: false } },
+        { $unwind: { path: "$unitsList.storesList", preserveNullAndEmptyArrays: false } },
+        { $match: { "unitsList.storesList.store.id": storeId } },
+        {
+          $project: {
+            itemId: "$id",
+            nameAr: "$nameAr",
+            nameEn: "$nameEn",
+            code: "$code",
+            barcode: "$barcode",
+            unitId: "$unitsList.unit.id",
+            unitNameAr: "$unitsList.unit.nameAr",
+            unitNameEn: "$unitsList.unit.nameEn",
+            salesCount: { $ifNull: ["$unitsList.storesList.salesCount", 0] },
+            salesPrice: { $ifNull: ["$unitsList.storesList.salesPrice", 0] },
+          },
+        },
+        {
+          $group: {
+            _id: { itemId: "$itemId", unitId: "$unitId" },
+            nameAr: { $first: "$nameAr" },
+            nameEn: { $first: "$nameEn" },
+            code: { $first: "$code" },
+            barcode: { $first: "$barcode" },
+            unitNameAr: { $first: "$unitNameAr" },
+            unitNameEn: { $first: "$unitNameEn" },
+            unitSalesCount: { $sum: "$salesCount" },
+            unitSalesPrice: { $sum: "$salesPrice" },
+          },
+        },
+        {
+          $group: {
+            _id: "$_id.itemId",
+            nameAr: { $first: "$nameAr" },
+            nameEn: { $first: "$nameEn" },
+            code: { $first: "$code" },
+            barcode: { $first: "$barcode" },
+            totalSalesCount: { $sum: "$unitSalesCount" },
+            totalSalesPrice: { $sum: "$unitSalesPrice" },
+            units: {
+              $push: {
+                unitId: "$_id.unitId",
+                unitNameAr: "$unitNameAr",
+                unitNameEn: "$unitNameEn",
+                unitSalesCount: "$unitSalesCount",
+                unitSalesPrice: "$unitSalesPrice",
+              },
+            },
+          },
+        },
+        { $match: { totalSalesCount: { $gt: 0 } } },
+        { $sort: { totalSalesCount: -1 } },
+        { $limit: topN },
+        {
+          $project: {
+            _id: 0,
+            itemId: "$_id",
+            nameAr: 1,
+            nameEn: 1,
+            code: 1,
+            barcode: 1,
+            totalSalesCount: 1,
+            totalSalesPrice: 1,
+            units: 1,
+          },
+        },
+      ];
+    }
+
+    // run aggregation and return result directly
+    app.$collection.aggregate(pipeline, { allowDiskUse: true }, (err, rows) => {
+      response.err = err;
+      response.done = true;
+      response.rows = rows;
+      return res.json(response);
+    });
+  });
+
   app.init();
   site.addApp(app);
 };
