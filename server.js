@@ -1,65 +1,65 @@
 const site = require('../isite')({
-  port: [12345],
-  lang: 'En',
-  language: { id: 'En', dir: 'ltr', text: 'left' },
-  version: '_' + new Date().getTime(),
-  name: 'HMIS',
-    upload_dir: __dirname + "/../uploads",
-  download_dir: __dirname + "/../downloads",
-  backup_dir: __dirname + "/../backups",
-  require: {
-    features: [],
-    permissions: [],
-  },
-  theme: 'theme_paper',
-  mongodb: {
-    db: 'HMIS',
-    limit: 3000,
-    identity: {
-      enabled: !0,
+    port: [12345],
+    lang: 'En',
+    language: { id: 'En', dir: 'ltr', text: 'left' },
+    version: '_' + new Date().getTime(),
+    name: 'HMIS',
+    upload_dir: __dirname + '/../uploads',
+    download_dir: __dirname + '/../downloads',
+    backup_dir: __dirname + '/../backups',
+    require: {
+        features: [],
+        permissions: [],
     },
-  },
-  security: {
-    keys: ['21232f297a57a5a743894a0e4a801fc3', 'f6fdffe48c908deb0f4c3bd36c032e72', 'ba0644892c52beb6594c41c8b1ff02c6', 'd53bab6cfb906f852adc14d490b95dbf'],
-  },
+    theme: 'theme_paper',
+    mongodb: {
+        db: 'HMIS',
+        limit: 3000,
+        identity: {
+            enabled: !0,
+        },
+    },
+    security: {
+        keys: ['21232f297a57a5a743894a0e4a801fc3', 'f6fdffe48c908deb0f4c3bd36c032e72', 'ba0644892c52beb6594c41c8b1ff02c6', 'd53bab6cfb906f852adc14d490b95dbf'],
+    },
 });
 
 site.get({
-  name: '/',
-  path: site.dir + '/',
+    name: '/',
+    path: site.dir + '/',
 });
 
 site.get({
-  name: ['/css/sa.css'],
-  parser: 'css2',
-  public: true,
-  compress: !0,
-  path: [
-    'client-side/normalize.css',
-    'client-side/theme.css',
-    'client-side/layout.css',
-    'client-side/modal.css',
-    'client-side/color.css',
-    'client-side/images.css',
-    'client-side/dropdown.css',
-    'client-side/fonts.css',
-    'client-side/effect.css',
-    'client-side/scrollbar.css',
-    'client-side/table.css',
-    'client-side/treeview.css',
-    'client-side/tabs.css',
-    'client-side/help.css',
-    'client-side/print.css',
-    'client-side/tableExport.css',
-    'client-side/theme_paper.css',
-    'client-side/bootstrap5.css',
-    'client-side/bootstrap5-addon.css',
-    'client-side/font-awesome.css',
-    'client-side/font-saudi.css',
-    'client-side/WebShareEditor.css',
-    __dirname + '/site_files/css/sitebar.css',
-    __dirname + '/site_files/css/style.css',
-  ],
+    name: ['/css/sa.css'],
+    parser: 'css2',
+    public: true,
+    compress: !0,
+    path: [
+        'client-side/normalize.css',
+        'client-side/theme.css',
+        'client-side/layout.css',
+        'client-side/modal.css',
+        'client-side/color.css',
+        'client-side/images.css',
+        'client-side/dropdown.css',
+        'client-side/fonts.css',
+        'client-side/effect.css',
+        'client-side/scrollbar.css',
+        'client-side/table.css',
+        'client-side/treeview.css',
+        'client-side/tabs.css',
+        'client-side/help.css',
+        'client-side/print.css',
+        'client-side/tableExport.css',
+        'client-side/theme_paper.css',
+        'client-side/bootstrap5.css',
+        'client-side/bootstrap5-addon.css',
+        'client-side/font-awesome.css',
+        'client-side/font-saudi.css',
+        'client-side/WebShareEditor.css',
+        __dirname + '/site_files/css/sitebar.css',
+        __dirname + '/site_files/css/style.css',
+    ],
 });
 
 site.importApps(__dirname + '/appsAccounting');
@@ -83,31 +83,31 @@ site.addFeature('m-reports');
 site.run();
 
 site.get('/x-update', (req, res) => {
-  site.cmd('git pull', (data) => {
-    res.end(data);
-    console.log(data);
-    site.cmd('pm2 restart 14', (data) => {
-      console.log(data);
+    site.cmd('git pull', (data) => {
+        res.end(data);
+        console.log(data);
+        site.cmd('pm2 restart 14', (data) => {
+            console.log(data);
+        });
     });
-  });
 });
 
 site.get('/x-restart', (req, res) => {
-  site.cmd('pm2 restart 14', (data) => {
-    console.log(data);
-  });
+    site.cmd('pm2 restart 14', (data) => {
+        console.log(data);
+    });
 });
 
 site.get('/x-updateIsite', (req, res) => {
-  site.cmd('cd .. && cd isite && git pull', (data) => {
-    res.end(data);
-    console.log(data);
-  });
+    site.cmd('cd .. && cd isite && git pull', (data) => {
+        res.end(data);
+        console.log(data);
+    });
 });
 
 site.get('/x-shell', (req, res) => {
-  site.cmd(req.query.command, (data) => {
-    console.log(req.query.command, data);
-    res.end(data);
-  });
+    site.cmd(req.query.command, (data) => {
+        console.log(req.query.command, data);
+        res.end(data);
+    });
 });
