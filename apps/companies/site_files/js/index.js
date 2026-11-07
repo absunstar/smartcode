@@ -28,10 +28,10 @@ app.controller("companies", function ($scope, $http, $timeout) {
   };
 
   $scope.addCompany = function () {
-    if ($scope.busy) {
-      $scope.error = "App Busy";
-      return;
-    }
+    // if ($scope.busy) {
+    //   $scope.error = "App Busy";
+    //   return;
+    // }
 
     $scope.error = "";
     const v = site.validated("#companyManageModal");
